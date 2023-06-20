@@ -1,0 +1,7 @@
+.main-app {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  grid-template-rows: 1fr 3fr 1fr;
+  column-gap: rem(8px);
+  padding: rem(8px);
+}

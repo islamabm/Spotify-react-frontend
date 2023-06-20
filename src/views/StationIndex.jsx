@@ -5,7 +5,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { loadStations, removeStation } from '../store/actions/station.actions'
 
 export function StationIndex() {
-  const stations = useSelector((storeState) => storeState.stationModule.stations)
+  const stations = useSelector(
+    (storeState) => storeState.stationModule.stations
+  )
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -24,6 +26,7 @@ export function StationIndex() {
 
   return (
     <section className="station-index">
+      <p>itay haea</p>
       {/* <Link to="/station/edit">Add Station</Link> */}
       <StationList stations={stations} onRemoveStation={onRemoveStation} />
     </section>
