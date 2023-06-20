@@ -1,7 +1,6 @@
 import { memo } from "react";
 import { StationPreview } from "./StationPreview";
 function _StationList({ stations, onRemoveStation }) {
-    console.log('STATION LIST RENDERED');
     return (
         <section className="station-list">
             {stations.map(station =>
