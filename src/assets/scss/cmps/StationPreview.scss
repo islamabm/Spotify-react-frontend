@@ -1,34 +1,35 @@
 .info {
   text-decoration: none;
   font-family: circular-book;
+  position: relative;
 
   .station-preview {
+    cursor: pointer;
     height: 273px;
     width: 186px;
-    border-radius: 5px;
+    border-radius: 10px;
     background-color: $clr1;
     margin-inline-start: rem(30px);
     font-size: 12px;
+    overflow: hidden;
 
     .station-info {
-      display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: start;
       margin-inline-start: 1rem;
       margin-block-start: 0;
       color: white;
 
       h3 {
-         font-size: 16px;
-         margin-block-start: 0;
-         margin-block-end: 1px;
+        font-size: 16px;
+        margin-block-start: 0;
+        margin-block-end: 1px;
       }
-      
+
       p {
-         margin-inline-start: -3px;
-         color: $clr3;
-         padding: 0 5px;
+        margin: 5px 0px -3px 2px;
+        color: $clr3;
+        padding: 0;
       }
     }
 
@@ -36,9 +37,56 @@
       margin-inline-start: rem(12px);
       padding: 13px 2px;
       img {
-         border-radius: 7px;
-         width: 157px;
-         height: 157px;
+        border-radius: 7px;
+        width: 157px;
+        height: 157px;
+      }
+    }
+  }
+
+  .play-button {
+    position: absolute;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.4);
+    bottom: 110px;
+    left: 150px;
+    width: 48px;
+    height: 48px;
+    background-color: $clrGreen;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.4s 0.2s, transform 0.4s 0.2s;
+    cursor: pointer;
+    z-index: 2;
+  
+    &:before {
+      content: '';
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 9px 0 9px 16px;
+      border-color: transparent $clr2;
+      display: inline-block;
+      position: relative;
+      left: 3px;
+    }
+  }
+
+  :hover {
+    background-color: $clr8;
+    transition: background-color 0.3s ease-in-out;
+    border-radius: 10px;
+
+    .play-button {
+      opacity: 1;
+      transition: opacity 0.1s 0.1s, transform 0.1s 0.1s;
+
+      &:hover {
+        transform: scale(1.05);
+        background-color: $clrGreenLight;
+        border-radius: 50%;
       }
     }
   }

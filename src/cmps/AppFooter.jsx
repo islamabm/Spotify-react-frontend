@@ -10,11 +10,17 @@ export function AppFooter() {
           <img src="https://imgd.aeplcdn.com/1056x594/n/cw/ec/44686/activa-6g-right-front-three-quarter.jpeg?q=75" />
         </div>
         <div className="actor-name-song">
-          <p className="song-name">unicornn</p>
+          <p className="song-name">Unicorn</p>
           <p className="actor-name">Noa kirel</p>
         </div>
-        <div>
+        <div className="heart-picture-icons">
           <BubblingHeart />
+          <span
+            className="pointer"
+            dangerouslySetInnerHTML={{
+              __html: getSpotifySvg('pictureIcon'),
+            }}
+          ></span>{' '}
         </div>
       </div>
       <div className="media-player">
@@ -41,7 +47,7 @@ export function AppFooter() {
           }}
         ></span>
         <div class="progress-bar-audio">
-          <div class="progress-bar-fill"></div>
+          <div class="progress-bar-audio-fill"></div>
         </div>
       </div>
     </div>

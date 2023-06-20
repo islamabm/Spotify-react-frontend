@@ -14,6 +14,9 @@
 
   .song-details {
     display: flex;
+    align-items: center;
+    gap: rem(24px);
+    justify-items: center;
     .image {
       width: 80px;
       height: 80px;
@@ -21,13 +24,30 @@
         border-radius: 10px;
       }
     }
+    .heart-picture-icons {
+      display: flex;
+      align-items: center;
+      justify-items: center;
+      gap: rem(24px);
+    }
 
     .actor-name-song {
       display: flex;
       flex-direction: column;
+      gap: 0;
       margin-inline-start: 0.5em;
+      font-family: Circular-light;
+      .song-name {
+        margin: 0;
+        padding: 0;
+        color: #fff;
+        font-size: 0.8125rem;
+        font-weight: 400;
+      }
       .actor-name {
-        margin-top: 0;
+        margin: 0;
+        padding: 0;
+        color: #b3b3b3;
       }
     }
   }
