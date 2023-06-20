@@ -2,7 +2,7 @@ import React from 'react'
 import { getSpotifySvg } from '../services/SVG.service'
 export function MediaPlayer() {
   return (
-    <div>
+    <>
       {/* Note that there's no React equivalent for the 'YouTube' component */}
       {/* Replace it with the appropriate component or HTML element */}
 
@@ -29,7 +29,7 @@ export function MediaPlayer() {
               {' '}
               <span
                 dangerouslySetInnerHTML={{
-                  __html: getSpotifySvg('searchIcon'),
+                  __html: getSpotifySvg('prevSongBtnIcon'),
                 }}
               ></span>
             </i>
@@ -40,7 +40,7 @@ export function MediaPlayer() {
               {' '}
               <span
                 dangerouslySetInnerHTML={{
-                  __html: getSpotifySvg('searchIcon'),
+                  __html: getSpotifySvg('prevSongBtnIcon'),
                 }}
               ></span>
             </i>
@@ -50,7 +50,7 @@ export function MediaPlayer() {
               {' '}
               <span
                 dangerouslySetInnerHTML={{
-                  __html: getSpotifySvg('searchIcon'),
+                  __html: getSpotifySvg('prevSongBtnIcon'),
                 }}
               ></span>
             </i>
@@ -63,7 +63,7 @@ export function MediaPlayer() {
               {' '}
               <span
                 dangerouslySetInnerHTML={{
-                  __html: getSpotifySvg('searchIcon'),
+                  __html: getSpotifySvg('prevSongBtnIcon'),
                 }}
               ></span>
             </i>
@@ -90,7 +90,7 @@ export function MediaPlayer() {
           id="volume-bar"
         />
       </div>
-    </div>
+    </>
   )
 }
 
