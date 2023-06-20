@@ -1,13 +1,13 @@
-import { robotService } from "../../services/robot.service"
-import { REMOVE_ROBOT, SET_FILTER_BY, SET_ROBOTS } from "../reducers/robot.reducer"
+import { stationService } from "../../services/station.service"
+import { REMOVE_ROBOT, SET_FILTER_BY, SET_ROBOTS } from "../reducers/station.reducer"
 
-export function loadRobots() {
+export function loadStations() {
     return async (dispatch, getState) => {
         try {
-            const robots = await robotService.query(getState().robotModule.filterBy)
+            const stations = await stationService.query(getState().stationModule.filterBy)
             const action = {
                 type: SET_ROBOTS,
-                robots
+                stations
             }
             dispatch(action)
         } catch (error) {
@@ -16,11 +16,11 @@ export function loadRobots() {
     }
 }
 
-export function removeRobot(robotId) {
+export function removeStation(stationId) {
     return async (dispatch) => {
         try {
-            await robotService.remove(robotId)
-            const action = { type: REMOVE_ROBOT, robotId }
+            await stationService.remove(stationId)
+            const action = { type: REMOVE_ROBOT, stationId }
             dispatch(action)
             return 'Removed!'
         } catch (error) {

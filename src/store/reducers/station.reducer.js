@@ -6,7 +6,7 @@ export const UPDATE_ROBOT = 'UPDATE_ROBOT'
 export const SET_FILTER_BY = 'SET_FILTER_BY'
 
 const INITIAL_STATE = {
-    robots: null,
+    stations: null,
     filterBy: {
         model: '',
         type: '',
@@ -15,28 +15,28 @@ const INITIAL_STATE = {
     }
 }
 
-export function robotReducer(state = INITIAL_STATE, action = {}) {
+export function stationReducer(state = INITIAL_STATE, action = {}) {
 
     switch (action.type) {
         case SET_ROBOTS:
             return {
                 ...state,
-                robots: action.robots
+                stations: action.stations
             }
         case ADD_ROBOT:
             return {
                 ...state,
-                robots: [...state.robots, action.robot]
+                stations: [...state.stations, action.station]
             }
         case REMOVE_ROBOT:
             return {
                 ...state,
-                robots: state.robots.filter(robot => robot._id !== action.robotId)
+                stations: state.stations.filter(station => station._id !== action.stationId)
             }
         case UPDATE_ROBOT:
             return {
                 ...state,
-                robots: state.robots.map(robot => robot._id === action.robot._id ? action.robot : robot)
+                stations: state.stations.map(station => station._id === action.station._id ? action.station : station)
             }
         case SET_FILTER_BY:
             return {

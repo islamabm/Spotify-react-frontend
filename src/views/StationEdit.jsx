@@ -1,46 +1,46 @@
 import { useEffect } from 'react'
 
-import { robotService } from '../services/robot.service'
+import { stationService } from '../services/station.service'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useForm } from '../customHooks/useForm'
 
-export function RobotEdit() {
-  const [robot, handleChange, setRobot] = useForm(robotService.getEmptyRobot())
+export function StationEdit() {
+  const [station, handleChange, setStation] = useForm(stationService.getEmptyStation())
 
   const params = useParams()
   const navigate = useNavigate()
 
   useEffect(() => {
-    loadRobot()
+    loadStation()
   }, [])
 
-  async function loadRobot() {
-    const robotId = params.id
-    if (robotId) {
+  async function loadStation() {
+    const stationId = params.id
+    if (stationId) {
       try {
-        const robot = await robotService.getById(robotId)
-        setRobot(robot)
+        const station = await stationService.getById(stationId)
+        setStation(station)
       } catch (error) {
         console.log('error:', error)
       }
     }
   }
 
-  async function onSaveRobot(ev) {
+  async function onSaveStation(ev) {
     ev.preventDefault()
     try {
-      await robotService.save({ ...robot })
+      await stationService.save({ ...station })
       navigate('/')
     } catch (error) {
       console.log('error:', error)
     }
   }
 
-  const { model, type } = robot
+  const { model, type } = station
   return (
-    <section className="robot-edit">
-      <h1>{robot._id ? 'Edit' : 'Add'} Robot</h1>
-      <form onSubmit={onSaveRobot}>
+    <section className="station-edit">
+      <h1>{station._id ? 'Edit' : 'Add'} Station</h1>
+      <form onSubmit={onSaveStation}>
         <label htmlFor="model">Model</label>
         <input
           value={model}
