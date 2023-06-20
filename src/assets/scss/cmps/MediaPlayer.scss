@@ -87,10 +87,37 @@
 
 .progress-bar-audio {
   flex: 1 1;
-  height: 3px;
+  height: 5px;
   background-color: gray;
   position: relative;
   cursor: pointer;
-  width: 150px;
+  width: 110px;
   border-radius: 89px;
+}
+
+.progress-bar-audio-fill {
+  position: absolute;
+  height: 100%;
+  width: 0;
+  background-color: white;
+}
+
+.progress-bar-audio:hover .progress-bar-audio-fill {
+  background-color: green;
+}
+
+.progress-bar-audio-fill:after {
+  content: '';
+  position: absolute;
+  right: -5px;
+  top: -5px;
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  background-color: green;
+  display: none;
+}
+
+.progress-bar-audio:hover .progress-bar-audio-fill:after {
+  display: block;
 }

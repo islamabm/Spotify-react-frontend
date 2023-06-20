@@ -41,7 +41,7 @@ export function AppFooter() {
           }}
         ></span>
         <div class="progress-bar-audio">
-          <div class="progress-bar-fill"></div>
+          <div class="progress-bar-audio-fill"></div>
         </div>
       </div>
     </div>
