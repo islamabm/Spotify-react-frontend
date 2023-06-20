@@ -10,11 +10,13 @@ export function MediaPlayer() {
         <div className="control-buttons">
           {' '}
           <span
+            className="pointer"
             dangerouslySetInnerHTML={{
               __html: getSpotifySvg('shouffleIcon'),
             }}
           ></span>{' '}
           <span
+            className="pointer"
             dangerouslySetInnerHTML={{
               __html: getSpotifySvg('prevIcon'),
             }}
@@ -22,7 +24,7 @@ export function MediaPlayer() {
           <div className="play-song-div">
             {' '}
             <span
-              className="special-i"
+              className="special-i pointer"
               dangerouslySetInnerHTML={{
                 __html: getSpotifySvg('playIcon'),
               }}
@@ -30,41 +32,32 @@ export function MediaPlayer() {
           </div>
           {/* <i className="pause"></i> */}{' '}
           <span
+            className="pointer"
             dangerouslySetInnerHTML={{
               __html: getSpotifySvg('nextIcon'),
             }}
           ></span>{' '}
           <span
+            className="pointer"
             dangerouslySetInnerHTML={{
               __html: getSpotifySvg('repeateIcon'),
             }}
           ></span>{' '}
           <span
+            className="pointer"
             dangerouslySetInnerHTML={{
               __html: getSpotifySvg('prevSongBtnIcon'),
             }}
           ></span>
         </div>
 
-        <div className="music-bar">
-          <span className="current-time hiding"></span>
-          <div className="progress-bar">
-            <div className="progress-bar-fill"></div>
+        <div class="music-bar">
+          <span class="current-time hiding">0:00</span>
+          <div class="progress-bar">
+            <div class="progress-bar-fill"></div>
           </div>
-          <span className="current-time hiding"></span>
+          <span class="current-time hiding">3:30</span>
         </div>
-      </div>
-
-      <div className="footer-media-adjusments">
-        <i className="speaker"></i>
-        <input
-          type="range"
-          className="speaker-bar"
-          min="0"
-          max="100"
-          step="10"
-          id="volume-bar"
-        />
       </div>
     </>
   )

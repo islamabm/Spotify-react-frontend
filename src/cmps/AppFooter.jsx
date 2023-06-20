@@ -21,30 +21,28 @@ export function AppFooter() {
         <MediaPlayer />
       </div>
       <div className="song-details-two">
-        <i>
-          {' '}
-          <span
-            dangerouslySetInnerHTML={{
-              __html: getSpotifySvg('lyricsIcon'),
-            }}
-          ></span>
-        </i>
-        <i>
-          {' '}
-          <span
-            dangerouslySetInnerHTML={{
-              __html: getSpotifySvg('queueIcon'),
-            }}
-          ></span>
-        </i>
-        <i>
-          {' '}
-          <span
-            dangerouslySetInnerHTML={{
-              __html: getSpotifySvg('volumeIcon'),
-            }}
-          ></span>
-        </i>
+        {' '}
+        <span
+          className="pointer"
+          dangerouslySetInnerHTML={{
+            __html: getSpotifySvg('lyricsIcon'),
+          }}
+        ></span>{' '}
+        <span
+          className="pointer"
+          dangerouslySetInnerHTML={{
+            __html: getSpotifySvg('queueIcon'),
+          }}
+        ></span>{' '}
+        <span
+          className="pointer"
+          dangerouslySetInnerHTML={{
+            __html: getSpotifySvg('volumeIcon'),
+          }}
+        ></span>
+        <div class="progress-bar-audio">
+          <div class="progress-bar-audio-fill"></div>
+        </div>
       </div>
     </div>
   )
