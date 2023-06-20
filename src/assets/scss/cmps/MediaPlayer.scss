@@ -1,6 +1,7 @@
 .control-buttons {
   display: flex;
-  gap: rem(20px);
+  gap: rem(16px);
+  margin-bottom: rem(8px);
   align-items: center;
   justify-content: center;
   .play-song-div {
