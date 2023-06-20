@@ -5,20 +5,14 @@
   font-family: Circular-medium;
   color: $clr6;
   max-height: 112px;
-   padding: 22px 20px;
-  .nav-home-div {
+  padding: 17px 25px;
+  > * {
     display: flex;
     align-items: center;
-    margin: 7px 5px;
+    height: 40px;
     cursor: pointer;
     svg {
       fill: $clr6;
     }
-  }
-  .nav-search-div {
-    display: flex;
-    align-items: center;
-    margin: 7px 5px;
-    cursor: pointer;
   }
 }
