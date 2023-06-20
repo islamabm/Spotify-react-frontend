@@ -26,7 +26,6 @@ export function StationIndex() {
 
   return (
     <section className="station-index">
-      <p>itay haea</p>
       {/* <Link to="/station/edit">Add Station</Link> */}
       <StationList stations={stations} onRemoveStation={onRemoveStation} />
     </section>

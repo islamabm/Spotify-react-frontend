@@ -11,10 +11,9 @@ const SpotifySvgs = {
   <path d="M10.533 1.279 c -5.18 0 -9.407 4.14 -9.407 9.279 s 4.226 9.279 9.407 9.279 c 2.234 0 4.29 -0.77 5.907 -2.058 l 4.353 4.353 a 1 1 0 1 0 1.414 -1.414 l -4.344 -4.344 a 9.157 9.157 0 0 0 2.077 -5.816 c 0 -5.14 -4.226 -9.28 -9.407 -9.28 Z m -7.407 9.279 c 0 -4.006 3.302 -7.28 7.407 -7.28 s 7.407 3.274 7.407 7.28 s -3.302 7.279 -7.407 7.279 s -7.407 -3.273 -7.407 -7.28 Z"/>
 </svg>`,
 
-searchIconActive  : `<svg role="img" height="24" width="40" aria-hidden="true" class="Svg-sc-ytk21e-0 gQUQL search-active-icon" data-encore-id="icon"><path d="M15.356 10.558c0 2.623-2.16 4.75-4.823 4.75-2.664 0-4.824-2.127-4.824-4.75s2.16-4.75 4.824-4.75c2.664 0 4.823 2.127 4.823 4.75z"></path><path d="M1.126 10.558c0-5.14 4.226-9.28 9.407-9.28 5.18 0 9.407 4.14 9.407 9.28a9.157 9.157 0 0 1-2.077 5.816l4.344 4.344a1 1 0 0 1-1.414 1.414l-4.353-4.353a9.454 9.454 0 0 1-5.907 2.058c-5.18 0-9.407-4.14-9.407-9.28zm9.407-7.28c-4.105 0-7.407 3.274-7.407 7.28s3.302 7.279 7.407 7.279 7.407-3.273 7.407-7.28c0-4.005-3.302-7.278-7.407-7.278z"></path></svg>`,
-
-  rightArrowIcon: `<svg xmlns="http://www.w3.org/2000/svg" style="width: 40px;" fill="currentColor">
-  path("M 15.957 2.793 a 1 1 0 0 1 0 1.414 L 8.164 12 l 7.793 7.793 a 1 1 0 1 1 -1.414 1.414 L 5.336 12 l 9.207 -9.207 a 1 1 0 0 1 1.414 0 Z")`,
+  searchIconActive: `<svg role="img" height="24" width="40" aria-hidden="true" class="Svg-sc-ytk21e-0 gQUQL search-active-icon" data-encore-id="icon"><path d="M15.356 10.558c0 2.623-2.16 4.75-4.823 4.75-2.664 0-4.824-2.127-4.824-4.75s2.16-4.75 4.824-4.75c2.664 0 4.823 2.127 4.823 4.75z"></path><path d="M1.126 10.558c0-5.14 4.226-9.28 9.407-9.28 5.18 0 9.407 4.14 9.407 9.28a9.157 9.157 0 0 1-2.077 5.816l4.344 4.344a1 1 0 0 1-1.414 1.414l-4.353-4.353a9.454 9.454 0 0 1-5.907 2.058c-5.18 0-9.407-4.14-9.407-9.28zm9.407-7.28c-4.105 0-7.407 3.274-7.407 7.28s3.302 7.279 7.407 7.279 7.407-3.273 7.407-7.28c0-4.005-3.302-7.278-7.407-7.278z"></path></svg>`,
+   leftArrowIcon: `<svg role="img" height="16" width="16" aria-hidden="true" class="Svg-sc-ytk21e-0 leya-dW IYDlXmBmmUKHveMzIPCF" viewBox="0 0 16 16" data-encore-id="icon"><path d="M11.03.47a.75.75 0 0 1 0 1.06L4.56 8l6.47 6.47a.75.75 0 1 1-1.06 1.06L2.44 8 9.97.47a.75.75 0 0 1 1.06 0z"></path></svg>`,
+  rightArrowIcon: `<svg role="img" height="16" width="16" aria-hidden="true" class="Svg-sc-ytk21e-0 leya-dW IYDlXmBmmUKHveMzIPCF" viewBox="0 0 16 16" data-encore-id="icon"><path d="M4.97.47a.75.75 0 0 0 0 1.06L11.44 8l-6.47 6.47a.75.75 0 1 0 1.06 1.06L13.56 8 6.03.47a.75.75 0 0 0-1.06 0z"></path></svg>`,
 
   libraryIcon: `<svg role="img" height="24" width="24" aria-hidden="true" class="Svg-sc-ytk21e-0 gQUQL collection-icon" viewBox="0 0 24 24" data-encore-id="icon"><path d="M14.5 2.134a1 1 0 0 1 1 0l6 3.464a1 1 0 0 1 .5.866V21a1 1 0 0 1-1 1h-6a1 1 0 0 1-1-1V3a1 1 0 0 1 .5-.866zM16 4.732V20h4V7.041l-4-2.309zM3 22a1 1 0 0 1-1-1V3a1 1 0 0 1 2 0v18a1 1 0 0 1-1 1zm6 0a1 1 0 0 1-1-1V3a1 1 0 0 1 2 0v18a1 1 0 0 1-1 1z"></path></svg>`,
 
@@ -114,8 +113,8 @@ searchIconActive  : `<svg role="img" height="24" width="40" aria-hidden="true" c
   editImgIcon: `<svg role="img" height="50" width="50" aria-hidden="true" viewBox="0 0 24 24" data-encore-id="icon" class="Svg-sc-ytk21e-0 gQUQL"><path d="M17.318 1.975a3.329 3.329 0 1 1 4.707 4.707L8.451 20.256c-.49.49-1.082.867-1.735 1.103L2.34 22.94a1 1 0 0 1-1.28-1.28l1.581-4.376a4.726 4.726 0 0 1 1.103-1.735L17.318 1.975zm3.293 1.414a1.329 1.329 0 0 0-1.88 0L5.159 16.963c-.283.283-.5.624-.636 1l-.857 2.372 2.371-.857a2.726 2.726 0 0 0 1.001-.636L20.611 5.268a1.329 1.329 0 0 0 0-1.879z"></path></svg>`,
 
   defaultImgIcon: `<?xml version="1.0" ?><svg fill="none" height="80" stroke-width="1.5" viewBox="0 0 24 24" width="80" xmlns="http://www.w3.org/2000/svg"><path d="M20 14V3L9 5V16" stroke="#7F7F7F" stroke-linecap="round" stroke-linejoin="round"/><path d="M17 19H18C19.1046 19 20 18.1046 20 17V14H17C15.8954 14 15 14.8954 15 16V17C15 18.1046 15.8954 19 17 19Z" stroke="#7F7F7F" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 21H7C8.10457 21 9 20.1046 9 19V16H6C4.89543 16 4 16.8954 4 18V19C4 20.1046 4.89543 21 6 21Z" stroke="#7F7F7F" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
-}
+};
 
 export function getSpotifySvg(iconName) {
-  return SpotifySvgs[iconName]
+  return SpotifySvgs[iconName];
 }
