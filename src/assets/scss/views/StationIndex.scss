@@ -6,7 +6,8 @@
 // }
 
 .container {
-  background-color: pink;
+  background-color: $clr13;
   grid-column: 2;
+  border-radius: 7px;
   // grid-row: 1/3;
 }
