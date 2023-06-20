@@ -1,82 +1,2286 @@
-import { storageService } from './storage.service.js'
-import { makeId } from './util.service.js'
+import { storageService } from "./storage.service.js"
+import { makeId } from "./util.service.js"
 
 export const stationService = {
-    query,
-    save,
-    remove,
-    getById,
-    getEmptyStation,
-    tryStation
+  query,
+  save,
+  remove,
+  getById,
+  getEmptyStation,
+  tryStation,
 }
 
-const STORAGE_KEY = 'stations'
+const STORAGE_KEY = "stations"
 
 const gDefaultStations = [
-    { _id: 'r2', model: 'Salad-O-Matic', batteryStatus: 80, type: 'Cooking' },
-    { _id: 'r3', model: 'Dusty', batteryStatus: 100, type: 'Cleaning' },
-    { _id: 'r1', model: 'Dominique Sote', batteryStatus: 100, type: 'Pleasure' },
-    { _id: 'r4', model: 'DevTron', batteryStatus: 40, type: 'Office' }
+  {
+    _id: 1,
+    name: "Sing in the Shower",
+    tags: ["Mood"],
+    imgUrl: "https://i.scdn.co/image/ab67706f00000003329e2c5d3104f8c6a1d16a34",
+    createdBy: {
+      _id: "u101",
+      fullname: "system",
+      imgUrl: "http://some-photo/",
+    },
+    likedByUsers: ["{minimal-user}", "{minimal-user}"],
+    description:
+      "Make your shower more uplifting by singing along to these hits.",
+    songs: [
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "As It Was",
+        artist: "Harry Styles",
+        album: "As It Was",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273b46f74097655d7f353caab14",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Blinding Lights",
+        artist: "The Weeknd",
+        album: "After Hours",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2738863bc11d2aa12b54f5aeb36",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Someone You Loved",
+        artist: "Lewis Capaldi",
+        album: "Divinely Uninspired To A Hellish Extent",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273fc2101e6889d6ce9025f85f2",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "One Kiss (with Dua Lipa)",
+        artist: "Calvin Harris",
+        album: "One Kiss (with Dua Lipa)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273d09f96d82310d4d77c14c108",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Shivers",
+        artist: "Ed Sheeran",
+        album: "=",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273ef24c3fdbf856340d55cfeb2",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Locked out of Heaven",
+        artist: "Bruno Mars",
+        album: "Unorthodox Jukebox",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273926f43e7cce571e62720fd46",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Love On The Brain",
+        artist: "Rihanna",
+        album: "ANTI (Deluxe)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b27333c6b920eabcf4c00d7a1093",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Say You Won't Let Go",
+        artist: "James Arthur",
+        album: "Back from the Edge",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b27320beb61f61fcbeb33b10a9ab",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Watermelon Sugar",
+        artist: "Harry Styles",
+        album: "Fine Line",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b27377fdcfda6535601aff081b6a",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "There's Nothing Holdin' Me Back",
+        artist: "Shawn Mendes",
+        album: "Illuminate (Deluxe)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273ea3ef7697cfd5705b8f47521",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Viva La Vida",
+        artist: "Coldplay",
+        album: "Viva La Vida or Death and All His Friends",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273e21cc1db05580b6f2d2a3b6e",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Bad Habits",
+        artist: "Ed Sheeran",
+        album: "=",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273ef24c3fdbf856340d55cfeb2",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Wake Me Up",
+        artist: "Avicii",
+        album: "True",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273e14f11f796cef9f9a82691a7",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-02T09:50:57Z",
+        title: "Every Breath You Take",
+        artist: "The Police",
+        album: "Synchronicity (Remastered 2003)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273c8e97cafeb2acb85b21a777e",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Take on Me",
+        artist: "a-ha",
+        album: "Hunting High and Low",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273e8dd4db47e7177c63b0b7d53",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Cold Heart - PNAU Remix",
+        artist: "Elton John",
+        album: "Cold Heart (PNAU Remix)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2739f5cce8304c42d3a5463fd23",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Thunder",
+        artist: "Imagine Dragons",
+        album: "Evolve",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2735675e83f707f1d7271e5cf8a",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "All of Me",
+        artist: "John Legend",
+        album: "Love In The Future (Expanded Edition)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b27394c9217a398f5174757c0c78",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Umbrella",
+        artist: "Rihanna",
+        album: "Good Girl Gone Bad: Reloaded",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273f9f27162ab1ed45b8d7a7e98",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Adore You",
+        artist: "Harry Styles",
+        album: "Fine Line",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b27377fdcfda6535601aff081b6a",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "The Meters - Cissy Strut",
+        artist: "Harry Styles",
+        album: "Starboy",
+        imgUrl:
+          "https://www.adobe.com/express/learn/blog/media_16b8661af5a86e0a9ffe834e6a74a5ae2c8217696.png?width=750&format=png&optimize=medium",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Photograph",
+        artist: "Ed Sheeran",
+        album: "x (Deluxe Edition)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b27313b3e37318a0c247b550bccd",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Treat You Better",
+        artist: "Shawn Mendes",
+        album: "Illuminate",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2731376b4b16f4bfcba02dc571b",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Something Just Like This",
+        artist: "The Chainsmokers",
+        album: "Memories...Do Not Open",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2730c13d3d5a503c84fcc60ae94",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Livin' On A Prayer",
+        artist: "Bon Jovi",
+        album: "Slippery When Wet",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2731336b31b6a1799f0de5807ac",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Shallow",
+        artist: "Lady Gaga",
+        album: "A Star Is Born Soundtrack",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273e2d156fdc691f57900134342",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Love Yourself",
+        artist: "Justin Bieber",
+        album: "Purpose (Deluxe)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273f46b9d202509a8f7384b90de",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Maps",
+        artist: "Maroon 5",
+        album: "V",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273442b53773d50e1b5369bb16c",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Before You Go",
+        artist: "Lewis Capaldi",
+        album: "Divinely Uninspired To A Hellish Extent (Extended Edition)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2737b9639babbe96e25071ec1d4",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "A Sky Full of Stars",
+        artist: "Coldplay",
+        album: "Ghost Stories",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273f864bcdcc245f06831d17ae0",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Stay With Me",
+        artist: "Sam Smith",
+        album: "In The Lonely Hour",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273b11bdc91cb9ac6b14f5c1dae",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "The Motto",
+        artist: "Tiësto",
+        album: "The Motto",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2736b64f7a7e0e7af3d604ab41e",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Iris",
+        artist: "The Goo Goo Dolls",
+        album: "Dizzy up the Girl",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273eda9478c39a21e1cdc6609ca",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Closer",
+        artist: "The Chainsmokers",
+        album: "Closer",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273495ce6da9aeb159e94eaa453",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Levitating (feat. DaBaby)",
+        artist: "Dua Lipa",
+        album: "Future Nostalgia",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273d4daf28d55fe4197ede848be",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "abcdefu",
+        artist: "GAYLE",
+        album: "abcdefu",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2732842f743ebd32235bceb43d3",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Falling",
+        artist: "Harry Styles",
+        album: "Fine Line",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b27377fdcfda6535601aff081b6a",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Africa",
+        artist: "TOTO",
+        album: "Toto IV",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2734a052b99c042dc15f933145b",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Too Good At Goodbyes",
+        artist: "Sam Smith",
+        album: "The Thrill Of It All (Special Edition)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273005cd7d0ae87b081601f6cca",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Thinking out Loud",
+        artist: "Ed Sheeran",
+        album: "x (Deluxe Edition)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b27313b3e37318a0c247b550bccd",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "This Is What You Came For",
+        artist: "Calvin Harris",
+        album: "This Is What You Came For",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273d9aa52355e062f5de060adbf",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Shut Up and Dance",
+        artist: "WALK THE MOON",
+        album: "TALKING IS HARD",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b27343294cfa2688055c9d821bf3",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "My Universe",
+        artist: "Coldplay",
+        album: "My Universe",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273f60a9b7e2abafc38da31f575",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Dancing Queen",
+        artist: "ABBA",
+        album: "Arrival",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b27370f7a1b35d5165c85b95a0e0",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Story of My Life",
+        artist: "One Direction",
+        album: "Midnight Memories (Deluxe)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2732f76b797c382bedcafdf45e1",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Just the Way You Are",
+        artist: "Bruno Mars",
+        album: "Doo-Wops & Hooligans",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273f6b55ca93bd33211227b502b",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Happier",
+        artist: "Marshmello",
+        album: "Happier",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b27304bfd5a5fd5aa6ca648f66aa",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Uptown Funk (feat. Bruno Mars)",
+        artist: "Mark Ronson",
+        album: "Uptown Special",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273e419ccba0baa8bd3f3d7abf2",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Don't Start Now",
+        artist: "Dua Lipa",
+        album: "Future Nostalgia",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273bd26ede1ae69327010d49946",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Sorry",
+        artist: "Justin Bieber",
+        album: "Purpose (Deluxe)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273f46b9d202509a8f7384b90de",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Hey, Soul Sister",
+        artist: "Train",
+        album: "Save Me, San Francisco (Golden Gate Edition)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2736ff8bc258e3ebc835ffe14ca",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "thank u, next",
+        artist: "Ariana Grande",
+        album: "thank u, next",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b27356ac7b86e090f307e218e9c8",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Whenever, Wherever",
+        artist: "Shakira",
+        album: "Laundry Service",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2731f400a1f4d821b00824cf58f",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Summer Of '69",
+        artist: "Bryan Adams",
+        album: "Reckless (30th Anniversary / Deluxe Edition)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273cf1fee2a55e98e22bf358512",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "I Wanna Dance with Somebody (Who Loves Me)",
+        artist: "Whitney Houston",
+        album: "Whitney",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273cc57e9b00b87dd0f6e868347",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Sugar",
+        artist: "Maroon 5",
+        album: "V",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273442b53773d50e1b5369bb16c",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Just Give Me a Reason (feat. Nate Ruess)",
+        artist: "P!nk",
+        album: "The Truth About Love",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2739d0f0d226987b449808e7b6f",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Timber (feat. Ke$ha)",
+        artist: "Pitbull",
+        album: "Global Warming: Meltdown (Deluxe Version)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273f2486b438645e97b523e4f90",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Mercy",
+        artist: "Shawn Mendes",
+        album: "Illuminate (Deluxe)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273ea3ef7697cfd5705b8f47521",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "TiK ToK",
+        artist: "Kesha",
+        album: "Animal (Expanded Edition)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2737a6339d6ddfd579f77559b3c",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "I Want It That Way",
+        artist: "Backstreet Boys",
+        album: "Millennium",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2732160c02bc56f192df0f4986b",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Stuck with U (with Justin Bieber)",
+        artist: "Ariana Grande",
+        album: "Stuck with U",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2732babb9dbd8f5146112f1bf86",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Set Fire to the Rain",
+        artist: "Adele",
+        album: "21",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2732118bf9b198b05a95ded6300",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Señorita",
+        artist: "Shawn Mendes",
+        album: "Shawn Mendes (Deluxe)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273c820f033bd82bef4355d1563",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "High Hopes",
+        artist: "Panic! At The Disco",
+        album: "Pray for the Wicked",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273c5148520a59be191eea16989",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "We Found Love",
+        artist: "Rihanna",
+        album: "Talk That Talk",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2731c5eacf6965d328c2c795cef",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Sucker",
+        artist: "Jonas Brothers",
+        album: "Happiness Begins",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273de1a3a5eaa0c75bb18e7b597",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: 'Happy - From "Despicable Me 2"',
+        artist: "Pharrell Williams",
+        album: "G I R L",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273e8107e6d9214baa81bb79bba",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Chasing Cars",
+        artist: "Snow Patrol",
+        album: "Eyes Open",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2735da2756220da9b6f17924f8f",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Rude",
+        artist: "MAGIC!",
+        album: "Don't Kill the Magic",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273604f8ac39f15d287e251f193",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Sweet but Psycho",
+        artist: "Ava Max",
+        album: "Heaven & Hell",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2739a95e89d24214b94de36ccf7",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "New Rules",
+        artist: "Dua Lipa",
+        album: "Dua Lipa (Deluxe)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2736b915e407b70e121e06fe979",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Bruises",
+        artist: "Lewis Capaldi",
+        album: "Divinely Uninspired To A Hellish Extent",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273fc2101e6889d6ce9025f85f2",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "What's Up?",
+        artist: "4 Non Blondes",
+        album: "Bigger, Better, Faster, More !",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273381371cb8ce680d0dc324600",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Wannabe",
+        artist: "Spice Girls",
+        album: "Spice",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b27363facc42e4a35eb3aa182b59",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Rolling in the Deep",
+        artist: "Adele",
+        album: "21",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2732118bf9b198b05a95ded6300",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "This Love",
+        artist: "Maroon 5",
+        album: "Songs About Jane: 10th Anniversary Edition",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b27392f2d790c6a97b195f66d51e",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Dancing On My Own",
+        artist: "Calum Scott",
+        album: "Only Human (Deluxe)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273f2d671c22b70e01b78a618a8",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Where Is The Love?",
+        artist: "Black Eyed Peas",
+        album: "Elephunk",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b27329a42ba069a854c9078377b4",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "7 Years",
+        artist: "Lukas Graham",
+        album: "Lukas Graham",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2732d94d0f04e9a58d1654b760b",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "I'm Yours",
+        artist: "Jason Mraz",
+        album: "We Sing. We Dance. We Steal Things.",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2730f2e51f7121539e221c51161",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Everywhere - 2017 Remaster",
+        artist: "Fleetwood Mac",
+        album: "Tango In the Night (Deluxe Edition)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273aaba065944cd82a6f15c86b6",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "The Middle",
+        artist: "Zedd",
+        album: "The Middle",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273fbe22d168a743b782a5e856a",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Royals",
+        artist: "Lorde",
+        album: "Pure Heroine",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273187331e276c898d39764cc98",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Havana (feat. Young Thug)",
+        artist: "Camila Cabello",
+        album: "Camila",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2736eb0b9e73adcf04e4ed3eca4",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Happier",
+        artist: "Ed Sheeran",
+        album: "÷ (Deluxe)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273ba5db46f4b838ef6027e6f96",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "She Will Be Loved - Radio Mix",
+        artist: "Maroon 5",
+        album: "Songs About Jane: 10th Anniversary Edition",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b27392f2d790c6a97b195f66d51e",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Budapest",
+        artist: "George Ezra",
+        album: "Wanted on Voyage (Expanded Edition)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273d6df3bccf3ec41ea2f76debc",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Someone Like You",
+        artist: "Adele",
+        album: "21",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2732118bf9b198b05a95ded6300",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Drag Me Down",
+        artist: "One Direction",
+        album: "Made In The A.M. (Deluxe Edition)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273241e4fe75732c9c4b49b94c3",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Complicated",
+        artist: "Avril Lavigne",
+        album: "Let Go",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273f7ec724fbf97a30869d06240",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Girls Just Want to Have Fun",
+        artist: "Cyndi Lauper",
+        album: "She's So Unusual",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b27352f532df7ba3269b0242fed9",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "This Town",
+        artist: "Niall Horan",
+        album: "Flicker (Deluxe)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2735bac234d5511248b248caf36",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "How to Save a Life",
+        artist: "The Fray",
+        album: "How To Save A Life",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b27359b8b957f164ce660919f1f4",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "With Or Without You - Remastered",
+        artist: "U2",
+        album: "The Joshua Tree (Super Deluxe)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273b7bea3d01f04e6d0408d2afe",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "IDGAF",
+        artist: "Dua Lipa",
+        album: "Dua Lipa (Deluxe)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2736b915e407b70e121e06fe979",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Wind Of Change",
+        artist: "Scorpions",
+        album: "Crazy World",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273787674b6a114f98cad6f834b",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Uptown Girl",
+        artist: "Billy Joel",
+        album: "An Innocent Man",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273814cbc4746358a25c84c62e7",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "Wake Me Up Before You Go-Go",
+        artist: "Wham!",
+        album: "Make It Big",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273a2fc41b0dd6ce4f0d16a4c46",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-02-08T14:33:43Z",
+        title: "I Don’t Wanna Live Forever (Fifty Shades Darker)",
+        artist: "ZAYN",
+        album: "reputation Stadium Tour Surprise Song Playlist",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b27363d77f99117b28af9f656918",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-02T09:50:57Z",
+        title: "Should I Stay or Should I Go - Remastered",
+        artist: "The Clash",
+        album: "Combat Rock (Remastered)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b27325a4df452a3c42ccc2e9288b",
+        likedByUsers: [],
+      },
+    ],
+    msgs: [
+      {
+        id: "m101",
+        from: "{mini-user}",
+        txt: "Manish?",
+      },
+    ],
+  },
+  {
+    _id: 2,
+    name: "Rock This",
+    tags: ["Rock"],
+    description:
+      "Nothing But Thieves along with today's Rock songs you need to hear.",
+    imgUrl: "https://i.scdn.co/image/ab67706f00000003c02bfd2d13e8c5784e0390f5",
+    songs: [
+      {
+        addedAt: "2023-03-31T04:01:00Z",
+        title: "Welcome to the DCC",
+        artist: "Nothing But Thieves",
+        album: "Welcome to the DCC",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b27367b6e438b2d1dfec09918926",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T04:01:00Z",
+        title: "GOSSIP (feat. Tom Morello)",
+        artist: "Måneskin",
+        album: "RUSH!",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273c1b211b5fcdef31be5f806df",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T04:01:00Z",
+        title: "Lost",
+        artist: "Linkin Park",
+        album: "Lost",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273fa981359e156d38403129fa8",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T04:01:00Z",
+        title: "GODDESS",
+        artist: "PVRIS",
+        album: "GODDESS",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273674bf5c15859cdf261ff83d4",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T04:01:00Z",
+        title: "Love From The Other Side - Edit",
+        artist: "Fall Out Boy",
+        album: "Love From The Other Side",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273b90a83710fe24a824b8868d6",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T04:01:00Z",
+        title: "Hollywood Baby",
+        artist: "100 gecs",
+        album: "Hollywood Baby",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2730fdc0525ef406f8b2e81862b",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T04:01:00Z",
+        title: "Running Out Of Time",
+        artist: "Paramore",
+        album: "This Is Why",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273de1518c8beec71d61acc25fa",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T04:01:00Z",
+        title: "Love Will Get You There",
+        artist: "Inhaler",
+        album: "Cuts & Bruises",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273d2e39ea289f5cdc3a2c1ae13",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T04:01:00Z",
+        title: "Ghosts Again",
+        artist: "Depeche Mode",
+        album: "Ghosts Again",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273534061accc8a24abddb38176",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T04:01:00Z",
+        title: "In My Head",
+        artist: "Mike Shinoda",
+        album: "In My Head",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273adee3ea8087cc2a78ebe5127",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T04:01:00Z",
+        title: "Supernatural",
+        artist: "Barns Courtney",
+        album: "Supernatural",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273d81b8002786b077600ce9de1",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T04:01:00Z",
+        title: "Calm Down",
+        artist: "All Time Low",
+        album: "Tell Me I'm Alive",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b27351c5a0490ea847ecb7b8b164",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T04:01:00Z",
+        title: "Six Feet Under",
+        artist: "Charlotte Sands",
+        album: "Six Feet Under",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2733dc0ca1a9b9ed6048e7aef20",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T04:01:00Z",
+        title: "Emergency Contact",
+        artist: "Pierce The Veil",
+        album: "Emergency Contact",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2736e61cfcaf2d8c4a7b051d026",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T04:01:00Z",
+        title: "Left Behind",
+        artist: "The Plot In You",
+        album: "Left Behind",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273d5ed54d7e37d4dd456ec28f1",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T04:01:00Z",
+        title: "Kool",
+        artist: "Meet Me @ The Altar",
+        album: "Past // Present // Future",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b27355ea06678f159ce04854000a",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T04:01:00Z",
+        title: "Told You So",
+        artist: "The Band CAMINO",
+        album: "Told You So",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273b1ab783287a526d1bd8f1b37",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T04:01:00Z",
+        title: "Hooves",
+        artist: "Sir Chloe",
+        album: "Hooves",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b27384a67de1f7ea4f665608fbe2",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T04:01:00Z",
+        title: "Call Me What You Like",
+        artist: "Lovejoy",
+        album: "Call Me What You Like",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2732645d21cce25cea1ac5aedf2",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T04:01:00Z",
+        title: "Veronica Mars",
+        artist: "Blondshell",
+        album: "Veronica Mars",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2736774908d6f67a7eac4cee6b7",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T04:01:00Z",
+        title: "Pages",
+        artist: "White Reaper",
+        album: "Asking For A Ride",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b27314a24b46da707b11655c9431",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T04:01:00Z",
+        title: "Another Celebration at the End of the World",
+        artist: "Mammoth WVH",
+        album: "Another Celebration at the End of the World",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2730e4e8c07ea84c47648ac0a08",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T04:01:00Z",
+        title: "Spillways [Feat. Joe Elliott]",
+        artist: "Ghost",
+        album: "Spillways [Feat. Joe Elliott]",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273a7e74acfaf004e89a091699e",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T04:01:00Z",
+        title: "War",
+        artist: "Story Of The Year",
+        album: "War",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b27339119b568203b616b0e606f4",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T04:01:00Z",
+        title: "PANIC",
+        artist: "YONAKA",
+        album: "PANIC",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2739629c19a2470effdaf531256",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T04:01:00Z",
+        title: "Play My Favourite Song",
+        artist: "Tigercub",
+        album: "Play My Favourite Song",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2730c53199764b32c6d25a19c91",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T04:01:00Z",
+        title: "Love Abuser (Save Me)",
+        artist: "Royal & the Serpent",
+        album: "Love Abuser (Save Me)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273d38a9a0226af111542ca5c27",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T04:01:00Z",
+        title: "ALL CAPS (feat. John the Ghost)",
+        artist: "Weathers",
+        album: "ALL CAPS (feat. John the Ghost)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273f1dab974d0bd5448bcf6007b",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T04:01:00Z",
+        title: ":mydopamine:",
+        artist: "You Me At Six",
+        album: ":mydopamine:",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273867f34691ad85a5dd65ac10d",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T04:01:00Z",
+        title: "The Summoning",
+        artist: "Sleep Token",
+        album: "The Summoning",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273eb7a831300d4835a4c16f8c1",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T04:01:00Z",
+        title: "Without Me",
+        artist: "Dayseeker",
+        album: "Dark Sun",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273af0b19a66d60dd75baa77ec1",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T04:01:00Z",
+        title: "Ice Cold",
+        artist: "Highly Suspect",
+        album: "The Midnight Demon Club",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273cf88e7a465f979556100e59c",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T04:01:00Z",
+        title: "Just Pretend",
+        artist: "Bad Omens",
+        album: "THE DEATH OF PEACE OF MIND",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273e5f6f7ec99735d7b870f18ae",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T04:01:00Z",
+        title: "BANG BANG!",
+        artist: "Nessa Barrett",
+        album: "BANG BANG!",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2737e343ef46476f6dded17cfb5",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T04:01:00Z",
+        title: "Eulogy",
+        artist: "grandson",
+        album: "Eulogy",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2735769a12b62158f468bf533f4",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T04:01:00Z",
+        title: "FREAK (Feat. jxdn)",
+        artist: "Beauty School Dropout",
+        album: "FREAK (Feat. jxdn)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2738c77daf900cc662bf97cd897",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T04:01:00Z",
+        title: "Shelter (feat. Avril Lavigne)",
+        artist: "MOD SUN",
+        album: "God Save The Teen",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273fd23f48e459fb87865829652",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T04:01:00Z",
+        title: "Heartbreak Of The Century",
+        artist: "Neck Deep",
+        album: "Heartbreak Of The Century",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2732cd2d9761f4818a4a73278ca",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T04:01:00Z",
+        title: "kill[h]er",
+        artist: "Stand Atlantic",
+        album: "kill[h]er",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273ff9dc97e2b80258177aa830c",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T04:01:00Z",
+        title: "Centipede",
+        artist: "FIDLAR",
+        album: "Centipede",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2733810fb09270c5b97072b2714",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T04:01:00Z",
+        title: "Do It Faster",
+        artist: "Militarie Gun",
+        album: "Do It Faster",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273fc192fd409c1e8dd7431b0ee",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T04:01:00Z",
+        title: "Lose You (feat. Soccer Mommy)",
+        artist: "Bully",
+        album: "Lose You (feat. Soccer Mommy)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2739c8fef42f2ac4705c76ec19b",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T04:01:00Z",
+        title: "Hate.",
+        artist: "ThxSoMch",
+        album: "Hate.",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2739a60aa596ebddff13dc0e08b",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T04:01:00Z",
+        title: "curious/furious",
+        artist: "WILLOW",
+        album: "<COPINGMECHANISM>",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2731d13addda541bcf23ea27e0d",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T04:01:00Z",
+        title: "TAKE THIS CROWN (feat. Good Charlotte)",
+        artist: "DE'WAYNE",
+        album: "My Favorite Blue Jeans",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b27321da5bbcc537077342b399f9",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T04:01:00Z",
+        title: "POS",
+        artist: "Sueco",
+        album: "POS",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b27326f0c5addc43575fe62a55d1",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T04:01:00Z",
+        title: "everybody hates me",
+        artist: "GAYLE",
+        album: "everybody hates me",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273cec24360f503f4e1b609aa3c",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T04:01:00Z",
+        title: "Friends With Benefits",
+        artist: "jxdn",
+        album: "Friends With Benefits",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2734c1f3cc5c6352f474a8c6196",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T04:01:00Z",
+        title: "EDGING",
+        artist: "blink-182",
+        album: "EDGING",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273992db40efc4367bebea586f7",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T04:01:00Z",
+        title: "HOLIDAY",
+        artist: "Turnstile",
+        album: "GLOW ON",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273a4499cf37a6fe4ff043dc9f2",
+        likedByUsers: [],
+      },
+    ],
+    createdBy: {
+      _id: "u101",
+      fullname: "system",
+      imgUrl: "http://some-photo/",
+    },
+    likedByUsers: [],
+  },
+  {
+    _id: 3,
+    name: "This Is Pink Floyd",
+    description:
+      "This is Pink Floyd. The essential tracks, all in one playlist.",
+    imgUrl: "https://thisis-images.scdn.co/37i9dQZF1DZ06evO07zaak-large.jpg",
+    songs: [
+      {
+        addedAt: "2023-03-31T17:37:27Z",
+        title: "Hey Hey Rise Up (feat. Andriy Khlyvnyuk of Boombox)",
+        artist: "Pink Floyd",
+        album: "Hey Hey Rise Up (feat. Andriy Khlyvnyuk of Boombox)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273366a444b9d639924cb953b3b",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:27Z",
+        title: "Another Brick in the Wall, Pt. 2",
+        artist: "Pink Floyd",
+        album: "The Wall",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2735d48e2f56d691f9a4e4b0bdf",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:27Z",
+        title: "Breathe (In the Air)",
+        artist: "Pink Floyd",
+        album: "The Dark Side of the Moon",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273ea7caaff71dea1051d49b2fe",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:27Z",
+        title: "Wish You Were Here",
+        artist: "Pink Floyd",
+        album: "Wish You Were Here",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2731a84d71391df7469c5ab8539",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:27Z",
+        title: "Pigs on the Wing 1",
+        artist: "Pink Floyd",
+        album: "Animals",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273810168d54f85d48f07389237",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:27Z",
+        title: "Comfortably Numb",
+        artist: "Pink Floyd",
+        album: "The Wall",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2735d48e2f56d691f9a4e4b0bdf",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:27Z",
+        title: "The Great Gig in the Sky",
+        artist: "Pink Floyd",
+        album: "The Dark Side of the Moon",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273ea7caaff71dea1051d49b2fe",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:27Z",
+        title: "Have a Cigar",
+        artist: "Pink Floyd",
+        album: "Wish You Were Here",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2731a84d71391df7469c5ab8539",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:27Z",
+        title: "Learning to Fly",
+        artist: "Pink Floyd",
+        album: "A Momentary Lapse of Reason",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b27361f734a2370207feda78d018",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:27Z",
+        title: "Hey You",
+        artist: "Pink Floyd",
+        album: "The Wall",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2735d48e2f56d691f9a4e4b0bdf",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:27Z",
+        title: "Money",
+        artist: "Pink Floyd",
+        album: "The Dark Side of the Moon",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273ea7caaff71dea1051d49b2fe",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:27Z",
+        title: "Shine On You Crazy Diamond (Pts. 1-5)",
+        artist: "Pink Floyd",
+        album: "Wish You Were Here",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2731a84d71391df7469c5ab8539",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:27Z",
+        title: "Coming Back to Life",
+        artist: "Pink Floyd",
+        album: "The Division Bell",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2738431fb4cb38f8ee96d3434c0",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:27Z",
+        title: "Young Lust",
+        artist: "Pink Floyd",
+        album: "The Wall",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2735d48e2f56d691f9a4e4b0bdf",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:27Z",
+        title: "Time",
+        artist: "Pink Floyd",
+        album: "The Dark Side of the Moon",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273ea7caaff71dea1051d49b2fe",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:27Z",
+        title: "Welcome to the Machine",
+        artist: "Pink Floyd",
+        album: "Wish You Were Here",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2731a84d71391df7469c5ab8539",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:27Z",
+        title: "What Do You Want from Me",
+        artist: "Pink Floyd",
+        album: "The Division Bell",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2738431fb4cb38f8ee96d3434c0",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:27Z",
+        title: "Another Brick in the Wall, Pt. 1",
+        artist: "Pink Floyd",
+        album: "The Wall",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2735d48e2f56d691f9a4e4b0bdf",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:27Z",
+        title: "Brain Damage",
+        artist: "Pink Floyd",
+        album: "The Dark Side of the Moon",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273ea7caaff71dea1051d49b2fe",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:27Z",
+        title: "Fearless",
+        artist: "Pink Floyd",
+        album: "Meddle",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2739449d3adaa0f6e26af288c0d",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:27Z",
+        title: "Marooned",
+        artist: "Pink Floyd",
+        album: "The Division Bell",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2738431fb4cb38f8ee96d3434c0",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:27Z",
+        title: "Mother",
+        artist: "Pink Floyd",
+        album: "The Wall",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2735d48e2f56d691f9a4e4b0bdf",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:27Z",
+        title: "Us and Them",
+        artist: "Pink Floyd",
+        album: "The Dark Side of the Moon",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273ea7caaff71dea1051d49b2fe",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:27Z",
+        title: "On the Turning Away",
+        artist: "Pink Floyd",
+        album: "A Momentary Lapse of Reason",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b27361f734a2370207feda78d018",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:27Z",
+        title: "Lost for Words",
+        artist: "Pink Floyd",
+        album: "The Division Bell",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2738431fb4cb38f8ee96d3434c0",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:27Z",
+        title: "Pigs (Three Different Ones)",
+        artist: "Pink Floyd",
+        album: "Animals",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273810168d54f85d48f07389237",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:27Z",
+        title: "San Tropez",
+        artist: "Pink Floyd",
+        album: "Meddle",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2739449d3adaa0f6e26af288c0d",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:27Z",
+        title: "Wot's...Uh the Deal",
+        artist: "Pink Floyd",
+        album: "Obscured by Clouds",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273e806fae51cd0fc57e59d52a3",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:27Z",
+        title: "Take It Back",
+        artist: "Pink Floyd",
+        album: "The Division Bell",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2738431fb4cb38f8ee96d3434c0",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:27Z",
+        title: "Dogs",
+        artist: "Pink Floyd",
+        album: "Animals",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273810168d54f85d48f07389237",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:27Z",
+        title: "One of These Days",
+        artist: "Pink Floyd",
+        album: "Meddle",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2739449d3adaa0f6e26af288c0d",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:27Z",
+        title: "The Final Cut",
+        artist: "Pink Floyd",
+        album: "The Final Cut",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b27347df2a740389393d35cb33ca",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:27Z",
+        title: "Poles Apart",
+        artist: "Pink Floyd",
+        album: "The Division Bell",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2738431fb4cb38f8ee96d3434c0",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:27Z",
+        title: "Sheep",
+        artist: "Pink Floyd",
+        album: "Animals",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273810168d54f85d48f07389237",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:27Z",
+        title: "A Pillow of Winds",
+        artist: "Pink Floyd",
+        album: "Meddle",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2739449d3adaa0f6e26af288c0d",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:27Z",
+        title: "One of the Few",
+        artist: "Pink Floyd",
+        album: "The Final Cut",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b27347df2a740389393d35cb33ca",
+        likedByUsers: [],
+      },
+    ],
+    tags: ["Rock"],
+    createdBy: {
+      _id: "u101",
+      fullname: "system",
+      imgUrl: "http://some-photo/",
+    },
+    likedByUsers: [],
+  },
+  {
+    _id: 4,
+    name: "This Is The Beatles",
+    description:
+      "This is The Beatles. The essential tracks, all in one playlist.",
+    imgUrl: "https://thisis-images.scdn.co/37i9dQZF1DZ06evO2iBPiw-large.jpg",
+    tags: ["Rock"],
+    songs: [
+      {
+        addedAt: "2023-03-31T17:37:35Z",
+        title: "Here Comes The Sun - Remastered 2009",
+        artist: "The Beatles",
+        album: "Abbey Road (Remastered)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273dc30583ba717007b00cceb25",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:35Z",
+        title: "In My Life - Remastered 2009",
+        artist: "The Beatles",
+        album: "Rubber Soul (Remastered)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273ed801e58a9ababdea6ac7ce4",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:35Z",
+        title: "Yesterday - Remastered 2009",
+        artist: "The Beatles",
+        album: "Help! (Remastered)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273e3e3b64cea45265469d4cafa",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:35Z",
+        title: "Let It Be - Remastered 2009",
+        artist: "The Beatles",
+        album: "Let It Be (Remastered)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b27384243a01af3c77b56fe01ab1",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:35Z",
+        title: "Blackbird - Remastered 2009",
+        artist: "The Beatles",
+        album: "The Beatles (Remastered)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2734ce8b4e42588bf18182a1ad2",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:35Z",
+        title: "Norwegian Wood (This Bird Has Flown) - Remastered 2009",
+        artist: "The Beatles",
+        album: "Rubber Soul (Remastered)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273ed801e58a9ababdea6ac7ce4",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:35Z",
+        title: "Come Together - Remastered 2009",
+        artist: "The Beatles",
+        album: "Abbey Road (Remastered)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273dc30583ba717007b00cceb25",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:35Z",
+        title: "Twist And Shout - Remastered 2009",
+        artist: "The Beatles",
+        album: "Please Please Me (Remastered)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273dbeec63ad914c973e75c24df",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:35Z",
+        title: "You've Got To Hide Your Love Away - Remastered 2009",
+        artist: "The Beatles",
+        album: "Help! (Remastered)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273e3e3b64cea45265469d4cafa",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:35Z",
+        title: "I Want To Hold Your Hand - Remastered 2015",
+        artist: "The Beatles",
+        album: "1 (Remastered)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273582d56ce20fe0146ffa0e5cf",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:35Z",
+        title: "Something - Remastered 2009",
+        artist: "The Beatles",
+        album: "Abbey Road (Remastered)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273dc30583ba717007b00cceb25",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:35Z",
+        title: "All My Loving - Remastered 2009",
+        artist: "The Beatles",
+        album: "With The Beatles (Remastered)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273608a63ad5b18e99da94a3f73",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:35Z",
+        title: "Help! - Remastered 2009",
+        artist: "The Beatles",
+        album: "Help! (Remastered)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273e3e3b64cea45265469d4cafa",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:35Z",
+        title: "Ob-La-Di, Ob-La-Da - Remastered 2009",
+        artist: "The Beatles",
+        album: "The Beatles (Remastered)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2734ce8b4e42588bf18182a1ad2",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:35Z",
+        title: "Hey Jude - Remastered 2015",
+        artist: "The Beatles",
+        album: "1 (Remastered)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273582d56ce20fe0146ffa0e5cf",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:35Z",
+        title: "And I Love Her - Remastered 2009",
+        artist: "The Beatles",
+        album: "A Hard Day's Night (Remastered)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273e230f303815e82a86713eedd",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:35Z",
+        title: "Love Me Do - Remastered 2009",
+        artist: "The Beatles",
+        album: "Please Please Me (Remastered)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273dbeec63ad914c973e75c24df",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:35Z",
+        title: "While My Guitar Gently Weeps - Remastered 2009",
+        artist: "The Beatles",
+        album: "The Beatles (Remastered)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2734ce8b4e42588bf18182a1ad2",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:35Z",
+        title: "We Can Work It Out - Remastered 2015",
+        artist: "The Beatles",
+        album: "1 (Remastered)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273582d56ce20fe0146ffa0e5cf",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:35Z",
+        title: "Golden Slumbers - Remastered 2009",
+        artist: "The Beatles",
+        album: "Abbey Road (Remastered)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273dc30583ba717007b00cceb25",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:35Z",
+        title: "Can't Buy Me Love - Remastered 2009",
+        artist: "The Beatles",
+        album: "A Hard Day's Night (Remastered)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273e230f303815e82a86713eedd",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:35Z",
+        title: "I'll Follow The Sun - Remastered 2009",
+        artist: "The Beatles",
+        album: "Beatles For Sale (Remastered)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b27355612ece447bec5d62c68375",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:35Z",
+        title: "Day Tripper - Remastered 2015",
+        artist: "The Beatles",
+        album: "1 (Remastered)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273582d56ce20fe0146ffa0e5cf",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:35Z",
+        title: "Eleanor Rigby - Remastered 2009",
+        artist: "The Beatles",
+        album: "Revolver (Remastered)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b27328b8b9b46428896e6491e97a",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:35Z",
+        title: "A Hard Day's Night - Remastered 2009",
+        artist: "The Beatles",
+        album: "A Hard Day's Night (Remastered)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273e230f303815e82a86713eedd",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:35Z",
+        title: "Eight Days A Week - Remastered 2009",
+        artist: "The Beatles",
+        album: "Beatles For Sale (Remastered)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b27355612ece447bec5d62c68375",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:35Z",
+        title: "I Feel Fine - Remastered 2015",
+        artist: "The Beatles",
+        album: "1 (Remastered)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273582d56ce20fe0146ffa0e5cf",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:35Z",
+        title: "Here, There And Everywhere - Remastered 2009",
+        artist: "The Beatles",
+        album: "Revolver (Remastered)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b27328b8b9b46428896e6491e97a",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:35Z",
+        title: "I Saw Her Standing There - Remastered 2009",
+        artist: "The Beatles",
+        album: "Please Please Me (Remastered)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273dbeec63ad914c973e75c24df",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:35Z",
+        title: "Michelle - Remastered 2009",
+        artist: "The Beatles",
+        album: "Rubber Soul (Remastered)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273ed801e58a9ababdea6ac7ce4",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:35Z",
+        title: "The Long And Winding Road - Remastered 2009",
+        artist: "The Beatles",
+        album: "Let It Be (Remastered)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b27384243a01af3c77b56fe01ab1",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:35Z",
+        title: "I Will - Remastered 2009",
+        artist: "The Beatles",
+        album: "The Beatles (Remastered)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2734ce8b4e42588bf18182a1ad2",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:35Z",
+        title: "Ticket To Ride - Remastered 2009",
+        artist: "The Beatles",
+        album: "Help! (Remastered)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273e3e3b64cea45265469d4cafa",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:35Z",
+        title: "She Loves You - Mono / Remastered",
+        artist: "The Beatles",
+        album: "1 (Remastered)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273582d56ce20fe0146ffa0e5cf",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:35Z",
+        title: "Get Back - Remastered 2009",
+        artist: "The Beatles",
+        album: "Let It Be (Remastered)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b27384243a01af3c77b56fe01ab1",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:35Z",
+        title: "For No One - Remastered 2009",
+        artist: "The Beatles",
+        album: "Revolver (Remastered)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b27328b8b9b46428896e6491e97a",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:35Z",
+        title: "When I'm Sixty Four - Remastered 2009",
+        artist: "The Beatles",
+        album: "Sgt. Pepper's Lonely Hearts Club Band (Remastered)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b27334ef8f7d06cf2fc2146f420a",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:35Z",
+        title: "Don't Let Me Down - Remastered 2009",
+        artist: "The Beatles",
+        album: "The Beatles 1967 - 1970 (Remastered)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b2736e3d3c964df32136fb1cd594",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:35Z",
+        title: "Penny Lane - Remastered 2009",
+        artist: "The Beatles",
+        album: "Magical Mystery Tour (Remastered)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273692d9189b2bd75525893f0c1",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:35Z",
+        title: "Drive My Car - Remastered 2009",
+        artist: "The Beatles",
+        album: "Rubber Soul (Remastered)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273ed801e58a9ababdea6ac7ce4",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:35Z",
+        title: "If I Fell - Remastered 2009",
+        artist: "The Beatles",
+        album: "A Hard Day's Night (Remastered)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273e230f303815e82a86713eedd",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:35Z",
+        title: "With A Little Help From My Friends - Remastered 2009",
+        artist: "The Beatles",
+        album: "Sgt. Pepper's Lonely Hearts Club Band (Remastered)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b27334ef8f7d06cf2fc2146f420a",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:35Z",
+        title: "Oh! Darling - Remastered 2009",
+        artist: "The Beatles",
+        album: "Abbey Road (Remastered)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273dc30583ba717007b00cceb25",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:35Z",
+        title: "Nowhere Man - Remastered 2009",
+        artist: "The Beatles",
+        album: "Rubber Soul (Remastered)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273ed801e58a9ababdea6ac7ce4",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:35Z",
+        title: "Across The Universe - Remastered 2009",
+        artist: "The Beatles",
+        album: "Let It Be (Remastered)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b27384243a01af3c77b56fe01ab1",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:35Z",
+        title: "Lucy In The Sky With Diamonds - Remastered 2009",
+        artist: "The Beatles",
+        album: "Sgt. Pepper's Lonely Hearts Club Band (Remastered)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b27334ef8f7d06cf2fc2146f420a",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:35Z",
+        title: "All You Need Is Love - Remastered 2009",
+        artist: "The Beatles",
+        album: "Magical Mystery Tour (Remastered)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273692d9189b2bd75525893f0c1",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:35Z",
+        title: "I've Just Seen A Face - Remastered 2009",
+        artist: "The Beatles",
+        album: "Help! (Remastered)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273e3e3b64cea45265469d4cafa",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:35Z",
+        title: "Octopus's Garden - Remastered 2009",
+        artist: "The Beatles",
+        album: "Abbey Road (Remastered)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273dc30583ba717007b00cceb25",
+        likedByUsers: [],
+      },
+      {
+        addedAt: "2023-03-31T17:37:35Z",
+        title: "Till There Was You - Remastered 2009",
+        artist: "The Beatles",
+        album: "With The Beatles (Remastered)",
+        imgUrl:
+          "https://i.scdn.co/image/ab67616d0000b273608a63ad5b18e99da94a3f73",
+        likedByUsers: [],
+      },
+    ],
+    createdBy: {
+      _id: "u101",
+      fullname: "system",
+      imgUrl: "http://some-photo/",
+    },
+    likedByUsers: [],
+  },
 ]
 
 var gStations = _loadStations()
 
 function query(filterBy) {
-    let stationsToReturn = gStations;
-    console.log(filterBy);
-    if (filterBy) {
-        var { type, maxBatteryStatus, minBatteryStatus, model } = filterBy
-        maxBatteryStatus = maxBatteryStatus || Infinity
-        minBatteryStatus = minBatteryStatus || 0
-        stationsToReturn = gStations.filter(station => station.type.toLowerCase().includes(type.toLowerCase()) && station.model.toLowerCase().includes(model.toLowerCase())
-            && (station.batteryStatus < maxBatteryStatus)
-            && station.batteryStatus > minBatteryStatus)
-    }
-    return Promise.resolve([...stationsToReturn]);
+  let stationsToReturn = gStations
+  console.log(filterBy)
+  if (filterBy) {
+    var { type, maxBatteryStatus, minBatteryStatus, model } = filterBy
+    maxBatteryStatus = maxBatteryStatus || Infinity
+    minBatteryStatus = minBatteryStatus || 0
+    stationsToReturn = gStations.filter(
+      (station) =>
+        station.type.toLowerCase().includes(type.toLowerCase()) &&
+        station.model.toLowerCase().includes(model.toLowerCase()) &&
+        station.batteryStatus < maxBatteryStatus &&
+        station.batteryStatus > minBatteryStatus
+    )
+  }
+  return Promise.resolve([...stationsToReturn])
 }
 function tryStation(id) {
-    const station = gStations.find(station => station._id === id)
-    station.batteryStatus -= 10
-    return Promise.resolve()
+  const station = gStations.find((station) => station._id === id)
+  station.batteryStatus -= 10
+  return Promise.resolve()
 }
 function getById(id) {
-    const station = gStations.find(station => station._id === id)
-    return Promise.resolve({ ...station })
+  const station = gStations.find((station) => station._id === id)
+  return Promise.resolve({ ...station })
 }
 
 function remove(id) {
-    const idx = gStations.findIndex(station => station._id === id)
-    gStations.splice(idx, 1)
-    if (!gStations.length) gStations = gDefaultStations.slice()
-    storageService.store(STORAGE_KEY, gStations)
-    return Promise.resolve()
+  const idx = gStations.findIndex((station) => station._id === id)
+  gStations.splice(idx, 1)
+  if (!gStations.length) gStations = gDefaultStations.slice()
+  storageService.store(STORAGE_KEY, gStations)
+  return Promise.resolve()
 }
 
 function save(stationToSave) {
-    if (stationToSave._id) {
-        const idx = gStations.findIndex(station => station._id === stationToSave._id)
-        gStations.splice(idx, 1, stationToSave)
-    } else {
-        stationToSave._id = makeId()
-        stationToSave.batteryStatus = 100
-        gStations.push(stationToSave)
-    }
-    storageService.store(STORAGE_KEY, gStations)
-    return Promise.resolve(stationToSave);
+  if (stationToSave._id) {
+    const idx = gStations.findIndex(
+      (station) => station._id === stationToSave._id
+    )
+    gStations.splice(idx, 1, stationToSave)
+  } else {
+    stationToSave._id = makeId()
+    stationToSave.batteryStatus = 100
+    gStations.push(stationToSave)
+  }
+  storageService.store(STORAGE_KEY, gStations)
+  return Promise.resolve(stationToSave)
 }
 
-
 function getEmptyStation() {
-    return {
-        model: '',
-        type: ''
-    }
+  return {
+    model: "",
+    type: "",
+  }
 }
 
 function _loadStations() {
-    let stations = storageService.load(STORAGE_KEY)
-    if (!stations || !stations.length) stations = gDefaultStations
-    storageService.store(STORAGE_KEY, stations)
-    return stations
+  let stations = storageService.load(STORAGE_KEY)
+  if (!stations || !stations.length) stations = gDefaultStations
+  storageService.store(STORAGE_KEY, stations)
+  return stations
 }
-
