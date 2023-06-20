@@ -8,66 +8,61 @@ export function MediaPlayer() {
 
       <div className="media-player">
         <div className="control-buttons">
-          <button
-            title="Enable shuffle"
-            className="shuffle media-player-prev-song hiding"
-          >
-            <i>
+          <i>
+            {' '}
+            <span
+              dangerouslySetInnerHTML={{
+                __html: getSpotifySvg('shouffleIcon'),
+              }}
+            ></span>
+          </i>
+
+          <i>
+            {' '}
+            <span
+              dangerouslySetInnerHTML={{
+                __html: getSpotifySvg('prevIcon'),
+              }}
+            ></span>
+          </i>
+          <button>
+            <i className="special-i">
               {' '}
               <span
                 dangerouslySetInnerHTML={{
-                  __html: getSpotifySvg('shuffleBtnIcon'),
+                  __html: getSpotifySvg('playIcon'),
                 }}
               ></span>
             </i>
           </button>
-          <button
-            title="Previous"
-            className="prev media-player-prev-song hiding"
-          >
-            <i>
-              {' '}
-              <span
-                dangerouslySetInnerHTML={{
-                  __html: getSpotifySvg('prevSongBtnIcon'),
-                }}
-              ></span>
-            </i>
-          </button>
-          <button title="Play" className="media-player-play">
-            {/* <i className="pause"></i> */}
-            <i>
-              {' '}
-              <span
-                dangerouslySetInnerHTML={{
-                  __html: getSpotifySvg('prevSongBtnIcon'),
-                }}
-              ></span>
-            </i>
-          </button>
-          <button title="Next" className="next media-player-prev-song hiding">
-            <i>
-              {' '}
-              <span
-                dangerouslySetInnerHTML={{
-                  __html: getSpotifySvg('prevSongBtnIcon'),
-                }}
-              ></span>
-            </i>
-          </button>
-          <button
-            title="Enable repeat"
-            className="media-player-repeat-song hiding"
-          >
-            <i>
-              {' '}
-              <span
-                dangerouslySetInnerHTML={{
-                  __html: getSpotifySvg('prevSongBtnIcon'),
-                }}
-              ></span>
-            </i>
-          </button>
+
+          {/* <i className="pause"></i> */}
+          <i>
+            {' '}
+            <span
+              dangerouslySetInnerHTML={{
+                __html: getSpotifySvg('nextIcon'),
+              }}
+            ></span>
+          </i>
+
+          <i>
+            {' '}
+            <span
+              dangerouslySetInnerHTML={{
+                __html: getSpotifySvg('repeateIcon'),
+              }}
+            ></span>
+          </i>
+
+          <i>
+            {' '}
+            <span
+              dangerouslySetInnerHTML={{
+                __html: getSpotifySvg('prevSongBtnIcon'),
+              }}
+            ></span>
+          </i>
         </div>
 
         <div className="music-bar">

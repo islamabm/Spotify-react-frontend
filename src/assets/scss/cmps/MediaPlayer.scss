@@ -1,10 +1,30 @@
 .control-buttons {
+  display: flex;
+  gap: rem(20px);
+  align-items: center;
+  justify-content: center;
   button {
-    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    background-color: white;
+    // margin-inline-start: 2px;
+    margin-block-start: 3px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+  }
+  i {
+    fill: #b3b3b3;
 
-    i {
+    &:hover {
       fill: white;
     }
-    border: none;
+  }
+  .special-i {
+    fill: black;
+    &:hover {
+      fill: black;
+    }
   }
 }
