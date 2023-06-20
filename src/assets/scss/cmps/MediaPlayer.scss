@@ -34,3 +34,63 @@
     }
   }
 }
+.music-bar {
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  gap: 10px;
+  width: 100%;
+  height: 20px;
+}
+
+.current-time {
+  font-size: 14px;
+  color: #fff;
+}
+
+.progress-bar {
+  flex: 1 1;
+  height: 3px;
+  background-color: gray;
+  position: relative;
+  cursor: pointer;
+  width: 400.12px;
+  border-radius: 89px;
+}
+
+.progress-bar-fill {
+  position: absolute;
+  height: 100%;
+  width: 0;
+  background-color: white;
+}
+
+.progress-bar:hover .progress-bar-fill {
+  background-color: green;
+}
+
+.progress-bar-fill:after {
+  content: '';
+  position: absolute;
+  right: -5px;
+  top: -5px;
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  background-color: green;
+  display: none;
+}
+
+.progress-bar:hover .progress-bar-fill:after {
+  display: block;
+}
+
+.progress-bar-audio {
+  flex: 1 1;
+  height: 3px;
+  background-color: gray;
+  position: relative;
+  cursor: pointer;
+  width: 150px;
+  border-radius: 89px;
+}
