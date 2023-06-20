@@ -17,7 +17,7 @@ export function AppNav() {
   
   return (
     <section className="app-nav">
-      <Link exact to="/" className="shared-nav-item">
+      <Link to="/" className="shared-nav-item">
         <span dangerouslySetInnerHTML={{ __html: getSvgIcon("homeIcon") }}></span>
         <span>Home</span>
       </Link>
