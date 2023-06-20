@@ -1,0 +1,5 @@
+.station-list {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(100px,189px));
+    gap: rem(24px);
+}

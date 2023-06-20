@@ -13,9 +13,12 @@
 @import 'basics/animations';
 
 // Views
-@import 'views/StationIndex.scss';
+@import 'views/StationIndex';
+
 // Components
-@import 'cmps/AppFooter.scss';
-@import 'cmps/AppNav.scss';
-@import 'cmps/UserLibrary.scss';
-@import 'cmps/AppHeader.scss';
+@import 'cmps/AppFooter';
+@import 'cmps/AppNav';
+@import 'cmps/UserLibrary';
+@import 'cmps/AppHeader';
+@import 'cmps/StationPreview';
+@import 'cmps/StationList.scss';

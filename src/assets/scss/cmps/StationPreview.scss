@@ -1,0 +1,17 @@
+.station-preview {
+   height: 273px;
+   width: 186px; 
+   border-radius: 5px;
+   background-color: $clr1;
+   margin-inline-start: rem(30px);
+   font-size: 12px;
+
+   .station-img {
+      margin-inline-start: rem(15px);
+      margin-block-start: rem(15px);
+      width: 157px;
+      height: 157px;
+      border-radius: 5px;
+      background-color: aqua;
+   }
+}
