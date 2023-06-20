@@ -4,7 +4,7 @@ import { REMOVE_STATION, SET_FILTER_BY, SET_STATIONS } from "../reducers/station
 export function loadStations() {
     return async (dispatch, getState) => {
         try {
-            const stations = await stationService.query(getState().stationModule.filterBy)
+            const stations = await stationService.query()
             const action = {
                 type: SET_STATIONS,
                 stations

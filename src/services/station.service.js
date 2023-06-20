@@ -7,7 +7,7 @@ export const stationService = {
   remove,
   getById,
   getEmptyStation,
-  tryStation,
+//   tryStation,
 }
 
 const STORAGE_KEY = "stations"
@@ -2221,28 +2221,29 @@ const gDefaultStations = [
 
 var gStations = _loadStations()
 
-function query(filterBy) {
-  let stationsToReturn = gStations
-  console.log(filterBy)
-  if (filterBy) {
-    var { type, maxBatteryStatus, minBatteryStatus, model } = filterBy
-    maxBatteryStatus = maxBatteryStatus || Infinity
-    minBatteryStatus = minBatteryStatus || 0
-    stationsToReturn = gStations.filter(
-      (station) =>
-        station.type.toLowerCase().includes(type.toLowerCase()) &&
-        station.model.toLowerCase().includes(model.toLowerCase()) &&
-        station.batteryStatus < maxBatteryStatus &&
-        station.batteryStatus > minBatteryStatus
-    )
-  }
-  return Promise.resolve([...stationsToReturn])
+function query() {
+//   let stationsToReturn = gStations
+//   console.log(filterBy)
+//   if (filterBy) {
+//     var { type, maxBatteryStatus, minBatteryStatus, model } = filterBy
+//     maxBatteryStatus = maxBatteryStatus || Infinity
+//     minBatteryStatus = minBatteryStatus || 0
+//     stationsToReturn = gStations.filter(
+//       (station) =>
+//         station.type.toLowerCase().includes(type.toLowerCase()) &&
+//         station.model.toLowerCase().includes(model.toLowerCase()) &&
+//         station.batteryStatus < maxBatteryStatus &&
+//         station.batteryStatus > minBatteryStatus
+//     )
+//   }
+  return Promise.resolve([...gStations])
 }
-function tryStation(id) {
-  const station = gStations.find((station) => station._id === id)
-  station.batteryStatus -= 10
-  return Promise.resolve()
-}
+// function tryStation(id) {
+//   const station = gStations.find((station) => station._id === id)
+//   station.batteryStatus -= 10
+//   return Promise.resolve()
+// }
+
 function getById(id) {
   const station = gStations.find((station) => station._id === id)
   return Promise.resolve({ ...station })
