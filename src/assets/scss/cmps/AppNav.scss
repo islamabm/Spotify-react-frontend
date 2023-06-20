@@ -16,8 +16,25 @@
     text-decoration: none;
     cursor: pointer;
     color: $clr6;
+    transition: color 0.3s ease;
     svg {
       fill: $clr6;
+      transition: fill 0.3s ease;
     }
+  }
+  .shared-nav-item:not(.active) {
+    color: #b3b3b3;
+    svg {
+      fill: #b3b3b3;
+    }
+    &:hover {
+      color: $clr6;
+      svg {
+        fill: $clr6;
+      }
+    }
+  }
+  .shared-nav-item .icon.active svg {
+    fill: $clr6;
   }
 }

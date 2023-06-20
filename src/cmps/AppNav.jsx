@@ -14,15 +14,19 @@ export function AppNav() {
     }
     return getSpotifySvg(iconName);
   };
+
+  const isActive = (path) => {
+    return location.pathname === path ? "active" : "";
+  };
   
   return (
     <section className="app-nav">
-      <Link to="/" className="shared-nav-item">
-        <span dangerouslySetInnerHTML={{ __html: getSvgIcon("homeIcon") }}></span>
+      <Link to="/" className={`shared-nav-item ${isActive("/")}`}>
+        <span className={`icon ${isActive("/")}`} dangerouslySetInnerHTML={{ __html: getSvgIcon("homeIcon") }}></span>
         <span>Home</span>
       </Link>
-      <Link to="/search" className="shared-nav-item">
-        <span dangerouslySetInnerHTML={{ __html: getSvgIcon("searchIcon") }}></span>
+      <Link to="/search" className={`shared-nav-item ${isActive("/search")}`}>
+        <span className={`icon ${isActive("/search")}`} dangerouslySetInnerHTML={{ __html: getSvgIcon("searchIcon") }}></span>
         <span>Search</span>
       </Link>
     </section>
