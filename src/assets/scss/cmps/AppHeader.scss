@@ -1,38 +1,60 @@
 .app-header {
   position: sticky;
+  top: 0;
   display: flex;
   justify-content: space-between;
-  top: 0;
   grid-column: 2;
   grid-row: 1;
   padding: 20px;
   // after scrolling -
-  background-color: $clr4;
   background-color: transparent;
+  background-color: #121212;
   height: 60px;
   border-radius: 5px;
-  .arrows {
+  .arrows-and-input {
     display: flex;
     gap: 8px;
-    .black-circle {
+    .arrows {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 32px;
-      width: 32px;
-      background-color: #000000b3;
-      border-radius: 50%;
-      color: #fff;
-      cursor: pointer;
-      svg {
-        fill: white;
+      gap: 8px;
+
+      .black-circle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 32px;
+        width: 32px;
+        background-color: #000000b3;
+        border-radius: 50%;
+        color: #fff;
+        cursor: pointer;
+        svg {
+          fill: white;
+        }
+      }
+    }
+    input {
+      background-color: #242424;
+      border: 0;
+      border-radius: 500px;
+      color: #fff !important;
+      height: 48px;
+      padding: 6px 36px;
+      text-overflow: ellipsis;
+      width: 364px;
+      &:hover {
+        border: 1px solid #404040;
+        outline: none;
+      }
+      &:focus {
+        border: 1px solid white;
+        outline: none;
       }
     }
   }
   .user-actions {
     display: flex;
-    gap: 10px
-    ;
+    gap: 10px;
     .login {
       background-color: $clr6;
       display: flex;
@@ -49,7 +71,6 @@
     }
     img {
       min-block-size: 32px;
-      cursor: pointer;
     }
   }
 }

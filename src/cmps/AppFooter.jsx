@@ -16,7 +16,7 @@ export function AppFooter() {
         <div className="heart-picture-icons">
           <BubblingHeart />
           <span
-            className="pointer"
+            className="picture-icon pointer"
             dangerouslySetInnerHTML={{
               __html: getSpotifySvg('pictureIcon'),
             }}
