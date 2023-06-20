@@ -1,8 +1,9 @@
 .info {
   text-decoration: none;
   font-family: circular-book;
-
+  
   .station-preview {
+    cursor: pointer;
     height: 273px;
     width: 186px;
     border-radius: 5px;
@@ -11,9 +12,7 @@
     font-size: 12px;
 
     .station-info {
-      display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: start;
       margin-inline-start: 1rem;
       margin-block-start: 0;
@@ -26,9 +25,9 @@
       }
       
       p {
-         margin-inline-start: -3px;
+        margin: 5px 0px -3px 2px;
          color: $clr3;
-         padding: 0 5px;
+         padding: 0 ;
       }
     }
 
@@ -41,5 +40,9 @@
          height: 157px;
       }
     }
+  }
+
+  :hover {
+    background-color: #282828;
   }
 }

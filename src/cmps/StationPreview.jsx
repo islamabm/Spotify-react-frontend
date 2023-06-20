@@ -8,7 +8,7 @@ export function StationPreview({ station }) {
         <div className="station-img">
           <img src={station.imgUrl} alt="" />
         </div>
-        <div className="station-info">
+        <div className="station-info flex justify-center">
           <h3>{station.name}</h3>
           <p>{station.description}</p>
         </div>
