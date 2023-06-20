@@ -1,8 +1,8 @@
 
-export const SET_ROBOTS = 'SET_ROBOTS'
-export const ADD_ROBOT = 'ADD_ROBOT'
-export const REMOVE_ROBOT = 'REMOVE_ROBOT'
-export const UPDATE_ROBOT = 'UPDATE_ROBOT'
+export const SET_STATIONS = 'SET_STATIONS'
+export const ADD_STATION = 'ADD_STATION'
+export const REMOVE_STATION = 'REMOVE_STATION'
+export const UPDATE_STATION = 'UPDATE_STATION'
 export const SET_FILTER_BY = 'SET_FILTER_BY'
 
 const INITIAL_STATE = {
@@ -18,22 +18,22 @@ const INITIAL_STATE = {
 export function stationReducer(state = INITIAL_STATE, action = {}) {
 
     switch (action.type) {
-        case SET_ROBOTS:
+        case SET_STATIONS:
             return {
                 ...state,
                 stations: action.stations
             }
-        case ADD_ROBOT:
+        case ADD_STATION:
             return {
                 ...state,
                 stations: [...state.stations, action.station]
             }
-        case REMOVE_ROBOT:
+        case REMOVE_STATION:
             return {
                 ...state,
                 stations: state.stations.filter(station => station._id !== action.stationId)
             }
-        case UPDATE_ROBOT:
+        case UPDATE_STATION:
             return {
                 ...state,
                 stations: state.stations.map(station => station._id === action.station._id ? action.station : station)
