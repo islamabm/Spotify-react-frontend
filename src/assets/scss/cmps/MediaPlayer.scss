@@ -3,17 +3,18 @@
   gap: rem(20px);
   align-items: center;
   justify-content: center;
-  button {
+  .play-song-div {
     display: flex;
     align-items: center;
     justify-items: center;
     background-color: white;
-
     width: 32px;
     height: 32px;
     border-radius: 50%;
+
+    justify-content: center;
   }
-  i {
+  span {
     fill: #b3b3b3;
 
     &:hover {
@@ -21,9 +22,11 @@
     }
   }
   .special-i {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+
     fill: black;
-    margin-block-end: 3px;
-    margin-inline-start: -1px;
 
     &:hover {
       fill: black;

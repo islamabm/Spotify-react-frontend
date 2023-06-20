@@ -8,61 +8,42 @@ export function MediaPlayer() {
 
       <div className="media-player">
         <div className="control-buttons">
-          <i>
+          {' '}
+          <span
+            dangerouslySetInnerHTML={{
+              __html: getSpotifySvg('shouffleIcon'),
+            }}
+          ></span>{' '}
+          <span
+            dangerouslySetInnerHTML={{
+              __html: getSpotifySvg('prevIcon'),
+            }}
+          ></span>
+          <div className="play-song-div">
             {' '}
             <span
+              className="special-i"
               dangerouslySetInnerHTML={{
-                __html: getSpotifySvg('shouffleIcon'),
+                __html: getSpotifySvg('playIcon'),
               }}
             ></span>
-          </i>
-
-          <i>
-            {' '}
-            <span
-              dangerouslySetInnerHTML={{
-                __html: getSpotifySvg('prevIcon'),
-              }}
-            ></span>
-          </i>
-          <button>
-            <i className="special-i">
-              {' '}
-              <span
-                dangerouslySetInnerHTML={{
-                  __html: getSpotifySvg('playIcon'),
-                }}
-              ></span>
-            </i>
-          </button>
-
-          {/* <i className="pause"></i> */}
-          <i>
-            {' '}
-            <span
-              dangerouslySetInnerHTML={{
-                __html: getSpotifySvg('nextIcon'),
-              }}
-            ></span>
-          </i>
-
-          <i>
-            {' '}
-            <span
-              dangerouslySetInnerHTML={{
-                __html: getSpotifySvg('repeateIcon'),
-              }}
-            ></span>
-          </i>
-
-          <i>
-            {' '}
-            <span
-              dangerouslySetInnerHTML={{
-                __html: getSpotifySvg('prevSongBtnIcon'),
-              }}
-            ></span>
-          </i>
+          </div>
+          {/* <i className="pause"></i> */}{' '}
+          <span
+            dangerouslySetInnerHTML={{
+              __html: getSpotifySvg('nextIcon'),
+            }}
+          ></span>{' '}
+          <span
+            dangerouslySetInnerHTML={{
+              __html: getSpotifySvg('repeateIcon'),
+            }}
+          ></span>{' '}
+          <span
+            dangerouslySetInnerHTML={{
+              __html: getSpotifySvg('prevSongBtnIcon'),
+            }}
+          ></span>
         </div>
 
         <div className="music-bar">
