@@ -1,7 +1,24 @@
 .app-nav {
-  background-color: $clr13;
-  grid-column: 1;
-  grid-row: 1;
+  background-color: $clr7;
   margin-block-end: rem(8px);
   border-radius: 7px;
+  font-family: Circular-medium;
+  color: $clr6;
+  max-height: 112px;
+   padding: 22px 20px;
+  .nav-home-div {
+    display: flex;
+    align-items: center;
+    margin: 7px 5px;
+    cursor: pointer;
+    svg {
+      fill: $clr6;
+    }
+  }
+  .nav-search-div {
+    display: flex;
+    align-items: center;
+    margin: 7px 5px;
+    cursor: pointer;
+  }
 }

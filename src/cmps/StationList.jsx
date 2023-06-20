@@ -1,7 +1,7 @@
 import { memo } from "react";
 import { StationPreview } from "./StationPreview";
 function _StationList({ stations, onRemoveStation }) {
-    console.log('ROBOT LIST RENDERED');
+    console.log('STATION LIST RENDERED');
     return (
         <section className="station-list simple-cards-grid">
             {stations.map(station =>
