@@ -14,11 +14,19 @@
     display: flex;
     .image {
       width: 80px;
+      height: 80px;
+      img {
+        border-radius: 10px;
+      }
     }
 
     .actor-name-song {
       display: flex;
       flex-direction: column;
+      margin-inline-start: 0.5em;
+      .actor-name {
+        margin-top: 0;
+      }
     }
   }
 }
