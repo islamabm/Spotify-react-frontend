@@ -1,10 +1,16 @@
 import React from "react"
-import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 export function StationPreview({ station }) {
+
+  const navigate = useNavigate()
+
+  function goToDetails() {
+    navigate(`/station/${station._id}`)
+  }
+
   return (
-    <Link to={`/station/${station._id}`} className="info">
-      <article className="station-preview">
+      <article className="info" onClick={goToDetails}>
         <div className="station-img">
           <img src={station.imgUrl} alt="station-img" />
           <div className="play-button flex justify-center"></div>
@@ -14,6 +20,6 @@ export function StationPreview({ station }) {
           <p>{station.description}</p>
         </div>
       </article>
-    </Link>
+    
   )
 }
