@@ -1,6 +1,9 @@
 import { Route, HashRouter as Router, Routes } from 'react-router-dom'
 import './assets/scss/global.scss'
 import { AppHeader } from './cmps/AppHeader'
+import { AppNav } from './cmps/AppNav'
+import { UserLibrary } from './cmps/UserLibrary'
+import { AppFooter } from './cmps/AppFooter'
 import { StationIndex } from './views/StationIndex'
 import { StationDetails } from './views/StationDetails'
 import { StationEdit } from './views/StationEdit'
@@ -10,10 +13,15 @@ function App() {
     <Router>
       <section className="main-app">
         <AppHeader />
+        <AppNav />
+        <UserLibrary />
 
         <main className="container">
           <Routes>
-            <Route path="/" element={<StationIndex />} />
+            <Route path="/" element={<StationIndex />}>
+              {' '}
+            </Route>
+
             <Route path="/station/edit/:id?" element={<StationEdit />} />
             <Route path="/station/:id" element={<StationDetails />} />
             {/* <Route path="/about" element={<About />} >
@@ -22,6 +30,7 @@ function App() {
                         </Route> */}
           </Routes>
         </main>
+        <AppFooter />
       </section>
     </Router>
   )
