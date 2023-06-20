@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { getSpotifySvg } from '../services/SVG.service'
 import { BubblingHeart } from './BubblingHeart'
 import { MediaPlayer } from './MediaPlayer'
 export function AppFooter() {
@@ -21,7 +21,30 @@ export function AppFooter() {
         <MediaPlayer />
       </div>
       <div className="song-details-two">
-        <p>section three</p>
+        <i>
+          {' '}
+          <span
+            dangerouslySetInnerHTML={{
+              __html: getSpotifySvg('lyricsIcon'),
+            }}
+          ></span>
+        </i>
+        <i>
+          {' '}
+          <span
+            dangerouslySetInnerHTML={{
+              __html: getSpotifySvg('queueIcon'),
+            }}
+          ></span>
+        </i>
+        <i>
+          {' '}
+          <span
+            dangerouslySetInnerHTML={{
+              __html: getSpotifySvg('volumeIcon'),
+            }}
+          ></span>
+        </i>
       </div>
     </div>
   )
