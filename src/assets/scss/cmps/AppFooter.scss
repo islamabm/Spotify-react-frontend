@@ -2,6 +2,23 @@
   background-color: $clr2;
   grid-row: 3;
   grid-column: 1/-1;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  justify-items: center;
   // position: fixed;
   // bottom: 0;
+
+  .song-details {
+    display: flex;
+    .image {
+      width: 80px;
+    }
+
+    .actor-name-song {
+      display: flex;
+      flex-direction: column;
+    }
+  }
 }
