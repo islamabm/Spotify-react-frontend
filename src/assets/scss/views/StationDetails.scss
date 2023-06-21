@@ -1,0 +1,48 @@
+.station-songs {
+    font-family: circular-book;
+  .song {
+    padding: 0 16px;
+    position: relative;
+    border: 1px solid transparent;
+    height: 56px;
+    display: grid;
+    grid-template-columns: 16px 2fr 1.3fr 0.7fr minmax(120px, 1fr);
+    gap: 10px;
+    .song-details-container {
+      grid-column: 2;
+      display: grid;
+      grid-template-columns: 50px 1fr;
+      .name-and-artist {
+        margin-inline-start: rem(12px);
+        flex-direction: column;
+        gap: 8px;
+        grid-column: 2;
+      }
+      .song-img {
+        height: 40px;
+        width: 40px;
+      }
+      .song-idx {
+        grid-column: 1;
+      }
+      .album-name {
+        grid-column: 3;
+      }
+    }
+    .duration-container {
+      justify-content: space-evenly;
+      align-items: center;
+      .hidden {
+        opacity: 0;
+      }
+      .duration {
+        margin-inline-end: -17px;
+      }
+    }
+    &:hover {
+        .hidden {
+            opacity: 1;
+        }
+    }
+}
+}
