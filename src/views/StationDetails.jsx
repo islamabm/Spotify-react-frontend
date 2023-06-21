@@ -1,22 +1,22 @@
-import { useEffect, useState } from "react";
-import { stationService } from "../services/station.service";
-import { useParams } from "react-router-dom";
-import { getSpotifySvg } from "../services/SVG.service";
+import { useEffect, useState } from "react"
+import { stationService } from "../services/station.service"
+import { useParams } from "react-router-dom"
+import { getSpotifySvg } from "../services/SVG.service"
 
 export function StationDetails(props) {
-  const [station, setStation] = useState(null);
-  const params = useParams();
+  const [station, setStation] = useState(null)
+  const params = useParams()
 
   useEffect(() => {
-    loadStation();
-  }, [params.id]);
+    loadStation()
+  }, [params.id])
 
   async function loadStation() {
     try {
-      const station = await stationService.getById(params.id);
-      setStation(station);
+      const station = await stationService.getById(params.id)
+      setStation(station)
     } catch (error) {
-      console.log("error:", error);
+      console.log("error:", error)
     }
   }
 
@@ -34,28 +34,41 @@ export function StationDetails(props) {
       "Oct",
       "Nov",
       "Dec",
-    ];
+    ]
 
-    const date = new Date(dateString);
-    const monthIndex = date.getMonth();
-    const day = date.getDate();
-    const year = date.getFullYear();
+    const date = new Date(dateString)
+    const monthIndex = date.getMonth()
+    const day = date.getDate()
+    const year = date.getFullYear()
 
-    const formattedDate = `${months[monthIndex]} ${day}, ${year}`;
-    return formattedDate;
+    const formattedDate = `${months[monthIndex]} ${day}, ${year}`
+    return formattedDate
   }
 
-  if (!station) return <div>Loading...</div>;
+  if (!station) return <div>Loading...</div>
   return (
     <section className="station-details">
-      <div>{station.name}</div>
+      <div className="station-header-content">
+        <img
+          className="station-main-img"
+          src={station.imgUrl}
+          alt="station main img"
+        />
+        <div className="station-info">
+          <span className="playlist-word">Playlist</span>
+          <h1 className="station-name">{station.name}</h1>
+          <p className="station-description">{station.description}</p>
+          <span className="logo">Spotify </span>
+          <span class="dot">• </span>
+          <span class="songs-count"> {station.songs.length} songs </span>
+        </div>
+      </div>
       <div className="station-songs-header">
         <span>#</span>
         <span>Title</span>
         <span>Album</span>
         <span>Date added</span>
         <span>#</span>
-        {/* <span>#</span> */}
       </div>
       <div className="station-songs">
         {station.songs.map((song, idx) => (
@@ -81,15 +94,16 @@ export function StationDetails(props) {
               <div className="duration">
                 {song.duration ? song.duration : "1:00"}
               </div>
-              <span className="hidden dots"
-              dangerouslySetInnerHTML={{
-                __html: getSpotifySvg('dots'),
-              }}
-            ></span>
+              <span
+                className="hidden dots"
+                dangerouslySetInnerHTML={{
+                  __html: getSpotifySvg("dots"),
+                }}
+              ></span>
             </div>
           </div>
         ))}
       </div>
     </section>
-  );
+  )
 }
