@@ -49,6 +49,14 @@ export function StationDetails(props) {
   return (
     <section className="station-details">
       <div>{station.name}</div>
+      <div className="station-songs-header">
+        <span>#</span>
+        <span>Title</span>
+        <span>Album</span>
+        <span>Date added</span>
+        <span>#</span>
+        {/* <span>#</span> */}
+      </div>
       <div className="station-songs">
         {station.songs.map((song, idx) => (
           <div key={idx} className="song">
