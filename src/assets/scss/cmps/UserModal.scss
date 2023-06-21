@@ -1,0 +1,49 @@
+// import React from 'react'
+
+// export function UserModal() {
+//   return (
+//     <div className="user-modal">
+//       <p>Profile</p>
+//       <div className="line"></div>
+//       <p>Log out</p>
+//     </div>
+//   )
+// }
+
+.user-modal {
+  display: flex;
+  flex-direction: column;
+  background-color: #282828;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 16px 24px rgba(0, 0, 0, 0.3),
+    0 6px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 16px 24px rgba(0, 0, 0, 0.3), 0 6px 8px rgba(0, 0, 0, 0.2);
+  max-height: calc(100vh - 24px);
+  max-width: 350px;
+  min-width: 160px;
+  overflow-y: auto;
+  padding: 4px;
+  color: hsla(0, 0%, 100%, 0.9);
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  z-index: 999;
+  .user-actions-modal {
+    p {
+      font-size: 0.875rem;
+      padding-left: 4px;
+      font-family: Roboto-Regular;
+    }
+
+    &:hover {
+      background-color: hsla(0, 0%, 100%, 0.1);
+      color: #fff;
+    }
+  }
+
+  .line {
+    width: 100%;
+    height: 1px;
+    background-color: rgb(102, 104, 102);
+  }
+}
