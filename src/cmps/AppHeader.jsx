@@ -3,7 +3,6 @@ import { useLocation } from "react-router-dom";
 
 export function AppHeader() {
   const location = useLocation();
-  console.log(location.path);
   return (
     <header className="app-header">
       <section className="arrows-and-input">

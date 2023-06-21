@@ -14,7 +14,7 @@ const STORAGE_KEY = "stations"
 
 const gDefaultStations = [
   {
-    _id: 1,
+    _id: "1",
     name: "Sing in the Shower",
     tags: ["Mood"],
     imgUrl: "https://i.scdn.co/image/ab67706f00000003329e2c5d3104f8c6a1d16a34",
@@ -946,7 +946,7 @@ const gDefaultStations = [
     ],
   },
   {
-    _id: 2,
+    _id: "2",
     name: "Rock This",
     tags: ["Rock"],
     description:
@@ -1412,7 +1412,7 @@ const gDefaultStations = [
     likedByUsers: [],
   },
   {
-    _id: 3,
+    _id: "3",
     name: "This Is Pink Floyd",
     description:
       "This is Pink Floyd. The essential tracks, all in one playlist.",
@@ -1752,7 +1752,7 @@ const gDefaultStations = [
     likedByUsers: [],
   },
   {
-    _id: 4,
+    _id: "4",
     name: "This Is The Beatles",
     description:
       "This is The Beatles. The essential tracks, all in one playlist.",
