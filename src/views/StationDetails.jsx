@@ -56,7 +56,21 @@ export function StationDetails(props) {
   if (!station) return <div>Loading...</div>
   return (
     <section className="station-details">
-      <div>{station.name}</div>
+      <div className="station-header-content">
+        <img
+          className="station-main-img"
+          src={station.imgUrl}
+          alt="station main img"
+        />
+        <div className="station-info">
+          <span className="playlist-word">Playlist</span>
+          <h1 className="station-name">{station.name}</h1>
+          <p className="station-description">{station.description}</p>
+          <span className="logo">Spotify </span>
+          <span class="dot">• </span>
+          <span class="songs-count"> {station.songs.length} songs </span>
+        </div>
+      </div>
       <div className="station-songs-header">
         <span>#</span>
         <span>Title</span>

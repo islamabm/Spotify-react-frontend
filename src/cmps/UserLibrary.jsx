@@ -40,9 +40,9 @@ export function UserLibrary() {
         ></span>
       </div>
       <div className="your-library-btns flex align-center">
-        <button className="library-btn">Playlists</button>
-        <button className="library-btn">Artists</button>
-        <button className="library-btn">Albums</button>
+        <button className="library-btn pointer">Playlists</button>
+        <button className="library-btn pointer">Artists</button>
+        <button className="library-btn pointer">Albums</button>
       </div>
       <div className="library-filter">
         <span
