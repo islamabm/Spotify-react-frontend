@@ -1,5 +1,6 @@
 .user-library {
   background-color: $clr7;
+  // position: relative;
   grid-column: 1;
   grid-row: 2;
   border-radius: 7px;
@@ -51,5 +52,30 @@
     border: none;
     border-radius: 20px;
     margin: 0 7px;
+  }
+}
+.library-filter {
+  display: flex;
+  justify-content: space-between;
+  .sort-by-section {
+    display: flex;
+    gap: rem(10px);
+    .sort-by-span {
+      color: gray;
+    }
+    .arrow {
+      margin-inline-end: rem(5px);
+    }
+
+    &:hover {
+      .arrow {
+        svg {
+          fill: white;
+        }
+      }
+      .sort-by-span {
+        color: white;
+      }
+    }
   }
 }
