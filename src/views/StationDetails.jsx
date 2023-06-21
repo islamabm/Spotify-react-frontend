@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom'
 import { getSpotifySvg } from '../services/SVG.service'
 import { useDispatch, useSelector } from 'react-redux'
 import { setCurrStation } from '../store/actions/station.actions'
+import { setCurrSong } from '../store/actions/song.actions'
 export function StationDetails(props) {
   // const [station, setStation] = useState(null)
   const params = useParams()
@@ -11,7 +12,8 @@ export function StationDetails(props) {
   const station = useSelector(
     (storeState) => storeState.stationModule.currStation
   )
-
+  const song = useSelector((storeState) => storeState.songModule.currSong)
+  console.log('song', song)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -26,6 +28,10 @@ export function StationDetails(props) {
     // } catch (error) {
     //   console.log('error:', error)
     // }
+  }
+
+  function onSongClicked(songId) {
+    dispatch(setCurrSong(params.id, songId))
   }
 
   function formatDate(dateString) {
@@ -89,7 +95,9 @@ export function StationDetails(props) {
                 <img className="song-img" src={song.imgUrl} alt="song img" />
               </div>
               <div className="name-and-artist flex justify-center">
-                <span className="song-name">{song.title}</span>
+                <span onClick={onSongClicked(song._id)} className="song-name">
+                  {song.title}
+                </span>
                 <span className="song-artist">{song.artist}</span>
               </div>
             </div>
