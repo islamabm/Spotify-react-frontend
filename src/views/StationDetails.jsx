@@ -14,6 +14,7 @@ export function StationDetails(props) {
     try {
       const station = await stationService.getById(params.id)
       setStation(station)
+      console.log('station', station)
     } catch (error) {
       console.log('error:', error)
     }
@@ -22,6 +23,7 @@ export function StationDetails(props) {
   if (!station) return <div>Loading...</div>
   return (
     <section className="station-details">
+       <div>{station.name}</div> 
     </section>
   )
 }
