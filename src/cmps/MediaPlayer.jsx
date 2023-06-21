@@ -1,25 +1,35 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import { getSpotifySvg } from '../services/SVG.service'
+import { HoverModal } from './HoverModal'
 export function MediaPlayer() {
+  const shuffleRef = useRef(null)
+  const prevRef = useRef(null)
+
+  const [modalMessage, setModalMessage] = useState('')
   return (
     <>
       {/* Note that there's no React equivalent for the 'YouTube' component */}
       {/* Replace it with the appropriate component or HTML element */}
 
       <div className="media-player">
+        {/* <HoverModal
+          triggerRef={modalMessage === 'Enable shuffle' ? shuffleRef : prevRef}
+          message={modalMessage}
+        />{' '} */}
         <div className="control-buttons">
-          {' '}
           <span
             className="pointer"
-            dangerouslySetInnerHTML={{
-              __html: getSpotifySvg('shouffleIcon'),
-            }}
-          ></span>{' '}
+            dangerouslySetInnerHTML={{ __html: getSpotifySvg('shouffleIcon') }}
+            ref={shuffleRef}
+            onMouseEnter={() => setModalMessage('Enable shuffle')}
+            onMouseLeave={() => setModalMessage('')}
+          ></span>
           <span
             className="pointer"
-            dangerouslySetInnerHTML={{
-              __html: getSpotifySvg('prevIcon'),
-            }}
+            dangerouslySetInnerHTML={{ __html: getSpotifySvg('prevIcon') }}
+            ref={prevRef}
+            onMouseEnter={() => setModalMessage('Previous')}
+            onMouseLeave={() => setModalMessage('')}
           ></span>
           <div className="play-song-div">
             {' '}
@@ -43,14 +53,7 @@ export function MediaPlayer() {
               __html: getSpotifySvg('repeateIcon'),
             }}
           ></span>{' '}
-          <span
-            className="pointer"
-            dangerouslySetInnerHTML={{
-              __html: getSpotifySvg('prevSongBtnIcon'),
-            }}
-          ></span>
         </div>
-
         <div class="music-bar">
           <span class="current-time hiding">0:00</span>
           <div class="progress-bar">
