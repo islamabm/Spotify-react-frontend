@@ -4,6 +4,7 @@ import {
   SET_FILTER_BY,
   SET_STATIONS,
   SET_SEARCH_STATIONS,
+  SET_CURR_STATION,
 } from '../reducers/station.reducer'
 
 export function loadStations() {
@@ -27,6 +28,20 @@ export function loadSearchStations() {
       const action = {
         type: SET_SEARCH_STATIONS,
         stations,
+      }
+      dispatch(action)
+    } catch (error) {
+      console.log('error:', error)
+    }
+  }
+}
+export function setCurrStation(id) {
+  return async (dispatch, getState) => {
+    try {
+      const station = await stationService.getById(id)
+      const action = {
+        type: SET_CURR_STATION,
+        station,
       }
       dispatch(action)
     } catch (error) {

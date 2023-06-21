@@ -1,51 +1,59 @@
-import { useEffect, useState } from "react";
-import { stationService } from "../services/station.service";
-import { useParams } from "react-router-dom";
-import { getSpotifySvg } from "../services/SVG.service";
-
+import { useEffect, useState } from 'react'
+import { stationService } from '../services/station.service'
+import { useParams } from 'react-router-dom'
+import { getSpotifySvg } from '../services/SVG.service'
+import { useDispatch, useSelector } from 'react-redux'
+import { setCurrStation } from '../store/actions/station.actions'
 export function StationDetails(props) {
-  const [station, setStation] = useState(null);
-  const params = useParams();
+  // const [station, setStation] = useState(null)
+  const params = useParams()
+
+  const station = useSelector(
+    (storeState) => storeState.stationModule.currStation
+  )
+
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    loadStation();
-  }, [params.id]);
+    loadStation()
+  }, [params.id])
 
-  async function loadStation() {
-    try {
-      const station = await stationService.getById(params.id);
-      setStation(station);
-    } catch (error) {
-      console.log("error:", error);
-    }
+  function loadStation() {
+    dispatch(setCurrStation(params.id))
+    // try {
+    //   const station = await stationService.getById(params.id)
+    //   setStation(station)
+    // } catch (error) {
+    //   console.log('error:', error)
+    // }
   }
 
   function formatDate(dateString) {
     const months = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ];
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
+    ]
 
-    const date = new Date(dateString);
-    const monthIndex = date.getMonth();
-    const day = date.getDate();
-    const year = date.getFullYear();
+    const date = new Date(dateString)
+    const monthIndex = date.getMonth()
+    const day = date.getDate()
+    const year = date.getFullYear()
 
-    const formattedDate = `${months[monthIndex]} ${day}, ${year}`;
-    return formattedDate;
+    const formattedDate = `${months[monthIndex]} ${day}, ${year}`
+    return formattedDate
   }
 
-  if (!station) return <div>Loading...</div>;
+  if (!station) return <div>Loading...</div>
   return (
     <section className="station-details">
       <div>{station.name}</div>
@@ -79,17 +87,18 @@ export function StationDetails(props) {
             <div className="duration-container flex">
               <input className="hidden" type="checkbox" />
               <div className="duration">
-                {song.duration ? song.duration : "1:00"}
+                {song.duration ? song.duration : '1:00'}
               </div>
-              <span className="hidden dots"
-              dangerouslySetInnerHTML={{
-                __html: getSpotifySvg('dots'),
-              }}
-            ></span>
+              <span
+                className="hidden dots"
+                dangerouslySetInnerHTML={{
+                  __html: getSpotifySvg('dots'),
+                }}
+              ></span>
             </div>
           </div>
         ))}
       </div>
     </section>
-  );
+  )
 }

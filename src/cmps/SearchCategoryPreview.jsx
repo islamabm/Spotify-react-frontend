@@ -6,7 +6,7 @@ export function SearchCategoryPreview({ category }) {
       className="category-container"
       style={{ backgroundColor: category.color }}
     >
-      <img src={category.img} alt={category.title} />
+      <img className="image" src={category.img} alt={category.title} />
       <h2>{category.title}</h2>
     </article>
   )
