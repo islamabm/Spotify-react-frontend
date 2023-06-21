@@ -63,7 +63,6 @@ export function StationDetails(props) {
         <span>Album</span>
         <span>Date added</span>
         <span>#</span>
-        {/* <span>#</span> */}
       </div>
       <div className="station-songs">
         {station.songs.map((song, idx) => (
