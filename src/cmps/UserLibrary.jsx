@@ -25,6 +25,14 @@ export function UserLibrary() {
         <button className="library-btn">Artists</button>
         <button className="library-btn">Albums</button>
       </div>
+      <div className="library-filter">
+        <span className="pointer"
+        dangerouslySetInnerHTML={{
+          __html: getSpotifySvg("searchIcon"),
+        }}
+      ></span>
+      <span>Recents</span>
+      </div>
     </section>
   );
 }
