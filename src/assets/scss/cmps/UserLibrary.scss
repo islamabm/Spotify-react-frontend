@@ -3,4 +3,53 @@
   grid-column: 1;
   grid-row: 2;
   border-radius: 7px;
+  width: 100%;
+  font-family: Circular-medium;
+  min-height: 650px;
+  .library-header {
+    padding: 10px;
+    justify-content: space-between;
+    color: #b3b3b3;
+    span {
+      margin: 7px;
+    }
+  }
+  svg {
+    fill: #b3b3b3;
+    transition: color 0.3s ease;
+  }
+
+  .your-library {
+    color: #b3b3b3;
+    transition: color 0.3s ease;
+    &:hover {
+      color: $clr6;
+      svg {
+        fill: $clr6;
+        transition: fill 0.3s ease;
+      }
+    }
+  }
+  .plus-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    &:hover {
+      color: $clr6;
+      background-color: #1a1a1a;
+      svg {
+        fill: $clr6;
+        transition: fill 0.3s ease;
+      }
+    }
+  }
+  .library-btn {
+    width: 72px;
+    height: 32px;
+    background-color: #232323;
+    color: $clr6;
+    border: none;
+    border-radius: 20px;
+    margin: 0 7px;
+  }
 }

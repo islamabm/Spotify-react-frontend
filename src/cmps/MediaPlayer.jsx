@@ -54,12 +54,13 @@ export function MediaPlayer() {
             }}
           ></span>{' '}
         </div>
-        <div class="music-bar">
-          <span class="current-time hiding">0:00</span>
-          <div class="progress-bar">
-            <div class="progress-bar-fill"></div>
+
+        <div className="music-bar">
+          <span className="current-time hiding">0:00</span>
+          <div className="progress-bar">
+            <div className="progress-bar-fill"></div>
           </div>
-          <span class="current-time hiding">3:30</span>
+          <span className="current-time hiding">3:30</span>
         </div>
       </div>
     </>

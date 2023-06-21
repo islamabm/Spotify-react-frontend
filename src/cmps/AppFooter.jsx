@@ -46,8 +46,8 @@ export function AppFooter() {
             __html: getSpotifySvg('volumeIcon'),
           }}
         ></span>
-        <div class="progress-bar-audio">
-          <div class="progress-bar-audio-fill"></div>
+        <div className="progress-bar-audio">
+          <div className="progress-bar-audio-fill"></div>
         </div>
       </div>
     </div>
