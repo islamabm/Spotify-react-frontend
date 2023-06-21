@@ -1,26 +1,23 @@
-import React, { useEffect, useState } from "react"
-import { stationService } from "../services/station.service"
-
+import React, { useEffect } from 'react'
+import { SearchCategorieList } from '../cmps/SearchCategorieList'
+import { useDispatch, useSelector } from 'react-redux'
+import { loadSearchStations } from '../store/actions/station.actions'
 export default function Search() {
-  const [searchStations, setSearchStations] = useState(null)
+  const categories = useSelector(
+    (storeState) => storeState.stationModule.searchStations
+  )
 
-  function loadSearchCategories() {
-    const categories = stationService.loadSearchStations()
-    setSearchStations(categories)
-  }
+  const dispatch = useDispatch()
 
-  useEffect(() => loadSearchCategories(), [])
-  console.log('searchStations', searchStations)
-  if (!searchStations) return <div>Loading....</div>
+  useEffect(() => {
+    dispatch(loadSearchStations())
+  }, [])
+
+  if (!categories) return <div>Loading....</div>
   return (
-      <div>
-        {searchStations.map((category,idx) => {
-            return (
-          <div key={idx}>
-            <img src={category.img} alt="category search img" />
-            <div>{category.title}</div>
-          </div>
-        )})}
-      </div>
+    <div className="categories-index">
+      <h2 class="search-header">Browse all</h2>
+      <SearchCategorieList categories={categories} />
+    </div>
   )
 }
