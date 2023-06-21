@@ -1,13 +1,13 @@
 import { stationService } from '../../services/station.service'
-import { SET_CURR_SONG } from '../reducers/station.reducer'
+import { SET_CURR_SONG } from '../reducers/song.reducer'
 
-export function setCurrStation(id) {
+export function setCurrSong(stationId, songId) {
   return async (dispatch, getState) => {
     try {
-      const station = await stationService.getSongById(id)
+      const song = await stationService.getSongById(stationId, songId)
       const action = {
         type: SET_CURR_SONG,
-        station,
+        song,
       }
       dispatch(action)
     } catch (error) {

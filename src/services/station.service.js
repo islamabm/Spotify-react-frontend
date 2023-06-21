@@ -2579,7 +2579,7 @@ function getById(id) {
   const station = gStations.find((station) => station._id === id)
   return Promise.resolve({ ...station })
 }
-function getSongById(songId, stationId) {
+function getSongById(stationId, songId) {
   const station = getById(stationId)
   const song = station.find((song) => song._id === songId)
   return Promise.resolve({ ...song })

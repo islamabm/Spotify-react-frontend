@@ -13,7 +13,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const rootReducer = combineReducers({
   stationModule: stationReducer,
   userModule: userReducer,
-  songReducer: songReducer,
+  songModule: songReducer,
 })
 
 export const store = createStore(
