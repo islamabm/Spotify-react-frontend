@@ -9,8 +9,8 @@ html {
 body {
   margin: 0;
   background-color: $clr2;
-  min-height: 100vh;
   color: $clr6;
+  overflow-y: hidden;
 }
 
 img {
