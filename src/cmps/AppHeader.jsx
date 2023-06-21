@@ -42,6 +42,7 @@ export function AppHeader() {
       </section>
 
       <div className="user-actions">
+        <button className="sign-up pointer">Sign up</button>
         <button className="login pointer">Login</button>
         <img
           onClick={onShowModal}
