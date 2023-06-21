@@ -4,7 +4,7 @@ export const ADD_STATION = 'ADD_STATION'
 export const REMOVE_STATION = 'REMOVE_STATION'
 export const UPDATE_STATION = 'UPDATE_STATION'
 export const SET_FILTER_BY = 'SET_FILTER_BY'
-
+export const SET_CURR_STATION = 'SET_CURR_STATION'
 const INITIAL_STATE = {
   stations: null,
   searchStations: null,
@@ -14,6 +14,7 @@ const INITIAL_STATE = {
     minBatteryStatus: '',
     maxBatteryStatus: '',
   },
+  currStation: null,
 }
 
 export function stationReducer(state = INITIAL_STATE, action = {}) {
@@ -22,6 +23,11 @@ export function stationReducer(state = INITIAL_STATE, action = {}) {
       return {
         ...state,
         stations: action.stations,
+      }
+    case SET_CURR_STATION:
+      return {
+        ...state,
+        currStation: action.station,
       }
     case SET_SEARCH_STATIONS:
       return {

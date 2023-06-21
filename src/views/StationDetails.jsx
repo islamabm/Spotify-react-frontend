@@ -1,39 +1,47 @@
-import { useEffect, useState } from "react"
-import { stationService } from "../services/station.service"
-import { useParams } from "react-router-dom"
-import { getSpotifySvg } from "../services/SVG.service"
-
+import { useEffect, useState } from 'react'
+import { stationService } from '../services/station.service'
+import { useParams } from 'react-router-dom'
+import { getSpotifySvg } from '../services/SVG.service'
+import { useDispatch, useSelector } from 'react-redux'
+import { setCurrStation } from '../store/actions/station.actions'
 export function StationDetails(props) {
-  const [station, setStation] = useState(null)
+  // const [station, setStation] = useState(null)
   const params = useParams()
+
+  const station = useSelector(
+    (storeState) => storeState.stationModule.currStation
+  )
+
+  const dispatch = useDispatch()
 
   useEffect(() => {
     loadStation()
   }, [params.id])
 
-  async function loadStation() {
-    try {
-      const station = await stationService.getById(params.id)
-      setStation(station)
-    } catch (error) {
-      console.log("error:", error)
-    }
+  function loadStation() {
+    dispatch(setCurrStation(params.id))
+    // try {
+    //   const station = await stationService.getById(params.id)
+    //   setStation(station)
+    // } catch (error) {
+    //   console.log('error:', error)
+    // }
   }
 
   function formatDate(dateString) {
     const months = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
     ]
 
     const date = new Date(dateString)
@@ -92,12 +100,12 @@ export function StationDetails(props) {
             <div className="duration-container flex">
               <input className="hidden" type="checkbox" />
               <div className="duration">
-                {song.duration ? song.duration : "1:00"}
+                {song.duration ? song.duration : '1:00'}
               </div>
               <span
                 className="hidden dots"
                 dangerouslySetInnerHTML={{
-                  __html: getSpotifySvg("dots"),
+                  __html: getSpotifySvg('dots'),
                 }}
               ></span>
             </div>
