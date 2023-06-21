@@ -3,7 +3,7 @@ import { stationService } from "../services/station.service"
 import { useParams } from "react-router-dom"
 
 export function StationDetails(props) {
-  const [station, setStation] = useState({})
+  const [station, setStation] = useState(null)
   const params = useParams()
 
   useEffect(() => {
@@ -25,14 +25,28 @@ export function StationDetails(props) {
       <div>{station.name}</div>
       <div className="station-songs">
         {station.songs.map((song, idx) => (
-          <div className="song flex">
-            <span className="song-idx">{idx}</span>
-            <img className="song-img" src={song.imgUrl} alt="song img" />
+          <div key={idx} className="song">
+            <span className="song-idx flex align-center justify-center">
+              {idx}
+            </span>
             <div className="song-details-container">
-              <span className="song-name">{song.title}</span>
-              <span className="song-artist">{song.artist}</span>
+              <div className="img-container flex align-center justify-center">
+                <img className="song-img" src={song.imgUrl} alt="song img" />
+              </div>
+              <div className="name-and-artist flex justify-center">
+                <span className="song-name">{song.title}</span>
+                <span className="song-artist">{song.artist}</span>
+              </div>
             </div>
-            <div className="album-name">{song.album}</div>
+            <div className="album-name flex align-center">{song.album}</div>
+            <div className="added-at flex align-center">{song.addedAt}</div>
+            <div className="duration-container flex">
+              <input className="hidden" type="checkbox" />
+              <div className="duration">
+                {song.duration ? song.duration : "1:00"}
+              </div>
+              <span className="hidden">...</span>
+            </div>
           </div>
         ))}
       </div>
