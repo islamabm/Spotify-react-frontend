@@ -8,6 +8,10 @@
     display: grid;
     grid-template-columns: 16px 2fr 1.3fr 0.7fr minmax(120px, 1fr);
     gap: 10px;
+    border-radius: 4px;
+    &:hover {
+      background-color:#292a2a;
+    }
     .song-details-container {
       grid-column: 2;
       display: grid;
@@ -17,17 +21,23 @@
         flex-direction: column;
         gap: 8px;
         grid-column: 2;
+        .song-artist {
+          color: $clr3;
+          font-size: 14px;
+        }
       }
       .song-img {
         height: 40px;
         width: 40px;
       }
-      .song-idx {
-        grid-column: 1;
-      }
-      .album-name {
-        grid-column: 3;
-      }
+    }
+    .song-idx {
+      grid-column: 1;
+      color: $clr14;
+    }
+    .album-name {
+      grid-column: 3;
+      color: $clr14;
     }
     .duration-container {
       justify-content: space-evenly;
@@ -37,6 +47,10 @@
       }
       .duration {
         margin-inline-end: -17px;
+        color: $clr14;
+      }
+      .dots {
+        fill: $clr6;
       }
     }
     &:hover {
