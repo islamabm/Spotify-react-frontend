@@ -7,10 +7,12 @@ export const stationService = {
   remove,
   getById,
   getEmptyStation,
+  loadSearchStations
 //   tryStation,
 }
 
 const STORAGE_KEY = "stations"
+const STORAGE_SEARCH_KEY = "search-stations"
 
 const gDefaultStations = [
   {
@@ -2219,6 +2221,93 @@ const gDefaultStations = [
   },
 ]
 
+const gSearchCategories = [
+  [
+    {
+      "img": "https://i.scdn.co/image/ab67fb8200005cafa862ab80dd85682b37c4e768",
+      "title": "Pop",
+      "color": "#E13300"
+    },
+    {
+      "img": "https://i.scdn.co/image/ab67fb8200005cafcc70a3c2e4c71398708bdc4a",
+      "title": "Folk & Acoustic",
+      "color": "#7358FF"
+    },
+    {
+      "img": "https://i.scdn.co/image/ab67fb8200005cafae7e69beb88f16969641b53e",
+      "title": "Rock",
+      "color": "#1E3264"
+    },
+    {
+      "img": "https://i.scdn.co/image/ab67fb8200005caf271f9d895003c5f5561c1354",
+      "title": "Mood",
+      "color": "#E8115B"
+    },
+    {
+      "img": "https://i.scdn.co/image/ab67706f000000029249b35f23fb596b6f006a15",
+      "title": "Workout",
+      "color": "#148A08"
+    },
+    {
+      "img": "https://i.scdn.co/image/ab67fb8200005cafa1a252e3a815b65778d8c2aa",
+      "title": "Indie",
+      "color": "#BC5900"
+    },
+    {
+      "img": "https://i.scdn.co/image/ab67706f00000002e4eadd417a05b2546e866934",
+      "title": "Focus",
+      "color": "#E91429"
+    },
+    {
+      "img": "https://i.scdn.co/image/ab67fb8200005cafda178a834e4f87371e9fa543",
+      "title": "Alternative",
+      "color": "#E1118C"
+    },
+    {
+      "img": "https://i.scdn.co/image/ab67fb8200005caff005a355830c374754d32868",
+      "title": "Decades",
+      "color": "#8D67AB"
+    },
+    {
+      "img": "https://i.scdn.co/image/ab67fb8200005cafe914a07d20cec7a65e2e5dad",
+      "title": "At Home",
+      "color": "#D84000"
+    },
+    {
+      "img": "https://i.scdn.co/image/ab67fb8200005caf4b36a2c31432ace68d90c4f2",
+      "title": "Travel",
+      "color": "#E13300"
+    },
+    {
+      "img": "https://i.scdn.co/image/ab67fb8200005cafcbf80f8ea695536eace4fd2c",
+      "title": "Party",
+      "color": "#7358FF"
+    },
+    {
+      "img": "https://i.scdn.co/image/ab67fb8200005caf7e11c8413dc33c00740579c1",
+      "title": "Hip-Hop",
+      "color": "#1E3264"
+    },
+    {
+      "img": "https://i.scdn.co/image/ab67fb8200005cafdfdaac1cf9574a196ca25196",
+      "title": "Dance-Electronic",
+      "color": "#148A08"
+    },
+    {
+      "img": "https://i.scdn.co/image/ab67fb8200005caf47e942f5bea637f4f4760170",
+      "title": "Chill",
+      "color": "#E1118C"
+    },
+    {
+      "img": "https://i.scdn.co/image/ab67706f00000002b70e0223f544b1faa2e95ed0",
+      "title": "Sleep",
+      "color": "#BC5900"
+    }
+  ]
+  
+]
+
+
 var gStations = _loadStations()
 
 function query() {
@@ -2283,5 +2372,11 @@ function _loadStations() {
   let stations = storageService.load(STORAGE_KEY)
   if (!stations || !stations.length) stations = gDefaultStations
   storageService.store(STORAGE_KEY, stations)
+  return stations
+}
+function loadSearchStations() {
+  let stations = storageService.load(STORAGE_SEARCH_KEY)
+  if (!stations || !stations.length) stations = gSearchCategories
+  storageService.store(STORAGE_SEARCH_KEY, stations)
   return stations
 }
