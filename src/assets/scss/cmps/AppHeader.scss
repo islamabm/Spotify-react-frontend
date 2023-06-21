@@ -66,7 +66,22 @@
       border: none;
       outline: none;
       &:hover {
-        font-size: 14.5px;
+        background-color: #e6e6e6;
+      }
+    }
+    .sign-up {
+      background-color: transparent;
+      color: $clr6;
+      display: flex;
+      border-radius: 500px;
+      min-block-size: 32px;
+      align-items: center;
+      padding-inline: 16px;
+      font-family: Circular-medium;
+      border: none;
+      outline: none;
+      &:hover {
+        background-color: #222327;
       }
     }
     img {
