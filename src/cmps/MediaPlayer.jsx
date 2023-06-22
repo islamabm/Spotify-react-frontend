@@ -3,10 +3,9 @@ import { getSpotifySvg } from '../services/SVG.service'
 // import { HoverModal } from './HoverModal'
 import { stationService } from '../services/station.service'
 import YouTube from 'react-youtube'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 export function MediaPlayer() {
   const song = useSelector((storeState) => storeState.songModule.currSong)
-  console.log('song', song)
 
   const [videoId, setVideoId] = useState('M7lc1UVf-VE')
 
@@ -40,6 +39,7 @@ export function MediaPlayer() {
         videoId={videoId}
         opts={videoOptions}
         onReady={onReady}
+        // onPlay={func}
         // onPause={func}
         className="hidden-player"
       />

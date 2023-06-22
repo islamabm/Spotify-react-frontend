@@ -14,12 +14,9 @@ export function UserLibrary() {
   function onSelectOption(option) {
     setSelectedOption(option)
     setShowSortModal(false)
-    console.log('showSortModal', showSortModal)
   }
 
-  useEffect(() => {
-    console.log('showSortModal', showSortModal)
-  }, [showSortModal])
+  useEffect(() => {}, [showSortModal])
 
   return (
     <section className="user-library">

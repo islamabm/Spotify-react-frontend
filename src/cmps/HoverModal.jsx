@@ -8,8 +8,6 @@ export function HoverModal({ triggerRef, message }) {
     setIsVisible(message !== '')
     if (triggerRef.current) {
       const rect = triggerRef.current.getBoundingClientRect()
-      console.log('rect', rect)
-      console.log('message', message)
       setStyle({ top: `${rect.y + rect.height}px`, left: `${rect.x}px` })
     }
   }, [triggerRef, message])

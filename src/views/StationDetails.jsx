@@ -19,9 +19,9 @@ export function StationDetails(props) {
     (storeState) => storeState.stationModule.currStationImg
   )
   const song = useSelector((storeState) => storeState.songModule.currSong)
-  console.log('song', song)
+
   const idx = useSelector((storeState) => storeState.songModule.currIndex)
-  console.log('idx', idx)
+
   const dispatch = useDispatch()
 
   useEffect(() => {
