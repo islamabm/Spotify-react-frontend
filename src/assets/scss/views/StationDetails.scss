@@ -1,100 +1,123 @@
-.station-songs-header {
-  display: grid;
-  grid-template-columns: 16px 2fr 1.3fr 0.7fr minmax(120px, 1fr);
-  padding: 0 20px;
-}
+.station-details {
+  min-height: 100vh;
+  font-family: Circular-book;
 
-.station-header-content {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  padding: 24px;
-  padding-block-end: 1.5rem;
+  // Bar fix this please ya gever
+  height: calc(100vh - 1px);
 
-  .station-description {
-    color: rgba(255, 255, 255, 0.698);
+  overflow-y: scroll;
+
+  .station-header-content {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 24px;
+    padding-block-end: 1.5rem;
+
+    .station-description {
+      color: rgba(255, 255, 255, 0.698);
+    }
+    
+    .short-station-name {
+      font-size: 6rem;
+      margin-block: 25px;
+    }
+
+    .long-station-name {
+      font-size: 5rem;
+      margin-block: 30px;
+    }
+
+    .huge-station-name {
+      font-size: 4rem;
+    }
+
+    .station-main-img {
+      object-fit: cover;
+      border-radius: 1px;
+      margin-inline-end: 24px;
+      box-shadow: 0 2px 8px rgba($clr2, 0.2), 0 1px 2px rgba($clr2, 0.1);
+      height: 232px;
+      min-width: 232px;
+      width: 232px;
+    }
   }
 
-  .station-name {
-  margin: 0.08em 0px 0.12em;
-  visibility: visible;
-  width: 100%;
-  font-size: 4.5rem;
-}
+  .station-songs {
 
-.station-main-img {
-  object-fit: cover;
-  border-radius: 1px;
-  margin-inline-end: 24px;
-  box-shadow: 0 2px 8px rgba($clr2, 0.2), 0 1px 2px rgba($clr2, 0.1);
-  height: 232px;
-  min-width: 232px;
-  width: 232px;
-}
-
-}
-
-.station-songs {
-  font-family: circular-book;
-  height: calc(100vh - 500px);
-  overflow-y: scroll;
-  .song {
-    padding: 0 16px;
-    position: relative;
-    border: 1px solid transparent;
-    height: 56px;
-    display: grid;
-    grid-template-columns: 16px 2fr 1.3fr 0.7fr minmax(120px, 1fr);
-    gap: 10px;
-    border-radius: 4px;
-   border: 1px solid #292a2a;
-    &:hover {
-      background-color: #292a2a;
-    }
-    .song-details-container {
-      grid-column: 2;
+    .station-songs-header {
+      margin: 24px 0;
+      padding: 0 16px;
+      position: relative;
+      height: 30px;
       display: grid;
-      grid-template-columns: 50px 1fr;
-      .name-and-artist {
-        margin-inline-start: rem(12px);
-        flex-direction: column;
-        gap: 8px;
+      grid-template-columns: 16px 6fr 4fr 3fr minmax(120px, 1fr);
+      gap: 10px;
+      border-radius: 4px;
+      border: 1px solid #292a2a;
+
+      .title {
+        margin-inline-start: 6px;
+      }
+    }
+    .song {
+      grid-template-columns: 16px 6fr 4fr 3fr minmax(120px, 1fr);
+      gap: 10px;
+      padding: 0 16px;
+      position: relative;
+      border: 1px solid transparent;
+      height: 56px;
+      display: grid;
+      border-radius: 4px;
+      border: 1px solid #292a2a;
+      &:hover {
+        background-color: #292a2a;
+      }
+      .song-details-container {
         grid-column: 2;
-        .song-artist {
-          color: $clr3;
-          font-size: 14px;
+        display: grid;
+        grid-template-columns: 50px 1fr;
+        .name-and-artist {
+          margin-inline-start: rem(12px);
+          flex-direction: column;
+          gap: 8px;
+          grid-column: 2;
+          .song-artist {
+            color: $clr3;
+            font-size: 14px;
+          }
+        }
+        .song-img {
+          height: 40px;
+          width: 40px;
         }
       }
-      .song-img {
-        height: 40px;
-        width: 40px;
-      }
-    }
-    .song-idx {
-      grid-column: 1;
-      color: $clr14;
-    }
-    .album-name {
-      grid-column: 3;
-      color: $clr14;
-    }
-    .duration-container {
-      justify-content: space-evenly;
-      align-items: center;
-      .hidden {
-        opacity: 0;
-      }
-      .duration {
-        margin-inline-end: -17px;
+      .song-idx {
+        grid-column: 1;
         color: $clr14;
       }
-      .dots {
-        fill: $clr6;
+      .album-name {
+        grid-column: 3;
+        color: $clr14;
       }
-    }
-    &:hover {
-      .hidden {
-        opacity: 1;
+      .duration-container {
+        justify-content: space-evenly;
+        align-items: center;
+        .hidden {
+          opacity: 0;
+        }
+        .duration {
+          margin-inline-end: -17px;
+          color: $clr14;
+        }
+        .dots {
+          fill: $clr6;
+        }
+      }
+      &:hover {
+        .hidden {
+          opacity: 1;
+        }
       }
     }
   }
