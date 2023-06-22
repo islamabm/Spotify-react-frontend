@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { getSpotifySvg } from "../services/SVG.service"
 import { useDispatch, useSelector } from "react-redux"
@@ -9,13 +9,13 @@ import { FastAverageColor } from 'fast-average-color'
 export function StationDetails(props) {
   // const [station, setStation] = useState(null)
   const colorCache = {}
-  const stationDetailsHeader = useRef(null)
-  const bottomHalf = useRef(null);
+  let bgStyle = null
   const params = useParams()
 
   const station = useSelector(
     (storeState) => storeState.stationModule.currStation
   )
+  const stationImg = useSelector((storeState) => storeState.stationModule.currStationImg)  
   const song = useSelector((storeState) => storeState.songModule.currSong)
   console.log("song", song)
   const idx = useSelector((storeState) => storeState.songModule.currIndex)
@@ -26,6 +26,10 @@ export function StationDetails(props) {
     loadStation()
     // console.log('song', song)
   }, [params.id])
+
+  useEffect(() => {
+    updateImgUrlAndColor(station)
+  }, [stationImg])
 
   function loadStation() {
     dispatch(setCurrStation(params.id))
@@ -38,51 +42,26 @@ export function StationDetails(props) {
   }
 
   function onSongClicked(songId) {
-    console.log('hi')
     dispatch(setCurrSong(params.id, songId))
     dispatch(setCurrSongIndex(params.id, songId))
   }
 
-  function updateBodyBackgroundColor(color) {
-    const darkShade =getShade(color, 0.07)
-    const headerShade =getShade(color, 0.4)
 
-    const gradient = `linear-gradient(to bottom, ${color.rgba}, ${headerShade.rgba})`
-    const darkGradient = `linear-gradient(to bottom, ${darkShade.rgba} 0%, rgba(0, 0, 0, 1) 30%)`
-
-    document.body.style.backgroundImage = gradient
-    if(stationDetailsHeader.current) stationDetailsHeader.current.style.backgroundImage = gradient
-    if(bottomHalf.current) bottomHalf.current.style.backgroundImage = darkGradient    
-  }
-  function getShade(color, shadeLevel) {
-    return {
-      ...color,
-      rgba: `rgba(${Math.round(color.value[0] * shadeLevel)}, ${Math.round(
-        color.value[1] * shadeLevel
-      )}, ${Math.round(color.value[2] * shadeLevel)}, 0.7)`,
-    }
-  }
+  
   function updateImgUrlAndColor(station) {
     if (!station) return
-    let imgUrl = ''
-    if (station.name === 'Liked songs') {
-      imgUrl = 'https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png'
-    } else {
-      imgUrl =
-        station.imgUrl ||
-        (station.songs && station.songs.length > 0
-          ? station.songs[0].imgUrl
-          : '')
-    }
+    const imgUrl = station.imgUrl
     if (imgUrl !== '') {
-     getDominantColor(imgUrl)
+      getDominantColor(imgUrl)
     }
   }
-
+  
   async function getDominantColor(imageSrc) {
     const cachedColor = colorCache[imageSrc]
     if (cachedColor) {
-     updateBodyBackgroundColor(cachedColor)
+      const gradient = `background: linear-gradient(to bottom, ${cachedColor} 0%, black 30%, ${cachedColor} 70%, black 100%)`
+      bgStyle = gradient
+      document.body.style.backgroundImage = gradient
       return
     }
     const fac = new FastAverageColor()
@@ -93,14 +72,15 @@ export function StationDetails(props) {
     img.onload = async () => {
       try {
         const color = await fac.getColorAsync(img)
-       colorCache[imageSrc] = color
-       updateBodyBackgroundColor(color)
+        colorCache[imageSrc] = color
+        bgStyle = {
+          background: `linear-gradient(to bottom, ${color.rgb} 0%, black 30%, black 70%, black 100%)`,
+        }
       } catch (e) {
         console.error(e)
       }
     }
   }
-
   function stationNameClass() {
     const words = station.name.split(" ").length
     if (words <= 3) {
@@ -136,10 +116,10 @@ export function StationDetails(props) {
     const formattedDate = `${months[monthIndex]} ${day}, ${year}`
     return formattedDate
   }
-
+  console.log('bgStyle', bgStyle)
   if (!station) return <div>Loading...</div>
   return (
-    <section ref={stationDetailsHeader} className="station-details ">
+    <section className="station-details" style={bgStyle}>
       <div className="station-header-content">
         <img
           className="station-main-img"
@@ -155,7 +135,7 @@ export function StationDetails(props) {
           <span className="songs-count"> {station.songs.length} songs </span>
         </div>
       </div>
-      <div ref={bottomHalf} className="station-songs">
+      <div className="station-songs">
         <div className="station-songs-header">
           <span className="flex align-center justify-center">#</span>
           <span className="title flex align-center">Title</span>
