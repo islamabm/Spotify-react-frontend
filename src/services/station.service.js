@@ -1,15 +1,16 @@
 import { storageService } from './storage.service.js'
 import { makeId } from './util.service.js'
-
+import axios from 'axios'
 export const stationService = {
   query,
   save,
   remove,
   getById,
   getEmptyStation,
-  // searchQuery,
+  searchQuery,
   getSongById,
   getCurrIndex,
+  getVideos,
   //   tryStation,
 }
 
@@ -18,6 +19,42 @@ const STORAGE_KEY = 'stations'
 const STORAGE_SEARCH_KEY = 'search-stations'
 const SEARCH_KEY = 'videosDB'
 const VIDEOS_KEY = 'videosIdDB'
+let gSearchCache = storageService.load(SEARCH_KEY) || {}
+
+var gStations = _loadStations()
+
+var gSearchStations = _loadSearchStations()
+
+function getVideos(keyword) {
+  if (gSearchCache[keyword]) {
+    return Promise.resolve(gSearchCache[keyword])
+  }
+  let videosIds = storageService.load(VIDEOS_KEY) || []
+
+  const existTitle = videosIds.find((video) =>
+    video.title.toLowerCase().includes(keyword.toLowerCase())
+  )
+
+  return axios.get(gUrl + keyword).then((res) => {
+    const videos = res.data.items.map((item) => _prepareData(item))
+
+    gSearchCache = videos
+
+    videosIds.push(videos[0])
+    // storageService.store(SEARCH_KEY, gSearchCache)
+    // storageService.store(VIDEOS_KEY, videosIds)
+    return videos
+  })
+}
+
+function _prepareData(item) {
+  return {
+    videoId: item.id.videoId,
+    title: item.snippet.title,
+    imgUrl: item.snippet.thumbnails.default.url,
+    createdAt: item.snippet.publishedAt,
+  }
+}
 const gDefaultStations = [
   {
     _id: '1',
@@ -2551,30 +2588,31 @@ var gStations = _loadStations()
 
 var gSearchStations = _loadSearchStations()
 
-// function getVideos(keyword) {
-//   if (gSearchCache[keyword]) {
-//     return Promise.resolve(gSearchCache[keyword])
-//   }
-//   let videosIds = utilService.loadFromStorage(VIDEOS_KEY) || []
+function getVideos(keyword) {
+  if (gSearchCache[keyword]) {
+    return Promise.resolve(gSearchCache[keyword])
+  }
+  let videosIds = utilService.loadFromStorage(VIDEOS_KEY) || []
 
-//   const existTitle = videosIds.find((video) =>
-//     video.title.toLowerCase().includes(keyword.toLowerCase())
-//   )
+  const existTitle = videosIds.find((video) =>
+    video.title.toLowerCase().includes(keyword.toLowerCase())
+  )
 
-//   return axios.get(gUrl + keyword).then((res) => {
-//     const videos = res.data.items.map((item) => _prepareData(item))
+  return axios.get(gUrl + keyword).then((res) => {
+    const videos = res.data.items.map((item) => _prepareData(item))
 
-//     gSearchCache = videos
+    gSearchCache = videos
 
-//     videosIds.push(videos[0])
-//     utilService.saveToStorage(SEARCH_KEY, gSearchCache)
-//     utilService.saveToStorage(VIDEOS_KEY, videosIds)
-//     return videos
-//   })
-// }
-// function searchQuery() {
-//   return Promise.resolve([...gSearchStations])
-// }
+    videosIds.push(videos[0])
+    utilService.saveToStorage(SEARCH_KEY, gSearchCache)
+    utilService.saveToStorage(VIDEOS_KEY, videosIds)
+    return videos
+  })
+}
+function searchQuery() {
+  return Promise.resolve([...gSearchStations])
+}
+
 
 function query() {
   //   let stationsToReturn = gStations

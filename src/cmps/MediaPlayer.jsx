@@ -1,12 +1,29 @@
 import React, { useRef, useState } from 'react'
 import { getSpotifySvg } from '../services/SVG.service'
-import { HoverModal } from './HoverModal'
+// import { HoverModal } from './HoverModal'
+import { stationService } from '../services/station.service'
+import YouTube from 'react-youtube'
+import { useDispatch, useSelector } from 'react-redux'
 export function MediaPlayer() {
+  const song = useSelector((storeState) => storeState.songModule.currSong)
+  console.log('song', song)
+
+  const videoOptions = {
+    // height: '390',
+    // width: '640',
+    playerVars: {
+      // https://developers.google.com/youtube/player_parameters
+      autoplay: 1,
+    },
+  }
+
+  const onReady = (event) => {
+    // access to player in all event handlers via event.target
+    event.target.pauseVideo()
+  }
   return (
     <>
-      {/* Note that there's no React equivalent for the 'YouTube' component */}
-      {/* Replace it with the appropriate component or HTML element */}
-
+      <YouTube videoId="M7lc1UVf-VE" opts={videoOptions} onReady={onReady} />
       <div className="media-player">
         <div className="control-buttons">
           <span
