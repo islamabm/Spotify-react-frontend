@@ -55,9 +55,15 @@
       gap: 10px;
       border-radius: 4px;
       border: 1px solid #292a2a;
-
+      color: $clr3;
+      font-size: 14px;
       .title {
         margin-inline-start: 6px;
+      }
+      .time {
+        svg {
+          fill: $clr3;
+        }
       }
     }
     .song {

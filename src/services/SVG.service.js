@@ -55,6 +55,7 @@ const SpotifySvgs = {
   bottomArrowIcon: `<svg role="img" height="16" width="16" aria-hidden="true" class="Svg-sc-ytk21e-0 haNxPq SbDHY3fVADNJ4l9qOLQ2" viewBox="0 0 16 16" data-encore-id="icon"><path d="m14 6-6 6-6-6h12z"></path></svg>`,
   upArrowIcon: `<svg role="img" height="16" width="16" aria-hidden="true" class="Svg-sc-ytk21e-0 haNxPq SbDHY3fVADNJ4l9qOLQ2" viewBox="0 0 16 16" data-encore-id="icon"><path d="M14 10 8 4l-6 6h12z"></path></svg>`,
   dots: `<svg role="img" height="16" width="16" aria-hidden="true" viewBox="0 0 16 16" data-encore-id="icon" class="Svg-sc-ytk21e-0 haNxPq"><path d="M3 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm6.5 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zM16 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"></path></svg>`,
+  time: `<svg role="img" height="16" width="16" aria-hidden="true" viewBox="0 0 16 16" data-encore-id="icon" class="Svg-sc-ytk21e-0 haNxPq"><path d="M8 1.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"></path><path d="M8 3.25a.75.75 0 0 1 .75.75v3.25H11a.75.75 0 0 1 0 1.5H7.25V4A.75.75 0 0 1 8 3.25z"></path></svg>`,
 }
 
 export function getSpotifySvg(iconName) {
