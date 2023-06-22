@@ -52,7 +52,7 @@ export function StationDetails(props) {
   async function getDominantColor(imageSrc) {
     const cachedColor = colorCache[imageSrc];
     if (cachedColor) {
-      const gradient = `background: linear-gradient(to bottom, ${cachedColor} 0%, black 30%, ${cachedColor} 70%, black 100%)`;
+      const gradient = `linear-gradient(to bottom, ${cachedColor} 0%, ${cachedColor} 10%, ${cachedColor} 20%, ${cachedColor} 50%, black 140%, black 70%, black 100%)`;
       setBgStyle(gradient);
       document.body.style.backgroundImage = gradient;
       return;
@@ -67,7 +67,7 @@ export function StationDetails(props) {
         const color = await fac.getColorAsync(img);
         colorCache[imageSrc] = color;
         setBgStyle({
-          background: `linear-gradient(to bottom, ${color.rgb} 0%, ${color.rgb} 10%, ${color.rgb} 20%, ${color.rgb} 50%, black 60%, black 70%, black 100%)`
+          background: `linear-gradient(to bottom, ${color.rgb} 0%, ${color.rgb} 10%, ${color.rgb} 20%, ${color.rgb} 50%, black 140%, black 70%, black 100%)`
         })
       } catch (e) {
         console.error(e);
