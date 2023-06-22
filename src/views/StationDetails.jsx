@@ -7,11 +7,10 @@ import { setCurrSong, setCurrSongIndex } from '../store/actions/song.actions'
 import { FastAverageColor } from 'fast-average-color'
 
 export function StationDetails(props) {
-  // let bgStyle = null
   const [bgStyle, setBgStyle] = useState(null)
+  const [headerOpacity, setHeaderOpacity] = useState(0)
   const colorCache = {}
   const params = useParams()
-
   const station = useSelector(
     (storeState) => storeState.stationModule.currStation
   )
@@ -19,14 +18,16 @@ export function StationDetails(props) {
     (storeState) => storeState.stationModule.currStationImg
   )
   const song = useSelector((storeState) => storeState.songModule.currSong)
-  console.log('song', song)
   const idx = useSelector((storeState) => storeState.songModule.currIndex)
-  console.log('idx', idx)
   const dispatch = useDispatch()
 
   useEffect(() => {
     loadStation()
   }, [params.id])
+
+  useEffect(() => {
+    updateHeaderOpacity()
+  }, [headerOpacity])
 
   useEffect(() => {
     updateImgUrlAndColor(station)
@@ -110,6 +111,20 @@ export function StationDetails(props) {
     const formattedDate = `${months[monthIndex]} ${day}, ${year}`
     return formattedDate
   }
+
+  function updateHeaderOpacity() {
+    const scrollPosition =
+      window.pageYOffset || document.documentElement.scrollTop
+    const headerHeight = 64
+    const opacityFactor = 3
+
+    const header = Math.min(
+      scrollPosition / (headerHeight * opacityFactor),
+      1
+    )
+    setHeaderOpacity(header)
+  }
+
   if (!station) return <div>Loading...</div>
   return (
     <section className="station-details">
