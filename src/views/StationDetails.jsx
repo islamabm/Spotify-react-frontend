@@ -18,6 +18,7 @@ export function StationDetails(props) {
 
   useEffect(() => {
     loadStation()
+    // console.log('song', song)
   }, [params.id])
 
   function loadStation() {
@@ -31,7 +32,7 @@ export function StationDetails(props) {
   }
 
   function onSongClicked(songId) {
-    console.log()
+    console.log('hi')
     dispatch(setCurrSong(params.id, songId))
   }
 
@@ -94,7 +95,7 @@ export function StationDetails(props) {
             <div className="song-details-container">
               <div className="img-container flex align-center justify-center">
                 <img
-                  onClick={onSongClicked(song._id)}
+                  onClick={() => onSongClicked(song._id)}
                   className="song-img"
                   src={song.imgUrl}
                   alt="song img"

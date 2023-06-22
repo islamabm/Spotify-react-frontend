@@ -2579,9 +2579,9 @@ function getById(id) {
   const station = gStations.find((station) => station._id === id)
   return Promise.resolve({ ...station })
 }
-function getSongById(stationId, songId) {
-  const station = getById(stationId)
-  const song = station.find((song) => song._id === songId)
+async function getSongById(stationId, songId) {
+  const station = await getById(stationId) // use 'await' here to wait for the promise
+  const song = station.songs.find((song) => song._id === songId) // use `songs` property of station object
   return Promise.resolve({ ...song })
 }
 
