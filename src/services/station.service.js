@@ -9,12 +9,15 @@ export const stationService = {
   getEmptyStation,
   searchQuery,
   getSongById,
+  getCurrIndex,
   //   tryStation,
 }
 
+const gUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyDMaVeDmO58LherEwmJrnRzsn58vDd1n34&q=`
 const STORAGE_KEY = 'stations'
 const STORAGE_SEARCH_KEY = 'search-stations'
-
+const SEARCH_KEY = 'videosDB'
+const VIDEOS_KEY = 'videosIdDB'
 const gDefaultStations = [
   {
     _id: '1',
@@ -2548,6 +2551,27 @@ var gStations = _loadStations()
 
 var gSearchStations = _loadSearchStations()
 
+function getVideos(keyword) {
+  if (gSearchCache[keyword]) {
+    return Promise.resolve(gSearchCache[keyword])
+  }
+  let videosIds = utilService.loadFromStorage(VIDEOS_KEY) || []
+
+  const existTitle = videosIds.find((video) =>
+    video.title.toLowerCase().includes(keyword.toLowerCase())
+  )
+
+  return axios.get(gUrl + keyword).then((res) => {
+    const videos = res.data.items.map((item) => _prepareData(item))
+
+    gSearchCache = videos
+
+    videosIds.push(videos[0])
+    utilService.saveToStorage(SEARCH_KEY, gSearchCache)
+    utilService.saveToStorage(VIDEOS_KEY, videosIds)
+    return videos
+  })
+}
 function searchQuery() {
   return Promise.resolve([...gSearchStations])
 }
@@ -2579,10 +2603,16 @@ function getById(id) {
   const station = gStations.find((station) => station._id === id)
   return Promise.resolve({ ...station })
 }
-function getSongById(stationId, songId) {
-  const station = getById(stationId)
-  const song = station.find((song) => song._id === songId)
+async function getSongById(stationId, songId) {
+  const station = await getById(stationId)
+  const song = station.songs.find((song) => song._id === songId)
   return Promise.resolve({ ...song })
+}
+async function getCurrIndex(stationId, songId) {
+  const station = await getById(stationId)
+  const songIdx = station.songs.findIndex((song) => song._id === songId)
+  console.log('songIdx in service', songIdx)
+  return Promise.resolve(songIdx)
 }
 
 function remove(id) {

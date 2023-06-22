@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom"
 import { getSpotifySvg } from "../services/SVG.service"
 import { useDispatch, useSelector } from "react-redux"
 import { setCurrStation } from "../store/actions/station.actions"
-import { setCurrSong } from "../store/actions/song.actions"
+import { setCurrSong, setCurrSongIndex } from "../store/actions/song.actions"
 import { FastAverageColor } from 'fast-average-color'
 
 export function StationDetails(props) {
@@ -18,10 +18,13 @@ export function StationDetails(props) {
   )
   const song = useSelector((storeState) => storeState.songModule.currSong)
   console.log("song", song)
+  const idx = useSelector((storeState) => storeState.songModule.currIndex)
+  console.log('idx', idx)
   const dispatch = useDispatch()
 
   useEffect(() => {
     loadStation()
+    // console.log('song', song)
   }, [params.id])
 
   function loadStation() {
@@ -35,7 +38,9 @@ export function StationDetails(props) {
   }
 
   function onSongClicked(songId) {
+    console.log('hi')
     dispatch(setCurrSong(params.id, songId))
+    dispatch(setCurrSongIndex(params.id, songId))
   }
 
   function updateBodyBackgroundColor(color) {
@@ -165,12 +170,15 @@ export function StationDetails(props) {
             </span>
             <div className="song-details-container">
               <div className="img-container flex align-center justify-center">
-                <img className="song-img" src={song.imgUrl} alt="song img" />
+                <img
+                  onClick={() => onSongClicked(song._id)}
+                  className="song-img"
+                  src={song.imgUrl}
+                  alt="song img"
+                />
               </div>
               <div className="name-and-artist flex justify-center">
-                <span onClick={onSongClicked(song._id)} className="song-name">
-                  {song.title}
-                </span>
+                <span className="song-name">{song.title}</span>
                 <span className="song-artist">{song.artist}</span>
               </div>
             </div>
