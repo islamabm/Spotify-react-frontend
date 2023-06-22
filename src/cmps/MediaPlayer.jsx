@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { getSpotifySvg } from '../services/SVG.service'
 // import { HoverModal } from './HoverModal'
 import { stationService } from '../services/station.service'
@@ -8,22 +8,41 @@ export function MediaPlayer() {
   const song = useSelector((storeState) => storeState.songModule.currSong)
   console.log('song', song)
 
+  const [videoId, setVideoId] = useState('M7lc1UVf-VE')
+
   const videoOptions = {
-    // height: '390',
-    // width: '640',
     playerVars: {
-      // https://developers.google.com/youtube/player_parameters
       autoplay: 1,
     },
   }
+  useEffect(() => {
+    if (song && song.title && song.artist) {
+      const searchStr = `${song.artist} ${song.title}`
+      stationService
+        .getVideos(searchStr)
+        .then((videos) => {
+          if (videos.length > 0) {
+            setVideoId(videos[0].videoId)
+          }
+        })
+        .catch((error) => {
+          console.error('Error getting videos:', error)
+        })
+    }
+  }, [song])
 
   const onReady = (event) => {
-    // access to player in all event handlers via event.target
     event.target.pauseVideo()
   }
   return (
     <>
-      <YouTube videoId="M7lc1UVf-VE" opts={videoOptions} onReady={onReady} />
+      <YouTube
+        videoId={videoId}
+        opts={videoOptions}
+        onReady={onReady}
+        // onPause={func}
+        className="hidden-player"
+      />
       <div className="media-player">
         <div className="control-buttons">
           <span
