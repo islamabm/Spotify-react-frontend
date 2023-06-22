@@ -31,6 +31,7 @@ export function StationDetails(props) {
   }
 
   function onSongClicked(songId) {
+    console.log()
     dispatch(setCurrSong(params.id, songId))
   }
 
@@ -92,12 +93,15 @@ export function StationDetails(props) {
             </span>
             <div className="song-details-container">
               <div className="img-container flex align-center justify-center">
-                <img className="song-img" src={song.imgUrl} alt="song img" />
+                <img
+                  onClick={onSongClicked(song._id)}
+                  className="song-img"
+                  src={song.imgUrl}
+                  alt="song img"
+                />
               </div>
               <div className="name-and-artist flex justify-center">
-                <span onClick={onSongClicked(song._id)} className="song-name">
-                  {song.title}
-                </span>
+                <span className="song-name">{song.title}</span>
                 <span className="song-artist">{song.artist}</span>
               </div>
             </div>

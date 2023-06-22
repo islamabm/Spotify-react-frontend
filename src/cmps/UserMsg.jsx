@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { eventBus, SHOW_MSG } from '../services/event-bus.service'
 
-export class UserMsg extends Component {
+export  UserMsg extends Component {
   constructor(props) {
     super(props)
     this.state = {
