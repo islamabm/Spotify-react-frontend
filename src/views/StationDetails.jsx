@@ -14,10 +14,10 @@ export function StationDetails(props) {
 
   const station = useSelector(
     (storeState) => storeState.stationModule.currStation
-  );
+  )
   const stationImg = useSelector(
     (storeState) => storeState.stationModule.currStationImg
-  );
+  )
   const song = useSelector((storeState) => storeState.songModule.currSong);
   console.log("song", song);
   const idx = useSelector((storeState) => storeState.songModule.currIndex);
