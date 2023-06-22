@@ -11,12 +11,10 @@ export function SortModal({ onSelectOption }) {
     onSelectOption(option)
   }
 
-  console.log('onSelectOption', onSelectOption)
-
   return (
     <div className="sort-modal">
       <div>
-        <p className='sort-by'>Sort by</p>
+        <p className="sort-by">Sort by</p>
       </div>
       {options.map((option) => (
         <div onClick={() => onSelect(option)} className="pointer" key={option}>

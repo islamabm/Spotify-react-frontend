@@ -2627,7 +2627,6 @@ async function getSongById(stationId, songId) {
 async function getCurrIndex(stationId, songId) {
   const station = await getById(stationId)
   const songIdx = station.songs.findIndex((song) => song._id === songId)
-  console.log('songIdx in service', songIdx)
   return Promise.resolve(songIdx)
 }
 
