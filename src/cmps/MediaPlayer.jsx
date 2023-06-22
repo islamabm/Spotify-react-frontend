@@ -2,12 +2,19 @@ import React, { useRef, useState, useEffect } from 'react'
 import { getSpotifySvg } from '../services/SVG.service'
 // import { HoverModal } from './HoverModal'
 import { stationService } from '../services/station.service'
+import { getRandomSong } from '../store/actions/song.actions'
 import YouTube from 'react-youtube'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 export function MediaPlayer() {
   const song = useSelector((storeState) => storeState.songModule.currSong)
-
+  const dispatch = useDispatch()
+  const stationId = useSelector(
+    (storeState) => storeState.stationModule.currStationId
+  )
   const [videoId, setVideoId] = useState('M7lc1UVf-VE')
+  const [isShuffled, setIsShuffled] = useState(false)
+  const [isPlaying, setIsPlaying] = useState(false)
+  let playerRef = useRef(null)
 
   const videoOptions = {
     playerVars: {
@@ -31,7 +38,29 @@ export function MediaPlayer() {
   }, [song])
 
   const onReady = (event) => {
+    playerRef.current = event.target
     event.target.pauseVideo()
+  }
+
+  const onPlaySong = () => {
+    setIsPlaying(true)
+  }
+
+  function onShuffleClicked() {
+    setIsShuffled(!isShuffled)
+    dispatch(getRandomSong(stationId))
+  }
+
+  const onPauseSong = () => {
+    setIsPlaying(false)
+  }
+
+  const handlePlayPauseClick = () => {
+    if (isPlaying) {
+      playerRef.current.pauseVideo()
+    } else {
+      playerRef.current.playVideo()
+    }
   }
   return (
     <>
@@ -39,14 +68,15 @@ export function MediaPlayer() {
         videoId={videoId}
         opts={videoOptions}
         onReady={onReady}
-        // onPlay={func}
-        // onPause={func}
+        onPlay={onPlaySong}
+        onPause={onPauseSong}
         className="hidden-player"
       />
       <div className="media-player">
         <div className="control-buttons">
           <span
-            className="pointer"
+            onClick={onShuffleClicked}
+            className={`pointer ${isShuffled ? 'green-fill' : ''}`}
             dangerouslySetInnerHTML={{ __html: getSpotifySvg('shouffleIcon') }}
           ></span>
           <span
@@ -57,12 +87,14 @@ export function MediaPlayer() {
             {' '}
             <span
               className="special-i pointer"
+              onClick={handlePlayPauseClick}
               dangerouslySetInnerHTML={{
-                __html: getSpotifySvg('playIcon'),
+                __html: isPlaying
+                  ? getSpotifySvg('pauseIcon')
+                  : getSpotifySvg('playIcon'),
               }}
             ></span>
           </div>
-          {/* <i className="pause"></i> */}{' '}
           <span
             className="pointer"
             dangerouslySetInnerHTML={{

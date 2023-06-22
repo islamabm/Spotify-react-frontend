@@ -29,3 +29,17 @@ export function setCurrSongIndex(stationId, songId) {
     }
   }
 }
+export function getRandomSong(stationId) {
+  return async (dispatch, getState) => {
+    try {
+      const song = await stationService.getRandomSong(stationId)
+      const action = {
+        type: SET_CURR_SONG,
+        song,
+      }
+      dispatch(action)
+    } catch (error) {
+      console.log('error:', error)
+    }
+  }
+}

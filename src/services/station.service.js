@@ -1,5 +1,5 @@
 import { storageService } from './storage.service.js'
-import { makeId } from './util.service.js'
+import { utilService } from './util.service.js'
 import axios from 'axios'
 export const stationService = {
   query,
@@ -11,6 +11,7 @@ export const stationService = {
   getSongById,
   getCurrIndex,
   getVideos,
+  getRandomSong,
   //   tryStation,
 }
 
@@ -2624,6 +2625,13 @@ async function getSongById(stationId, songId) {
   const song = station.songs.find((song) => song._id === songId)
   return Promise.resolve({ ...song })
 }
+async function getRandomSong(stationId) {
+  const station = await getById(stationId)
+  const length = station.songs.length
+  const idx = utilService.getRandomIntInclusive(0, length - 1)
+  const song = station.songs[idx]
+  return Promise.resolve({ ...song })
+}
 async function getCurrIndex(stationId, songId) {
   const station = await getById(stationId)
   const songIdx = station.songs.findIndex((song) => song._id === songId)
@@ -2645,7 +2653,7 @@ function save(stationToSave) {
     )
     gStations.splice(idx, 1, stationToSave)
   } else {
-    stationToSave._id = makeId()
+    stationToSave._id = utilService.makeId()
     stationToSave.batteryStatus = 100
     gStations.push(stationToSave)
   }

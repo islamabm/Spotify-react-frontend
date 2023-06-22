@@ -17,6 +17,7 @@ const INITIAL_STATE = {
     maxBatteryStatus: '',
   },
   currStation: null,
+  currStationId: null,
 }
 
 export function stationReducer(state = INITIAL_STATE, action = {}) {
@@ -30,7 +31,8 @@ export function stationReducer(state = INITIAL_STATE, action = {}) {
       return {
         ...state,
         currStation: action.station,
-        currStationImg: action.station.imgUrl
+        currStationId: action.station._id,
+        currStationImg: action.station.imgUrl,
       }
     case SET_SEARCH_STATIONS:
       return {

@@ -2,16 +2,25 @@ import React from 'react'
 import { getSpotifySvg } from '../services/SVG.service'
 import { BubblingHeart } from './BubblingHeart'
 import { MediaPlayer } from './MediaPlayer'
+import { useDispatch, useSelector } from 'react-redux'
 export function AppFooter() {
+  const song = useSelector((storeState) => storeState.songModule.currSong)
+  const station = useSelector(
+    (storeState) => storeState.stationModule.currStation
+  )
   return (
     <div className="app-footer">
       <div className="song-details">
         <div className="image">
-          <img src="https://imgd.aeplcdn.com/1056x594/n/cw/ec/44686/activa-6g-right-front-three-quarter.jpeg?q=75" />
+          <img src={song ? song.imgUrl : station?.songs[0].imgUrl} />
         </div>
         <div className="actor-name-song">
-          <p className="song-name">Unicorn</p>
-          <p className="actor-name">Noa kirel</p>
+          <p className="song-name">
+            {song ? song.title : station?.songs[0].title}
+          </p>
+          <p className="actor-name">
+            {song ? song.artist : station?.songs[0].artist}
+          </p>
         </div>
         <div className="heart-picture-icons">
           <BubblingHeart />
