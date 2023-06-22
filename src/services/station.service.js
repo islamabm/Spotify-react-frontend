@@ -2588,31 +2588,9 @@ var gStations = _loadStations()
 
 var gSearchStations = _loadSearchStations()
 
-function getVideos(keyword) {
-  if (gSearchCache[keyword]) {
-    return Promise.resolve(gSearchCache[keyword])
-  }
-  let videosIds = utilService.loadFromStorage(VIDEOS_KEY) || []
-
-  const existTitle = videosIds.find((video) =>
-    video.title.toLowerCase().includes(keyword.toLowerCase())
-  )
-
-  return axios.get(gUrl + keyword).then((res) => {
-    const videos = res.data.items.map((item) => _prepareData(item))
-
-    gSearchCache = videos
-
-    videosIds.push(videos[0])
-    utilService.saveToStorage(SEARCH_KEY, gSearchCache)
-    utilService.saveToStorage(VIDEOS_KEY, videosIds)
-    return videos
-  })
-}
 function searchQuery() {
   return Promise.resolve([...gSearchStations])
 }
-
 
 function query() {
   //   let stationsToReturn = gStations
