@@ -53,11 +53,17 @@
       display: grid;
       grid-template-columns: 16px 6fr 4fr 3fr minmax(120px, 1fr);
       gap: 10px;
-      border-radius: 4px;
-      border: 1px solid #292a2a;
-
+      border-bottom: 1px solid #292a2a;
+      color: $clr3;
+      font-size: 14px;
       .title {
         margin-inline-start: 6px;
+      }
+      .time {
+        svg {
+          fill: $clr3;
+          margin-left: 15%;
+        }
       }
     }
     .song {
@@ -69,7 +75,7 @@
       height: 56px;
       display: grid;
       border-radius: 4px;
-      border: 1px solid #292a2a;
+      // border: 1px solid #292a2a;
       &:hover {
         background-color: #292a2a;
       }
@@ -99,6 +105,11 @@
       .album-name {
         grid-column: 3;
         color: $clr14;
+        font-size: 14px;
+      }
+      .added-at {
+        font-size: 14px;
+        color: $clr3;
       }
       .duration-container {
         justify-content: space-evenly;
@@ -109,6 +120,7 @@
         .duration {
           margin-inline-end: -17px;
           color: $clr14;
+          font-size: 14px;
         }
         .dots {
           fill: $clr6;
