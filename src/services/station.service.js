@@ -12,6 +12,8 @@ export const stationService = {
   getCurrIndex,
   getVideos,
   getRandomSong,
+  getPrevSong,
+  getNextSong,
   //   tryStation,
 }
 
@@ -2632,6 +2634,24 @@ async function getRandomSong(stationId) {
   const song = station.songs[idx]
   return Promise.resolve({ ...song })
 }
+async function getPrevSong(stationId, songId) {
+  let song
+  const station = await getById(stationId)
+  const idx = station.songs.findIndex((song) => song._id === songId)
+  if (idx === 0) song = station.songs[station.length - 1]
+  else song = station.songs[idx - 1]
+
+  return Promise.resolve({ ...song })
+}
+async function getNextSong(stationId, songId) {
+  let song
+  const station = await getById(stationId)
+  const idx = station.songs.findIndex((song) => song._id === songId)
+  if (idx === station.length - 1) song = station.songs[0]
+  else song = station.songs[idx + 1]
+  return Promise.resolve({ ...song })
+}
+
 async function getCurrIndex(stationId, songId) {
   const station = await getById(stationId)
   const songIdx = station.songs.findIndex((song) => song._id === songId)

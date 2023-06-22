@@ -43,3 +43,31 @@ export function getRandomSong(stationId) {
     }
   }
 }
+export function setPrevSong(stationId, songId) {
+  return async (dispatch, getState) => {
+    try {
+      const song = await stationService.getPrevSong(stationId, songId)
+      const action = {
+        type: SET_CURR_SONG,
+        song,
+      }
+      dispatch(action)
+    } catch (error) {
+      console.log('error:', error)
+    }
+  }
+}
+export function setNextSong(stationId, songId) {
+  return async (dispatch, getState) => {
+    try {
+      const song = await stationService.getNextSong(stationId, songId)
+      const action = {
+        type: SET_CURR_SONG,
+        song,
+      }
+      dispatch(action)
+    } catch (error) {
+      console.log('error:', error)
+    }
+  }
+}

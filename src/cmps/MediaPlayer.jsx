@@ -2,11 +2,16 @@ import React, { useRef, useState, useEffect } from 'react'
 import { getSpotifySvg } from '../services/SVG.service'
 // import { HoverModal } from './HoverModal'
 import { stationService } from '../services/station.service'
-import { getRandomSong } from '../store/actions/song.actions'
+import {
+  getRandomSong,
+  setPrevSong,
+  setNextSong,
+} from '../store/actions/song.actions'
 import YouTube from 'react-youtube'
 import { useDispatch, useSelector } from 'react-redux'
 export function MediaPlayer() {
   const song = useSelector((storeState) => storeState.songModule.currSong)
+  const songId = useSelector((storeState) => storeState.songModule.currSongId)
   const dispatch = useDispatch()
   const stationId = useSelector(
     (storeState) => storeState.stationModule.currStationId
@@ -46,6 +51,14 @@ export function MediaPlayer() {
     setIsPlaying(true)
   }
 
+  function getPrevSong() {
+    dispatch(setPrevSong(stationId, songId))
+  }
+
+  function getNextSong() {
+    dispatch(setNextSong(stationId, songId))
+  }
+
   function onShuffleClicked() {
     setIsShuffled(!isShuffled)
     dispatch(getRandomSong(stationId))
@@ -80,6 +93,7 @@ export function MediaPlayer() {
             dangerouslySetInnerHTML={{ __html: getSpotifySvg('shouffleIcon') }}
           ></span>
           <span
+            onClick={getPrevSong}
             className="pointer"
             dangerouslySetInnerHTML={{ __html: getSpotifySvg('prevIcon') }}
           ></span>
@@ -96,6 +110,7 @@ export function MediaPlayer() {
             ></span>
           </div>
           <span
+            onClick={getNextSong}
             className="pointer"
             dangerouslySetInnerHTML={{
               __html: getSpotifySvg('nextIcon'),
