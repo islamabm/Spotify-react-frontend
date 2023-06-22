@@ -72,8 +72,9 @@ export function StationDetails(props) {
       } catch (e) {
         console.error(e);
       }
-    };
+    }
   }
+  
   function stationNameClass() {
     const words = station.name.split(" ").length;
     if (words <= 3) {
