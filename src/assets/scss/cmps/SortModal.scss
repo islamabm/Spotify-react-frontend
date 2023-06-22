@@ -17,14 +17,17 @@
   right: 0px;
   padding: 4px;
   z-index: 999;
-
+.sort-by {
+  font-size: 11px;
+  color: $clr3;
+}
   div {
     display: flex;
     justify-content: space-between;
     align-items: center;
     justify-items: center;
     width: 100%;
-    padding: 12px 8px 12px 12px;
+    padding: 10px 12px;
 
     span {
       opacity: 0;

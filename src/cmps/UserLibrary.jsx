@@ -46,9 +46,9 @@ export function UserLibrary() {
       </div>
       <div className="library-filter">
         <span
-          className="pointer"
+          className="smaller-search pointer flex align-center justify-center"
           dangerouslySetInnerHTML={{
-            __html: getSpotifySvg('searchIcon'),
+            __html: getSpotifySvg('smallerSearchIcon'),
           }}
         ></span>
         <div onClick={onShowSortModal} className="sort-by-section relative">

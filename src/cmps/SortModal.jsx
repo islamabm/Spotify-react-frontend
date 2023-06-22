@@ -16,7 +16,7 @@ export function SortModal({ onSelectOption }) {
   return (
     <div className="sort-modal">
       <div>
-        <p>sort</p>
+        <p className='sort-by'>Sort by</p>
       </div>
       {options.map((option) => (
         <div onClick={() => onSelect(option)} className="pointer" key={option}>
