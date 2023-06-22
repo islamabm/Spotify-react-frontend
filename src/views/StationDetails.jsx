@@ -9,7 +9,6 @@ import { FastAverageColor } from 'fast-average-color'
 export function StationDetails(props) {
   const [bgStyle, setBgStyle] = useState(null)
   const colorCache = {}
-  // let bgStyle = null
   const params = useParams()
 
   const station = useSelector(
@@ -67,7 +66,7 @@ export function StationDetails(props) {
         const color = await fac.getColorAsync(img)
         colorCache[imageSrc] = color
         setBgStyle({
-          background: `linear-gradient(to bottom, ${color.rgb} 0%, black 30%, black 70%, black 100%)`,
+          background: `linear-gradient(to bottom, ${color.rgb} 0%, ${color.rgb} 10%, ${color.rgb} 20%, ${color.rgb} 50%, black 60%, black 70%, black 100%)`
         })
       } catch (e) {
         console.error(e)
@@ -109,11 +108,10 @@ export function StationDetails(props) {
     const formattedDate = `${months[monthIndex]} ${day}, ${year}`
     return formattedDate
   }
-  console.log('bgStyle', bgStyle)
   if (!station) return <div>Loading...</div>
   return (
-    <section className="station-details" style={bgStyle}>
-      <div className="station-header-content">
+    <section className="station-details">
+      <div className="station-header-content" style={bgStyle}>
         <img
           className="station-main-img"
           src={station.imgUrl}
