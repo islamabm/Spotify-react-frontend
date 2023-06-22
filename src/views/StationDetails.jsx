@@ -74,8 +74,8 @@ export function StationDetails(props) {
           <h1 className="station-name">{station.name}</h1>
           <p className="station-description">{station.description}</p>
           <span className="logo">Spotify </span>
-          <span class="dot">• </span>
-          <span class="songs-count"> {station.songs.length} songs </span>
+          <span className="dot">• </span>
+          <span className="songs-count"> {station.songs.length} songs </span>
         </div>
       </div>
       <div className="station-songs-header">
