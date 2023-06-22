@@ -74,6 +74,7 @@ export function StationDetails(props) {
       }
     }
   }
+  
   function stationNameClass() {
     const words = station.name.split(' ').length
     if (words <= 3) {
