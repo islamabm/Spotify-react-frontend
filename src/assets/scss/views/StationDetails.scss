@@ -54,7 +54,7 @@
       grid-template-columns: 16px 6fr 4fr 3fr minmax(120px, 1fr);
       gap: 10px;
       border-radius: 4px;
-      border: 1px solid #292a2a;
+      // border: 1px solid #292a2a;
       color: $clr3;
       font-size: 14px;
       .title {
@@ -63,6 +63,7 @@
       .time {
         svg {
           fill: $clr3;
+          margin-left: 15%;
         }
       }
     }
