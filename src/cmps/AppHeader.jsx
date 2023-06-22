@@ -6,6 +6,7 @@ import { useState } from 'react'
 export function AppHeader() {
   const [showModal, setShowModal] = useState(false)
   const location = useLocation()
+  const opacity = {opacity: 1}
 
   function onShowModal() {
     setShowModal(true)
@@ -17,7 +18,7 @@ export function AppHeader() {
 
   return (
     <header className="app-header">
-      <section className="arrows-and-input">
+      <section className="arrows-and-input" style={opacity}>
         <section className="arrows">
           <div className="black-circle">
             <span
