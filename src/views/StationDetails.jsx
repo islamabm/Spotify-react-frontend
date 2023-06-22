@@ -1,30 +1,31 @@
-import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
-import { getSpotifySvg } from "../services/SVG.service"
-import { useDispatch, useSelector } from "react-redux"
-import { setCurrStation } from "../store/actions/station.actions"
-import { setCurrSong, setCurrSongIndex } from "../store/actions/song.actions"
+import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
+import { getSpotifySvg } from '../services/SVG.service'
+import { useDispatch, useSelector } from 'react-redux'
+import { setCurrStation } from '../store/actions/station.actions'
+import { setCurrSong, setCurrSongIndex } from '../store/actions/song.actions'
 import { FastAverageColor } from 'fast-average-color'
 
 export function StationDetails(props) {
-  // const [station, setStation] = useState(null)
+  const [bgStyle, setBgStyle] = useState(null)
   const colorCache = {}
-  let bgStyle = null
+  // let bgStyle = null
   const params = useParams()
 
   const station = useSelector(
     (storeState) => storeState.stationModule.currStation
   )
-  const stationImg = useSelector((storeState) => storeState.stationModule.currStationImg)  
+  const stationImg = useSelector(
+    (storeState) => storeState.stationModule.currStationImg
+  )
   const song = useSelector((storeState) => storeState.songModule.currSong)
-  console.log("song", song)
+  console.log('song', song)
   const idx = useSelector((storeState) => storeState.songModule.currIndex)
   console.log('idx', idx)
   const dispatch = useDispatch()
 
   useEffect(() => {
     loadStation()
-    // console.log('song', song)
   }, [params.id])
 
   useEffect(() => {
@@ -33,12 +34,6 @@ export function StationDetails(props) {
 
   function loadStation() {
     dispatch(setCurrStation(params.id))
-    // try {
-    //   const station = await stationService.getById(params.id)
-    //   setStation(station)
-    // } catch (error) {
-    //   console.log('error:', error)
-    // }
   }
 
   function onSongClicked(songId) {
@@ -46,8 +41,6 @@ export function StationDetails(props) {
     dispatch(setCurrSongIndex(params.id, songId))
   }
 
-
-  
   function updateImgUrlAndColor(station) {
     if (!station) return
     const imgUrl = station.imgUrl
@@ -55,12 +48,12 @@ export function StationDetails(props) {
       getDominantColor(imgUrl)
     }
   }
-  
+
   async function getDominantColor(imageSrc) {
     const cachedColor = colorCache[imageSrc]
     if (cachedColor) {
       const gradient = `background: linear-gradient(to bottom, ${cachedColor} 0%, black 30%, ${cachedColor} 70%, black 100%)`
-      bgStyle = gradient
+      setBgStyle(gradient)
       document.body.style.backgroundImage = gradient
       return
     }
@@ -73,39 +66,39 @@ export function StationDetails(props) {
       try {
         const color = await fac.getColorAsync(img)
         colorCache[imageSrc] = color
-        bgStyle = {
+        setBgStyle({
           background: `linear-gradient(to bottom, ${color.rgb} 0%, black 30%, black 70%, black 100%)`,
-        }
+        })
       } catch (e) {
         console.error(e)
       }
     }
   }
   function stationNameClass() {
-    const words = station.name.split(" ").length
+    const words = station.name.split(' ').length
     if (words <= 3) {
-      return "short-station-name"
+      return 'short-station-name'
     } else if (words <= 5) {
-      return "long-station-name"
+      return 'long-station-name'
     } else {
-      return "huge-station-name"
+      return 'huge-station-name'
     }
   }
 
   function formatDate(dateString) {
     const months = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
     ]
 
     const date = new Date(dateString)
@@ -169,12 +162,12 @@ export function StationDetails(props) {
             <div className="duration-container flex">
               <input className="hidden" type="checkbox" />
               <div className="duration">
-                {song.duration ? song.duration : "1:00"}
+                {song.duration ? song.duration : '1:00'}
               </div>
               <span
                 className="hidden dots"
                 dangerouslySetInnerHTML={{
-                  __html: getSpotifySvg("dots"),
+                  __html: getSpotifySvg('dots'),
                 }}
               ></span>
             </div>
