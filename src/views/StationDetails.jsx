@@ -1,12 +1,16 @@
-import { useEffect, useState } from "react"
-import { stationService } from "../services/station.service"
+import { useEffect, useRef, useState } from "react"
 import { useParams } from "react-router-dom"
 import { getSpotifySvg } from "../services/SVG.service"
 import { useDispatch, useSelector } from "react-redux"
 import { setCurrStation } from "../store/actions/station.actions"
 import { setCurrSong } from "../store/actions/song.actions"
+import { FastAverageColor } from 'fast-average-color'
+
 export function StationDetails(props) {
   // const [station, setStation] = useState(null)
+  const colorCache = {}
+  const stationDetailsHeader = useRef(null)
+  const bottomHalf = useRef(null);
   const params = useParams()
 
   const station = useSelector(
@@ -32,6 +36,64 @@ export function StationDetails(props) {
 
   function onSongClicked(songId) {
     dispatch(setCurrSong(params.id, songId))
+  }
+
+  function updateBodyBackgroundColor(color) {
+    const darkShade =getShade(color, 0.07)
+    const headerShade =getShade(color, 0.4)
+
+    const gradient = `linear-gradient(to bottom, ${color.rgba}, ${headerShade.rgba})`
+    const darkGradient = `linear-gradient(to bottom, ${darkShade.rgba} 0%, rgba(0, 0, 0, 1) 30%)`
+
+    document.body.style.backgroundImage = gradient
+    if(stationDetailsHeader.current) stationDetailsHeader.current.style.backgroundImage = gradient
+    if(bottomHalf.current) bottomHalf.current.style.backgroundImage = darkGradient    
+  }
+  function getShade(color, shadeLevel) {
+    return {
+      ...color,
+      rgba: `rgba(${Math.round(color.value[0] * shadeLevel)}, ${Math.round(
+        color.value[1] * shadeLevel
+      )}, ${Math.round(color.value[2] * shadeLevel)}, 0.7)`,
+    }
+  }
+  function updateImgUrlAndColor(station) {
+    if (!station) return
+    let imgUrl = ''
+    if (station.name === 'Liked songs') {
+      imgUrl = 'https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png'
+    } else {
+      imgUrl =
+        station.imgUrl ||
+        (station.songs && station.songs.length > 0
+          ? station.songs[0].imgUrl
+          : '')
+    }
+    if (imgUrl !== '') {
+     getDominantColor(imgUrl)
+    }
+  }
+
+  async function getDominantColor(imageSrc) {
+    const cachedColor = colorCache[imageSrc]
+    if (cachedColor) {
+     updateBodyBackgroundColor(cachedColor)
+      return
+    }
+    const fac = new FastAverageColor()
+    const img = new Image()
+    img.crossOrigin = 'Anonymous'
+    const corsProxyUrl = 'https://api.codetabs.com/v1/proxy?quest='
+    img.src = corsProxyUrl + encodeURIComponent(imageSrc)
+    img.onload = async () => {
+      try {
+        const color = await fac.getColorAsync(img)
+       colorCache[imageSrc] = color
+       updateBodyBackgroundColor(color)
+      } catch (e) {
+        console.error(e)
+      }
+    }
   }
 
   function stationNameClass() {
@@ -72,7 +134,7 @@ export function StationDetails(props) {
 
   if (!station) return <div>Loading...</div>
   return (
-    <section className="station-details">
+    <section ref={stationDetailsHeader} className="station-details ">
       <div className="station-header-content">
         <img
           className="station-main-img"
@@ -84,11 +146,11 @@ export function StationDetails(props) {
           <h1 className={stationNameClass()}>{station.name}</h1>
           <p className="station-description">{station.description}</p>
           <span className="logo">Spotify </span>
-          <span class="dot">• </span>
-          <span class="songs-count"> {station.songs.length} songs </span>
+          <span className="dot">• </span>
+          <span className="songs-count"> {station.songs.length} songs </span>
         </div>
       </div>
-      <div className="station-songs">
+      <div ref={bottomHalf} className="station-songs">
         <div className="station-songs-header">
           <span className="flex align-center justify-center">#</span>
           <span className="title flex align-center">Title</span>
