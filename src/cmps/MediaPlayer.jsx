@@ -19,8 +19,15 @@ export function MediaPlayer() {
   const [videoId, setVideoId] = useState('M7lc1UVf-VE')
   const [isShuffled, setIsShuffled] = useState(false)
   const [isPlaying, setIsPlaying] = useState(false)
+  const [duration, setDuration] = useState(0)
+  const [currentTime, setCurrentTime] = useState(0)
+  const [displayDuration, setDisplayDuration] = useState('0:00')
+  const [displayTime, setDisplayTime] = useState('0:00')
+  let interval = null
   let playerRef = useRef(null)
-
+  const progressBarWidth = duration
+    ? `${(currentTime / duration) * 100}%`
+    : '0%'
   const videoOptions = {
     playerVars: {
       autoplay: 1,
@@ -44,13 +51,28 @@ export function MediaPlayer() {
 
   const onReady = (event) => {
     playerRef.current = event.target
+    const duration = event.target.getDuration()
+    setDuration(duration) // here, duration is a number
+    const minutes = Math.floor(duration / 60)
+    const seconds = Math.round(duration % 60)
+    setDisplayDuration(`${minutes}:${seconds < 10 ? '0' : ''}${seconds}`) // here, displayDuration is a string
     event.target.pauseVideo()
   }
-
   const onPlaySong = () => {
     setIsPlaying(true)
-  }
+    interval = setInterval(() => {
+      const currentTime = playerRef.current.getCurrentTime()
+      setCurrentTime(Math.floor(currentTime))
 
+      const minutes = Math.floor(currentTime / 60)
+      const seconds = Math.round(currentTime % 60)
+      setDisplayTime(`${minutes}:${seconds < 10 ? '0' : ''}${seconds}`) // Update displayTime
+    }, 1000)
+  }
+  const onPauseSong = () => {
+    setIsPlaying(false)
+    clearInterval(interval)
+  }
   function getPrevSong() {
     dispatch(setPrevSong(stationId, songId))
   }
@@ -62,10 +84,6 @@ export function MediaPlayer() {
   function onShuffleClicked() {
     setIsShuffled(!isShuffled)
     dispatch(getRandomSong(stationId))
-  }
-
-  const onPauseSong = () => {
-    setIsPlaying(false)
   }
 
   const handlePlayPauseClick = () => {
@@ -125,11 +143,14 @@ export function MediaPlayer() {
         </div>
 
         <div className="music-bar">
-          <span className="current-time hiding">0:00</span>
+          <span className="current-time hiding">{displayTime}</span>
           <div className="progress-bar">
-            <div className="progress-bar-fill"></div>
+            <div
+              className="progress-bar-fill"
+              style={{ width: progressBarWidth }}
+            ></div>
           </div>
-          <span className="current-time hiding">3:30</span>
+          <span className="current-time hiding">{displayDuration}</span>
         </div>
       </div>
     </>

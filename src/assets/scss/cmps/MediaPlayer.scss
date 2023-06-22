@@ -63,7 +63,7 @@
 .progress-bar-fill {
   position: absolute;
   height: 100%;
-  width: 15px;
+
   background-color: white;
   border-radius: 10000px;
 }
@@ -101,7 +101,7 @@
 .progress-bar-audio-fill {
   position: absolute;
   height: 100%;
-  width: 15px;
+  width: 0;
   background-color: white;
   border-radius: 10000px;
 }
