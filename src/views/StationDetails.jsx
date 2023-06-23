@@ -145,6 +145,21 @@ export function StationDetails(props) {
           <span className="songs-count"> {station.songs.length} songs </span>
         </div>
       </div>
+      <div className="user-station-actions">
+      <div className="play-button flex justify-center align-center"></div>
+      <span
+            className="heart flex align-center justify-center"
+            dangerouslySetInnerHTML={{
+              __html: getSpotifySvg('bigFilledHeart'),
+            }}
+          ></span>
+      <span
+            className="dots flex align-center justify-center"
+            dangerouslySetInnerHTML={{
+              __html: getSpotifySvg('bigDots'),
+            }}
+          ></span>
+      </div>
       <div className="station-songs">
         <div className="station-songs-header">
           <span className="flex align-center justify-center">#</span>
