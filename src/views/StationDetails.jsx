@@ -138,6 +138,8 @@ export function StationDetails(props) {
           <span className="playlist-word">Playlist</span>
           <h1 className={stationNameClass()}>{station.name}</h1>
           <p className="station-description">{station.description}</p>
+
+          <img src="https://upload.wikimedia.org/wikipedia/commons/7/74/Spotify_App_Logo.svg" className="spotify-logo"/>
           <span className="logo">Spotify </span>
           <span className="dot">• </span>
           <span className="songs-count"> {station.songs.length} songs </span>
