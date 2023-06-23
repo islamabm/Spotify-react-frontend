@@ -1,131 +1,129 @@
-import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import { getSpotifySvg } from '../services/SVG.service'
-import { useDispatch, useSelector } from 'react-redux'
-import { setCurrStation } from '../store/actions/station.actions'
-import { setCurrSong, setCurrSongIndex } from '../store/actions/song.actions'
-import { FastAverageColor } from 'fast-average-color'
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { getSpotifySvg } from "../services/SVG.service";
+import { useDispatch, useSelector } from "react-redux";
+import { setCurrStation } from "../store/actions/station.actions";
+import { setCurrSong, setCurrSongIndex } from "../store/actions/song.actions";
+import { FastAverageColor } from "fast-average-color";
 
 export function StationDetails(props) {
-  const [bgStyle, setBgStyle] = useState(null)
-  const [headerOpacity, setHeaderOpacity] = useState(0)
-  const colorCache = {}
-  const params = useParams()
+  const [bgStyle, setBgStyle] = useState(null);
+  const [headerOpacity, setHeaderOpacity] = useState(0);
+  const colorCache = {};
+  const params = useParams();
   const station = useSelector(
     (storeState) => storeState.stationModule.currStation
-  )
+  );
   const stationImg = useSelector(
     (storeState) => storeState.stationModule.currStationImg
-  )
-  const song = useSelector((storeState) => storeState.songModule.currSong)
-  const idx = useSelector((storeState) => storeState.songModule.currIndex)
-  const dispatch = useDispatch()
+  );
+  const song = useSelector((storeState) => storeState.songModule.currSong);
+  const idx = useSelector((storeState) => storeState.songModule.currIndex);
+  const dispatch = useDispatch();
+  const [hoveredSongIdx] = useState(null);
 
   useEffect(() => {
-    loadStation()
-  }, [params.id])
+    loadStation();
+  }, [params.id]);
 
   useEffect(() => {
-    updateHeaderOpacity()
-  }, [headerOpacity])
+    updateHeaderOpacity();
+  }, [headerOpacity]);
 
   useEffect(() => {
-    updateImgUrlAndColor(station)
-  }, [stationImg])
+    updateImgUrlAndColor(station);
+  }, [stationImg]);
 
   function loadStation() {
-    dispatch(setCurrStation(params.id))
+    dispatch(setCurrStation(params.id));
   }
 
   function onSongClicked(songId) {
-    dispatch(setCurrSong(params.id, songId))
-    dispatch(setCurrSongIndex(params.id, songId))
+    dispatch(setCurrSong(params.id, songId));
+    dispatch(setCurrSongIndex(params.id, songId));
   }
 
   function updateImgUrlAndColor(station) {
-    if (!station) return
-    const imgUrl = station.imgUrl
-    if (imgUrl !== '') {
-      getDominantColor(imgUrl)
+    if (!station) return;
+    const imgUrl = station.imgUrl;
+    if (imgUrl !== "") {
+      getDominantColor(imgUrl);
     }
   }
 
   async function getDominantColor(imageSrc) {
-    const cachedColor = colorCache[imageSrc]
+    const cachedColor = colorCache[imageSrc];
     if (cachedColor) {
-      const gradient = `linear-gradient(to bottom, ${cachedColor} 0%, ${cachedColor} 10%, ${cachedColor} 20%, ${cachedColor} 50%, black 140%, black 70%, black 100%)`
-      setBgStyle(gradient)
-      document.body.style.backgroundImage = gradient
-      return
+      const gradient = `linear-gradient(to bottom, ${cachedColor} 0%, ${cachedColor} 10%, ${cachedColor} 20%, ${cachedColor} 50%, black 140%, black 70%, black 100%)`;
+      setBgStyle(gradient);
+      document.body.style.backgroundImage = gradient;
+      return;
     }
-    const fac = new FastAverageColor()
-    const img = new Image()
-    img.crossOrigin = 'Anonymous'
-    const corsProxyUrl = 'https://api.codetabs.com/v1/proxy?quest='
-    img.src = corsProxyUrl + encodeURIComponent(imageSrc)
+    const fac = new FastAverageColor();
+    const img = new Image();
+    img.crossOrigin = "Anonymous";
+    const corsProxyUrl = "https://api.codetabs.com/v1/proxy?quest=";
+    img.src = corsProxyUrl + encodeURIComponent(imageSrc);
     img.onload = async () => {
       try {
-        const color = await fac.getColorAsync(img)
-        colorCache[imageSrc] = color
+        const color = await fac.getColorAsync(img);
+        colorCache[imageSrc] = color;
         setBgStyle({
           background: `linear-gradient(to bottom, ${color.rgb} 0%, ${color.rgb} 10%, ${color.rgb} 20%, ${color.rgb} 50%, black 140%, black 70%, black 100%)`,
-        })
+        });
       } catch (e) {
-        console.error(e)
+        console.error(e);
       }
-    }
+    };
   }
-  
+
   function stationNameClass() {
-    const words = station.name.split(' ').length
+    const words = station.name.split(" ").length;
     if (words <= 3) {
-      return 'short-station-name'
+      return "short-station-name";
     } else if (words <= 5) {
-      return 'long-station-name'
+      return "long-station-name";
     } else {
-      return 'huge-station-name'
+      return "huge-station-name";
     }
   }
 
   function formatDate(dateString) {
     const months = [
-      'Jan',
-      'Feb',
-      'Mar',
-      'Apr',
-      'May',
-      'Jun',
-      'Jul',
-      'Aug',
-      'Sep',
-      'Oct',
-      'Nov',
-      'Dec',
-    ]
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
 
-    const date = new Date(dateString)
-    const monthIndex = date.getMonth()
-    const day = date.getDate()
-    const year = date.getFullYear()
+    const date = new Date(dateString);
+    const monthIndex = date.getMonth();
+    const day = date.getDate();
+    const year = date.getFullYear();
 
-    const formattedDate = `${months[monthIndex]} ${day}, ${year}`
-    return formattedDate
+    const formattedDate = `${months[monthIndex]} ${day}, ${year}`;
+    return formattedDate;
   }
 
   function updateHeaderOpacity() {
     const scrollPosition =
-      window.pageYOffset || document.documentElement.scrollTop
-    const headerHeight = 64
-    const opacityFactor = 3
+      window.pageYOffset || document.documentElement.scrollTop;
+    const headerHeight = 64;
+    const opacityFactor = 3;
 
-    const header = Math.min(
-      scrollPosition / (headerHeight * opacityFactor),
-      1
-    )
-    setHeaderOpacity(header)
+    const header = Math.min(scrollPosition / (headerHeight * opacityFactor), 1);
+    setHeaderOpacity(header);
   }
 
-  if (!station) return <div>Loading...</div>
+  if (!station) return <div>Loading...</div>;
   return (
     <section className="station-details">
       <div className="station-header-content" style={bgStyle}>
@@ -139,26 +137,29 @@ export function StationDetails(props) {
           <h1 className={stationNameClass()}>{station.name}</h1>
           <p className="station-description">{station.description}</p>
 
-          <img src="https://upload.wikimedia.org/wikipedia/commons/7/74/Spotify_App_Logo.svg" className="spotify-logo"/>
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/7/74/Spotify_App_Logo.svg"
+            className="spotify-logo"
+          />
           <span className="logo">Spotify </span>
           <span className="dot">• </span>
           <span className="songs-count"> {station.songs.length} songs </span>
         </div>
       </div>
       <div className="user-station-actions">
-      <div className="play-button flex justify-center align-center"></div>
-      <span
-            className="heart flex align-center justify-center"
-            dangerouslySetInnerHTML={{
-              __html: getSpotifySvg('bigFilledHeart'),
-            }}
-          ></span>
-      <span
-            className="dots flex align-center justify-center"
-            dangerouslySetInnerHTML={{
-              __html: getSpotifySvg('bigDots'),
-            }}
-          ></span>
+        <div className="play-button flex justify-center align-center"></div>
+        <span
+          className="heart flex align-center justify-center"
+          dangerouslySetInnerHTML={{
+            __html: getSpotifySvg("bigFilledHeart"),
+          }}
+        ></span>
+        <span
+          className="dots flex align-center justify-center"
+          dangerouslySetInnerHTML={{
+            __html: getSpotifySvg("bigDots"),
+          }}
+        ></span>
       </div>
       <div className="station-songs">
         <div className="station-songs-header">
@@ -169,15 +170,27 @@ export function StationDetails(props) {
           <span
             className="time flex align-center justify-center"
             dangerouslySetInnerHTML={{
-              __html: getSpotifySvg('time'),
+              __html: getSpotifySvg("time"),
             }}
           ></span>
         </div>
         {station.songs.map((song, idx) => (
           <div key={idx} className="song">
-            <span className="song-idx flex align-center justify-center">
+            <span
+              className={`song-idx flex align-center justify-center ${
+                hoveredSongIdx === idx ? "hovered" : ""
+              }`}
+            >
               {idx + 1}
             </span>
+            <span
+              className={` small-play-btn flex align-center justify-center ${
+                hoveredSongIdx === idx ? "hovered" : ""
+              }`}
+              dangerouslySetInnerHTML={{
+                __html: getSpotifySvg("smallPlayButton"),
+              }}
+            ></span>
             <div className="song-details-container">
               <div className="img-container flex align-center justify-center">
                 <img
@@ -197,14 +210,19 @@ export function StationDetails(props) {
               {formatDate(song.addedAt)}
             </div>
             <div className="duration-container flex">
-              <input className="hidden" type="checkbox" />
+              <span
+                className="hidden dots"
+                dangerouslySetInnerHTML={{
+                  __html: getSpotifySvg("emptyHeartIcon"),
+                }}
+              ></span>
               <div className="duration">
-                {song.duration ? song.duration : '1:00'}
+                {song.duration ? song.duration : "1:00"}
               </div>
               <span
                 className="hidden dots"
                 dangerouslySetInnerHTML={{
-                  __html: getSpotifySvg('dots'),
+                  __html: getSpotifySvg("dots"),
                 }}
               ></span>
             </div>
@@ -212,5 +230,5 @@ export function StationDetails(props) {
         ))}
       </div>
     </section>
-  )
+  );
 }
