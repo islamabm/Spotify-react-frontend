@@ -7,16 +7,33 @@ export function AppHeader() {
   const [showModal, setShowModal] = useState(false)
   const location = useLocation()
   const [headerOpacity, setHeaderOpacity] = useState(0)
+  const [headerOpacity, setHeaderOpacity] = useState(0)
 
   useEffect(() => {
-    console.log('scroll')
+    console.log('scrol')
     window.addEventListener('scroll', updateHeaderOpacity)
+    useEffect(() => {
+      console.log('scroll')
+      window.addEventListener('scroll', updateHeaderOpacity)
 
+      return () => {
+        window.removeEventListener('scroll', updateHeaderOpacity)
+      }
+    }, []) // <-- Change is here
     return () => {
       window.removeEventListener('scroll', updateHeaderOpacity)
     }
-  }, []) // <-- Change is here
+  }, [headerOpacity])
 
+  const updateHeaderOpacity = () => {
+    console.log('here')
+    const scrollPosition =
+      window.pageYOffset || document.documentElement.scrollTop
+    const headerHeight = 64
+    const opacityFactor = 3
+    const header = Math.min(scrollPosition / (headerHeight * opacityFactor), 1)
+    setHeaderOpacity(header)
+  }
   function updateHeaderOpacity() {
     console.log('hi from update header function')
     const scrollPosition =
@@ -34,9 +51,11 @@ export function AppHeader() {
   function onCloseModal() {
     setShowModal(false)
   }
-
   return (
-    <header className="app-header" style={{ opacity: headerOpacity }}>
+    <header
+      className="app-header"
+      style={{ backgroundColor: `rgba(10,10,10, ${headerOpacity})` }}
+    >
       <section className="arrows-and-input">
         <section className="arrows">
           <div className="black-circle">
