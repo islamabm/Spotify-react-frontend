@@ -7,6 +7,7 @@ import { AppFooter } from './cmps/AppFooter'
 import { StationIndex } from './views/StationIndex'
 import { StationDetails } from './views/StationDetails'
 import { StationEdit } from './views/StationEdit'
+import { Login } from './views/Login'
 import Search from './views/Search'
 
 function App() {
@@ -26,8 +27,9 @@ function App() {
             <Route path="/station/edit/:id?" element={<StationEdit />} />
             <Route path="/station/:id" element={<StationDetails />} />
             <Route path="/search" element={<Search />} />
+            {/* <Route path="/login" element={<Login />} /> */}
             {/* <Route path="/about" element={<About />} >
-                            <Route path="/about/team" element={<Team />} />
+                            // <Route path="/about/team" element={<Team />} />
                             <Route path="/about/vision" element={<Vision />} />
                         </Route> */}
           </Routes>

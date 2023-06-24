@@ -1,5 +1,5 @@
 import { getSpotifySvg } from "../services/SVG.service"
-import { useLocation } from "react-router-dom"
+import { useLocation,Link } from "react-router-dom"
 import { UserModal } from "./UserModal"
 import { useState, useEffect } from "react"
 
@@ -61,7 +61,8 @@ export function AppHeader() {
 
       <div className="user-actions">
         <button className="sign-up pointer">Sign up</button>
-        <button className="login pointer">Login</button>
+        <Link to="/login">
+        <button className="login pointer">Log in</button></Link>
         <img
           onClick={onShowModal}
           src="https://i.scdn.co/image/ab6761610000e5eb601fb0059594d52f3f7939a9"
