@@ -17,7 +17,7 @@ export const stationService = {
   //   tryStation,
 }
 
-const gUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyDMaVeDmO58LherEwmJrnRzsn58vDd1n34&q=`
+const gUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyDKlXiiyfaI0sFZbRbv17LGgaZI_ffF9fQ&q=`
 const STORAGE_KEY = 'stations'
 const STORAGE_SEARCH_KEY = 'search-stations'
 const SEARCH_KEY = 'videosDB'
