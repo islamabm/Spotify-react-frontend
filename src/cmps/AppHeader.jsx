@@ -34,6 +34,7 @@ export function AppHeader() {
   function onCloseModal() {
     setShowModal(false)
   }
+  
   return (
     <header className="app-header" style={{ backgroundColor: `rgba(10,10,10, ${headerOpacity})` }}>
       <section className="arrows-and-input">
