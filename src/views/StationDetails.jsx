@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
-import { getSpotifySvg } from "../services/SVG.service"
-import { useDispatch, useSelector } from "react-redux"
-import { setCurrStation } from "../store/actions/station.actions"
-import { setCurrSong, setCurrSongIndex } from "../store/actions/song.actions"
-import { FastAverageColor } from "fast-average-color"
+import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
+import { getSpotifySvg } from '../services/SVG.service'
+import { useDispatch, useSelector } from 'react-redux'
+import { setCurrStation } from '../store/actions/station.actions'
+import { setCurrSong, setCurrSongIndex } from '../store/actions/song.actions'
+import { FastAverageColor } from 'fast-average-color'
 
 export function StationDetails(props) {
   const [bgStyle, setBgStyle] = useState(null)
@@ -41,7 +41,7 @@ export function StationDetails(props) {
   function updateImgUrlAndColor(station) {
     if (!station) return
     const imgUrl = station.imgUrl
-    if (imgUrl !== "") {
+    if (imgUrl !== '') {
       getDominantColor(imgUrl)
     }
   }
@@ -56,8 +56,8 @@ export function StationDetails(props) {
     }
     const fac = new FastAverageColor()
     const img = new Image()
-    img.crossOrigin = "Anonymous"
-    const corsProxyUrl = "https://api.codetabs.com/v1/proxy?quest="
+    img.crossOrigin = 'Anonymous'
+    const corsProxyUrl = 'https://api.codetabs.com/v1/proxy?quest='
     img.src = corsProxyUrl + encodeURIComponent(imageSrc)
     img.onload = async () => {
       try {
@@ -73,30 +73,30 @@ export function StationDetails(props) {
   }
 
   function stationNameClass() {
-    const words = station.name.split(" ").length
+    const words = station.name.split(' ').length
     if (words <= 3) {
-      return "short-station-name"
+      return 'short-station-name'
     } else if (words <= 5) {
-      return "long-station-name"
+      return 'long-station-name'
     } else {
-      return "huge-station-name"
+      return 'huge-station-name'
     }
   }
 
   function formatDate(dateString) {
     const months = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
     ]
 
     const date = new Date(dateString)
@@ -136,13 +136,13 @@ export function StationDetails(props) {
         <span
           className="heart flex align-center justify-center"
           dangerouslySetInnerHTML={{
-            __html: getSpotifySvg("bigFilledHeart"),
+            __html: getSpotifySvg('bigFilledHeart'),
           }}
         ></span>
         <span
           className="dots flex align-center justify-center"
           dangerouslySetInnerHTML={{
-            __html: getSpotifySvg("bigDots"),
+            __html: getSpotifySvg('bigDots'),
           }}
         ></span>
       </div>
@@ -155,7 +155,7 @@ export function StationDetails(props) {
           <span
             className="time flex align-center justify-center"
             dangerouslySetInnerHTML={{
-              __html: getSpotifySvg("time"),
+              __html: getSpotifySvg('time'),
             }}
           ></span>
         </div>
@@ -163,17 +163,17 @@ export function StationDetails(props) {
           <div key={idx} className="song">
             <span
               className={`song-idx flex align-center justify-center ${
-                hoveredSongIdx === idx ? "hovered" : ""
+                hoveredSongIdx === idx ? 'hovered' : ''
               }`}
             >
               {idx + 1}
             </span>
             <span
               className={` small-play-btn flex align-center justify-center ${
-                hoveredSongIdx === idx ? "hovered" : ""
+                hoveredSongIdx === idx ? 'hovered' : ''
               }`}
               dangerouslySetInnerHTML={{
-                __html: getSpotifySvg("smallPlayButton"),
+                __html: getSpotifySvg('smallPlayButton'),
               }}
             ></span>
             <div className="song-details-container">
@@ -198,16 +198,16 @@ export function StationDetails(props) {
               <span
                 className="hidden dots"
                 dangerouslySetInnerHTML={{
-                  __html: getSpotifySvg("emptyHeartIcon"),
+                  __html: getSpotifySvg('emptyHeartIcon'),
                 }}
               ></span>
               <div className="duration">
-                {song.duration ? song.duration : "1:00"}
+                {song.duration ? song.duration : '1:00'}
               </div>
               <span
                 className="hidden dots"
                 dangerouslySetInnerHTML={{
-                  __html: getSpotifySvg("dots"),
+                  __html: getSpotifySvg('dots'),
                 }}
               ></span>
             </div>

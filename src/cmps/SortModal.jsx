@@ -6,9 +6,9 @@ export function SortModal({ onSelectOption }) {
 
   const options = ['Recents', 'Recently Added', 'Alphabetical', 'Creator']
 
-  const onSelect = (option) => {
+  const onSelect = (ev, option) => {
     setSelected(option)
-    onSelectOption(option)
+    onSelectOption(ev, option)
   }
 
   return (
@@ -17,7 +17,11 @@ export function SortModal({ onSelectOption }) {
         <p className="sort-by">Sort by</p>
       </div>
       {options.map((option) => (
-        <div onClick={() => onSelect(option)} className="pointer" key={option}>
+        <div
+          onClick={(ev) => onSelect(ev, option)}
+          className="pointer"
+          key={option}
+        >
           <p className={selected === option ? 'green' : ''}>{option}</p>
           <span
             className={selected === option ? 'active' : ''}

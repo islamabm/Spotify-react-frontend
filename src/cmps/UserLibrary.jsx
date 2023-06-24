@@ -11,12 +11,13 @@ export function UserLibrary() {
     setShowSortModal(true)
   }
 
-  function onSelectOption(option) {
+  function onSelectOption(ev, option) {
+    ev.stopPropagation()
     setSelectedOption(option)
     setShowSortModal(false)
   }
 
-  useEffect(() => {}, [showSortModal])
+  // useEffect(() => {}, [showSortModal])
 
   return (
     <section className="user-library">

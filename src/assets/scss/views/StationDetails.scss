@@ -30,7 +30,7 @@
         font-size: 14px;
       }
     }
-    
+
     .short-station-name {
       font-size: 6rem;
       margin-block: 2px;
@@ -55,7 +55,7 @@
       width: 232px;
     }
   }
-  .user-station-actions{
+  .user-station-actions {
     display: flex;
     align-items: center;
     padding: 24px;
@@ -70,7 +70,7 @@
       cursor: pointer;
       z-index: 2;
       &:before {
-        content: "";
+        content: '';
         width: 0;
         height: 0;
         border-style: solid;
@@ -90,7 +90,7 @@
       fill: $clrGreen;
     }
     .dots {
-      fill: #afb8b7 ;
+      fill: #afb8b7;
     }
   }
 
@@ -133,10 +133,10 @@
       &:hover {
         background-color: #292a2a;
       }
-      &:hover .song-idx{
+      &:hover .song-idx {
         display: none;
       }
-      &:hover .small-play-btn{
+      &:hover .small-play-btn {
         display: block;
         margin-top: 17px;
         fill: $clr3;
