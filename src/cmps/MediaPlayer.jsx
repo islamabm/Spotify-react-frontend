@@ -9,7 +9,7 @@ import {
 } from '../store/actions/song.actions'
 import YouTube from 'react-youtube'
 import { useDispatch, useSelector } from 'react-redux'
-export function MediaPlayer() {
+export function MediaPlayer({ volume, onVolumeChange }) {
   const song = useSelector((storeState) => storeState.songModule.currSong)
   const songId = useSelector((storeState) => storeState.songModule.currSongId)
   const dispatch = useDispatch()
@@ -23,6 +23,18 @@ export function MediaPlayer() {
   const [currentTime, setCurrentTime] = useState(0)
   const [displayDuration, setDisplayDuration] = useState('0:00')
   const [displayTime, setDisplayTime] = useState('0:00')
+
+  const [localVolume, setLocalVolume] = useState(volume || 100)
+
+  // useEffect(() => {
+  //   setLocalVolume(volume)
+  //   console.log('volume', volume)
+  //   if (playerRef.current) {
+  //     playerRef.current.setVolume(volume)
+  //   }
+  //   onVolumeChange(volume)
+  // }, [volume])
+
   let interval = null
   let playerRef = useRef(null)
   const progressBarWidth = duration
