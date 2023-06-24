@@ -1,29 +1,41 @@
 import { getSpotifySvg } from '../services/SVG.service'
 import { useLocation, Link } from 'react-router-dom'
 import { UserModal } from './UserModal'
-import { useState, useEffect, useCallback } from 'react'
-
+import { useState, useEffect } from 'react'
+import { eventBus } from '../services/event-bus.service'
 export function AppHeader() {
   const [showModal, setShowModal] = useState(false)
   const location = useLocation()
   // const [headerOpacity, setHeaderOpacity] = useState(0)
-  const [headers, setHeaders] = useState({})
-  function updateHeaderOpacity() {
+  const [headers, setHeaders] = useState({
+    backgroundColor: 'transparent',
+  })
+
+  function updateHeaderOpacity(scrollPos) {
     console.log('hi')
-    const headerStyles = {
-      backgroundColor: 'red',
+
+    const maxScroll = 50
+    let opacity = Math.min(scrollPos / maxScroll, 1)
+
+    const newHeaders = {
+      backgroundColor: `rgba(0, 0, 0, ${opacity})`,
     }
-    setHeaders(headerStyles)
+    console.log('after creating the styles ')
+
+    setHeaders(newHeaders)
+
+    console.log('after updatge the state')
   }
+
   useEffect(() => {
-    console.log('scroll')
-    console.log('window', window)
-    window.addEventListener('scroll', updateHeaderOpacity)
+    const onScroll = (scrollPos) => updateHeaderOpacity(scrollPos)
+    const unlisten = eventBus.on('stationDetailsScroll', onScroll)
 
     return () => {
-      window.removeEventListener('scroll', updateHeaderOpacity)
+      unlisten()
     }
   }, [])
+
   function onShowModal() {
     setShowModal(true)
   }
@@ -34,7 +46,7 @@ export function AppHeader() {
   return (
     <header
       className="app-header"
-      style={{ headers }}
+      style={{ ...headers }}
       // style={{ backgroundColor: `rgba(10,10,10, ${headerOpacity})` }}
     >
       <section className="arrows-and-input">

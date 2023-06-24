@@ -1,15 +1,16 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { useParams } from 'react-router-dom'
 import { getSpotifySvg } from '../services/SVG.service'
 import { useDispatch, useSelector } from 'react-redux'
 import { setCurrStation } from '../store/actions/station.actions'
 import { setCurrSong, setCurrSongIndex } from '../store/actions/song.actions'
 import { FastAverageColor } from 'fast-average-color'
-
+import { eventBus } from '../services/event-bus.service'
 export function StationDetails(props) {
   const [bgStyle, setBgStyle] = useState(null)
   const colorCache = {}
   const params = useParams()
+  const stationDetailsRef = useRef(null)
   const station = useSelector(
     (storeState) => storeState.stationModule.currStation
   )
@@ -28,6 +29,23 @@ export function StationDetails(props) {
   useEffect(() => {
     updateImgUrlAndColor(station)
   }, [stationImg])
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPos = stationDetailsRef.current.scrollTop
+      console.log('StationDetails scroll position:', scrollPos)
+      eventBus.emit('stationDetailsScroll', scrollPos)
+    }
+    if (stationDetailsRef.current) {
+      stationDetailsRef.current.addEventListener('scroll', handleScroll)
+    }
+
+    return () => {
+      if (stationDetailsRef.current) {
+        stationDetailsRef.current.removeEventListener('scroll', handleScroll)
+      }
+    }
+  }, [])
 
   function loadStation() {
     dispatch(setCurrStation(params.id))
@@ -110,7 +128,7 @@ export function StationDetails(props) {
 
   if (!station) return <div>Loading...</div>
   return (
-    <section className="station-details">
+    <section className="station-details" ref={stationDetailsRef}>
       <div className="station-header-content" style={bgStyle}>
         <img
           className="station-main-img"
