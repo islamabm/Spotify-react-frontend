@@ -28,6 +28,7 @@ export function AppHeader() {
   }
 
   useEffect(() => {
+    console.log('hi')
     const onScroll = (scrollPos) => updateHeaderOpacity(scrollPos)
     const unlisten = eventBus.on('stationDetailsScroll', onScroll)
 

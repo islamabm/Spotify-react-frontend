@@ -32,18 +32,19 @@ export function StationDetails(props) {
   }, [stationImg])
 
   useEffect(() => {
+    const currentStationDetailsRef = stationDetailsRef.current
     const handleScroll = () => {
-      const scrollPos = stationDetailsRef.current.scrollTop
+      const scrollPos = currentStationDetailsRef.scrollTop
       console.log('StationDetails scroll position:', scrollPos)
       eventBus.emit('stationDetailsScroll', scrollPos)
     }
-    if (stationDetailsRef.current) {
-      stationDetailsRef.current.addEventListener('scroll', handleScroll)
+    if (currentStationDetailsRef) {
+      currentStationDetailsRef.addEventListener('scroll', handleScroll)
     }
 
     return () => {
-      if (stationDetailsRef.current) {
-        stationDetailsRef.current.removeEventListener('scroll', handleScroll)
+      if (currentStationDetailsRef) {
+        currentStationDetailsRef.removeEventListener('scroll', handleScroll)
       }
     }
   }, [])
