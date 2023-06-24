@@ -8,7 +8,6 @@ import { FastAverageColor } from "fast-average-color";
 
 export function StationDetails(props) {
   const [bgStyle, setBgStyle] = useState(null);
-  const [headerOpacity, setHeaderOpacity] = useState(0);
   const colorCache = {};
   const params = useParams();
   const station = useSelector(
@@ -25,10 +24,6 @@ export function StationDetails(props) {
   useEffect(() => {
     loadStation();
   }, [params.id]);
-
-  useEffect(() => {
-    updateHeaderOpacity();
-  }, [headerOpacity]);
 
   useEffect(() => {
     updateImgUrlAndColor(station);
@@ -111,16 +106,6 @@ export function StationDetails(props) {
 
     const formattedDate = `${months[monthIndex]} ${day}, ${year}`;
     return formattedDate;
-  }
-
-  function updateHeaderOpacity() {
-    const scrollPosition =
-      window.pageYOffset || document.documentElement.scrollTop;
-    const headerHeight = 64;
-    const opacityFactor = 3;
-
-    const header = Math.min(scrollPosition / (headerHeight * opacityFactor), 1);
-    setHeaderOpacity(header);
   }
 
   if (!station) return <div>Loading...</div>;

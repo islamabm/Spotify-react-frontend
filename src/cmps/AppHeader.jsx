@@ -1,12 +1,29 @@
-import { getSpotifySvg } from '../services/SVG.service'
-import { useLocation } from 'react-router-dom'
-import { UserModal } from './UserModal'
-import { useState } from 'react'
+import { getSpotifySvg } from "../services/SVG.service"
+import { useLocation } from "react-router-dom"
+import { UserModal } from "./UserModal"
+import { useState, useEffect } from "react"
 
 export function AppHeader() {
   const [showModal, setShowModal] = useState(false)
   const location = useLocation()
-  const opacity = {opacity: 1}
+  // const [headerOpacity, setHeaderOpacity] = useState(0)
+
+  // useEffect(() => {
+  //   window.addEventListener("scroll", updateHeaderOpacity())
+
+  //   return () => {
+  //     window.removeEventListener("scroll", updateHeaderOpacity())
+  //   }
+  // }, [])
+
+  // function updateHeaderOpacity() {
+  //   const scrollPosition =
+  //     window.pageYOffset || document.documentElement.scrollTop
+  //   const headerHeight = 64
+  //   const opacityFactor = 3
+  //   const header = Math.min(scrollPosition / (headerHeight * opacityFactor), 1)
+  //   setHeaderOpacity(header)
+  // }
 
   function onShowModal() {
     setShowModal(true)
@@ -15,27 +32,27 @@ export function AppHeader() {
   function onCloseModal() {
     setShowModal(false)
   }
-
+  // style={{ opacity: headerOpacity }}
   return (
     <header className="app-header">
-      <section className="arrows-and-input" style={opacity}>
+      <section className="arrows-and-input">
         <section className="arrows">
           <div className="black-circle">
             <span
               dangerouslySetInnerHTML={{
-                __html: getSpotifySvg('leftArrowIcon'),
+                __html: getSpotifySvg("leftArrowIcon"),
               }}
             ></span>
           </div>
           <div className="black-circle">
             <span
               dangerouslySetInnerHTML={{
-                __html: getSpotifySvg('rightArrowIcon'),
+                __html: getSpotifySvg("rightArrowIcon"),
               }}
             ></span>
           </div>
         </section>
-        {location.pathname === '/search' && (
+        {location.pathname === "/search" && (
           <div className="flex align-center justify-center">
             <input placeholder="What do you want to listen to?" />
           </div>
