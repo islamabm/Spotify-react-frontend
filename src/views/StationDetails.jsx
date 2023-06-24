@@ -1,85 +1,85 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { getSpotifySvg } from "../services/SVG.service";
-import { useDispatch, useSelector } from "react-redux";
-import { setCurrStation } from "../store/actions/station.actions";
-import { setCurrSong, setCurrSongIndex } from "../store/actions/song.actions";
-import { FastAverageColor } from "fast-average-color";
+import { useEffect, useState } from "react"
+import { useParams } from "react-router-dom"
+import { getSpotifySvg } from "../services/SVG.service"
+import { useDispatch, useSelector } from "react-redux"
+import { setCurrStation } from "../store/actions/station.actions"
+import { setCurrSong, setCurrSongIndex } from "../store/actions/song.actions"
+import { FastAverageColor } from "fast-average-color"
 
 export function StationDetails(props) {
-  const [bgStyle, setBgStyle] = useState(null);
-  const colorCache = {};
-  const params = useParams();
+  const [bgStyle, setBgStyle] = useState(null)
+  const colorCache = {}
+  const params = useParams()
   const station = useSelector(
     (storeState) => storeState.stationModule.currStation
-  );
+  )
   const stationImg = useSelector(
     (storeState) => storeState.stationModule.currStationImg
-  );
-  const song = useSelector((storeState) => storeState.songModule.currSong);
-  const idx = useSelector((storeState) => storeState.songModule.currIndex);
-  const dispatch = useDispatch();
-  const [hoveredSongIdx] = useState(null);
+  )
+  const song = useSelector((storeState) => storeState.songModule.currSong)
+  const idx = useSelector((storeState) => storeState.songModule.currIndex)
+  const dispatch = useDispatch()
+  const [hoveredSongIdx] = useState(null)
 
   useEffect(() => {
-    loadStation();
-  }, [params.id]);
+    loadStation()
+  }, [params.id])
 
   useEffect(() => {
-    updateImgUrlAndColor(station);
-  }, [stationImg]);
+    updateImgUrlAndColor(station)
+  }, [stationImg])
 
   function loadStation() {
-    dispatch(setCurrStation(params.id));
+    dispatch(setCurrStation(params.id))
   }
 
   function onSongClicked(songId) {
-    dispatch(setCurrSong(params.id, songId));
-    dispatch(setCurrSongIndex(params.id, songId));
+    dispatch(setCurrSong(params.id, songId))
+    dispatch(setCurrSongIndex(params.id, songId))
   }
 
   function updateImgUrlAndColor(station) {
-    if (!station) return;
-    const imgUrl = station.imgUrl;
+    if (!station) return
+    const imgUrl = station.imgUrl
     if (imgUrl !== "") {
-      getDominantColor(imgUrl);
+      getDominantColor(imgUrl)
     }
   }
 
   async function getDominantColor(imageSrc) {
-    const cachedColor = colorCache[imageSrc];
+    const cachedColor = colorCache[imageSrc]
     if (cachedColor) {
-      const gradient = `linear-gradient(to bottom, ${cachedColor} 0%, ${cachedColor} 10%, ${cachedColor} 20%, ${cachedColor} 50%, black 140%, black 70%, black 100%)`;
-      setBgStyle(gradient);
-      document.body.style.backgroundImage = gradient;
-      return;
+      const gradient = `linear-gradient(to bottom, ${cachedColor} 0%, ${cachedColor} 10%, ${cachedColor} 20%, ${cachedColor} 50%, black 140%, black 70%, black 100%)`
+      setBgStyle(gradient)
+      document.body.style.backgroundImage = gradient
+      return
     }
-    const fac = new FastAverageColor();
-    const img = new Image();
-    img.crossOrigin = "Anonymous";
-    const corsProxyUrl = "https://api.codetabs.com/v1/proxy?quest=";
-    img.src = corsProxyUrl + encodeURIComponent(imageSrc);
+    const fac = new FastAverageColor()
+    const img = new Image()
+    img.crossOrigin = "Anonymous"
+    const corsProxyUrl = "https://api.codetabs.com/v1/proxy?quest="
+    img.src = corsProxyUrl + encodeURIComponent(imageSrc)
     img.onload = async () => {
       try {
-        const color = await fac.getColorAsync(img);
-        colorCache[imageSrc] = color;
+        const color = await fac.getColorAsync(img)
+        colorCache[imageSrc] = color
         setBgStyle({
           background: `linear-gradient(to bottom, ${color.rgb} 0%, ${color.rgb} 10%, ${color.rgb} 20%, ${color.rgb} 50%, black 140%, black 70%, black 100%)`,
-        });
+        })
       } catch (e) {
-        console.error(e);
+        console.error(e)
       }
-    };
+    }
   }
 
   function stationNameClass() {
-    const words = station.name.split(" ").length;
+    const words = station.name.split(" ").length
     if (words <= 3) {
-      return "short-station-name";
+      return "short-station-name"
     } else if (words <= 5) {
-      return "long-station-name";
+      return "long-station-name"
     } else {
-      return "huge-station-name";
+      return "huge-station-name"
     }
   }
 
@@ -97,18 +97,18 @@ export function StationDetails(props) {
       "Oct",
       "Nov",
       "Dec",
-    ];
+    ]
 
-    const date = new Date(dateString);
-    const monthIndex = date.getMonth();
-    const day = date.getDate();
-    const year = date.getFullYear();
+    const date = new Date(dateString)
+    const monthIndex = date.getMonth()
+    const day = date.getDate()
+    const year = date.getFullYear()
 
-    const formattedDate = `${months[monthIndex]} ${day}, ${year}`;
-    return formattedDate;
+    const formattedDate = `${months[monthIndex]} ${day}, ${year}`
+    return formattedDate
   }
 
-  if (!station) return <div>Loading...</div>;
+  if (!station) return <div>Loading...</div>
   return (
     <section className="station-details">
       <div className="station-header-content" style={bgStyle}>
@@ -215,5 +215,5 @@ export function StationDetails(props) {
         ))}
       </div>
     </section>
-  );
+  )
 }
