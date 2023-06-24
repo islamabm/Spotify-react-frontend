@@ -36,7 +36,6 @@ export function AppHeader() {
   function onCloseModal() {
     setShowModal(false)
   }
-
   return (
     <header
       className="app-header"
