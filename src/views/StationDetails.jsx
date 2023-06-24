@@ -8,6 +8,7 @@ import { FastAverageColor } from "fast-average-color"
 
 export function StationDetails(props) {
   const [bgStyle, setBgStyle] = useState(null)
+  const [bgBottomStyle, setBgBottomStyle] = useState(null)
   const colorCache = {}
   const params = useParams()
   const station = useSelector(
@@ -51,6 +52,8 @@ export function StationDetails(props) {
     if (cachedColor) {
       const gradient = `linear-gradient(to bottom, ${cachedColor} 0%, ${cachedColor} 10%, ${cachedColor} 20%, ${cachedColor} 50%, black 140%, black 70%, black 100%)`
       setBgStyle(gradient)
+      const bottomGradient = `linear-gradient(${cachedColor} -20%, rgb(0, 0, 0) 12%)`;
+      setBgBottomStyle(bottomGradient)
       document.body.style.backgroundImage = gradient
       return
     }
@@ -65,6 +68,9 @@ export function StationDetails(props) {
         colorCache[imageSrc] = color
         setBgStyle({
           background: `linear-gradient(to bottom, ${color.rgb} 0%, ${color.rgb} 10%, ${color.rgb} 20%, ${color.rgb} 50%, black 140%, black 70%, black 100%)`,
+        })
+        setBgBottomStyle({
+          background: `linear-gradient(${color.rgb} -30%, rgb(0, 0, 0) 12%)`
         })
       } catch (e) {
         console.error(e)
@@ -131,21 +137,22 @@ export function StationDetails(props) {
           <span className="songs-count"> {station.songs.length} songs </span>
         </div>
       </div>
-      <div className="user-station-actions">
-        <div className="play-button flex justify-center align-center"></div>
-        <span
-          className="heart flex align-center justify-center"
-          dangerouslySetInnerHTML={{
-            __html: getSpotifySvg("bigFilledHeart"),
-          }}
-        ></span>
-        <span
-          className="dots flex align-center justify-center"
-          dangerouslySetInnerHTML={{
-            __html: getSpotifySvg("bigDots"),
-          }}
-        ></span>
-      </div>
+    <div className="bottom gradient" style={bgBottomStyle}>
+        <div className="user-station-actions" >
+          <div className="play-button flex justify-center align-center"></div>
+          <span
+            className="heart flex align-center justify-center"
+            dangerouslySetInnerHTML={{
+              __html: getSpotifySvg("bigFilledHeart"),
+            }}
+          ></span>
+          <span
+            className="dots flex align-center justify-center"
+            dangerouslySetInnerHTML={{
+              __html: getSpotifySvg("bigDots"),
+            }}
+          ></span>
+        </div>
       <div className="station-songs">
         <div className="station-songs-header">
           <span className="flex align-center justify-center">#</span>
@@ -157,7 +164,7 @@ export function StationDetails(props) {
             dangerouslySetInnerHTML={{
               __html: getSpotifySvg("time"),
             }}
-          ></span>
+            ></span>
         </div>
         {station.songs.map((song, idx) => (
           <div key={idx} className="song">
@@ -213,6 +220,7 @@ export function StationDetails(props) {
             </div>
           </div>
         ))}
+      </div>
       </div>
     </section>
   )
