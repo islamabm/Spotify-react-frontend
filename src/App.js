@@ -27,7 +27,7 @@ function App() {
             <Route path="/station/edit/:id?" element={<StationEdit />} />
             <Route path="/station/:id" element={<StationDetails />} />
             <Route path="/search" element={<Search />} />
-            {/* <Route path="/login" element={<Login />} /> */}
+            <Route path="/login" element={<Login />} />
             {/* <Route path="/about" element={<About />} >
                             // <Route path="/about/team" element={<Team />} />
                             <Route path="/about/vision" element={<Vision />} />

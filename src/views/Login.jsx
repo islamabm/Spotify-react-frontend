@@ -3,7 +3,7 @@ export function Login() {
 
   return (
     <div className="categories-index">
-      <h2 class="search-header">Browse all</h2>
+      <h2 class="search-header">Log in</h2>
     </div>
   )
 }
