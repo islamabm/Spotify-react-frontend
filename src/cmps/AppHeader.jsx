@@ -7,7 +7,6 @@ export function AppHeader() {
   const [showModal, setShowModal] = useState(false)
   const location = useLocation()
   const [headerOpacity, setHeaderOpacity] = useState(0)
-  const [headerOpacity, setHeaderOpacity] = useState(0)
 
   useEffect(() => {
     console.log('scrol')
