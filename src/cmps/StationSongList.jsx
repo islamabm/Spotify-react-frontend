@@ -3,12 +3,15 @@ import { useDispatch } from 'react-redux'
 import { getSpotifySvg } from '../services/SVG.service'
 import { setCurrSong, setCurrSongIndex } from '../store/actions/song.actions'
 import { useParams } from 'react-router-dom'
+import { SongOptionsModal } from './SongOptionsModal'
 
 export default function StationSongList(props) {
   const station = props.station
   const dispatch = useDispatch()
   const params = useParams()
   const [hoveredSongIdx] = useState(null)
+  const [showModal, setShowModal] = useState(false)
+  const [songs, setSongs] = useState(station.songs)
   function onSongClicked(songId) {
     dispatch(setCurrSong(params.id, songId))
     dispatch(setCurrSongIndex(params.id, songId))
@@ -62,7 +65,7 @@ export default function StationSongList(props) {
     setSongs(updatedSongs)
 
     // Dispatch the updateStation action with the new song order
-    dispatch(updateStation(params.id, updatedSongs))
+    // dispatch(updateStation(params.id, updatedSongs))
   }
   return (
     <div>
@@ -112,12 +115,14 @@ export default function StationSongList(props) {
               {song.duration ? song.duration : '1:00'}
             </div>
             <span
+              onClick={showSongOptionsModal}
               className="hidden dots"
               dangerouslySetInnerHTML={{
                 __html: getSpotifySvg('dots'),
               }}
             ></span>
           </div>
+          {showModal && <SongOptionsModal />}
         </div>
       ))}
     </div>
