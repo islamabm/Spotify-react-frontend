@@ -6,7 +6,7 @@ import { setCurrStation } from '../store/actions/station.actions'
 import { setCurrSong, setCurrSongIndex } from '../store/actions/song.actions'
 import { FastAverageColor } from 'fast-average-color'
 import { eventBus } from '../services/event-bus.service'
-import StationHeaderDetails from './StationHeaderDetails'
+import StationHeaderDetails from '../cmps/StationHeaderDetails'
 
 
 export function StationDetails(props) {
