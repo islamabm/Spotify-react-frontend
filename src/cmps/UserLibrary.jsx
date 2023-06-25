@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { getSpotifySvg } from '../services/SVG.service'
 import { SortModal } from './SortModal'
 import { useDispatch, useSelector } from 'react-redux'
-import { UserStations } from './UserStations'
+import { UserStations, UserStationsIndex } from './UserStationsIndex'
 import { addStation } from '../store/actions/station.actions'
 export function UserLibrary() {
   const [showSortModal, setShowSortModal] = useState(false)
@@ -70,7 +70,7 @@ export function UserLibrary() {
           {showSortModal && <SortModal onSelectOption={onSelectOption} />}
         </div>
       </div>
-      <UserStations></UserStations>
+      <UserStationsIndex></UserStationsIndex>
     </section>
   )
 }
