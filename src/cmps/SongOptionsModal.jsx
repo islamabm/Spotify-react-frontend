@@ -1,8 +1,14 @@
 import React from 'react'
-
-export function SongOptionsModal() {
+import { getSpotifySvg } from '../services/SVG.service'
+export function SongOptionsModal({ position }) {
   return (
-    <section className="song-options-modal">
+    <section
+      className="song-options-modal"
+      style={{
+        top: position.top + 20,
+        left: position.left - 220,
+      }}
+    >
       <ul>
         <li>
           <button>Save to your Liked Songs</button>
@@ -10,8 +16,13 @@ export function SongOptionsModal() {
         <li>
           <button>Remove from this playlist</button>
         </li>
-        <li>
+        <li className="special-li">
           <button>Add to playlist</button>
+          <span
+            dangerouslySetInnerHTML={{
+              __html: getSpotifySvg('listIcon'),
+            }}
+          ></span>
         </li>
       </ul>
     </section>

@@ -11,13 +11,19 @@ export default function StationSongList(props) {
   const params = useParams()
   const [hoveredSongIdx] = useState(null)
   const [showModal, setShowModal] = useState(false)
+  const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 })
   const [songs, setSongs] = useState(station.songs)
   function onSongClicked(songId) {
     dispatch(setCurrSong(params.id, songId))
     dispatch(setCurrSongIndex(params.id, songId))
   }
 
-  function showSongOptionsModal() {
+  function showSongOptionsModal(e) {
+    const rect = e.target.getBoundingClientRect()
+    setModalPosition({
+      top: rect.top + window.scrollY,
+      left: rect.left + window.scrollX,
+    })
     console.log('showModal', showModal)
     setShowModal(true)
   }
@@ -122,9 +128,9 @@ export default function StationSongList(props) {
               }}
             ></span>
           </div>
-          {showModal && <SongOptionsModal />}
         </div>
       ))}
+      {showModal && <SongOptionsModal position={modalPosition} />}
     </div>
   )
 }
