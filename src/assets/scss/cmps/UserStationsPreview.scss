@@ -1,0 +1,64 @@
+.user-station-preview {
+  display: flex;
+  min-width: 100%;
+  .image-svg-container {
+    background-color: rgb(58, 56, 56);
+    display: flex;
+    border: 14px;
+    width: 48px;
+    height: 48px;
+    flex-direction: column-reverse;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    border-radius: 3px;
+  }
+  .user-station-details {
+    display: flex;
+    flex-direction: column;
+    padding: 0 0.5em;
+    .user-station-name {
+      p {
+        font-size: 1rem;
+        font-weight: 400;
+        font-family: circular-book;
+        margin: 0;
+        padding: 0;
+      }
+    }
+    .user-details {
+      display: flex;
+      gap: 5px;
+      margin-bottom: 0;
+      margin-top: 10px;
+      span {
+        font-size: 0.8125rem;
+        margin: 0;
+        padding: 0;
+        color: #6a6a6a;
+      }
+    }
+  }
+  &:hover {
+    background-color: aqua;
+  }
+}
+// <article className="user-station-preview">
+//       <div className="image-svg-container">
+//         <span
+//           dangerouslySetInnerHTML={{
+//             __html: getSpotifySvg('musicIcon'),
+//           }}
+//         ></span>
+//       </div>
+//       <div className="user-station-details">
+//         <div>
+//           <p>{station.name}</p>
+//         </div>
+//         <div className="user-details">
+//           <span>Playlist</span>
+//           <span>•</span>
+//           <span>Guest</span>
+//         </div>
+//       </div>
+//     </article>
