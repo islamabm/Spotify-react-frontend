@@ -7,7 +7,11 @@ import {
   SET_CURR_STATION,
   SET_CURR_GRADIENT,
   ADD_STATION,
+  UPDATE_STATION
 } from '../reducers/station.reducer'
+
+import { store } from '../index'; 
+
 
 export function loadStations() {
   return async (dispatch, getState) => {
@@ -88,4 +92,20 @@ export function setFilterBy(filterBy) {
   return (dispatch) => {
     dispatch({ type: SET_FILTER_BY, filterBy })
   }
+}
+
+export function updateStation(stationId, songs) {
+  return async () => {
+    try {
+      const updatedStation = await stationService.updateStation(stationId, songs);
+      const action = {
+        type: UPDATE_STATION,
+        station: updatedStation,
+      };
+      store.dispatch(action); // Use the dispatch function from the store
+      return 'Updated!';
+    } catch (error) {
+      console.log('error:', error);
+    }
+  };
 }

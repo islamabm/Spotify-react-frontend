@@ -20,9 +20,11 @@ function App() {
 
         <main className="container">
           <Routes>
+     
             <Route path="/" element={<StationIndex />}>
               {' '}
             </Route>
+           
 
             <Route path="/station/edit/:id?" element={<StationEdit />} />
             <Route path="/station/:id" element={<StationDetails />} />
