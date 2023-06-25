@@ -14,6 +14,7 @@ export const stationService = {
   getRandomSong,
   getPrevSong,
   getNextSong,
+  createNewStation,
   //   tryStation,
 }
 
