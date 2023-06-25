@@ -1,9 +1,16 @@
 import React from 'react'
 import { getSpotifySvg } from '../services/SVG.service'
+import { useNavigate } from 'react-router-dom'
 import emptyImg from '../assets/imgs/empty-img.png'
 export default function UserStationsPreview({ station }) {
+  const navigate = useNavigate()
+
+  function goToDetails() {
+    navigate(`/station/${station._id}`)
+  }
+
   return (
-    <article className="user-station-preview">
+    <article className="user-station-preview" onClick={goToDetails}>
       <div className="image-svg-container">
         <span
           dangerouslySetInnerHTML={{

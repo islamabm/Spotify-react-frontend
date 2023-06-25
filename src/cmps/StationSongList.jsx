@@ -1,10 +1,13 @@
-import React , {useState} from "react"
-import { useDispatch } from "react-redux"
-import { getSpotifySvg } from "../services/SVG.service"
-import { setCurrSong, setCurrSongIndex } from "../store/actions/song.actions"
-import { useParams } from "react-router-dom"
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { getSpotifySvg } from '../services/SVG.service'
+import { setCurrSong, setCurrSongIndex } from '../store/actions/song.actions'
+import { useParams } from 'react-router-dom'
+import { SongOptionsModal } from './SongOptionsModal'
 
 export default function StationSongList(props) {
+  const [showModal, setShowModal] = useState(false)
+
   const station = props.station
   const dispatch = useDispatch()
   const params = useParams()
@@ -14,20 +17,25 @@ export default function StationSongList(props) {
     dispatch(setCurrSongIndex(params.id, songId))
   }
 
+  function showSongOptionsModal() {
+    console.log('showModal', showModal)
+    setShowModal(true)
+  }
+
   function formatDate(dateString) {
     const months = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
     ]
 
     const date = new Date(dateString)
@@ -45,17 +53,17 @@ export default function StationSongList(props) {
         <div key={idx} className="song">
           <span
             className={`song-idx flex align-center justify-center ${
-              hoveredSongIdx === idx ? "hovered" : ""
+              hoveredSongIdx === idx ? 'hovered' : ''
             }`}
           >
             {idx + 1}
           </span>
           <span
             className={` small-play-btn flex align-center justify-center ${
-              hoveredSongIdx === idx ? "hovered" : ""
+              hoveredSongIdx === idx ? 'hovered' : ''
             }`}
             dangerouslySetInnerHTML={{
-              __html: getSpotifySvg("smallPlayButton"),
+              __html: getSpotifySvg('smallPlayButton'),
             }}
           ></span>
           <div className="song-details-container">
@@ -80,21 +88,23 @@ export default function StationSongList(props) {
             <span
               className="hidden dots"
               dangerouslySetInnerHTML={{
-                __html: getSpotifySvg("emptyHeartIcon"),
+                __html: getSpotifySvg('emptyHeartIcon'),
               }}
             ></span>
             <div className="duration">
-              {song.duration ? song.duration : "1:00"}
+              {song.duration ? song.duration : '1:00'}
             </div>
             <span
+              onClick={showSongOptionsModal}
               className="hidden dots"
               dangerouslySetInnerHTML={{
-                __html: getSpotifySvg("dots"),
+                __html: getSpotifySvg('dots'),
               }}
             ></span>
           </div>
         </div>
       ))}
+      {showModal && <SongOptionsModal />}
     </div>
   )
 }

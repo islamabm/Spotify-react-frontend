@@ -2,10 +2,13 @@ import React, { useState } from 'react'
 import { getSpotifySvg } from '../services/SVG.service'
 import { BubblingHeart } from './BubblingHeart'
 import { MediaPlayer } from './MediaPlayer'
+import { useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 export function AppFooter() {
   const [volume, setVolume] = useState(50)
   const [currSvg, setCurrSvg] = useState('volumeIcon')
+
+  const location = useLocation()
 
   const handleVolumeChange = (event) => {
     setVolume(event.target.value)
@@ -31,10 +34,14 @@ export function AppFooter() {
   )
   return (
     <div className="app-footer">
-      <div className="song-details">
+      <div
+        className="song-details"
+        style={{ opacity: location.pathname === '/' ? 0 : 1 }}
+      >
         <div className="image">
           <img src={song ? song.imgUrl : station?.songs[0].imgUrl} />
         </div>
+
         <div className="actor-name-song">
           <p className="song-name">
             {song ? song.title : station?.songs[0].title}
@@ -43,6 +50,7 @@ export function AppFooter() {
             {song ? song.artist : station?.songs[0].artist}
           </p>
         </div>
+
         <div className="heart-picture-icons">
           <span
             className="picture-icon pointer"
@@ -52,6 +60,7 @@ export function AppFooter() {
           ></span>{' '}
         </div>
       </div>
+
       <div className="media-player">
         <MediaPlayer volume={volume} />
       </div>
