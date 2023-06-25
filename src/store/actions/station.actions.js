@@ -5,6 +5,7 @@ import {
   SET_STATIONS,
   SET_SEARCH_STATIONS,
   SET_CURR_STATION,
+  SET_CURR_GRADIENT,
 } from '../reducers/station.reducer'
 
 export function loadStations() {
@@ -60,6 +61,13 @@ export function removeStation(stationId) {
     } catch (error) {
       console.log('error:', error)
     }
+  }
+}
+
+export function setCurrGradient(bgStyle) {
+  console.log('color', bgStyle)
+  return (dispatch) => {
+    dispatch({ type: SET_CURR_GRADIENT, bgStyle })
   }
 }
 
