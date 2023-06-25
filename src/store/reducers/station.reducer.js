@@ -19,6 +19,7 @@ const INITIAL_STATE = {
   currStation: null,
   currStationId: null,
   currStationGradientColor: 'black',
+  userStations: [],
 }
 
 export function stationReducer(state = INITIAL_STATE, action = {}) {
@@ -49,6 +50,7 @@ export function stationReducer(state = INITIAL_STATE, action = {}) {
       return {
         ...state,
         stations: [...state.stations, action.station],
+        userStations: [...state.userStations, action.station],
       }
     case REMOVE_STATION:
       return {

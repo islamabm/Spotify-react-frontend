@@ -2,10 +2,15 @@ import React, { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { getSpotifySvg } from '../services/SVG.service'
 import { SortModal } from './SortModal'
-
+import { useDispatch, useSelector } from 'react-redux'
+import { UserStations } from './UserStations'
+import { addStation } from '../store/actions/station.actions'
 export function UserLibrary() {
   const [showSortModal, setShowSortModal] = useState(false)
   const [selectedOption, setSelectedOption] = useState('Recents')
+  const [stationCounter, setStationCounter] = useState(0)
+
+  const dispatch = useDispatch()
 
   function onShowSortModal() {
     setShowSortModal(true)
@@ -17,7 +22,11 @@ export function UserLibrary() {
     setShowSortModal(false)
   }
 
-  // useEffect(() => {}, [showSortModal])
+  function createNewStation() {
+    setStationCounter(stationCounter + 1)
+    const name = `My Playlist #${stationCounter}`
+    dispatch(addStation(name))
+  }
 
   return (
     <section className="user-library">
@@ -31,6 +40,7 @@ export function UserLibrary() {
           <span>Your Library</span>
         </div>
         <span
+          onClick={createNewStation}
           className="plus-icon flex align-center justify-center pointer"
           dangerouslySetInnerHTML={{
             __html: getSpotifySvg('plus'),
@@ -60,6 +70,7 @@ export function UserLibrary() {
           {showSortModal && <SortModal onSelectOption={onSelectOption} />}
         </div>
       </div>
+      <UserStations></UserStations>
     </section>
   )
 }

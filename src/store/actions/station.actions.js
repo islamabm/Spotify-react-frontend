@@ -6,6 +6,7 @@ import {
   SET_SEARCH_STATIONS,
   SET_CURR_STATION,
   SET_CURR_GRADIENT,
+  ADD_STATION,
 } from '../reducers/station.reducer'
 
 export function loadStations() {
@@ -56,6 +57,18 @@ export function removeStation(stationId) {
     try {
       await stationService.remove(stationId)
       const action = { type: REMOVE_STATION, stationId }
+      dispatch(action)
+      return 'Removed!'
+    } catch (error) {
+      console.log('error:', error)
+    }
+  }
+}
+export function addStation(name) {
+  return async (dispatch) => {
+    try {
+     const station  =  await stationService.createNewStation(name)
+      const action = { type: ADD_STATION, station }
       dispatch(action)
       return 'Removed!'
     } catch (error) {
