@@ -6,10 +6,10 @@ import {
   setCurrStation,
   setCurrGradient,
 } from '../store/actions/station.actions'
-import { setCurrSong, setCurrSongIndex } from '../store/actions/song.actions'
 import { FastAverageColor } from 'fast-average-color'
 import { eventBus } from '../services/event-bus.service'
 import StationHeaderDetails from '../cmps/StationHeaderDetails'
+import StationSongList from '../cmps/StationSongList'
 
 
 export function StationDetails(props) {
@@ -25,7 +25,6 @@ export function StationDetails(props) {
     (storeState) => storeState.stationModule.currStationImg
   )
   const dispatch = useDispatch()
-  const [hoveredSongIdx] = useState(null)
 
   useEffect(() => {
     loadStation()
@@ -61,11 +60,6 @@ export function StationDetails(props) {
 
   function loadStation() {
     dispatch(setCurrStation(params.id))
-  }
-
-  function onSongClicked(songId) {
-    dispatch(setCurrSong(params.id, songId))
-    dispatch(setCurrSongIndex(params.id, songId))
   }
 
   function updateImgUrlAndColor(station) {
@@ -108,30 +102,6 @@ export function StationDetails(props) {
     }
   }
 
-  function formatDate(dateString) {
-    const months = [
-      'Jan',
-      'Feb',
-      'Mar',
-      'Apr',
-      'May',
-      'Jun',
-      'Jul',
-      'Aug',
-      'Sep',
-      'Oct',
-      'Nov',
-      'Dec',
-    ]
-
-    const date = new Date(dateString)
-    const monthIndex = date.getMonth()
-    const day = date.getDate()
-    const year = date.getFullYear()
-
-    const formattedDate = `${months[monthIndex]} ${day}, ${year}`
-    return formattedDate
-  }
 
   if (!station) return <div>Loading...</div>
   return (
@@ -166,60 +136,7 @@ export function StationDetails(props) {
               }}
             ></span>
           </div>
-          {station.songs.map((song, idx) => (
-            <div key={idx} className="song">
-              <span
-                className={`song-idx flex align-center justify-center ${
-                  hoveredSongIdx === idx ? 'hovered' : ''
-                }`}
-              >
-                {idx + 1}
-              </span>
-              <span
-                className={` small-play-btn flex align-center justify-center ${
-                  hoveredSongIdx === idx ? 'hovered' : ''
-                }`}
-                dangerouslySetInnerHTML={{
-                  __html: getSpotifySvg('smallPlayButton'),
-                }}
-              ></span>
-              <div className="song-details-container">
-                <div className="img-container flex align-center justify-center">
-                  <img
-                    onClick={() => onSongClicked(song._id)}
-                    className="song-img"
-                    src={song.imgUrl}
-                    alt="song img"
-                  />
-                </div>
-                <div className="name-and-artist flex justify-center">
-                  <span className="song-name">{song.title}</span>
-                  <span className="song-artist">{song.artist}</span>
-                </div>
-              </div>
-              <div className="album-name flex align-center">{song.album}</div>
-              <div className="added-at flex align-center">
-                {formatDate(song.addedAt)}
-              </div>
-              <div className="duration-container flex">
-                <span
-                  className="hidden dots"
-                  dangerouslySetInnerHTML={{
-                    __html: getSpotifySvg('emptyHeartIcon'),
-                  }}
-                ></span>
-                <div className="duration">
-                  {song.duration ? song.duration : '1:00'}
-                </div>
-                <span
-                  className="hidden dots"
-                  dangerouslySetInnerHTML={{
-                    __html: getSpotifySvg('dots'),
-                  }}
-                ></span>
-              </div>
-            </div>
-          ))}
+              <StationSongList station={station}/>
         </div>
       </div>
     </section>
