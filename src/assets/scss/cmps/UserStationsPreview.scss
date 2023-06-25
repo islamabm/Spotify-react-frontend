@@ -1,0 +1,43 @@
+.user-station-preview {
+  display: flex;
+
+  .image-svg-container {
+    background-color: rgb(58, 56, 56);
+    display: flex;
+    border: 14px;
+    width: 48px;
+    height: 48px;
+    flex-direction: column-reverse;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    // span {
+    //   svg {
+    //     align-items: center;
+    //     justify-items: center;
+    //   }
+    // }
+  }
+  .user-station-details {
+    display: flex;
+    flex-direction: column;
+    padding: 0 0.5em;
+    .user-details {
+      margin: 0;
+      padding: 0;
+    }
+  }
+}
+
+// <article className="user-station-preview">
+// <img src={emptyImg} />
+// <div>
+//   <p>{station.name}</p>
+//   <span className="dot">•</span>
+//   <span>Guest</span>
+// </div>
+// </article>
+// <div className='image-container'>
+// <img src={emptyImg} />
+// </div>
+// <div className='user-station-details'>
