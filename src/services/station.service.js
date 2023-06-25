@@ -2700,3 +2700,32 @@ function _loadSearchStations() {
   storageService.store(STORAGE_SEARCH_KEY, stations)
   return stations
 }
+
+async function createNewStation(name) {
+  const stations = storageService.load(STORAGE_KEY)
+
+  const newStation = {
+    imgUrl: '',
+    name: name,
+    tags: [],
+    createdBy: {
+      _id: '001',
+      fullname: 'guset',
+      imgUrl: '',
+    },
+    likedByUsers: [],
+    songs: [],
+    msgs: [
+      {
+        id: '',
+        from: '',
+        txt: '',
+      },
+    ],
+    desc: '',
+  }
+
+  stations.push(newStation)
+  storageService.store(STORAGE_KEY, stations)
+  return newStation
+}
