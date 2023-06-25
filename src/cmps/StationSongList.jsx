@@ -3,11 +3,8 @@ import { useDispatch } from 'react-redux'
 import { getSpotifySvg } from '../services/SVG.service'
 import { setCurrSong, setCurrSongIndex } from '../store/actions/song.actions'
 import { useParams } from 'react-router-dom'
-import { SongOptionsModal } from './SongOptionsModal'
 
 export default function StationSongList(props) {
-  const [showModal, setShowModal] = useState(false)
-
   const station = props.station
   const dispatch = useDispatch()
   const params = useParams()
@@ -47,6 +44,26 @@ export default function StationSongList(props) {
     return formattedDate
   }
 
+  function handleDragEnd(result) {
+    if (!result.destination) {
+      return // The item was dropped outside of a droppable area
+    }
+
+    const { source, destination } = result
+
+    // Create a new array to avoid mutating the state directly
+    const updatedSongs = Array.from(songs)
+
+    // Reorder the songs based on the drag and drop result
+    const [movedSong] = updatedSongs.splice(source.index, 1)
+    updatedSongs.splice(destination.index, 0, movedSong)
+
+    // Update the state with the new song order
+    setSongs(updatedSongs)
+
+    // Dispatch the updateStation action with the new song order
+    dispatch(updateStation(params.id, updatedSongs))
+  }
   return (
     <div>
       {station.songs.map((song, idx) => (
@@ -95,7 +112,6 @@ export default function StationSongList(props) {
               {song.duration ? song.duration : '1:00'}
             </div>
             <span
-              onClick={showSongOptionsModal}
               className="hidden dots"
               dangerouslySetInnerHTML={{
                 __html: getSpotifySvg('dots'),
@@ -104,7 +120,6 @@ export default function StationSongList(props) {
           </div>
         </div>
       ))}
-      {showModal && <SongOptionsModal />}
     </div>
   )
 }

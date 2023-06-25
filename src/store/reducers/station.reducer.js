@@ -71,6 +71,13 @@ export function stationReducer(state = INITIAL_STATE, action = {}) {
         ...state,
         filterBy: { ...action.filterBy },
       }
+      case UPDATE_STATION:
+        return {
+          ...state,
+          stations: state.stations.map((station) =>
+            station._id === action.station._id ? action.station : station
+          ),
+        };
 
     default:
       return state

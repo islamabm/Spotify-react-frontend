@@ -26,8 +26,9 @@ export default function StationHeaderDetails(props) {
         <h1 className={stationNameClass()}>{station.name}</h1>
         <p className="station-description">{station.description}</p>
         <img
-          src="https://upload.wikimedia.org/wikipedia/commons/7/74/Spotify_App_Logo.svg"
+          src="https://www.freepnglogos.com/uploads/spotify-logo-png/spotify-icon-green-logo-8.png"
           className="spotify-logo"
+          alt="spotify logo"
           />
         <span className="logo">Spotify </span>
         <span className="dot">• </span>
