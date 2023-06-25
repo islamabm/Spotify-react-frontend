@@ -9,6 +9,9 @@ import {
 import { setCurrSong, setCurrSongIndex } from '../store/actions/song.actions'
 import { FastAverageColor } from 'fast-average-color'
 import { eventBus } from '../services/event-bus.service'
+import StationHeaderDetails from './StationHeaderDetails'
+
+
 export function StationDetails(props) {
   const [bgStyle, setBgStyle] = useState(null)
   const [bgBottomStyle, setBgBottomStyle] = useState(null)
@@ -105,17 +108,6 @@ export function StationDetails(props) {
     }
   }
 
-  function stationNameClass() {
-    const words = station.name.split(' ').length
-    if (words <= 3) {
-      return 'short-station-name'
-    } else if (words <= 5) {
-      return 'long-station-name'
-    } else {
-      return 'huge-station-name'
-    }
-  }
-
   function formatDate(dateString) {
     const months = [
       'Jan',
@@ -144,26 +136,7 @@ export function StationDetails(props) {
   if (!station) return <div>Loading...</div>
   return (
     <section className="station-details" ref={stationDetailsRef}>
-      <div className="station-header-content" style={bgStyle}>
-        <img
-          className="station-main-img"
-          src={station.imgUrl}
-          alt="station main img"
-        />
-        <div className="station-info">
-          <span className="playlist-word">Playlist</span>
-          <h1 className={stationNameClass()}>{station.name}</h1>
-          <p className="station-description">{station.description}</p>
-
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/7/74/Spotify_App_Logo.svg"
-            className="spotify-logo"
-          />
-          <span className="logo">Spotify </span>
-          <span className="dot">• </span>
-          <span className="songs-count"> {station.songs.length} songs </span>
-        </div>
-      </div>
+      <StationHeaderDetails bgStyle={bgStyle} station={station} />
       <div className="bottom gradient" style={bgBottomStyle}>
         <div className="user-station-actions">
           <div className="play-button flex justify-center align-center"></div>
