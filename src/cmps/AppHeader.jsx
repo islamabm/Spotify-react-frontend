@@ -107,7 +107,7 @@ export function AppHeader() {
       <div className="user-actions flex justify-center align-center">
         <button className="sign-up pointer">Sign up</button>
         <Link to="/login">
-          <button className="login pointer flex">Log in</button>
+          <button className="login pointer flex justify-center align-center">Log in</button>
         </Link>
 
         <span className="user-icon pointer flex justify-center align-center"
