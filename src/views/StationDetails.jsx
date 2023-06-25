@@ -2,7 +2,10 @@ import { useEffect, useState, useRef } from 'react'
 import { useParams } from 'react-router-dom'
 import { getSpotifySvg } from '../services/SVG.service'
 import { useDispatch, useSelector } from 'react-redux'
-import { setCurrStation } from '../store/actions/station.actions'
+import {
+  setCurrStation,
+  setCurrGradient,
+} from '../store/actions/station.actions'
 import { setCurrSong, setCurrSongIndex } from '../store/actions/song.actions'
 import { FastAverageColor } from 'fast-average-color'
 import { eventBus } from '../services/event-bus.service'
@@ -21,8 +24,6 @@ export function StationDetails(props) {
   const stationImg = useSelector(
     (storeState) => storeState.stationModule.currStationImg
   )
-  const song = useSelector((storeState) => storeState.songModule.currSong)
-  const idx = useSelector((storeState) => storeState.songModule.currIndex)
   const dispatch = useDispatch()
   const [hoveredSongIdx] = useState(null)
 
@@ -39,15 +40,21 @@ export function StationDetails(props) {
     const handleScroll = () => {
       const scrollPos = currentStationDetailsRef.scrollTop
       console.log('StationDetails scroll position:', scrollPos)
+
       eventBus.emit('stationDetailsScroll', scrollPos)
     }
     if (currentStationDetailsRef) {
-      currentStationDetailsRef.addEventListener('scroll', handleScroll)
+      dispatch(setCurrGradient(bgStyle))
+      currentStationDetailsRef.addEventListener('scroll', handleScroll, {
+        passive: true,
+      })
     }
 
     return () => {
       if (currentStationDetailsRef) {
-        currentStationDetailsRef.removeEventListener('scroll', handleScroll)
+        currentStationDetailsRef.removeEventListener('scroll', handleScroll, {
+          passive: true,
+        })
       }
     }
   }, [])
@@ -73,6 +80,7 @@ export function StationDetails(props) {
     const cachedColor = colorCache[imageSrc]
     if (cachedColor) {
       const gradient = `linear-gradient(to bottom, ${cachedColor} 0%, ${cachedColor} 10%, ${cachedColor} 20%, ${cachedColor} 50%, black 140%, black 70%, black 100%)`
+
       setBgStyle(gradient)
       const bottomGradient = `linear-gradient(${cachedColor} -20%, rgb(0, 0, 0) 12%)`
       setBgBottomStyle(bottomGradient)

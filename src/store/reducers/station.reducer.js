@@ -5,7 +5,7 @@ export const REMOVE_STATION = 'REMOVE_STATION'
 export const UPDATE_STATION = 'UPDATE_STATION'
 export const SET_FILTER_BY = 'SET_FILTER_BY'
 export const SET_CURR_STATION = 'SET_CURR_STATION'
-
+export const SET_CURR_GRADIENT = 'SET_CURR_GRADIENT'
 const INITIAL_STATE = {
   currStationImg: '',
   stations: null,
@@ -18,6 +18,7 @@ const INITIAL_STATE = {
   },
   currStation: null,
   currStationId: null,
+  currStationGradientColor: 'black',
 }
 
 export function stationReducer(state = INITIAL_STATE, action = {}) {
@@ -26,6 +27,11 @@ export function stationReducer(state = INITIAL_STATE, action = {}) {
       return {
         ...state,
         stations: action.stations,
+      }
+    case SET_CURR_GRADIENT:
+      return {
+        ...state,
+        currStationGradientColor: { ...action.bgStyle },
       }
     case SET_CURR_STATION:
       return {

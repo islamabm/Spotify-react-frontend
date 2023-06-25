@@ -2,9 +2,20 @@ import { getSpotifySvg } from '../services/SVG.service'
 import { useLocation, Link } from 'react-router-dom'
 import { UserModal } from './UserModal'
 import { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import { eventBus } from '../services/event-bus.service'
 export function AppHeader() {
   const [showModal, setShowModal] = useState(false)
+  const [currScrollPos, setScrollPos] = useState(0)
+
+  const station = useSelector(
+    (storeState) => storeState.stationModule.currStation
+  )
+
+  const gradient = useSelector(
+    (storeState) => storeState.stationModule.currStationGradientColor
+  )
+  console.log('gradient', gradient)
   const location = useLocation()
   // const [headerOpacity, setHeaderOpacity] = useState(0)
   const [headers, setHeaders] = useState({
@@ -13,29 +24,40 @@ export function AppHeader() {
 
   function updateHeaderOpacity(scrollPos) {
     console.log('hi')
+    console.log('scrollPos', scrollPos)
+    setScrollPos(scrollPos)
 
     const maxScroll = 50
     let opacity = Math.min(scrollPos / maxScroll, 1)
 
+    let dominantColor =
+      // gradient
+      //   ? gradient.background
+      //       .match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/i)
+      //       .slice(1, 4)
+      //       .join(', ')
+      //   :
+      '0, 0, 0'
+
     const newHeaders = {
-      backgroundColor: `rgba(0, 0, 0, ${opacity})`,
+      backgroundColor: `rgba(${dominantColor}, ${opacity})`,
     }
+
     console.log('after creating the styles ')
 
     setHeaders(newHeaders)
 
-    console.log('after updatge the state')
+    console.log('after update the state')
   }
 
   useEffect(() => {
-    console.log('hi')
     const onScroll = (scrollPos) => updateHeaderOpacity(scrollPos)
     const unlisten = eventBus.on('stationDetailsScroll', onScroll)
 
     return () => {
       unlisten()
     }
-  }, [])
+  }, [gradient])
 
   function onShowModal() {
     setShowModal(true)
@@ -71,6 +93,14 @@ export function AppHeader() {
           <div className="flex align-center justify-center">
             <input placeholder="What do you want to listen to?" />
           </div>
+        )}
+        {currScrollPos > 466 ? (
+          <div className="user-station-actions">
+            <div className="play-button flex justify-center align-center"></div>
+            <p>{station.name}</p>
+          </div>
+        ) : (
+          ''
         )}
       </section>
 
