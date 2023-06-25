@@ -12,12 +12,14 @@ export default function UserStationsPreview({ station }) {
         ></span>
       </div>
       <div className="user-station-details">
+        <div className="user-station-name">
+          <p>{station.name}</p>
+        </div>
         <div className="user-details">
           <span>Playlist</span>
           <span>•</span>
-          <span>Guest</span>
+          <span>islam abo mokh</span>
         </div>
-        <p>{station.name}</p>
       </div>
     </article>
   )

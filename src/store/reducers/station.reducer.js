@@ -8,7 +8,7 @@ export const SET_CURR_STATION = 'SET_CURR_STATION'
 export const SET_CURR_GRADIENT = 'SET_CURR_GRADIENT'
 const INITIAL_STATE = {
   currStationImg: '',
-  stations: null,
+  stations: [],
   searchStations: null,
   filterBy: {
     model: '',
