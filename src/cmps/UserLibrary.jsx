@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { getSpotifySvg } from '../services/SVG.service'
 import { SortModal } from './SortModal'
 import { useDispatch, useSelector } from 'react-redux'
-import { UserStations } from './UserStations'
+import { UserStations, UserStationsIndex } from './UserStationsIndex'
 import { addStation } from '../store/actions/station.actions'
 export function UserLibrary() {
   const [showSortModal, setShowSortModal] = useState(false)
@@ -29,48 +29,51 @@ export function UserLibrary() {
   }
 
   return (
-    <section className="user-library">
-      <div className="flex align-center library-header">
-        <div className="flex align-center your-library pointer">
+    <>
+      <section className="user-library">
+        <div className="flex align-center library-header">
+          <div className="flex align-center your-library pointer">
+            <span
+              dangerouslySetInnerHTML={{
+                __html: getSpotifySvg('libraryIconActive'),
+              }}
+            ></span>
+            <span>Your Library</span>
+          </div>
           <span
+            onClick={createNewStation}
+            className="plus-icon flex align-center justify-center pointer"
             dangerouslySetInnerHTML={{
-              __html: getSpotifySvg('libraryIconActive'),
+              __html: getSpotifySvg('plus'),
             }}
           ></span>
-          <span>Your Library</span>
         </div>
-        <span
-          onClick={createNewStation}
-          className="plus-icon flex align-center justify-center pointer"
-          dangerouslySetInnerHTML={{
-            __html: getSpotifySvg('plus'),
-          }}
-        ></span>
-      </div>
-      <div className="your-library-btns flex align-center">
-        <button className="library-btn pointer">Playlists</button>
-        <button className="library-btn pointer">Artists</button>
-        <button className="library-btn pointer">Albums</button>
-      </div>
-      <div className="library-filter">
-        <span
-          className="smaller-search pointer flex align-center justify-center"
-          dangerouslySetInnerHTML={{
-            __html: getSpotifySvg('smallerSearchIcon'),
-          }}
-        ></span>
-        <div onClick={onShowSortModal} className="sort-by-section relative">
-          <span className="sort-by-span">{selectedOption}</span>
+        <div className="your-library-btns flex align-center">
+          <button className="library-btn pointer">Playlists</button>
+          <button className="library-btn pointer">Artists</button>
+          <button className="library-btn pointer">Albums</button>
+        </div>
+        <div className="library-filter">
           <span
-            className="pointer arrow"
+            className="smaller-search pointer flex align-center justify-center"
             dangerouslySetInnerHTML={{
-              __html: getSpotifySvg('bottomArrowIcon'),
+              __html: getSpotifySvg('smallerSearchIcon'),
             }}
           ></span>
-          {showSortModal && <SortModal onSelectOption={onSelectOption} />}
+          <div onClick={onShowSortModal} className="sort-by-section relative">
+            <span className="sort-by-span">{selectedOption}</span>
+            <span
+              className="pointer arrow"
+              dangerouslySetInnerHTML={{
+                __html: getSpotifySvg('bottomArrowIcon'),
+              }}
+            ></span>
+            {showSortModal && <SortModal onSelectOption={onSelectOption} />}
+          </div>
         </div>
-      </div>
-      <UserStations></UserStations>
-    </section>
+
+        <UserStationsIndex></UserStationsIndex>
+      </section>
+    </>
   )
 }
