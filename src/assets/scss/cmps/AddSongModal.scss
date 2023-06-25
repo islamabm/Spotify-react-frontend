@@ -11,6 +11,17 @@
   min-width: 160px;
   overflow-y: auto;
   scrollbar-width: thin;
+  scrollbar-color: transparent transparent; // for Firefox
+
+  &::-webkit-scrollbar {
+    // for Chrome, Safari
+    width: 17px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    // for Chrome, Safari
+    background-color: rgb(107, 105, 105);
+  }
   padding: 4px;
   z-index: 9999;
   ul {
@@ -46,6 +57,9 @@
   }
 
   .filter-by-user-stations {
+    background-color: hsla(0, 0%, 100%, 0.1);
+    color: #fff;
+    border-radius: 4px;
     display: flex;
     align-items: center;
     justify-items: center;
