@@ -1,7 +1,7 @@
 import React from 'react'
 import { getSpotifySvg } from '../services/SVG.service'
 import { UserStationName } from './UserStationName'
-export function AddSongModal({ position }) {
+export function AddSongModal({ position, closeModal }) {
   return (
     <section
       className="add-song-modal"
@@ -23,7 +23,7 @@ export function AddSongModal({ position }) {
           <button>Create playlist</button>
         </li>
         <li>
-          <UserStationName />
+          <UserStationName closeModal={closeModal} />
         </li>
       </ul>
     </section>
