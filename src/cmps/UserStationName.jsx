@@ -9,7 +9,7 @@ export function UserStationName({ addSongToStation }) {
   return (
     <div className="user-stations-name">
       <ul>
-        {userStations.map((station, idx) => (
+        {userStations?.map((station, idx) => (
           <li key={idx} onClick={() => addSongToStation(station._id)}>
             <button>{station.name}</button>
           </li>
