@@ -102,6 +102,10 @@ export function addStation(name) {
       const station = await stationService.createNewStation(name)
       const action = { type: ADD_STATION, station }
       dispatch(action)
+      
+      const setStation = {type: SET_CURR_STATION, station}
+      dispatch(setStation)
+
     } catch (error) {
       console.log('error:', error)
     }

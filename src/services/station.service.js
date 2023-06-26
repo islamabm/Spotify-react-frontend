@@ -16,6 +16,7 @@ export const stationService = {
   getNextSong,
   createNewStation,
   getUserStations,
+  stationNameClass,
   //   tryStation,
 }
 const gDefaultStations = [
@@ -2739,4 +2740,15 @@ async function createNewStation(name) {
   stations.push(newStation)
   storageService.store(STORAGE_KEY, stations)
   return newStation
+}
+
+function stationNameClass(station) {
+  const words = station.name.split(" ").length
+  if (words <= 3) {
+    return "short-station-name"
+  } else if (words <= 5) {
+    return "long-station-name"
+  } else {
+    return "huge-station-name"
+  }
 }

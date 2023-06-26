@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
-import { getSpotifySvg } from '../services/SVG.service'
-import { BubblingHeart } from './BubblingHeart'
-import { MediaPlayer } from './MediaPlayer'
-import { useLocation } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useState } from "react"
+import { getSpotifySvg } from "../services/SVG.service"
+import { BubblingHeart } from "./BubblingHeart"
+import { MediaPlayer } from "./MediaPlayer"
+import { useLocation } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
 export function AppFooter() {
   const [volume, setVolume] = useState(50)
-  const [currSvg, setCurrSvg] = useState('volumeIcon')
+  const [currSvg, setCurrSvg] = useState("volumeIcon")
 
   const location = useLocation()
 
@@ -15,14 +15,14 @@ export function AppFooter() {
   }
 
   function setSvg() {
-    if (volume > 80) return 'volumeIcon'
-    if (volume > 30 && volume < 80) return 'mediumVolumeIcon'
-    if (volume > 1 && volume < 30) return 'veryShortVolumeIcon'
-    else return 'muteIcon'
+    if (volume > 80) return "volumeIcon"
+    if (volume > 30 && volume < 80) return "mediumVolumeIcon"
+    if (volume > 1 && volume < 30) return "veryShortVolumeIcon"
+    else return "muteIcon"
   }
 
   function onToggleMute() {
-    if (setSvg() === 'muteIcon') {
+    if (setSvg() === "muteIcon") {
       setVolume(100)
     } else {
       setVolume(0)
@@ -34,50 +34,52 @@ export function AppFooter() {
   )
   return (
     <div className="app-footer">
-      <div
-        className="song-details"
-        style={{ opacity: location.pathname === '/' ? 0 : 1 }}
-      >
-        <div className="image">
-          <img src={song ? song.imgUrl : station?.songs[0].imgUrl} />
-        </div>
+      {song && (
+        <div
+          className="song-details"
+          style={{ opacity: location.pathname === "/" ? 0 : 1 }}
+        >
+          <div className="image">
+            <img src={song ? song.imgUrl : station?.songs[0].imgUrl} />
+          </div>
 
-        <div className="actor-name-song">
-          <p className="song-name">
-            {song ? song.title : station?.songs[0].title}
-          </p>
-          <p className="actor-name">
-            {song ? song.artist : station?.songs[0].artist}
-          </p>
-        </div>
+          <div className="actor-name-song">
+            <p className="song-name">
+              {song ? song.title : station?.songs[0].title}
+            </p>
+            <p className="actor-name">
+              {song ? song.artist : station?.songs[0].artist}
+            </p>
+          </div>
 
-        <div className="heart-picture-icons">
-          <span
-            className="picture-icon pointer"
-            dangerouslySetInnerHTML={{
-              __html: getSpotifySvg('pictureIcon'),
-            }}
-          ></span>{' '}
+          <div className="heart-picture-icons">
+            <span
+              className="picture-icon pointer"
+              dangerouslySetInnerHTML={{
+                __html: getSpotifySvg("pictureIcon"),
+              }}
+            ></span>{" "}
+          </div>
         </div>
-      </div>
+      )}
 
       <div className="media-player">
         <MediaPlayer volume={volume} />
       </div>
       <div className="song-details-two">
-        {' '}
+        {" "}
         <span
           className="pointer"
           dangerouslySetInnerHTML={{
-            __html: getSpotifySvg('lyricsIcon'),
+            __html: getSpotifySvg("lyricsIcon"),
           }}
-        ></span>{' '}
+        ></span>{" "}
         <span
           className="pointer"
           dangerouslySetInnerHTML={{
-            __html: getSpotifySvg('queueIcon'),
+            __html: getSpotifySvg("queueIcon"),
           }}
-        ></span>{' '}
+        ></span>{" "}
         <span
           onClick={onToggleMute}
           className="pointer"

@@ -9,7 +9,7 @@ export function UserStationName() {
   return (
     <div className="user-stations-name">
       <ul>
-        {userStations.map((station, idx) => (
+        {userStations?.map((station, idx) => (
           <li key={idx}>
             <button>{station.name}</button>
           </li>
