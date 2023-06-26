@@ -61,16 +61,20 @@
     color: #fff;
     border-radius: 4px;
     display: flex;
-    align-items: center;
-    justify-items: center;
+    align-items: flex-end;
     width: 250px;
     height: 36px;
     padding: 2px;
 
+    span {
+      fill: white;
+      padding: 0 0 0 4px;
+    }
+
     input {
       width: 246px;
       height: 32px;
-      padding: 8px 8px 8px 32px;
+      padding: 0 0 0 4px;
       border: none;
       background-color: transparent;
       outline: none;

@@ -7,11 +7,11 @@ import {
   SET_CURR_STATION,
   SET_CURR_GRADIENT,
   ADD_STATION,
-  UPDATE_STATION
+  UPDATE_STATION,
+  LOAD_USER_STATIONS,
 } from '../reducers/station.reducer'
 
-import { store } from '../index'; 
-
+import { store } from '../index'
 
 export function loadStations() {
   return async (dispatch, getState) => {
@@ -19,6 +19,21 @@ export function loadStations() {
       const stations = await stationService.query()
       const action = {
         type: SET_STATIONS,
+        stations,
+      }
+      dispatch(action)
+    } catch (error) {
+      console.log('error:', error)
+    }
+  }
+}
+
+export function loadUserStations() {
+  return async (dispatch, getState) => {
+    try {
+      const stations = await stationService.getUserStations()
+      const action = {
+        type: LOAD_USER_STATIONS,
         stations,
       }
       dispatch(action)
@@ -71,10 +86,9 @@ export function removeStation(stationId) {
 export function addStation(name) {
   return async (dispatch) => {
     try {
-     const station  =  await stationService.createNewStation(name)
+      const station = await stationService.createNewStation(name)
       const action = { type: ADD_STATION, station }
       dispatch(action)
-      return 'Removed!'
     } catch (error) {
       console.log('error:', error)
     }
@@ -97,15 +111,18 @@ export function setFilterBy(filterBy) {
 export function updateStation(stationId, songs) {
   return async () => {
     try {
-      const updatedStation = await stationService.updateStation(stationId, songs);
+      const updatedStation = await stationService.updateStation(
+        stationId,
+        songs
+      )
       const action = {
         type: UPDATE_STATION,
         station: updatedStation,
-      };
-      store.dispatch(action); // Use the dispatch function from the store
-      return 'Updated!';
+      }
+      store.dispatch(action) // Use the dispatch function from the store
+      return 'Updated!'
     } catch (error) {
-      console.log('error:', error);
+      console.log('error:', error)
     }
-  };
+  }
 }

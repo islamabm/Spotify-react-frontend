@@ -15,6 +15,7 @@ export const stationService = {
   getPrevSong,
   getNextSong,
   createNewStation,
+  getUserStations,
   //   tryStation,
 }
 const gDefaultStations = [
@@ -2548,6 +2549,7 @@ const gSearchCategories = [
 
 const gUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyDKlXiiyfaI0sFZbRbv17LGgaZI_ffF9fQ&q=`
 const STORAGE_KEY = 'stations'
+const USER_STATIONS = 'user-stations'
 const STORAGE_SEARCH_KEY = 'search-stations'
 const SEARCH_KEY = 'videosDB'
 const VIDEOS_KEY = 'videosIdDB'
@@ -2695,6 +2697,11 @@ function _loadStations() {
   storageService.store(STORAGE_KEY, stations)
   return stations
 }
+
+function getUserStations() {
+  return storageService.load(USER_STATIONS)
+}
+
 function _loadSearchStations() {
   let stations = storageService.load(STORAGE_SEARCH_KEY)
   if (!stations || !stations.length) stations = gSearchCategories
@@ -2704,7 +2711,7 @@ function _loadSearchStations() {
 
 async function createNewStation(name) {
   const stations = storageService.load(STORAGE_KEY)
-
+  const userStations = storageService.load(USER_STATIONS) || []
   const newStation = {
     _id: utilService.makeId(),
     imgUrl: '',
@@ -2727,6 +2734,8 @@ async function createNewStation(name) {
     desc: '',
   }
 
+  userStations.push(newStation)
+  storageService.store(USER_STATIONS, userStations)
   stations.push(newStation)
   storageService.store(STORAGE_KEY, stations)
   return newStation
