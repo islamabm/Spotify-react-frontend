@@ -2709,7 +2709,8 @@ function _loadStations() {
 }
 
 function getUserStations() {
-  return storageService.load(USER_STATIONS)
+  const stations = storageService.load(USER_STATIONS)
+  return Promise.resolve([...stations])
 }
 
 function _loadSearchStations() {

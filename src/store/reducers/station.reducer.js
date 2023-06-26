@@ -65,7 +65,7 @@ export function stationReducer(state = INITIAL_STATE, action = {}) {
       return {
         ...state,
         stations: [...state.stations, action.station],
-        userStations: [...state.userStations, action.station],
+        userStations: [...state?.userStations, action.station],
       }
     case REMOVE_STATION:
       return {
