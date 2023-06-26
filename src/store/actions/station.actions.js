@@ -83,6 +83,19 @@ export function removeStation(stationId) {
     }
   }
 }
+
+// export function removeStation(stationId) {
+//   return async (dispatch) => {
+//     try {
+//       await stationService.remove(stationId)
+//       const action = { type: REMOVE_STATION, stationId }
+//       dispatch(action)
+//       return 'Removed!'
+//     } catch (error) {
+//       console.log('error:', error)
+//     }
+//   }
+// }
 export function addStation(name) {
   return async (dispatch) => {
     try {
