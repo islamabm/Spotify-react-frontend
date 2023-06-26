@@ -1,6 +1,5 @@
 import React from "react"
 import { useSelector } from "react-redux"
-import { stationService } from "../services/station.service.js"
 import StationSystem  from "./StationSystem";
 import StationUser from "./StationUser.jsx";
 
@@ -10,9 +9,8 @@ export default function StationHeaderDetails(props) {
   const stationType = useSelector(
     (storeState) => storeState.stationModule.currStationType
   )
+  console.log('stationType', stationType)
   
-  const stationNameClass = stationService.stationNameClass(station)
-
   return (
     <div className="station-header-content" style={bgStyle}>
        {stationType === "system" && (<StationSystem station={station}/>)}

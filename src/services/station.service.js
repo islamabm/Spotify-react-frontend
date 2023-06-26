@@ -2752,6 +2752,7 @@ async function createNewStation(name) {
 }
 
 function stationNameClass(station) {
+  if(!station.name) return
   const words = station.name.split(' ').length
   if (words <= 3) {
     return 'short-station-name'

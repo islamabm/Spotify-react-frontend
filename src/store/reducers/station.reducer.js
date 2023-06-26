@@ -48,7 +48,6 @@ export function stationReducer(state = INITIAL_STATE, action = {}) {
         currStation: action.station,
         currStationId: action.station._id,
         currStationImg: action.station.imgUrl,
-        currStationType: 'system',
       }
     case ADD_SONG_TO_STATION:
       return {
