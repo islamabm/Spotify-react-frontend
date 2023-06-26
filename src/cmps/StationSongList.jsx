@@ -10,7 +10,7 @@ export default function StationSongList(props) {
   const dispatch = useDispatch()
   const params = useParams()
   const [hoveredSongIdx] = useState(null)
-  const [showModal, setShowModal] = useState(false)
+  const [showModal, setShowOptionsModal] = useState(false)
   const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 })
   const [songs, setSongs] = useState(station.songs)
   function onSongClicked(songId) {
@@ -25,7 +25,7 @@ export default function StationSongList(props) {
       left: rect.left + window.scrollX,
     })
     console.log('showModal', showModal)
-    setShowModal(true)
+    setShowOptionsModal(true)
   }
 
   function formatDate(dateString) {
@@ -130,7 +130,12 @@ export default function StationSongList(props) {
           </div>
         </div>
       ))}
-      {showModal && <SongOptionsModal position={modalPosition} />}
+      {showModal && (
+        <SongOptionsModal
+          position={modalPosition}
+          // closeOptionsModal={() => setShowOptionsModal(false)}
+        />
+      )}
     </div>
   )
 }

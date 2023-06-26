@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { getSpotifySvg } from '../services/SVG.service'
 import { AddSongModal } from './AddSongModal'
-export function SongOptionsModal({ position }) {
+export function SongOptionsModal({ position, closeOptionsModal }) {
   const [showModal, setShowModal] = useState(false)
   const [modalPosition, setAddModalPosition] = useState({ top: 0, left: 0 })
   function showAddModal(e) {
@@ -13,6 +13,10 @@ export function SongOptionsModal({ position }) {
     console.log('showModal', showModal)
 
     setShowModal(true)
+  }
+
+  function closeModal() {
+    setShowModal(false)
   }
 
   return (
@@ -41,7 +45,9 @@ export function SongOptionsModal({ position }) {
           </li>
         </ul>
       </section>
-      {showModal && <AddSongModal position={modalPosition} />}
+      {showModal && (
+        <AddSongModal position={modalPosition} closeModal={closeModal} />
+      )}
     </>
   )
 }
