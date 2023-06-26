@@ -7,7 +7,7 @@ export const SET_FILTER_BY = 'SET_FILTER_BY'
 export const SET_CURR_STATION = 'SET_CURR_STATION'
 export const SET_CURR_GRADIENT = 'SET_CURR_GRADIENT'
 export const LOAD_USER_STATIONS = 'LOAD_USER_STATIONS'
-
+export const ADD_SONG_TO_STATION = 'ADD_SONG_TO_STATION'
 const INITIAL_STATE = {
   currStationImg: '',
   stations: [],
@@ -47,6 +47,13 @@ export function stationReducer(state = INITIAL_STATE, action = {}) {
         currStation: action.station,
         currStationId: action.station._id,
         currStationImg: action.station.imgUrl,
+      }
+    case ADD_SONG_TO_STATION:
+      return {
+        ...state,
+        stations: state.stations.map((station) =>
+          station._id === action.station._id ? action.station : station
+        ),
       }
     case SET_SEARCH_STATIONS:
       return {

@@ -9,6 +9,7 @@ import {
   ADD_STATION,
   UPDATE_STATION,
   LOAD_USER_STATIONS,
+  ADD_SONG_TO_STATION,
 } from '../reducers/station.reducer'
 
 import { store } from '../index'
@@ -108,6 +109,24 @@ export function addStation(name) {
   }
 }
 
+export function addSongToStation(stationId, song) {
+  return async (dispatch) => {
+    try {
+      const updatedStation = await stationService.addSongToStation(
+        stationId,
+        song
+      )
+      const action = {
+        type: ADD_SONG_TO_STATION,
+        station: updatedStation,
+      }
+      dispatch(action)
+    } catch (error) {
+      console.log('error:', error)
+    }
+  }
+}
+
 export function setCurrGradient(bgStyle) {
   console.log('color', bgStyle)
   return (dispatch) => {
@@ -132,7 +151,7 @@ export function updateStation(stationId, songs) {
         type: UPDATE_STATION,
         station: updatedStation,
       }
-      store.dispatch(action) 
+      store.dispatch(action)
       return 'Updated!'
     } catch (error) {
       console.log('error:', error)

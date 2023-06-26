@@ -1,9 +1,16 @@
 import React, { useState } from 'react'
 import { getSpotifySvg } from '../services/SVG.service'
 import { AddSongModal } from './AddSongModal'
+import { useDispatch, useSelector } from 'react-redux'
+import { addSongToStation } from '../store/actions/station.actions'
 export function SongOptionsModal({ position, closeOptionsModal }) {
+  const station = useSelector(
+    (storeState) => storeState.stationModule.currStation
+  )
+  const song = useSelector((storeState) => storeState.songModule.currSong)
   const [showModal, setShowModal] = useState(false)
   const [modalPosition, setAddModalPosition] = useState({ top: 0, left: 0 })
+  const dispatch = useDispatch()
   function showAddModal(e) {
     const rect = e.target.getBoundingClientRect()
     setAddModalPosition({
@@ -14,11 +21,10 @@ export function SongOptionsModal({ position, closeOptionsModal }) {
 
     setShowModal(true)
   }
-
-  function closeModal() {
+  function handleAddSongToStation(stationId) {
+    dispatch(addSongToStation(stationId, song))
     setShowModal(false)
   }
-
   return (
     <>
       <section
@@ -46,7 +52,10 @@ export function SongOptionsModal({ position, closeOptionsModal }) {
         </ul>
       </section>
       {showModal && (
-        <AddSongModal position={modalPosition} closeModal={closeModal} />
+        <AddSongModal
+          position={modalPosition}
+          addSongToStation={handleAddSongToStation}
+        />
       )}
     </>
   )

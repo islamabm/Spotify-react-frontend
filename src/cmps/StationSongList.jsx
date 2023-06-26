@@ -18,7 +18,9 @@ export default function StationSongList(props) {
     dispatch(setCurrSongIndex(params.id, songId))
   }
 
-  function showSongOptionsModal(e) {
+  function showSongOptionsModal(e, songId) {
+    dispatch(setCurrSong(params.id, songId))
+
     const rect = e.target.getBoundingClientRect()
     setModalPosition({
       top: rect.top + window.scrollY,
@@ -121,7 +123,7 @@ export default function StationSongList(props) {
               {song.duration ? song.duration : '1:00'}
             </div>
             <span
-              onClick={showSongOptionsModal}
+              onClick={(e) => showSongOptionsModal(e, song._id)}
               className="hidden dots"
               dangerouslySetInnerHTML={{
                 __html: getSpotifySvg('dots'),

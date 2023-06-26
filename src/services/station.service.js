@@ -16,6 +16,7 @@ export const stationService = {
   getNextSong,
   createNewStation,
   getUserStations,
+  addSongToStation,
   //   tryStation,
 }
 const gDefaultStations = [
@@ -2624,6 +2625,14 @@ function query() {
 function getById(id) {
   const station = gStations.find((station) => station._id === id)
   return Promise.resolve({ ...station })
+}
+
+async function addSongToStation(stationId, song) {
+  const station = await getById(stationId)
+  station.songs.push(song)
+  storageService.store(STORAGE_KEY, gStations)
+  console.log('gStations', gStations)
+  return { ...station }
 }
 async function getSongById(stationId, songId) {
   const station = await getById(stationId)

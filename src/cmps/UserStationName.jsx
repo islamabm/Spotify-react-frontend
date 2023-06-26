@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 
-export function UserStationName({ closeModal }) {
+export function UserStationName({ addSongToStation }) {
   const userStations = useSelector(
     (storeState) => storeState.stationModule.userStations
   )
@@ -10,7 +10,7 @@ export function UserStationName({ closeModal }) {
     <div className="user-stations-name">
       <ul>
         {userStations.map((station, idx) => (
-          <li onClick={closeModal} key={idx}>
+          <li key={idx} onClick={() => addSongToStation(station._id)}>
             <button>{station.name}</button>
           </li>
         ))}
