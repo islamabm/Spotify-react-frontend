@@ -5,12 +5,12 @@ import emptyImg from '../assets/imgs/empty-img.png'
 export default function UserStationsPreview({ station }) {
   const navigate = useNavigate()
 
-  function goToDetails() {
-    navigate(`/station/${station._id}`)
-  }
+  // function goToDetails() {
+  //   navigate(`/station/${station._id}`)
+  // }
 
   return (
-    <article className="user-station-preview" onClick={goToDetails}>
+    <article className="user-station-preview">
       <div className="image-svg-container">
         <span
           dangerouslySetInnerHTML={{

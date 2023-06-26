@@ -85,28 +85,17 @@ export function removeStation(stationId) {
   }
 }
 
-// export function removeStation(stationId) {
-//   return async (dispatch) => {
-//     try {
-//       await stationService.remove(stationId)
-//       const action = { type: REMOVE_STATION, stationId }
-//       dispatch(action)
-//       return 'Removed!'
-//     } catch (error) {
-//       console.log('error:', error)
-//     }
-//   }
-// }
 export function addStation(name) {
   return async (dispatch) => {
     try {
+      console.log('hi from the action')
       const station = await stationService.createNewStation(name)
+      console.log('station after service', station)
       const action = { type: ADD_STATION, station }
       dispatch(action)
-      
-      const setStation = {type: SET_CURR_STATION, station}
-      dispatch(setStation)
 
+      const setStation = { type: SET_CURR_STATION, station }
+      dispatch(setStation)
     } catch (error) {
       console.log('error:', error)
     }

@@ -2748,11 +2748,11 @@ async function createNewStation(name) {
   storageService.store(USER_STATIONS, userStations)
   stations.push(newStation)
   storageService.store(STORAGE_KEY, stations)
-  return newStation
+  return { ...newStation }
 }
 
 function stationNameClass(station) {
-  if(!station.name) return
+  if (!station.name) return
   const words = station.name.split(' ').length
   if (words <= 3) {
     return 'short-station-name'
