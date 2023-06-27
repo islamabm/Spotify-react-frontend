@@ -32,20 +32,20 @@
       }
     }
 
-      .short-station-name {
-        font-size: 6rem;
-        margin-block: 2px;
-      }
-      
-      .long-station-name {
-        font-size: 5rem;
-        margin-block: 30px;
-      }
-      
-      .huge-station-name {
-        font-size: 4rem;
-      }
-      
+    .short-station-name {
+      font-size: 6rem;
+      margin-block: 2px;
+    }
+
+    .long-station-name {
+      font-size: 5rem;
+      margin-block: 30px;
+    }
+
+    .huge-station-name {
+      font-size: 4rem;
+    }
+
     .station-main-img {
       object-fit: cover;
       border-radius: 1px;
@@ -54,6 +54,25 @@
       height: 232px;
       min-width: 232px;
       width: 232px;
+
+      &.user-main-img {
+        position: relative;
+        display: inline-flex;
+        
+        .music-note {
+          position: absolute;
+          z-index: 1;
+          stroke: #7f7f7f;
+          transform: translate(-6px, -5px);
+          fill: #fff;
+          stroke: none;
+        }
+
+        img {
+          position: relative;
+          z-index: 0;
+        }
+      }
     }
   }
   .user-station-actions {
@@ -71,7 +90,7 @@
       cursor: pointer;
       z-index: 2;
       &:before {
-        content: '';
+        content: "";
         width: 0;
         height: 0;
         border-style: solid;
