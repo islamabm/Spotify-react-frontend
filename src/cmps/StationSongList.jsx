@@ -73,7 +73,7 @@ export default function StationSongList(props) {
     setSongs(updatedSongs)
 
     // Dispatch the updateStation action with the new song order
-    // dispatch(updateStation(params.id, updatedSongs))
+    dispatch(updateStation(params.id, updatedSongs))
   }
   return (
     <div>
