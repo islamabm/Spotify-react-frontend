@@ -1,6 +1,9 @@
 import React from 'react'
-
+import { useSelector } from 'react-redux'
 export function DeleteStationModal() {
+  const station = useSelector(
+    (storeState) => storeState.stationModule.currStation
+  )
   return (
     <section className="delete-modal-backdrop">
       <div className="delete-modal">
