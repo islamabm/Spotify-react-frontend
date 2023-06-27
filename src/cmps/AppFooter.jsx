@@ -38,18 +38,21 @@ export function AppFooter() {
         className="song-details"
         style={{ opacity: location.pathname === '/' ? 0 : 1 }}
       >
+        {song &&
+        <>
         <div className="image">
-          <img src={song ? song.imgUrl : station?.songs[0].imgUrl} />
+          <img src={song ? song.imgUrl : station?.songs[0]?.imgUrl} />
         </div>
-
         <div className="actor-name-song">
           <p className="song-name">
-            {song ? song.title : station?.songs[0].title}
+            {song ? song.title : station?.songs[0]?.title}
           </p>
           <p className="actor-name">
-            {song ? song.artist : station?.songs[0].artist}
+            {song ? song.artist : station?.songs[0]?.artist}
           </p>
         </div>
+        </> 
+        }
 
         <div className="heart-picture-icons">
           <span
