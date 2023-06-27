@@ -2624,13 +2624,13 @@ function query() {
 //   return Promise.resolve()
 // }
 
-function getById(id) {
-  const station = gStations.find((station) => station._id === id);
-  return Promise.resolve({ ...station });
+async function getById(id) {
+  const station = gStations.find((station) => station._id === id)
+  return Promise.resolve({ ...station })
 }
 
-async function addSongToStation(stationId, song) {
-  const station = await getById(stationId);
+async function addSongToStation(stationId, songId) {
+  const station = await getById(stationId)
   if (station) {
     const songIndex = station.songs.findIndex((song) => song._id === songId);
 
@@ -2642,6 +2642,14 @@ async function addSongToStation(stationId, song) {
     }
   }
   return null;
+}
+
+async function removeSongFromStation(stationId, songId) {
+  console.log('songId', songId)
+}
+
+async function removeSongFromStation(stationId, songId) {
+  console.log('songId', songId)
 }
 
 async function getSongById(stationId, songId) {
@@ -2681,11 +2689,13 @@ async function getCurrIndex(stationId, songId) {
 }
 
 function remove(id) {
-  const idx = gStations.findIndex((station) => station._id === id);
-  gStations.splice(idx, 1);
-  if (!gStations.length) gStations = gDefaultStations.slice();
-  storageService.store(STORAGE_KEY, gStations);
-  return Promise.resolve();
+  const idx = gStations.findIndex((station) => station._id === id)
+  gStations.splice(idx, 1)
+  const stations = storageService.load(USER_STATIONS)
+  stations.splice(idx, 1)
+  storageService.store(USER_STATIONS, stations)
+  storageService.store(STORAGE_KEY, gStations)
+  return Promise.resolve()
 }
 
 function save(stationToSave) {
@@ -2737,9 +2747,9 @@ async function createNewStation(name) {
     name: name,
     tags: [],
     createdBy: {
-      _id: "001",
-      fullname: "guset",
-      imgUrl: "",
+      _id: utilService.makeId(),
+      fullname: 'guest',
+      imgUrl: '',
     },
     likedByUsers: [],
     songs: [],
@@ -2753,11 +2763,11 @@ async function createNewStation(name) {
     desc: "",
   };
 
-  userStations.push(newStation);
-  storageService.store(USER_STATIONS, userStations);
-  stations.push(newStation);
-  storageService.store(STORAGE_KEY, stations);
-  return { ...newStation };
+  userStations.push(newStation)
+  storageService.store(USER_STATIONS, userStations)
+  stations.push(newStation)
+  storageService.store(STORAGE_KEY, stations)
+  return Promise.resolve({ ...newStation })
 }
 
 function stationNameClass(station) {

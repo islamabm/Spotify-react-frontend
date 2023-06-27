@@ -149,7 +149,7 @@ export function setFilterBy(filterBy) {
 export function updateStation(stationId, songs) {
   return async (dispatch) => {
     try {
-      console.log('from actions',stationId)
+      console.log('from actions', stationId)
       const updatedStation = await stationService.updateStation(
         stationId,
         songs
