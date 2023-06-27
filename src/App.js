@@ -1,30 +1,29 @@
-import { useState } from 'react';
-import { Route, HashRouter as Router, Routes } from 'react-router-dom';
-import './assets/scss/global.scss';
-import { AppHeader } from './cmps/AppHeader';
-import { AppNav } from './cmps/AppNav';
-import { UserLibrary } from './cmps/UserLibrary';
-import { AppFooter } from './cmps/AppFooter';
-import { StationIndex } from './views/StationIndex';
-import { StationDetails } from './views/StationDetails';
-import { StationEdit } from './views/StationEdit';
-import { Login } from './views/Login';
+import { useState } from 'react'
+import { Route, HashRouter as Router, Routes } from 'react-router-dom'
+import './assets/scss/global.scss'
+import { AppHeader } from './cmps/AppHeader'
+import { AppNav } from './cmps/AppNav'
+import { UserLibrary } from './cmps/UserLibrary'
+import { AppFooter } from './cmps/AppFooter'
+import { StationIndex } from './views/StationIndex'
+import { StationDetails } from './views/StationDetails'
+import { StationEdit } from './views/StationEdit'
+import { Login } from './views/Login'
 // import { Signup } from './views/Signup';
-import Search from './views/Search';
+import Search from './views/Search'
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   const login = () => {
     // Perform login logic here
-    setIsLoggedIn(true);
-  };
+    setIsLoggedIn(true)
+  }
 
   const logout = () => {
     // Perform logout logic here
-    setIsLoggedIn(false);
-  };
-
+    setIsLoggedIn(false)
+  }
 
   return (
     <Router>
@@ -34,7 +33,7 @@ function App() {
         <Route path="/login" element={<Login login={login} />} />
       </Routes>
     </Router>
-  );
+  )
 }
 
 function LoggedInApp() {
@@ -53,7 +52,7 @@ function LoggedInApp() {
       </main>
       <AppFooter />
     </section>
-  );
+  )
 }
 
-export default App;
+export default App

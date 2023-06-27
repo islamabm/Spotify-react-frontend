@@ -8,7 +8,8 @@ export function StationPreview({ station }) {
   const dispatch = useDispatch()
 
   function goToDetails() {
-    dispatch(setCurrStation(station._id))
+    // dispatch(setCurrStation(station._id))
+    console.log('hi')
     navigate(`/station/${station._id}`)
   }
 

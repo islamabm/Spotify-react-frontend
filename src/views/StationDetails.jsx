@@ -23,6 +23,7 @@ export function StationDetails(props) {
   const station = useSelector(
     (storeState) => storeState.stationModule.currStation
   )
+  console.log('station in the station details please', station)
   const stationImg = useSelector(
     (storeState) => storeState.stationModule.currStationImg
   )
