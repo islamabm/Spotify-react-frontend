@@ -2625,7 +2625,7 @@ function query() {
 //   return Promise.resolve()
 // }
 
-function getById(id) {
+async function getById(id) {
   const station = gStations.find((station) => station._id === id)
   return Promise.resolve({ ...station })
 }
@@ -2744,7 +2744,7 @@ async function createNewStation(name) {
     name: name,
     tags: [],
     createdBy: {
-      _id: '001',
+      _id: utilService.makeId(),
       fullname: 'guest',
       imgUrl: '',
     },
@@ -2764,7 +2764,7 @@ async function createNewStation(name) {
   storageService.store(USER_STATIONS, userStations)
   stations.push(newStation)
   storageService.store(STORAGE_KEY, stations)
-  return { ...newStation }
+  return Promise.resolve({ ...newStation })
 }
 
 function stationNameClass(station) {
