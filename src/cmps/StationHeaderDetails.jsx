@@ -6,15 +6,12 @@ import StationUser from "./StationUser.jsx";
 export default function StationHeaderDetails(props) {
   const bgStyle = props.bgStyle
   const station = props.station
-  const stationType = useSelector(
-    (storeState) => storeState.stationModule.currStationType
-  )
-  console.log('stationType', stationType)
+  const createdBy = station.createdBy.fullname
   
   return (
     <div className="station-header-content" style={bgStyle}>
-       {stationType === "system" && (<StationSystem station={station}/>)}
-       {stationType === "user" && (<StationUser station={station}/>)}
+       {createdBy === "system" && (<StationSystem station={station}/>)}
+       {createdBy === "guset" && (<StationUser station={station}/>)}
     </div>
   )
 }

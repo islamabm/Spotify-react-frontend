@@ -22,8 +22,8 @@ const INITIAL_STATE = {
   currStationId: null,
   currStationGradientColor: "black",
   userStations: [],
-  currStationType: "system",
-};
+
+}
 
 export function stationReducer(state = INITIAL_STATE, action = {}) {
   switch (action.type) {

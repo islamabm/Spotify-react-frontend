@@ -18,6 +18,7 @@ export const stationService = {
   getUserStations,
   addSongToStation,
   stationNameClass,
+  removeSongFromStation,
   updateStation,
   //   tryStation,
 };
@@ -2636,6 +2637,30 @@ async function addSongToStation(stationId, song) {
   console.log("gStations", gStations);
   return { ...station };
 }
+
+async function removeSongFromStation(stationId, songId) {
+  const station = await getById(stationId)
+  station.songs.push(song)
+  storageService.store(STORAGE_KEY, gStations)
+  console.log('gStations', gStations)
+  return { ...station }
+}
+
+async function removeSongFromStation(stationId, songId) {
+  const station = await getById(stationId)
+  if (station) {
+    const songIndex = station.songs.findIndex((song) => song._id === songId)
+
+    if (songIndex !== -1) {
+      station.songs.splice(songIndex, 1)
+      const updatedStation = await save(station)
+      storageService.store(STORAGE_KEY, gStations)
+      return { ...updatedStation }
+    }
+  }
+  return null
+}
+
 async function getSongById(stationId, songId) {
   const station = await getById(stationId);
   const song = station.songs.find((song) => song._id === songId);
