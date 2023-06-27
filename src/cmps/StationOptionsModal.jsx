@@ -1,8 +1,14 @@
 import React, { useState } from 'react'
 import { DeleteStationModal } from './DeleteStationModal'
-
+import { useDispatch, useSelector } from 'react-redux'
+import { removeStation } from '../store/actions/station.actions'
 export function StationOptionsModal({ position }) {
   const [showDeleteModal, setShowDeleteModal] = useState(false)
+  const dispatch = useDispatch()
+
+  const station = useSelector(
+    (storeState) => storeState.stationModule.currStation
+  )
 
   function handleShowDeleteModal() {
     setShowDeleteModal(true)
@@ -11,6 +17,12 @@ export function StationOptionsModal({ position }) {
   function handleCloseDeleteModal() {
     setShowDeleteModal(false)
   }
+
+  function handleRemoveStation() {
+    dispatch(removeStation(station._id))
+    setShowDeleteModal(false)
+  }
+
   return (
     <>
       <section
@@ -36,7 +48,10 @@ export function StationOptionsModal({ position }) {
         </ul>
       </section>
       {showDeleteModal && (
-        <DeleteStationModal closeModal={handleCloseDeleteModal} />
+        <DeleteStationModal
+          closeModal={handleCloseDeleteModal}
+          onRemoveStation={handleRemoveStation}
+        />
       )}
     </>
   )
