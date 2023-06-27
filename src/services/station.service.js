@@ -2689,7 +2689,7 @@ async function getCurrIndex(stationId, songId) {
   return Promise.resolve(songIdx)
 }
 
-function remove(id) {
+ function remove(id) {
   const idx = gStations.findIndex((station) => station._id === id)
   gStations.splice(idx, 1)
   if (!gStations.length) gStations = gDefaultStations.slice()
