@@ -1,6 +1,5 @@
 export const utilService = {
   makeId,
-
   getRandomIntInclusive,
 }
 

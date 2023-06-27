@@ -2689,8 +2689,8 @@ function remove(id) {
   const idx = gStations.findIndex((station) => station._id === id)
   gStations.splice(idx, 1)
   const stations = storageService.load(USER_STATIONS)
-  stations.splice(idx,1)
-  storageService.store(USER_STATIONS,stations)
+  stations.splice(idx, 1)
+  storageService.store(USER_STATIONS, stations)
   storageService.store(STORAGE_KEY, gStations)
   return Promise.resolve()
 }
@@ -2745,7 +2745,7 @@ async function createNewStation(name) {
     tags: [],
     createdBy: {
       _id: '001',
-      fullname: 'guset',
+      fullname: 'guest',
       imgUrl: '',
     },
     likedByUsers: [],

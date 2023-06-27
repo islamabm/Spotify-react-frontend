@@ -1,9 +1,9 @@
-import React from "react"
-import { stationService } from "../services/station.service.js"
+import React from 'react'
+import { stationService } from '../services/station.service.js'
 
-export default function StationSystem(props) {
-  const station = props.station
+export default function StationSystem({ station }) {
   const stationNameClass = stationService.stationNameClass(station)
+  console.log('hi from rendering system')
   return (
     <>
       <img
@@ -20,7 +20,7 @@ export default function StationSystem(props) {
           className="spotify-logo"
           alt="spotify logo"
         />
-        <span className="logo">Spotify </span>
+        <span className="logo">Spotify</span>
         <span className="dot">• </span>
         <span className="songs-count"> {station.songs?.length} songs </span>
       </div>
