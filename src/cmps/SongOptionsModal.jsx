@@ -2,7 +2,10 @@ import React, { useState } from 'react'
 import { getSpotifySvg } from '../services/SVG.service'
 import { AddSongModal } from './AddSongModal'
 import { useDispatch, useSelector } from 'react-redux'
-import { addSongToStation } from '../store/actions/station.actions'
+import {
+  addSongToStation,
+  removeSongFromStation,
+} from '../store/actions/station.actions'
 export function SongOptionsModal({ position, closeOptionsModal }) {
   const station = useSelector(
     (storeState) => storeState.stationModule.currStation
@@ -25,6 +28,11 @@ export function SongOptionsModal({ position, closeOptionsModal }) {
     dispatch(addSongToStation(stationId, song))
     setShowModal(false)
   }
+
+  function handleRemoveSongFromStation() {
+    dispatch(removeSongFromStation(station._id, song._id))
+  }
+
   return (
     <>
       <section
@@ -39,7 +47,7 @@ export function SongOptionsModal({ position, closeOptionsModal }) {
             <button>Save to your Liked Songs</button>
           </li>
           {station.createdBy.fullname !== 'system' && (
-            <li>
+            <li onClick={handleRemoveSongFromStation}>
               <button>Remove from this playlist</button>
             </li>
           )}

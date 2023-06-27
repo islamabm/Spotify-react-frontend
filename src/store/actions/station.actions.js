@@ -117,6 +117,24 @@ export function addSongToStation(stationId, song) {
   }
 }
 
+export function removeSongFromStation(stationId, songId) {
+  return async (dispatch) => {
+    try {
+      const updatedStation = await stationService.removeSongFromStation(
+        stationId,
+        songId
+      )
+      console.log('updatedStation', updatedStation)
+      const action = {
+        type: UPDATE_STATION,
+        station: updatedStation,
+      }
+      dispatch(action)
+    } catch (error) {
+      console.log('error:', error)
+    }
+  }
+}
 export function setCurrGradient(bgStyle) {
   console.log('color', bgStyle)
   return (dispatch) => {

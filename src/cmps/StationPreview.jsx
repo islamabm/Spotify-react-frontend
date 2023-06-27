@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
 export function StationPreview({ station }) {
-  const createdBy = station.createdBy.fullname
+  const createdBy = station?.createdBy.fullname
   const navigate = useNavigate()
 
   function goToDetails() {
