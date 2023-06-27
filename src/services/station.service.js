@@ -2632,14 +2632,6 @@ function getById(id) {
 
 async function addSongToStation(stationId, song) {
   const station = await getById(stationId)
-  station.songs.push(song)
-  storageService.store(STORAGE_KEY, gStations)
-  console.log('gStations', gStations)
-  return { ...station }
-}
-
-async function removeSongFromStation(stationId, songId) {
-  const station = await getById(stationId)
   if (station) {
     const songIndex = station.songs.findIndex((song) => song._id === songId)
 
