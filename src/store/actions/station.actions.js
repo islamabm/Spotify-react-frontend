@@ -12,8 +12,6 @@ import {
   ADD_SONG_TO_STATION,
 } from '../reducers/station.reducer'
 
-import { store } from '../index'
-
 export function loadStations() {
   return async (dispatch, getState) => {
     try {
@@ -149,8 +147,9 @@ export function setFilterBy(filterBy) {
 }
 
 export function updateStation(stationId, songs) {
-  return async () => {
+  return async (dispatch) => {
     try {
+      console.log('from actions',stationId)
       const updatedStation = await stationService.updateStation(
         stationId,
         songs
@@ -159,7 +158,7 @@ export function updateStation(stationId, songs) {
         type: UPDATE_STATION,
         station: updatedStation,
       }
-      store.dispatch(action)
+      dispatch(action)
       return 'Updated!'
     } catch (error) {
       console.log('error:', error)
