@@ -10,11 +10,13 @@ import { FastAverageColor } from 'fast-average-color'
 import { eventBus } from '../services/event-bus.service'
 import StationHeaderDetails from '../cmps/StationHeaderDetails'
 import StationSongList from '../cmps/StationSongList'
-
+import { StationOptionsModal } from '../cmps/StationOptionsModal'
 
 export function StationDetails(props) {
   const [bgStyle, setBgStyle] = useState(null)
   const [bgBottomStyle, setBgBottomStyle] = useState(null)
+  const [showModal, setShowModal] = useState(false)
+  const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 })
   const colorCache = {}
   const params = useParams()
   const stationDetailsRef = useRef(null)
@@ -62,6 +64,15 @@ export function StationDetails(props) {
     dispatch(setCurrStation(params.id))
   }
 
+  function showStationModal(e) {
+    const rect = e.target.getBoundingClientRect()
+    setModalPosition({
+      top: rect.top + window.scrollY,
+      left: rect.left + window.scrollX,
+    })
+    setShowModal(true)
+  }
+
   function updateImgUrlAndColor(station) {
     if (!station) return
     const imgUrl = station.imgUrl
@@ -102,7 +113,6 @@ export function StationDetails(props) {
     }
   }
 
-
   if (!station) return <div>Loading...</div>
   return (
     <section className="station-details" ref={stationDetailsRef}>
@@ -117,6 +127,7 @@ export function StationDetails(props) {
             }}
           ></span>
           <span
+            onClick={(e) => showStationModal(e)}
             className="dots flex align-center justify-center"
             dangerouslySetInnerHTML={{
               __html: getSpotifySvg('bigDots'),
@@ -136,9 +147,10 @@ export function StationDetails(props) {
               }}
             ></span>
           </div>
-              <StationSongList station={station}/>
+          <StationSongList station={station} />
         </div>
       </div>
+      {showModal && <StationOptionsModal position={modalPosition} />}
     </section>
   )
 }
