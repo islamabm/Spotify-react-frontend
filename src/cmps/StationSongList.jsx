@@ -77,7 +77,7 @@ export default function StationSongList(props) {
   }
   return (
     <div>
-      {station.songs.map((song, idx) => (
+      {station.songs?.map((song, idx) => (
         <div key={idx} className="song">
           <span
             className={`song-idx flex align-center justify-center ${

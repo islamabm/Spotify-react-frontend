@@ -5,7 +5,7 @@ import { getSpotifySvg } from "../services/SVG.service.js"
 export default function StationUser(props) {
     const station = props.station
     const stationNameClass = stationService.stationNameClass(station)
-    
+    console.log('station', station)
     return (
     <>
       <div className="station-main-img">
@@ -18,7 +18,7 @@ export default function StationUser(props) {
       <div className="station-info">
         <span className="playlist-word">Playlist</span>
         <h1 className={stationNameClass}>{station.name}</h1>
-        <span className="songs-count"> {station.songs.length} songs </span>
+        <span className="songs-count"> {station.songs?.length} songs </span>
       </div>
     </>
   )

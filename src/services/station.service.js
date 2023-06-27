@@ -2709,7 +2709,8 @@ function _loadStations() {
 }
 
 function getUserStations() {
-  return storageService.load(USER_STATIONS)
+  const stations = storageService.load(USER_STATIONS)
+  return Promise.resolve([...stations])
 }
 
 function _loadSearchStations() {
@@ -2748,10 +2749,11 @@ async function createNewStation(name) {
   storageService.store(USER_STATIONS, userStations)
   stations.push(newStation)
   storageService.store(STORAGE_KEY, stations)
-  return newStation
+  return { ...newStation }
 }
 
 function stationNameClass(station) {
+  if (!station.name) return
   const words = station.name.split(' ').length
   if (words <= 3) {
     return 'short-station-name'

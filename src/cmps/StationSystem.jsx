@@ -22,7 +22,7 @@ export default function StationSystem(props) {
         />
         <span className="logo">Spotify </span>
         <span className="dot">• </span>
-        <span className="songs-count"> {station.songs.length} songs </span>
+        <span className="songs-count"> {station.songs?.length} songs </span>
       </div>
     </>
   )

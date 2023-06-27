@@ -38,9 +38,11 @@ export function SongOptionsModal({ position, closeOptionsModal }) {
           <li>
             <button>Save to your Liked Songs</button>
           </li>
-          <li>
-            <button>Remove from this playlist</button>
-          </li>
+          {station.createdBy.fullname !== 'system' && (
+            <li>
+              <button>Remove from this playlist</button>
+            </li>
+          )}
           <li className="special-li">
             <button onClick={showAddModal}>Add to playlist</button>
             <span

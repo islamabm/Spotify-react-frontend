@@ -22,7 +22,7 @@ const INITIAL_STATE = {
   currStationId: null,
   currStationGradientColor: 'black',
   userStations: [],
-  currStationType: 'system' ,
+  currStationType: 'system',
 }
 
 export function stationReducer(state = INITIAL_STATE, action = {}) {
@@ -48,7 +48,6 @@ export function stationReducer(state = INITIAL_STATE, action = {}) {
         currStation: action.station,
         currStationId: action.station._id,
         currStationImg: action.station.imgUrl,
-        currStationType: 'system',
       }
     case ADD_SONG_TO_STATION:
       return {
@@ -66,8 +65,7 @@ export function stationReducer(state = INITIAL_STATE, action = {}) {
       return {
         ...state,
         stations: [...state.stations, action.station],
-        userStations: [...state.userStations, action.station],
-        currStationType: 'user',
+        userStations: [...state?.userStations, action.station],
       }
     case REMOVE_STATION:
       return {
