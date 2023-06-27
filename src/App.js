@@ -1,45 +1,60 @@
-import { Route, HashRouter as Router, Routes } from 'react-router-dom'
-import './assets/scss/global.scss'
-import { AppHeader } from './cmps/AppHeader'
-import { AppNav } from './cmps/AppNav'
-import { UserLibrary } from './cmps/UserLibrary'
-import { AppFooter } from './cmps/AppFooter'
-import { StationIndex } from './views/StationIndex'
-import { StationDetails } from './views/StationDetails'
-import { StationEdit } from './views/StationEdit'
-import { Login } from './views/Login'
-import Search from './views/Search'
+import { useState } from 'react';
+import { Route, HashRouter as Router, Routes } from 'react-router-dom';
+import './assets/scss/global.scss';
+import { AppHeader } from './cmps/AppHeader';
+import { AppNav } from './cmps/AppNav';
+import { UserLibrary } from './cmps/UserLibrary';
+import { AppFooter } from './cmps/AppFooter';
+import { StationIndex } from './views/StationIndex';
+import { StationDetails } from './views/StationDetails';
+import { StationEdit } from './views/StationEdit';
+import { Login } from './views/Login';
+import Search from './views/Search';
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const login = () => {
+    // Perform login logic here
+    setIsLoggedIn(true);
+  };
+
+  const logout = () => {
+    // Perform logout logic here
+    setIsLoggedIn(false);
+  };
+
+  if (!isLoggedIn) {
+    window.location.href = "/#/login"; // Redirect to the login page
+  }
+
   return (
     <Router>
-      <section className="main-app">
-        <AppHeader />
-        <AppNav />
-        <UserLibrary />
-
-        <main className="container">
-          <Routes>
-     
-            <Route path="/" element={<StationIndex />}>
-              {' '}
-            </Route>
-           
-
-            <Route path="/station/edit/:id?" element={<StationEdit />} />
-            <Route path="/station/:id" element={<StationDetails />} />
-            <Route path="/search" element={<Search />} />
-            <Route path="/login" element={<Login />} />
-            {/* <Route path="/about" element={<About />} >
-                            // <Route path="/about/team" element={<Team />} />
-                            <Route path="/about/vision" element={<Vision />} />
-                        </Route> */}
-          </Routes>
-        </main>
-        <AppFooter />
-      </section>
+      <Routes>
+        <Route path="/login" element={<Login login={login} />} />
+        <Route path="/" element={<LoggedInApp />} />
+      </Routes>
     </Router>
-  )
+  );
 }
 
-export default App
+function LoggedInApp() {
+  return (
+    <section className="main-app">
+      <AppHeader />
+      <AppNav />
+      <UserLibrary />
+      <main className="container">
+        <Routes>
+          <Route path="/" element={<StationIndex />} />
+          <Route path="/station/edit/:id?" element={<StationEdit />} />
+          <Route path="/station/:id" element={<StationDetails />} />
+          <Route path="/search" element={<Search />} />
+        </Routes>
+      </main>
+      <AppFooter />
+    </section>
+  );
+}
+
+export default App;
