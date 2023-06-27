@@ -7,6 +7,10 @@ export function StationOptionsModal({ position }) {
   function handleShowDeleteModal() {
     setShowDeleteModal(true)
   }
+
+  function handleCloseDeleteModal() {
+    setShowDeleteModal(false)
+  }
   return (
     <>
       <section
@@ -31,7 +35,9 @@ export function StationOptionsModal({ position }) {
           </li>
         </ul>
       </section>
-      {showDeleteModal && <DeleteStationModal />}
+      {showDeleteModal && (
+        <DeleteStationModal closeModal={handleCloseDeleteModal} />
+      )}
     </>
   )
 }
