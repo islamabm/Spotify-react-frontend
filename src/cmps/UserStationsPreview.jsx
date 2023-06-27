@@ -1,16 +1,20 @@
 import React from 'react'
 import { getSpotifySvg } from '../services/SVG.service'
 import { useNavigate } from 'react-router-dom'
-import emptyImg from '../assets/imgs/empty-img.png'
+import { useDispatch } from 'react-redux'
+import { setCurrStation } from '../store/actions/station.actions'
 export default function UserStationsPreview({ station }) {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
-  function goToDetails() {
+  function goToUserStationDetails() {
+    // dispatch(setCurrStation(station._id))
+
     navigate(`/station/${station._id}`)
   }
 
   return (
-    <article className="user-station-preview" onClick={goToDetails}>
+    <article className="user-station-preview" onClick={goToUserStationDetails}>
       <div className="image-svg-container">
         <span
           dangerouslySetInnerHTML={{
