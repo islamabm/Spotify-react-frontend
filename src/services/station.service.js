@@ -2648,10 +2648,6 @@ async function removeSongFromStation(stationId, songId) {
   console.log('songId', songId)
 }
 
-async function removeSongFromStation(stationId, songId) {
-  console.log('songId', songId)
-}
-
 async function getSongById(stationId, songId) {
   const station = await getById(stationId);
   const song = station.songs.find((song) => song._id === songId);
