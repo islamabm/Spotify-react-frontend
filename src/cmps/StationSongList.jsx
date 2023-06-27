@@ -78,7 +78,7 @@ export default function StationSongList(props) {
       <Droppable droppableId="songList">
         {(provided) => (
           <div ref={provided.innerRef} {...provided.droppableProps}>
-            {songs.map((song, idx) => (
+            {songs?.map((song, idx) => (
               // SONG
               <Draggable key={song._id} draggableId={song._id} index={idx}>
                 {(provided) => (
