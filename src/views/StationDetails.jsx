@@ -87,7 +87,7 @@ export function StationDetails(props) {
       const gradient = `linear-gradient(to bottom, ${cachedColor} 0%, ${cachedColor} 10%, ${cachedColor} 20%, ${cachedColor} 50%, black 140%, black 70%, black 100%)`
 
       setBgStyle(gradient)
-      const bottomGradient = `linear-gradient(${cachedColor} -20%, rgb(0, 0, 0) 12%)`
+      const bottomGradient = `linear-gradient(${cachedColor} -20%, #121212 9%)`
       setBgBottomStyle(bottomGradient)
       document.body.style.backgroundImage = gradient
       return
@@ -105,7 +105,7 @@ export function StationDetails(props) {
           background: `linear-gradient(to bottom, ${color.rgb} 0%, ${color.rgb} 10%, ${color.rgb} 20%, ${color.rgb} 50%, black 140%, black 70%, black 100%)`,
         })
         setBgBottomStyle({
-          background: `linear-gradient(${color.rgb} -30%, rgb(0, 0, 0) 12%)`,
+          background: `linear-gradient(${color.rgb} -30%, #121212 9%)`,
         })
       } catch (e) {
         console.error(e)
