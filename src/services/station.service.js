@@ -2630,7 +2630,7 @@ function getById(id) {
   return Promise.resolve({ ...station })
 }
 
-async function addSongToStation(stationId, song) {
+async function addSongToStation(stationId, songId) {
   const station = await getById(stationId)
   if (station) {
     const songIndex = station.songs.findIndex((song) => song._id === songId)
@@ -2643,6 +2643,10 @@ async function addSongToStation(stationId, song) {
     }
   }
   return null
+}
+
+async function removeSongFromStation(stationId, songId) {
+  console.log('songId', songId)
 }
 
 async function getSongById(stationId, songId) {
@@ -2681,10 +2685,12 @@ async function getCurrIndex(stationId, songId) {
   return Promise.resolve(songIdx)
 }
 
- function remove(id) {
+function remove(id) {
   const idx = gStations.findIndex((station) => station._id === id)
   gStations.splice(idx, 1)
-  if (!gStations.length) gStations = gDefaultStations.slice()
+  const stations = storageService.load(USER_STATIONS)
+  stations.splice(idx,1)
+  storageService.store(USER_STATIONS,stations)
   storageService.store(STORAGE_KEY, gStations)
   return Promise.resolve()
 }

@@ -30,7 +30,7 @@ export function SongOptionsModal({ position, closeOptionsModal }) {
   }
 
   function handleRemoveSongFromStation() {
-    dispatch(removeSongFromStation(station._id, song._id))
+    // dispatch(removeSongFromStation(station._id, song._id))
   }
 
   return (

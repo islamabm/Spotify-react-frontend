@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import { DeleteStationModal } from './DeleteStationModal'
+import { RecommindationModal } from './RecommindationModal'
 import { useDispatch, useSelector } from 'react-redux'
 import { removeStation } from '../store/actions/station.actions'
 export function StationOptionsModal({ position }) {
   const [showDeleteModal, setShowDeleteModal] = useState(false)
+  const [showRecommindationModal, setShowRecommindationModal] = useState(false)
   const dispatch = useDispatch()
 
   const station = useSelector(
@@ -14,8 +16,16 @@ export function StationOptionsModal({ position }) {
     setShowDeleteModal(true)
   }
 
+  function handleShowRecommindationModal() {
+    setShowRecommindationModal(true)
+  }
+
   function handleCloseDeleteModal() {
     setShowDeleteModal(false)
+  }
+
+  function handleCloseRecommindationModal() {
+    setShowRecommindationModal(false)
   }
 
   function handleRemoveStation() {
@@ -42,7 +52,7 @@ export function StationOptionsModal({ position }) {
           <li>
             <button>Copy link to playlist</button>
           </li>
-          <li>
+          <li onClick={handleShowRecommindationModal}>
             <button>About recommendation</button>
           </li>
         </ul>
@@ -51,6 +61,12 @@ export function StationOptionsModal({ position }) {
         <DeleteStationModal
           closeModal={handleCloseDeleteModal}
           onRemoveStation={handleRemoveStation}
+        />
+      )}
+
+      {showRecommindationModal && (
+        <RecommindationModal
+          closeRecommindationModal={handleCloseRecommindationModal}
         />
       )}
     </>
