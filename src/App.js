@@ -9,6 +9,7 @@ import { StationIndex } from './views/StationIndex';
 import { StationDetails } from './views/StationDetails';
 import { StationEdit } from './views/StationEdit';
 import { Login } from './views/Login';
+// import { Signup } from './views/Signup';
 import Search from './views/Search';
 
 function App() {
@@ -24,15 +25,13 @@ function App() {
     setIsLoggedIn(false);
   };
 
-  if (!isLoggedIn) {
-    window.location.href = "/#/login"; // Redirect to the login page
-  }
 
   return (
     <Router>
       <Routes>
-        <Route path="/login" element={<Login login={login} />} />
+        {/* <Route path="/signup" element={<Signup />} /> */}
         <Route path="/" element={<LoggedInApp />} />
+        <Route path="/login" element={<Login login={login} />} />
       </Routes>
     </Router>
   );
