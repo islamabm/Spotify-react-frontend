@@ -23,7 +23,6 @@ export function UserLibrary() {
   }
 
   function createNewStation() {
-    console.log('hi ffrom create in the component')
     setStationCounter(stationCounter + 1)
     const name = `My Playlist #${stationCounter}`
     dispatch(addStation(name))

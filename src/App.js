@@ -11,31 +11,44 @@ import { Login } from './views/Login'
 import Search from './views/Search'
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+  const login = () => {
+    // Perform login logic here
+    setIsLoggedIn(true)
+  }
+
+  const logout = () => {
+    // Perform logout logic here
+    setIsLoggedIn(false)
+  }
+
   return (
     <Router>
-      <section className="main-app">
-        <AppHeader />
-        <AppNav />
-        <UserLibrary />
-        <main className="container">
-          <Routes>
-            <Route path="/" element={<StationIndex />}>
-              {' '}
-            </Route>
-
-            <Route path="/station/edit/:id?" element={<StationEdit />} />
-            <Route path="/station/:id" element={<StationDetails />} />
-            <Route path="/search" element={<Search />} />
-            <Route path="/login" element={<Login />} />
-            {/* <Route path="/about" element={<About />} >
-                            // <Route path="/about/team" element={<Team />} />
-                            <Route path="/about/vision" element={<Vision />} />
-                        </Route> */}
-          </Routes>
-        </main>
-        <AppFooter />
-      </section>
+      <Routes>
+        {/* <Route path="/signup" element={<Signup />} /> */}
+        <Route path="*" element={<LoggedInApp />} />
+        <Route path="/login" element={<Login login={login} />} />
+      </Routes>
     </Router>
+  )
+}
+function LoggedInApp() {
+  return (
+    <section className="main-app">
+      <AppHeader />
+      <AppNav />
+      <UserLibrary />
+      <main className="container">
+        <Routes>
+          <Route path="/" element={<StationIndex />} />
+          <Route path="/station/edit/:id?" element={<StationEdit />} />
+          <Route path="/station/:id" element={<StationDetails />} />
+          <Route path="/search" element={<Search />} />
+        </Routes>
+      </main>
+      <AppFooter />
+    </section>
   )
 }
 

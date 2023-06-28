@@ -19,6 +19,7 @@ export const stationService = {
   addSongToStation,
   stationNameClass,
   updateStation,
+  getRecommendedSongs,
   //   tryStation,
 };
 const gDefaultStations = [
@@ -2550,7 +2551,7 @@ const gSearchCategories = [
   ],
 ];
 
-const gUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyDKlXiiyfaI0sFZbRbv17LGgaZI_ffF9fQ&q=`;
+const gUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyCs23P1BnAU45UgQargknaVQz7mDJEIRGc&q=`;
 const STORAGE_KEY = "stations";
 const USER_STATIONS = "user-stations";
 const STORAGE_SEARCH_KEY = "search-stations";
@@ -2563,6 +2564,20 @@ var gStations = _loadStations();
 var gSearchStations = _loadSearchStations();
 
 function getVideos(keyword) {
+  if (Array.isArray(keyword)) {
+    // Fetch recommended songs based on the provided list of song titles
+    const recommendedSongs = keyword.map(async (title) => {
+      // Use the title to fetch the recommended song
+      // Modify the axios.get call to fetch the recommended song based on the title
+      const res = await axios.get(gUrl + title);
+      const recommendedSong = res.data.items.map((item) =>
+        _prepareRecommendedData(item)
+      );
+      return recommendedSong[0];
+    });
+
+    return Promise.all(recommendedSongs);
+  }
   if (gSearchCache[keyword]) {
     return Promise.resolve(gSearchCache[keyword]);
   }
@@ -2625,12 +2640,12 @@ function query() {
 // }
 
 async function getById(id) {
-  const station = gStations.find((station) => station._id === id)
-  return Promise.resolve({ ...station })
+  const station = gStations.find((station) => station._id === id);
+  return Promise.resolve({ ...station });
 }
 
 async function addSongToStation(stationId, songId) {
-  const station = await getById(stationId)
+  const station = await getById(stationId);
   if (station) {
     const songIndex = station.songs.findIndex((song) => song._id === songId);
 
@@ -2685,13 +2700,13 @@ async function getCurrIndex(stationId, songId) {
 }
 
 function remove(id) {
-  const idx = gStations.findIndex((station) => station._id === id)
-  gStations.splice(idx, 1)
-  const stations = storageService.load(USER_STATIONS)
-  stations.splice(idx, 1)
-  storageService.store(USER_STATIONS, stations)
-  storageService.store(STORAGE_KEY, gStations)
-  return Promise.resolve()
+  const idx = gStations.findIndex((station) => station._id === id);
+  gStations.splice(idx, 1);
+  const stations = storageService.load(USER_STATIONS);
+  stations.splice(idx, 1);
+  storageService.store(USER_STATIONS, stations);
+  storageService.store(STORAGE_KEY, gStations);
+  return Promise.resolve();
 }
 
 function save(stationToSave) {
@@ -2744,8 +2759,8 @@ async function createNewStation(name) {
     tags: [],
     createdBy: {
       _id: utilService.makeId(),
-      fullname: 'guest',
-      imgUrl: '',
+      fullname: "guest",
+      imgUrl: "",
     },
     likedByUsers: [],
     songs: [],
@@ -2759,11 +2774,11 @@ async function createNewStation(name) {
     desc: "",
   };
 
-  userStations.push(newStation)
-  storageService.store(USER_STATIONS, userStations)
-  stations.push(newStation)
-  storageService.store(STORAGE_KEY, stations)
-  return Promise.resolve({ ...newStation })
+  userStations.push(newStation);
+  storageService.store(USER_STATIONS, userStations);
+  stations.push(newStation);
+  storageService.store(STORAGE_KEY, stations);
+  return Promise.resolve({ ...newStation });
 }
 
 function stationNameClass(station) {
@@ -2779,14 +2794,27 @@ function stationNameClass(station) {
 }
 
 async function updateStation(stationId, songs) {
-  console.log("from service", stationId);
   const currStation = await getById(stationId);
-  console.log("currStation from service", currStation);
   if (currStation && currStation._id === stationId) {
     const updatedStation = { ...currStation, songs: songs };
     save(updatedStation);
-    console.log("updatedStation:", updatedStation);
   } else {
     console.log("Station not found!");
   }
+}
+
+async function getRecommendedSongs(station) {
+  console.log('from service',station)
+  const songTitles = station.map((song) => song.title);
+  return await getVideos(songTitles);
+}
+
+function _prepareRecommendedData(item) {
+  return {
+    imgUrl: item.snippet.thumbnails.default.url,
+    videoId: item.id.videoId,
+    title: item.snippet.title,
+    artist: item.snippet.artist, // Add artist information
+    album: item.snippet.album, // Add album information
+  };
 }

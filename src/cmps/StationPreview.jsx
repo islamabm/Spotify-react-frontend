@@ -9,7 +9,6 @@ export function StationPreview({ station }) {
 
   function goToDetails() {
     // dispatch(setCurrStation(station._id))
-    console.log('hi')
     navigate(`/station/${station._id}`)
     console.log('hi sfter go')
   }

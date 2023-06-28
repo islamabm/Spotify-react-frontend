@@ -27,7 +27,6 @@ export default function StationSongList({ station }) {
       top: rect.top + window.scrollY,
       left: rect.left + window.scrollX,
     })
-    console.log('showModal', showModal)
     setShowOptionsModal(true)
   }
 
