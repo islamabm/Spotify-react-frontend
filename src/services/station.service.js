@@ -2779,13 +2779,10 @@ function stationNameClass(station) {
 }
 
 async function updateStation(stationId, songs) {
-  console.log("from service", stationId);
   const currStation = await getById(stationId);
-  console.log("currStation from service", currStation);
   if (currStation && currStation._id === stationId) {
     const updatedStation = { ...currStation, songs: songs };
     save(updatedStation);
-    console.log("updatedStation:", updatedStation);
   } else {
     console.log("Station not found!");
   }

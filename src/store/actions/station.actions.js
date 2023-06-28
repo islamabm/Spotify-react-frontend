@@ -45,9 +45,7 @@ export function loadUserStations() {
 export function addStation(name) {
   return async (dispatch) => {
     try {
-      console.log('hi from the action')
       const station = await stationService.createNewStation(name)
-      console.log('station after service', station)
       const action = { type: ADD_STATION, station }
       dispatch(action)
     } catch (error) {
@@ -122,7 +120,6 @@ export function removeSongFromStation(stationId, songId) {
         stationId,
         songId
       )
-      console.log('updatedStation', updatedStation)
       const action = {
         type: UPDATE_STATION,
         station: updatedStation,
@@ -134,7 +131,6 @@ export function removeSongFromStation(stationId, songId) {
   }
 }
 export function setCurrGradient(bgStyle) {
-  console.log('color', bgStyle)
   return (dispatch) => {
     dispatch({ type: SET_CURR_GRADIENT, bgStyle })
   }
