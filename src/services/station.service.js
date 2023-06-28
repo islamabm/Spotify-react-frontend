@@ -20,6 +20,7 @@ export const stationService = {
   stationNameClass,
   updateStation,
   getRecommendedSongs,
+  removeSongFromStation,
   //   tryStation,
 }
 const gDefaultStations = [
@@ -2714,6 +2715,24 @@ async function addSongToStation(stationId, song) {
   station.songs.push(song)
   await save(station)
   return station
+}
+
+async function removeSongFromStation(stationId, songId) {
+  const station = await getById(stationId)
+  if (!station) {
+    console.error('Station with id not found')
+    return null
+  }
+
+  const songIdx = station.songs.findIndex((song) => song._id === songId)
+  if (songIdx === -1) {
+    console.error('Song with id not found in the station')
+    return null
+  } else {
+    station.songs.splice(songIdx, 1)
+    const updatedStation = await save(station)
+    return { ...updatedStation }
+  }
 }
 
 async function getSongById(stationId, songId) {
