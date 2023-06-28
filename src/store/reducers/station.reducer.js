@@ -87,6 +87,9 @@ export function stationReducer(state = INITIAL_STATE, action = {}) {
         stations: state.stations.map((station) =>
           station._id === action.station._id ? action.station : station
         ),
+        userStations: state.userStations.map((station) =>
+          station._id === action.station._id ? action.station : station
+        ),
       }
 
     default:
