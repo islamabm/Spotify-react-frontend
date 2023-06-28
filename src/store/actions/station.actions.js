@@ -48,6 +48,9 @@ export function addStation(name) {
       const station = await stationService.createNewStation(name)
       const action = { type: ADD_STATION, station }
       dispatch(action)
+      const action2 = { type: SET_CURR_STATION, station }
+      console.log('hi after dispatch2')
+      dispatch(action2)
     } catch (error) {
       console.log('error:', error)
     }
@@ -145,7 +148,6 @@ export function setFilterBy(filterBy) {
 export function updateStation(stationId, songs) {
   return async (dispatch) => {
     try {
-      console.log('from actions', stationId)
       const updatedStation = await stationService.updateStation(
         stationId,
         songs

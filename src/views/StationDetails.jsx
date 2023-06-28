@@ -31,7 +31,6 @@ export function StationDetails(props) {
 
   useEffect(() => {
     loadStation()
-    console.log('hi in useEffect of the loadStation')
   }, [params.id])
 
   useEffect(() => {
@@ -46,7 +45,6 @@ export function StationDetails(props) {
       eventBus.emit('stationDetailsScroll', scrollPos)
     }
     if (currentStationDetailsRef) {
-      dispatch(setCurrGradient(bgStyle))
       currentStationDetailsRef.addEventListener('scroll', handleScroll, {
         passive: true,
       })
@@ -113,7 +111,7 @@ export function StationDetails(props) {
       }
     }
   }
-
+  
   if (!station) return <div>Loading...</div>
   return (
     <section className="station-details" ref={stationDetailsRef}>

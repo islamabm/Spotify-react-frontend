@@ -1,63 +1,56 @@
-import { getSpotifySvg } from "../services/SVG.service";
-import { useLocation, Link } from "react-router-dom";
-import { UserModal } from "./UserModal";
-import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import { eventBus } from "../services/event-bus.service";
+import { getSpotifySvg } from '../services/SVG.service'
+import { useLocation, Link } from 'react-router-dom'
+import { UserModal } from './UserModal'
+import { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import { eventBus } from '../services/event-bus.service'
 export function AppHeader() {
-  const [showModal, setShowModal] = useState(false);
-  const [currScrollPos, setScrollPos] = useState(0);
+  const [showModal, setShowModal] = useState(false)
+  const [currScrollPos, setScrollPos] = useState(0)
 
   const station = useSelector(
     (storeState) => storeState.stationModule.currStation
-  );
+  )
 
   const gradient = useSelector(
     (storeState) => storeState.stationModule.currStationGradientColor
-  );
-  const location = useLocation();
-  // const [headerOpacity, setHeaderOpacity] = useState(0)
+  )
+  const location = useLocation()
+
   const [headers, setHeaders] = useState({
-    backgroundColor: "transparent",
-  });
+    backgroundColor: 'transparent',
+  })
 
   function updateHeaderOpacity(scrollPos) {
-    setScrollPos(scrollPos);
+    setScrollPos(scrollPos)
 
-    const maxScroll = 50;
-    let opacity = Math.min(scrollPos / maxScroll, 1);
-
-    let dominantColor =
-      // gradient
-      //   ? gradient.background
-      //       .match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/i)
-      //       .slice(1, 4)
-      //       .join(', ')
-      //   :
-      "0, 0, 0";
+    const maxScroll = 50
+    let opacity = Math.min(scrollPos / maxScroll, 1)
+    console.log('gradient', gradient)
+    let dominantColor = '0, 0, 0'
 
     const newHeaders = {
       backgroundColor: `rgba(${dominantColor}, ${opacity})`,
-    };
-
-    setHeaders(newHeaders);
+    }
+    //
+    setHeaders(newHeaders)
   }
 
   useEffect(() => {
-    const onScroll = (scrollPos) => updateHeaderOpacity(scrollPos);
-    const unlisten = eventBus.on("stationDetailsScroll", onScroll);
+    const onScroll = (scrollPos) => updateHeaderOpacity(scrollPos)
+    const unlisten = eventBus.on('stationDetailsScroll', onScroll)
 
     return () => {
-      unlisten();
-    };
-  }, [gradient]);
+      unlisten()
+    }
+  }, [gradient])
 
   function onShowModal() {
-    setShowModal(true);
+    setShowModal(true)
   }
 
   function onCloseModal() {
-    setShowModal(false);
+    setShowModal(false)
   }
   return (
     <header
@@ -70,19 +63,19 @@ export function AppHeader() {
           <div className="black-circle">
             <span
               dangerouslySetInnerHTML={{
-                __html: getSpotifySvg("leftArrowIcon"),
+                __html: getSpotifySvg('leftArrowIcon'),
               }}
             ></span>
           </div>
           <div className="black-circle">
             <span
               dangerouslySetInnerHTML={{
-                __html: getSpotifySvg("rightArrowIcon"),
+                __html: getSpotifySvg('rightArrowIcon'),
               }}
             ></span>
           </div>
         </section>
-        {location.pathname === "/search" && (
+        {location.pathname === '/search' && (
           <div className="flex align-center justify-center">
             <input placeholder="What do you want to listen to?" />
           </div>
@@ -93,7 +86,7 @@ export function AppHeader() {
             <p>{station.name}</p>
           </div>
         ) : (
-          ""
+          ''
         )}
       </section>
 
@@ -108,11 +101,11 @@ export function AppHeader() {
         <span
           className="user-icon pointer flex justify-center align-center"
           dangerouslySetInnerHTML={{
-            __html: getSpotifySvg("userIcon"),
+            __html: getSpotifySvg('userIcon'),
           }}
         ></span>
       </div>
       {showModal && <UserModal onClose={onCloseModal} />}
     </header>
-  );
+  )
 }

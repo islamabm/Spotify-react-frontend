@@ -4,6 +4,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { loadStations, removeStation } from '../store/actions/station.actions'
 
 export function StationIndex() {
+  const station = useSelector(
+    (storeState) => storeState.stationModule.currStation
+  )
+  console.log('station', station)
+
   const stations = useSelector(
     (storeState) => storeState.stationModule.stations
   )

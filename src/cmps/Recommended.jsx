@@ -5,7 +5,6 @@ import { stationService } from "../services/station.service.js";
 
 export function Recommended({ list }) {
   const [recommendedSongs, setRecommendedSongs] = useState([]);
-  console.log(list);
 
   useEffect(() => {
     getList();
@@ -14,7 +13,6 @@ export function Recommended({ list }) {
   async function getList() {
     try {
       const currList = await stationService.getRecommendedSongs(list);
-      console.log(currList);
       setRecommendedSongs(currList);
     } catch (error) {
       console.error("Error fetching recommended songs:", error);

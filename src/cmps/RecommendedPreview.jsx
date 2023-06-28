@@ -2,7 +2,6 @@ import React from "react";
 
 export function RecommendedPreview({ song }) {
 
-console.log('song from preview',song)
   return (
     <article className="recommended-song flex align-center">
       <div className="img-and-title flex align-center">

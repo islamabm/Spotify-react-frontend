@@ -2643,8 +2643,6 @@ async function getVideos(keyword, song = null) {
 
     const recommendedSongs = uncachedKeywords.map(async (artist) => {
       const res = await axios.get(gUrl + artist);
-      console.log(res.data.items)
-      // console.log(item)
       const recommendedSong = res.data.items.map((item) =>
         _prepareRecommendedData(item,song)
       );
@@ -2671,9 +2669,6 @@ function _prepareData(item) {
   };
 }
 
-var gStations = _loadStations();
-
-var gSearchStations = _loadSearchStations();
 
 function searchQuery() {
   return Promise.resolve([...gSearchStations]);
@@ -2681,7 +2676,6 @@ function searchQuery() {
 
 function query() {
   //   let stationsToReturn = gStations
-  //   console.log(filterBy)
   //   if (filterBy) {
   //     var { type, maxBatteryStatus, minBatteryStatus, model } = filterBy
   //     maxBatteryStatus = maxBatteryStatus || Infinity
@@ -2723,7 +2717,6 @@ async function addSongToStation(stationId, songId) {
 }
 
 // async function removeSongFromStation(stationId, songId) {
-//   console.log('songId', songId)
 // }
 
 async function getSongById(stationId, songId) {
@@ -2840,6 +2833,7 @@ async function createNewStation(name) {
   userStations.push(newStation);
   storageService.store(USER_STATIONS, userStations);
   stations.push(newStation);
+  gStations.push(newStation)
   storageService.store(STORAGE_KEY, stations);
   return Promise.resolve({ ...newStation });
 }
@@ -2862,20 +2856,16 @@ async function updateStation(stationId, songs) {
     const updatedStation = { ...currStation, songs: songs };
     save(updatedStation);
   } else {
-    console.log("Station not found!");
   }
 }
 
 async function getRecommendedSongs(station) {
-  console.log('station from service',station)
   const songArtists = station.map((song) => song.artist);
   const song = station.map((song) => song)
   return await getVideos(songArtists,song);
 }
 
 function _prepareRecommendedData(item,song) {
-  console.log('from service',song.artist)
-  console.log('from service',song.album)
   return {
     imgUrl: item.snippet.thumbnails.default.url,
     // videoId: item.id.videoId,
