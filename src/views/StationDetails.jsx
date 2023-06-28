@@ -31,6 +31,7 @@ export function StationDetails(props) {
 
   useEffect(() => {
     loadStation()
+    console.log('hi in useEffect of the loadStation')
   }, [params.id])
 
   useEffect(() => {

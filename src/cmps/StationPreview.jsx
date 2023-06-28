@@ -11,6 +11,7 @@ export function StationPreview({ station }) {
     // dispatch(setCurrStation(station._id))
     console.log('hi')
     navigate(`/station/${station._id}`)
+    console.log('hi sfter go')
   }
 
   return (

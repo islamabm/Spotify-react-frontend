@@ -18,7 +18,9 @@ export default function StationHeaderDetails({ bgStyle, station }) {
       {station && (
         <>
           {createdBy === 'system' && <StationSystem station={station} />}
+          {console.log('hi between the render option')}
           {createdBy === 'guest' && <StationUser station={station} />}
+          {console.log('hi after the render option')}
         </>
       )}
     </div>
