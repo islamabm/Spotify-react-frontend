@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { DeleteStationModal } from './DeleteStationModal'
 import { RecommindationModal } from './RecommindationModal'
 import { useNavigate, useLocation } from 'react-router-dom'
@@ -12,7 +12,7 @@ export function StationOptionsModal({
   closeOptionsModal,
 }) {
   const [showDeleteModal, setShowDeleteModal] = useState(false)
-
+  const modalRef = useRef()
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const location = useLocation()
@@ -38,6 +38,19 @@ export function StationOptionsModal({
     navigate(`/`)
   }
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      // if the target of the click is inside the modal, return early
+      if (modalRef.current && modalRef.current.contains(event.target)) {
+        return
+      }
+      closeModal()
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [closeModal])
   async function copyLinkToClipboard() {
     const playlistLink = `${window.location.href}`
     try {
@@ -52,6 +65,7 @@ export function StationOptionsModal({
   return (
     <>
       <section
+        ref={modalRef}
         className="station-options-modal"
         style={{
           top: position.top - 30,

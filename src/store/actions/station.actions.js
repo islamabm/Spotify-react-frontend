@@ -43,6 +43,8 @@ export function loadUserStations() {
 }
 
 export function addStation(name) {
+  console.log('hi')
+  console.log('')
   return async (dispatch) => {
     try {
       const station = await stationService.createNewStation(name)

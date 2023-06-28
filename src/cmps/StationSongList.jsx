@@ -82,7 +82,7 @@ export default function StationSongList({ station }) {
           <div ref={provided.innerRef} {...provided.droppableProps}>
             {songs?.map((song, idx) => (
               // SONG
-              <Draggable key={song._id} draggableId={song._id} index={idx}>
+              <Draggable key={idx} draggableId={song._id} index={idx}>
                 {(provided) => (
                   <div
                     ref={provided.innerRef}
@@ -155,7 +155,7 @@ export default function StationSongList({ station }) {
       {showModal && (
         <SongOptionsModal
           position={modalPosition}
-          // closeOptionsModal={() => setShowOptionsModal(false)}
+          closeModal={() => setShowOptionsModal(false)}
         />
       )}
     </DragDropContext>

@@ -1,11 +1,18 @@
 import React from 'react'
-
+import { getSpotifySvg } from '../services/SVG.service'
 export function RecommindationModal({ closeRecommindationModal }) {
   return (
     <section className="recommendation-modal-backdrop">
       <div className="recommendation-modal">
         <h1>About recommendations</h1>
-        <button onClick={closeRecommindationModal}>X</button>
+        <button onClick={closeRecommindationModal}>
+          {' '}
+          <span
+            dangerouslySetInnerHTML={{
+              __html: getSpotifySvg('recommindationModalIcon'),
+            }}
+          ></span>
+        </button>
         <div className="line"></div>
         <div className="recommendation-modla-text">
           <p>

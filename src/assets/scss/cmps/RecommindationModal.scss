@@ -15,6 +15,7 @@
 .recommendation-modal {
   position: relative;
   padding: 10px;
+  overflow: hidden;
   box-sizing: border-box;
   background-color: #333;
   border-radius: 10px;
@@ -33,12 +34,16 @@
 
 .recommendation-modal button {
   position: absolute;
-  top: 0px;
-  right: 0px;
+  top: 20px;
+  right: 20px;
   background: none;
   border: none;
   font-size: 20px;
   cursor: pointer;
+
+  span {
+    fill: #a7a7a7;
+  }
 }
 
 .recommendation-modal .line {
