@@ -2551,7 +2551,7 @@ const gSearchCategories = [
   ],
 ];
 
-const gUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyAuhBv6yBdwmGMUrWOZrlFc5frHKY92ftw&q=`;
+const gUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyBy57wW4X_Uw1le-qLNi7Q-emurNVutzQ0&q=`;
 const STORAGE_KEY = "stations";
 const USER_STATIONS = "user-stations";
 const STORAGE_SEARCH_KEY = "search-stations";
@@ -2603,7 +2603,10 @@ const CACHE_EXPIRATION_TIME = 60 * 60 * 1000; // Cache expiration time in millis
 const videoCache = {};
 
 async function getCachedVideos(keyword) {
-  if (videoCache[keyword] && Date.now() - videoCache[keyword].timestamp < CACHE_EXPIRATION_TIME) {
+  if (
+    videoCache[keyword] &&
+    Date.now() - videoCache[keyword].timestamp < CACHE_EXPIRATION_TIME
+  ) {
     return videoCache[keyword].data;
   }
 
@@ -2618,13 +2621,13 @@ async function getCachedVideos(keyword) {
 
   videoCache[keyword] = {
     timestamp: Date.now(),
-    data: videos
+    data: videos,
   };
 
   videosIds.push(videos[0]);
   // storageService.store(SEARCH_KEY, gSearchCache)
   // storageService.store(VIDEOS_KEY, videosIds)
-  
+
   return videos;
 }
 
@@ -2634,7 +2637,10 @@ async function getVideos(keyword, song = null) {
     const uncachedKeywords = [];
 
     keyword.forEach((artist) => {
-      if (videoCache[artist] && Date.now() - videoCache[artist].timestamp < CACHE_EXPIRATION_TIME) {
+      if (
+        videoCache[artist] &&
+        Date.now() - videoCache[artist].timestamp < CACHE_EXPIRATION_TIME
+      ) {
         cachedVideos.push(videoCache[artist].data);
       } else {
         uncachedKeywords.push(artist);
@@ -2644,11 +2650,11 @@ async function getVideos(keyword, song = null) {
     const recommendedSongs = uncachedKeywords.map(async (artist) => {
       const res = await axios.get(gUrl + artist);
       const recommendedSong = res.data.items.map((item) =>
-        _prepareRecommendedData(item,song)
+        _prepareRecommendedData(item, song)
       );
       videoCache[artist] = {
         timestamp: Date.now(),
-        data: recommendedSong[0]
+        data: recommendedSong[0],
       };
       return recommendedSong[0];
     });
@@ -2668,7 +2674,6 @@ function _prepareData(item) {
     createdAt: item.snippet.publishedAt,
   };
 }
-
 
 function searchQuery() {
   return Promise.resolve([...gSearchStations]);
@@ -2701,11 +2706,12 @@ async function getById(id) {
   return Promise.resolve({ ...station });
 }
 
-async function addSongToStation(stationId, songId) {
+async function addSongToStation(stationId, song) {
+  console.log("from service", stationId);
+  console.log("from service", song);
   const station = await getById(stationId);
   if (station) {
-    const songIndex = station.songs.findIndex((song) => song._id === songId);
-
+    const songIndex = station.songs.findIndex((song) => song._id === song._id);
     if (songIndex !== -1) {
       station.songs.splice(songIndex, 1);
       const updatedStation = await save(station);
@@ -2833,7 +2839,7 @@ async function createNewStation(name) {
   userStations.push(newStation);
   storageService.store(USER_STATIONS, userStations);
   stations.push(newStation);
-  gStations.push(newStation)
+  gStations.push(newStation);
   storageService.store(STORAGE_KEY, stations);
   return Promise.resolve({ ...newStation });
 }
@@ -2861,16 +2867,16 @@ async function updateStation(stationId, songs) {
 
 async function getRecommendedSongs(station) {
   const songArtists = station.map((song) => song.artist);
-  const song = station.map((song) => song)
-  return await getVideos(songArtists,song);
+  const song = station.map((song) => song);
+  return await getVideos(songArtists, song);
 }
 
-function _prepareRecommendedData(item,song) {
+function _prepareRecommendedData(item, song) {
   return {
     imgUrl: item.snippet.thumbnails.default.url,
     // videoId: item.id.videoId,
     title: item.snippet.title,
     artist: song.artist,
-    album: song.album
+    album: song.album,
   };
 }
