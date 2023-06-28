@@ -5,11 +5,6 @@ import { useSelector } from 'react-redux'
 export default function StationUser({ station }) {
   console.log('StationUser rendered')
   const stationNameClass = stationService.stationNameClass(station)
-  const storeStation = useSelector(
-    (storeState) => storeState.stationModule.currStation
-  )
-  console.log('station', storeStation)
-  console.log('hi user')
   return (
     <>
       <div className="station-main-img user-main-img justify-center align-center">
