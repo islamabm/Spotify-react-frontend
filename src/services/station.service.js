@@ -2707,7 +2707,7 @@ async function getById(id) {
 }
 
 async function addSongToStation(stationId, song) {
-  const station = gStations.find((station) => station._id === stationId)
+  const station = await getById(stationId)
   if (!station) {
     console.log('Station with id not found')
   }
