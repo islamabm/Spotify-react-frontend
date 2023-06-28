@@ -11,6 +11,7 @@ import { eventBus } from "../services/event-bus.service";
 import StationHeaderDetails from "../cmps/StationHeaderDetails";
 import StationSongList from "../cmps/StationSongList";
 import { StationOptionsModal } from "../cmps/StationOptionsModal";
+import { Recommended } from "../cmps/Recommended";
 
 export function StationDetails(props) {
   const [bgStyle, setBgStyle] = useState(null);
@@ -150,6 +151,7 @@ export function StationDetails(props) {
         </div>
       </div>
       {showModal && <StationOptionsModal position={modalPosition} />}
+      <Recommended list={station?.songs.slice(0,5)}/>
     </section>
   );
 }
