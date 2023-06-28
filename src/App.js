@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Route, HashRouter as Router, Routes } from 'react-router-dom'
 import './assets/scss/global.scss'
 import { AppHeader } from './cmps/AppHeader'
@@ -9,8 +8,8 @@ import { StationIndex } from './views/StationIndex'
 import { StationDetails } from './views/StationDetails'
 import { StationEdit } from './views/StationEdit'
 import { Login } from './views/Login'
-// import { Signup } from './views/Signup';
 import Search from './views/Search'
+import { useState } from 'react'
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -35,7 +34,6 @@ function App() {
     </Router>
   )
 }
-
 function LoggedInApp() {
   return (
     <section className="main-app">

@@ -1,6 +1,6 @@
-import { memo } from "react"
-import { StationPreview } from "./StationPreview"
-function _StationList({ stations, onRemoveStation }) {
+import { memo } from 'react'
+import { StationPreview } from './StationPreview'
+function _StationList({ stations }) {
   return (
     <>
       <section className="station-list-container">

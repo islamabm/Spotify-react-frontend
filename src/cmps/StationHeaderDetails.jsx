@@ -16,6 +16,7 @@ export default function StationHeaderDetails({ bgStyle, station }) {
       {station && (
         <>
           {createdBy === 'system' && <StationSystem station={station} />}
+
           {createdBy === 'guest' && <StationUser station={station} />}
         </>
       )}

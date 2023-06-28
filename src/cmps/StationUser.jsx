@@ -4,6 +4,7 @@ import { getSpotifySvg } from '../services/SVG.service.js'
 
 export default function StationUser({ station }) {
   const stationNameClass = stationService.stationNameClass(station)
+  console.log('hi user')
   return (
     <>
       <div className="station-main-img user-main-img justify-center align-center">
