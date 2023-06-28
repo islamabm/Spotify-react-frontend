@@ -26,19 +26,13 @@ export function AppHeader() {
 
     const maxScroll = 50;
     let opacity = Math.min(scrollPos / maxScroll, 1);
-
+    console.log('gradient', gradient)
     let dominantColor =
-      // gradient
-      //   ? gradient.background
-      //       .match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/i)
-      //       .slice(1, 4)
-      //       .join(', ')
-      //   :
+      gradient
+        ? gradient :
       "0, 0, 0";
 
-    const newHeaders = {
-      backgroundColor: `rgba(${dominantColor}, ${opacity})`,
-    };
+    const newHeaders = `linear-gradient: rgba(${dominantColor}, ${opacity})`;
 
     setHeaders(newHeaders);
   }
