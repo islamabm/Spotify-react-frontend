@@ -21,7 +21,6 @@ export default function StationSongList({ station }) {
 
   useEffect(() => {
     setSongs(station.songs)
-    
   }, [station])
 
   function showSongOptionsModal(e, songId) {

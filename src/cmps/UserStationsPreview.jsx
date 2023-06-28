@@ -9,9 +9,7 @@ export default function UserStationsPreview({ station }) {
 
   function goToUserStationDetails() {
     dispatch(setCurrStation(station._id))
-    console.log('hi')
     navigate(`/station/${station._id}`)
-    console.log('hi sfter go')
   }
 
   return (
