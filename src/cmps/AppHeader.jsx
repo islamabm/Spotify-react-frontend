@@ -78,10 +78,11 @@ export function AppHeader() {
             <input placeholder="What do you want to listen to?" />
           </div>
         )}
-        {currScrollPos > 466 ? (
-          <div className="user-station-actions">
+
+        {currScrollPos > 300 ? (
+          <div className="flex align-center justify-center station-options">
             <div className="play-button flex justify-center align-center"></div>
-            <p>{station.name}</p>
+            <p className="">{station.name}</p>
           </div>
         ) : (
           ''
