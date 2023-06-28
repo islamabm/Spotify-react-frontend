@@ -13,7 +13,7 @@ export function StationPreview({ station }) {
     console.log('hi sfter go')
   }
 
-  return (
+  return createdBy === 'system' ? (
     <article className="info" onClick={goToDetails}>
       <div className="station-img">
         <img src={station.imgUrl} alt="station-img" />
@@ -24,5 +24,5 @@ export function StationPreview({ station }) {
         <p>{station.description}</p>
       </div>
     </article>
-  )
+  ) : null
 }

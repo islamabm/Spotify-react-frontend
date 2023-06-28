@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import { DeleteStationModal } from './DeleteStationModal'
 import { RecommindationModal } from './RecommindationModal'
+import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { removeStation } from '../store/actions/station.actions'
 export function StationOptionsModal({ position }) {
   const [showDeleteModal, setShowDeleteModal] = useState(false)
   const [showRecommindationModal, setShowRecommindationModal] = useState(false)
   const dispatch = useDispatch()
-
+  const navigate = useNavigate()
   const station = useSelector(
     (storeState) => storeState.stationModule.currStation
   )
@@ -31,6 +32,7 @@ export function StationOptionsModal({ position }) {
   function handleRemoveStation() {
     dispatch(removeStation(station._id))
     setShowDeleteModal(false)
+    navigate(`/`)
   }
 
   return (
