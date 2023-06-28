@@ -2673,7 +2673,7 @@ function _prepareData(item) {
     videoId: item.id.videoId,
     title: item.snippet.title,
     imgUrl: item.snippet.thumbnails.default.url,
-    createdAt: Date.now(),
+    addedAt: Date.now(),
     album: item.snippet.title.slice(0, 5),
     artist: item.snippet.title.slice(2, 7),
   }
@@ -2716,11 +2716,7 @@ async function addSongToStation(stationId, song) {
   if (!station) {
     console.log('Station with id not found')
   }
-  if (!song.artist || !song.title) {
-    const adjustedSong = _prepareRecommendedData(song)
-    station.songs.push(adjustedSong)
-    console.log('adjustedSong', adjustedSong)
-  } else station.songs.push(song)
+
   station.songs.push(song)
   await save(station)
   return station
@@ -2893,22 +2889,13 @@ async function getRecommendedSongs(station) {
 function _prepareRecommendedData(song) {
   console.log('song', song)
   console.log('prepareRecomended')
-  console.log("song", song)
-  console.log("prepareRecomended")
+  console.log('song', song)
+  console.log('prepareRecomended')
   return {
     // imgUrl: song.snippet.thumbnails.default.url,
     videoId: song.id.videoId,
     title: song.snippet.title,
     artist: song.artist,
     album: song.album,
-  }
-    addedAt: Date.now(),
-    album: "barbur",
-    artist: "EC BC",
-    imgUrl: "https://i.scdn.co/image/ab67616d0000b273366a444b9d639924cb953b3b",
-    likedByUsers: [],
-    title: "Hey Hey Rise Up (feat. Andriy Khlyvnyuk of Boombox)",
-    _id: "1",
-    // videoId: song.id.videoId,
   }
 }

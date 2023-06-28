@@ -18,8 +18,10 @@ export function StationOptionsModal({ position, closeModal }) {
   }
 
   function handleShowRecommindationModal() {
-    setShowRecommindationModal(true) // open RecommindationModal
-    // closeModal() // close StationOptionsModal
+    closeModal()
+    setTimeout(() => {
+      setShowRecommindationModal(true)
+    }, 0)
   }
   function handleCloseDeleteModal() {
     setShowDeleteModal(false)
