@@ -2552,7 +2552,7 @@ const gSearchCategories = [
   ],
 ]
 
-const API_KEY = 'AIzaSyAOOxQai6gVgw-7XhwMht3VcdHzXHH9D5Y'
+const API_KEY = 'AIzaSyChpLnnJ1SoF36P8aPBBAd8FyC3qDPQDGM'
 
 const gUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=${API_KEY}&q=`
 const STORAGE_KEY = 'stations'
@@ -2670,7 +2670,7 @@ async function getVideos(keyword, song = null) {
 }
 
 function _prepareData(item) {
-  console.log('preperData');
+  console.log('preperData')
   return {
     videoId: item.id.videoId,
     title: item.snippet.title,
@@ -2716,12 +2716,11 @@ async function addSongToStation(stationId, song) {
   if (!station) {
     console.log('Station with id not found')
   }
-  if(!song.artist || !song.title){
-    const adjustedSong = _prepareRecommendedData(song)   
+  if (!song.artist || !song.title) {
+    const adjustedSong = _prepareRecommendedData(song)
     station.songs.push(adjustedSong)
     console.log('adjustedSong', adjustedSong)
-  } 
-  else station.songs.push(song)
+  } else station.songs.push(song)
   await save(station)
   return station
 }
@@ -2891,13 +2890,13 @@ async function getRecommendedSongs(station) {
 }
 
 function _prepareRecommendedData(song) {
-    console.log('song', song)
-    console.log('prepareRecomended');
+  console.log('song', song)
+  console.log('prepareRecomended')
   return {
-      // imgUrl: song.snippet.thumbnails.default.url,
-      videoId: song.id.videoId,
-      title: song.snippet.title,
-      artist: song.artist,
-      album: song.album,
-    }
+    // imgUrl: song.snippet.thumbnails.default.url,
+    videoId: song.id.videoId,
+    title: song.snippet.title,
+    artist: song.artist,
+    album: song.album,
+  }
 }
