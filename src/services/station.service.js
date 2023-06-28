@@ -2706,16 +2706,19 @@ async function getById(id) {
   return Promise.resolve({ ...station })
 }
 
-// async function removeSongFromStation(stationId, songId) {
-// }
-async function addSongToStation(stationId, song) {
+async function addSongToStation(stationId, songId) {
   const station = await getById(stationId)
-  if (!station) {
-    throw new Error(`Station with id ${stationId} not found`)
+  if (station) {
+    const songIndex = station.songs.findIndex((song) => song._id === songId)
+
+    if (songIndex !== -1) {
+      station.songs.splice(songIndex, 1)
+      const updatedStation = await save(station)
+      storageService.store(STORAGE_KEY, gStations)
+      return { ...updatedStation }
+    }
   }
-  station.songs.push(song)
-  await save(station)
-  return station
+  return null
 }
 
 async function getSongById(stationId, songId) {
