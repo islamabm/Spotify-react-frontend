@@ -99,6 +99,7 @@ export function removeStation(stationId) {
 }
 
 export function addSongToStation(stationId, song) {
+  console.log('song action ', song)
   return async (dispatch) => {
     try {
       const updatedStation = await stationService.addSongToStation(

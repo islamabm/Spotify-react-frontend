@@ -2552,7 +2552,9 @@ const gSearchCategories = [
   ],
 ]
 
-const gUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyCgwJQthiXSyGxO1AEQsi40_bKw5RgrDSE&q=`
+const API_KEY = 'AIzaSyAOOxQai6gVgw-7XhwMht3VcdHzXHH9D5Y'
+
+const gUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=${API_KEY}&q=`
 const STORAGE_KEY = 'stations'
 const USER_STATIONS = 'user-stations'
 const STORAGE_SEARCH_KEY = 'search-stations'
@@ -2651,7 +2653,7 @@ async function getVideos(keyword, song = null) {
     const recommendedSongs = uncachedKeywords.map(async (artist) => {
       const res = await axios.get(gUrl + artist)
       const recommendedSong = res.data.items.map((item) =>
-        _prepareRecommendedData(item, song)
+        _prepareRecommendedData(item)
       )
       videoCache[artist] = {
         timestamp: Date.now(),
@@ -2668,6 +2670,7 @@ async function getVideos(keyword, song = null) {
 }
 
 function _prepareData(item) {
+  console.log('preperData');
   return {
     videoId: item.id.videoId,
     title: item.snippet.title,
@@ -2708,11 +2711,17 @@ async function getById(id) {
 }
 
 async function addSongToStation(stationId, song) {
+  console.log('song', song)
   const station = await getById(stationId)
   if (!station) {
     console.log('Station with id not found')
   }
-  station.songs.push(song)
+  if(!song.artist || !song.title){
+    const adjustedSong = _prepareRecommendedData(song)   
+    station.songs.push(adjustedSong)
+    console.log('adjustedSong', adjustedSong)
+  } 
+  else station.songs.push(song)
   await save(station)
   return station
 }
@@ -2881,12 +2890,14 @@ async function getRecommendedSongs(station) {
   return await getVideos(songArtists, song)
 }
 
-function _prepareRecommendedData(item, song) {
+function _prepareRecommendedData(song) {
+    console.log('song', song)
+    console.log('prepareRecomended');
   return {
-    imgUrl: item.snippet.thumbnails.default.url,
-    // videoId: item.id.videoId,
-    title: item.snippet.title,
-    artist: song.artist,
-    album: song.album,
-  }
+      // imgUrl: song.snippet.thumbnails.default.url,
+      videoId: song.id.videoId,
+      title: song.snippet.title,
+      artist: song.artist,
+      album: song.album,
+    }
 }
