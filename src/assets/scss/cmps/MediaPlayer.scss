@@ -2,8 +2,12 @@
   display: flex;
   gap: rem(16px);
   margin-bottom: rem(8px);
+  padding-inline-end: 8.1rem;
+  padding-inline-start: 25.5%;
+  margin-block-start: 10px;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
+  width: 70%;
   .play-song-div {
     display: flex;
     align-items: center;
@@ -39,7 +43,8 @@
   align-items: center;
   justify-items: center;
   gap: 10px;
-  width: 100%;
+  // width: 100%;
+  width: 575px;
   height: 20px;
 }
 
@@ -73,7 +78,7 @@
 }
 
 .progress-bar-fill:after {
-  content: '';
+  content: "";
   position: absolute;
   right: -5px;
   top: -2px;
