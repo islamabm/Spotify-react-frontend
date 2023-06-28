@@ -1,10 +1,20 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { stationService } from '../services/station.service.js'
 import { getSpotifySvg } from '../services/SVG.service.js'
 import { useSelector } from 'react-redux'
+import {EditUserStationModal} from '../cmps/EditUserStationModal'
+
 export default function StationUser({ station }) {
   console.log('StationUser rendered')
   const stationNameClass = stationService.stationNameClass(station)
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const handleEditModalOpen = () => {
+    setIsEditModalOpen(true);
+  };
+
+  const handleEditModalClose = () => {
+    setIsEditModalOpen(false);
+  };
   return (
     <>
       <div className="station-main-img user-main-img justify-center align-center">
@@ -22,7 +32,10 @@ export default function StationUser({ station }) {
       </div>
       <div className="station-info">
         <span className="playlist-word">Playlist</span>
-        <h1 className={stationNameClass}>{station.name}</h1>
+        <h1 className={stationNameClass} onClick={handleEditModalOpen}>{station.name}</h1>
+        {isEditModalOpen && (
+        <EditUserStationModal onClose={handleEditModalClose} />
+      )}
         <span className="songs-count"> {station.songs?.length} songs </span>
       </div>
     </>

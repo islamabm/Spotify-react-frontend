@@ -12,6 +12,7 @@ import StationHeaderDetails from '../cmps/StationHeaderDetails'
 import StationSongList from '../cmps/StationSongList'
 import { StationOptionsModal } from '../cmps/StationOptionsModal'
 import { Recommended } from '../cmps/Recommended'
+import {EditUserStationModal} from '../cmps/EditUserStationModal'
 
 export function StationDetails(props) {
   const [bgStyle, setBgStyle] = useState(null)
