@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { getSpotifySvg } from '../services/SVG.service'
 import { setCurrSong, setCurrSongIndex } from '../store/actions/song.actions'
@@ -18,6 +18,11 @@ export default function StationSongList({ station }) {
     dispatch(setCurrSong(params.id, songId))
     dispatch(setCurrSongIndex(params.id, songId))
   }
+
+  useEffect(() => {
+    setSongs(station.songs)
+    
+  }, [station])
 
   function showSongOptionsModal(e, songId) {
     dispatch(setCurrSong(params.id, songId))

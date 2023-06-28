@@ -152,7 +152,7 @@ export function StationDetails(props) {
         </div>
       </div>
       {showModal && <StationOptionsModal position={modalPosition} />}
-      <Recommended list={station?.songs.slice(0, 5)} />
+      <Recommended list={station?.songs?.slice(0, 5)} />
     </section>
   )
 }
