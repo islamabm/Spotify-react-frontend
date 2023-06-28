@@ -2551,7 +2551,7 @@ const gSearchCategories = [
   ],
 ];
 
-const gUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyDkQ778zeJcnjAFYcQQJiTqGkn9RDU2reE&q=`;
+const gUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyAuhBv6yBdwmGMUrWOZrlFc5frHKY92ftw&q=`;
 const STORAGE_KEY = "stations";
 const USER_STATIONS = "user-stations";
 const STORAGE_SEARCH_KEY = "search-stations";
@@ -2563,40 +2563,103 @@ var gStations = _loadStations();
 
 var gSearchStations = _loadSearchStations();
 
-function getVideos(keyword) {
-  if (Array.isArray(keyword)) {
-    // Fetch recommended songs based on the provided list of song titles
-    const recommendedSongs = keyword.map(async (artist) => {
-      // Use the title to fetch the recommended song
-      // Modify the axios.get call to fetch the recommended song based on the title
-      const res = await axios.get(gUrl + artist);
-      const recommendedSong = res.data.items.map((item) =>
-        _prepareRecommendedData(item)
-      );
-      return recommendedSong[0];
-    });
+// function getVideos(keyword) {
+//   if (Array.isArray(keyword)) {
+//     // Fetch recommended songs based on the provided list of song titles
+//     const recommendedSongs = keyword.map(async (artist) => {
+//       // Use the title to fetch the recommended song
+//       // Modify the axios.get call to fetch the recommended song based on the title
+//       const res = await axios.get(gUrl + artist);
+//       const recommendedSong = res.data.items.map((item) =>
+//         _prepareRecommendedData(item)
+//       );
+//       return recommendedSong[0];
+//     });
 
-    return Promise.all(recommendedSongs);
+//     return Promise.all(recommendedSongs);
+//   }
+//   if (gSearchCache[keyword]) {
+//     return Promise.resolve(gSearchCache[keyword]);
+//   }
+//   let videosIds = storageService.load(VIDEOS_KEY) || [];
+
+//   const existTitle = videosIds.find((video) =>
+//     video.title.toLowerCase().includes(keyword.toLowerCase())
+//   );
+
+//   return axios.get(gUrl + keyword).then((res) => {
+//     const videos = res.data.items.map((item) => _prepareData(item));
+
+//     gSearchCache = videos;
+
+//     videosIds.push(videos[0]);
+//     // storageService.store(SEARCH_KEY, gSearchCache)
+//     // storageService.store(VIDEOS_KEY, videosIds)
+//     return videos;
+//   });
+// }
+
+const CACHE_EXPIRATION_TIME = 60 * 60 * 1000; // Cache expiration time in milliseconds (1 hour)
+const videoCache = {};
+
+async function getCachedVideos(keyword) {
+  if (videoCache[keyword] && Date.now() - videoCache[keyword].timestamp < CACHE_EXPIRATION_TIME) {
+    return videoCache[keyword].data;
   }
-  if (gSearchCache[keyword]) {
-    return Promise.resolve(gSearchCache[keyword]);
-  }
+
   let videosIds = storageService.load(VIDEOS_KEY) || [];
 
   const existTitle = videosIds.find((video) =>
     video.title.toLowerCase().includes(keyword.toLowerCase())
   );
 
-  return axios.get(gUrl + keyword).then((res) => {
-    const videos = res.data.items.map((item) => _prepareData(item));
+  const res = await axios.get(gUrl + keyword);
+  const videos = res.data.items.map((item) => _prepareData(item));
 
-    gSearchCache = videos;
+  videoCache[keyword] = {
+    timestamp: Date.now(),
+    data: videos
+  };
 
-    videosIds.push(videos[0]);
-    // storageService.store(SEARCH_KEY, gSearchCache)
-    // storageService.store(VIDEOS_KEY, videosIds)
-    return videos;
-  });
+  videosIds.push(videos[0]);
+  // storageService.store(SEARCH_KEY, gSearchCache)
+  // storageService.store(VIDEOS_KEY, videosIds)
+  
+  return videos;
+}
+
+async function getVideos(keyword, song = null) {
+  if (Array.isArray(keyword)) {
+    const cachedVideos = [];
+    const uncachedKeywords = [];
+
+    keyword.forEach((artist) => {
+      if (videoCache[artist] && Date.now() - videoCache[artist].timestamp < CACHE_EXPIRATION_TIME) {
+        cachedVideos.push(videoCache[artist].data);
+      } else {
+        uncachedKeywords.push(artist);
+      }
+    });
+
+    const recommendedSongs = uncachedKeywords.map(async (artist) => {
+      const res = await axios.get(gUrl + artist);
+      console.log(res.data.items)
+      // console.log(item)
+      const recommendedSong = res.data.items.map((item) =>
+        _prepareRecommendedData(item,song)
+      );
+      videoCache[artist] = {
+        timestamp: Date.now(),
+        data: recommendedSong[0]
+      };
+      return recommendedSong[0];
+    });
+
+    const recommendedVideos = await Promise.all(recommendedSongs);
+    return cachedVideos.concat(recommendedVideos);
+  }
+
+  return getCachedVideos(keyword);
 }
 
 function _prepareData(item) {
@@ -2804,17 +2867,20 @@ async function updateStation(stationId, songs) {
 }
 
 async function getRecommendedSongs(station) {
-  console.log('from service',station)
+  console.log('station from service',station)
   const songArtists = station.map((song) => song.artist);
-  return await getVideos(songArtists);
+  const song = station.map((song) => song)
+  return await getVideos(songArtists,song);
 }
 
-function _prepareRecommendedData(item) {
+function _prepareRecommendedData(item,song) {
+  console.log('from service',song.artist)
+  console.log('from service',song.album)
   return {
     imgUrl: item.snippet.thumbnails.default.url,
-    videoId: item.id.videoId,
+    // videoId: item.id.videoId,
     title: item.snippet.title,
-    artist: item.snippet.artist, // Add artist information
-    album: item.snippet.album, // Add album information
+    artist: song.artist,
+    album: song.album
   };
 }

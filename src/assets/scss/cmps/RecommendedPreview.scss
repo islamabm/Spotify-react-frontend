@@ -1,11 +1,10 @@
-.song {
-  grid-template-columns: 16px 6fr 4fr 3fr minmax(120px, 1fr);
-  gap: 10px;
+.recommended-song {
+  justify-content: space-between;
+  gap: 8px;
   padding: 0 16px;
   position: relative;
   border: 1px solid transparent;
   height: 56px;
-  display: grid;
   border-radius: 4px;
   .small-play-btn {
     display: none;
@@ -18,23 +17,23 @@
     margin-top: 17px;
     fill: $clr3;
   }
-  .name-and-artist {
+  .img-and-title {
     margin-inline-start: rem(12px);
-    flex-direction: column;
     gap: 8px;
-    grid-column: 2;
-    .song-artist {
-      color: $clr3;
-      font-size: 14px;
-    }
   }
   .song-img {
     height: 40px;
     width: 40px;
   }
-  .album-name {
-    grid-column: 3;
-    color: $clr14;
-    font-size: 14px;
+  button {
+    width: 60px;
+    height: 32px;
+    background-color: inherit;
+    color: $clr6;
+    border-radius: 500px;
+    border: 1px solid rgba(255, 255, 255, 0.585);
+    &:hover {
+      border: 1px solid $clr6;
+    }
   }
 }
