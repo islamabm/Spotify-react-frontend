@@ -8,6 +8,7 @@ export default function UserStationsPreview({ station }) {
   const dispatch = useDispatch()
 
   function goToUserStationDetails() {
+    console.log('hi')
     dispatch(setCurrStation(station._id))
     navigate(`/station/${station._id}`)
   }
