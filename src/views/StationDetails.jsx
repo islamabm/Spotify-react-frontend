@@ -31,7 +31,6 @@ export function StationDetails(props) {
 
   useEffect(() => {
     loadStation()
-    console.log('hi in useEffect of the loadStation')
   }, [params.id])
 
   useEffect(() => {
@@ -113,7 +112,7 @@ export function StationDetails(props) {
       }
     }
   }
-
+  
   if (!station) return <div>Loading...</div>
   return (
     <section className="station-details" ref={stationDetailsRef}>

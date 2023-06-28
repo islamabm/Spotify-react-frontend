@@ -26,7 +26,6 @@ export function AppHeader() {
 
     const maxScroll = 50;
     let opacity = Math.min(scrollPos / maxScroll, 1);
-    console.log('gradient', gradient)
     let dominantColor =
       gradient
         ? gradient :
