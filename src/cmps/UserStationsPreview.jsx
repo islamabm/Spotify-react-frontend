@@ -14,7 +14,7 @@ export default function UserStationsPreview({ station }) {
   }
 
   return (
-    <article className="user-station-preview" onClick={goToUserStationDetails}>
+    <section className="user-station-preview" onClick={goToUserStationDetails}>
       <div className="image-svg-container">
         <span
           dangerouslySetInnerHTML={{
@@ -32,6 +32,6 @@ export default function UserStationsPreview({ station }) {
           <span>islam abo mokh</span>
         </div>
       </div>
-    </article>
+    </section>
   )
 }

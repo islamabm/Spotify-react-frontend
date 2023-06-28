@@ -1,6 +1,8 @@
 .user-station-preview {
   display: flex;
-  min-width: 100%;
+  min-width: 400px;
+  padding: 8px;
+  border-radius: 6px;
   .image-svg-container {
     background-color: rgb(58, 56, 56);
     display: flex;
@@ -16,7 +18,7 @@
   .user-station-details {
     display: flex;
     flex-direction: column;
-    padding: 0 0.5em;
+    padding: 3px 0.5em;
     .user-station-name {
       p {
         font-size: 1rem;
@@ -40,7 +42,7 @@
     }
   }
   &:hover {
-    background-color: aqua;
+    background-color: #232323;
   }
 }
 // <article className="user-station-preview">

@@ -31,6 +31,7 @@ export function UserLibrary() {
   return (
     <>
       <section className="user-library">
+        <section className='library-header-wrapper'>
         <div className="flex align-center library-header">
           <div className="flex align-center your-library pointer">
             <span
@@ -53,6 +54,8 @@ export function UserLibrary() {
           <button className="library-btn pointer">Artists</button>
           <button className="library-btn pointer">Albums</button>
         </div>
+        </section>
+        <section className='filter-and-list'>
         <div className="library-filter">
           <span
             className="smaller-search pointer flex align-center justify-center"
@@ -71,8 +74,8 @@ export function UserLibrary() {
             {showSortModal && <SortModal onSelectOption={onSelectOption} />}
           </div>
         </div>
-
-        <UserStationsIndex></UserStationsIndex>
+        <UserStationsIndex/>
+        </section>
       </section>
     </>
   )
