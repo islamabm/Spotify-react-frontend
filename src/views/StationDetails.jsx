@@ -37,20 +37,17 @@ export function StationDetails(props) {
   useEffect(() => {
     updateImgUrlAndColor(station)
   }, [stationImg])
-
   useEffect(() => {
     const currentStationDetailsRef = stationDetailsRef.current
     const handleScroll = () => {
       const scrollPos = currentStationDetailsRef.scrollTop
-
-      eventBus.emit('stationDetailsScroll', scrollPos)
+      eventBus.emit('stationDetailsScroll', { scrollPos, bgStyle })
     }
     if (currentStationDetailsRef) {
       currentStationDetailsRef.addEventListener('scroll', handleScroll, {
         passive: true,
       })
     }
-
     return () => {
       if (currentStationDetailsRef) {
         currentStationDetailsRef.removeEventListener('scroll', handleScroll, {
@@ -58,7 +55,7 @@ export function StationDetails(props) {
         })
       }
     }
-  }, [])
+  }, [bgStyle])
 
   function loadStation() {
     dispatch(setCurrStation(params.id))
@@ -112,7 +109,7 @@ export function StationDetails(props) {
       }
     }
   }
-  
+
   if (!station) return <div>Loading...</div>
   return (
     <section className="station-details" ref={stationDetailsRef}>

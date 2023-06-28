@@ -12,38 +12,36 @@ export function AppHeader() {
     (storeState) => storeState.stationModule.currStation
   )
 
-  const gradient = useSelector(
-    (storeState) => storeState.stationModule.currStationGradientColor
-  )
   const location = useLocation()
 
   const [headers, setHeaders] = useState({
     backgroundColor: 'transparent',
   })
 
-  function updateHeaderOpacity(scrollPos) {
+  function updateHeaderOpacity(scrollPos, bgStyle) {
     setScrollPos(scrollPos)
 
     const maxScroll = 50
     let opacity = Math.min(scrollPos / maxScroll, 1)
-    console.log('gradient', gradient)
-    let dominantColor = '0, 0, 0'
+
+    let match = bgStyle.background.match(/rgb\((\d+,\d+,\d+)\)/)
+    let dominantColor = match ? match[1] : '0,0,0'
+    console.log('dominantColor', dominantColor)
 
     const newHeaders = {
       backgroundColor: `rgba(${dominantColor}, ${opacity})`,
     }
-    //
     setHeaders(newHeaders)
   }
-
   useEffect(() => {
-    const onScroll = (scrollPos) => updateHeaderOpacity(scrollPos)
+    const onScroll = ({ scrollPos, bgStyle }) =>
+      updateHeaderOpacity(scrollPos, bgStyle)
     const unlisten = eventBus.on('stationDetailsScroll', onScroll)
 
     return () => {
       unlisten()
     }
-  }, [gradient])
+  }, [])
 
   function onShowModal() {
     setShowModal(true)
@@ -80,10 +78,11 @@ export function AppHeader() {
             <input placeholder="What do you want to listen to?" />
           </div>
         )}
-        {currScrollPos > 466 ? (
-          <div className="user-station-actions">
+
+        {currScrollPos > 300 ? (
+          <div className="flex align-center justify-center station-options">
             <div className="play-button flex justify-center align-center"></div>
-            <p>{station.name}</p>
+            <p className="">{station.name}</p>
           </div>
         ) : (
           ''
