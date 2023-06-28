@@ -13,10 +13,12 @@ import StationSongList from '../cmps/StationSongList'
 import { StationOptionsModal } from '../cmps/StationOptionsModal'
 import { Recommended } from '../cmps/Recommended'
 import { EditUserStationModal } from '../cmps/EditUserStationModal'
+import { RecommindationModal } from '../cmps/RecommindationModal'
 
 export function StationDetails(props) {
   const [bgStyle, setBgStyle] = useState(null)
   const [bgBottomStyle, setBgBottomStyle] = useState(null)
+  const [showRecommindationModal, setShowRecommindationModal] = useState(false)
   const [showModal, setShowModal] = useState(false)
   const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 })
   const colorCache = {}
@@ -79,10 +81,13 @@ export function StationDetails(props) {
   }
 
   function handleCloseOptionModal() {
-    console.log('hi')
     setShowModal(false)
   }
 
+  function handleShowRecommindationModal() {
+    setShowModal(false)
+    setShowRecommindationModal(true)
+  }
   async function getDominantColor(imageSrc) {
     const cachedColor = colorCache[imageSrc]
     if (cachedColor) {
@@ -156,6 +161,13 @@ export function StationDetails(props) {
         <StationOptionsModal
           position={modalPosition}
           closeModal={handleCloseOptionModal}
+          openRecommindationModal={handleShowRecommindationModal}
+        />
+      )}
+
+      {showRecommindationModal && (
+        <RecommindationModal
+          closeRecommindationModal={() => setShowRecommindationModal(false)}
         />
       )}
       <Recommended list={station?.songs?.slice(0, 5)} stationId={station._id} />

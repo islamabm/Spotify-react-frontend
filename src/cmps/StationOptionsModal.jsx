@@ -1,14 +1,20 @@
 import React, { useState } from 'react'
 import { DeleteStationModal } from './DeleteStationModal'
 import { RecommindationModal } from './RecommindationModal'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { removeStation } from '../store/actions/station.actions'
-export function StationOptionsModal({ position, closeModal }) {
+
+export function StationOptionsModal({
+  position,
+  closeModal,
+  openRecommindationModal,
+}) {
   const [showDeleteModal, setShowDeleteModal] = useState(false)
   const [showRecommindationModal, setShowRecommindationModal] = useState(false)
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const location = useLocation()
   const station = useSelector(
     (storeState) => storeState.stationModule.currStation
   )
@@ -18,10 +24,7 @@ export function StationOptionsModal({ position, closeModal }) {
   }
 
   function handleShowRecommindationModal() {
-    closeModal()
-    setTimeout(() => {
-      setShowRecommindationModal(true)
-    }, 0)
+    openRecommindationModal()
   }
   function handleCloseDeleteModal() {
     setShowDeleteModal(false)
@@ -35,6 +38,15 @@ export function StationOptionsModal({ position, closeModal }) {
     dispatch(removeStation(station._id))
     setShowDeleteModal(false)
     navigate(`/`)
+  }
+
+  async function copyLinkToClipboard() {
+    const playlistLink = `${window.location.href}`
+    try {
+      await navigator.clipboard.writeText(playlistLink)
+    } catch (err) {
+      console.error('Failed to copy playlist link: ', err)
+    }
   }
 
   return (
@@ -53,7 +65,7 @@ export function StationOptionsModal({ position, closeModal }) {
           <li onClick={handleShowDeleteModal}>
             <button>Delete</button>
           </li>
-          <li>
+          <li onClick={copyLinkToClipboard}>
             <button>Copy link to playlist</button>
           </li>
           <li>
