@@ -2,19 +2,15 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 export function RecommendedPreview({ song }) {
-  const navigate = useNavigate();
-  function handleSongClick() {
-    navigate(`/songs/${song.videoId}`);
-  }
 
+console.log('song from preview',song)
   return (
-    <article className="song" onClick={handleSongClick}>
+    <article className="recommended-song flex align-center">
+      <div className="img-and-title flex align-center">
       <img src={song.imgUrl} className="song-img"/>
-      <div className="name-and-artist">
       <span>{song?.title}</span>
-      <span className="song-artist">{song?.artist}</span>
       </div>
-      <span>{song?.album}</span>
+      <button className="pointer">Add</button>
     </article>
   );
 }
