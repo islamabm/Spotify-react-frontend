@@ -4,9 +4,6 @@ import StationSystem from './StationSystem'
 import StationUser from './StationUser.jsx'
 
 export default function StationHeaderDetails({ bgStyle, station }) {
-  const storeStation = useSelector(
-    (storeState) => storeState.stationModule.currStation
-  )
   const [createdBy, setCreatedBy] = useState('')
   useEffect(() => {
     setCreatedBy(station.createdBy?.fullname)

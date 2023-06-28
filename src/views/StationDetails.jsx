@@ -46,7 +46,6 @@ export function StationDetails(props) {
       eventBus.emit('stationDetailsScroll', scrollPos)
     }
     if (currentStationDetailsRef) {
-      dispatch(setCurrGradient(bgStyle))
       currentStationDetailsRef.addEventListener('scroll', handleScroll, {
         passive: true,
       })
