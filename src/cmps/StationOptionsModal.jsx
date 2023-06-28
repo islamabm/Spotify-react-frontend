@@ -4,7 +4,7 @@ import { RecommindationModal } from './RecommindationModal'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { removeStation } from '../store/actions/station.actions'
-export function StationOptionsModal({ position }) {
+export function StationOptionsModal({ position, closeModal }) {
   const [showDeleteModal, setShowDeleteModal] = useState(false)
   const [showRecommindationModal, setShowRecommindationModal] = useState(false)
   const dispatch = useDispatch()
@@ -18,9 +18,9 @@ export function StationOptionsModal({ position }) {
   }
 
   function handleShowRecommindationModal() {
-    setShowRecommindationModal(true)
+    setShowRecommindationModal(true) // open RecommindationModal
+    // closeModal() // close StationOptionsModal
   }
-
   function handleCloseDeleteModal() {
     setShowDeleteModal(false)
   }
@@ -54,8 +54,10 @@ export function StationOptionsModal({ position }) {
           <li>
             <button>Copy link to playlist</button>
           </li>
-          <li onClick={handleShowRecommindationModal}>
-            <button>About recommendation</button>
+          <li>
+            <button onClick={handleShowRecommindationModal}>
+              About recommendation
+            </button>
           </li>
         </ul>
       </section>

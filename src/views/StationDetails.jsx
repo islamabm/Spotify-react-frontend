@@ -78,6 +78,10 @@ export function StationDetails(props) {
     }
   }
 
+  function handleCloseOptionModal() {
+    setShowModal(false)
+  }
+
   async function getDominantColor(imageSrc) {
     const cachedColor = colorCache[imageSrc]
     if (cachedColor) {
@@ -147,7 +151,12 @@ export function StationDetails(props) {
           <StationSongList station={station} />
         </div>
       </div>
-      {showModal && <StationOptionsModal position={modalPosition} />}
+      {showModal && (
+        <StationOptionsModal
+          position={modalPosition}
+          closeModal={handleCloseOptionModal}
+        />
+      )}
       <Recommended list={station?.songs?.slice(0, 5)} stationId={station._id} />
     </section>
   )
