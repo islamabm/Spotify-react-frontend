@@ -2902,13 +2902,4 @@ function _prepareRecommendedData(song) {
     artist: song.artist,
     album: song.album,
   }
-    addedAt: Date.now(),
-    album: "barbur",
-    artist: "EC BC",
-    imgUrl: "https://i.scdn.co/image/ab67616d0000b273366a444b9d639924cb953b3b",
-    likedByUsers: [],
-    title: "Hey Hey Rise Up (feat. Andriy Khlyvnyuk of Boombox)",
-    _id: "1",
-    // videoId: song.id.videoId,
-  }
 }
