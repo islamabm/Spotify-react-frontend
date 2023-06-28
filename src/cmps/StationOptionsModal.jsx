@@ -9,9 +9,10 @@ export function StationOptionsModal({
   position,
   closeModal,
   openRecommindationModal,
+  closeOptionsModal,
 }) {
   const [showDeleteModal, setShowDeleteModal] = useState(false)
-  const [showRecommindationModal, setShowRecommindationModal] = useState(false)
+
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const location = useLocation()
@@ -20,6 +21,7 @@ export function StationOptionsModal({
   )
 
   function handleShowDeleteModal() {
+    closeOptionsModal() // close the options modal before showing the delete modal
     setShowDeleteModal(true)
   }
 
@@ -28,10 +30,6 @@ export function StationOptionsModal({
   }
   function handleCloseDeleteModal() {
     setShowDeleteModal(false)
-  }
-
-  function handleCloseRecommindationModal() {
-    setShowRecommindationModal(false)
   }
 
   function handleRemoveStation() {
@@ -46,6 +44,8 @@ export function StationOptionsModal({
       await navigator.clipboard.writeText(playlistLink)
     } catch (err) {
       console.error('Failed to copy playlist link: ', err)
+    } finally {
+      closeModal()
     }
   }
 
@@ -79,12 +79,6 @@ export function StationOptionsModal({
         <DeleteStationModal
           closeModal={handleCloseDeleteModal}
           onRemoveStation={handleRemoveStation}
-        />
-      )}
-
-      {showRecommindationModal && (
-        <RecommindationModal
-          closeRecommindationModal={handleCloseRecommindationModal}
         />
       )}
     </>

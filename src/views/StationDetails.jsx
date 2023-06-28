@@ -84,6 +84,10 @@ export function StationDetails(props) {
     setShowModal(false)
   }
 
+  function closeOptionsModal() {
+    setShowModal(false)
+  }
+
   function handleShowRecommindationModal() {
     setShowModal(false)
     setShowRecommindationModal(true)
@@ -162,6 +166,7 @@ export function StationDetails(props) {
           position={modalPosition}
           closeModal={handleCloseOptionModal}
           openRecommindationModal={handleShowRecommindationModal}
+          closeOptionsModal={closeOptionsModal}
         />
       )}
 

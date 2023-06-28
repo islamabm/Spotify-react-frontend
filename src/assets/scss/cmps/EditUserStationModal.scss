@@ -11,16 +11,16 @@
   .modal-header {
     justify-content: space-between;
     .x {
-    fill: #bebebe;
-    align-items: center;
-    background-color: transparent;
-    border: 0;
-    border-radius: 32px;
-    width: 32px;
-    height: 32px;
-    &:hover {
+      fill: #bebebe;
+      align-items: center;
+      background-color: transparent;
+      border: 0;
+      border-radius: 32px;
+      width: 32px;
+      height: 32px;
+      &:hover {
         background-color: #3e3e3e;
-    }
+      }
     }
   }
   .default-image-div {
@@ -66,16 +66,16 @@
       }
     }
     .name-span {
-        position: absolute;
-        margin-top: -5px;
-        margin-left: 10px;
-        font-size: 11px;
+      position: absolute;
+      margin-top: -5px;
+      margin-left: 10px;
+      font-size: 11px;
     }
     .descp-span {
-        position: absolute;
-        margin-top: 50px;
-        margin-left: 10px;
-        font-size: 11px;
+      position: absolute;
+      margin-top: 50px;
+      margin-left: 10px;
+      font-size: 11px;
     }
   }
   button {
