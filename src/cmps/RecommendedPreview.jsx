@@ -8,11 +8,13 @@ export function RecommendedPreview({ song }) {
   }
 
   return (
-    <article className="info" onClick={handleSongClick}>
-      <img src={song.imgUrl}/>
-      <h3>{song?.title}</h3>
-      <p>{song?.artist}</p>
-      <p>{song?.album}</p>
+    <article className="song" onClick={handleSongClick}>
+      <img src={song.imgUrl} className="song-img"/>
+      <div className="name-and-artist">
+      <span>{song?.title}</span>
+      <span className="song-artist">{song?.artist}</span>
+      </div>
+      <span>{song?.album}</span>
     </article>
   );
 }

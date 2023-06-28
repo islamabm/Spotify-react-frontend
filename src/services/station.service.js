@@ -2551,7 +2551,7 @@ const gSearchCategories = [
   ],
 ];
 
-const gUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyCs23P1BnAU45UgQargknaVQz7mDJEIRGc&q=`;
+const gUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyDkQ778zeJcnjAFYcQQJiTqGkn9RDU2reE&q=`;
 const STORAGE_KEY = "stations";
 const USER_STATIONS = "user-stations";
 const STORAGE_SEARCH_KEY = "search-stations";
@@ -2566,10 +2566,10 @@ var gSearchStations = _loadSearchStations();
 function getVideos(keyword) {
   if (Array.isArray(keyword)) {
     // Fetch recommended songs based on the provided list of song titles
-    const recommendedSongs = keyword.map(async (title) => {
+    const recommendedSongs = keyword.map(async (artist) => {
       // Use the title to fetch the recommended song
       // Modify the axios.get call to fetch the recommended song based on the title
-      const res = await axios.get(gUrl + title);
+      const res = await axios.get(gUrl + artist);
       const recommendedSong = res.data.items.map((item) =>
         _prepareRecommendedData(item)
       );
@@ -2805,8 +2805,8 @@ async function updateStation(stationId, songs) {
 
 async function getRecommendedSongs(station) {
   console.log('from service',station)
-  const songTitles = station.map((song) => song.title);
-  return await getVideos(songTitles);
+  const songArtists = station.map((song) => song.artist);
+  return await getVideos(songArtists);
 }
 
 function _prepareRecommendedData(item) {
