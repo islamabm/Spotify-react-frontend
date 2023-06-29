@@ -1,5 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import UserStationsNameList from './UserStationsNameList'
 
 export function UserStationName({ addSongToStation, filter }) {
   const userStations = useSelector(
@@ -8,15 +9,11 @@ export function UserStationName({ addSongToStation, filter }) {
 
   return (
     <div className="user-stations-name">
-      <ul>
-        {userStations
-          ?.filter((station) => station.name.includes(filter))
-          .map((station, idx) => (
-            <li key={idx} onClick={() => addSongToStation(station._id)}>
-              <button>{station.name}</button>
-            </li>
-          ))}
-      </ul>
+      <UserStationsNameList
+        userStations={userStations}
+        addSongToStation={addSongToStation}
+        filter={filter}
+      />
     </div>
   )
 }
