@@ -2824,7 +2824,7 @@ function filterUserStations(userStations, filterBy) {
     //   filteredStations = userStations.filter(station => station.addedAt);
     //   break;
     case 'Recently Added':
-      filteredStations = userStations.filter(station => station.addedAt);
+      filteredStations = userStations.filter(station => station.createdAt);
       break;
     case 'Alphabetical':
       filteredStations = userStations.sort((a, b) => a.name.localeCompare(b.name));
@@ -2835,6 +2835,7 @@ function filterUserStations(userStations, filterBy) {
     default:
       break;
   }
+  console.log('filteredStations', filteredStations)
   return filteredStations;
 }
  
@@ -2851,8 +2852,10 @@ async function createNewStation(name) {
   const userStations = storageService.load(USER_STATIONS) || []
   const newStation = {
     _id: utilService.makeId(),
+    
     imgUrl: '',
     name: name,
+    createdAt: Date.now(),
     tags: [],
     createdBy: {
       _id: utilService.makeId(),
