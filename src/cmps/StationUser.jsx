@@ -1,7 +1,6 @@
 import React, {useState} from 'react'
 import { stationService } from '../services/station.service.js'
 import { getSpotifySvg } from '../services/SVG.service.js'
-import { useSelector } from 'react-redux'
 import {EditUserStationModal} from '../cmps/EditUserStationModal'
 
 export default function StationUser({ station }) {
@@ -33,7 +32,7 @@ export default function StationUser({ station }) {
         <span className="playlist-word">Playlist</span>
         <h1 className={stationNameClass} onClick={handleEditModalOpen}>{station.name}</h1>
         {isEditModalOpen && (
-        <EditUserStationModal onClose={handleEditModalClose} />
+        <EditUserStationModal onClose={handleEditModalClose} station={station} />
       )}
         <span className="songs-count"> {station.songs?.length} songs </span>
       </div>

@@ -6,7 +6,6 @@ import { UserLibrary } from './cmps/UserLibrary'
 import { AppFooter } from './cmps/AppFooter'
 import { StationIndex } from './views/StationIndex'
 import { StationDetails } from './views/StationDetails'
-import { StationEdit } from './views/StationEdit'
 import { Login } from './views/Login'
 import Search from './views/Search'
 import { useState } from 'react'
@@ -43,7 +42,6 @@ function LoggedInApp() {
       <main className="container">
         <Routes>
           <Route path="/" element={<StationIndex />} />
-          <Route path="/station/edit/:id?" element={<StationEdit />} />
           <Route path="/station/:id" element={<StationDetails />} />
           <Route path="/search" element={<Search />} />
         </Routes>
