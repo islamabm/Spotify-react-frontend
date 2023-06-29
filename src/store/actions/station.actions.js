@@ -43,15 +43,12 @@ export function loadUserStations() {
 }
 
 export function addStation(name) {
-  console.log('hi')
-  console.log('')
   return async (dispatch) => {
     try {
       const station = await stationService.createNewStation(name)
       const action = { type: ADD_STATION, station }
       dispatch(action)
       const action2 = { type: SET_CURR_STATION, station }
-      console.log('hi after dispatch2')
       dispatch(action2)
     } catch (error) {
       console.log('error:', error)
@@ -101,7 +98,6 @@ export function removeStation(stationId) {
 }
 
 export function addSongToStation(stationId, song) {
-  console.log('song action ', song)
   return async (dispatch) => {
     try {
       const updatedStation = await stationService.addSongToStation(
@@ -142,9 +138,10 @@ export function setCurrGradient(bgStyle) {
   }
 }
 
-export function setFilterBy(filterBy) {
+export function setFilterBy(userStations,filterBy) {
+  const filteredStations = stationService.filterUserStations(userStations,filterBy) 
   return (dispatch) => {
-    dispatch({ type: SET_FILTER_BY, filterBy })
+    dispatch({ type: SET_FILTER_BY, filteredStations })
   }
 }
 

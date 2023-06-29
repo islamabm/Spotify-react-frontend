@@ -10,7 +10,6 @@ export function RecommendedPreview({ song , stationId}) {
   function handleAddSong() {
     song._id = utilService.makeId()
     dispatch(addSongToStation(stationId,song))
-    console.log('song', song)
   }
 
   return (

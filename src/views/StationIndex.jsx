@@ -7,7 +7,6 @@ export function StationIndex() {
   const station = useSelector(
     (storeState) => storeState.stationModule.currStation
   )
-  console.log('station', station)
 
   const stations = useSelector(
     (storeState) => storeState.stationModule.stations

@@ -21,6 +21,7 @@ export const stationService = {
   updateStation,
   getRecommendedSongs,
   removeSongFromStation,
+  filterUserStations,
   //   tryStation,
 }
 const gDefaultStations = [
@@ -2668,7 +2669,6 @@ async function getVideos(keyword, song = null) {
 }
 
 function _prepareData(item) {
-  console.log('preperData')
   return {
     videoId: item.id.videoId,
     title: item.snippet.title,
@@ -2711,10 +2711,8 @@ async function getById(id) {
 }
 
 async function addSongToStation(stationId, song) {
-  console.log('song', song)
   const station = await getById(stationId)
   if (!station) {
-    console.log('Station with id not found')
   }
 
   station.songs.push(song)
@@ -2819,6 +2817,28 @@ function getUserStations() {
   return Promise.resolve([...stations])
 }
 
+function filterUserStations(userStations, filterBy) {
+  let filteredStations = userStations;
+  switch (filterBy) {
+    // case 'Recents':
+    //   filteredStations = userStations.filter(station => station.addedAt);
+    //   break;
+    case 'Recently Added':
+      filteredStations = userStations.filter(station => station.createdAt);
+      break;
+    case 'Alphabetical':
+      filteredStations = userStations.sort((a, b) => a.name.localeCompare(b.name));
+      break;
+    case 'Creator':
+      filteredStations = userStations.sort((a, b) => a.createdBy.fullname.localeCompare(b.creator));
+      break;
+    default:
+      break;
+  }
+  return filteredStations;
+}
+ 
+
 function _loadSearchStations() {
   let stations = storageService.load(STORAGE_SEARCH_KEY)
   if (!stations || !stations.length) stations = gSearchCategories
@@ -2831,8 +2851,10 @@ async function createNewStation(name) {
   const userStations = storageService.load(USER_STATIONS) || []
   const newStation = {
     _id: utilService.makeId(),
+    
     imgUrl: '',
     name: name,
+    createdAt: Date.now(),
     tags: [],
     createdBy: {
       _id: utilService.makeId(),
@@ -2887,10 +2909,6 @@ async function getRecommendedSongs(station) {
 }
 
 function _prepareRecommendedData(song) {
-  console.log('song', song)
-  console.log('prepareRecomended')
-  console.log('song', song)
-  console.log('prepareRecomended')
   return {
     // imgUrl: song.snippet.thumbnails.default.url,
     videoId: song.id.videoId,

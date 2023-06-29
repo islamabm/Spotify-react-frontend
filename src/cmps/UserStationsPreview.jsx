@@ -6,9 +6,7 @@ import { setCurrStation } from '../store/actions/station.actions'
 export default function UserStationsPreview({ station }) {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  console.log('station', station)
   function goToUserStationDetails() {
-    console.log('hi')
     dispatch(setCurrStation(station._id))
     navigate(`/station/${station._id}`)
   }
