@@ -2835,7 +2835,6 @@ function filterUserStations(userStations, filterBy) {
     default:
       break;
   }
-  console.log('filteredStations', filteredStations)
   return filteredStations;
 }
  
