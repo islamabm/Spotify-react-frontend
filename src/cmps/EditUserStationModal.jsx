@@ -1,8 +1,9 @@
-import React from 'react'
-import { getSpotifySvg } from '../services/SVG.service'
-import { useState } from 'react'
-
-export function EditUserStationModal() {
+import React from "react"
+import { getSpotifySvg } from "../services/SVG.service"
+import { useState } from "react"
+import { uploadImg } from "../services/upload.service"
+import emptyImg from '../assets/imgs/empty-img.png'
+export function EditUserStationModal({ station }) {
   const [isHovered, setIsHovered] = useState(false)
   const [focusedInput, setFocusedInput] = useState(null)
 
@@ -22,19 +23,34 @@ export function EditUserStationModal() {
     setFocusedInput(null)
   }
 
+  async function handelFile(ev) {
+    const file =
+      ev.type === "change" ? ev.target.files[0] : ev.dataTransfer.files[0]
+    try {
+      const { url } = await uploadImg(file)
+      station.imgUrl = url
+    } catch (err) {
+      console.log("err", err)
+    }
+  }
+
   return (
     <section className="modal-container">
       <div className="modal-header flex align-center">
-        <h2>Edit details</h2>
+        <h2 className="edit-details">Edit details</h2>
         <span
           className="x flex align-center justify-center pointer"
           dangerouslySetInnerHTML={{
-            __html: getSpotifySvg('x'),
+            __html: getSpotifySvg("x"),
           }}
         ></span>
       </div>
       <div className="edit-actions">
-        <div
+        <label className="cover-img" >
+        <img className="img-edit" src={station.imgUrl? station.imgUrl : emptyImg} alt="user station img" />  
+        <input type="file" onChange={handelFile} className="hidden" />
+        </label>
+        {/* <div
           className="default-image-div"
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
@@ -43,11 +59,11 @@ export function EditUserStationModal() {
             className="music-note"
             dangerouslySetInnerHTML={{
               __html: isHovered
-                ? getSpotifySvg('editImgIcon')
-                : getSpotifySvg('userStationImg'),
+                ? getSpotifySvg("editImgIcon")
+                : getSpotifySvg("userStationImg"),
             }}
           ></span>
-        </div>
+        </div> */}
 
         <div className="flex column inputs-container">
           <input
@@ -70,10 +86,6 @@ export function EditUserStationModal() {
         </div>
       </div>
       <button>Save</button>
-      <p>
-        By proceeding, you agree to give Spotify access to the image you choose
-        to upload. Please make sure you have the right to upload the image.
-      </p>
     </section>
   )
 }
