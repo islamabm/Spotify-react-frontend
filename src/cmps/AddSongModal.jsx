@@ -8,7 +8,6 @@ export function AddSongModal({ position, addSongToStation }) {
   const dispatch = useDispatch()
   const [filterInput, setFilterInput] = useState('')
   function createStation() {
-    console.log('hi')
     const name = song.title
     dispatch(addStation(name))
   }

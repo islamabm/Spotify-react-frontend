@@ -7,7 +7,6 @@ export function EditUserStationModal() {
   const [focusedInput, setFocusedInput] = useState(null)
 
   const handleMouseEnter = () => {
-    console.log('hi')
     setIsHovered(true)
   }
 

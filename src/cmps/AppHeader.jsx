@@ -26,7 +26,6 @@ export function AppHeader() {
 
     let match = bgStyle.background.match(/rgb\((\d+,\d+,\d+)\)/)
     let dominantColor = match ? match[1] : '0,0,0'
-    console.log('dominantColor', dominantColor)
 
     const newHeaders = {
       backgroundColor: `rgba(${dominantColor}, ${opacity})`,

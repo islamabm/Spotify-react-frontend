@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux'
 import {EditUserStationModal} from '../cmps/EditUserStationModal'
 
 export default function StationUser({ station }) {
-  console.log('StationUser rendered')
   const stationNameClass = stationService.stationNameClass(station)
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const handleEditModalOpen = () => {
