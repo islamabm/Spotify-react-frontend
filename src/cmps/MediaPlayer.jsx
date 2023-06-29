@@ -64,10 +64,10 @@ export function MediaPlayer({ volume }) {
   const onReady = (event) => {
     playerRef.current = event.target
     const duration = event.target.getDuration()
-    setDuration(duration) // here, duration is a number
+    setDuration(duration) 
     const minutes = Math.floor(duration / 60)
     const seconds = Math.round(duration % 60)
-    setDisplayDuration(`${minutes}:${seconds < 10 ? '0' : ''}${seconds}`) // here, displayDuration is a string
+    setDisplayDuration(`${minutes}:${seconds < 10 ? '0' : ''}${seconds}`) 
     event.target.pauseVideo()
   }
   const onPlaySong = () => {
@@ -78,7 +78,7 @@ export function MediaPlayer({ volume }) {
 
       const minutes = Math.floor(currentTime / 60)
       const seconds = Math.round(currentTime % 60)
-      setDisplayTime(`${minutes}:${seconds < 10 ? '0' : ''}${seconds}`) // Update displayTime
+      setDisplayTime(`${minutes}:${seconds < 10 ? '0' : ''}${seconds}`) 
     }, 1000)
   }
   const onPauseSong = () => {

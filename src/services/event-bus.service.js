@@ -21,7 +21,7 @@ function createEventEmitter() {
 }
 
 export const eventBus = createEventEmitter()
-
+export const SELECT_SONG = 'select-song'
 export function showUserMsg(msg) {
   eventBus.emit('show-msg', msg)
 }

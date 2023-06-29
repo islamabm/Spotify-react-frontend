@@ -122,6 +122,7 @@ export function removeSongFromStation(stationId, songId) {
         stationId,
         songId
       )
+      console.log('updatedStation', updatedStation)
       const action = {
         type: UPDATE_STATION,
         station: updatedStation,
@@ -138,8 +139,11 @@ export function setCurrGradient(bgStyle) {
   }
 }
 
-export function setFilterBy(userStations,filterBy) {
-  const filteredStations = stationService.filterUserStations(userStations,filterBy) 
+export function setFilterBy(userStations, filterBy) {
+  const filteredStations = stationService.filterUserStations(
+    userStations,
+    filterBy
+  )
   return (dispatch) => {
     dispatch({ type: SET_FILTER_BY, filteredStations })
   }

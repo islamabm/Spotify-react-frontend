@@ -2564,7 +2564,7 @@ const VIDEOS_KEY = 'videosIdDB'
 let gSearchCache = storageService.load(SEARCH_KEY) || {}
 
 var gStations = _loadStations()
-
+var gUserStations = getUserStations()
 var gSearchStations = _loadSearchStations()
 
 // function getVideos(keyword) {
@@ -2789,12 +2789,17 @@ function save(stationToSave) {
     const idx = gStations.findIndex(
       (station) => station._id === stationToSave._id
     )
+
+    gUserStations.splice(idx, 1, stationToSave)
     gStations.splice(idx, 1, stationToSave)
   } else {
     stationToSave._id = utilService.makeId()
     gStations.push(stationToSave)
+    gUserStations.push(stationToSave)
   }
   storageService.store(STORAGE_KEY, gStations)
+  storageService.store(USER_STATIONS, gUserStations)
+  console.log('userStations after', gUserStations)
   return Promise.resolve(stationToSave)
 }
 
@@ -2813,31 +2818,36 @@ function _loadStations() {
 }
 
 function getUserStations() {
-  const stations = storageService.load(USER_STATIONS)
-  return Promise.resolve([...stations])
+  let stations = storageService.load(USER_STATIONS)
+  if (!stations || !stations.length) stations = []
+  storageService.store(USER_STATIONS, stations)
+  return stations
 }
 
 function filterUserStations(userStations, filterBy) {
-  let filteredStations = userStations;
+  let filteredStations = userStations
   switch (filterBy) {
     // case 'Recents':
     //   filteredStations = userStations.filter(station => station.addedAt);
     //   break;
     case 'Recently Added':
-      filteredStations = userStations.filter(station => station.createdAt);
-      break;
+      filteredStations = userStations.filter((station) => station.createdAt)
+      break
     case 'Alphabetical':
-      filteredStations = userStations.sort((a, b) => a.name.localeCompare(b.name));
-      break;
+      filteredStations = userStations.sort((a, b) =>
+        a.name.localeCompare(b.name)
+      )
+      break
     case 'Creator':
-      filteredStations = userStations.sort((a, b) => a.createdBy.fullname.localeCompare(b.creator));
-      break;
+      filteredStations = userStations.sort((a, b) =>
+        a.createdBy.fullname.localeCompare(b.creator)
+      )
+      break
     default:
-      break;
+      break
   }
-  return filteredStations;
+  return filteredStations
 }
- 
 
 function _loadSearchStations() {
   let stations = storageService.load(STORAGE_SEARCH_KEY)
@@ -2851,7 +2861,7 @@ async function createNewStation(name) {
   const userStations = storageService.load(USER_STATIONS) || []
   const newStation = {
     _id: utilService.makeId(),
-    
+
     imgUrl: '',
     name: name,
     createdAt: Date.now(),

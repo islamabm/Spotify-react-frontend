@@ -21,8 +21,8 @@ export function StationOptionsModal({
   )
 
   function handleShowDeleteModal() {
-    closeOptionsModal() // close the options modal before showing the delete modal
     setShowDeleteModal(true)
+    // closeOptionsModal()
   }
 
   function handleShowRecommindationModal() {
@@ -33,24 +33,25 @@ export function StationOptionsModal({
   }
 
   function handleRemoveStation() {
+    console.log('hi')
     dispatch(removeStation(station._id))
     setShowDeleteModal(false)
     navigate(`/`)
   }
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      // if the target of the click is inside the modal, return early
-      if (modalRef.current && modalRef.current.contains(event.target)) {
-        return
-      }
-      closeModal()
-    }
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [closeModal])
+  // useEffect(() => {
+  //   const handleClickOutside = (event) => {
+  //     // if the target of the click is inside the modal, return early
+  //     if (modalRef.current && modalRef.current.contains(event.target)) {
+  //       return
+  //     }
+  //     closeModal()
+  //   }
+  //   document.addEventListener('mousedown', handleClickOutside)
+  //   return () => {
+  //     document.removeEventListener('mousedown', handleClickOutside)
+  //   }
+  // }, [closeModal])
   async function copyLinkToClipboard() {
     const playlistLink = `${window.location.href}`
     try {

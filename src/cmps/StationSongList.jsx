@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom'
 import { SongOptionsModal } from './SongOptionsModal'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import { updateStation } from '../store/actions/station.actions'
-
+import { setCurrSongAction } from '../store/actions/song.actions'
 export default function StationSongList({ station }) {
   const dispatch = useDispatch()
   const params = useParams()
@@ -23,8 +23,9 @@ export default function StationSongList({ station }) {
     setSongs(station.songs)
   }, [station])
 
-  function showSongOptionsModal(e, songId) {
-    dispatch(setCurrSong(params.id, songId))
+  function showSongOptionsModal(e, song) {
+    dispatch(setCurrSongAction(station._id, song._id))
+    e.stopPropagation()
 
     const rect = e.target.getBoundingClientRect()
     setModalPosition({
@@ -82,7 +83,11 @@ export default function StationSongList({ station }) {
           <div ref={provided.innerRef} {...provided.droppableProps}>
             {songs?.map((song, idx) => (
               // SONG
-              <Draggable key={idx} draggableId={song._id} index={idx}>
+              <Draggable
+                key={idx}
+                draggableId={song?._id || `song-${idx}`}
+                index={idx}
+              >
                 {(provided) => (
                   <div
                     ref={provided.innerRef}
@@ -110,20 +115,20 @@ export default function StationSongList({ station }) {
                         <img
                           onClick={() => onSongClicked(song._id)}
                           className="song-img"
-                          src={song.imgUrl}
+                          src={song?.imgUrl}
                           alt="song img"
                         />
                       </div>
                       <div className="name-and-artist flex justify-center">
-                        <span className="song-name">{song.title}</span>
-                        <span className="song-artist">{song.artist}</span>
+                        <span className="song-name">{song?.title}</span>
+                        <span className="song-artist">{song?.artist}</span>
                       </div>
                     </div>
                     <div className="album-name flex align-center">
-                      {song.album}
+                      {song?.album}
                     </div>
                     <div className="added-at flex align-center">
-                      {formatDate(song.addedAt)}
+                      {formatDate(song?.addedAt)}
                     </div>
                     <div className="duration-container flex">
                       <span
@@ -133,10 +138,10 @@ export default function StationSongList({ station }) {
                         }}
                       ></span>
                       <div className="duration">
-                        {song.duration ? song.duration : '1:00'}
+                        {song?.duration ? song?.duration : '1:00'}
                       </div>
                       <span
-                        onClick={(e) => showSongOptionsModal(e, song._id)}
+                        onClick={(e) => showSongOptionsModal(e, song)}
                         className="hidden dots"
                         dangerouslySetInnerHTML={{
                           __html: getSpotifySvg('dots'),
