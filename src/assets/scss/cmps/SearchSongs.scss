@@ -1,0 +1,17 @@
+.search-songs-container {
+
+    margin-inline-start: rem(20px);
+    
+    .search-input {
+    background-color: hsla(0,0%,100%,.1);
+    border: 0;
+    border-radius: 4px;
+    color: hsla(0,0%,100%,.7);
+    height: 40px;
+    opacity: 1;
+    padding: 8px 32px;
+    text-overflow: ellipsis;
+    width: 60%;
+}
+
+}
