@@ -2603,7 +2603,6 @@ var gSearchStations = _loadSearchStations()
 //   });
 // }
 
-const CACHE_EXPIRATION_TIME = 60 * 60 * 1000 // Cache expiration time in milliseconds (1 hour)
 const videoCache = {}
 
 async function getCachedVideos(keyword) {
@@ -2635,37 +2634,98 @@ async function getCachedVideos(keyword) {
   return videos
 }
 
+// async function getVideos(keyword, song = null) {
+//   if (Array.isArray(keyword)) {
+//     const cachedVideos = []
+//     const uncachedKeywords = []
+
+//     keyword.forEach((artist) => {
+//       if (
+//         videoCache[artist] &&
+//         Date.now() - videoCache[artist].timestamp < CACHE_EXPIRATION_TIME
+//       ) {
+//         cachedVideos.push(videoCache[artist].data)
+//       } else {
+//         uncachedKeywords.push(artist)
+//       }
+//     })
+
+//     const recommendedSongs = uncachedKeywords.map(async (artist) => {
+//       const res = await axios.get(gUrl + artist)
+//       const recommendedSong = res.data.items.map((item) => _prepareData(item))
+//       videoCache[artist] = {
+//         timestamp: Date.now(),
+//         data: recommendedSong[0],
+//       }
+//       return recommendedSong[0]
+//     })
+
+//     const recommendedVideos = await Promise.all(recommendedSongs)
+//     return cachedVideos.concat(recommendedVideos)
+//   }
+
+//   return getCachedVideos(keyword)
+// }
+
+const CACHE_KEY = 'recommendedSongsCache';
+const CACHE_EXPIRATION_TIME = 24 * 60 * 60 * 1000; // 24 hours
+
 async function getVideos(keyword, song = null) {
   if (Array.isArray(keyword)) {
-    const cachedVideos = []
-    const uncachedKeywords = []
+    const cachedVideos = [];
+    const uncachedKeywords = [];
 
     keyword.forEach((artist) => {
-      if (
-        videoCache[artist] &&
-        Date.now() - videoCache[artist].timestamp < CACHE_EXPIRATION_TIME
-      ) {
-        cachedVideos.push(videoCache[artist].data)
+      if (videoCache[artist] && Date.now() - videoCache[artist].timestamp < CACHE_EXPIRATION_TIME) {
+        cachedVideos.push(videoCache[artist].data);
       } else {
-        uncachedKeywords.push(artist)
+        uncachedKeywords.push(artist);
       }
-    })
+    });
 
-    const recommendedSongs = uncachedKeywords.map(async (artist) => {
-      const res = await axios.get(gUrl + artist)
-      const recommendedSong = res.data.items.map((item) => _prepareData(item))
-      videoCache[artist] = {
-        timestamp: Date.now(),
-        data: recommendedSong[0],
+    const recommendedSongs = await Promise.all(uncachedKeywords.map(async (artist) => {
+      let cachedSong = getCachedSong(artist);
+      if (cachedSong) {
+        return cachedSong;
+      } else {
+        const res = await axios.get(gUrl + artist);
+        const recommendedSong = res.data.items.map((item) => _prepareData(item));
+        cacheSong(artist, recommendedSong[0]);
+        return recommendedSong[0];
       }
-      return recommendedSong[0]
-    })
+    }));
 
-    const recommendedVideos = await Promise.all(recommendedSongs)
-    return cachedVideos.concat(recommendedVideos)
+    return cachedVideos.concat(recommendedSongs);
   }
 
-  return getCachedVideos(keyword)
+  return getCachedVideos(keyword);
+}
+
+function getCachedSong(artist) {
+  const cache = getCache();
+  if (cache && cache[artist] && Date.now() - cache[artist].timestamp < CACHE_EXPIRATION_TIME) {
+    return cache[artist].data;
+  }
+  return null;
+}
+
+function cacheSong(artist, song) {
+  const cache = getCache() || {};
+  cache[artist] = {
+    timestamp: Date.now(),
+    data: song,
+  };
+  setCache(cache);
+}
+
+function getCache() {
+  const cacheJSON = localStorage.getItem(CACHE_KEY);
+  return JSON.parse(cacheJSON);
+}
+
+function setCache(cache) {
+  const cacheJSON = JSON.stringify(cache);
+  localStorage.setItem(CACHE_KEY, cacheJSON);
 }
 
 function _prepareData(item) {
@@ -2906,14 +2966,4 @@ async function getRecommendedSongs(station) {
   const songArtists = station.map((song) => song.artist)
   const song = station.map((song) => song)
   return await getVideos(songArtists, song)
-}
-
-function _prepareRecommendedData(song) {
-  return {
-    // imgUrl: song.snippet.thumbnails.default.url,
-    videoId: song.id.videoId,
-    title: song.snippet.title,
-    artist: song.artist,
-    album: song.album,
-  }
 }
