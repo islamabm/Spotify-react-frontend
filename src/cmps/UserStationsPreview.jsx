@@ -2,6 +2,7 @@ import React from 'react'
 import { getSpotifySvg } from '../services/SVG.service'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
+import emptyImg from '../assets/imgs/empty-img.png'
 import { setCurrStation } from '../store/actions/station.actions'
 export default function UserStationsPreview({ station }) {
   const navigate = useNavigate()
@@ -14,15 +15,16 @@ export default function UserStationsPreview({ station }) {
   return (
     <section className="user-station-preview" onClick={goToUserStationDetails}>
       <div className="image-svg-container">
-        <span
+        {/* <span
           dangerouslySetInnerHTML={{
             __html: getSpotifySvg('musicIcon'),
           }}
-        ></span>
+        ></span> */}
+        <img src={station.imgUrl ? station.imgUrl : emptyImg} />
       </div>
       <div className="user-station-details">
         <div className="user-station-name">
-          <p>{station.name}</p>
+          <p>{station?.name}</p>
         </div>
         <div className="user-details">
           <span>Playlist</span>

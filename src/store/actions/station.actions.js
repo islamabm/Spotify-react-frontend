@@ -1,4 +1,5 @@
 import { stationService } from '../../services/station.service'
+import { showErrorMsg, showSuccessMsg } from '../../services/event-bus.service'
 import {
   REMOVE_STATION,
   SET_FILTER_BY,
@@ -10,6 +11,7 @@ import {
   UPDATE_STATION,
   LOAD_USER_STATIONS,
   ADD_SONG_TO_STATION,
+  EDIT_STATION,
 } from '../reducers/station.reducer'
 
 export function loadStations() {
@@ -30,7 +32,7 @@ export function loadStations() {
 export function loadUserStations() {
   return async (dispatch, getState) => {
     try {
-      const stations = await stationService.getUserStations()
+      const stations = await stationService.userQuery()
       const action = {
         type: LOAD_USER_STATIONS,
         stations,
@@ -50,8 +52,9 @@ export function addStation(name) {
       dispatch(action)
       const action2 = { type: SET_CURR_STATION, station }
       dispatch(action2)
+      showSuccessMsg('Playlist added')
     } catch (error) {
-      console.log('error:', error)
+      showErrorMsg('Cannot add playlist')
     }
   }
 }
@@ -90,9 +93,9 @@ export function removeStation(stationId) {
       await stationService.remove(stationId)
       const action = { type: REMOVE_STATION, stationId }
       dispatch(action)
-      return 'Removed!'
+      showSuccessMsg('Playlist removed')
     } catch (error) {
-      console.log('error:', error)
+      showErrorMsg('Cannot remove Playlist')
     }
   }
 }
@@ -109,8 +112,9 @@ export function addSongToStation(stationId, song) {
         station: updatedStation,
       }
       dispatch(action)
+      showSuccessMsg(`Song added to${updatedStation.name} `)
     } catch (error) {
-      console.log('error:', error)
+      showErrorMsg(`Cannot add song`)
     }
   }
 }
@@ -128,8 +132,9 @@ export function removeSongFromStation(stationId, songId) {
         station: updatedStation,
       }
       dispatch(action)
+      showSuccessMsg(`Song removed to${updatedStation.name} `)
     } catch (error) {
-      console.log('error:', error)
+      showErrorMsg(`Cannot remove song`)
     }
   }
 }
@@ -161,9 +166,34 @@ export function updateStation(stationId, songs) {
         station: updatedStation,
       }
       dispatch(action)
-      return 'Updated!'
     } catch (error) {
       console.log('error:', error)
+    }
+  }
+}
+
+export function editUserStation(
+  stationId,
+  stationName,
+  stationDesc,
+  stationImg
+) {
+  return async (dispatch) => {
+    try {
+      const updatedStation = await stationService.editStation(
+        stationId,
+        stationName,
+        stationDesc,
+        stationImg
+      )
+      console.log('updatedStation', updatedStation)
+      const action = { type: EDIT_STATION, station: updatedStation }
+      dispatch(action)
+      const action2 = { type: SET_CURR_STATION, station: updatedStation }
+      dispatch(action2)
+      showSuccessMsg(`Playlist updated`)
+    } catch (error) {
+      showErrorMsg(`Cannot update song`)
     }
   }
 }

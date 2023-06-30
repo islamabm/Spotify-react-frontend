@@ -15,10 +15,11 @@ export const stationService = {
   getPrevSong,
   getNextSong,
   createNewStation,
-  getUserStations,
+  userQuery,
   addSongToStation,
   stationNameClass,
   updateStation,
+  editStation,
   getRecommendedSongs,
   removeSongFromStation,
   filterUserStations,
@@ -2564,7 +2565,7 @@ const VIDEOS_KEY = 'videosIdDB'
 let gSearchCache = storageService.load(SEARCH_KEY) || {}
 
 var gStations = _loadStations()
-var gUserStations = getUserStations()
+var gUserStations = _getUserStations()
 var gSearchStations = _loadSearchStations()
 
 // function getVideos(keyword) {
@@ -2683,6 +2684,10 @@ function searchQuery() {
   return Promise.resolve([...gSearchStations])
 }
 
+function userQuery() {
+  return Promise.resolve([...gUserStations])
+}
+
 function query() {
   //   let stationsToReturn = gStations
   //   if (filterBy) {
@@ -2716,8 +2721,7 @@ async function addSongToStation(stationId, song) {
   }
 
   station.songs.push(song)
-  await save(station)
-  return station
+  return await save(station)
 }
 
 async function removeSongFromStation(stationId, songId) {
@@ -2733,6 +2737,20 @@ async function removeSongFromStation(stationId, songId) {
     return null
   } else {
     station.songs.splice(songIdx, 1)
+    await save(station)
+  }
+  const userStation = gUserStations.find((station) => station._id === stationId)
+  if (!userStation) {
+    console.error('Station with id not found')
+    return null
+  }
+
+  const userSongIdx = userStation.songs.findIndex((song) => song._id === songId)
+  if (userSongIdx === -1) {
+    console.error('Song with id not found in the station')
+    return null
+  } else {
+    userStation.songs.splice(songIdx, 1)
     const updatedStation = await save(station)
     return { ...updatedStation }
   }
@@ -2817,7 +2835,7 @@ function _loadStations() {
   return stations
 }
 
-function getUserStations() {
+function _getUserStations() {
   let stations = storageService.load(USER_STATIONS)
   if (!stations || !stations.length) stations = []
   storageService.store(USER_STATIONS, stations)
@@ -2888,6 +2906,7 @@ async function createNewStation(name) {
   stations.push(newStation)
   gStations.push(newStation)
   storageService.store(STORAGE_KEY, stations)
+  // const station = await save(newStation)
   return Promise.resolve({ ...newStation })
 }
 
@@ -2910,6 +2929,27 @@ async function updateStation(stationId, songs) {
     save(updatedStation)
   } else {
   }
+}
+async function editStation(stationId, stationName, stationDesc, stationImg) {
+  const station = await getById(stationId)
+  const idx = gStations.findIndex((s) => s._id === stationId)
+  const userIdx = gUserStations.findIndex((s) => s._id === stationId)
+  if (idx === -1) {
+    console.error('Station with id not found')
+    return null
+  }
+
+  station.name = stationName
+  station.description = stationDesc
+  station.imgUrl = stationImg
+
+  const updatedStation = await save(station)
+
+  gStations[idx] = updatedStation
+  gUserStations[userIdx] = updatedStation
+  storageService.store(STORAGE_KEY, gStations)
+  storageService.store(USER_STATIONS, gUserStations)
+  return Promise.resolve({ ...updatedStation })
 }
 
 async function getRecommendedSongs(station) {

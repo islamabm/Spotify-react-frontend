@@ -38,6 +38,7 @@ export function StationDetails(props) {
 
   useEffect(() => {
     updateImgUrlAndColor(station)
+    console.log('stationImg', stationImg)
   }, [stationImg])
   useEffect(() => {
     const currentStationDetailsRef = stationDetailsRef.current
@@ -124,7 +125,7 @@ export function StationDetails(props) {
     }
   }
 
-  if (!station) return <div>Loading...</div>
+  if (!station) return <div class="loader"></div>
   return (
     <section className="station-details" ref={stationDetailsRef}>
       <StationHeaderDetails bgStyle={bgStyle} station={station} />
