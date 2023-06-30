@@ -17,29 +17,16 @@ export default function StationSongList({ station }) {
   const [hoveredSongIdx] = useState(null)
   const [hoveredSong, setHoveredSong] = useState(null)
   const [showModal, setShowOptionsModal] = useState(false)
-  const [currSvg, setCurrSvg] = useState('play')
   const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 })
   const [songs, setSongs] = useState(station.songs)
   const [clickedSongs, setClickedSongs] = useState({})
   function onSongClicked(songId) {
-    if (!clickedSongs[songId]) {
-      console.log('first time')
-      setCurrSvg('play')
-      dispatch(setCurrSong(params.id, songId))
-      dispatch(setCurrSongIndex(params.id, songId))
-
-      setClickedSongs((prevState) => ({ ...prevState, [songId]: true }))
-    } else {
-      console.log('second time')
-      setCurrSvg('play')
-      eventBus.emit(PLAY_SONG)
-    }
+    dispatch(setCurrSong(params.id, songId))
+    dispatch(setCurrSongIndex(params.id, songId))
   }
 
   function pauseSong() {
-    setCurrSvg('pause')
     eventBus.emit(PAUSE_SONG)
-    // console.log('ok')
   }
 
   useEffect(() => {
@@ -157,7 +144,7 @@ export default function StationSongList({ station }) {
                         }`}
                         dangerouslySetInnerHTML={{
                           __html: getSpotifySvg(
-                            isPlayingAndHovered && currSvg === 'play'
+                            isPlayingAndHovered
                               ? 'smallPauseButton'
                               : 'smallPlayButton'
                           ),

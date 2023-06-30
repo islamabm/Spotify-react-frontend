@@ -2,7 +2,8 @@ import { getSpotifySvg } from '../services/SVG.service'
 import { useLocation, Link } from 'react-router-dom'
 import { UserModal } from './UserModal'
 import { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { setCurrSong, setCurrSongIndex } from '../store/actions/song.actions'
+import { useDispatch, useSelector } from 'react-redux'
 import { eventBus } from '../services/event-bus.service'
 export function AppHeader() {
   const [showModal, setShowModal] = useState(false)
@@ -11,7 +12,7 @@ export function AppHeader() {
   const station = useSelector(
     (storeState) => storeState.stationModule.currStation
   )
-
+  const dispatch = useDispatch()
   const location = useLocation()
 
   const [headers, setHeaders] = useState({
@@ -32,6 +33,12 @@ export function AppHeader() {
     }
     setHeaders(newHeaders)
   }
+
+  function playFirstSong() {
+    dispatch(setCurrSong(station?._id, station?.songs[0]._id))
+    dispatch(setCurrSongIndex(station?._id, station?.songs[0]._id))
+  }
+
   useEffect(() => {
     const onScroll = ({ scrollPos, bgStyle }) =>
       updateHeaderOpacity(scrollPos, bgStyle)
@@ -79,7 +86,10 @@ export function AppHeader() {
         )}
 
         {currScrollPos > 300 ? (
-          <div className="flex align-center justify-center station-options">
+          <div
+            onClick={playFirstSong}
+            className="flex align-center justify-center station-options"
+          >
             <div className="play-button flex justify-center align-center"></div>
             <p className="">{station.name}</p>
           </div>
