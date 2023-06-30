@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom'
 import { SongOptionsModal } from './SongOptionsModal'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import { updateStation } from '../store/actions/station.actions'
-import { PAUSE_SONG, eventBus } from '../services/event-bus.service'
+import { PAUSE_SONG, PLAY_SONG, eventBus } from '../services/event-bus.service'
 import { setCurrSongAction } from '../store/actions/song.actions'
 import animationGit from '../assets/gif/animation.gif'
 
@@ -17,14 +17,27 @@ export default function StationSongList({ station }) {
   const [hoveredSongIdx] = useState(null)
   const [hoveredSong, setHoveredSong] = useState(null)
   const [showModal, setShowOptionsModal] = useState(false)
+  const [currSvg, setCurrSvg] = useState('play')
   const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 })
   const [songs, setSongs] = useState(station.songs)
-
+  const [clickedSongs, setClickedSongs] = useState({})
   function onSongClicked(songId) {
-    dispatch(setCurrSong(params.id, songId))
-    dispatch(setCurrSongIndex(params.id, songId))
+    if (!clickedSongs[songId]) {
+      console.log('first time')
+      setCurrSvg('play')
+      dispatch(setCurrSong(params.id, songId))
+      dispatch(setCurrSongIndex(params.id, songId))
+
+      setClickedSongs((prevState) => ({ ...prevState, [songId]: true }))
+    } else {
+      console.log('second time')
+      setCurrSvg('play')
+      eventBus.emit(PLAY_SONG)
+    }
   }
+
   function pauseSong() {
+    setCurrSvg('pause')
     eventBus.emit(PAUSE_SONG)
     // console.log('ok')
   }
@@ -123,6 +136,9 @@ export default function StationSongList({ station }) {
                           className={`song-idx flex align-center justify-center ${
                             hoveredSongIdx === idx ? 'hovered' : ''
                           }`}
+                          style={{
+                            color: song?._id === currSong?._id ? '#1ED760' : '',
+                          }}
                         >
                           {idx + 1}
                         </span>
@@ -141,7 +157,7 @@ export default function StationSongList({ station }) {
                         }`}
                         dangerouslySetInnerHTML={{
                           __html: getSpotifySvg(
-                            isPlayingAndHovered
+                            isPlayingAndHovered && currSvg === 'play'
                               ? 'smallPauseButton'
                               : 'smallPlayButton'
                           ),

@@ -27,7 +27,7 @@ export function showUserMsg(msg) {
 }
 
 export const PAUSE_SONG = 'pause-song'
-
+export const PLAY_SONG = 'pause-song'
 export function showSuccessMsg(txt) {
   showUserMsg({ txt, type: 'success' })
 }

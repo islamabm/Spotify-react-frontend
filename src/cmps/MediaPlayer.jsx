@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { getSpotifySvg } from '../services/SVG.service'
 // import { HoverModal } from './HoverModal'
-import { PAUSE_SONG, eventBus } from '../services/event-bus.service'
+import { PAUSE_SONG, PLAY_SONG, eventBus } from '../services/event-bus.service'
 import { stationService } from '../services/station.service'
 import {
   getRandomSong,
@@ -83,6 +83,19 @@ export function MediaPlayer({ volume }) {
 
     return () => {
       eventBus.off(PAUSE_SONG, stopPlay)
+    }
+  }, [])
+  useEffect(() => {
+    const playSong = () => {
+      if (playerRef.current) {
+        playerRef.current.playVideo()
+      }
+    }
+
+    eventBus.on(PLAY_SONG, playSong)
+
+    return () => {
+      eventBus.off(PLAY_SONG, playSong)
     }
   }, [])
 

@@ -24,7 +24,7 @@ export function AppHeader() {
     const maxScroll = 50
     let opacity = Math.min(scrollPos / maxScroll, 1)
 
-    let match = bgStyle.background.match(/rgb\((\d+,\d+,\d+)\)/)
+    let match = bgStyle?.background.match(/rgb\((\d+,\d+,\d+)\)/)
     let dominantColor = match ? match[1] : '0,0,0'
 
     const newHeaders = {
