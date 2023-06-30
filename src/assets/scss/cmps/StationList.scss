@@ -1,5 +1,5 @@
 .station-list-container {
-padding: 55px 24px;
+  padding: 55px 24px;
 }
 .station-list {
   display: grid;
@@ -13,4 +13,12 @@ padding: 55px 24px;
 .category-tag {
   font-family: circular-book;
   font-size: 24px;
+}
+
+.song-animation-gif {
+  height: 13px;
+  width: 13px;
+  margin-top: 13px;
+  padding: 0;
+  transform: translate(2px);
 }

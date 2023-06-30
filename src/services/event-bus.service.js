@@ -26,6 +26,8 @@ export function showUserMsg(msg) {
   eventBus.emit('show-msg', msg)
 }
 
+export const PAUSE_SONG = 'pause-song'
+
 export function showSuccessMsg(txt) {
   showUserMsg({ txt, type: 'success' })
 }

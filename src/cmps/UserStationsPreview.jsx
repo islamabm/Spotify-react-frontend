@@ -3,7 +3,10 @@ import { getSpotifySvg } from '../services/SVG.service'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import emptyImg from '../assets/imgs/empty-img.png'
-import { setCurrStation } from '../store/actions/station.actions'
+import {
+  setCurrGradient,
+  setCurrStation,
+} from '../store/actions/station.actions'
 export default function UserStationsPreview({ station }) {
   const navigate = useNavigate()
   const dispatch = useDispatch()
