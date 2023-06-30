@@ -72,33 +72,33 @@ export function MediaPlayer({ volume }) {
     }
   }, [song])
 
-  useEffect(() => {
-    const stopPlay = () => {
-      console.log('hi event bus')
-      if (playerRef.current) {
-        playerRef.current.pauseVideo()
-      }
-    }
+  // useEffect(() => {
+  //   const stopPlay = () => {
+  //     console.log('hi event bus')
+  //     if (playerRef.current) {
+  //       playerRef.current.pauseVideo()
+  //     }
+  //   }
 
-    eventBus.on(PAUSE_SONG, stopPlay)
+  //   eventBus.on(PAUSE_SONG, stopPlay)
 
-    return () => {
-      eventBus.off(PAUSE_SONG, stopPlay)
-    }
-  }, [])
-  useEffect(() => {
-    const playSong = () => {
-      if (playerRef.current) {
-        playerRef.current.playVideo()
-      }
-    }
+  //   return () => {
+  //     eventBus.off(PAUSE_SONG, stopPlay)
+  //   }
+  // }, [])
+  // useEffect(() => {
+  //   const playSong = () => {
+  //     if (playerRef.current) {
+  //       playerRef.current.playVideo()
+  //     }
+  //   }
 
-    eventBus.on(PLAY_SONG, playSong)
+  //   eventBus.on(PLAY_SONG, playSong)
 
-    return () => {
-      eventBus.off(PLAY_SONG, playSong)
-    }
-  }, [])
+  //   return () => {
+  //     eventBus.off(PLAY_SONG, playSong)
+  //   }
+  // }, [])
 
   function onEndSong() {
     if (isRepeated) {
@@ -162,7 +162,7 @@ export function MediaPlayer({ volume }) {
   }
 
   function onRepeatClicked() {
-    setIsRepeated(!isRepeated) // Toggle the repeat option when the repeat button is clicked
+    setIsRepeated(!isRepeated)
   }
 
   function handlePlayPauseClick() {

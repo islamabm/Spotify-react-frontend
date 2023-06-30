@@ -99,7 +99,9 @@ export function AppHeader() {
       </section>
 
       <div className="user-actions flex justify-center align-center">
-        <button className="sign-up pointer">Sign up</button>
+        <Link to="/signup">
+          <button className="sign-up pointer">Sign up</button>
+        </Link>
         <Link to="/login">
           <button className="login pointer flex justify-center align-center">
             Log in

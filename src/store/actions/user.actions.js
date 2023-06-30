@@ -1,7 +1,40 @@
+import { userService } from '../../services/user.service'
+import { SIGNUP, SPEND_BALANCE, LOGIN } from '../reducers/user.reducer'
+
+export function doSignup(userCred) {
+  return async (dispatch, getState) => {
+    try {
+      const user = await userService.signup(userCred)
+      const action = {
+        type: SIGNUP,
+        user,
+      }
+      dispatch(action)
+    } catch (error) {
+      console.log('error:', error)
+    }
+  }
+}
+
+export function doLogin(userCred) {
+  return async (dispatch, getState) => {
+    try {
+      const user = await userService.login(userCred)
+      const action = {
+        type: LOGIN,
+        user,
+      }
+      dispatch(action)
+    } catch (error) {
+      console.log('error:', error)
+    }
+  }
+}
+
 export function spendBalance(amount) {
   return async (dispatch, getState) => {
     try {
-      dispatch({ type: 'SPEND_BALANCE', amount })
+      dispatch({ type: SPEND_BALANCE, amount })
     } catch (error) {
       console.log('error:', error)
     }

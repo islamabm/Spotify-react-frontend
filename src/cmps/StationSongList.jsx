@@ -26,7 +26,8 @@ export default function StationSongList({ station }) {
   }
 
   function pauseSong() {
-    eventBus.emit(PAUSE_SONG)
+    console.log('hi')
+    // eventBus.emit(PAUSE_SONG)
   }
 
   useEffect(() => {
