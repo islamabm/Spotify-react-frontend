@@ -1,5 +1,5 @@
 import { userService } from '../../services/user.service'
-import { SIGNUP, SPEND_BALANCE, LOGIN } from '../reducers/user.reducer'
+import { SIGNUP, SPEND_BALANCE, LOGIN, LOGOUT } from '../reducers/user.reducer'
 
 export function doSignup(userCred) {
   return async (dispatch, getState) => {
@@ -23,6 +23,19 @@ export function doLogin(userCred) {
       const action = {
         type: LOGIN,
         user,
+      }
+      dispatch(action)
+    } catch (error) {
+      console.log('error:', error)
+    }
+  }
+}
+export function doLogout() {
+  return async (dispatch, getState) => {
+    try {
+      await userService.logout()
+      const action = {
+        type: LOGOUT,
       }
       dispatch(action)
     } catch (error) {

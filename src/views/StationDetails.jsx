@@ -27,6 +27,7 @@ export function StationDetails(props) {
   const stationImg = useSelector(
     (storeState) => storeState.stationModule.currStationImg
   )
+  console.log('bgStyle', bgStyle)
   const dispatch = useDispatch()
 
   useEffect(() => {

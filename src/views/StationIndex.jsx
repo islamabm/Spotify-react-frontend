@@ -25,7 +25,7 @@ export function StationIndex() {
     }
   }, [])
 
-  if (!stations) return <div class="loader"></div>
+  if (!stations) return <div className="loader"></div>
 
   return (
     <section className="station-index">

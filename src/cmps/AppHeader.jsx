@@ -3,6 +3,7 @@ import { useLocation, Link } from 'react-router-dom'
 import { UserModal } from './UserModal'
 import { useState, useEffect } from 'react'
 import { setCurrSong, setCurrSongIndex } from '../store/actions/song.actions'
+import { doLogout } from '../store/actions/user.actions'
 import { useDispatch, useSelector } from 'react-redux'
 import { eventBus } from '../services/event-bus.service'
 export function AppHeader() {
@@ -12,12 +13,14 @@ export function AppHeader() {
   const station = useSelector(
     (storeState) => storeState.stationModule.currStation
   )
+  const user = useSelector((storeState) => storeState.userModule.loggedInUser)
   const dispatch = useDispatch()
   const location = useLocation()
 
   const [headers, setHeaders] = useState({
     backgroundColor: 'transparent',
   })
+  console.log('headers', headers)
 
   function updateHeaderOpacity(scrollPos, bgStyle) {
     setScrollPos(scrollPos)
@@ -39,15 +42,29 @@ export function AppHeader() {
     dispatch(setCurrSongIndex(station?._id, station?.songs[0]._id))
   }
 
+  function handleLogout() {
+    dispatch(doLogout())
+  }
   useEffect(() => {
     const onScroll = ({ scrollPos, bgStyle }) =>
       updateHeaderOpacity(scrollPos, bgStyle)
     const unlisten = eventBus.on('stationDetailsScroll', onScroll)
 
+    if (location.pathname === '/' || location.pathname === '/search') {
+      setHeaders({
+        backgroundColor: 'rgba(0,0,0,0)',
+      })
+      console.log('headers', headers)
+    } else {
+      setHeaders({
+        backgroundColor: 'transparent',
+      })
+    }
+
     return () => {
       unlisten()
     }
-  }, [])
+  }, [location])
 
   function onShowModal() {
     setShowModal(true)
@@ -85,7 +102,8 @@ export function AppHeader() {
           </div>
         )}
 
-        {currScrollPos > 300 ? (
+        {currScrollPos > 300 &&
+        location.pathname === `/station/${station?._id}` ? (
           <div
             onClick={playFirstSong}
             className="flex align-center justify-center station-options"
@@ -99,21 +117,28 @@ export function AppHeader() {
       </section>
 
       <div className="user-actions flex justify-center align-center">
-        <Link to="/signup">
-          <button className="sign-up pointer">Sign up</button>
-        </Link>
-        <Link to="/login">
-          <button className="login pointer flex justify-center align-center">
-            Log in
-          </button>
-        </Link>
-
-        <span
-          className="user-icon pointer flex justify-center align-center"
-          dangerouslySetInnerHTML={{
-            __html: getSpotifySvg('userIcon'),
-          }}
-        ></span>
+        {!user ? (
+          <>
+            <Link to="/signup">
+              <button className="sign-up pointer">Sign up</button>
+            </Link>
+            <Link to="/login">
+              <button className="login pointer flex justify-center align-center">
+                Log in
+              </button>
+            </Link>
+          </>
+        ) : (
+          <>
+            <button onClick={handleLogout} className="sign-up  pointer">
+              Log out
+            </button>
+            <span className="user-details-header">
+              <img src="https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg" />
+              {user?.username}
+            </span>
+          </>
+        )}
       </div>
       {showModal && <UserModal onClose={onCloseModal} />}
     </header>
