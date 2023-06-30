@@ -3,6 +3,7 @@ import './assets/scss/global.scss'
 import { AppHeader } from './cmps/AppHeader'
 import { AppNav } from './cmps/AppNav'
 import { UserLibrary } from './cmps/UserLibrary'
+import { UserMsg } from './cmps/UserMsg'
 import { AppFooter } from './cmps/AppFooter'
 import { StationIndex } from './views/StationIndex'
 import { StationDetails } from './views/StationDetails'
@@ -36,6 +37,7 @@ function App() {
 function LoggedInApp() {
   return (
     <section className="main-app">
+      <UserMsg />
       <AppHeader />
       <AppNav />
       <UserLibrary />

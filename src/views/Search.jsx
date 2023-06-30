@@ -13,7 +13,7 @@ export default function Search() {
     dispatch(loadSearchStations())
   }, [])
 
-  if (!categories) return <div>Loading....</div>
+  if (!categories) return <div class="loader"></div>
   return (
     <div className="categories-index">
       <h2 class="search-header">Browse all</h2>

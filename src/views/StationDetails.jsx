@@ -35,6 +35,7 @@ export function StationDetails(props) {
 
   useEffect(() => {
     updateImgUrlAndColor(station)
+    console.log('stationImg', stationImg)
   }, [stationImg])
   useEffect(() => {
     const currentStationDetailsRef = stationDetailsRef.current
@@ -116,7 +117,7 @@ export function StationDetails(props) {
       }
     }
   }
-  console.log("station", station)
+
   if (!station) return <div>Loading...</div>
   return (
     <section className="station-details" ref={stationDetailsRef}>

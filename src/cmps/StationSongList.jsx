@@ -1,22 +1,32 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { getSpotifySvg } from '../services/SVG.service'
 import { setCurrSong, setCurrSongIndex } from '../store/actions/song.actions'
 import { useParams } from 'react-router-dom'
 import { SongOptionsModal } from './SongOptionsModal'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import { updateStation } from '../store/actions/station.actions'
+import { PAUSE_SONG, eventBus } from '../services/event-bus.service'
 import { setCurrSongAction } from '../store/actions/song.actions'
+import animationGit from '../assets/gif/animation.gif'
+
 export default function StationSongList({ station }) {
+  const currSong = useSelector((storeState) => storeState.songModule.currSong)
   const dispatch = useDispatch()
   const params = useParams()
   const [hoveredSongIdx] = useState(null)
+  const [hoveredSong, setHoveredSong] = useState(null)
   const [showModal, setShowOptionsModal] = useState(false)
   const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 })
   const [songs, setSongs] = useState(station.songs)
+
   function onSongClicked(songId) {
     dispatch(setCurrSong(params.id, songId))
     dispatch(setCurrSongIndex(params.id, songId))
+  }
+  function pauseSong() {
+    eventBus.emit(PAUSE_SONG)
+    // console.log('ok')
   }
 
   useEffect(() => {
@@ -76,83 +86,117 @@ export default function StationSongList({ station }) {
 
     dispatch(updateStation(params.id, updatedSongs))
   }
+
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
       <Droppable droppableId="songList">
         {(provided) => (
           <div ref={provided.innerRef} {...provided.droppableProps}>
-            {songs?.map((song, idx) => (
-              // SONG
-              <Draggable
-                key={idx}
-                draggableId={song?._id || `song-${idx}`}
-                index={idx}
-              >
-                {(provided) => (
-                  <div
-                    ref={provided.innerRef}
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
-                    className="song"
-                  >
-                    <span
-                      className={`song-idx flex align-center justify-center ${
-                        hoveredSongIdx === idx ? 'hovered' : ''
-                      }`}
+            {songs?.map((song, idx) => {
+              const isPlayingAndHovered =
+                song?._id === currSong?._id && song?._id === hoveredSong
+
+              return (
+                <Draggable
+                  key={idx}
+                  draggableId={song?._id || `song-${idx}`}
+                  index={idx}
+                >
+                  {(provided) => (
+                    <div
+                      ref={provided.innerRef}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                      className="song"
+                      onMouseEnter={() => setHoveredSong(song._id)}
+                      onMouseLeave={() => setHoveredSong(null)}
                     >
-                      {idx + 1}
-                    </span>
-                    <span
-                      className={` small-play-btn flex align-center justify-center ${
-                        hoveredSongIdx === idx ? 'hovered' : ''
-                      }`}
-                      dangerouslySetInnerHTML={{
-                        __html: getSpotifySvg('smallPlayButton'),
-                      }}
-                    ></span>
-                    <div className="song-details-container">
-                      <div className="img-container flex align-center justify-center">
+                      {song?._id === currSong?._id &&
+                      song?._id !== hoveredSong ? (
                         <img
-                          onClick={() => onSongClicked(song._id)}
-                          className="song-img"
-                          src={song?.imgUrl}
-                          alt="song img"
+                          className="song-animation-gif"
+                          src={animationGit}
+                          alt="Animation"
                         />
-                      </div>
-                      <div className="name-and-artist flex justify-center">
-                        <span className="song-name">{song?.title}</span>
-                        <span className="song-artist">{song?.artist}</span>
-                      </div>
-                    </div>
-                    <div className="album-name flex align-center">
-                      {song?.album}
-                    </div>
-                    <div className="added-at flex align-center">
-                      {formatDate(song?.addedAt)}
-                    </div>
-                    <div className="duration-container flex">
+                      ) : (
+                        <span
+                          className={`song-idx flex align-center justify-center ${
+                            hoveredSongIdx === idx ? 'hovered' : ''
+                          }`}
+                        >
+                          {idx + 1}
+                        </span>
+                      )}
+
                       <span
-                        className="hidden dots"
+                        onClick={() => {
+                          if (isPlayingAndHovered) {
+                            pauseSong()
+                          } else {
+                            onSongClicked(song._id)
+                          }
+                        }}
+                        className={` small-play-btn flex align-center justify-center ${
+                          hoveredSongIdx === idx ? 'hovered' : ''
+                        }`}
                         dangerouslySetInnerHTML={{
-                          __html: getSpotifySvg('emptyHeartIcon'),
+                          __html: getSpotifySvg(
+                            isPlayingAndHovered
+                              ? 'smallPauseButton'
+                              : 'smallPlayButton'
+                          ),
                         }}
                       ></span>
-                      <div className="duration">
-                        {song?.duration ? song?.duration : '1:00'}
+                      <div className="song-details-container">
+                        <div className="img-container flex align-center justify-center">
+                          <img
+                            className="song-img"
+                            src={song?.imgUrl}
+                            alt="song img"
+                          />
+                        </div>
+                        <div className="name-and-artist flex justify-center">
+                          <span
+                            className="song-name"
+                            style={{
+                              color:
+                                song?._id === currSong?._id ? '#1ED760' : '',
+                            }}
+                          >
+                            {song?.title}
+                          </span>
+                          <span className="song-artist">{song?.artist}</span>
+                        </div>
                       </div>
-                      <span
-                        onClick={(e) => showSongOptionsModal(e, song)}
-                        className="hidden dots"
-                        dangerouslySetInnerHTML={{
-                          __html: getSpotifySvg('dots'),
-                        }}
-                      ></span>
+                      <div className="album-name flex align-center">
+                        {song?.album}
+                      </div>
+                      <div className="added-at flex align-center">
+                        {formatDate(song?.addedAt)}
+                      </div>
+                      <div className="duration-container flex">
+                        <span
+                          className="hidden dots"
+                          dangerouslySetInnerHTML={{
+                            __html: getSpotifySvg('emptyHeartIcon'),
+                          }}
+                        ></span>
+                        <div className="duration">
+                          {song?.duration ? song?.duration : '1:00'}
+                        </div>
+                        <span
+                          onClick={(e) => showSongOptionsModal(e, song)}
+                          className="hidden dots"
+                          dangerouslySetInnerHTML={{
+                            __html: getSpotifySvg('dots'),
+                          }}
+                        ></span>
+                      </div>
                     </div>
-                  </div>
-                )}
-              </Draggable>
-              // SONG
-            ))}
+                  )}
+                </Draggable>
+              )
+            })}
             {provided.placeholder}
           </div>
         )}
