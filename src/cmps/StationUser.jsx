@@ -34,12 +34,11 @@ export default function StationUser({ station }) {
           {station.name}
         </h1>
         {isEditModalOpen && (
-          <EditUserStationModal
-            onClose={handleEditModalClose}
-            station={station}
-          />
-        )}
-        <span className="songs-count"> {station.songs?.length} songs </span>
+        <EditUserStationModal onClose={handleEditModalClose} station={station} />
+      )}
+      {station.songs.length > 0 &&
+        <span className="songs-count"> {station.songs.length} songs </span>
+      }
       </div>
     </>
   )

@@ -1,19 +1,16 @@
-import { useEffect, useState, useRef } from 'react'
-import { useParams } from 'react-router-dom'
-import { getSpotifySvg } from '../services/SVG.service'
-import { useDispatch, useSelector } from 'react-redux'
-import {
-  setCurrStation,
-  setCurrGradient,
-} from '../store/actions/station.actions'
-import { FastAverageColor } from 'fast-average-color'
-import { eventBus } from '../services/event-bus.service'
-import StationHeaderDetails from '../cmps/StationHeaderDetails'
-import StationSongList from '../cmps/StationSongList'
-import { StationOptionsModal } from '../cmps/StationOptionsModal'
-import { Recommended } from '../cmps/Recommended'
-import { EditUserStationModal } from '../cmps/EditUserStationModal'
-import { RecommindationModal } from '../cmps/RecommindationModal'
+import { useEffect, useState, useRef } from "react"
+import { useParams } from "react-router-dom"
+import { getSpotifySvg } from "../services/SVG.service"
+import { useDispatch, useSelector } from "react-redux"
+import { setCurrStation } from "../store/actions/station.actions"
+import { FastAverageColor } from "fast-average-color"
+import { eventBus } from "../services/event-bus.service"
+import StationHeaderDetails from "../cmps/StationHeaderDetails"
+import StationSongList from "../cmps/StationSongList"
+import { StationOptionsModal } from "../cmps/StationOptionsModal"
+import { Recommended } from "../cmps/Recommended"
+import { RecommindationModal } from "../cmps/RecommindationModal"
+import SearchSongs from "../cmps/SearchSongs"
 
 export function StationDetails(props) {
   const [bgStyle, setBgStyle] = useState(null)
@@ -44,16 +41,16 @@ export function StationDetails(props) {
     const currentStationDetailsRef = stationDetailsRef.current
     const handleScroll = () => {
       const scrollPos = currentStationDetailsRef.scrollTop
-      eventBus.emit('stationDetailsScroll', { scrollPos, bgStyle })
+      eventBus.emit("stationDetailsScroll", { scrollPos, bgStyle })
     }
     if (currentStationDetailsRef) {
-      currentStationDetailsRef.addEventListener('scroll', handleScroll, {
+      currentStationDetailsRef.addEventListener("scroll", handleScroll, {
         passive: true,
       })
     }
     return () => {
       if (currentStationDetailsRef) {
-        currentStationDetailsRef.removeEventListener('scroll', handleScroll, {
+        currentStationDetailsRef.removeEventListener("scroll", handleScroll, {
           passive: true,
         })
       }
@@ -76,16 +73,12 @@ export function StationDetails(props) {
   function updateImgUrlAndColor(station) {
     if (!station) return
     const imgUrl = station.imgUrl
-    if (imgUrl !== '') {
+    if (imgUrl !== "") {
       getDominantColor(imgUrl)
     }
   }
 
   function handleCloseOptionModal() {
-    setShowModal(false)
-  }
-
-  function closeOptionsModal() {
     setShowModal(false)
   }
 
@@ -106,8 +99,8 @@ export function StationDetails(props) {
     }
     const fac = new FastAverageColor()
     const img = new Image()
-    img.crossOrigin = 'Anonymous'
-    const corsProxyUrl = 'https://api.codetabs.com/v1/proxy?quest='
+    img.crossOrigin = "Anonymous"
+    const corsProxyUrl = "https://api.codetabs.com/v1/proxy?quest="
     img.src = corsProxyUrl + encodeURIComponent(imageSrc)
     img.onload = async () => {
       try {
@@ -125,41 +118,49 @@ export function StationDetails(props) {
     }
   }
 
-  if (!station) return <div class="loader"></div>
+  if (!station) return <div>Loading...</div>
   return (
     <section className="station-details" ref={stationDetailsRef}>
       <StationHeaderDetails bgStyle={bgStyle} station={station} />
       <div className="bottom gradient" style={bgBottomStyle}>
         <div className="user-station-actions">
-          <div className="play-button flex justify-center align-center"></div>
-          <span
-            className="heart flex align-center justify-center"
-            dangerouslySetInnerHTML={{
-              __html: getSpotifySvg('bigFilledHeart'),
-            }}
-          ></span>
+          {station.songs.length < 0 && (
+            <>
+              <div className="play-button flex justify-center align-center"></div>
+              <span
+                className="heart flex align-center justify-center"
+                dangerouslySetInnerHTML={{
+                  __html: getSpotifySvg("bigFilledHeart"),
+                }}
+              ></span>
+            </>
+          )}
           <span
             onClick={(e) => showStationModal(e)}
             className="dots flex align-center justify-center"
             dangerouslySetInnerHTML={{
-              __html: getSpotifySvg('bigDots'),
+              __html: getSpotifySvg("bigDots"),
             }}
           ></span>
         </div>
         <div className="station-songs">
           <div className="station-songs-header">
-            <span className="flex align-center justify-center">#</span>
-            <span className="title flex align-center">Title</span>
-            <span className="flex align-center">Album</span>
-            <span className="flex align-center">Date added</span>
-            <span
-              className="time flex align-center justify-center"
-              dangerouslySetInnerHTML={{
-                __html: getSpotifySvg('time'),
-              }}
-            ></span>
+            {station.songs.length > 0 && (
+              <>
+                <span className="flex align-center justify-center">#</span>
+                <span className="title flex align-center">Title</span>
+                <span className="flex align-center">Album</span>
+                <span className="flex align-center">Date added</span>
+                <span
+                  className="time flex align-center justify-center"
+                  dangerouslySetInnerHTML={{
+                    __html: getSpotifySvg("time"),
+                  }}
+                ></span>
+                <StationSongList station={station} />
+              </>
+            )}
           </div>
-          <StationSongList station={station} />
         </div>
       </div>
       {showModal && (
@@ -167,7 +168,6 @@ export function StationDetails(props) {
           position={modalPosition}
           closeModal={handleCloseOptionModal}
           openRecommindationModal={handleShowRecommindationModal}
-          closeOptionsModal={closeOptionsModal}
         />
       )}
 
@@ -176,7 +176,14 @@ export function StationDetails(props) {
           closeRecommindationModal={() => setShowRecommindationModal(false)}
         />
       )}
-      <Recommended list={station?.songs?.slice(0, 5)} stationId={station._id} />
+      {station.createdBy?.fullname === "guest" && station.songs.length > 0 && (
+        <Recommended
+          list={station?.songs?.slice(0, 5) || station?.songs?.slice(0,station.songs.length - 1)}
+          stationId={station._id}
+        />
+      )}
+      {station.createdBy?.fullname === "guest" &&
+        station.songs.length === 0 && <SearchSongs />}
     </section>
   )
 }

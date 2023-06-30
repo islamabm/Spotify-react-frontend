@@ -7,15 +7,15 @@ export function Recommended({ list , stationId}) {
   const [recommendedSongs, setRecommendedSongs] = useState([]);
 
   useEffect(() => {
-    getList();
-  }, [list]);
+    getList()
+  }, [list])
 
   async function getList() {
     try {
-      const currList = await stationService.getRecommendedSongs(list);
+      const currList = await stationService.getRecommendedSongs(list)
       setRecommendedSongs(currList);
     } catch (error) {
-      console.error("Error fetching recommended songs:", error);
+      console.error("Error fetching recommended songs:", error)
     }
   }
 
