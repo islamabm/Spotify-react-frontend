@@ -23,6 +23,8 @@ export const stationService = {
   getRecommendedSongs,
   removeSongFromStation,
   filterUserStations,
+  setVideoIdCache,
+  getVideoIdCache,
   //   tryStation,
 }
 const gDefaultStations = [
@@ -2554,7 +2556,7 @@ const gSearchCategories = [
   ],
 ]
 
-const API_KEY = 'AIzaSyChpLnnJ1SoF36P8aPBBAd8FyC3qDPQDGM'
+const API_KEY = 'AIzaSyA7OCEYhcRCpVEh8ufrH39Vez_Sfd7fWjQ'
 
 const gUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=${API_KEY}&q=`
 const STORAGE_KEY = 'stations'
@@ -2668,65 +2670,84 @@ async function getCachedVideos(keyword) {
 //   return getCachedVideos(keyword)
 // }
 
-const CACHE_KEY = 'recommendedSongsCache';
-const CACHE_EXPIRATION_TIME = 24 * 60 * 60 * 1000; // 24 hours
+const CACHE_KEY = 'recommendedSongsCache'
+const CACHE_EXPIRATION_TIME = 24 * 60 * 60 * 1000 // 24 hours
 
 async function getVideos(keyword, song = null) {
   if (Array.isArray(keyword)) {
-    const cachedVideos = [];
-    const uncachedKeywords = [];
+    const cachedVideos = []
+    const uncachedKeywords = []
 
     keyword.forEach((artist) => {
-      if (videoCache[artist] && Date.now() - videoCache[artist].timestamp < CACHE_EXPIRATION_TIME) {
-        cachedVideos.push(videoCache[artist].data);
+      if (
+        videoCache[artist] &&
+        Date.now() - videoCache[artist].timestamp < CACHE_EXPIRATION_TIME
+      ) {
+        cachedVideos.push(videoCache[artist].data)
       } else {
-        uncachedKeywords.push(artist);
+        uncachedKeywords.push(artist)
       }
-    });
+    })
 
-    const recommendedSongs = await Promise.all(uncachedKeywords.map(async (artist) => {
-      let cachedSong = getCachedSong(artist);
-      if (cachedSong) {
-        return cachedSong;
-      } else {
-        const res = await axios.get(gUrl + artist);
-        const recommendedSong = res.data.items.map((item) => _prepareData(item));
-        cacheSong(artist, recommendedSong[0]);
-        return recommendedSong[0];
-      }
-    }));
+    const recommendedSongs = await Promise.all(
+      uncachedKeywords.map(async (artist) => {
+        let cachedSong = getCachedSong(artist)
+        if (cachedSong) {
+          return cachedSong
+        } else {
+          const res = await axios.get(gUrl + artist)
+          const recommendedSong = res.data.items.map((item) =>
+            _prepareData(item)
+          )
+          cacheSong(artist, recommendedSong[0])
+          return recommendedSong[0]
+        }
+      })
+    )
 
-    return cachedVideos.concat(recommendedSongs);
+    return cachedVideos.concat(recommendedSongs)
   }
 
-  return getCachedVideos(keyword);
+  return getCachedVideos(keyword)
 }
 
 function getCachedSong(artist) {
-  const cache = getCache();
-  if (cache && cache[artist] && Date.now() - cache[artist].timestamp < CACHE_EXPIRATION_TIME) {
-    return cache[artist].data;
+  const cache = getCache()
+  if (
+    cache &&
+    cache[artist] &&
+    Date.now() - cache[artist].timestamp < CACHE_EXPIRATION_TIME
+  ) {
+    return cache[artist].data
   }
-  return null;
+  return null
 }
 
 function cacheSong(artist, song) {
-  const cache = getCache() || {};
+  const cache = getCache() || {}
   cache[artist] = {
     timestamp: Date.now(),
     data: song,
-  };
-  setCache(cache);
+  }
+  setCache(cache)
+}
+
+function setVideoIdCache(song, videoId) {
+  localStorage.setItem(`${song.artist} - ${song.title}`, videoId)
+}
+
+function getVideoIdCache(song) {
+  return localStorage.getItem(`${song.artist} - ${song.title}`)
 }
 
 function getCache() {
-  const cacheJSON = localStorage.getItem(CACHE_KEY);
-  return JSON.parse(cacheJSON);
+  const cacheJSON = localStorage.getItem(CACHE_KEY)
+  return JSON.parse(cacheJSON)
 }
 
 function setCache(cache) {
-  const cacheJSON = JSON.stringify(cache);
-  localStorage.setItem(CACHE_KEY, cacheJSON);
+  const cacheJSON = JSON.stringify(cache)
+  localStorage.setItem(CACHE_KEY, cacheJSON)
 }
 
 function _prepareData(item) {

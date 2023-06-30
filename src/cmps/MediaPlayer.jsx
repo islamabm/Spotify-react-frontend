@@ -16,6 +16,7 @@ export function MediaPlayer({ volume }) {
   const stationId = useSelector(
     (storeState) => storeState.stationModule.currStationId
   )
+  const progressBarRef = useRef(null)
   const [videoId, setVideoId] = useState('M7lc1UVf-VE')
   const [isShuffled, setIsShuffled] = useState(false)
   const [isPlaying, setIsPlaying] = useState(false)
@@ -48,29 +49,37 @@ export function MediaPlayer({ volume }) {
   useEffect(() => {
     if (song && song.title && song.artist) {
       const searchStr = `${song.artist} ${song.title}`
-      stationService
-        .getVideos(searchStr)
-        .then((videos) => {
-          if (videos.length > 0) {
-            setVideoId(videos[0].videoId)
-          }
-        })
-        .catch((error) => {
-          console.error('Error getting videos:', error)
-        })
+      const cachedVideoId = stationService.getVideoIdCache(song)
+      if (cachedVideoId) {
+        console.log('getr from locale')
+        setVideoId(cachedVideoId)
+      } else {
+        console.log('get from api')
+        stationService
+          .getVideos(searchStr)
+          .then((videos) => {
+            if (videos.length > 0) {
+              stationService.setVideoIdCache(song, videos[0].videoId)
+              setVideoId(videos[0].videoId)
+            }
+          })
+          .catch((error) => {
+            console.error('Error getting videos:', error)
+          })
+      }
     }
   }, [song])
 
-  const onReady = (event) => {
+  function onReady(event) {
     playerRef.current = event.target
     const duration = event.target.getDuration()
-    setDuration(duration) 
+    setDuration(duration)
     const minutes = Math.floor(duration / 60)
     const seconds = Math.round(duration % 60)
-    setDisplayDuration(`${minutes}:${seconds < 10 ? '0' : ''}${seconds}`) 
+    setDisplayDuration(`${minutes}:${seconds < 10 ? '0' : ''}${seconds}`)
     event.target.pauseVideo()
   }
-  const onPlaySong = () => {
+  function onPlaySong() {
     setIsPlaying(true)
     interval = setInterval(() => {
       const currentTime = playerRef.current.getCurrentTime()
@@ -78,10 +87,10 @@ export function MediaPlayer({ volume }) {
 
       const minutes = Math.floor(currentTime / 60)
       const seconds = Math.round(currentTime % 60)
-      setDisplayTime(`${minutes}:${seconds < 10 ? '0' : ''}${seconds}`) 
+      setDisplayTime(`${minutes}:${seconds < 10 ? '0' : ''}${seconds}`)
     }, 1000)
   }
-  const onPauseSong = () => {
+  function onPauseSong() {
     setIsPlaying(false)
     clearInterval(interval)
   }
@@ -98,7 +107,23 @@ export function MediaPlayer({ volume }) {
     dispatch(getRandomSong(stationId))
   }
 
-  const handlePlayPauseClick = () => {
+  function handleProgressBarClick(e) {
+    if (progressBarRef.current && playerRef.current) {
+      const progressBar = progressBarRef.current
+
+      const clickPositionInPage = e.pageX
+      const progressBarStartInPage = progressBar.getBoundingClientRect().left
+      const clickPositionInBar = clickPositionInPage - progressBarStartInPage
+      const percentageOfBarClicked =
+        clickPositionInBar / progressBar.offsetWidth
+      const newTimeInSong =
+        playerRef.current.getDuration() * percentageOfBarClicked
+
+      playerRef.current.seekTo(newTimeInSong)
+    }
+  }
+
+  function handlePlayPauseClick() {
     if (isPlaying) {
       playerRef.current.pauseVideo()
     } else {
@@ -156,7 +181,11 @@ export function MediaPlayer({ volume }) {
 
         <div className="music-bar">
           <span className="current-time hiding">{displayTime}</span>
-          <div className="progress-bar">
+          <div
+            className="progress-bar"
+            ref={progressBarRef}
+            onClick={handleProgressBarClick}
+          >
             <div
               className="progress-bar-fill"
               style={{ width: progressBarWidth }}
