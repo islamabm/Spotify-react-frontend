@@ -8,6 +8,7 @@ export const SET_CURR_STATION = 'SET_CURR_STATION'
 export const SET_CURR_GRADIENT = 'SET_CURR_GRADIENT'
 export const LOAD_USER_STATIONS = 'LOAD_USER_STATIONS'
 export const ADD_SONG_TO_STATION = 'ADD_SONG_TO_STATION'
+export const REMOVE_SONG_FROM_STATION = 'REMOVE_SONG_FROM_STATION'
 const INITIAL_STATE = {
   currStationImg: '',
   stations: [],
@@ -89,6 +90,30 @@ export function stationReducer(state = INITIAL_STATE, action = {}) {
         ),
         userStations: state.userStations.map((station) =>
           station._id === action.station._id ? action.station : station
+        ),
+      }
+    case REMOVE_SONG_FROM_STATION:
+      return {
+        ...state,
+        stations: state.stations.map((station) =>
+          station._id === action.stationId
+            ? {
+                ...station,
+                songs: station.songs.filter(
+                  (song) => song._id !== action.songId
+                ),
+              }
+            : station
+        ),
+        userStations: state.userStations.map((station) =>
+          station._id === action.stationId
+            ? {
+                ...station,
+                songs: station.songs.filter(
+                  (song) => song._id !== action.songId
+                ),
+              }
+            : station
         ),
       }
 

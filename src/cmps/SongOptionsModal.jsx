@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import { getSpotifySvg } from '../services/SVG.service'
 import { AddSongModal } from './AddSongModal'
 import { useDispatch, useSelector } from 'react-redux'
+import { eventBus, SELECT_SONG } from '../services/event-bus.service'
 import {
   addSongToStation,
   removeSongFromStation,
@@ -10,11 +11,38 @@ export function SongOptionsModal({ position, closeOptionsModal, closeModal }) {
   const station = useSelector(
     (storeState) => storeState.stationModule.currStation
   )
+  const song = useSelector((storeState) => storeState.songModule.currSongAction)
   const SongmodalRef = useRef()
-  const song = useSelector((storeState) => storeState.songModule.currSong)
+
   const [showModal, setShowModal] = useState(false)
   const [modalPosition, setAddModalPosition] = useState({ top: 0, left: 0 })
   const dispatch = useDispatch()
+  // const [selectedSong, setSelectedSong] = useState(null)
+
+  // useEffect(() => {
+  //   const onClick = eventBus.on('select-song', (song) => {
+  //     console.log('song', song)
+  //     setSelectedSong(song)
+  //   })
+  //   return unsubscribe
+  // }, [selectedSong])
+  // useEffect(() => {
+  //   const onClick = (song) => {
+  //     setSelectedSong({ ...song })
+  //   }
+
+  //   const unlisten = eventBus.on('SELECT_SONG', onClick)
+  //   console.log('onClick', onClick)
+
+  //   return () => {
+  //     unlisten()
+  //   }
+  // }, [])
+
+  // useEffect(() => {
+  //   console.log('selectedSong', selectedSong)
+  // }, [selectedSong])
+
   function showAddModal(e) {
     const rect = e.target.getBoundingClientRect()
     setAddModalPosition({
@@ -48,7 +76,7 @@ export function SongOptionsModal({ position, closeOptionsModal, closeModal }) {
   }
 
   function handleRemoveSongFromStation() {
-    dispatch(removeSongFromStation(station._id, song._id))
+    dispatch(removeSongFromStation(station._id, song?._id))
     closeModal()
   }
 
