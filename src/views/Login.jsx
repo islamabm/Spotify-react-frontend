@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { doLogin } from '../store/actions/user.actions'
-import { useNavigate, Link } from 'react-router-dom'
-import { getSpotifySvg } from '../services/SVG.service'
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { doLogin } from "../store/actions/user.actions";
+import { useNavigate, Link } from "react-router-dom";
+import { getSpotifySvg } from "../services/SVG.service";
 export function Login() {
   const dispatch = useDispatch()
 
@@ -29,41 +29,33 @@ export function Login() {
   return (
     <section className="spotify-login-page">
       <div className="login-header">
-        {' '}
+      <Link to="/">
         <span
           className="flex"
           dangerouslySetInnerHTML={{
-            __html: getSpotifySvg('LoginHeaderLogo'),
+            __html: getSpotifySvg("LoginHeaderLogo"),
           }}
         ></span>
+        </Link>
       </div>
       <div className="login-main-container flex column align-center">
         <h2>Log in to Spotify</h2>
         <div className="continueW flex column">
           <button className="pointer">
             <span>
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/2008px-Google_%22G%22_Logo.svg.png"
-                alt="google-img"
-              />
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/2008px-Google_%22G%22_Logo.svg.png" />
             </span>
             Continue With Google
           </button>
           <button className="pointer">
             <span>
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/1024px-Facebook_Logo_%282019%29.png"
-                alt="facebook-img"
-              />
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/1024px-Facebook_Logo_%282019%29.png" />
             </span>
             Continue With Facebook
           </button>
           <button className="pointer">
             <span>
-              <img
-                src="https://1000logos.net/wp-content/uploads/2016/10/apple-emblem.jpg"
-                alt="apple-img"
-              />
+              <img src="https://1000logos.net/wp-content/uploads/2016/10/apple-emblem.jpg" />
             </span>
             Continue With Apple
           </button>

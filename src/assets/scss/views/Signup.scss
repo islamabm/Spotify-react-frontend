@@ -1,12 +1,21 @@
 .spotify-signup-page {
   background-color: $clr6;
   color: $clr2;
+  min-height: 1000px;
+
+
+  margin: 0px auto;
+  padding-bottom: 130px;
+
+
+
   h1 {
     font-size: 32px;
     font-family: Circular-medium;
     letter-spacing: -0.04em;
   }
-  .signupW {
+  .signupW { 
+    gap: 20px;
     .fb-btn {
       width: 394px;
       height: 48px;
@@ -16,6 +25,16 @@
       border: none;
       background-color: #425b91;
       color: $clr6;
+      transition: opacity 0.01s 0.01s, transform 0.01s 0.01s;
+      &:hover {
+        transform: scale(1.03);
+        font-weight: bolder;
+      }
+      img {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+    }
     }
     .google-btn {
       width: 394px;
@@ -26,15 +45,82 @@
       background-color: inherit;
       color: #535353;
       border: 2px solid #535353;
+      transition: opacity 0.01s 0.01s, transform 0.01s 0.01s;
+      &:hover {
+        transform: scale(1.03);
+        font-weight: bolder;
+      }
     }
-    .line {
-        .divider {
-            border-top: 1px solid rgb(204, 204, 204);
-            content: "";
-            display: table-cell;
-            position: relative;
-            top: 0.8em;
-            width: 42%;
+    .divider {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      margin: 1em 0;
+  
+      .line {
+        flex-grow: 1;
+        height: 1px;
+        background-color: #ccc;
+      }
+  
+      span {
+        padding: 0 1em;
+        color:#777;
+ }
+ }
+  }
+  h3 {
+    font-family: Circular-light;
+    font-size: 18px;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    .label {
+        font-family: Circular-medium;
+    }
+    input {
+        width: 450px;
+        height: 48px;
+        border: 1px solid #878787;
+        border-radius: 4px;
+        margin: 8px 0;
+        padding: 15px;
+        &:hover {
+            border: 1px solid black;
+        }
+    }
+    small {
+        font-family: Circular-light;
+        font-size: 14px;
+    }
+    button {
+        font-size: 18px;
+        font-family: Circular-medium;
+        background-color: #1ed760;
+        border-radius: 500px;
+        width: 159px;
+        height: 56px;
+        border: none;
+        margin-left: 32%;
+      margin-bottom: 30px;
+      transition: opacity 0.01s 0.01s, transform 0.01s 0.01s;
+      &:hover {
+        transform: scale(1.03);
+      }
+    }
+  }
+  .go-to-login {
+    font-size: 16px;
+    font-family: Circular-light;
+    gap: 5px;
+    a {
+        color: #39b95b;
+        text-decoration: underline;
+        &:hover {
+            color:#1ed760;
         }
     }
   }
