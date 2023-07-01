@@ -1,7 +1,7 @@
-import { useCallback, useEffect } from 'react'
+import { useEffect } from 'react'
 import { StationList } from '../cmps/StationList'
 import { useDispatch, useSelector } from 'react-redux'
-import { loadStations, removeStation } from '../store/actions/station.actions'
+import { loadStations } from '../store/actions/station.actions'
 
 export function StationIndex() {
   const stations = useSelector(
@@ -18,7 +18,7 @@ export function StationIndex() {
 
   return (
     <section className="station-index">
-      <StationList stations={stations} onRemoveStation={onRemoveStation} />
+      <StationList stations={stations} />
     </section>
   )
 }
