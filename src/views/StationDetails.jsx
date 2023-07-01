@@ -183,7 +183,7 @@ export function StationDetails(props) {
         />
       )}
       {station.createdBy?.fullname === "guest" &&
-        station.songs.length === 0 && <SearchSongs />}
+        station.songs.length === 0 && <SearchSongs stationId={station._id} />}
     </section>
   )
 }
