@@ -17,7 +17,8 @@ export function StationOptionsModal({
     (storeState) => storeState.stationModule.currStation
   )
 
-  function handleShowDeleteModal() {
+  function handleShowDeleteModal(e) {
+    e.stopPropagation()
     setShowDeleteModal(true)
     closeOptionsModal()
   }
@@ -60,7 +61,7 @@ export function StationOptionsModal({
           <li>
             <button>Edit details</button>
           </li>
-          <li onClick={handleShowDeleteModal}>
+          <li onClick={(e) => handleShowDeleteModal(e)}>
             <button>Delete</button>
           </li>
           <li onClick={copyLinkToClipboard}>
