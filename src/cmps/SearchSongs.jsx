@@ -49,7 +49,7 @@ export default function SearchSongs({ stationId }) {
           onChange={handleInputChange}
         />
       </div>
-      <div className="station-songs">
+      <div className="station-songs search">
         {searchText.length > 0 &&
         <SearchSongsList list={songList} stationId={stationId} />
         }
