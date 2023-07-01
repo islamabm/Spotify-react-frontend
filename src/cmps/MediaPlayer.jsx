@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { getSpotifySvg } from '../services/SVG.service'
-// import { HoverModal } from './HoverModal'
-import { PAUSE_SONG, PLAY_SONG, eventBus } from '../services/event-bus.service'
+
+import { PAUSE_SONG, eventBus } from '../services/event-bus.service'
 import { stationService } from '../services/station.service'
 import {
   getRandomSong,
@@ -53,10 +53,10 @@ export function MediaPlayer({ volume }) {
       const searchStr = `${song.artist} ${song.title}`
       const cachedVideoId = stationService.getVideoIdCache(song)
       if (cachedVideoId) {
-        console.log('getr from locale')
+
         setVideoId(cachedVideoId)
       } else {
-        console.log('get from api')
+
         stationService
           .getVideos(searchStr)
           .then((videos) => {
@@ -72,33 +72,20 @@ export function MediaPlayer({ volume }) {
     }
   }, [song])
 
-  // useEffect(() => {
-  //   const stopPlay = () => {
-  //     console.log('hi event bus')
-  //     if (playerRef.current) {
-  //       playerRef.current.pauseVideo()
-  //     }
-  //   }
+  useEffect(() => {
+    const stopPlay = () => {
+      if (playerRef.current) {
+        playerRef.current.pauseVideo()
+      }
+    }
 
-  //   eventBus.on(PAUSE_SONG, stopPlay)
+    eventBus.on(PAUSE_SONG, stopPlay)
 
-  //   return () => {
-  //     eventBus.off(PAUSE_SONG, stopPlay)
-  //   }
-  // }, [])
-  // useEffect(() => {
-  //   const playSong = () => {
-  //     if (playerRef.current) {
-  //       playerRef.current.playVideo()
-  //     }
-  //   }
+    return () => {
+      eventBus.off(PAUSE_SONG, stopPlay)
+    }
+  }, [])
 
-  //   eventBus.on(PLAY_SONG, playSong)
-
-  //   return () => {
-  //     eventBus.off(PLAY_SONG, playSong)
-  //   }
-  // }, [])
 
   function onEndSong() {
     if (isRepeated) {

@@ -5,6 +5,7 @@ export const userService = {
   getLoggedinUser,
   login,
   logout,
+  updateUser,
 }
 
 function getLoggedinUser() {
@@ -18,12 +19,17 @@ function signup(userCred) {
 }
 
 function logout() {
-    storageService.store('loggedinUser', {})
-
-  }
+  storageService.store('loggedinUser', {})
+}
 
 function login(userCred) {
   console.log('userCred', userCred)
   storageService.store('loggedinUser', userCred)
   return { ...userCred }
+}
+function updateUser(url) {
+  const user = storageService.load('loggedinUser')
+  user.imgUrl = url
+  storageService.store('loggedinUser', user)
+  return { ...user }
 }

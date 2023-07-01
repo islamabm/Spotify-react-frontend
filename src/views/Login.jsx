@@ -4,28 +4,27 @@ import { doLogin } from "../store/actions/user.actions";
 import { useNavigate, Link } from "react-router-dom";
 import { getSpotifySvg } from "../services/SVG.service";
 export function Login() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
-  const users = useSelector((storeState) => storeState.userModule.users);
-  const navigate = useNavigate();
-  const [loginCred, setLoginCred] = useState({ username: "", password: "" });
+  const navigate = useNavigate()
+  const [loginCred, setLoginCred] = useState({ username: '', password: '' })
 
   function handleLogin(e) {
-    e.preventDefault();
+    e.preventDefault()
     if (!loginCred.username || !loginCred.password) {
-      alert("Please enter username/password");
-      return;
+      alert('Please enter username/password')
+      return
     }
-    dispatch(doLogin(loginCred));
-    navigate(`/`);
+    dispatch(doLogin(loginCred))
+    navigate(`/`)
   }
 
   const handleInputChange = (e) => {
     setLoginCred({
       ...loginCred,
       [e.target.name]: e.target.value,
-    });
-  };
+    })
+  }
 
   return (
     <section className="spotify-login-page">
@@ -102,5 +101,5 @@ export function Login() {
         </div>
       </div>
     </section>
-  );
+  )
 }

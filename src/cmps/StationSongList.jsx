@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom'
 import { SongOptionsModal } from './SongOptionsModal'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import { updateStation } from '../store/actions/station.actions'
-import { PAUSE_SONG, PLAY_SONG, eventBus } from '../services/event-bus.service'
+import { PAUSE_SONG, eventBus } from '../services/event-bus.service'
 import { setCurrSongAction } from '../store/actions/song.actions'
 import animationGit from '../assets/gif/animation.gif'
 
@@ -19,15 +19,15 @@ export default function StationSongList({ station }) {
   const [showModal, setShowOptionsModal] = useState(false)
   const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 })
   const [songs, setSongs] = useState(station.songs)
-  const [clickedSongs, setClickedSongs] = useState({})
+
   function onSongClicked(songId) {
     dispatch(setCurrSong(params.id, songId))
     dispatch(setCurrSongIndex(params.id, songId))
   }
 
   function pauseSong() {
-    console.log('hi')
-    // eventBus.emit(PAUSE_SONG)
+ 
+    eventBus.emit(PAUSE_SONG)
   }
 
   useEffect(() => {

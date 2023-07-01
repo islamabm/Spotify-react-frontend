@@ -2,6 +2,7 @@ export const SPEND_BALANCE = 'SPEND_BALANCE'
 export const SIGNUP = 'SIGNUP'
 export const LOGIN = 'LOGIN'
 export const LOGOUT = 'LOGOUT'
+export const UPDATE_USER = 'UPDATE_USER'
 
 const INITIAL_STATE = {
   loggedInUser: null,
@@ -35,6 +36,11 @@ export function userReducer(state = INITIAL_STATE, action = {}) {
       return {
         ...state,
         loggedInUser: null,
+      }
+    case UPDATE_USER:
+      return {
+        ...state,
+        loggedInUser: action.user,
       }
 
     default:
