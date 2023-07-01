@@ -42,21 +42,19 @@ export function Signup() {
         <h1 className="flex align-center justify-center">
           Sign up for free to start listening.
         </h1>
-        <div className="separator">
-          <div className="signupW flex column align-center">
-            <button className="fb-btn pointer">
-              Sign up with Facebook
-              {/* <span>
+        <div className="signupW flex column align-center">
+          <button className="fb-btn pointer">
+            Sign up with Facebook
+            {/* <span>
                 <img src="https://www.freeiconspng.com/uploads/facebook-f-logo-white-background-21.jpg" />
               </span> */}
-            </button>
-            <button className="google-btn pointer">Sign up with Google</button>
-          </div>
+          </button>
+          <button className="google-btn pointer">Sign up with Google</button>
           <div className="divider">
             <div className="line"></div>
-            <span>OR</span>
+            <span>or</span>
             <div className="line"></div>
-        </div>
+          </div>
         </div>
         <h3 className="flex align-center justify-center">
           Sign up with your email address
