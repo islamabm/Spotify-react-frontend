@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { getSpotifySvg } from '../services/SVG.service'
-// import { HoverModal } from './HoverModal'
+
 import { PAUSE_SONG, eventBus } from '../services/event-bus.service'
 import { stationService } from '../services/station.service'
 import {

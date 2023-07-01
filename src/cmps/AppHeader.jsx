@@ -20,7 +20,6 @@ export function AppHeader() {
   const [headers, setHeaders] = useState({
     backgroundColor: 'transparent',
   })
- 
 
   function updateHeaderOpacity(scrollPos, bgStyle) {
     setScrollPos(scrollPos)
@@ -54,7 +53,6 @@ export function AppHeader() {
       setHeaders({
         backgroundColor: 'rgba(0,0,0,0)',
       })
-   
     } else {
       setHeaders({
         backgroundColor: 'transparent',
@@ -74,11 +72,7 @@ export function AppHeader() {
     setShowModal(false)
   }
   return (
-    <header
-      className="app-header"
-      style={{ ...headers }}
-
-    >
+    <header className="app-header" style={{ ...headers }}>
       <section className="arrows-and-input">
         <section className="arrows">
           <div className="black-circle">
@@ -135,7 +129,10 @@ export function AppHeader() {
             </button>
             <Link to="/user">
               <span className="user-details-header">
-                <img src="https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg" />
+                <img
+                  src="https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg"
+                  alt="user-img"
+                />
                 {user?.username}
               </span>
             </Link>

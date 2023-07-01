@@ -44,7 +44,10 @@ export function AppFooter() {
         {song && (
           <>
             <div className="image">
-              <img src={song ? song.imgUrl : station?.songs[0]?.imgUrl} />
+              <img
+                src={song ? song.imgUrl : station?.songs[0]?.imgUrl}
+                alt="song-img"
+              />
             </div>
             <div className="actor-name-song">
               <p className="song-name">
