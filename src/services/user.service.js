@@ -6,6 +6,7 @@ export const userService = {
   login,
   logout,
   updateUser,
+  prepareData,
 }
 
 function getLoggedInUser() {
@@ -30,4 +31,12 @@ function updateUser(url) {
   user.imgUrl = url
   storageService.store('loggedinUser', user)
   return { ...user }
+}
+
+function prepareData(userCred) {
+  return {
+    email:userCred.email,
+    userName: userCred.name,
+    img: userCred.picture
+  }
 }

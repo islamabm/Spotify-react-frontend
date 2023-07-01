@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { doLogin } from "../store/actions/user.actions";
 import { useNavigate, Link } from "react-router-dom";
 import { getSpotifySvg } from "../services/SVG.service";
+
 export function Login() {
   const dispatch = useDispatch();
-
   const navigate = useNavigate();
   const [loginCred, setLoginCred] = useState({ username: "", password: "" });
 

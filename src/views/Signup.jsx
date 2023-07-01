@@ -1,10 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { doSignup } from "../store/actions/user.actions";
 import { useNavigate, Link } from "react-router-dom";
 import { getSpotifySvg } from "../services/SVG.service";
+import jwtDecode from "jwt-decode";
+import {userService} from '../services/user.service'
 
 export function Signup() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const google = window.google;
+
+  function handleCallbackResponse(response) {
+    // console.log("Encoded JWT ID token: " + response.credential);
+    const userObject = jwtDecode(response.credential);
+    console.log("user object", userObject);
+    const user = userService.prepareData(userObject)
+    dispatch(doSignup(user));
+  }
+
+  useEffect(() => {
+    google.accounts.id.initialize({
+      client_id:
+        "574173385565-5e20ddsrolqlbdrsk5shsfodsfp36pfh.apps.googleusercontent.com",
+      callback: handleCallbackResponse,
+    });
+
+    google.accounts.id.renderButton(document.getElementById("signIn-div"), {
+      theme: "outline",
+      size: "large",
+    });
+  }, []);
+
   const [signupCred, setSignupCred] = useState({
     username: "",
     password: "",
@@ -14,8 +41,6 @@ export function Signup() {
     likedSongs: [],
   });
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   function handleSignup(e) {
     e.preventDefault();
@@ -49,7 +74,8 @@ export function Signup() {
                 <img src="https://www.freeiconspng.com/uploads/facebook-f-logo-white-background-21.jpg" />
               </span> */}
           </button>
-          <button className="google-btn pointer">Sign up with Google</button>
+          <div id="signIn-div"></div>
+          {/* <button className="google-btn pointer">Sign up with Google</button> */}
           <div className="divider">
             <div className="line"></div>
             <span>or</span>
@@ -77,7 +103,7 @@ export function Signup() {
             <span className="label">Create a password</span>
             <input
               type="password"
-               value={signupCred.password}
+              value={signupCred.password}
               onChange={(e) =>
                 setSignupCred({ ...signupCred, password: e.target.value })
               }
@@ -90,7 +116,7 @@ export function Signup() {
             <span className="label">What should we call you?</span>
             <input
               type="text"
-            value={signupCred.username}
+              value={signupCred.username}
               onChange={(e) =>
                 setSignupCred({ ...signupCred, username: e.target.value })
               }
