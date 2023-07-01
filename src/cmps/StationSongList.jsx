@@ -54,6 +54,7 @@ export default function StationSongList({ station }) {
   }, [station])
 
   function showSongOptionsModal(e, song) {
+    console.log('song in dots', song)
     dispatch(setCurrSongAction(station._id, song._id))
     e.stopPropagation()
 
@@ -99,7 +100,7 @@ export default function StationSongList({ station }) {
 
     const updatedSongs = Array.from(songs)
 
-    const [movedSong] = updatedSongs.splice(source.index, 1)
+    const [movedSong] = updatedSongs?.splice(source.index, 1)
     updatedSongs.splice(destination.index, 0, movedSong)
 
     setSongs(updatedSongs)

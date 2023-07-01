@@ -24,6 +24,7 @@ export function setCurrSongAction(stationId, songId) {
   return async (dispatch, getState) => {
     try {
       const song = await stationService.getSongById(stationId, songId)
+      console.log('song after service', song)
       const action = {
         type: SET_CURR_SONG_ACTION,
         song,
