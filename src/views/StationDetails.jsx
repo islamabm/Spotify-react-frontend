@@ -180,7 +180,7 @@ export function StationDetails(props) {
       {showModal && (
         <StationOptionsModal
           position={modalPosition}
-          closeModal={handleCloseOptionModal}
+          closeOptionsModal={handleCloseOptionModal}
           openRecommindationModal={handleShowRecommindationModal}
         />
       )}
@@ -199,7 +199,7 @@ export function StationDetails(props) {
           stationId={station._id}
         />
       )}
-      {station.createdBy?.fullname === "guest" &&
+      {station.createdBy?.fullname === 'guest' &&
         station.songs.length === 0 && <SearchSongs stationId={station._id} />}
     </section>
   )

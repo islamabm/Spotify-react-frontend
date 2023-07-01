@@ -1,12 +1,12 @@
-import React, { useState, useRef } from "react"
-import { DeleteStationModal } from "./DeleteStationModal"
-import { useNavigate } from "react-router-dom"
-import { useDispatch, useSelector } from "react-redux"
-import { removeStation } from "../store/actions/station.actions"
+import React, { useState, useRef } from 'react'
+import { DeleteStationModal } from './DeleteStationModal'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { removeStation } from '../store/actions/station.actions'
 
 export function StationOptionsModal({
   position,
-  closeModal,
+  closeOptionsModal,
   openRecommindationModal,
 }) {
   const [showDeleteModal, setShowDeleteModal] = useState(false)
@@ -19,7 +19,7 @@ export function StationOptionsModal({
 
   function handleShowDeleteModal() {
     setShowDeleteModal(true)
-    // closeModal()
+    closeOptionsModal()
   }
 
   function handleShowRecommindationModal() {
@@ -30,21 +30,19 @@ export function StationOptionsModal({
   }
 
   function handleRemoveStation() {
- 
     dispatch(removeStation(station._id))
     setShowDeleteModal(false)
     navigate(`/`)
   }
-
 
   async function copyLinkToClipboard() {
     const playlistLink = `${window.location.href}`
     try {
       await navigator.clipboard.writeText(playlistLink)
     } catch (err) {
-      console.error("Failed to copy playlist link: ", err)
+      console.error('Failed to copy playlist link: ', err)
     } finally {
-      closeModal()
+      closeOptionsModal()
     }
   }
 
