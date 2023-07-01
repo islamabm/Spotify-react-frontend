@@ -25,6 +25,16 @@
       border: none;
       background-color: #425b91;
       color: $clr6;
+      transition: opacity 0.01s 0.01s, transform 0.01s 0.01s;
+      &:hover {
+        transform: scale(1.03);
+        font-weight: bolder;
+      }
+      img {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+    }
     }
     .google-btn {
       width: 394px;
@@ -35,19 +45,33 @@
       background-color: inherit;
       color: #535353;
       border: 2px solid #535353;
-    }
-    .line {
-      .divider {
-        width: 534px;
-        height: 1px;
-        margin: 32px 100px;
-        border-right: none;
-        border-bottom: none;
-        border-left: none;
-        border-image: initial;
-        border-top: 3px solid rgb(41, 41, 41);
+      transition: opacity 0.01s 0.01s, transform 0.01s 0.01s;
+      &:hover {
+        transform: scale(1.03);
+        font-weight: bolder;
       }
     }
+    .divider {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      margin: 1em 0;
+  
+      .line {
+        flex-grow: 1;
+        height: 1px;
+        background-color: #ccc;
+      }
+  
+      span {
+        padding: 0 1em;
+        color:#777;
+        letter-spacing: 2px;
+        font-size: 16px;
+        font-family: Circular-light;
+        font-weight: 700;
+ }
+ }
   }
   h3 {
     font-family: Circular-light;
@@ -85,7 +109,11 @@
         height: 56px;
         border: none;
         margin-left: 32%;
-    margin-bottom: 30px;
+      margin-bottom: 30px;
+      transition: opacity 0.01s 0.01s, transform 0.01s 0.01s;
+      &:hover {
+        transform: scale(1.03);
+      }
     }
   }
   .go-to-login {
