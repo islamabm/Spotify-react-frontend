@@ -17,6 +17,10 @@ export function MediaPlayer({ volume }) {
   const stationId = useSelector(
     (storeState) => storeState.stationModule.currStationId
   )
+
+  const currSvg = useSelector((storeState) => storeState.songModule.currentSvg)
+  console.log('currSvg in the media player', currSvg)
+
   const progressBarRef = useRef(null)
   const [videoId, setVideoId] = useState('M7lc1UVf-VE')
   const [isShuffled, setIsShuffled] = useState(false)
@@ -70,19 +74,24 @@ export function MediaPlayer({ volume }) {
     }
   }, [song])
 
-  // useEffect(() => {
-  //   const stopPlay = () => {
-  //     if (playerRef.current) {
-  //       playerRef.current.pauseVideo()
-  //     }
-  //   }
-
-  //   eventBus.on(PAUSE_SONG, stopPlay)
-
-  //   return () => {
-  //     eventBus.off(PAUSE_SONG, stopPlay)
-  //   }
-  // }, [])
+  useEffect(() => {
+    switch (currSvg) {
+      case 'play':
+        if (!isPlaying) {
+          playerRef.current.playVideo()
+          setIsPlaying(true)
+        }
+        break
+      case 'pause':
+        if (isPlaying) {
+          playerRef.current.pauseVideo()
+          setIsPlaying(false)
+        }
+        break
+      default:
+        console.error(`Unknown SVG action: ${currSvg}`)
+    }
+  }, [currSvg])
 
   function onEndSong() {
     if (isRepeated) {
