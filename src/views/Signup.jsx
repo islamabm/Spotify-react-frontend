@@ -3,15 +3,15 @@ import { useDispatch } from "react-redux";
 import { doSignup } from "../store/actions/user.actions";
 import { useNavigate, Link } from "react-router-dom";
 import { getSpotifySvg } from "../services/SVG.service";
-import { LoginButton } from "../cmps/LoginButton";
-import { LogoutButton } from "../cmps/LogoutButton";
-import { gapi } from "gapi-script";
+// import { LoginButton } from "../cmps/LoginButton";
+// import { LogoutButton } from "../cmps/LogoutButton";
+// import { gapi } from "gapi-script";
 
 export function Signup() {
-  const clientId =
-  "574173385565-9vnc14nd5rlg32r4ojmqcvhhkq8sfb0d.apps.googleusercontent.com";
+  // const clientId =
+  // "574173385565-9vnc14nd5rlg32r4ojmqcvhhkq8sfb0d.apps.googleusercontent.com";
 
-  const accessToken = gapi.auth.getToken().access_token;
+  // const accessToken = gapi.auth.getToken().access_token;
 
   const [signupCred, setSignupCred] = useState({
     username: "",
@@ -23,16 +23,16 @@ export function Signup() {
   });
 
 
-  useEffect(() => {
-    function start() {
-      gapi.client.init({
-        clientId: clientId,
-        scope: "",
-      });
-    }
+  // useEffect(() => {
+  //   function start() {
+  //     gapi.client.init({
+  //       clientId: clientId,
+  //       scope: "",
+  //     });
+  //   }
 
-    gapi.load("client:auth2", start);
-  });
+  //   gapi.load("client:auth2", start);
+  // });
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -69,7 +69,7 @@ export function Signup() {
                 <img src="https://www.freeiconspng.com/uploads/facebook-f-logo-white-background-21.jpg" />
               </span> */}
           </button>
-          <LoginButton/>
+          {/* <LoginButton/> */}
           {/* <button className="google-btn pointer">Sign up with Google</button> */}
           <div className="divider">
             <div className="line"></div>

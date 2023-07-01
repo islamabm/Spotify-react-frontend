@@ -3,28 +3,28 @@ import { useDispatch, useSelector } from "react-redux";
 import { doLogin } from "../store/actions/user.actions";
 import { useNavigate, Link } from "react-router-dom";
 import { getSpotifySvg } from "../services/SVG.service";
-import { LoginButton } from "../cmps/LoginButton";
-import { LogoutButton } from "../cmps/LogoutButton";
-import { gapi } from "gapi-script";
+// import { LoginButton } from "../cmps/LoginButton";
+// import { LogoutButton } from "../cmps/LogoutButton";
+// import { gapi } from "gapi-script";
 
 export function Login() {
-  const clientId =
-    "574173385565-9vnc14nd5rlg32r4ojmqcvhhkq8sfb0d.apps.googleusercontent.com";
+  // const clientId =
+  //   "574173385565-9vnc14nd5rlg32r4ojmqcvhhkq8sfb0d.apps.googleusercontent.com";
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [loginCred, setLoginCred] = useState({ username: "", password: "" });
 
-  useEffect(() => {
-    function start() {
-      gapi.client.init({
-        clientId: clientId,
-        scope: "",
-      });
-    }
+  // useEffect(() => {
+  //   function start() {
+  //     gapi.client.init({
+  //       clientId: clientId,
+  //       scope: "",
+  //     });
+  //   }
 
-    gapi.load("client:auth2", start);
-  });
+  //   gapi.load("client:auth2", start);
+  // });
 
   function handleLogin(e) {
     e.preventDefault();
