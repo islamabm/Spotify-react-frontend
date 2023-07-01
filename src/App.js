@@ -8,28 +8,18 @@ import { AppFooter } from './cmps/AppFooter'
 import { StationIndex } from './views/StationIndex'
 import { StationDetails } from './views/StationDetails'
 import { Login } from './views/Login'
+import { Signup } from './views/Signup'
 import Search from './views/Search'
-import { useState } from 'react'
+
+import { UserDetails } from './views/UserDetails'
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-
-  const login = () => {
-    // Perform login logic here
-    setIsLoggedIn(true)
-  }
-
-  const logout = () => {
-    // Perform logout logic here
-    setIsLoggedIn(false)
-  }
-
   return (
     <Router>
       <Routes>
-        {/* <Route path="/signup" element={<Signup />} /> */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
         <Route path="*" element={<LoggedInApp />} />
-        <Route path="/login" element={<Login login={login} />} />
       </Routes>
     </Router>
   )
@@ -45,7 +35,9 @@ function LoggedInApp() {
         <Routes>
           <Route path="/" element={<StationIndex />} />
           <Route path="/station/:id" element={<StationDetails />} />
+          <Route path="/user" element={<UserDetails />} />
           <Route path="/search" element={<Search />} />
+          {/* Exclude /login and /signup */}
         </Routes>
       </main>
       <AppFooter />

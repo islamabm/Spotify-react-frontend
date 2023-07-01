@@ -1,17 +1,17 @@
-import { useEffect, useState, useRef } from "react"
-import { useParams } from "react-router-dom"
-import { getSpotifySvg } from "../services/SVG.service"
-import { useDispatch, useSelector } from "react-redux"
-import { setCurrStation } from "../store/actions/station.actions"
-import { FastAverageColor } from "fast-average-color"
-import { eventBus } from "../services/event-bus.service"
-import StationHeaderDetails from "../cmps/StationHeaderDetails"
-import StationSongList from "../cmps/StationSongList"
-import { StationOptionsModal } from "../cmps/StationOptionsModal"
-import { Recommended } from "../cmps/Recommended"
-import { RecommindationModal } from "../cmps/RecommindationModal"
-import SearchSongs from "../cmps/SearchSongs"
-
+import { useEffect, useState, useRef } from 'react'
+import { useParams } from 'react-router-dom'
+import { getSpotifySvg } from '../services/SVG.service'
+import { useDispatch, useSelector } from 'react-redux'
+import { setCurrStation } from '../store/actions/station.actions'
+import { FastAverageColor } from 'fast-average-color'
+import { eventBus } from '../services/event-bus.service'
+import StationHeaderDetails from '../cmps/StationHeaderDetails'
+import StationSongList from '../cmps/StationSongList'
+import { StationOptionsModal } from '../cmps/StationOptionsModal'
+import { Recommended } from '../cmps/Recommended'
+import { RecommindationModal } from '../cmps/RecommindationModal'
+import SearchSongs from '../cmps/SearchSongs'
+import { setCurrSong, setCurrSongIndex } from '../store/actions/song.actions'
 export function StationDetails(props) {
   const [bgStyle, setBgStyle] = useState(null)
   const [bgBottomStyle, setBgBottomStyle] = useState(null)
@@ -27,11 +27,17 @@ export function StationDetails(props) {
   const stationImg = useSelector(
     (storeState) => storeState.stationModule.currStationImg
   )
+  console.log('bgStyle', bgStyle)
   const dispatch = useDispatch()
 
   useEffect(() => {
     loadStation()
   }, [params.id])
+
+  useEffect(() => {
+    const unsubscribe = eventBus.on('newStationCreated', setBgStyle)
+    return () => unsubscribe()
+  }, [])
 
   useEffect(() => {
     updateImgUrlAndColor(station)
@@ -41,16 +47,16 @@ export function StationDetails(props) {
     const currentStationDetailsRef = stationDetailsRef.current
     const handleScroll = () => {
       const scrollPos = currentStationDetailsRef.scrollTop
-      eventBus.emit("stationDetailsScroll", { scrollPos, bgStyle })
+      eventBus.emit('stationDetailsScroll', { scrollPos, bgStyle })
     }
     if (currentStationDetailsRef) {
-      currentStationDetailsRef.addEventListener("scroll", handleScroll, {
+      currentStationDetailsRef.addEventListener('scroll', handleScroll, {
         passive: true,
       })
     }
     return () => {
       if (currentStationDetailsRef) {
-        currentStationDetailsRef.removeEventListener("scroll", handleScroll, {
+        currentStationDetailsRef.removeEventListener('scroll', handleScroll, {
           passive: true,
         })
       }
@@ -73,13 +79,18 @@ export function StationDetails(props) {
   function updateImgUrlAndColor(station) {
     if (!station) return
     const imgUrl = station.imgUrl
-    if (imgUrl !== "") {
+    if (imgUrl !== '') {
       getDominantColor(imgUrl)
     }
   }
 
   function handleCloseOptionModal() {
     setShowModal(false)
+  }
+
+  function playFirstSongInStation() {
+    dispatch(setCurrSong(station?._id, station?.songs[0]._id))
+    dispatch(setCurrSongIndex(station?._id, station?.songs[0]._id))
   }
 
   function handleShowRecommindationModal() {
@@ -99,8 +110,8 @@ export function StationDetails(props) {
     }
     const fac = new FastAverageColor()
     const img = new Image()
-    img.crossOrigin = "Anonymous"
-    const corsProxyUrl = "https://api.codetabs.com/v1/proxy?quest="
+    img.crossOrigin = 'Anonymous'
+    const corsProxyUrl = 'https://api.codetabs.com/v1/proxy?quest='
     img.src = corsProxyUrl + encodeURIComponent(imageSrc)
     img.onload = async () => {
       try {
@@ -126,11 +137,14 @@ export function StationDetails(props) {
         <div className="user-station-actions">
           {station.songs.length < 0 && (
             <>
-              <div className="play-button flex justify-center align-center"></div>
+              <div
+                onClick={playFirstSongInStation}
+                className="play-button flex justify-center align-center"
+              ></div>
               <span
                 className="heart flex align-center justify-center"
                 dangerouslySetInnerHTML={{
-                  __html: getSpotifySvg("bigFilledHeart"),
+                  __html: getSpotifySvg('bigFilledHeart'),
                 }}
               ></span>
             </>
@@ -139,28 +153,28 @@ export function StationDetails(props) {
             onClick={(e) => showStationModal(e)}
             className="dots flex align-center justify-center"
             dangerouslySetInnerHTML={{
-              __html: getSpotifySvg("bigDots"),
+              __html: getSpotifySvg('bigDots'),
             }}
           ></span>
         </div>
         <div className="station-songs">
           <div className="station-songs-header">
-            {station.songs.length > 0 && (
-              <>
-                <span className="flex align-center justify-center">#</span>
-                <span className="title flex align-center">Title</span>
-                <span className="flex align-center">Album</span>
-                <span className="flex align-center">Date added</span>
-                <span
-                  className="time flex align-center justify-center"
-                  dangerouslySetInnerHTML={{
-                    __html: getSpotifySvg("time"),
-                  }}
-                ></span>
-                <StationSongList station={station} />
-              </>
-            )}
+            {/* {station.songs.length > 0 && ( */}
+            {/* <> */}
+            <span className="flex align-center justify-center">#</span>
+            <span className="title flex align-center">Title</span>
+            <span className="flex align-center">Album</span>
+            <span className="flex align-center">Date added</span>
+            <span
+              className="time flex align-center justify-center"
+              dangerouslySetInnerHTML={{
+                __html: getSpotifySvg('time'),
+              }}
+            ></span>
+            {/* </> */}
+            {/* )} */}
           </div>
+          <StationSongList station={station} />
         </div>
       </div>
       {showModal && (
@@ -176,9 +190,12 @@ export function StationDetails(props) {
           closeRecommindationModal={() => setShowRecommindationModal(false)}
         />
       )}
-      {station.createdBy?.fullname === "guest" && station.songs.length > 0 && (
+      {station.createdBy?.fullname === 'guest' && station.songs.length > 0 && (
         <Recommended
-          list={station?.songs?.slice(0, 5) || station?.songs?.slice(0,station.songs.length - 1)}
+          list={
+            station?.songs?.slice(0, 5) ||
+            station?.songs?.slice(0, station.songs.length - 1)
+          }
           stationId={station._id}
         />
       )}

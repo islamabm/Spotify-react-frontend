@@ -1,17 +1,20 @@
 import React, { useState } from 'react'
 import { getSpotifySvg } from '../services/SVG.service'
-import { BubblingHeart } from './BubblingHeart'
+
 import { MediaPlayer } from './MediaPlayer'
 import { useLocation } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 export function AppFooter() {
   const [volume, setVolume] = useState(50)
-  const [currSvg, setCurrSvg] = useState('volumeIcon')
-
+  const [isLyrics, setIsLyrics] = useState(false)
   const location = useLocation()
 
   const handleVolumeChange = (event) => {
     setVolume(event.target.value)
+  }
+
+  function onRepeatClicked() {
+    setIsLyrics(!isLyrics)
   }
 
   function setSvg() {
@@ -38,21 +41,24 @@ export function AppFooter() {
         className="song-details"
         style={{ opacity: location.pathname === '/' ? 0 : 1 }}
       >
-        {song &&
-        <>
-        <div className="image">
-          <img src={song ? song.imgUrl : station?.songs[0]?.imgUrl} />
-        </div>
-        <div className="actor-name-song">
-          <p className="song-name">
-            {song ? song.title : station?.songs[0]?.title}
-          </p>
-          <p className="actor-name">
-            {song ? song.artist : station?.songs[0]?.artist}
-          </p>
-        </div>
-        </> 
-        }
+        {song && (
+          <>
+            <div className="image">
+              <img
+                src={song ? song.imgUrl : station?.songs[0]?.imgUrl}
+                alt="song-img"
+              />
+            </div>
+            <div className="actor-name-song">
+              <p className="song-name">
+                {song ? song.title : station?.songs[0]?.title}
+              </p>
+              <p className="actor-name">
+                {song ? song.artist : station?.songs[0]?.artist}
+              </p>
+            </div>
+          </>
+        )}
 
         <div className="heart-picture-icons">
           <span
@@ -69,12 +75,25 @@ export function AppFooter() {
       </div>
       <div className="song-details-two">
         {' '}
-        <span
-          className="pointer"
-          dangerouslySetInnerHTML={{
-            __html: getSpotifySvg('lyricsIcon'),
-          }}
-        ></span>{' '}
+        {isLyrics ? (
+          <button className="is-repeated">
+            <span
+              onClick={onRepeatClicked}
+              className="pointer"
+              dangerouslySetInnerHTML={{
+                __html: getSpotifySvg('lyricsIcon'),
+              }}
+            ></span>{' '}
+          </button>
+        ) : (
+          <span
+            onClick={onRepeatClicked}
+            className="pointer"
+            dangerouslySetInnerHTML={{
+              __html: getSpotifySvg('lyricsIcon'),
+            }}
+          ></span>
+        )}
         <span
           className="pointer"
           dangerouslySetInnerHTML={{
@@ -88,7 +107,6 @@ export function AppFooter() {
             __html: getSpotifySvg(setSvg()),
           }}
         ></span>
-        {/* <div className="progress-bar-audio"> */}
         <input
           type="range"
           min="0"
@@ -97,7 +115,6 @@ export function AppFooter() {
           onChange={handleVolumeChange}
           className="progress-bar-audio-fill"
         />
-        {/* </div> */}
       </div>
     </div>
   )

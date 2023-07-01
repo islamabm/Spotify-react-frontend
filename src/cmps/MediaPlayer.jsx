@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { getSpotifySvg } from '../services/SVG.service'
-// import { HoverModal } from './HoverModal'
+
 import { PAUSE_SONG, eventBus } from '../services/event-bus.service'
 import { stationService } from '../services/station.service'
 import {
@@ -20,6 +20,7 @@ export function MediaPlayer({ volume }) {
   const progressBarRef = useRef(null)
   const [videoId, setVideoId] = useState('M7lc1UVf-VE')
   const [isShuffled, setIsShuffled] = useState(false)
+  const [isRepeated, setIsRepeated] = useState(false)
   const [isPlaying, setIsPlaying] = useState(false)
   const [duration, setDuration] = useState(0)
   const [currentTime, setCurrentTime] = useState(0)
@@ -52,10 +53,10 @@ export function MediaPlayer({ volume }) {
       const searchStr = `${song.artist} ${song.title}`
       const cachedVideoId = stationService.getVideoIdCache(song)
       if (cachedVideoId) {
-        console.log('getr from locale')
+
         setVideoId(cachedVideoId)
       } else {
-        console.log('get from api')
+
         stationService
           .getVideos(searchStr)
           .then((videos) => {
@@ -73,7 +74,6 @@ export function MediaPlayer({ volume }) {
 
   useEffect(() => {
     const stopPlay = () => {
-      console.log('hi event bus')
       if (playerRef.current) {
         playerRef.current.pauseVideo()
       }
@@ -85,6 +85,15 @@ export function MediaPlayer({ volume }) {
       eventBus.off(PAUSE_SONG, stopPlay)
     }
   }, [])
+
+
+  function onEndSong() {
+    if (isRepeated) {
+      playerRef.current.playVideo()
+    } else {
+      getNextSong()
+    }
+  }
 
   function onReady(event) {
     playerRef.current = event.target
@@ -139,6 +148,10 @@ export function MediaPlayer({ volume }) {
     }
   }
 
+  function onRepeatClicked() {
+    setIsRepeated(!isRepeated)
+  }
+
   function handlePlayPauseClick() {
     if (isPlaying) {
       playerRef.current.pauseVideo()
@@ -154,15 +167,30 @@ export function MediaPlayer({ volume }) {
         onReady={onReady}
         onPlay={onPlaySong}
         onPause={onPauseSong}
+        onEnd={onEndSong}
         className="hidden-player"
       />
       <div className="media-player">
         <div className="control-buttons">
-          <span
-            onClick={onShuffleClicked}
-            className={`pointer ${isShuffled ? 'green-fill' : ''}`}
-            dangerouslySetInnerHTML={{ __html: getSpotifySvg('shouffleIcon') }}
-          ></span>
+          {isShuffled ? (
+            <button className="is-repeated">
+              <span
+                onClick={onShuffleClicked}
+                className="pointer"
+                dangerouslySetInnerHTML={{
+                  __html: getSpotifySvg('shouffleIcon'),
+                }}
+              ></span>{' '}
+            </button>
+          ) : (
+            <span
+              onClick={onShuffleClicked}
+              className="pointer"
+              dangerouslySetInnerHTML={{
+                __html: getSpotifySvg('shouffleIcon'),
+              }}
+            ></span>
+          )}
           <span
             onClick={getPrevSong}
             className="pointer"
@@ -187,12 +215,25 @@ export function MediaPlayer({ volume }) {
               __html: getSpotifySvg('nextIcon'),
             }}
           ></span>{' '}
-          <span
-            className="pointer"
-            dangerouslySetInnerHTML={{
-              __html: getSpotifySvg('repeateIcon'),
-            }}
-          ></span>{' '}
+          {isRepeated ? (
+            <button className="is-repeated">
+              <span
+                onClick={onRepeatClicked}
+                className="pointer"
+                dangerouslySetInnerHTML={{
+                  __html: getSpotifySvg('repeateIcon'),
+                }}
+              ></span>{' '}
+            </button>
+          ) : (
+            <span
+              onClick={onRepeatClicked}
+              className="pointer"
+              dangerouslySetInnerHTML={{
+                __html: getSpotifySvg('repeateIcon'),
+              }}
+            ></span>
+          )}
         </div>
 
         <div className="music-bar">

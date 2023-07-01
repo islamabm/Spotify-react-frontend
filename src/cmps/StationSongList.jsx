@@ -24,9 +24,10 @@ export default function StationSongList({ station }) {
     dispatch(setCurrSong(params.id, songId))
     dispatch(setCurrSongIndex(params.id, songId))
   }
+
   function pauseSong() {
+ 
     eventBus.emit(PAUSE_SONG)
-    // console.log('ok')
   }
 
   useEffect(() => {
@@ -123,6 +124,9 @@ export default function StationSongList({ station }) {
                           className={`song-idx flex align-center justify-center ${
                             hoveredSongIdx === idx ? 'hovered' : ''
                           }`}
+                          style={{
+                            color: song?._id === currSong?._id ? '#1ED760' : '',
+                          }}
                         >
                           {idx + 1}
                         </span>

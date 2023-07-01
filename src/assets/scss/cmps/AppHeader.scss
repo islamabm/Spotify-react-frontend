@@ -112,3 +112,34 @@
     font-family: circular-book;
   }
 }
+
+.user-details-header {
+  background-color: #3e3d3d66;
+  font-size: 0.9rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 500px;
+  padding-block: 8px;
+  padding-inline-end: 25px;
+  padding-inline-start: 10px;
+  margin-inline-end: 22px;
+  font-family: Circular-medium;
+  height: 40px;
+  color: #fff;
+  line-height: 1.6;
+  width: max-content;
+  transform: translateY(4px);
+  cursor: pointer;
+  img {
+    align-self: end;
+    height: 48px;
+    width: 48px;
+    padding: 10px;
+    border-radius: 50%;
+    transform: translateY(12px);
+  }
+  &:hover {
+    background-color: #b3b3b366;
+  }
+}

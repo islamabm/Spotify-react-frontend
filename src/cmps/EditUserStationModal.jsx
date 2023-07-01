@@ -34,10 +34,10 @@ export function EditUserStationModal({ station, onClose }) {
     setStationDesc(e.target.value)
   }
   function handleSave() {
-    console.log('station before', station)
+
     dispatch(editUserStation(station._id, stationName, stationDesc, stationImg))
     onClose()
-    console.log('station after', station)
+
   }
 
   function handleInputBlur() {
@@ -86,7 +86,7 @@ export function EditUserStationModal({ station, onClose }) {
           className="cover-img"
         >
           {isUploading ? (
-            <span class="loader"></span>
+            <span className="loader"></span>
           ) : (
             <img
               className="img-edit"
