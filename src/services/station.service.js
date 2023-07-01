@@ -2564,7 +2564,6 @@ const USER_STATIONS = 'user-stations'
 const STORAGE_SEARCH_KEY = 'search-stations'
 const SEARCH_KEY = 'videosDB'
 const VIDEOS_KEY = 'videosIdDB'
-let gSearchCache = storageService.load(SEARCH_KEY) || {}
 
 var gStations = _loadStations()
 var gUserStations = _getUserStations()
@@ -2617,11 +2616,6 @@ async function getCachedVideos(keyword) {
   }
 
   let videosIds = storageService.load(VIDEOS_KEY) || []
-
-  const existTitle = videosIds.find((video) =>
-    video.title.toLowerCase().includes(keyword.toLowerCase())
-  )
-
   const res = await axios.get(gUrl + keyword)
   const videos = res.data.items.map((item) => _prepareData(item))
 
@@ -2677,7 +2671,6 @@ async function getVideos(keyword, song = null) {
   if (Array.isArray(keyword)) {
     const cachedVideos = []
     const uncachedKeywords = []
-
     keyword.forEach((artist) => {
       if (
         videoCache[artist] &&
@@ -2688,27 +2681,29 @@ async function getVideos(keyword, song = null) {
         uncachedKeywords.push(artist)
       }
     })
-
+    
     const recommendedSongs = await Promise.all(
       uncachedKeywords.map(async (artist) => {
         let cachedSong = getCachedSong(artist)
         if (cachedSong) {
+          console.log('cashed');
           return cachedSong
         } else {
           const res = await axios.get(gUrl + artist)
           const recommendedSong = res.data.items.map((item) =>
-            _prepareData(item)
+          _prepareData(item)
           )
           cacheSong(artist, recommendedSong[0])
+          console.log('save cashed');
           return recommendedSong[0]
         }
       })
-    )
-
-    return cachedVideos.concat(recommendedSongs)
-  }
-
-  return getCachedVideos(keyword)
+      )
+      
+      return cachedVideos.concat(recommendedSongs)
+    }
+    
+    return getCachedVideos(keyword)
 }
 
 function getCachedSong(artist) {
