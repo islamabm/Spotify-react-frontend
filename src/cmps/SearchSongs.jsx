@@ -9,13 +9,13 @@ export default function SearchSongs({ stationId }) {
 
   useEffect(() => {
     const timerId = setTimeout(async () => {
-      console.log("Search Text:", searchText)
       const list = await stationService.getVideos(searchText)
       setSongList(list)
       console.log("songList", songList)
     }, 1000)
     return () => {
       clearTimeout(timerId)
+      setSongList([])
     }
   }, [searchText])
 
@@ -50,7 +50,9 @@ export default function SearchSongs({ stationId }) {
         />
       </div>
       <div className="station-songs">
+        {searchText.length > 0 &&
         <SearchSongsList list={songList} stationId={stationId} />
+        }
       </div>
     </div>
   )
