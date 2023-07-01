@@ -38,9 +38,9 @@ export function Login() {
               <div className="login-main-container flex column align-center">
                  <h2>Log in to Spotify</h2>
                  <div className="continueW flex column">
-                  <button><span><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/2008px-Google_%22G%22_Logo.svg.png"/></span>Continue With Google</button>
-                  <button><span><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/1024px-Facebook_Logo_%282019%29.png"/></span>Continue With Facebook</button>
-                  <button><span><img src="https://1000logos.net/wp-content/uploads/2016/10/apple-emblem.jpg"/></span>Continue With Apple</button>
+                  <button className="pointer"><span><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/2008px-Google_%22G%22_Logo.svg.png"/></span>Continue With Google</button>
+                  <button className="pointer"><span><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/1024px-Facebook_Logo_%282019%29.png"/></span>Continue With Facebook</button>
+                  <button className="pointer"><span><img src="https://1000logos.net/wp-content/uploads/2016/10/apple-emblem.jpg"/></span>Continue With Apple</button>
                  </div>
                  <div className="empty-line"></div>
       <form className="spotify-login-form" onSubmit={handleLogin}>
@@ -78,7 +78,7 @@ export function Login() {
             onChange={handleInputChange}
           />
         </div>
-        <button className="login-btn">Log in</button>
+        <button className="login-btn pointer">Log in</button>
       </form>
       <div className="empty-line"></div>
               <div className="go-to-signup flex justify-center">

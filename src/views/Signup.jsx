@@ -1,49 +1,53 @@
-import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { doSignup } from '../store/actions/user.actions'
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { doSignup } from "../store/actions/user.actions";
+import { useNavigate } from "react-router-dom";
+import { getSpotifySvg } from "../services/SVG.service";
 
-import { useNavigate } from 'react-router-dom'
 export function Signup() {
   const [signupCred, setSignupCred] = useState({
-    username: '',
-    password: '',
-    fullname: '',
-    imgUrl: '',
+    username: "",
+    password: "",
+    fullname: "",
+    imgUrl: "",
     stations: [],
     likedSongs: [],
-  })
+  });
 
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   function handleSignup(e) {
-    e.preventDefault()
+    e.preventDefault();
 
     if (!signupCred.fullname || !signupCred.password || !signupCred.username) {
-      return
+      return;
     }
 
-    dispatch(doSignup(signupCred))
-    navigate(`/`)
+    dispatch(doSignup(signupCred));
+    navigate(`/`);
   }
 
   return (
-    <section className="signup-section">
-      <div id="signup-page">
-        <div className="signup-header">
-          <div className="black-logo-container">
-            <img
-              className="black-logo"
-              src="./../assets/img/logo-black.png"
-              alt="Logo"
-            />
-            <span className="muzikay-logo">Muzikay</span>
-          </div>
-          <h1>Sign up for free to start listening.</h1>
-        </div>
-
+    <section className="spotify-signup-page">
+      <div className="signup-main-container">
+        <span
+          className="flex"
+          dangerouslySetInnerHTML={{
+            __html: getSpotifySvg("SignupHeaderLogo"),
+          }}
+        ></span>
+        <h1>Sign up for free to start listening.</h1>
         <div className="separator">
-          <span>or</span>
+          <div className="signupW flex column">
+            <button className="fb-btn">Sign up with Facebook</button>
+            <button className="google-btn">Sign up with Google</button>
+          </div>
+          <div className="line">
+            <span className="divider"></span>
+            <span>or</span>
+            <span className="divider"></span>
+          </div>
         </div>
 
         <h3 className="signup-email-h2">Sign up with a new account</h3>
@@ -105,5 +109,5 @@ export function Signup() {
         </form>
       </div>
     </section>
-  )
+  );
 }

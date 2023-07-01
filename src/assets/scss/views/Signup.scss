@@ -1,0 +1,41 @@
+.spotify-signup-page {
+  background-color: $clr6;
+  color: $clr2;
+  h1 {
+    font-size: 32px;
+    font-family: Circular-medium;
+    letter-spacing: -0.04em;
+  }
+  .signupW {
+    .fb-btn {
+      width: 394px;
+      height: 48px;
+      border-radius: 200px;
+      font-family: Circular-medium;
+      font-size: 16px;
+      border: none;
+      background-color: #425b91;
+      color: $clr6;
+    }
+    .google-btn {
+      width: 394px;
+      height: 48px;
+      border-radius: 200px;
+      font-family: Circular-medium;
+      font-size: 16px;
+      background-color: inherit;
+      color: #535353;
+      border: 2px solid #535353;
+    }
+    .line {
+        .divider {
+            border-top: 1px solid rgb(204, 204, 204);
+            content: "";
+            display: table-cell;
+            position: relative;
+            top: 0.8em;
+            width: 42%;
+        }
+    }
+  }
+}
