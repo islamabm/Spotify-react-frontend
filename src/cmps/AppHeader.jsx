@@ -44,25 +44,25 @@ export function AppHeader() {
   function handleLogout() {
     dispatch(doLogout())
   }
-  // useEffect(() => {
-  //   const onScroll = ({ scrollPos, bgStyle }) =>
-  //     updateHeaderOpacity(scrollPos, bgStyle)
-  //   const unlisten = eventBus.on('stationDetailsScroll', onScroll)
+  useEffect(() => {
+    const onScroll = ({ scrollPos, bgStyle }) =>
+      updateHeaderOpacity(scrollPos, bgStyle)
+    const unlisten = eventBus.on('stationDetailsScroll', onScroll)
 
-  //   if (location.pathname === '/' || location.pathname === '/search') {
-  //     setHeaders({
-  //       backgroundColor: 'rgba(0,0,0,0)',
-  //     })
-  //   } else {
-  //     setHeaders({
-  //       backgroundColor: 'transparent',
-  //     })
-  //   }
+    if (location.pathname === '/' || location.pathname === '/search') {
+      setHeaders({
+        backgroundColor: 'rgba(0,0,0,0)',
+      })
+    } else {
+      setHeaders({
+        backgroundColor: 'transparent',
+      })
+    }
 
-  //   return () => {
-  //     unlisten()
-  //   }
-  // }, [location])
+    return () => {
+      unlisten()
+    }
+  }, [location])
 
   function onShowModal() {
     setShowModal(true)
