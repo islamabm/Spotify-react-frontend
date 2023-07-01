@@ -32,26 +32,35 @@ export function Signup() {
     <section className="spotify-signup-page flex align-center justify-center">
       <div className="signup-main-container">
         <Link to="/">
-        <span
-          className="flex align-center justify-center"
-          dangerouslySetInnerHTML={{
-            __html: getSpotifySvg("SignupHeaderLogo"),
-          }}
-        ></span>
+          <span
+            className="flex align-center justify-center"
+            dangerouslySetInnerHTML={{
+              __html: getSpotifySvg("SignupHeaderLogo"),
+            }}
+          ></span>
         </Link>
-        <h1 className="flex align-center justify-center">Sign up for free to start listening.</h1>
+        <h1 className="flex align-center justify-center">
+          Sign up for free to start listening.
+        </h1>
         <div className="separator">
           <div className="signupW flex column align-center">
-            <button className="fb-btn">Sign up with Facebook</button>
-            <button className="google-btn">Sign up with Google</button>
+            <button className="fb-btn pointer">
+              Sign up with Facebook
+              {/* <span>
+                <img src="https://www.freeiconspng.com/uploads/facebook-f-logo-white-background-21.jpg" />
+              </span> */}
+            </button>
+            <button className="google-btn pointer">Sign up with Google</button>
           </div>
-          <div className="line flex align-center">
-            <span className="divider">-------</span>
-            <span>or</span>
-            <span className="divider">-------</span>
-          </div>
+          <div className="divider">
+            <div className="line"></div>
+            <span>OR</span>
+            <div className="line"></div>
         </div>
-        <h3 className="flex align-center justify-center">Sign up with your email address</h3>
+        </div>
+        <h3 className="flex align-center justify-center">
+          Sign up with your email address
+        </h3>
         <form onSubmit={handleSignup}>
           <div className="form-group flex column">
             <span className="label">What's your email?</span>
@@ -94,7 +103,9 @@ export function Signup() {
             <small>This appears on your profile.</small>
           </div>
 
-          <button className="pointer flex align-center justify-center">Sign up</button>
+          <button className="pointer flex align-center justify-center">
+            Sign up
+          </button>
         </form>
         <div className="go-to-login flex align-center justify-center">
           <span>Have an account?</span>
