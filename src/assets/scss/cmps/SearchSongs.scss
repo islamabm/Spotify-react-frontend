@@ -1,18 +1,19 @@
 .search-songs-container {
   margin-inline-start: rem(20px);
-
+  position: relative;
   .search-songs-x {
-    svg {
-      fill: $clr3;
-      width: 30px;
-      height: 22px;
-    }
     position: absolute;
     background-color: transparent;
     border: 0;
     color: hsla(0, 0%, 100%, 0.7);
     right: 36px;
     top: 75%;
+
+    svg {
+      fill: $clr3;
+      width: 30px;
+      height: 22px;
+    }
   }
   .input-container {
     position: relative;
