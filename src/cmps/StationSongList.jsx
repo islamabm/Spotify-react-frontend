@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getSpotifySvg } from '../services/SVG.service'
-import { setCurrSong, setCurrSongIndex } from '../store/actions/song.actions'
+import {
+  setCurrSong,
+  setCurrSongIndex,
+  setCurrSongSvg,
+} from '../store/actions/song.actions'
 import { useParams } from 'react-router-dom'
 import { SongOptionsModal } from './SongOptionsModal'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
@@ -16,18 +20,33 @@ export default function StationSongList({ station }) {
   const params = useParams()
   const [hoveredSongIdx] = useState(null)
   const [hoveredSong, setHoveredSong] = useState(null)
+  const [currSvg, setCurrSvg] = useState('play')
   const [showModal, setShowOptionsModal] = useState(false)
   const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 })
   const [songs, setSongs] = useState(station.songs)
-
+  const [isFirstClick, setIsFirstClick] = useState(true)
   function onSongClicked(songId) {
-    dispatch(setCurrSong(params.id, songId))
-    dispatch(setCurrSongIndex(params.id, songId))
+    setCurrSvg('play')
+
+    if (currSong?.id !== songId) {
+      setIsFirstClick(true)
+    }
+
+    if (isFirstClick) {
+      console.log('hi first time')
+      dispatch(setCurrSong(params.id, songId))
+      dispatch(setCurrSongIndex(params.id, songId))
+      setIsFirstClick(false)
+    } else {
+      console.log('hi after first time')
+      dispatch(setCurrSongSvg('play'))
+    }
   }
 
   function pauseSong() {
- 
-    eventBus.emit(PAUSE_SONG)
+    setCurrSvg('pause')
+
+    dispatch(setCurrSongSvg('pause'))
   }
 
   useEffect(() => {
@@ -113,7 +132,8 @@ export default function StationSongList({ station }) {
                       onMouseLeave={() => setHoveredSong(null)}
                     >
                       {song?._id === currSong?._id &&
-                      song?._id !== hoveredSong ? (
+                      song?._id !== hoveredSong &&
+                      currSvg === 'play' ? (
                         <img
                           className="song-animation-gif"
                           src={animationGit}
@@ -132,25 +152,27 @@ export default function StationSongList({ station }) {
                         </span>
                       )}
 
-                      <span
-                        onClick={() => {
-                          if (isPlayingAndHovered) {
-                            pauseSong()
-                          } else {
-                            onSongClicked(song._id)
-                          }
-                        }}
-                        className={` small-play-btn flex align-center justify-center ${
-                          hoveredSongIdx === idx ? 'hovered' : ''
-                        }`}
-                        dangerouslySetInnerHTML={{
-                          __html: getSpotifySvg(
-                            isPlayingAndHovered
-                              ? 'smallPauseButton'
-                              : 'smallPlayButton'
-                          ),
-                        }}
-                      ></span>
+                      {isPlayingAndHovered && currSvg === 'play' ? (
+                        <span
+                          onClick={pauseSong}
+                          className={` small-play-btn flex align-center justify-center ${
+                            hoveredSongIdx === idx ? 'hovered' : ''
+                          }`}
+                          dangerouslySetInnerHTML={{
+                            __html: getSpotifySvg('smallPauseButton'),
+                          }}
+                        ></span>
+                      ) : (
+                        <span
+                          onClick={() => onSongClicked(song._id)}
+                          className={` small-play-btn flex align-center justify-center ${
+                            hoveredSongIdx === idx ? 'hovered' : ''
+                          }`}
+                          dangerouslySetInnerHTML={{
+                            __html: getSpotifySvg('smallPlayButton'),
+                          }}
+                        ></span>
+                      )}
                       <div className="song-details-container">
                         <div className="img-container flex align-center justify-center">
                           <img
