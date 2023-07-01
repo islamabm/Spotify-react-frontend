@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
 import { getSpotifySvg } from '../services/SVG.service'
-import { BubblingHeart } from './BubblingHeart'
+
 import { MediaPlayer } from './MediaPlayer'
 import { useLocation } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 export function AppFooter() {
   const [volume, setVolume] = useState(50)
-  const [currSvg, setCurrSvg] = useState('volumeIcon')
   const [isLyrics, setIsLyrics] = useState(false)
   const location = useLocation()
 
@@ -105,7 +104,6 @@ export function AppFooter() {
             __html: getSpotifySvg(setSvg()),
           }}
         ></span>
-        {/* <div className="progress-bar-audio"> */}
         <input
           type="range"
           min="0"
@@ -114,7 +112,6 @@ export function AppFooter() {
           onChange={handleVolumeChange}
           className="progress-bar-audio-fill"
         />
-        {/* </div> */}
       </div>
     </div>
   )

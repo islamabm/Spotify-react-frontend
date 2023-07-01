@@ -31,7 +31,7 @@ export function AddSongModal({ position, addSongToStation }) {
             type="text"
             placeholder="Find a playlist"
             value={filterInput}
-            onChange={(e) => setFilterInput(e.target.value)} // Update the filterInput state whenever the input changes
+            onChange={(e) => setFilterInput(e.target.value)} 
           ></input>
         </li>
         <li className="create-station-from-add">

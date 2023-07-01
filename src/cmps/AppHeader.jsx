@@ -20,7 +20,7 @@ export function AppHeader() {
   const [headers, setHeaders] = useState({
     backgroundColor: 'transparent',
   })
-  console.log('headers', headers)
+ 
 
   function updateHeaderOpacity(scrollPos, bgStyle) {
     setScrollPos(scrollPos)
@@ -54,7 +54,7 @@ export function AppHeader() {
       setHeaders({
         backgroundColor: 'rgba(0,0,0,0)',
       })
-      console.log('headers', headers)
+   
     } else {
       setHeaders({
         backgroundColor: 'transparent',
@@ -77,7 +77,7 @@ export function AppHeader() {
     <header
       className="app-header"
       style={{ ...headers }}
-      // style={{ backgroundColor: `rgba(10,10,10, ${headerOpacity})` }}
+
     >
       <section className="arrows-and-input">
         <section className="arrows">
