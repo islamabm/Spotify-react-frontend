@@ -53,10 +53,8 @@ export function MediaPlayer({ volume }) {
       const searchStr = `${song.artist} ${song.title}`
       const cachedVideoId = stationService.getVideoIdCache(song)
       if (cachedVideoId) {
-
         setVideoId(cachedVideoId)
       } else {
-
         stationService
           .getVideos(searchStr)
           .then((videos) => {
@@ -72,20 +70,19 @@ export function MediaPlayer({ volume }) {
     }
   }, [song])
 
-  useEffect(() => {
-    const stopPlay = () => {
-      if (playerRef.current) {
-        playerRef.current.pauseVideo()
-      }
-    }
+  // useEffect(() => {
+  //   const stopPlay = () => {
+  //     if (playerRef.current) {
+  //       playerRef.current.pauseVideo()
+  //     }
+  //   }
 
-    eventBus.on(PAUSE_SONG, stopPlay)
+  //   eventBus.on(PAUSE_SONG, stopPlay)
 
-    return () => {
-      eventBus.off(PAUSE_SONG, stopPlay)
-    }
-  }, [])
-
+  //   return () => {
+  //     eventBus.off(PAUSE_SONG, stopPlay)
+  //   }
+  // }, [])
 
   function onEndSong() {
     if (isRepeated) {
