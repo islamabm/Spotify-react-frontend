@@ -98,7 +98,7 @@ export function Signup() {
         </form>
         <div className="go-to-login flex align-center justify-center">
           <span>Have an account?</span>
-          <Link to="login">Log in</Link>
+          <Link to="/login">Log in</Link>
         </div>
       </div>
     </section>
