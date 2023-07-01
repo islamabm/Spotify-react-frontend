@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { doSignup } from "../store/actions/user.actions";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { getSpotifySvg } from "../services/SVG.service";
 
 export function Signup() {
@@ -29,84 +29,77 @@ export function Signup() {
   }
 
   return (
-    <section className="spotify-signup-page">
+    <section className="spotify-signup-page flex align-center justify-center">
       <div className="signup-main-container">
+        <Link to="/">
         <span
-          className="flex"
+          className="flex align-center justify-center"
           dangerouslySetInnerHTML={{
             __html: getSpotifySvg("SignupHeaderLogo"),
           }}
         ></span>
-        <h1>Sign up for free to start listening.</h1>
+        </Link>
+        <h1 className="flex align-center justify-center">Sign up for free to start listening.</h1>
         <div className="separator">
-          <div className="signupW flex column">
+          <div className="signupW flex column align-center">
             <button className="fb-btn">Sign up with Facebook</button>
             <button className="google-btn">Sign up with Google</button>
           </div>
-          <div className="line">
-            <span className="divider"></span>
+          <div className="line flex align-center">
+            <span className="divider">-------</span>
             <span>or</span>
-            <span className="divider"></span>
+            <span className="divider">-------</span>
           </div>
         </div>
-
-        <h3 className="signup-email-h2">Sign up with a new account</h3>
-
+        <h3 className="flex align-center justify-center">Sign up with your email address</h3>
         <form onSubmit={handleSignup}>
-          <div className="form-group">
-            <label className="label-dark" htmlFor="email">
-              What's your fullname?
-            </label>
+          <div className="form-group flex column">
+            <span className="label">What's your email?</span>
             <input
-              className="square-inputs"
               type="text"
-              id="email"
-              value={signupCred.fullname}
-              onChange={(e) =>
-                setSignupCred({ ...signupCred, fullname: e.target.value })
-              }
-              placeholder="Your full name"
+              // value={signupCred.fullname}
+              // onChange={(e) =>
+              //   setSignupCred({ ...signupCred, fullname: e.target.value })
+              // }
+              // placeholder="Your full name"
+              placeholder="Enter your email."
               required
             />
           </div>
 
-          <div className="form-group">
-            <label className="label-dark" htmlFor="confirm-email">
-              Enter your username
-            </label>
+          <div className="form-group flex column">
+            <span className="label">Create a password</span>
             <input
-              className="square-inputs"
+              type="password"
+              // value={signupCred.username}
+              // onChange={(e) =>
+              //   setSignupCred({ ...signupCred, username: e.target.value })
+              // }
+              placeholder="Create a password."
+              required
+            />
+          </div>
+
+          <div className="form-group flex column">
+            <span className="label">What should we call you?</span>
+            <input
               type="text"
-              id="confirm-email"
-              value={signupCred.username}
-              onChange={(e) =>
-                setSignupCred({ ...signupCred, username: e.target.value })
-              }
-              placeholder="Username"
+              // value={signupCred.password}
+              // onChange={(e) =>
+              //   setSignupCred({ ...signupCred, password: e.target.value })
+              // }
+              placeholder="Enter a profile name."
               required
             />
             <small>This appears on your profile.</small>
           </div>
 
-          <div className="form-group">
-            <label className="label-dark" htmlFor="password">
-              Create a password
-            </label>
-            <input
-              className="square-inputs"
-              type="password"
-              id="password"
-              value={signupCred.password}
-              onChange={(e) =>
-                setSignupCred({ ...signupCred, password: e.target.value })
-              }
-              placeholder="Password"
-              required
-            />
-          </div>
-
-          <input type="submit" value="Sign Up" />
+          <button className="pointer flex align-center justify-center">Sign up</button>
         </form>
+        <div className="go-to-login flex align-center justify-center">
+          <span>Have an account?</span>
+          <Link to="login">Log in</Link>
+        </div>
       </div>
     </section>
   );
