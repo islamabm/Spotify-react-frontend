@@ -2,18 +2,17 @@ import { storageService } from './storage.service'
 
 export const userService = {
   signup,
-  getLoggedinUser,
+  getLoggedInUser,
   login,
   logout,
   updateUser,
 }
 
-function getLoggedinUser() {
+function getLoggedInUser() {
   return storageService.load('loggedinUser')
 }
 
 function signup(userCred) {
-  console.log('userCred', userCred)
   storageService.store('loggedinUser', userCred)
   return { ...userCred }
 }
@@ -23,7 +22,6 @@ function logout() {
 }
 
 function login(userCred) {
-  console.log('userCred', userCred)
   storageService.store('loggedinUser', userCred)
   return { ...userCred }
 }

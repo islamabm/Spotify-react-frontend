@@ -8,7 +8,7 @@ export function Signup() {
   const [signupCred, setSignupCred] = useState({
     username: "",
     password: "",
-    fullname: "",
+    email: "",
     imgUrl: "",
     stations: [],
     likedSongs: [],
@@ -20,7 +20,7 @@ export function Signup() {
   function handleSignup(e) {
     e.preventDefault();
 
-    if (!signupCred.fullname || !signupCred.password || !signupCred.username) {
+    if (!signupCred.email || !signupCred.password || !signupCred.username) {
       return;
     }
 
@@ -64,11 +64,10 @@ export function Signup() {
             <span className="label">What's your email?</span>
             <input
               type="text"
-              // value={signupCred.fullname}
-              // onChange={(e) =>
-              //   setSignupCred({ ...signupCred, fullname: e.target.value })
-              // }
-              // placeholder="Your full name"
+              value={signupCred.email}
+              onChange={(e) =>
+                setSignupCred({ ...signupCred, email: e.target.value })
+              }
               placeholder="Enter your email."
               required
             />
@@ -78,10 +77,10 @@ export function Signup() {
             <span className="label">Create a password</span>
             <input
               type="password"
-              // value={signupCred.username}
-              // onChange={(e) =>
-              //   setSignupCred({ ...signupCred, username: e.target.value })
-              // }
+               value={signupCred.password}
+              onChange={(e) =>
+                setSignupCred({ ...signupCred, password: e.target.value })
+              }
               placeholder="Create a password."
               required
             />
@@ -91,10 +90,10 @@ export function Signup() {
             <span className="label">What should we call you?</span>
             <input
               type="text"
-              // value={signupCred.password}
-              // onChange={(e) =>
-              //   setSignupCred({ ...signupCred, password: e.target.value })
-              // }
+            value={signupCred.username}
+              onChange={(e) =>
+                setSignupCred({ ...signupCred, username: e.target.value })
+              }
               placeholder="Enter a profile name."
               required
             />

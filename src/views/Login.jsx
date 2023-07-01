@@ -4,38 +4,38 @@ import { doLogin } from "../store/actions/user.actions";
 import { useNavigate, Link } from "react-router-dom";
 import { getSpotifySvg } from "../services/SVG.service";
 export function Login() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const navigate = useNavigate()
-  const [loginCred, setLoginCred] = useState({ username: '', password: '' })
+  const navigate = useNavigate();
+  const [loginCred, setLoginCred] = useState({ username: "", password: "" });
 
   function handleLogin(e) {
-    e.preventDefault()
+    e.preventDefault();
     if (!loginCred.username || !loginCred.password) {
-      alert('Please enter username/password')
-      return
+      alert("Please enter username/password");
+      return;
     }
-    dispatch(doLogin(loginCred))
-    navigate(`/`)
+    dispatch(doLogin(loginCred));
+    navigate(`/`);
   }
 
   const handleInputChange = (e) => {
     setLoginCred({
       ...loginCred,
       [e.target.name]: e.target.value,
-    })
-  }
+    });
+  };
 
   return (
     <section className="spotify-login-page">
       <div className="login-header">
-      <Link to="/">
-        <span
-          className="flex"
-          dangerouslySetInnerHTML={{
-            __html: getSpotifySvg("LoginHeaderLogo"),
-          }}
-        ></span>
+        <Link to="/">
+          <span
+            className="flex"
+            dangerouslySetInnerHTML={{
+              __html: getSpotifySvg("LoginHeaderLogo"),
+            }}
+          ></span>
         </Link>
       </div>
       <div className="login-main-container flex column align-center">
@@ -64,7 +64,14 @@ export function Login() {
         <form className="spotify-login-form" onSubmit={handleLogin}>
           <div className="spotify-username flex column">
             <span className="login-form-labels">Email or username</span>
-            <input type="text name=username" placeholder="Email or username" />
+            <input
+              type="text"
+              placeholder="Email or username"
+              onChange={handleInputChange}
+              value={loginCred.username}
+              id="username"
+              name="username"
+            />
             {/* <select
             className="login-form-inputs"
             id="username"
@@ -83,13 +90,12 @@ export function Login() {
           <div className="spotify-password flex column">
             <span className="login-form-labels">Password</span>
             <input
-              className="login-form-inputs"
               type="password"
-              id="password"
-              name="password"
-              value={loginCred.password}
               placeholder="Password"
               onChange={handleInputChange}
+              value={loginCred.password}
+              id="password"
+              name="password"
             />
           </div>
           <button className="login-btn pointer">Log in</button>
@@ -101,5 +107,5 @@ export function Login() {
         </div>
       </div>
     </section>
-  )
+  );
 }
