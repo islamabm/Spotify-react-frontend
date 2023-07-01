@@ -1,56 +1,56 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { doSignup } from "../store/actions/user.actions";
-import { useNavigate, Link } from "react-router-dom";
-import { getSpotifySvg } from "../services/SVG.service";
-import jwtDecode from "jwt-decode";
-import {userService} from '../services/user.service'
+import React, { useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { doSignup } from '../store/actions/user.actions'
+import { useNavigate, Link } from 'react-router-dom'
+import { getSpotifySvg } from '../services/SVG.service'
+import jwtDecode from 'jwt-decode'
+import { userService } from '../services/user.service'
 
 export function Signup() {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const google = window.google;
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const google = window.google
 
   function handleCallbackResponse(response) {
     // console.log("Encoded JWT ID token: " + response.credential);
-    const userObject = jwtDecode(response.credential);
-    console.log("user object", userObject);
+    const userObject = jwtDecode(response.credential)
+    console.log('user object', userObject)
     const user = userService.prepareData(userObject)
-    dispatch(doSignup(user));
+    dispatch(doSignup(user))
+    navigate(`/`)
   }
 
   useEffect(() => {
     google.accounts.id.initialize({
       client_id:
-        "574173385565-5e20ddsrolqlbdrsk5shsfodsfp36pfh.apps.googleusercontent.com",
+        '574173385565-5e20ddsrolqlbdrsk5shsfodsfp36pfh.apps.googleusercontent.com',
       callback: handleCallbackResponse,
-    });
+    })
 
-    google.accounts.id.renderButton(document.getElementById("signIn-div"), {
-      theme: "outline",
-      size: "large",
-    });
-  }, []);
+    google.accounts.id.renderButton(document.getElementById('signIn-div'), {
+      theme: 'outline',
+      size: 'large',
+    })
+  }, [])
 
   const [signupCred, setSignupCred] = useState({
-    username: "",
-    password: "",
-    email: "",
-    imgUrl: "",
+    username: '',
+    password: '',
+    email: '',
+    imgUrl: '',
     stations: [],
     likedSongs: [],
-  });
-
+  })
 
   function handleSignup(e) {
-    e.preventDefault();
+    e.preventDefault()
 
     if (!signupCred.email || !signupCred.password || !signupCred.username) {
-      return;
+      return
     }
 
-    dispatch(doSignup(signupCred));
-    navigate(`/`);
+    dispatch(doSignup(signupCred))
+    navigate(`/`)
   }
 
   return (
@@ -60,7 +60,7 @@ export function Signup() {
           <span
             className="flex align-center justify-center"
             dangerouslySetInnerHTML={{
-              __html: getSpotifySvg("SignupHeaderLogo"),
+              __html: getSpotifySvg('SignupHeaderLogo'),
             }}
           ></span>
         </Link>
@@ -136,5 +136,5 @@ export function Signup() {
         </div>
       </div>
     </section>
-  );
+  )
 }
