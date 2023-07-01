@@ -1,6 +1,11 @@
 .search-songs-container {
   margin-inline-start: rem(20px);
   position: relative;
+
+  .search {
+    margin-top: 20px;
+    margin-left: -45px;
+  }
   .search-songs-x {
     position: absolute;
     background-color: transparent;
