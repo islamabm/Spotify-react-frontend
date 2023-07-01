@@ -133,10 +133,12 @@ export function AppHeader() {
             <button onClick={handleLogout} className="sign-up  pointer">
               Log out
             </button>
-            <span className="user-details-header">
-              <img src="https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg" />
-              {user?.username}
-            </span>
+            <Link to="/user">
+              <span className="user-details-header">
+                <img src="https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg" />
+                {user?.username}
+              </span>
+            </Link>
           </>
         )}
       </div>

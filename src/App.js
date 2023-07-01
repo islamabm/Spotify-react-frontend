@@ -11,6 +11,7 @@ import { Login } from './views/Login'
 import { Signup } from './views/Signup'
 import Search from './views/Search'
 import { useState } from 'react'
+import { UserDetails } from './views/UserDetails'
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function LoggedInApp() {
         <Routes>
           <Route path="/" element={<StationIndex />} />
           <Route path="/station/:id" element={<StationDetails />} />
+          <Route path="/user" element={<UserDetails />} />
           <Route path="/search" element={<Search />} />
           {/* Exclude /login and /signup */}
         </Routes>
