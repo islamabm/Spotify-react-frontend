@@ -21,6 +21,7 @@ export function StationDetails(props) {
   const [bgBottomStyle, setBgBottomStyle] = useState(null)
   const [showRecommindationModal, setShowRecommindationModal] = useState(false)
   const [showModal, setShowModal] = useState(false)
+  const [headerBg, setHeaderBg] = useState('transparent')
   const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 })
   const [showDeleteModal, setShowDeleteModal] = useState(false)
   const colorCache = {}
@@ -47,12 +48,17 @@ export function StationDetails(props) {
 
   useEffect(() => {
     updateImgUrlAndColor(station)
-    console.log('stationImg', stationImg)
   }, [stationImg])
   useEffect(() => {
     const currentStationDetailsRef = stationDetailsRef.current
     const handleScroll = () => {
       const scrollPos = currentStationDetailsRef.scrollTop
+      console.log('scrollPos', scrollPos)
+      if (scrollPos > 512.5) {
+        setHeaderBg('#1a1a1a')
+      } else {
+        setHeaderBg('transparent')
+      }
       eventBus.emit('stationDetailsScroll', { scrollPos, bgStyle })
     }
     if (currentStationDetailsRef) {
@@ -179,23 +185,23 @@ export function StationDetails(props) {
             }}
           ></span>
         </div>
-          <div className="station-songs-header">
-            {/* {station.songs.length > 0 && ( */}
-            {/* <> */}
-            <span className="flex align-center justify-center">#</span>
-            <span className="title flex align-center">Title</span>
-            <span className="flex align-center">Album</span>
-            <span className="flex align-center">Date added</span>
-            <span
-              className="time flex align-center justify-center"
-              dangerouslySetInnerHTML={{
-                __html: getSpotifySvg('time'),
-              }}
-            ></span>
-            {/* </> */}
-            {/* )} */}
-          </div>
-                <div className="station-songs">
+        <div className="station-songs-header" style={{ background: headerBg }}>
+          {/* {station.songs.length > 0 && ( */}
+          {/* <> */}
+          <span className="flex align-center justify-center">#</span>
+          <span className="title flex align-center">Title</span>
+          <span className="flex align-center">Album</span>
+          <span className="flex align-center">Date added</span>
+          <span
+            className="time flex align-center justify-center"
+            dangerouslySetInnerHTML={{
+              __html: getSpotifySvg('time'),
+            }}
+          ></span>
+          {/* </> */}
+          {/* )} */}
+        </div>
+        <div className="station-songs">
           <StationSongList station={station} />
         </div>
       </div>
