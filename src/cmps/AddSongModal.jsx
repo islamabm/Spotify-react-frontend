@@ -10,8 +10,13 @@ export function AddSongModal({ position, addSongToStation }) {
   const [filterInput, setFilterInput] = useState('')
   function createStation() {
     const name = song?.title
-    const songs = song
-    dispatch(addStation(name, songs))
+
+    if (!song) {
+      console.error('No song selected')
+      return
+    }
+
+    dispatch(addStation(name, [song], song?.imgUrl))
   }
 
   return (
