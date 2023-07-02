@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react'
-import { getSpotifySvg } from '../services/SVG.service'
+import { getSpotifySvg } from '../../services/SVG.service'
 import { AddSongModal } from './AddSongModal'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -7,7 +7,7 @@ import {
   addSongToStation,
   removeSongFromStation,
   addStation,
-} from '../store/actions/station.actions'
+} from '../../store/actions/station.actions'
 export function SongOptionsModal({ position, closeModal }) {
   const station = useSelector(
     (storeState) => storeState.stationModule.currStation

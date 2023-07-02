@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
-import { getSpotifySvg } from '../services/SVG.service'
-import { UserStationName } from './UserStationName'
+import { getSpotifySvg } from '../../services/SVG.service'
+import {
+  UserStationName,
+  UserStationNameIndex,
+} from '../UserStationName/UserStationNameIndex'
 
 export function AddSongModal({ position, addSongToStation, createStation }) {
   const [filterInput, setFilterInput] = useState('')
@@ -31,7 +34,7 @@ export function AddSongModal({ position, addSongToStation, createStation }) {
           <button onClick={createStation}>Create playlist</button>
         </li>
         <li>
-          <UserStationName
+          <UserStationNameIndex
             addSongToStation={addSongToStation}
             filter={filterInput}
           />

@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import UserStationsNameList from './UserStationsNameList'
 
-export function UserStationName({ addSongToStation, filter }) {
+export function UserStationNameIndex({ addSongToStation, filter }) {
   const userStations = useSelector(
     (storeState) => storeState.stationModule.userStations
   )

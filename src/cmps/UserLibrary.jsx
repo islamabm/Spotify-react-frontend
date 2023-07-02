@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { getSpotifySvg } from '../services/SVG.service'
-import { SortModal } from './SortModal'
+import { SortModal } from './Modals/SortModal'
 import { useDispatch } from 'react-redux'
-import { UserStationsIndex } from './UserStationsIndex'
+import { UserStationsIndex } from './UserStations/UserStationsIndex'
 import { addStation } from '../store/actions/station.actions'
 import { eventBus } from '../services/event-bus.service'
 export function UserLibrary() {

@@ -1,6 +1,6 @@
 import { getSpotifySvg } from '../services/SVG.service'
 import { useLocation, Link } from 'react-router-dom'
-import { UserModal } from './UserModal'
+import { UserModal } from './Modals/UserModal'
 import { useState, useEffect } from 'react'
 import { setCurrSong, setCurrSongIndex } from '../store/actions/song.actions'
 import { doLogout } from '../store/actions/user.actions'

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import UserStationsList from './UserStationsList'
-import { loadUserStations } from '../store/actions/station.actions'
+import { loadUserStations } from '../../store/actions/station.actions'
 
 export function UserStationsIndex() {
   const userStations = useSelector(
