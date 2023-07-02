@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 
-export function DeleteStationModal({ closeModal, onRemoveStation }) {
+export function DeleteStationModal({ onCloseDeleteModal, onRemoveStation }) {
   const station = useSelector(
     (storeState) => storeState.stationModule.currStation
   )
@@ -14,7 +14,7 @@ export function DeleteStationModal({ closeModal, onRemoveStation }) {
           This will delete <span>{station?.name} </span> from Your Library.
         </p>
         <div className="delete-modla-btns">
-          <button className="delete-modal-cancle-btn" onClick={closeModal}>
+          <button className="delete-modal-cancle-btn" onClick={onCloseDeleteModal}>
             Cancel
           </button>
           <button className="delete-modal-delete-btn" onClick={onRemoveStation}>

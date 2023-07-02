@@ -1,39 +1,20 @@
-import React, { useState, useRef } from 'react'
-import { DeleteStationModal } from './DeleteStationModal'
-import { useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { removeStation } from '../store/actions/station.actions'
+import React, { useRef } from 'react'
 
 export function StationOptionsModal({
   position,
   closeOptionsModal,
   openRecommindationModal,
+  onShowDeleteModal,
 }) {
-  const [showDeleteModal, setShowDeleteModal] = useState(false)
   const modalRef = useRef()
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const station = useSelector(
-    (storeState) => storeState.stationModule.currStation
-  )
 
-  function handleShowDeleteModal(e) {
-    e.stopPropagation()
-    setShowDeleteModal(true)
+  function handleShowDeleteModal() {
+    onShowDeleteModal()
     closeOptionsModal()
   }
 
   function handleShowRecommindationModal() {
     openRecommindationModal()
-  }
-  function handleCloseDeleteModal() {
-    setShowDeleteModal(false)
-  }
-
-  function handleRemoveStation() {
-    dispatch(removeStation(station._id))
-    setShowDeleteModal(false)
-    navigate(`/`)
   }
 
   async function copyLinkToClipboard() {
@@ -74,12 +55,6 @@ export function StationOptionsModal({
           </li>
         </ul>
       </section>
-      {showDeleteModal && (
-        <DeleteStationModal
-          closeModal={handleCloseDeleteModal}
-          onRemoveStation={handleRemoveStation}
-        />
-      )}
     </>
   )
 }
