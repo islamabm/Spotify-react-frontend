@@ -15,12 +15,8 @@ const INITIAL_STATE = {
   currStationImg: '',
   stations: [],
   searchStations: null,
-  filterBy: {
-    model: '',
-    type: '',
-    minBatteryStatus: '',
-    maxBatteryStatus: '',
-  },
+  filterBy: 'Alphabetical',
+
   currStation: null,
   currStationId: null,
   currStationGradientColor: 'black',
@@ -82,7 +78,7 @@ export function stationReducer(state = INITIAL_STATE, action = {}) {
     case SET_FILTER_BY:
       return {
         ...state,
-        filterBy: { ...action.filterBy },
+        filterBy: action.filterBy,
       }
     case UPDATE_STATION:
       return {

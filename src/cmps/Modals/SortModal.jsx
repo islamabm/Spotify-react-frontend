@@ -11,6 +11,10 @@ export function SortModal({ onSelectOption }) {
   const userStations = useSelector(
     (storeState) => storeState.stationModule.userStations
   )
+  const currFilterBy = useSelector(
+    (storeState) => storeState.stationModule.filterBy
+  )
+  console.log('currFilterBy', currFilterBy)
 
   const onSelect = (ev, option) => {
     setSelected(option)
@@ -23,15 +27,15 @@ export function SortModal({ onSelectOption }) {
       <div>
         <p className="sort-by">Sort by</p>
       </div>
-      {options?.map((option) => (
+      {options?.map((option, idx) => (
         <div
           onClick={(ev) => onSelect(ev, option)}
           className="pointer"
-          key={option}
+          key={idx}
         >
-          <p className={selected === option ? 'green' : ''}>{option}</p>
+          <p className={currFilterBy === option ? 'green' : ''}>{option}</p>
           <span
-            className={selected === option ? 'active' : ''}
+            className={currFilterBy === option ? 'active' : ''}
             dangerouslySetInnerHTML={{
               __html: getSpotifySvg('choosed'),
             }}
