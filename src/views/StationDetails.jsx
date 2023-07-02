@@ -153,6 +153,7 @@ export function StationDetails(props) {
   if (!station) return <div>Loading...</div>
   return (
     <section className="station-details" ref={stationDetailsRef}>
+      {/* <section className='headers-container'> */}
       <StationHeaderDetails bgStyle={bgStyle} station={station} />
       <div className="bottom gradient" style={bgBottomStyle}>
         <div className="user-station-actions">
@@ -178,7 +179,6 @@ export function StationDetails(props) {
             }}
           ></span>
         </div>
-        <div className="station-songs">
           <div className="station-songs-header">
             {/* {station.songs.length > 0 && ( */}
             {/* <> */}
@@ -195,9 +195,11 @@ export function StationDetails(props) {
             {/* </> */}
             {/* )} */}
           </div>
+                <div className="station-songs">
           <StationSongList station={station} />
         </div>
       </div>
+      {/* </section> */}
       {showModal && (
         <StationOptionsModal
           position={modalPosition}

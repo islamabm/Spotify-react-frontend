@@ -4,7 +4,9 @@
   height: calc(100vh - 1px);
 
   overflow-y: scroll;
+.headers-container{
 
+}
   .station-header-content {
     width: 100%;
     display: flex;
@@ -114,27 +116,6 @@
 
   .station-songs {
     padding: 0 20px;
-    .station-songs-header {
-      margin: 24px 0;
-      padding: 0 16px;
-      position: relative;
-      height: 30px;
-      display: grid;
-      grid-template-columns: 16px 6fr 4fr 3fr minmax(120px, 1fr);
-      gap: 10px;
-      border-bottom: 1px solid #292a2a;
-      color: $clr3;
-      font-size: 14px;
-      .title {
-        margin-inline-start: 6px;
-      }
-      .time {
-        svg {
-          fill: $clr3;
-          margin-left: 15%;
-        }
-      }
-    }
     .song {
       grid-template-columns: 16px 6fr 4fr 3fr minmax(120px, 1fr);
       gap: 10px;
@@ -229,9 +210,33 @@
       }
     }
   }
+  .station-songs-header {
+    margin: 24px 0;
+    padding: 0 16px;
+    position: relative;
+    height: 30px;
+    display: grid;
+    grid-template-columns: 16px 6fr 4fr 3fr minmax(120px, 1fr);
+    gap: 10px;
+    border-bottom: 1px solid #ffffff1a;
+    color: $clr3;
+    font-size: 14px;
+    position: sticky;
+    top: 64px;
+    z-index: 5;
+    background: #1a1a1a;
+    .title {
+      margin-inline-start: 6px;
+    }
+    .time {
+      svg {
+        fill: $clr3;
+        margin-left: 15%;
+      }
+    }
+  }
 }
 
-/////////////////////////////////////////////////////////
 .play-button {
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.4);
   width: 55px;
