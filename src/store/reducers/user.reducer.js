@@ -3,6 +3,7 @@ export const SIGNUP = 'SIGNUP'
 export const LOGIN = 'LOGIN'
 export const LOGOUT = 'LOGOUT'
 export const UPDATE_USER = 'UPDATE_USER'
+export const SET_LOGGEDIN_USER = 'SET_LOGGEDIN_USER'
 
 const INITIAL_STATE = {
   loggedInUser: null,
@@ -32,6 +33,12 @@ export function userReducer(state = INITIAL_STATE, action = {}) {
         ...state,
         loggedInUser: action.user,
       }
+    case SET_LOGGEDIN_USER:
+      return {
+        ...state,
+        loggedInUser: action.user,
+      }
+
     case LOGOUT:
       return {
         ...state,

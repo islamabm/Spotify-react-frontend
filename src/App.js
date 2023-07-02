@@ -10,10 +10,16 @@ import { StationDetails } from './views/StationDetails'
 import { Login } from './views/Login'
 import { Signup } from './views/Signup'
 import Search from './views/Search'
-
+import { getUser } from './store/actions/user.actions'
 import { UserDetails } from './views/UserDetails'
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 
 function App() {
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(getUser())
+  }, [])
   return (
     <Router>
       <Routes>

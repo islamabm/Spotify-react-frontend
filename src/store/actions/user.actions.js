@@ -5,6 +5,7 @@ import {
   LOGIN,
   LOGOUT,
   UPDATE_USER,
+  SET_LOGGEDIN_USER,
 } from '../reducers/user.reducer'
 
 export function doSignup(userCred) {
@@ -29,6 +30,20 @@ export function doLogin(userCred) {
       const user = await userService.login(userCred)
       const action = {
         type: LOGIN,
+        user,
+      }
+      dispatch(action)
+    } catch (error) {
+      console.log('error:', error)
+    }
+  }
+}
+export function getUser() {
+  return async (dispatch, getState) => {
+    try {
+      const user = await userService.getLoggedinUser()
+      const action = {
+        type: SET_LOGGEDIN_USER,
         user,
       }
       dispatch(action)
