@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 
 export function StationOptionsModal({
   position,
@@ -27,6 +27,18 @@ export function StationOptionsModal({
       closeOptionsModal()
     }
   }
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        closeOptionsModal()
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [modalRef, closeOptionsModal])
 
   return (
     <>
