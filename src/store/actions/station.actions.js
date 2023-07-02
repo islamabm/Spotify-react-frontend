@@ -44,10 +44,10 @@ export function loadUserStations() {
   }
 }
 
-export function addStation(name,songs,url) {
+export function addStation(name, songs, url) {
   return async (dispatch) => {
     try {
-      const station = await stationService.createNewStation(name,songs,url)
+      const station = await stationService.createNewStation(name, songs, url)
       const action = { type: ADD_STATION, station }
       dispatch(action)
       const action2 = { type: SET_CURR_STATION, station }
@@ -150,7 +150,7 @@ export function setFilterBy(userStations, filterBy) {
     filterBy
   )
   return (dispatch) => {
-    dispatch({ type: SET_FILTER_BY, filteredStations })
+    dispatch({ type: SET_FILTER_BY, filteredStations, filterBy })
   }
 }
 

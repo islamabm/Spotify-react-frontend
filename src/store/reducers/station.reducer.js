@@ -79,6 +79,7 @@ export function stationReducer(state = INITIAL_STATE, action = {}) {
       return {
         ...state,
         filterBy: action.filterBy,
+        userStations: action.filteredStations,
       }
     case UPDATE_STATION:
       return {
