@@ -49,12 +49,13 @@ export function StationDetails(props) {
   useEffect(() => {
     updateImgUrlAndColor(station)
   }, [stationImg])
+
   useEffect(() => {
     const currentStationDetailsRef = stationDetailsRef.current
     const handleScroll = () => {
       const scrollPos = currentStationDetailsRef.scrollTop
       console.log('scrollPos', scrollPos)
-      if (scrollPos > 512.5) {
+      if (scrollPos > 375) {
         setHeaderBg('#1a1a1a')
       } else {
         setHeaderBg('transparent')
