@@ -2681,29 +2681,29 @@ async function getVideos(keyword, song = null) {
         uncachedKeywords.push(artist)
       }
     })
-    
+
     const recommendedSongs = await Promise.all(
       uncachedKeywords.map(async (artist) => {
         let cachedSong = getCachedSong(artist)
         if (cachedSong) {
-          console.log('cashed');
+          console.log('cashed')
           return cachedSong
         } else {
           const res = await axios.get(gUrl + artist)
           const recommendedSong = res.data.items.map((item) =>
-          _prepareData(item)
+            _prepareData(item)
           )
           cacheSong(artist, recommendedSong[0])
-          console.log('save cashed');
+          console.log('save cashed')
           return recommendedSong[0]
         }
       })
-      )
-      
-      return cachedVideos.concat(recommendedSongs)
-    }
-    
-    return getCachedVideos(keyword)
+    )
+
+    return cachedVideos.concat(recommendedSongs)
+  }
+
+  return getCachedVideos(keyword)
 }
 
 function getCachedSong(artist) {
@@ -2950,7 +2950,7 @@ function _loadSearchStations() {
   return stations
 }
 
-async function createNewStation(name) {
+async function createNewStation(name, songs) {
   const stations = storageService.load(STORAGE_KEY)
   const userStations = storageService.load(USER_STATIONS) || []
   const newStation = {
@@ -2966,7 +2966,7 @@ async function createNewStation(name) {
       imgUrl: '',
     },
     likedByUsers: [],
-    songs: [],
+    songs,
     msgs: [
       {
         id: '',

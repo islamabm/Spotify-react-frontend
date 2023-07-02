@@ -135,7 +135,7 @@ export function StationDetails(props) {
       <StationHeaderDetails bgStyle={bgStyle} station={station} />
       <div className="bottom gradient" style={bgBottomStyle}>
         <div className="user-station-actions">
-          {station.songs.length < 0 && (
+          {station?.songs?.length < 0 && (
             <>
               <div
                 onClick={playFirstSongInStation}
@@ -190,17 +190,18 @@ export function StationDetails(props) {
           closeRecommindationModal={() => setShowRecommindationModal(false)}
         />
       )}
-      {station.createdBy?.fullname === 'guest' && station.songs.length > 0 && (
-        <Recommended
-          list={
-            station?.songs?.slice(0, 5) ||
-            station?.songs?.slice(0, station.songs.length - 1)
-          }
-          stationId={station._id}
-        />
-      )}
+      {station?.createdBy?.fullname === 'guest' &&
+        station?.songs?.length > 0 && (
+          <Recommended
+            list={
+              station?.songs?.slice(0, 5) ||
+              station?.songs?.slice(0, station?.songs?.length - 1)
+            }
+            stationId={station._id}
+          />
+        )}
       {station.createdBy?.fullname === 'guest' &&
-        station.songs.length === 0 && <SearchSongs stationId={station._id} />}
+        station?.songs?.length === 0 && <SearchSongs stationId={station._id} />}
     </section>
   )
 }

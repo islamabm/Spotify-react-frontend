@@ -103,31 +103,31 @@
 //   border-radius: 10000px;
 // }
 .progress-bar-audio-fill {
-  // -webkit-appearance: none;
-  // appearance: none;
+  -webkit-appearance: #1db954;
+  appearance: #1db954;
   width: 100%;
   height: 5px;
   outline: none;
   border-radius: 10px;
 }
 
-// .progress-bar-audio-fill::-webkit-slider-thumb {
-//   -webkit-appearance: none;
-//   appearance: none;
-//   width: 10px;
-//   height: 10px;
-//   border-radius: 50%;
-//   background: #1db954;
-//   cursor: pointer;
-// }
+.progress-bar-audio-fill::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #1db954;
+  cursor: pointer;
+}
 
-// .progress-bar-audio-fill::-moz-range-thumb {
-//   width: 10px;
-//   height: 10px;
-//   border-radius: 50%;
-//   background: #1db954;
-//   cursor: pointer;
-// }
+.progress-bar-audio-fill::-moz-range-thumb {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #1db954;
+  cursor: pointer;
+}
 
 .hidden-player {
   display: none;

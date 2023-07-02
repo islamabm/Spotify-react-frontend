@@ -9,7 +9,7 @@ export default function UserStationsNameList({
   return (
     <ul>
       {userStations
-        ?.filter((station) => station.name.includes(filter))
+        ?.filter((station) => station?.name?.includes(filter))
         .map((station, idx) => (
           <UserStationsNamePreview
             station={station}

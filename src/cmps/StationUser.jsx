@@ -19,14 +19,14 @@ export default function StationUser({ station }) {
       <div className="station-main-img user-main-img justify-center align-center">
         <img
           className="default-image station-cover-img"
-          src={station.imgUrl ? station.imgUrl : emptyImg}
+          src={station?.imgUrl ? station?.imgUrl : emptyImg}
           alt="user station img"
         ></img>
       </div>
       <div className="station-info">
         <span className="playlist-word">Playlist</span>
         <h1 className={stationNameClass} onClick={handleEditModalOpen}>
-          {station.name}
+          {station?.name}
         </h1>
         {isEditModalOpen && (
           <EditUserStationModal
@@ -34,8 +34,8 @@ export default function StationUser({ station }) {
             station={station}
           />
         )}
-        {station.songs.length > 0 && (
-          <span className="songs-count"> {station.songs.length} songs </span>
+        {station?.songs?.length > 0 && (
+          <span className="songs-count"> {station?.songs?.length} songs </span>
         )}
       </div>
     </>

@@ -4,12 +4,13 @@ import { UserStationName } from './UserStationName'
 import { useDispatch, useSelector } from 'react-redux'
 import { addStation } from '../store/actions/station.actions'
 export function AddSongModal({ position, addSongToStation }) {
-  const song = useSelector((storeState) => storeState.songModule.currSong)
+  const song = useSelector((storeState) => storeState.songModule.currSongAction)
+  console.log('song', song)
   const dispatch = useDispatch()
   const [filterInput, setFilterInput] = useState('')
   function createStation() {
-    const name = song.title
-    dispatch(addStation(name))
+    const name = song?.title
+    dispatch(addStation(name, song))
   }
 
   return (
@@ -31,7 +32,7 @@ export function AddSongModal({ position, addSongToStation }) {
             type="text"
             placeholder="Find a playlist"
             value={filterInput}
-            onChange={(e) => setFilterInput(e.target.value)} 
+            onChange={(e) => setFilterInput(e.target.value)}
           ></input>
         </li>
         <li className="create-station-from-add">
