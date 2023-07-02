@@ -69,10 +69,10 @@ export function stationReducer(state = INITIAL_STATE, action = {}) {
       return {
         ...state,
         stations: state.stations.filter(
-          (station) => station._id !== action.stationId
+          (station) => station._id !== action.id
         ),
         userStations: state.userStations.filter(
-          (station) => station._id !== action.stationId
+          (station) => station._id !== action.id
         ),
       }
     case SET_FILTER_BY:

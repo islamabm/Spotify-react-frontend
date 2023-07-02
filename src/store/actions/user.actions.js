@@ -1,7 +1,14 @@
 import { userService } from '../../services/user.service'
-import { SIGNUP, SPEND_BALANCE, LOGIN, LOGOUT,UPDATE_USER } from '../reducers/user.reducer'
+import {
+  SIGNUP,
+  SPEND_BALANCE,
+  LOGIN,
+  LOGOUT,
+  UPDATE_USER,
+} from '../reducers/user.reducer'
 
 export function doSignup(userCred) {
+  console.log('userCred in the actions ', userCred)
   return async (dispatch, getState) => {
     try {
       const user = await userService.signup(userCred)

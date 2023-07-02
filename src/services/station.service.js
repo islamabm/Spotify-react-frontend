@@ -2763,9 +2763,11 @@ function searchQuery() {
 
 async function userQuery() {
   let loggedinUser = await userService.getLoggedinUser()
- const stations =  httpService.get('station')
- console.log('stations', stations)
- return stations.filter((station)=>station.createdBy.fullname ===loggedinUser.fullname )
+  const stations = httpService.get('station')
+  console.log('stations', stations)
+  return stations.filter(
+    (station) => station.createdBy.fullname === loggedinUser.fullname
+  )
 }
 
 function query() {
@@ -2891,7 +2893,7 @@ async function createNewStation(name, songs, url) {
     tags: [],
     createdBy: {
       _id: loggedinUser._id,
-      fullname: loggedinUser.fullname,
+      fullname: loggedinUser.username,
       imgUrl: '',
     },
     likedByUsers: [],

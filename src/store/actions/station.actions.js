@@ -94,8 +94,8 @@ export function setCurrStation(id) {
 export function removeStation(stationId) {
   return async (dispatch) => {
     try {
-      await stationService.remove(stationId)
-      const action = { type: REMOVE_STATION, stationId }
+      const id = await stationService.remove(stationId)
+      const action = { type: REMOVE_STATION, id }
       dispatch(action)
       showSuccessMsg('Playlist removed')
     } catch (error) {

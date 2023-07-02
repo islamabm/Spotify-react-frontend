@@ -69,7 +69,7 @@ async function signup(userCred) {
   }
 
   const user = await httpService.post('auth/signup', userCred)
-
+  console.log('signupCred in the front component', user)
   return saveLocalUser(user)
 }
 
@@ -91,7 +91,8 @@ async function getLoggedinUserDetails() {
 function saveLocalUser(user) {
   user = {
     _id: user._id,
-    fullname: user.fullname,
+    username: user.username,
+    email: user.email,
     stations: [],
     imgUrl:
       'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg',
