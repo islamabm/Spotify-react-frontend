@@ -1,23 +1,9 @@
 import React, { useState } from 'react'
 import { getSpotifySvg } from '../services/SVG.service'
 import { UserStationName } from './UserStationName'
-import { useDispatch, useSelector } from 'react-redux'
-import { addStation } from '../store/actions/station.actions'
-export function AddSongModal({ position, addSongToStation }) {
-  const song = useSelector((storeState) => storeState.songModule.currSongAction)
-  console.log('song', song)
-  const dispatch = useDispatch()
+
+export function AddSongModal({ position, addSongToStation, createStation }) {
   const [filterInput, setFilterInput] = useState('')
-  function createStation() {
-    const name = song?.title
-
-    if (!song) {
-      console.error('No song selected')
-      return
-    }
-
-    dispatch(addStation(name, [song], song?.imgUrl))
-  }
 
   return (
     <section
