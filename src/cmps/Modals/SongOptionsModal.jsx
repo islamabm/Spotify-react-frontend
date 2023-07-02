@@ -1,13 +1,14 @@
 import React, { useState, useRef } from 'react'
-import { getSpotifySvg } from '../services/SVG.service'
+import { getSpotifySvg } from '../../services/SVG.service'
 import { AddSongModal } from './AddSongModal'
 import { useDispatch, useSelector } from 'react-redux'
 
 import {
   addSongToStation,
   removeSongFromStation,
-} from '../store/actions/station.actions'
-export function SongOptionsModal({ position, closeOptionsModal, closeModal }) {
+  addStation,
+} from '../../store/actions/station.actions'
+export function SongOptionsModal({ position, closeModal }) {
   const station = useSelector(
     (storeState) => storeState.stationModule.currStation
   )
@@ -29,6 +30,19 @@ export function SongOptionsModal({ position, closeOptionsModal, closeModal }) {
   }
   function handleAddSongToStation(stationId) {
     dispatch(addSongToStation(stationId, song))
+    setShowModal(false)
+    closeModal()
+  }
+
+  function handleCreateStation() {
+    const name = song?.title
+
+    if (!song) {
+      console.error('No song selected')
+      return
+    }
+
+    dispatch(addStation(name, [song], song?.imgUrl))
     setShowModal(false)
     closeModal()
   }
@@ -75,6 +89,7 @@ export function SongOptionsModal({ position, closeOptionsModal, closeModal }) {
         <AddSongModal
           position={modalPosition}
           addSongToStation={handleAddSongToStation}
+          createStation={handleCreateStation}
         />
       )}
     </>

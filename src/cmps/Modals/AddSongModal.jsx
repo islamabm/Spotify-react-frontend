@@ -1,17 +1,12 @@
 import React, { useState } from 'react'
-import { getSpotifySvg } from '../services/SVG.service'
-import { UserStationName } from './UserStationName'
-import { useDispatch, useSelector } from 'react-redux'
-import { addStation } from '../store/actions/station.actions'
-export function AddSongModal({ position, addSongToStation }) {
-  const song = useSelector((storeState) => storeState.songModule.currSongAction)
-  console.log('song', song)
-  const dispatch = useDispatch()
+import { getSpotifySvg } from '../../services/SVG.service'
+import {
+  UserStationName,
+  UserStationNameIndex,
+} from '../UserStationName/UserStationNameIndex'
+
+export function AddSongModal({ position, addSongToStation, createStation }) {
   const [filterInput, setFilterInput] = useState('')
-  function createStation() {
-    const name = song?.title
-    dispatch(addStation(name, song))
-  }
 
   return (
     <section
@@ -39,7 +34,7 @@ export function AddSongModal({ position, addSongToStation }) {
           <button onClick={createStation}>Create playlist</button>
         </li>
         <li>
-          <UserStationName
+          <UserStationNameIndex
             addSongToStation={addSongToStation}
             filter={filterInput}
           />

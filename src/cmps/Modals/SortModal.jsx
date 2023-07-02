@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { getSpotifySvg } from '../services/SVG.service'
+import { getSpotifySvg } from '../../services/SVG.service'
 import { useDispatch, useSelector } from 'react-redux'
-import { setFilterBy } from '../store/actions/station.actions'
+import { setFilterBy } from '../../store/actions/station.actions'
 
 export function SortModal({ onSelectOption }) {
   const [selected, setSelected] = useState(null)

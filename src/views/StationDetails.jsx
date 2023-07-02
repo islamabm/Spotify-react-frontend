@@ -1,24 +1,30 @@
 import { useEffect, useState, useRef } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { getSpotifySvg } from '../services/SVG.service'
 import { useDispatch, useSelector } from 'react-redux'
-import { setCurrStation } from '../store/actions/station.actions'
+import { setCurrStation, removeStation } from '../store/actions/station.actions'
 import { FastAverageColor } from 'fast-average-color'
 import { eventBus } from '../services/event-bus.service'
 import StationHeaderDetails from '../cmps/StationHeaderDetails'
 import StationSongList from '../cmps/StationSongList'
-import { StationOptionsModal } from '../cmps/StationOptionsModal'
-import { Recommended } from '../cmps/Recommended'
-import { RecommindationModal } from '../cmps/RecommindationModal'
-import SearchSongs from '../cmps/SearchSongs'
+import { StationOptionsModal } from '../cmps/Modals/StationOptionsModal'
+import {
+  Recommended,
+  RecommendedIndex,
+} from '../cmps/Recommended/RecommendedIndex'
+import { RecommindationModal } from '../cmps/Modals/RecommindationModal'
+import SearchSongs from '../cmps/SearchSongs/SearchSongsIndex'
 import { setCurrSong, setCurrSongIndex } from '../store/actions/song.actions'
+import { DeleteStationModal } from '../cmps/Modals/DeleteStationModal'
 export function StationDetails(props) {
   const [bgStyle, setBgStyle] = useState(null)
   const [bgBottomStyle, setBgBottomStyle] = useState(null)
   const [showRecommindationModal, setShowRecommindationModal] = useState(false)
   const [showModal, setShowModal] = useState(false)
   const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 })
+  const [showDeleteModal, setShowDeleteModal] = useState(false)
   const colorCache = {}
+  const navigate = useNavigate()
   const params = useParams()
   const stationDetailsRef = useRef(null)
   const station = useSelector(
@@ -86,6 +92,21 @@ export function StationDetails(props) {
 
   function handleCloseOptionModal() {
     setShowModal(false)
+  }
+
+  function handleShowDeleteModal() {
+    handleCloseOptionModal()
+    setShowDeleteModal(true)
+  }
+
+  function handleCloseDeleteModal() {
+    setShowDeleteModal(false)
+  }
+
+  function handleRemoveStation() {
+    dispatch(removeStation(station._id))
+    handleCloseDeleteModal()
+    navigate(`/`)
   }
 
   function playFirstSongInStation() {
@@ -182,6 +203,7 @@ export function StationDetails(props) {
           position={modalPosition}
           closeOptionsModal={handleCloseOptionModal}
           openRecommindationModal={handleShowRecommindationModal}
+          onShowDeleteModal={handleShowDeleteModal}
         />
       )}
 
@@ -192,7 +214,7 @@ export function StationDetails(props) {
       )}
       {station?.createdBy?.fullname === 'guest' &&
         station?.songs?.length > 0 && (
-          <Recommended
+          <RecommendedIndex
             list={
               station?.songs?.slice(0, 5) ||
               station?.songs?.slice(0, station?.songs?.length - 1)
@@ -202,6 +224,12 @@ export function StationDetails(props) {
         )}
       {station.createdBy?.fullname === 'guest' &&
         station?.songs?.length === 0 && <SearchSongs stationId={station._id} />}
+      {showDeleteModal && (
+        <DeleteStationModal
+          onCloseDeleteModal={handleCloseDeleteModal}
+          onRemoveStation={handleRemoveStation}
+        />
+      )}
     </section>
   )
 }

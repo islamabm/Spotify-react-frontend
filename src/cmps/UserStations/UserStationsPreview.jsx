@@ -2,9 +2,9 @@ import React from 'react'
 
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import emptyImg from '../assets/imgs/empty-img.png'
+import emptyImg from '../../assets/imgs/empty-img.png'
 import { useSelector } from 'react-redux'
-import { setCurrStation } from '../store/actions/station.actions'
+import { setCurrStation } from '../../store/actions/station.actions'
 export default function UserStationsPreview({ station }) {
   const navigate = useNavigate()
   const dispatch = useDispatch()

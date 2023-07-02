@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { SearchCategorieList } from '../cmps/SearchCategorieList'
+import { SearchCategoryList } from '../cmps/SearchCategory/SearchCategoryList'
 import { useDispatch, useSelector } from 'react-redux'
 import { loadSearchStations } from '../store/actions/station.actions'
 import { eventBus } from '../services/event-bus.service'
@@ -42,7 +42,7 @@ export default function Search() {
   return (
     <div className="categories-index" ref={searchRef}>
       <h2 className="search-header">Browse all</h2>
-      <SearchCategorieList categories={categories} />
+      <SearchCategoryList categories={categories} />
     </div>
   )
 }

@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from "react"
-import { getSpotifySvg } from "../services/SVG.service"
-import { stationService } from "../services/station.service"
-import SearchSongsList from "./SearchSongsList"
+import React, { useState, useEffect } from 'react'
+import { getSpotifySvg } from '../../services/SVG.service'
+import { stationService } from '../../services/station.service'
+import SearchSongsList from './SearchSongsList'
 
-export default function SearchSongs({ stationId }) {
-  const [searchText, setSearchText] = useState("")
+export default function SearchSongsIndex({ stationId }) {
+  const [searchText, setSearchText] = useState('')
   const [songList, setSongList] = useState([])
 
   useEffect(() => {
     const timerId = setTimeout(async () => {
       const list = await stationService.getVideos(searchText)
       setSongList(list)
-      console.log("songList", songList)
+      console.log('songList', songList)
     }, 1000)
     return () => {
       clearTimeout(timerId)
@@ -30,7 +30,7 @@ export default function SearchSongs({ stationId }) {
         <span
           className="search-icon"
           dangerouslySetInnerHTML={{
-            __html: getSpotifySvg("x"),
+            __html: getSpotifySvg('x'),
           }}
         ></span>
       </button>
@@ -38,7 +38,7 @@ export default function SearchSongs({ stationId }) {
         <span
           className="search-icon"
           dangerouslySetInnerHTML={{
-            __html: getSpotifySvg("searchIcon"),
+            __html: getSpotifySvg('searchIcon'),
           }}
         ></span>
         <input
@@ -50,9 +50,9 @@ export default function SearchSongs({ stationId }) {
         />
       </div>
       <div className="station-songs search">
-        {searchText.length > 0 &&
-        <SearchSongsList list={songList} stationId={stationId} />
-        }
+        {searchText.length > 0 && (
+          <SearchSongsList list={songList} stationId={stationId} />
+        )}
       </div>
     </div>
   )

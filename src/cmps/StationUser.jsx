@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { stationService } from '../services/station.service.js'
 
-import { EditUserStationModal } from '../cmps/EditUserStationModal'
+import { EditUserStationModal } from './Modals/EditUserStationModal.jsx'
 import emptyImg from '../assets/imgs/empty-img.png'
 
 export default function StationUser({ station }) {

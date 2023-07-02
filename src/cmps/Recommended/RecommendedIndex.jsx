@@ -1,10 +1,10 @@
-import React from "react";
-import { RecommendedList } from "./RecommendedList";
-import { useState, useEffect } from "react";
-import { stationService } from "../services/station.service.js";
+import React from 'react'
+import { RecommendedList } from './RecommendedList'
+import { useState, useEffect } from 'react'
+import { stationService } from '../../services/station.service.js'
 
-export function Recommended({ list , stationId}) {
-  const [recommendedSongs, setRecommendedSongs] = useState([]);
+export function RecommendedIndex({ list, stationId }) {
+  const [recommendedSongs, setRecommendedSongs] = useState([])
 
   useEffect(() => {
     getList()
@@ -13,9 +13,9 @@ export function Recommended({ list , stationId}) {
   async function getList() {
     try {
       const currList = await stationService.getRecommendedSongs(list)
-      setRecommendedSongs(currList);
+      setRecommendedSongs(currList)
     } catch (error) {
-      console.error("Error fetching recommended songs:", error)
+      console.error('Error fetching recommended songs:', error)
     }
   }
 
@@ -27,5 +27,5 @@ export function Recommended({ list , stationId}) {
       </div>
       <RecommendedList list={recommendedSongs} stationId={stationId} />
     </section>
-  );
+  )
 }

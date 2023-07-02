@@ -7,7 +7,7 @@ import {
   setCurrSongSvg,
 } from '../store/actions/song.actions'
 import { useParams } from 'react-router-dom'
-import { SongOptionsModal } from './SongOptionsModal'
+import { SongOptionsModal } from './Modals/SongOptionsModal'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import { updateStation } from '../store/actions/station.actions'
 import { PAUSE_SONG, eventBus } from '../services/event-bus.service'

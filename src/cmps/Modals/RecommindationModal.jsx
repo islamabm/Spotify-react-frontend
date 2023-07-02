@@ -1,5 +1,5 @@
 import React from 'react'
-import { getSpotifySvg } from '../services/SVG.service'
+import { getSpotifySvg } from '../../services/SVG.service'
 export function RecommindationModal({ closeRecommindationModal }) {
   return (
     <section className="recommendation-modal-backdrop">

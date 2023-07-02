@@ -2950,13 +2950,13 @@ function _loadSearchStations() {
   return stations
 }
 
-async function createNewStation(name, songs) {
+async function createNewStation(name, songs,url) {
   const stations = storageService.load(STORAGE_KEY)
   const userStations = storageService.load(USER_STATIONS) || []
   const newStation = {
     _id: utilService.makeId(),
 
-    imgUrl: '',
+    imgUrl:url,
     name: name,
     createdAt: Date.now(),
     tags: [],

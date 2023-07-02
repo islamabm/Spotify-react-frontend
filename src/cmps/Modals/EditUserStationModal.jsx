@@ -1,10 +1,10 @@
 import React from 'react'
-import { getSpotifySvg } from '../services/SVG.service'
+import { getSpotifySvg } from '../../services/SVG.service'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { editUserStation } from '../store/actions/station.actions'
-import { uploadImg } from '../services/upload.service'
-import emptyImg from '../assets/imgs/empty-img.png'
+import { editUserStation } from '../../store/actions/station.actions'
+import { uploadImg } from '../../services/upload.service'
+import emptyImg from '../../assets/imgs/empty-img.png'
 export function EditUserStationModal({ station, onClose }) {
   const [isHovered, setIsHovered] = useState(false)
   const [focusedInput, setFocusedInput] = useState(null)
@@ -34,10 +34,8 @@ export function EditUserStationModal({ station, onClose }) {
     setStationDesc(e.target.value)
   }
   function handleSave() {
-
     dispatch(editUserStation(station._id, stationName, stationDesc, stationImg))
     onClose()
-
   }
 
   function handleInputBlur() {
