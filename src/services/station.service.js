@@ -2761,8 +2761,11 @@ function searchQuery() {
   return Promise.resolve([...gSearchStations])
 }
 
-function userQuery() {
-  return Promise.resolve([...gUserStations])
+async function userQuery() {
+  let loggedinUser = await userService.getLoggedinUser()
+ const stations =  httpService.get('station')
+ console.log('stations', stations)
+ return stations.filter((station)=>station.createdBy.fullname ===loggedinUser.fullname )
 }
 
 function query() {
@@ -2881,14 +2884,14 @@ function _loadSearchStations() {
 }
 
 async function createNewStation(name, songs, url) {
-  // let loggedinUser = await userService.getLoggedinUser()
+  let loggedinUser = await userService.getLoggedinUser()
   const newStation = {
     imgUrl: url,
     name: name,
     tags: [],
     createdBy: {
-      _id: utilService.makeId(),
-      fullname: 'guest',
+      _id: loggedinUser._id,
+      fullname: loggedinUser.fullname,
       imgUrl: '',
     },
     likedByUsers: [],
