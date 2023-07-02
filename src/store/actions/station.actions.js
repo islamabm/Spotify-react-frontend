@@ -176,20 +176,10 @@ export function updateStation(stationId, songs) {
   }
 }
 
-export function editUserStation(
-  stationId,
-  stationName,
-  stationDesc,
-  stationImg
-) {
+export function editUserStation(station) {
   return async (dispatch) => {
     try {
-      const updatedStation = await stationService.editStation(
-        stationId,
-        stationName,
-        stationDesc,
-        stationImg
-      )
+      const updatedStation = await stationService.editStation(station)
       console.log('updatedStation', updatedStation)
       const action = { type: EDIT_STATION, station: updatedStation }
       dispatch(action)
@@ -197,7 +187,7 @@ export function editUserStation(
       dispatch(action2)
       showSuccessMsg(`Playlist updated`)
     } catch (error) {
-      showErrorMsg(`Cannot update song`)
+      showErrorMsg(`Cannot update station`)
     }
   }
 }

@@ -11,9 +11,8 @@ export function EditUserStationModal({ station, onClose }) {
   const [isUploading, setIsUploading] = useState(false)
   const dispatch = useDispatch()
 
-  const [stationName, setStationName] = useState(station.name)
-  const [stationDesc, setStationDesc] = useState(station.description)
-  const [stationImg, setStationImg] = useState(station.imgUrl)
+  const [editedStation, setEditedStation] = useState({ ...station })
+  console.log('editedStation', editedStation)
   function handleMouseEnter() {
     setIsHovered(true)
   }
@@ -27,14 +26,14 @@ export function EditUserStationModal({ station, onClose }) {
   }
 
   function onChangeStationName(e) {
-    setStationName(e.target.value)
+    setEditedStation({ ...editedStation, name: e.target.value })
   }
 
   function onChangeStationDesc(e) {
-    setStationDesc(e.target.value)
+    setEditedStation({ ...editedStation, desc: e.target.value })
   }
   function handleSave() {
-    dispatch(editUserStation(station._id, stationName, stationDesc, stationImg))
+    dispatch(editUserStation(editedStation))
     onClose()
   }
 
@@ -52,7 +51,8 @@ export function EditUserStationModal({ station, onClose }) {
     try {
       setIsUploading(true)
       const { url } = await uploadImg(file)
-      setStationImg(url)
+      console.log('url', url)
+      setEditedStation({ ...editedStation, imgUrl: url })
     } catch (err) {
       console.log('err', err)
     } finally {
@@ -88,27 +88,12 @@ export function EditUserStationModal({ station, onClose }) {
           ) : (
             <img
               className="img-edit"
-              src={stationImg ? stationImg : emptyImg}
+              src={editedStation.imgUrl ? editedStation.imgUrl : emptyImg}
               alt="user station img"
             />
           )}
           <input type="file" onChange={handelFile} className="hidden" />
         </label>
-        {/* <div
-          className="default-image-div"
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-        >
-          <span
-            className="music-note"
-            dangerouslySetInnerHTML={{
-              __html: isHovered
-                ? getSpotifySvg("editImgIcon")
-                : getSpotifySvg("userStationImg"),
-            }}
-          ></span>
-        </div> */}
-
         <div className="flex column inputs-container">
           <input
             type="text"
