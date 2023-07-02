@@ -168,9 +168,20 @@
           flex-direction: column;
           gap: 8px;
           grid-column: 2;
+          .song-name {
+            text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 224px;
+          }
           .song-artist {
             color: $clr3;
             font-size: 14px;
+            text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100px;
+            
           }
         }
         .song-img {
@@ -186,6 +197,9 @@
         grid-column: 3;
         color: $clr14;
         font-size: 14px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
       }
       .added-at {
         font-size: 14px;
