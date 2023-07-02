@@ -6,6 +6,7 @@
   min-height: 100vh;
 }
 
-// .station-index {
-//   // min-height: 100vh;
-// }
+.station-index {
+  overflow-y: scroll;
+  min-height: 500px;
+}
