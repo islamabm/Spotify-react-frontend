@@ -3,9 +3,11 @@ import { useSelector, useDispatch } from 'react-redux'
 // import FastAverageColor from "fast-average-color";
 
 export function SongLyrics() {
-  const song = useSelector((state) => state.currentSong)
-  const lyrics = useSelector((state) => state.currentLyrics)
-  const dispatch = useDispatch()
+  const song = useSelector((storeState) => storeState.songModule.currSong)
+
+  const lyrics = useSelector(
+    (storeState) => storeState.songModule.currSongLyrics
+  )
 
   //   const [bgStyle, setBgStyle] = useState({});
   //   const [colorCache, setColorCache] = useState({});
@@ -66,24 +68,25 @@ export function SongLyrics() {
 
   return (
     // <section className="song-details-section" style={bgStyle}>
-    <section className="song-details-section">
+    <section className="song-lyrics-section">
       {song && (
         <div className="song-details-wrapper header-content">
           <img
             className="station-cover-img"
-            src={song.imgUrl}
+            src={song?.imgUrl}
             alt="Album cover"
           />
           <div className="song-details-header">
-            <h1 className={stationNameClass()}>{song.title}</h1>
-            <h2 className="song-details-artist">{song.artist}</h2>
-            <small>Album - {song.album}</small>
+            {/* <h1 className={stationNameClass()}>{song.title}</h1> */}
+            <h1>{song?.title}</h1>
+            <h2 className="song-details-artist">{song?.artist}</h2>
+            <small>Album - {song?.album}</small>
           </div>
         </div>
       )}
       <article className="song-details-lyrics">
         {lyrics ? (
-          lyrics.map((line, index) => <div key={index}>{line.text}</div>)
+          lyrics.map((line, index) => <div key={index}>{line?.text}</div>)
         ) : (
           <div>Loading lyrics...</div>
         )}

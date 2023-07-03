@@ -14,6 +14,7 @@ import { getUser } from './store/actions/user.actions'
 import { UserDetails } from './views/UserDetails'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
+import { SongLyrics } from './views/SongLyrics'
 
 function App() {
   const dispatch = useDispatch()
@@ -41,6 +42,7 @@ function LoggedInApp() {
         <Routes>
           <Route path="/" element={<StationIndex />} />
           <Route path="/station/:id" element={<StationDetails />} />
+          <Route path="/lyrics" element={<SongLyrics />} />
           <Route path="/user" element={<UserDetails />} />
           <Route path="/search" element={<Search />} />
           {/* Exclude /login and /signup */}
