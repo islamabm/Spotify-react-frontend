@@ -5,7 +5,7 @@ function _StationList({ stations }) {
   const [stationsCategory, setStationsCategory] = useState([])
 
   function categorizedStations() {
-    const cate = stations.reduce((acc, station) => {
+    const category = stations.reduce((acc, station) => {
       station.tags.forEach((tag) => {
         if (!acc[tag]) {
           acc[tag] = []
@@ -14,7 +14,7 @@ function _StationList({ stations }) {
       })
       return acc
     }, {})
-    return Object.entries(cate) // Convert the object into an array of key-value
+    return Object.entries(category) // Convert the object into an array of key-value
   }
 
   useEffect(() => {

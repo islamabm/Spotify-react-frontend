@@ -8,7 +8,6 @@ export const stationService = {
   save,
   remove,
   getById,
-
   searchQuery,
   getSongById,
   getCurrIndex,
@@ -257,8 +256,8 @@ async function userQuery() {
   return userStations
 }
 
-function query() {
-  return httpService.get('station')
+function query(filterBy = null) {
+  return httpService.get('station', filterBy)
 }
 
 async function getById(id) {

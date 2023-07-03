@@ -10,6 +10,7 @@ export const LOAD_USER_STATIONS = 'LOAD_USER_STATIONS'
 export const ADD_SONG_TO_STATION = 'ADD_SONG_TO_STATION'
 export const REMOVE_SONG_FROM_STATION = 'REMOVE_SONG_FROM_STATION'
 export const EDIT_STATION = 'EDIT_STATION'
+export const SET_CURR_CATEGORY_BY = 'SET_CURR_CATEGORY_BY'
 
 const INITIAL_STATE = {
   currStationImg: '',
@@ -21,6 +22,7 @@ const INITIAL_STATE = {
   currStationId: null,
   currStationGradientColor: 'black',
   userStations: [],
+  categoryBy: '',
 }
 
 export function stationReducer(state = INITIAL_STATE, action = {}) {
@@ -39,6 +41,11 @@ export function stationReducer(state = INITIAL_STATE, action = {}) {
       return {
         ...state,
         currStationGradientColor: { ...action.bgStyle },
+      }
+    case SET_CURR_CATEGORY_BY:
+      return {
+        ...state,
+        categoryBy: action.category,
       }
     case SET_CURR_STATION:
       return {
