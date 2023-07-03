@@ -92,8 +92,11 @@ export function setCurrStation(id) {
   }
 }
 export function setCurrCategoryBy(category) {
-  return (dispatch) => {
-    dispatch({ type: SET_CURR_CATEGORY_BY, category })
+  console.log('type of(', typeof category)
+  console.log('category actions', category)
+  return async (dispatch) => {
+    const action = { type: SET_CURR_CATEGORY_BY, category }
+    dispatch(action)
   }
 }
 

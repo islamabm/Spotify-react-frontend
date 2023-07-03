@@ -31,6 +31,10 @@ export function StationDetails(props) {
   const station = useSelector(
     (storeState) => storeState.stationModule.currStation
   )
+  const filterBy = useSelector(
+    (storeState) => storeState.stationModule.categoryBy
+  )
+  console.log('filterBy', filterBy)
   const stationImg = useSelector(
     (storeState) => storeState.stationModule.currStationImg
   )
