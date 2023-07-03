@@ -107,16 +107,14 @@ export function removeStation(stationId) {
 export function addSongToStation(stationId, song) {
   return async (dispatch) => {
     try {
-      const updatedStation = await stationService.addSongToStation(
-        stationId,
-        song
-      )
+      const updateSong = await stationService.addSongToStation(stationId, song)
       const action = {
         type: ADD_SONG_TO_STATION,
-        station: updatedStation,
+        updateSong,
+        stationId,
       }
       dispatch(action)
-      showSuccessMsg(`Song added to${updatedStation.name} `)
+      showSuccessMsg(`Song added `)
     } catch (error) {
       showErrorMsg(`Cannot add song`)
     }

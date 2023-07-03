@@ -55,7 +55,7 @@ export default function StationSongList({ station }) {
 
   function showSongOptionsModal(e, song) {
     console.log('song in dots', song)
-    dispatch(setCurrSongAction(station._id, song._id))
+    dispatch(setCurrSongAction(station._id, song.title))
     e.stopPropagation()
 
     const rect = e.target.getBoundingClientRect()
