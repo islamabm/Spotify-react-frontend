@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 export default function StationLikedSongs({ station }) {
   const stationNameClass = stationService.stationNameClass(station)
   const user = useSelector((storeState) => storeState.userModule.loggedInUser)
-
+  console.log('hi from liked songs')
   return (
     <>
       <img

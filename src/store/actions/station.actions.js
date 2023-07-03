@@ -80,6 +80,7 @@ export function setCurrStation(id) {
   return async (dispatch, getState) => {
     try {
       const station = await stationService.getById(id)
+
       const action = {
         type: SET_CURR_STATION,
         station,

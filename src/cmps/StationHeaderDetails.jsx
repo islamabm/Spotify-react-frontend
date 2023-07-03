@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux'
 export default function StationHeaderDetails({ bgStyle, station }) {
   const user = useSelector((storeState) => storeState.userModule.loggedInUser)
   const [createdBy, setCreatedBy] = useState('')
+
   useEffect(() => {
     setCreatedBy(station.createdBy?.fullname)
   }, [station])
@@ -18,7 +19,7 @@ export default function StationHeaderDetails({ bgStyle, station }) {
           {createdBy === 'system' && <StationSystem station={station} />}
 
           {createdBy === user?.username && <StationUser station={station} />}
-          {createdBy === 'liked songs' && (
+          {createdBy === 'Liked songs system' && (
             <StationLikedSongs station={station} />
           )}
         </>

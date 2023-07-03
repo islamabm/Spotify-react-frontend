@@ -22,7 +22,7 @@ export function StationIndex() {
 
   return (
     <section className="station-index">
-      <LatestStationsIndex />
+      {/* <LatestStationsIndex /> */}
       <StationList stations={stations} />
     </section>
   )

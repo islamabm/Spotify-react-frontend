@@ -16,10 +16,12 @@ import animationGit from '../assets/gif/animation.gif'
 
 export default function StationSongList({ station }) {
   const currSong = useSelector((storeState) => storeState.songModule.currSong)
+  const user = useSelector((storeState) => storeState.userModule.loggedInUser)
   const dispatch = useDispatch()
   const params = useParams()
   const [hoveredSongIdx] = useState(null)
   const [hoveredSong, setHoveredSong] = useState(null)
+  const [createdBy, setCreatedBy] = useState('')
   const [currSvg, setCurrSvg] = useState('play')
   const [showModal, setShowOptionsModal] = useState(false)
   const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 })
@@ -51,6 +53,9 @@ export default function StationSongList({ station }) {
 
   useEffect(() => {
     setSongs(station.songs)
+  }, [station])
+  useEffect(() => {
+    setCreatedBy(station.createdBy?.fullname)
   }, [station])
 
   function showSongOptionsModal(e, song) {
@@ -113,7 +118,10 @@ export default function StationSongList({ station }) {
       <Droppable droppableId="songList">
         {(provided) => (
           <div ref={provided.innerRef} {...provided.droppableProps}>
-            {songs?.map((song, idx) => {
+            {(createdBy === 'Liked songs system'
+              ? user?.LikedSongs
+              : songs
+            )?.map((song, idx) => {
               const isPlayingAndHovered =
                 song?._id === currSong?._id && song?._id === hoveredSong
 
