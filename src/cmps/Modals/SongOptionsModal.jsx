@@ -8,12 +8,11 @@ import {
   removeSongFromStation,
   addStation,
 } from '../../store/actions/station.actions'
+import { updateUser } from '../../store/actions/user.actions'
 export function SongOptionsModal({ position, closeModal, station }) {
-  // const station = useSelector(
-  //   (storeState) => storeState.stationModule.currStation
-  // )
+  const user = useSelector((storeState) => storeState.userModule.loggedInUser)
   const song = useSelector((storeState) => storeState.songModule.currSongAction)
-  console.log('song', song)
+
   const SongmodalRef = useRef()
 
   const [showModal, setShowModal] = useState(false)
@@ -49,6 +48,7 @@ export function SongOptionsModal({ position, closeModal, station }) {
   }
 
   function addSongToLikedSongs() {
+    dispatch(updateUser(song, user))
     closeModal()
   }
 

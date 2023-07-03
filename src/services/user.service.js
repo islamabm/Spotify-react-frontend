@@ -35,6 +35,8 @@ function remove(userId) {
 }
 
 async function update(selectedSong, user) {
+  console.log('selectedSong', selectedSong)
+  console.log('user', user)
   const userCopy = { ...user }
 
   userCopy.LikedSongs = [...userCopy.LikedSongs, selectedSong]
