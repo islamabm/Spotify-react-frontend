@@ -269,15 +269,14 @@ async function addSongToStation(stationId, song) {
   return httpService.post(`station/${stationId}/song`, { song })
 }
 
-function removeSongFromStation(stationId, songId) {
+async function removeSongFromStation(stationId, songId) {
   return httpService.delete(`station/${stationId}/song/${songId}`)
 }
 
-async function getSongById(stationId, t) {
-
+async function getSongById(stationId, id) {
   const station = await getById(stationId)
   console.log('station in get song', station)
-  const song = station.songs.find((s) => s.title === t)
+  const song = station.songs.find((s) => s._id === id)
   return Promise.resolve({ ...song })
 }
 

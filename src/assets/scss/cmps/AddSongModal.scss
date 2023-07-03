@@ -14,12 +14,10 @@
   scrollbar-color: transparent transparent; // for Firefox
 
   &::-webkit-scrollbar {
-    // for Chrome, Safari
     width: 17px;
   }
 
   &::-webkit-scrollbar-thumb {
-    // for Chrome, Safari
     background-color: rgb(107, 105, 105);
   }
   padding: 4px;
