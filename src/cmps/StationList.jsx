@@ -1,17 +1,39 @@
-import { memo } from 'react'
-import { StationPreview } from './StationPreview'
+import { memo, useEffect, useState } from "react"
+import { StationPreview } from "./StationPreview"
+
 function _StationList({ stations }) {
+  const [stationsCategory, setStationsCategory] = useState([])
+
+  function categorizedStations() {
+    const cate = stations.reduce((acc, station) => {
+      station.tags.forEach((tag) => {
+        if (!acc[tag]) {
+          acc[tag] = []
+        }
+        acc[tag].push(station)
+      })
+      return acc
+    }, {})
+    return Object.entries(cate) // Convert the object into an array of key-value
+  }
+
+  useEffect(() => {
+    setStationsCategory(categorizedStations())
+  }, [])
+
   return (
-    <>
       <section className="station-list-container">
-        <h3 className="category-tag">Mood</h3>
-        <section className="station-list">
-          {stations?.map((station) => (
-            <StationPreview key={station._id} station={station} />
-          ))}
-        </section>
+        {stationsCategory.map(([tag, stationTag]) => (
+          <>
+            <h3 className="category-tag">{tag}</h3>
+            <section className="station-list">
+              {stationTag.map((station) => (
+                <StationPreview key={station._id} station={station} />
+              ))}
+            </section>
+          </>
+        ))}
       </section>
-    </>
   )
 }
 

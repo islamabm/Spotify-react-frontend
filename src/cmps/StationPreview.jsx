@@ -1,18 +1,30 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
-import { setCurrStation } from '../store/actions/station.actions'
+import React from "react";
+import { useNavigate, } from "react-router-dom";
+import { useDispatch,useSelector } from "react-redux";
+import { setCurrStation } from "../store/actions/station.actions";
+import { userService } from "../services/user.service";
+
+
 export function StationPreview({ station }) {
-  const createdBy = station?.createdBy.fullname
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const createdBy = station?.createdBy.fullname;
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const user = useSelector(
+    (storeState) => storeState.userModule.loggedInUser
+  )
 
   function goToDetails() {
-    dispatch(setCurrStation(station._id))
-    navigate(`/station/${station._id}`)
+    dispatch(setCurrStation(station._id));
+    navigate(`/station/${station._id}`);
+
+    const updatedLatestStations = [...user.latestStations, station];
+    if (updatedLatestStations.length > 6) {
+      updatedLatestStations.splice(0, updatedLatestStations.length - 6);
+    }
+    userService.updateLatestStations(updatedLatestStations, user);
   }
 
-  return createdBy === 'system' ? (
+  return createdBy === "system" ? (
     <article className="info" onClick={goToDetails}>
       <div className="station-img">
         <img src={station.imgUrl} alt="station-img" />
@@ -23,5 +35,5 @@ export function StationPreview({ station }) {
         <p>{station.description}</p>
       </div>
     </article>
-  ) : null
+  ) : null;
 }

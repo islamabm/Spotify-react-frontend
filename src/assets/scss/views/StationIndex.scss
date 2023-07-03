@@ -8,5 +8,22 @@
 
 .station-index {
   overflow-y: scroll;
-  min-height: 500px;
+  height: 100vh;
+  max-height: 94%;
+  -webkit-box-shadow: 0 16px 24px rgba(0, 0, 0, 0.3),
+    0 6px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 16px 24px rgba(0, 0, 0, 0.3), 0 6px 8px rgba(0, 0, 0, 0.2);
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+
+  &::-webkit-scrollbar {
+    width: 13px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(234, 227, 227, 0.39);
+    &:hover {
+      background-color: rgba(234, 227, 227, 0.552);
+    }
+  }
 }
