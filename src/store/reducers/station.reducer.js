@@ -113,9 +113,7 @@ export function stationReducer(state = INITIAL_STATE, action = {}) {
           station._id === action.stationId
             ? {
                 ...station,
-                songs: station.songs.filter(
-                  (song) => song._id !== action.songId
-                ),
+                songs: station.songs.filter((song) => song._id !== action.id),
               }
             : station
         ),
@@ -123,9 +121,7 @@ export function stationReducer(state = INITIAL_STATE, action = {}) {
           station._id === action.stationId
             ? {
                 ...station,
-                songs: station.songs.filter(
-                  (song) => song._id !== action.songId
-                ),
+                songs: station.songs.filter((song) => song._id !== action.id),
               }
             : station
         ),
