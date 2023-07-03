@@ -219,7 +219,7 @@ export function StationDetails(props) {
           closeRecommindationModal={() => setShowRecommindationModal(false)}
         />
       )}
-      {station?.createdBy?.fullname === 'guest' &&
+      {station?.createdBy?.fullname !== 'system' &&
         station?.songs?.length > 0 && (
           <RecommendedIndex
             list={
@@ -229,7 +229,7 @@ export function StationDetails(props) {
             stationId={station._id}
           />
         )}
-      {station.createdBy?.fullname === 'guest' &&
+      {station.createdBy?.fullname !== 'system' &&
         station?.songs?.length === 0 && <SearchSongs stationId={station._id} />}
       {showDeleteModal && (
         <DeleteStationModal

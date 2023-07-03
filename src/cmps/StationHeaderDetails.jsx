@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import StationSystem from './StationSystem'
 import StationUser from './StationUser.jsx'
+import StationLikedSongs from './StationLikedSongs.jsx'
 import { useSelector } from 'react-redux'
 
 export default function StationHeaderDetails({ bgStyle, station }) {
@@ -17,6 +18,9 @@ export default function StationHeaderDetails({ bgStyle, station }) {
           {createdBy === 'system' && <StationSystem station={station} />}
 
           {createdBy === user?.username && <StationUser station={station} />}
+          {createdBy === 'liked songs' && (
+            <StationLikedSongs station={station} />
+          )}
         </>
       )}
     </div>
