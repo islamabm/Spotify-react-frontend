@@ -230,6 +230,7 @@ export default function StationSongList({ station }) {
       </Droppable>
       {showModal && (
         <SongOptionsModal
+          station={station}
           position={modalPosition}
           closeModal={() => setShowOptionsModal(false)}
         />

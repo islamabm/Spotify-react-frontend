@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { getSpotifySvg } from '../../services/SVG.service'
 import { AddSongModal } from './AddSongModal'
 import { useDispatch, useSelector } from 'react-redux'
@@ -8,10 +8,10 @@ import {
   removeSongFromStation,
   addStation,
 } from '../../store/actions/station.actions'
-export function SongOptionsModal({ position, closeModal }) {
-  const station = useSelector(
-    (storeState) => storeState.stationModule.currStation
-  )
+export function SongOptionsModal({ position, closeModal, station }) {
+  // const station = useSelector(
+  //   (storeState) => storeState.stationModule.currStation
+  // )
   const song = useSelector((storeState) => storeState.songModule.currSongAction)
   console.log('song', song)
   const SongmodalRef = useRef()
@@ -56,6 +56,8 @@ export function SongOptionsModal({ position, closeModal }) {
     dispatch(removeSongFromStation(station._id, song?._id))
     closeModal()
   }
+
+  useEffect(() => {}, [station?.songs])
 
   return (
     <>

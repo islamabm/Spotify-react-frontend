@@ -123,9 +123,9 @@ export function addSongToStation(stationId, song) {
 }
 
 export function removeSongFromStation(stationId, songId) {
-  console.log('songId in the actions', songId)
   return async (dispatch) => {
     try {
+      console.log('songId', songId)
       const id = await stationService.removeSongFromStation(stationId, songId)
 
       const action = {
