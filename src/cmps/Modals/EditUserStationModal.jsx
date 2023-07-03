@@ -12,7 +12,7 @@ export function EditUserStationModal({ station, onClose }) {
   const dispatch = useDispatch()
 
   const [editedStation, setEditedStation] = useState({ ...station })
-  console.log('editedStation', editedStation)
+
   function handleMouseEnter() {
     setIsHovered(true)
   }

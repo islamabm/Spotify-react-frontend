@@ -6,6 +6,7 @@ import {
   LOGOUT,
   UPDATE_USER,
   SET_LOGGEDIN_USER,
+  ADD_SONG_TO_USER_LIKED_SONGS,
   UPDATE_LATEST,
 } from '../reducers/user.reducer'
 
@@ -73,7 +74,7 @@ export function updateUser(song, user) {
       const updatedUser = await userService.update(song, user)
       console.log('updatedUser', updatedUser)
       const action = {
-        type: UPDATE_USER_LIKED_SONGS,
+        type: UPDATE_USER,
         user: updatedUser,
       }
       dispatch(action)
@@ -82,14 +83,7 @@ export function updateUser(song, user) {
     }
   }
 }
-// async updateUser({ commit }, { selectedSong, user }) {
-//   try {
-//     const updatedUser = await userService.update(selectedSong, user)
-//     commit({ type: 'updateUser', song: selectedSong, updatedUser })
-//   } catch (err) {
-//     throw err
-//   }
-// },
+
 export function editUserImg(url) {
   return async (dispatch, getState) => {
     try {
