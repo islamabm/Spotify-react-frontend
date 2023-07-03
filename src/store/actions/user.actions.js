@@ -72,10 +72,11 @@ export function updateUser(song, user) {
     try {
       const updatedUser = await userService.update(song, user)
       console.log('updatedUser', updatedUser)
-      // const action = {
-      //   type: LOGOUT,
-      // }
-      // dispatch(action)
+      const action = {
+        type: UPDATE_USER_LIKED_SONGS,
+        user: updatedUser,
+      }
+      dispatch(action)
     } catch (error) {
       console.log('error:', error)
     }

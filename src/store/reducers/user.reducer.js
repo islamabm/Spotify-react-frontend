@@ -4,8 +4,8 @@ export const LOGIN = 'LOGIN'
 export const LOGOUT = 'LOGOUT'
 export const UPDATE_USER = 'UPDATE_USER'
 export const SET_LOGGEDIN_USER = 'SET_LOGGEDIN_USER'
-export const UPDATE_LATEST= 'UPDATE_LATEST'
-
+export const UPDATE_LATEST = 'UPDATE_LATEST'
+export const UPDATE_USER_LIKED_SONGS = 'UPDATE_USER_LIKED_SONGS'
 const INITIAL_STATE = {
   loggedInUser: null,
 
