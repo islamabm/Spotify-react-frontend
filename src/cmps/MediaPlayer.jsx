@@ -19,7 +19,6 @@ export function MediaPlayer({ volume }) {
   )
 
   const currSvg = useSelector((storeState) => storeState.songModule.currentSvg)
-  console.log('currSvg in the media player', currSvg)
 
   const progressBarRef = useRef(null)
   const [videoId, setVideoId] = useState('M7lc1UVf-VE')

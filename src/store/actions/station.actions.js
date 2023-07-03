@@ -11,6 +11,7 @@ import {
   UPDATE_STATION,
   LOAD_USER_STATIONS,
   ADD_SONG_TO_STATION,
+  REMOVE_SONG_FROM_STATION,
   EDIT_STATION,
   SET_CURR_CATEGORY_BY,
 } from '../reducers/station.reducer'
@@ -18,9 +19,7 @@ import {
 export function loadStations(filterBy = null) {
   return async (dispatch, getState) => {
     try {
-      console.log('hi')
-      const stations = await stationService.query(filterBy)
-      console.log('stations', stations)
+      const stations = await stationService.query()
       const action = {
         type: SET_STATIONS,
         stations,
@@ -128,19 +127,18 @@ export function addSongToStation(stationId, song) {
 }
 
 export function removeSongFromStation(stationId, songId) {
+  console.log('songId in the actions', songId)
   return async (dispatch) => {
     try {
-      const updatedStation = await stationService.removeSongFromStation(
-        stationId,
-        songId
-      )
-      console.log('updatedStation', updatedStation)
+      const id = await stationService.removeSongFromStation(stationId, songId)
+
       const action = {
-        type: UPDATE_STATION,
-        station: updatedStation,
+        type: REMOVE_SONG_FROM_STATION,
+        stationId,
+        id,
       }
       dispatch(action)
-      showSuccessMsg(`Song removed to${updatedStation.name} `)
+      showSuccessMsg(`Song removed `)
     } catch (error) {
       showErrorMsg(`Cannot remove song`)
     }

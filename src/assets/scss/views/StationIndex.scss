@@ -17,12 +17,10 @@
   scrollbar-color: transparent transparent;
 
   &::-webkit-scrollbar {
-    // for Chrome, Safari
     width: 13px;
   }
 
   &::-webkit-scrollbar-thumb {
-    // for Chrome, Safari
     background-color: rgba(234, 227, 227, 0.39);
     &:hover {
       background-color: rgba(234, 227, 227, 0.552);

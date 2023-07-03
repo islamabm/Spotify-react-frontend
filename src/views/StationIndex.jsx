@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { StationList } from '../cmps/StationList'
 import { useDispatch, useSelector } from 'react-redux'
 import { loadStations } from '../store/actions/station.actions'
+import {LatestStationsIndex} from '../cmps/LatestStations/LatestStationsIndex'
 
 export function StationIndex() {
   const stations = useSelector(
@@ -21,6 +22,7 @@ export function StationIndex() {
 
   return (
     <section className="station-index">
+      <LatestStationsIndex/>
       <StationList stations={stations} />
     </section>
   )

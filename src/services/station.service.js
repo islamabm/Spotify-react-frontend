@@ -269,6 +269,8 @@ async function addSongToStation(stationId, song) {
 }
 
 async function removeSongFromStation(stationId, songId) {
+  console.log('songId in service front', songId)
+  console.log('stationId in service front', stationId)
   return httpService.delete(`station/${stationId}/song/${songId}`)
 }
 
