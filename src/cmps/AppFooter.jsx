@@ -1,20 +1,32 @@
 import React, { useState } from 'react'
 import { getSpotifySvg } from '../services/SVG.service'
+import {
+  setCurrSongLyrics,
 
+} from '../store/actions/song.actions'
 import { MediaPlayer } from './MediaPlayer'
 import { useLocation } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 export function AppFooter() {
   const [volume, setVolume] = useState(50)
   const [isLyrics, setIsLyrics] = useState(false)
   const location = useLocation()
-
+const dispatch = useDispatch()
+  const song = useSelector((storeState) => storeState.songModule.currSong)
+  const station = useSelector(
+    (storeState) => storeState.stationModule.currStation
+  )
   const handleVolumeChange = (event) => {
     setVolume(event.target.value)
   }
 
   function onRepeatClicked() {
     setIsLyrics(!isLyrics)
+  }
+
+
+  function onLyricsClicked(){
+    dispatch(setCurrSongLyrics(song.artist,song.title))
   }
 
   function setSvg() {
@@ -31,10 +43,6 @@ export function AppFooter() {
       setVolume(0)
     }
   }
-  const song = useSelector((storeState) => storeState.songModule.currSong)
-  const station = useSelector(
-    (storeState) => storeState.stationModule.currStation
-  )
   return (
     <div className="app-footer">
       <div
@@ -87,7 +95,7 @@ export function AppFooter() {
           </button>
         ) : (
           <span
-            onClick={onRepeatClicked}
+            onClick={onLyricsClicked}
             className="pointer"
             dangerouslySetInnerHTML={{
               __html: getSpotifySvg('lyricsIcon'),

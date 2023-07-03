@@ -1,9 +1,11 @@
 import { stationService } from '../../services/station.service'
+import { lyricsService } from '../../services/lyrics.service'
 import {
   SET_CURR_SONG,
   SET_CURR_SONG_INDEX,
   SET_CURR_SONG_ACTION,
   SET_CURR_SONG_SVG,
+  SET_CURR_SONG_LYRICS,
 } from '../reducers/song.reducer'
 
 export function setCurrSong(stationId, songId) {
@@ -28,6 +30,21 @@ export function setCurrSongAction(stationId, id) {
       const action = {
         type: SET_CURR_SONG_ACTION,
         song,
+      }
+      dispatch(action)
+    } catch (error) {
+      console.log('error:', error)
+    }
+  }
+}
+export function setCurrSongLyrics(artist, title) {
+  return async (dispatch, getState) => {
+    try {
+      const lyrics = await lyricsService.getSongLyrics(artist, title)
+
+      const action = {
+        type: SET_CURR_SONG_LYRICS,
+        lyrics,
       }
       dispatch(action)
     } catch (error) {

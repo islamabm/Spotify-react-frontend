@@ -2,12 +2,14 @@ export const SET_CURR_SONG = 'SET_CURR_SONG'
 export const SET_CURR_SONG_ACTION = 'SET_CURR_SONG_ACTION'
 export const SET_CURR_SONG_INDEX = 'SET_CURR_SONG_INDEX'
 export const SET_CURR_SONG_SVG = 'SET_CURR_SONG_SVG'
+export const SET_CURR_SONG_LYRICS = 'SET_CURR_SONG_LYRICS'
 const INITIAL_STATE = {
   currSong: null,
   currSongId: null,
   currIndex: 0,
   currSongAction: null,
   currentSvg: '',
+  currSongLyrics: [],
 }
 
 export function songReducer(state = INITIAL_STATE, action = {}) {
@@ -27,6 +29,11 @@ export function songReducer(state = INITIAL_STATE, action = {}) {
       return {
         ...state,
         currSongAction: action.song,
+      }
+    case SET_CURR_SONG_LYRICS:
+      return {
+        ...state,
+        currSongLyrics: action.lyrics,
       }
     case SET_CURR_SONG_INDEX:
       return {

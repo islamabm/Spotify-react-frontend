@@ -256,8 +256,8 @@ async function userQuery() {
   return userStations
 }
 
-function query(filterBy = null) {
-  return httpService.get('station', filterBy)
+function query() {
+  return httpService.get('station')
 }
 
 async function getById(id) {
@@ -269,8 +269,6 @@ async function addSongToStation(stationId, song) {
 }
 
 async function removeSongFromStation(stationId, songId) {
-  console.log('songId in service front', songId)
-  console.log('stationId in service front', stationId)
   return httpService.delete(`station/${stationId}/song/${songId}`)
 }
 

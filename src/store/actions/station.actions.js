@@ -16,7 +16,7 @@ import {
   SET_CURR_CATEGORY_BY,
 } from '../reducers/station.reducer'
 
-export function loadStations(filterBy = null) {
+export function loadStations() {
   return async (dispatch, getState) => {
     try {
       const stations = await stationService.query()
@@ -90,11 +90,11 @@ export function setCurrStation(id) {
     }
   }
 }
-  export function setCurrCategoryBy(category) {
-    return (dispatch) => {
-      dispatch({ type: SET_CURR_CATEGORY_BY, category })
-    }
+export function setCurrCategoryBy(category) {
+  return (dispatch) => {
+    dispatch({ type: SET_CURR_CATEGORY_BY, category })
   }
+}
 
 export function removeStation(stationId) {
   return async (dispatch) => {
