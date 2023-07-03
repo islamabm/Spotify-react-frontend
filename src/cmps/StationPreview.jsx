@@ -3,6 +3,7 @@ import { useNavigate, } from "react-router-dom";
 import { useDispatch,useSelector } from "react-redux";
 import { setCurrStation } from "../store/actions/station.actions";
 import { userService } from "../services/user.service";
+import { updateLatestStations } from "../store/actions/user.actions"
 
 
 export function StationPreview({ station }) {
@@ -21,7 +22,7 @@ export function StationPreview({ station }) {
     if (updatedLatestStations.length > 6) {
       updatedLatestStations.splice(0, updatedLatestStations.length - 6);
     }
-    userService.updateLatestStations(updatedLatestStations, user);
+    dispatch(updateLatestStations(updatedLatestStations,user))
   }
 
   return createdBy === "system" ? (

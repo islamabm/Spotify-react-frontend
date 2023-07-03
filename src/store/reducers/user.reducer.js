@@ -4,6 +4,7 @@ export const LOGIN = 'LOGIN'
 export const LOGOUT = 'LOGOUT'
 export const UPDATE_USER = 'UPDATE_USER'
 export const SET_LOGGEDIN_USER = 'SET_LOGGEDIN_USER'
+export const UPDATE_LATEST= 'UPDATE_LATEST'
 
 const INITIAL_STATE = {
   loggedInUser: null,
@@ -45,6 +46,11 @@ export function userReducer(state = INITIAL_STATE, action = {}) {
         loggedInUser: null,
       }
     case UPDATE_USER:
+      return {
+        ...state,
+        loggedInUser: action.user,
+      }
+    case UPDATE_LATEST:
       return {
         ...state,
         loggedInUser: action.user,

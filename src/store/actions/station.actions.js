@@ -13,14 +13,13 @@ import {
   ADD_SONG_TO_STATION,
   REMOVE_SONG_FROM_STATION,
   EDIT_STATION,
+  SET_CURR_CATEGORY_BY,
 } from '../reducers/station.reducer'
 
-export function loadStations() {
+export function loadStations(filterBy = null) {
   return async (dispatch, getState) => {
     try {
-      console.log('hi')
       const stations = await stationService.query()
-      console.log('stations', stations)
       const action = {
         type: SET_STATIONS,
         stations,
@@ -91,6 +90,11 @@ export function setCurrStation(id) {
     }
   }
 }
+  export function setCurrCategoryBy(category) {
+    return (dispatch) => {
+      dispatch({ type: SET_CURR_CATEGORY_BY, category })
+    }
+  }
 
 export function removeStation(stationId) {
   return async (dispatch) => {

@@ -34,7 +34,6 @@ export function StationDetails(props) {
   const stationImg = useSelector(
     (storeState) => storeState.stationModule.currStationImg
   )
-  console.log('bgStyle', bgStyle)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -54,7 +53,6 @@ export function StationDetails(props) {
     const currentStationDetailsRef = stationDetailsRef.current
     const handleScroll = () => {
       const scrollPos = currentStationDetailsRef.scrollTop
-      console.log('scrollPos', scrollPos)
       if (scrollPos > 375) {
         setHeaderBg('#1a1a1a')
       } else {
