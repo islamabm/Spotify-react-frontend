@@ -17,9 +17,7 @@ import {
 export function loadStations() {
   return async (dispatch, getState) => {
     try {
-      console.log('hi')
       const stations = await stationService.query()
-      console.log('stations', stations)
       const action = {
         type: SET_STATIONS,
         stations,

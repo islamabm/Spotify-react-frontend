@@ -124,9 +124,8 @@ function prepareData(userCred) {
   };
 }
 
-function updateLatestStations(latestStations, user) {
+function updateLatestStations(user) {
   const userCopy = { ...user };
-  userCopy.latestStations = latestStations;
   const savedUser = httpService.put(`user/${userCopy._id}`, userCopy);
   if (getLoggedinUser()._id === savedUser._id) saveLocalUser(savedUser);
   return savedUser;
