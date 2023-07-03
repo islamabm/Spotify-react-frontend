@@ -269,15 +269,14 @@ async function addSongToStation(stationId, song) {
   return httpService.post(`station/${stationId}/song`, { song })
 }
 
-function removeSongFromStation(stationId, songArtist, songTitle) {
-  return httpService.delete(
-    `station/${stationId}/song/${songArtist}/${songTitle}`
-  )
+async function removeSongFromStation(stationId, songId) {
+  return httpService.delete(`station/${stationId}/song/${songId}`)
 }
 
-async function getSongById(stationId, songId) {
+async function getSongById(stationId, id) {
   const station = await getById(stationId)
-  const song = station.songs.find((song) => song._id === songId)
+  console.log('station in get song', station)
+  const song = station.songs.find((s) => s._id === id)
   return Promise.resolve({ ...song })
 }
 
@@ -396,25 +395,6 @@ async function updateStation(stationId, songs) {
 }
 async function editStation(station) {
   return httpService.put(`station/${station._id}`, station)
-  // const station = await getById(stationId)
-  // const idx = gStations.findIndex((s) => s._id === stationId)
-  // const userIdx = gUserStations.findIndex((s) => s._id === stationId)
-  // if (idx === -1) {
-  //   console.error('Station with id not found')
-  //   return null
-  // }
-
-  // station.name = stationName
-  // station.description = stationDesc
-  // station.imgUrl = stationImg
-
-  // const updatedStation = await save(station)
-
-  // gStations[idx] = updatedStation
-  // gUserStations[userIdx] = updatedStation
-  // storageService.store(STORAGE_KEY, gStations)
-  // storageService.store(USER_STATIONS, gUserStations)
-  // return Promise.resolve({ ...updatedStation })
 }
 
 async function getRecommendedSongs(station) {

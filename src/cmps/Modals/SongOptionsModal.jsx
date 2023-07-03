@@ -13,6 +13,7 @@ export function SongOptionsModal({ position, closeModal }) {
     (storeState) => storeState.stationModule.currStation
   )
   const song = useSelector((storeState) => storeState.songModule.currSongAction)
+  console.log('song', song)
   const SongmodalRef = useRef()
 
   const [showModal, setShowModal] = useState(false)

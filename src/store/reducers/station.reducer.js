@@ -51,7 +51,14 @@ export function stationReducer(state = INITIAL_STATE, action = {}) {
       return {
         ...state,
         stations: state.stations.map((station) =>
-          station._id === action.station._id ? action.station : station
+          station._id === action.stationId
+            ? { ...station, songs: [...station.songs, action.updateSong] }
+            : station
+        ),
+        userStations: state.userStations.map((station) =>
+          station._id === action.stationId
+            ? { ...station, songs: [...station.songs, action.updateSong] }
+            : station
         ),
       }
     case SET_SEARCH_STATIONS:
@@ -68,9 +75,7 @@ export function stationReducer(state = INITIAL_STATE, action = {}) {
     case REMOVE_STATION:
       return {
         ...state,
-        stations: state.stations.filter(
-          (station) => station._id !== action.id
-        ),
+        stations: state.stations.filter((station) => station._id !== action.id),
         userStations: state.userStations.filter(
           (station) => station._id !== action.id
         ),
