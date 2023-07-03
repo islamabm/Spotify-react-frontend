@@ -84,10 +84,11 @@ export function updateUser(song, user) {
   }
 }
 
-export function editUserImg(url) {
+export function editUserImg(url, loggedInUser) {
   return async (dispatch, getState) => {
     try {
-      const user = await userService.updateUser(url)
+      const user = await userService.updateUser(url, loggedInUser)
+      console.log('user', user)
       const action = {
         type: UPDATE_USER,
         user,

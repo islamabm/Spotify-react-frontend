@@ -13,7 +13,7 @@ export function UserDetails() {
     try {
       setIsUploading(true)
       const { url } = await uploadImg(file)
-      dispatch(editUserImg(url))
+      dispatch(editUserImg(url, user))
     } catch (err) {
       console.log('err', err)
     } finally {

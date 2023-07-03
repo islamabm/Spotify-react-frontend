@@ -17,6 +17,7 @@ export const userService = {
   removeSong,
   prepareData,
   updateLatestStations,
+  updateUser,
 }
 
 window.userService = userService
@@ -42,6 +43,16 @@ async function update(selectedSong, user) {
   userCopy.LikedSongs = [...userCopy.LikedSongs, selectedSong]
 
   const savedUser = await httpService.put(`user/${userCopy._id}`, userCopy)
+
+  if (getLoggedinUser()._id === savedUser._id) saveLocalUser(savedUser)
+  return savedUser
+}
+async function updateUser(url, user) {
+  const userCopy = { ...user }
+
+  userCopy.imgUrl = url
+
+  const savedUser = await httpService.put(`user/img/${userCopy._id}`, userCopy)
 
   if (getLoggedinUser()._id === savedUser._id) saveLocalUser(savedUser)
   return savedUser
