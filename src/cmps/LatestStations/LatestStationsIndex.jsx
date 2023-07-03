@@ -4,11 +4,12 @@ import { useSelector } from "react-redux";
 
 export function LatestStationsIndex() {
   const user = useSelector((storeState) => storeState.userModule.loggedInUser);
-  const latestStations = user.latestStations;
 
-  if (!latestStations || !user) return <div>There are no latest stations.</div>;
+  if (!user || !user.latestStations) return <div>There are no latest stations.</div>;
+  
+  const latestStations = user.latestStations;
   return (
-    (latestStations && 
+    latestStations && (
       <section className="latest-stations-index">
         <LatestStationsList latestStations={latestStations} />
       </section>
