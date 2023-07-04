@@ -22,8 +22,8 @@ export default function StationLikedSongs({ station }) {
           alt="spotify logo"
         />
         <span className="logo">{user?.username}</span>
-        <span className="dot">• </span>
-        <span className="songs-count"> {station.songs?.length} songs </span>
+        <span className="dot"></span>
+        <span className="songs-count">{station.songs?.length} songs </span>
       </div>
     </>
   )

@@ -14,9 +14,7 @@ export function Signup() {
   const google = window.google
 
   function handleCallbackResponse(response) {
-    // console.log("Encoded JWT ID token: " + response.credential);
     const userObject = jwtDecode(response.credential)
-    console.log('user object', userObject)
     const user = userService.prepareData(userObject)
     dispatch(doSignup(user))
     navigate(`/`)
@@ -42,6 +40,7 @@ export function Signup() {
     imgUrl: '',
     stations: [],
     likedSongs: [],
+    latestStations:[],
   })
 
   function handleSignup(e) {

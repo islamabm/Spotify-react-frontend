@@ -1,4 +1,5 @@
 import { httpService } from './http.service'
+import { stationService } from './station.service'
 
 const STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser'
 
@@ -138,10 +139,11 @@ function prepareData(userCred) {
   }
 }
 
-async function updateLatestStations(stationId,user) {
-  // const userCopy = { ...user }
-  return await httpService.put(`user/${user._id}`, stationId,user)
-  // const savedUser = await httpService.put(`user/${userCopy._id}`, user)
-  // if (getLoggedinUser()._id === savedUser._id) saveLocalUser(savedUser)
-  // return savedUser
+async function updateLatestStations(stationId, user) {
+  const station = await stationService.getById(stationId)
+  console.log('station', station)
+  const userCopy = { ...user }
+  userCopy.latestStations = [...userCopy.latestStations, station]
+  console.log(' userCopy.latestStations service', userCopy.latestStations)
+  return httpService.put(`user/latest/${userCopy._id}`, userCopy)
 }
