@@ -24,9 +24,9 @@ export function SortModal({ onSelectOption }) {
 
   return (
     <div className="sort-modal">
-      <div>
+      
         <p className="sort-by">Sort by</p>
-      </div>
+     
       {options?.map((option, idx) => (
         <div
           onClick={(ev) => onSelect(ev, option)}
