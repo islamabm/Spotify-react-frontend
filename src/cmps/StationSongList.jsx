@@ -1,53 +1,57 @@
-import React, { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { getSpotifySvg } from "../services/SVG.service"
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { getSpotifySvg } from '../services/SVG.service'
 import {
   setCurrSong,
   setCurrSongIndex,
   setCurrSongSvg,
-} from "../store/actions/song.actions"
-import { useParams } from "react-router-dom"
-import { SongOptionsModal } from "./Modals/SongOptionsModal"
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
-import { updateStation } from "../store/actions/station.actions"
-import { setCurrSongAction } from "../store/actions/song.actions"
-import animationGit from "../assets/gif/animation.gif"
+} from '../store/actions/song.actions'
+import { useNavigate, useParams } from 'react-router-dom'
+import { SongOptionsModal } from './Modals/SongOptionsModal'
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
+import { updateStation } from '../store/actions/station.actions'
+import {
+  setCurrSongAction,
+  setCurrSongLyrics,
+} from '../store/actions/song.actions'
+import animationGit from '../assets/gif/animation.gif'
 
 export default function StationSongList({ station }) {
   const currSong = useSelector((storeState) => storeState.songModule.currSong)
   const user = useSelector((storeState) => storeState.userModule.loggedInUser)
   const dispatch = useDispatch()
   const params = useParams()
+  const navigate = useNavigate()
   const [hoveredSongIdx] = useState(null)
   const [hoveredSong, setHoveredSong] = useState(null)
-  const [createdBy, setCreatedBy] = useState("")
-  const [currSvg, setCurrSvg] = useState("play")
+  const [createdBy, setCreatedBy] = useState('')
+  const [currSvg, setCurrSvg] = useState('play')
   const [showModal, setShowOptionsModal] = useState(false)
   const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 })
   const [songs, setSongs] = useState(station.songs)
   const [isFirstClick, setIsFirstClick] = useState(true)
   function onSongClicked(songId) {
-    setCurrSvg("play")
+    setCurrSvg('play')
 
     if (currSong?.id !== songId) {
       setIsFirstClick(true)
     }
 
     if (isFirstClick) {
-      console.log("hi first time")
+      console.log('hi first time')
       dispatch(setCurrSong(params.id, songId))
       dispatch(setCurrSongIndex(params.id, songId))
       setIsFirstClick(false)
     } else {
-      console.log("hi after first time")
-      dispatch(setCurrSongSvg("play"))
+      console.log('hi after first time')
+      dispatch(setCurrSongSvg('play'))
     }
   }
 
   function pauseSong() {
-    setCurrSvg("pause")
+    setCurrSvg('pause')
 
-    dispatch(setCurrSongSvg("pause"))
+    dispatch(setCurrSongSvg('pause'))
   }
 
   useEffect(() => {
@@ -58,7 +62,7 @@ export default function StationSongList({ station }) {
   }, [station])
 
   function showSongOptionsModal(e, song) {
-    console.log("song in dots", song)
+    console.log('song in dots', song)
     dispatch(setCurrSongAction(station._id, song._id))
     e.stopPropagation()
 
@@ -72,18 +76,18 @@ export default function StationSongList({ station }) {
 
   function formatDate(dateString) {
     const months = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
     ]
 
     const date = new Date(dateString)
@@ -112,12 +116,17 @@ export default function StationSongList({ station }) {
     dispatch(updateStation(params.id, updatedSongs))
   }
 
+  function onLyricsClicked(artist, title) {
+    dispatch(setCurrSongLyrics(artist, title))
+    navigate('/lyrics')
+  }
+
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
       <Droppable droppableId="songList">
         {(provided) => (
           <div ref={provided.innerRef} {...provided.droppableProps}>
-            {(createdBy === "Liked songs system"
+            {(createdBy === 'Liked songs system'
               ? user?.LikedSongs
               : songs
             )?.map((song, idx) => {
@@ -141,7 +150,7 @@ export default function StationSongList({ station }) {
                     >
                       {song?._id === currSong?._id &&
                       song?._id !== hoveredSong &&
-                      currSvg === "play" ? (
+                      currSvg === 'play' ? (
                         <img
                           className="song-animation-gif"
                           src={animationGit}
@@ -150,25 +159,25 @@ export default function StationSongList({ station }) {
                       ) : (
                         <span
                           className={`song-idx flex align-center justify-center ${
-                            hoveredSongIdx === idx ? "hovered" : ""
+                            hoveredSongIdx === idx ? 'hovered' : ''
                           }`}
                           style={{
-                            color: song?._id === currSong?._id ? "#1ED760" : "",
+                            color: song?._id === currSong?._id ? '#1ED760' : '',
                           }}
                         >
                           {idx + 1}
                         </span>
                       )}
 
-                      {isPlayingAndHovered && currSvg === "play" ? (
+                      {isPlayingAndHovered && currSvg === 'play' ? (
                         <span
                           title="Pause"
                           onClick={pauseSong}
                           className={` small-play-btn flex align-center justify-center title ${
-                            hoveredSongIdx === idx ? "hovered" : ""
+                            hoveredSongIdx === idx ? 'hovered' : ''
                           }`}
                           dangerouslySetInnerHTML={{
-                            __html: getSpotifySvg("smallPauseButton"),
+                            __html: getSpotifySvg('smallPauseButton'),
                           }}
                         ></span>
                       ) : (
@@ -176,10 +185,10 @@ export default function StationSongList({ station }) {
                           title={`Play ${currSong.title}`}
                           onClick={() => onSongClicked(song._id)}
                           className={` small-play-btn flex align-center justify-center title ${
-                            hoveredSongIdx === idx ? "hovered" : ""
+                            hoveredSongIdx === idx ? 'hovered' : ''
                           }`}
                           dangerouslySetInnerHTML={{
-                            __html: getSpotifySvg("smallPlayButton"),
+                            __html: getSpotifySvg('smallPlayButton'),
                           }}
                         ></span>
                       )}
@@ -193,10 +202,13 @@ export default function StationSongList({ station }) {
                         </div>
                         <div className="name-and-artist flex justify-center">
                           <span
+                            onClick={() =>
+                              onLyricsClicked(song.artist, song.title)
+                            }
                             className="song-name"
                             style={{
                               color:
-                                song?._id === currSong?._id ? "#1ED760" : "",
+                                song?._id === currSong?._id ? '#1ED760' : '',
                             }}
                           >
                             {song?.title}
@@ -212,21 +224,21 @@ export default function StationSongList({ station }) {
                       </div>
                       <div className="duration-container flex">
                         <span
-                        title="Save to Your Library"
+                          title="Save to Your Library"
                           className="hidden dots title"
                           dangerouslySetInnerHTML={{
-                            __html: getSpotifySvg("emptyHeartIcon"),
+                            __html: getSpotifySvg('emptyHeartIcon'),
                           }}
                         ></span>
                         <div className="duration">
-                          {song?.duration ? song?.duration : "1:00"}
+                          {song?.duration ? song?.duration : '1:00'}
                         </div>
                         <span
-                        title={`More options for ${currSong.title}`}
+                          title={`More options for ${currSong.title}`}
                           onClick={(e) => showSongOptionsModal(e, song)}
                           className="hidden dots title"
                           dangerouslySetInnerHTML={{
-                            __html: getSpotifySvg("dots"),
+                            __html: getSpotifySvg('dots'),
                           }}
                         ></span>
                       </div>

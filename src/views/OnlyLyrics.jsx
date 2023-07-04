@@ -55,7 +55,7 @@ export function OnlyLyrics() {
   //   }
 
   return (
-    <article className="song-details-lyrics">
+    <article className="only-song-lyrics">
       <h2>Lyrics</h2>
       {lyrics ? (
         lyrics.map((line, index) => <div key={index}>{line?.text}</div>)

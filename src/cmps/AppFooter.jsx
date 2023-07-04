@@ -5,7 +5,7 @@ import { MediaPlayer } from './MediaPlayer'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 export function AppFooter() {
-  const [mute , setMute] = useState(false)
+  const [mute, setMute] = useState(false)
   const [volume, setVolume] = useState(50)
   const [isLyrics, setIsLyrics] = useState(false)
   const location = useLocation()
@@ -25,7 +25,7 @@ export function AppFooter() {
 
   function onLyricsClicked() {
     dispatch(setCurrSongLyrics(song.artist, song.title))
-    navigate('/lyrics')
+    navigate('/only/lyrics')
   }
 
   function setSvg() {
@@ -42,7 +42,7 @@ export function AppFooter() {
     } else {
       setVolume(0)
       setMute(true)
-    }   
+    }
   }
   return (
     <div className="app-footer">
@@ -86,7 +86,8 @@ export function AppFooter() {
         {' '}
         {isLyrics ? (
           <button className="is-repeated">
-            <span title='Lyrics' 
+            <span
+              title="Lyrics"
               onClick={onRepeatClicked}
               className="pointer title"
               dangerouslySetInnerHTML={{
@@ -95,7 +96,8 @@ export function AppFooter() {
             ></span>{' '}
           </button>
         ) : (
-          <span title='Lyrics'
+          <span
+            title="Lyrics"
             onClick={onLyricsClicked}
             className="pointer title"
             dangerouslySetInnerHTML={{
