@@ -7,7 +7,7 @@ export function UserStationsIndex() {
   const userStations = useSelector(
     (storeState) => storeState.stationModule.userStations
   )
-
+  console.log('userStations', userStations)
   const dispatch = useDispatch()
 
   useEffect(() => {
