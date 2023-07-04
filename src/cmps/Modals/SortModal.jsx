@@ -14,7 +14,6 @@ export function SortModal({ onSelectOption }) {
   const currFilterBy = useSelector(
     (storeState) => storeState.stationModule.filterBy
   )
-  console.log('currFilterBy', currFilterBy)
 
   const onSelect = (ev, option) => {
     setSelected(option)

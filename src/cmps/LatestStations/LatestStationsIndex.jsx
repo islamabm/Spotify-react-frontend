@@ -8,8 +8,7 @@ export function LatestStationsIndex() {
   if (!user || !user.latestStations) return <div>There are no latest stations.</div>
 
   const latestStations = user.latestStations
-  console.log(user);
-  console.log(latestStations);
+
   return (
     latestStations && (
       <section className="latest-stations-index">

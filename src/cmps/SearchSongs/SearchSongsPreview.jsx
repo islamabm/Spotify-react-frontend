@@ -10,7 +10,6 @@ export default function SearchSongsPreview({ song, stationId }) {
     song._id = utilService.makeId()
     dispatch(addSongToStation(stationId, song))
   }
-  console.log('song', song)
   return (
     <article className="recommended-song flex align-center">
       <div className="img-and-title flex align-center">

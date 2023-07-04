@@ -1,7 +1,6 @@
 import React from 'react'
 import LatestStationsPreview from './LatestStationsPreview'
 export function LatestStationsList({latestStations}) {
-  console.log(latestStations);
   return (
     ( latestStations &&
     <section className='latest-stations-container'>
