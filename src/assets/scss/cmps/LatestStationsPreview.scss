@@ -1,7 +1,7 @@
 .latest-stations-article {
     display: grid;
     grid-auto-flow: column;
-    grid-template-columns: 85px 230px auto;
+    grid-template-columns: 85px 1fr 95px;
     align-items: center;
     width: 100%;
     background-color: #2d3030;
