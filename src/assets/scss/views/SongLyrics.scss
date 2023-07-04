@@ -6,42 +6,89 @@
   overflow-y: scroll;
   scrollbar-width: thin;
   scrollbar-color: transparent transparent;
-
   &::-webkit-scrollbar {
-    // for Chrome, Safari
     width: 13px;
   }
 
   &::-webkit-scrollbar-thumb {
-    // for Chrome, Safari
     background-color: rgba(234, 227, 227, 0.39);
     &:hover {
       background-color: rgba(234, 227, 227, 0.552);
     }
   }
-
   .song-details-wrapper {
     display: flex;
-
+    color: #fff;
     font-family: Circular-book;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 80px 24px;
+    padding-block-end: 1.5rem;
+    .image {
+      margin-right: 24px;
+      -webkit-box-shadow: 0 4px 60px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 4px 60px rgba(0, 0, 0, 0.5);
+      width: 192px;
+      height: 192px;
+    }
+  }
+
+  .song-details-header {
+    .artist-details {
+      display: flex;
+      align-items: center;
+      justify-items: center;
+      gap: 4px;
+      margin-top: 8px;
+
+      small {
+        font-size: 14px;
+        color: #fff;
+      }
+    }
+    h1 {
+      font-size: 0.875rem;
+      font-weight: 700;
+      font-family: Circular-book;
+    }
+    .special-h {
+      margin: 0.08em 0px 0.12em;
+      font-size: 3rem;
+    }
+    .small-image {
+      width: 24px;
+      height: 24px;
+      img {
+        border-radius: 50%;
+      }
+    }
   }
 
   .song-details-lyrics {
-    // overflow-y: scroll;
-    // scrollbar-width: thin;
-    // scrollbar-color: transparent transparent;
     line-height: 1.7;
-    width: 100px;
     padding-inline-start: 30px;
     margin-block-end: 100px;
-    margin-block-start: 20px;
-    // overflow-y: scroll;
 
-    // scrollbar-width: none; /* Hide the scrollbar for Firefox */
-    // -ms-overflow-style: none; /* Hide the scrollbar for Internet Explorer and Edge */
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 0 0 16px;
+      color: #fff;
+    }
   }
 
-  // .song-details-lyrics::-webkit-scrollbar {
-  //   display: none;
-  // }
+  .song-details {
+    padding: 24px 16px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-items: center;
+
+    span {
+      svg {
+        fill: #b3b3b3;
+      }
+    }
+  }
 }

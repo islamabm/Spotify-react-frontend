@@ -19,12 +19,12 @@ import { DeleteStationModal } from '../cmps/Modals/DeleteStationModal'
 export function StationDetails(props) {
   const [bgStyle, setBgStyle] = useState(null)
   const [bgBottomStyle, setBgBottomStyle] = useState(null)
+  const colorCache = {}
   const [showRecommindationModal, setShowRecommindationModal] = useState(false)
   const [showModal, setShowModal] = useState(false)
   const [headerBg, setHeaderBg] = useState('transparent')
   const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 })
   const [showDeleteModal, setShowDeleteModal] = useState(false)
-  const colorCache = {}
   const navigate = useNavigate()
   const params = useParams()
   const stationDetailsRef = useRef(null)
@@ -164,7 +164,7 @@ export function StationDetails(props) {
       <StationHeaderDetails bgStyle={bgStyle} station={station} />
       <div className="bottom gradient" style={bgBottomStyle}>
         <div className="user-station-actions">
-          {station?.songs?.length < 0 && (
+          {station?.songs?.length > 0 && (
             <>
               <div
                 onClick={playFirstSongInStation}
