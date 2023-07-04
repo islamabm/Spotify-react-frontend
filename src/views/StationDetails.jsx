@@ -172,7 +172,8 @@ export function StationDetails(props) {
                 className="play-button flex justify-center align-center"
               ></div>
               <span
-                className="heart flex align-center justify-center"
+                title='Save to Your Library'
+                className="heart flex align-center justify-center title"
                 dangerouslySetInnerHTML={{
                   __html: getSpotifySvg('bigFilledHeart'),
                 }}
@@ -180,6 +181,7 @@ export function StationDetails(props) {
             </>
           )}
           <span
+            title={`More options from ${station.name}`}
             onClick={(e) => showStationModal(e)}
             className="dots flex align-center justify-center"
             dangerouslySetInnerHTML={{
