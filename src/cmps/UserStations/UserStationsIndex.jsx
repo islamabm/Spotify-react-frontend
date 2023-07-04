@@ -10,9 +10,9 @@ export function UserStationsIndex() {
   console.log('userStations', userStations)
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    dispatch(loadUserStations())
-  }, [userStations])
+  // useEffect(() => {
+  //   dispatch(loadUserStations())
+  // }, [userStations])
 
   return (
     <section className="user-stations-index">

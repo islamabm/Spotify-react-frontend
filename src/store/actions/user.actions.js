@@ -69,6 +69,8 @@ export function doLogout() {
 }
 
 export function updateUser(song, user) {
+  console.log('song', song)
+  console.log('user', user)
   return async (dispatch, getState) => {
     try {
       const updatedUser = await userService.update(song, user)

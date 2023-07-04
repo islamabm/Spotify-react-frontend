@@ -9,7 +9,7 @@ export function UserLibrary() {
   const [showSortModal, setShowSortModal] = useState(false)
   const [selectedOption, setSelectedOption] = useState('Recents')
   const [stationCounter, setStationCounter] = useState(0)
-  const [newStationCreated, setNewStationCreated] = useState(false)
+  // const [newStationCreated, setNewStationCreated] = useState(false)
   const dispatch = useDispatch()
 
   function onShowSortModal() {
@@ -24,22 +24,22 @@ export function UserLibrary() {
 
   function createNewStation() {
     setStationCounter(stationCounter + 1)
-    const name = `My Playlist #${1}`
+    const name = `My Playlist #${stationCounter}`
     dispatch(addStation(name, [], ''))
     // setNewStationCreated(true)
   }
 
-  useEffect(() => {
-    if (newStationCreated) {
-      const gradient = {
-        background:
-          'linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 50%, rgba(0,0,0,1) 70%, rgba(0,0,0,1) 100%)',
-      }
-      eventBus.emit('newStationCreated', gradient)
+  // useEffect(() => {
+  //   if (newStationCreated) {
+  //     const gradient = {
+  //       background:
+  //         'linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 50%, rgba(0,0,0,1) 70%, rgba(0,0,0,1) 100%)',
+  //     }
+  //     eventBus.emit('newStationCreated', gradient)
 
-      setNewStationCreated(false)
-    }
-  }, [newStationCreated])
+  //     setNewStationCreated(false)
+  //   }
+  // }, [newStationCreated])
 
   return (
     <>
