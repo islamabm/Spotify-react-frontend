@@ -16,10 +16,12 @@ import {
   SET_CURR_CATEGORY_BY,
 } from '../reducers/station.reducer'
 
-export function loadStations() {
+export function loadStations(filterBy) {
   return async (dispatch, getState) => {
     try {
-      const stations = await stationService.query()
+      console.log('filterBy', filterBy)
+      const stations = await stationService.query(filterBy)
+
       const action = {
         type: SET_STATIONS,
         stations,
@@ -92,9 +94,7 @@ export function setCurrStation(id) {
   }
 }
 export function setCurrCategoryBy(category) {
-  console.log('type of(', typeof category)
-  console.log('category actions', category)
-  return async (dispatch) => {
+  return (dispatch) => {
     const action = { type: SET_CURR_CATEGORY_BY, category }
     dispatch(action)
   }
