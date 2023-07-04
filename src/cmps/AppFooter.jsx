@@ -5,6 +5,7 @@ import { MediaPlayer } from './MediaPlayer'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 export function AppFooter() {
+  const [mute , setMute] = useState(false)
   const [volume, setVolume] = useState(50)
   const [isLyrics, setIsLyrics] = useState(false)
   const location = useLocation()
@@ -37,9 +38,11 @@ export function AppFooter() {
   function onToggleMute() {
     if (setSvg() === 'muteIcon') {
       setVolume(100)
+      setMute(false)
     } else {
       setVolume(0)
-    }
+      setMute(true)
+    }   
   }
   return (
     <div className="app-footer">
@@ -66,9 +69,9 @@ export function AppFooter() {
           </>
         )}
 
-        <div className="heart-picture-icons">
+        <div className="heart-picture-icons ">
           <span
-            className="picture-icon pointer"
+            className="picture-icon pointer title"
             dangerouslySetInnerHTML={{
               __html: getSpotifySvg('pictureIcon'),
             }}
@@ -83,32 +86,33 @@ export function AppFooter() {
         {' '}
         {isLyrics ? (
           <button className="is-repeated">
-            <span
+            <span title='Lyrics' 
               onClick={onRepeatClicked}
-              className="pointer"
+              className="pointer title"
               dangerouslySetInnerHTML={{
                 __html: getSpotifySvg('lyricsIcon'),
               }}
             ></span>{' '}
           </button>
         ) : (
-          <span
+          <span title='Lyrics'
             onClick={onLyricsClicked}
-            className="pointer"
+            className="pointer title"
             dangerouslySetInnerHTML={{
               __html: getSpotifySvg('lyricsIcon'),
             }}
           ></span>
         )}
-        <span
+        {/* <span title='open '
           className="pointer"
           dangerouslySetInnerHTML={{
             __html: getSpotifySvg('queueIcon'),
           }}
-        ></span>{' '}
+        ></span>{' '} */}
         <span
+          title={mute ? 'Unmute' : 'Mute'}
           onClick={onToggleMute}
-          className="pointer"
+          className="pointer title"
           dangerouslySetInnerHTML={{
             __html: getSpotifySvg(setSvg()),
           }}

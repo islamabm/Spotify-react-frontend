@@ -76,7 +76,8 @@ export function AppHeader() {
       <section className="arrows-and-input">
         <section className="arrows">
           <div className="black-circle">
-            <span
+            <span className='title'
+            title='Go back'
               dangerouslySetInnerHTML={{
                 __html: getSpotifySvg('leftArrowIcon'),
               }}
@@ -84,6 +85,8 @@ export function AppHeader() {
           </div>
           <div className="black-circle">
             <span
+            className='title'
+            title='Go forward'
               dangerouslySetInnerHTML={{
                 __html: getSpotifySvg('rightArrowIcon'),
               }}

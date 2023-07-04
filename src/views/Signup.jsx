@@ -40,6 +40,7 @@ export function Signup() {
     imgUrl: '',
     stations: [],
     likedSongs: [],
+    latestStations:[],
   })
 
   function handleSignup(e) {

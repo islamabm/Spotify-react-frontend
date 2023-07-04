@@ -19,7 +19,6 @@ import {
 export function loadStations(filterBy) {
   return async (dispatch, getState) => {
     try {
-      console.log('filterBy', filterBy)
       const stations = await stationService.query(filterBy)
 
       const action = {

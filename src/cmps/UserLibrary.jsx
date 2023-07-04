@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react'
-import { getSpotifySvg } from '../services/SVG.service'
-import { SortModal } from './Modals/SortModal'
-import { useDispatch } from 'react-redux'
-import { UserStationsIndex } from './UserStations/UserStationsIndex'
-import { addStation } from '../store/actions/station.actions'
-import { eventBus } from '../services/event-bus.service'
+import React, { useState, useEffect } from "react"
+import { getSpotifySvg } from "../services/SVG.service"
+import { SortModal } from "./Modals/SortModal"
+import { useDispatch } from "react-redux"
+import { UserStationsIndex } from "./UserStations/UserStationsIndex"
+import { addStation } from "../store/actions/station.actions"
+import { eventBus } from "../services/event-bus.service"
 export function UserLibrary() {
   const [showSortModal, setShowSortModal] = useState(false)
-  const [selectedOption, setSelectedOption] = useState('Recents')
+  const [selectedOption, setSelectedOption] = useState("Recents")
   const [stationCounter, setStationCounter] = useState(0)
   const [newStationCreated, setNewStationCreated] = useState(false)
   const dispatch = useDispatch()
@@ -25,7 +25,7 @@ export function UserLibrary() {
   function createNewStation() {
     setStationCounter(stationCounter + 1)
     const name = `My Playlist #${stationCounter}`
-    dispatch(addStation(name, [], ''))
+    dispatch(addStation(name, [], ""))
     setNewStationCreated(true)
   }
 
@@ -33,9 +33,9 @@ export function UserLibrary() {
     if (newStationCreated) {
       const gradient = {
         background:
-          'linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 50%, rgba(0,0,0,1) 70%, rgba(0,0,0,1) 100%)',
+          "linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 50%, rgba(0,0,0,1) 70%, rgba(0,0,0,1) 100%)",
       }
-      eventBus.emit('newStationCreated', gradient)
+      eventBus.emit("newStationCreated", gradient)
 
       setNewStationCreated(false)
     }
@@ -49,16 +49,17 @@ export function UserLibrary() {
             <div className="flex align-center your-library pointer">
               <span
                 dangerouslySetInnerHTML={{
-                  __html: getSpotifySvg('libraryIconActive'),
+                  __html: getSpotifySvg("libraryIconActive"),
                 }}
               ></span>
               <span>Your Library</span>
             </div>
             <span
+              title="Create Playlist"
               onClick={createNewStation}
-              className="plus-icon flex align-center justify-center pointer"
+              className="plus-icon flex align-center justify-center pointer title"
               dangerouslySetInnerHTML={{
-                __html: getSpotifySvg('plus'),
+                __html: getSpotifySvg("plus"),
               }}
             ></span>
           </div>
@@ -71,9 +72,10 @@ export function UserLibrary() {
         <section className="filter-and-list">
           <div className="library-filter">
             <span
-              className="smaller-search pointer flex align-center justify-center"
+              title="Search in Your Library"
+              className="smaller-search pointer flex align-center justify-center title"
               dangerouslySetInnerHTML={{
-                __html: getSpotifySvg('smallerSearchIcon'),
+                __html: getSpotifySvg("smallerSearchIcon"),
               }}
             ></span>
             <div onClick={onShowSortModal} className="sort-by-section relative">
@@ -81,7 +83,7 @@ export function UserLibrary() {
               <span
                 className="pointer arrow"
                 dangerouslySetInnerHTML={{
-                  __html: getSpotifySvg('bottomArrowIcon'),
+                  __html: getSpotifySvg("bottomArrowIcon"),
                 }}
               ></span>
               {showSortModal && <SortModal onSelectOption={onSelectOption} />}
