@@ -246,13 +246,10 @@ function searchQuery() {
 
 async function userQuery() {
   let loggedinUser = await userService.getLoggedinUser()
-  console.log('loggedinUser', loggedinUser)
   const stations = await httpService.get('station')
-  console.log('stations', stations)
   const userStations = stations.filter(
     (station) => station.createdBy.fullname === loggedinUser.username
   )
-  console.log('userStations', userStations)
   return userStations
 }
 

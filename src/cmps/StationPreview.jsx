@@ -18,11 +18,11 @@ export function StationPreview({ station }) {
     dispatch(setCurrStation(station._id));
     navigate(`/station/${station._id}`);
 
-    const updatedLatestStations = [...user.latestStations, station];
-    if (updatedLatestStations.length > 6) {
-      updatedLatestStations.splice(0, updatedLatestStations.length - 6);
-    }
-    dispatch(updateLatestStations(updatedLatestStations,user))
+    // const updatedLatestStations = [...user.latestStations, station];
+    // if (updatedLatestStations.length > 6) {
+    //   updatedLatestStations.splice(0,updatedLatestStations.length - 6);
+    // }
+    dispatch(updateLatestStations(station._id,user))
   }
 
   return createdBy === "system" ? (

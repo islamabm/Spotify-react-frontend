@@ -110,12 +110,13 @@ export function spendBalance(amount) {
   }
 }
 
-export function updateLatestStations(updatedLatestStations, user) {
+export function updateLatestStations(stationId, user) {
+  console.log('from action',stationId)
+  console.log('from action',user)
   return async (dispatch, getState) => {
     try {
-      const updatedUser = { ...user, latestStations: updatedLatestStations }
-      const response = await userService.updateLatestStations(updatedUser)
-      dispatch({ type: UPDATE_LATEST, user: updatedUser })
+      const response = await userService.updateLatestStations(stationId,user)
+      dispatch({ type: UPDATE_LATEST, user })
       console.log('Latest stations updated successfully:', response)
     } catch (error) {
       console.log('Error updating latest stations:', error)

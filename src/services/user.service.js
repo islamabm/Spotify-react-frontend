@@ -138,9 +138,10 @@ function prepareData(userCred) {
   }
 }
 
-function updateLatestStations(user) {
-  const userCopy = { ...user }
-  const savedUser = httpService.put(`user/${userCopy._id}`, userCopy)
-  if (getLoggedinUser()._id === savedUser._id) saveLocalUser(savedUser)
-  return savedUser
+async function updateLatestStations(stationId,user) {
+  // const userCopy = { ...user }
+  return await httpService.put(`user/${user._id}`, stationId,user)
+  // const savedUser = await httpService.put(`user/${userCopy._id}`, user)
+  // if (getLoggedinUser()._id === savedUser._id) saveLocalUser(savedUser)
+  // return savedUser
 }
