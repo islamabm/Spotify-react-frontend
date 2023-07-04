@@ -17,3 +17,15 @@ function getRandomIntInclusive(min, max) {
   max = Math.floor(max)
   return Math.floor(Math.random() * (max - min + 1)) + min //The maximum is inclusive and the minimum is inclusive
 }
+
+export function getGreeting(date) {
+  const currentHour = date.getHours();
+
+  if (currentHour < 12) {
+    return "Good morning";
+  } else if (currentHour < 18) {
+    return "Good afternoon";
+  } else {
+    return "Good evening";
+  }
+}

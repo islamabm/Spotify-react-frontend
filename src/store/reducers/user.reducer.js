@@ -1,3 +1,4 @@
+
 export const SPEND_BALANCE = 'SPEND_BALANCE'
 export const SIGNUP = 'SIGNUP'
 export const LOGIN = 'LOGIN'
@@ -8,7 +9,6 @@ export const UPDATE_LATEST = 'UPDATE_LATEST'
 export const UPDATE_USER_LIKED_SONGS = 'UPDATE_USER_LIKED_SONGS'
 const INITIAL_STATE = {
   loggedInUser: null,
-
   users: [],
 }
 
@@ -53,7 +53,8 @@ export function userReducer(state = INITIAL_STATE, action = {}) {
     case UPDATE_LATEST:
       return {
         ...state,
-        loggedInUser: action.user,
+        loggedInUser: action.value,
+  
       }
 
     default:

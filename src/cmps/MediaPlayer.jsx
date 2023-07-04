@@ -1,15 +1,15 @@
-import React, { useRef, useState, useEffect } from "react"
-import { getSpotifySvg } from "../services/SVG.service"
+import React, { useRef, useState, useEffect } from 'react'
+import { getSpotifySvg } from '../services/SVG.service'
 
-import { PAUSE_SONG, eventBus } from "../services/event-bus.service"
-import { stationService } from "../services/station.service"
+import { PAUSE_SONG, eventBus } from '../services/event-bus.service'
+import { stationService } from '../services/station.service'
 import {
   getRandomSong,
   setPrevSong,
   setNextSong,
-} from "../store/actions/song.actions"
-import YouTube from "react-youtube"
-import { useDispatch, useSelector } from "react-redux"
+} from '../store/actions/song.actions'
+import YouTube from 'react-youtube'
+import { useDispatch, useSelector } from 'react-redux'
 export function MediaPlayer({ volume }) {
   const song = useSelector((storeState) => storeState.songModule.currSong)
   const songId = useSelector((storeState) => storeState.songModule.currSongId)
@@ -21,14 +21,15 @@ export function MediaPlayer({ volume }) {
   const currSvg = useSelector((storeState) => storeState.songModule.currentSvg)
 
   const progressBarRef = useRef(null)
-  const [videoId, setVideoId] = useState("M7lc1UVf-VE")
+  const [videoId, setVideoId] = useState('M7lc1UVf-VE')
   const [isShuffled, setIsShuffled] = useState(false)
   const [isRepeated, setIsRepeated] = useState(false)
   const [isPlaying, setIsPlaying] = useState(false)
   const [duration, setDuration] = useState(0)
   const [currentTime, setCurrentTime] = useState(0)
-  const [displayDuration, setDisplayDuration] = useState("0:00")
-  const [displayTime, setDisplayTime] = useState("0:00")
+  const [isMouseDown, setIsMouseDown] = useState(false)
+  const [displayDuration, setDisplayDuration] = useState('0:00')
+  const [displayTime, setDisplayTime] = useState('0:00')
   const [localVolume, setLocalVolume] = useState(volume || 50)
 
   useEffect(() => {
@@ -44,7 +45,7 @@ export function MediaPlayer({ volume }) {
 
   const progressBarWidth = duration
     ? `${(currentTime / duration) * 100}%`
-    : "0%"
+    : '0%'
   const videoOptions = {
     playerVars: {
       autoplay: 1,
@@ -66,21 +67,28 @@ export function MediaPlayer({ volume }) {
             }
           })
           .catch((error) => {
-            console.error("Error getting videos:", error)
+            console.error('Error getting videos:', error)
           })
       }
     }
   }, [song])
+  useEffect(() => {
+    window.addEventListener('mouseup', handleMouseUp)
+
+    return () => {
+      window.removeEventListener('mouseup', handleMouseUp)
+    }
+  }, [])
 
   useEffect(() => {
     switch (currSvg) {
-      case "play":
+      case 'play':
         if (!isPlaying) {
           playerRef.current.playVideo()
           setIsPlaying(true)
         }
         break
-      case "pause":
+      case 'pause':
         if (isPlaying) {
           playerRef.current.pauseVideo()
           setIsPlaying(false)
@@ -105,8 +113,19 @@ export function MediaPlayer({ volume }) {
     setDuration(duration)
     const minutes = Math.floor(duration / 60)
     const seconds = Math.round(duration % 60)
-    setDisplayDuration(`${minutes}:${seconds < 10 ? "0" : ""}${seconds}`)
+    setDisplayDuration(`${minutes}:${seconds < 10 ? '0' : ''}${seconds}`)
     event.target.pauseVideo()
+  }
+  function handleMouseDown() {
+    setIsMouseDown(true)
+  }
+  function handleMouseMove(e) {
+    if (isMouseDown) {
+      handleProgressBarClick(e)
+    }
+  }
+  function handleMouseUp() {
+    setIsMouseDown(false)
   }
   function onPlaySong() {
     setIsPlaying(true)
@@ -116,7 +135,7 @@ export function MediaPlayer({ volume }) {
 
       const minutes = Math.floor(currentTime / 60)
       const seconds = Math.round(currentTime % 60)
-      setDisplayTime(`${minutes}:${seconds < 10 ? "0" : ""}${seconds}`)
+      setDisplayTime(`${minutes}:${seconds < 10 ? '0' : ''}${seconds}`)
     }, 1000)
   }
   function onPauseSong() {
@@ -183,9 +202,9 @@ export function MediaPlayer({ volume }) {
                 onClick={onShuffleClicked}
                 className="pointer title"
                 dangerouslySetInnerHTML={{
-                  __html: getSpotifySvg("shouffleIcon"),
+                  __html: getSpotifySvg('shouffleIcon'),
                 }}
-              ></span>{" "}
+              ></span>{' '}
             </button>
           ) : (
             <span
@@ -193,7 +212,7 @@ export function MediaPlayer({ volume }) {
               title="Enable shuffle"
               onClick={onShuffleClicked}
               dangerouslySetInnerHTML={{
-                __html: getSpotifySvg("shouffleIcon"),
+                __html: getSpotifySvg('shouffleIcon'),
               }}
             ></span>
           )}
@@ -201,18 +220,18 @@ export function MediaPlayer({ volume }) {
             title="Previous"
             onClick={getPrevSong}
             className="pointer title"
-            dangerouslySetInnerHTML={{ __html: getSpotifySvg("prevIcon") }}
+            dangerouslySetInnerHTML={{ __html: getSpotifySvg('prevIcon') }}
           ></span>
           <div className="play-song-div">
-            {" "}
+            {' '}
             <span
-              title={isPlaying ? "Pause" : "Play"}
+              title={isPlaying ? 'Pause' : 'Play'}
               className="special-i pointer title"
               onClick={handlePlayPauseClick}
               dangerouslySetInnerHTML={{
                 __html: isPlaying
-                  ? getSpotifySvg("pauseIcon")
-                  : getSpotifySvg("playIcon"),
+                  ? getSpotifySvg('pauseIcon')
+                  : getSpotifySvg('playIcon'),
               }}
             ></span>
           </div>
@@ -221,9 +240,9 @@ export function MediaPlayer({ volume }) {
             onClick={getNextSong}
             className="pointer title"
             dangerouslySetInnerHTML={{
-              __html: getSpotifySvg("nextIcon"),
+              __html: getSpotifySvg('nextIcon'),
             }}
-          ></span>{" "}
+          ></span>{' '}
           {isRepeated ? (
             <button className="is-repeated">
               <span
@@ -231,9 +250,9 @@ export function MediaPlayer({ volume }) {
                 onClick={onRepeatClicked}
                 className="pointer"
                 dangerouslySetInnerHTML={{
-                  __html: getSpotifySvg("repeateIcon"),
+                  __html: getSpotifySvg('repeateIcon'),
                 }}
-              ></span>{" "}
+              ></span>{' '}
             </button>
           ) : (
             <span
@@ -241,7 +260,7 @@ export function MediaPlayer({ volume }) {
               onClick={onRepeatClicked}
               className="pointer title"
               dangerouslySetInnerHTML={{
-                __html: getSpotifySvg("repeateIcon"),
+                __html: getSpotifySvg('repeateIcon'),
               }}
             ></span>
           )}
@@ -253,6 +272,9 @@ export function MediaPlayer({ volume }) {
             className="progress-bar"
             ref={progressBarRef}
             onClick={handleProgressBarClick}
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onMouseUp={handleMouseUp}
           >
             <div
               className="progress-bar-fill"

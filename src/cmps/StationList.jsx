@@ -1,5 +1,5 @@
-import { memo, useEffect, useState } from "react"
-import { StationPreview } from "./StationPreview"
+import { memo, useEffect, useState } from 'react'
+import { StationPreview } from './StationPreview'
 
 function _StationList({ stations }) {
   const [stationsCategory, setStationsCategory] = useState([])
@@ -14,7 +14,7 @@ function _StationList({ stations }) {
       })
       return acc
     }, {})
-    return Object.entries(category) // Convert the object into an array of key-value
+    return Object.entries(category)
   }
 
   useEffect(() => {
@@ -22,18 +22,18 @@ function _StationList({ stations }) {
   }, [])
 
   return (
-      <section className="station-list-container">
-        {stationsCategory.map(([tag, stationTag]) => (
-          <>
-            <h3 className="category-tag">{tag}</h3>
-            <section className="station-list">
-              {stationTag.map((station) => (
-                <StationPreview key={station._id} station={station} />
-              ))}
-            </section>
-          </>
-        ))}
-      </section>
+    <section className="station-list-container">
+      {stationsCategory.map(([tag, stationTag]) => (
+        <>
+          <h3 className="category-tag">{tag}</h3>
+          <section className="station-list">
+            {stationTag.map((station) => (
+              <StationPreview key={station._id} station={station} />
+            ))}
+          </section>
+        </>
+      ))}
+    </section>
   )
 }
 
