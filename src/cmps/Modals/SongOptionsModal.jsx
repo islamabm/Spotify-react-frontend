@@ -48,6 +48,8 @@ export function SongOptionsModal({ position, closeModal, station }) {
   }
 
   function addSongToLikedSongs() {
+    console.log('user', user)
+    console.log('song', song)
     dispatch(updateUser(song, user))
     closeModal()
   }

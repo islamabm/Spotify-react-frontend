@@ -9,9 +9,9 @@ export function UserStationsIndex() {
   )
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    dispatch(loadUserStations())
-  }, [userStations])
+  // useEffect(() => {
+  //   dispatch(loadUserStations())
+  // }, [userStations])
 
   return (
     <section className="user-stations-index">
