@@ -140,6 +140,8 @@ function prepareData(userCred) {
 }
 
 async function updateLatestStations(stationId, user) {
+  console.log('SERVICE',stationId)
+  console.log('SERVICE',user)
   const station = await stationService.getById(stationId)
   console.log('station', station)
   const userCopy = { ...user }
