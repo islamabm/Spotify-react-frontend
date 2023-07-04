@@ -91,7 +91,12 @@ export function AppHeader() {
           </div>
         </section>
         {location.pathname === '/search' && (
-          <div className="flex align-center justify-center">
+          <div className="flex align-center justify-center input-container">
+            <span
+      dangerouslySetInnerHTML={{
+        __html: getSpotifySvg('smallerSearchIcon'),
+      }}
+    ></span>
             <input placeholder="What do you want to listen to?" />
           </div>
         )}

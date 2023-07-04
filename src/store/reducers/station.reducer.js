@@ -22,7 +22,7 @@ const INITIAL_STATE = {
   currStationId: null,
   currStationGradientColor: 'black',
   userStations: [],
-  categoryBy: 'All',
+  categoryBy: '',
 }
 
 export function stationReducer(state = INITIAL_STATE, action = {}) {

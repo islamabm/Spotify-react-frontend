@@ -4,7 +4,7 @@
 .station-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(100px, 189px));
-  gap: rem(23px);
+  gap: rem(20px);
   a {
     cursor: default;
   }

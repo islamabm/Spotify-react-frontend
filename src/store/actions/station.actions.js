@@ -37,7 +37,6 @@ export function loadUserStations() {
   return async (dispatch, getState) => {
     try {
       const stations = await stationService.userQuery()
-      console.log('stations', stations)
 
       const action = {
         type: LOAD_USER_STATIONS,
