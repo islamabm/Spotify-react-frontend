@@ -254,7 +254,8 @@ async function userQuery() {
 }
 
 function query(categoryBy) {
-  return httpService.get('station' , categoryBy)
+  console.log('categoryBy', categoryBy)
+  return httpService.get(`station/${categoryBy}`);
 }
 
 async function getById(id) {
