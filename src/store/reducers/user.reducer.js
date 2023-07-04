@@ -1,3 +1,5 @@
+import { Value } from "sass"
+
 export const SPEND_BALANCE = 'SPEND_BALANCE'
 export const SIGNUP = 'SIGNUP'
 export const LOGIN = 'LOGIN'
@@ -53,7 +55,8 @@ export function userReducer(state = INITIAL_STATE, action = {}) {
     case UPDATE_LATEST:
       return {
         ...state,
-        loggedInUser: action.user,
+        loggedInUser: action.value,
+  
       }
 
     default:

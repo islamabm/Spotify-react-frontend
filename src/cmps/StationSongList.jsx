@@ -173,7 +173,7 @@ export default function StationSongList({ station }) {
                         ></span>
                       ) : (
                         <span
-                          title={`Play ${currSong.title}`}
+                          title={`Play ${currSong?.title}`}
                           onClick={() => onSongClicked(song._id)}
                           className={` small-play-btn flex align-center justify-center title ${
                             hoveredSongIdx === idx ? "hovered" : ""
@@ -222,7 +222,7 @@ export default function StationSongList({ station }) {
                           {song?.duration ? song?.duration : "1:00"}
                         </div>
                         <span
-                        title={`More options for ${currSong.title}`}
+                        title={`More options for ${currSong?.title}`}
                           onClick={(e) => showSongOptionsModal(e, song)}
                           className="hidden dots title"
                           dangerouslySetInnerHTML={{
