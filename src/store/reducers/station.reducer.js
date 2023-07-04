@@ -45,6 +45,7 @@ export function stationReducer(state = INITIAL_STATE, action = {}) {
     case SET_CURR_CATEGORY_BY:
       return {
         ...state,
+        stations: null,
         categoryBy: action.category,
       }
     case SET_CURR_STATION:

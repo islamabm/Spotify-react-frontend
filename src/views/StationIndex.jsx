@@ -8,16 +8,18 @@ export function StationIndex() {
   const stations = useSelector(
     (storeState) => storeState.stationModule.stations
   )
-  const categoryBy = useSelector(
+  console.log('stations', stations)
+
+  const filterBy = useSelector(
     (storeState) => storeState.stationModule.categoryBy
   )
 
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(loadStations(categoryBy))
-  }, [categoryBy])
-
+    console.log('filterBy', filterBy)
+    dispatch(loadStations(filterBy))
+  }, [filterBy])
 
   if (!stations) return <div className="loader"></div>
 
