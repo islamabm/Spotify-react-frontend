@@ -36,23 +36,35 @@
         }
       }
     }
-    input {
-      background-color: #242424;
-      border: 0;
-      border-radius: 500px;
-      color: #fff !important;
-      height: 48px;
-      padding: 6px 36px;
-      text-overflow: ellipsis;
-      width: 364px;
-      &:hover {
-        border: 1px solid #404040;
-        outline: none;
+    .input-container {
+      margin-left: -15px
+      ;
+      span {
+        position: relative;
+        left: 8%;
+        margin-top: 2px;
+        svg {
+          fill: rgba(255, 255, 255, 0.744);
+        }
       }
-      &:focus {
-        border: 1px solid white;
-        outline: none;
+      input {
+        background-color: #242424;
+        border: 1px solid #242424;
+        border-radius: 500px;
+        color: #fff !important;
+        height: 48px;
+        padding: 6px 37px;
+        text-overflow: ellipsis;
+        width: 364px;
+        &:hover {
+          border: 1px solid #404040;
+        }
+        &:focus {
+          border: 2px solid white;
+          outline: none;
+        }
       }
+
     }
   }
   .user-actions {
