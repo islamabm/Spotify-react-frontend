@@ -37,8 +37,7 @@
       }
     }
     .input-container {
-      margin-left: -15px
-      ;
+      margin-left: -15px;
       span {
         position: relative;
         left: 8%;
@@ -64,7 +63,6 @@
           outline: none;
         }
       }
-
     }
   }
   .user-actions {
@@ -87,9 +85,9 @@
       border: 0;
       border-radius: 500px;
       font-size: inherit;
-      min-block-size: 32px;
-      padding-inline: 32px;
-      font-size: 14px;
+      min-block-size: 48px;
+      padding-inline: 30px;
+      font-size: 15px;
 
       &:hover {
         transform: scale(1.04);
