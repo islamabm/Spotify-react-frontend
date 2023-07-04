@@ -5,7 +5,7 @@ function _StationList({ stations }) {
   const [stationsCategory, setStationsCategory] = useState([])
 
   function categorizedStations() {
-    const category = stations.reduce((acc, station) => {
+    const category = stations?.reduce((acc, station) => {
       station.tags.forEach((tag) => {
         if (!acc[tag]) {
           acc[tag] = []
