@@ -10,7 +10,7 @@ export function SearchCategoryPreview({ category }) {
 
   function filterStationCategories(categoryName) {
     console.log('category', categoryName)
-    // dispatch(setCurrCategoryBy(categoryName))
+    dispatch(setCurrCategoryBy(categoryName)) // should it be?
     dispatch(loadStations(categoryName))
     navigate(`station/${categoryName}`)
   }

@@ -12,7 +12,7 @@ export function UserStationsIndex() {
 
   useEffect(() => {
     dispatch(loadUserStations())
-  }, [])
+  }, [userStations])
 
   return (
     <section className="user-stations-index">

@@ -254,7 +254,6 @@ async function userQuery() {
 }
 
 function query(categoryBy) {
-  console.log('categoryBy', categoryBy)
   return httpService.get(`station/${categoryBy}`);
 }
 

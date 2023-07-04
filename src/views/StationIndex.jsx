@@ -17,8 +17,7 @@ export function StationIndex() {
   useEffect(() => {
     dispatch(loadStations(categoryBy))
   }, [categoryBy])
-  useEffect(() => {
-  }, [categoryBy])
+
 
   if (!stations) return <div className="loader"></div>
 
