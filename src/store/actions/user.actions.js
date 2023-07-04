@@ -116,9 +116,8 @@ export function updateLatestStations(stationId, user) {
   return async (dispatch, getState) => {
     try {
       const {value} = await userService.updateLatestStations(stationId, user)
-      const latestStations = value.latestStations
-      dispatch({ type: UPDATE_LATEST, latestStations })
-      console.log('Latest stations updated successfully:', latestStations)
+      dispatch({ type: UPDATE_LATEST, value })
+      console.log('Latest stations updated successfully:', value)
     } catch (error) {
       console.log('Error updating latest stations:', error)
     }
