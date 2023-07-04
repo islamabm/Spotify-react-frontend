@@ -31,7 +31,8 @@ export function Login() {
       <div className="login-header">
         <Link to="/">
           <span
-            className="flex"
+          title={loginCred.username || ''}
+            className="flex title"
             dangerouslySetInnerHTML={{
               __html: getSpotifySvg("LoginHeaderLogo"),
             }}

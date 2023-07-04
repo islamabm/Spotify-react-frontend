@@ -1,15 +1,15 @@
-import React, { useRef, useState, useEffect } from 'react'
-import { getSpotifySvg } from '../services/SVG.service'
+import React, { useRef, useState, useEffect } from "react"
+import { getSpotifySvg } from "../services/SVG.service"
 
-import { PAUSE_SONG, eventBus } from '../services/event-bus.service'
-import { stationService } from '../services/station.service'
+import { PAUSE_SONG, eventBus } from "../services/event-bus.service"
+import { stationService } from "../services/station.service"
 import {
   getRandomSong,
   setPrevSong,
   setNextSong,
-} from '../store/actions/song.actions'
-import YouTube from 'react-youtube'
-import { useDispatch, useSelector } from 'react-redux'
+} from "../store/actions/song.actions"
+import YouTube from "react-youtube"
+import { useDispatch, useSelector } from "react-redux"
 export function MediaPlayer({ volume }) {
   const song = useSelector((storeState) => storeState.songModule.currSong)
   const songId = useSelector((storeState) => storeState.songModule.currSongId)
@@ -21,15 +21,14 @@ export function MediaPlayer({ volume }) {
   const currSvg = useSelector((storeState) => storeState.songModule.currentSvg)
 
   const progressBarRef = useRef(null)
-  const [videoId, setVideoId] = useState('M7lc1UVf-VE')
+  const [videoId, setVideoId] = useState("M7lc1UVf-VE")
   const [isShuffled, setIsShuffled] = useState(false)
   const [isRepeated, setIsRepeated] = useState(false)
   const [isPlaying, setIsPlaying] = useState(false)
   const [duration, setDuration] = useState(0)
   const [currentTime, setCurrentTime] = useState(0)
-  const [displayDuration, setDisplayDuration] = useState('0:00')
-  const [displayTime, setDisplayTime] = useState('0:00')
-
+  const [displayDuration, setDisplayDuration] = useState("0:00")
+  const [displayTime, setDisplayTime] = useState("0:00")
   const [localVolume, setLocalVolume] = useState(volume || 50)
 
   useEffect(() => {
@@ -45,7 +44,7 @@ export function MediaPlayer({ volume }) {
 
   const progressBarWidth = duration
     ? `${(currentTime / duration) * 100}%`
-    : '0%'
+    : "0%"
   const videoOptions = {
     playerVars: {
       autoplay: 1,
@@ -67,7 +66,7 @@ export function MediaPlayer({ volume }) {
             }
           })
           .catch((error) => {
-            console.error('Error getting videos:', error)
+            console.error("Error getting videos:", error)
           })
       }
     }
@@ -75,13 +74,13 @@ export function MediaPlayer({ volume }) {
 
   useEffect(() => {
     switch (currSvg) {
-      case 'play':
+      case "play":
         if (!isPlaying) {
           playerRef.current.playVideo()
           setIsPlaying(true)
         }
         break
-      case 'pause':
+      case "pause":
         if (isPlaying) {
           playerRef.current.pauseVideo()
           setIsPlaying(false)
@@ -106,7 +105,7 @@ export function MediaPlayer({ volume }) {
     setDuration(duration)
     const minutes = Math.floor(duration / 60)
     const seconds = Math.round(duration % 60)
-    setDisplayDuration(`${minutes}:${seconds < 10 ? '0' : ''}${seconds}`)
+    setDisplayDuration(`${minutes}:${seconds < 10 ? "0" : ""}${seconds}`)
     event.target.pauseVideo()
   }
   function onPlaySong() {
@@ -117,7 +116,7 @@ export function MediaPlayer({ volume }) {
 
       const minutes = Math.floor(currentTime / 60)
       const seconds = Math.round(currentTime % 60)
-      setDisplayTime(`${minutes}:${seconds < 10 ? '0' : ''}${seconds}`)
+      setDisplayTime(`${minutes}:${seconds < 10 ? "0" : ""}${seconds}`)
     }, 1000)
   }
   function onPauseSong() {
@@ -180,62 +179,69 @@ export function MediaPlayer({ volume }) {
           {isShuffled ? (
             <button className="is-repeated">
               <span
+                title="Disable shuffle"
                 onClick={onShuffleClicked}
-                className="pointer"
+                className="pointer title"
                 dangerouslySetInnerHTML={{
-                  __html: getSpotifySvg('shouffleIcon'),
+                  __html: getSpotifySvg("shouffleIcon"),
                 }}
-              ></span>{' '}
+              ></span>{" "}
             </button>
           ) : (
             <span
+              className="pointer title"
+              title="Enable shuffle"
               onClick={onShuffleClicked}
-              className="pointer"
               dangerouslySetInnerHTML={{
-                __html: getSpotifySvg('shouffleIcon'),
+                __html: getSpotifySvg("shouffleIcon"),
               }}
             ></span>
           )}
           <span
+            title="Previous"
             onClick={getPrevSong}
-            className="pointer"
-            dangerouslySetInnerHTML={{ __html: getSpotifySvg('prevIcon') }}
+            className="pointer title"
+            dangerouslySetInnerHTML={{ __html: getSpotifySvg("prevIcon") }}
           ></span>
           <div className="play-song-div">
-            {' '}
+            {" "}
             <span
-              className="special-i pointer"
+              title={isPlaying ? "Pause" : "Play"}
+              className="special-i pointer title"
               onClick={handlePlayPauseClick}
               dangerouslySetInnerHTML={{
                 __html: isPlaying
-                  ? getSpotifySvg('pauseIcon')
-                  : getSpotifySvg('playIcon'),
+                  ? getSpotifySvg("pauseIcon")
+                  : getSpotifySvg("playIcon"),
               }}
             ></span>
           </div>
           <span
+            title="Next"
             onClick={getNextSong}
-            className="pointer"
+            className="pointer title"
             dangerouslySetInnerHTML={{
-              __html: getSpotifySvg('nextIcon'),
+              __html: getSpotifySvg("nextIcon"),
             }}
-          ></span>{' '}
+          ></span>{" "}
           {isRepeated ? (
             <button className="is-repeated">
               <span
+                title="Disable repeat title"
                 onClick={onRepeatClicked}
                 className="pointer"
                 dangerouslySetInnerHTML={{
-                  __html: getSpotifySvg('repeateIcon'),
+                  __html: getSpotifySvg("repeateIcon"),
                 }}
-              ></span>{' '}
+              ></span>{" "}
             </button>
           ) : (
             <span
+              title="Enable repeat"
               onClick={onRepeatClicked}
-              className="pointer"
+              className="pointer title"
               dangerouslySetInnerHTML={{
-                __html: getSpotifySvg('repeateIcon'),
+                __html: getSpotifySvg("repeateIcon"),
               }}
             ></span>
           )}
