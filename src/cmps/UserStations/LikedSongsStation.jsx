@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux'
 import emptyImg from '../../assets/imgs/empty-img.png'
 import { useSelector } from 'react-redux'
 import { setCurrStation } from '../../store/actions/station.actions'
-
+import { getSpotifySvg } from '../../services/SVG.service'
 export default function LikedSongsStation() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -35,9 +35,18 @@ export default function LikedSongsStation() {
             <p>Liked Songs</p>
           </div>
           <div className="user-details">
+            <span
+              className="pinned-svg"
+              dangerouslySetInnerHTML={{
+                __html: getSpotifySvg('pinnedIcon'),
+              }}
+            ></span>
             <span>Playlist</span>
             <span>•</span>
-            <span>{user?.username}</span>
+            <span>
+              {user?.LikedSongs?.length}{' '}
+              {user?.LikedSongs?.length === 1 ? 'song' : 'songs'}
+            </span>
           </div>
         </div>
       </section>

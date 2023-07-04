@@ -39,6 +39,11 @@
         padding: 0;
         color: #6a6a6a;
       }
+      .pinned-svg {
+        svg {
+          fill: #1ed760;
+        }
+      }
     }
   }
   &:hover {
