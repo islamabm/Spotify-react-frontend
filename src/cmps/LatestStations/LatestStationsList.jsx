@@ -1,12 +1,12 @@
 import React from 'react'
 import LatestStationsPreview from './LatestStationsPreview'
 export function LatestStationsList({latestStations}) {
-
+  console.log(latestStations);
   return (
     ( latestStations &&
     <section className='latest-stations-container'>
       {latestStations?.map((station, idx) => (
-        <LatestStationsPreview key={idx} station={station} />
+        <LatestStationsPreview key={station.id} station={station} />
       ))}
     </section>
   ))

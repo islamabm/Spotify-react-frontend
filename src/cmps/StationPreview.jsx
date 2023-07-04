@@ -16,7 +16,7 @@ export function StationPreview({ station }) {
     navigate(`/station/${station._id}`)
     // console.log('CMP',station._id)
     // console.log('CMP',user)
-    // dispatch(updateLatestStations(station._id, user))
+    dispatch(updateLatestStations(station._id, user))
   }
 
   return createdBy === 'system' ? (
