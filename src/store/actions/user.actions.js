@@ -74,7 +74,6 @@ export function updateUser(song, user) {
   return async (dispatch, getState) => {
     try {
       const updatedUser = await userService.update(song, user)
-      console.log('updatedUser', updatedUser)
       const action = {
         type: UPDATE_USER,
         user: updatedUser,
@@ -113,8 +112,6 @@ export function spendBalance(amount) {
 }
 
 export function updateLatestStations(stationId, user) {
-  console.log('ACTION',stationId)
-  console.log('ACTION',user)
   return async (dispatch, getState) => {
     try {
       const {value} = await userService.updateLatestStations(stationId, user)

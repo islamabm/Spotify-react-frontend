@@ -51,7 +51,6 @@ export function EditUserStationModal({ station, onClose }) {
     try {
       setIsUploading(true)
       const { url } = await uploadImg(file)
-      console.log('url', url)
       setEditedStation({ ...editedStation, imgUrl: url })
     } catch (err) {
       console.log('err', err)

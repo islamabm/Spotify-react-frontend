@@ -19,7 +19,6 @@ async function getSongLyrics(artist, title) {
       })
 
       const trimmedLyricsArray = lyricsArray.slice(0, -2)
-      console.log('trimmedLyricsArray', trimmedLyricsArray)
       return trimmedLyricsArray
     })
     .catch((error) => {

@@ -11,7 +11,6 @@ export default function SearchSongsIndex({ stationId }) {
     const timerId = setTimeout(async () => {
       const list = await stationService.getVideos(searchText)
       setSongList(list)
-      console.log('songList', songList)
     }, 1000)
     return () => {
       clearTimeout(timerId)

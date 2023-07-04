@@ -1,4 +1,3 @@
-import { Value } from "sass"
 
 export const SPEND_BALANCE = 'SPEND_BALANCE'
 export const SIGNUP = 'SIGNUP'
@@ -10,7 +9,6 @@ export const UPDATE_LATEST = 'UPDATE_LATEST'
 export const UPDATE_USER_LIKED_SONGS = 'UPDATE_USER_LIKED_SONGS'
 const INITIAL_STATE = {
   loggedInUser: null,
-
   users: [],
 }
 

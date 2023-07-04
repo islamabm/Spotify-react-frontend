@@ -36,14 +36,11 @@ export default function StationSongList({ station }) {
     if (currSong?.id !== songId) {
       setIsFirstClick(true)
     }
-
     if (isFirstClick) {
-      console.log('hi first time')
       dispatch(setCurrSong(params.id, songId))
       dispatch(setCurrSongIndex(params.id, songId))
       setIsFirstClick(false)
     } else {
-      console.log('hi after first time')
       dispatch(setCurrSongSvg('play'))
     }
   }
@@ -62,7 +59,6 @@ export default function StationSongList({ station }) {
   }, [station])
 
   function showSongOptionsModal(e, song) {
-    console.log('song in dots', song)
     dispatch(setCurrSongAction(station._id, song._id))
     e.stopPropagation()
 
