@@ -44,7 +44,7 @@ async function update(selectedSong, user) {
   userCopy.LikedSongs = [...userCopy.LikedSongs, selectedSong]
 
   const savedUser = await httpService.put(`user/${userCopy._id}`, userCopy)
-
+  console.log('savedUser', savedUser)
   if (getLoggedinUser()._id === savedUser._id) saveLocalUser(savedUser)
   return savedUser
 }
@@ -140,8 +140,8 @@ function prepareData(userCred) {
 }
 
 async function updateLatestStations(stationId, user) {
-  console.log('SERVICE',stationId)
-  console.log('SERVICE',user)
+  console.log('SERVICE', stationId)
+  console.log('SERVICE', user)
   const station = await stationService.getById(stationId)
   console.log('station', station)
   const userCopy = { ...user }

@@ -49,9 +49,13 @@ export function loadUserStations() {
 }
 
 export function addStation(name, songs, url) {
+  console.log('name', name)
+  console.log('songs', songs)
+  console.log('url', url)
   return async (dispatch) => {
     try {
       const station = await stationService.createNewStation(name, songs, url)
+      console.log('station', station)
       const action = { type: ADD_STATION, station }
       dispatch(action)
       const action2 = { type: SET_CURR_STATION, station }

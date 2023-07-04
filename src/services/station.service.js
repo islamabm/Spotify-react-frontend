@@ -365,6 +365,7 @@ async function createNewStation(name, songs, url) {
     ],
     desc: '',
   }
+  console.log('newStations', newStation)
 
   return httpService.post('station', newStation)
 }
