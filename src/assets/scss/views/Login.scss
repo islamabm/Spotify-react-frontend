@@ -2,6 +2,8 @@
   background-color: #121212;
   font-family: Circular-medium;
   color: $clr6;
+  overflow-y: scroll;
+  min-height: 100vh;
   .login-header {
     background-color: black;
     height: 100px;
@@ -12,14 +14,15 @@
     margin-left: 30%;
     width: 734px;
     height: 986px;
-    padding: 32px;
+    padding: 10px;
     background-color: black;
     border-radius: 8px;
+    margin-bottom: 500px;
     h2 {
       font-family: Circular-medium;
       font-size: 48px;
     }
-    .continueW {
+    .continue {
       gap: 10px;
       button {
         font-size: 16px;

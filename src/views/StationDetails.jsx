@@ -189,10 +189,10 @@ export function StationDetails(props) {
           ></span>
         </div>
         <div className="station-songs-header" style={{ background: headerBg }}>
-          <span className="flex align-center justify-center">#</span>
+          <span className=" align-center justify-center">#</span>
           <span className="title flex align-center">Title</span>
-          <span className="flex align-center">Album</span>
-          <span className="flex align-center">Date added</span>
+          <span className=" align-center">Album</span>
+          <span className=" align-center">Date added</span>
           <span
             className="time flex align-center justify-center"
             dangerouslySetInnerHTML={{
