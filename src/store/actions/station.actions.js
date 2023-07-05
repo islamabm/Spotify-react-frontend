@@ -49,9 +49,6 @@ export function loadUserStations() {
 }
 
 export function addStation(name, songs, url) {
-  console.log("name", name);
-  console.log("songs", songs);
-  console.log("url", url);
   return async (dispatch) => {
     try {
       const station = await stationService.createNewStation(name, songs, url);
@@ -66,6 +63,7 @@ export function addStation(name, songs, url) {
     }
   };
 }
+
 export function loadSearchStations() {
   return async (dispatch, getState) => {
     try {

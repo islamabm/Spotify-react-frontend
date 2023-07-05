@@ -1,26 +1,27 @@
-import { getSpotifySvg } from "../services/SVG.service"
-import { useLocation, Link } from "react-router-dom"
-import { UserModal } from "./Modals/UserModal"
-import { useState, useEffect } from "react"
-import { setCurrSong, setCurrSongIndex } from "../store/actions/song.actions"
-import { doLogout } from "../store/actions/user.actions"
-import { useDispatch, useSelector } from "react-redux"
-import { eventBus } from "../services/event-bus.service"
+import { getSpotifySvg } from "../services/SVG.service";
+import { useLocation, Link, useNavigate } from "react-router-dom";
+import { UserModal } from "./Modals/UserModal";
+import { useState, useEffect } from "react";
+import { setCurrSong, setCurrSongIndex } from "../store/actions/song.actions";
+import { doLogout } from "../store/actions/user.actions";
+import { useDispatch, useSelector } from "react-redux";
+import { eventBus } from "../services/event-bus.service";
 export function AppHeader() {
-  const [showModal, setShowModal] = useState(false)
-  const [currScrollPos, setScrollPos] = useState(0)
-  const [isPlaying, setIsPlaying] = useState(false)
+  const [showModal, setShowModal] = useState(false);
+  const [currScrollPos, setScrollPos] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const navigate = useNavigate();
 
   const station = useSelector(
     (storeState) => storeState.stationModule.currStation
-  )
-  const user = useSelector((storeState) => storeState.userModule.loggedInUser)
-  const dispatch = useDispatch()
-  const location = useLocation()
+  );
+  const user = useSelector((storeState) => storeState.userModule.loggedInUser);
+  const dispatch = useDispatch();
+  const location = useLocation();
 
   const [headers, setHeaders] = useState({
     backgroundColor: "transparent",
-  })
+  });
 
   function updateHeaderOpacity(scrollPos, headerBg) {
     setScrollPos(scrollPos)
@@ -39,12 +40,12 @@ export function AppHeader() {
   }
 
   function playFirstSong() {
-    dispatch(setCurrSong(station?._id, station?.songs[0]._id))
-    dispatch(setCurrSongIndex(station?._id, station?.songs[0]._id))
+    dispatch(setCurrSong(station?._id, station?.songs[0]._id));
+    dispatch(setCurrSongIndex(station?._id, station?.songs[0]._id));
   }
 
   function handleLogout() {
-    dispatch(doLogout())
+    dispatch(doLogout());
   }
 
   useEffect(() => {
@@ -79,18 +80,26 @@ export function AppHeader() {
   }, [location.pathname])
 
   function onShowModal() {
-    setShowModal(true)
+    setShowModal(true);
   }
 
   function onCloseModal() {
-    setShowModal(false)
+    setShowModal(false);
   }
 
   function playFirstSongInStation(event) {
-    event.stopPropagation()
-    dispatch(setCurrSong(station?._id, station?.songs[0]._id))
-    dispatch(setCurrSongIndex(station?._id, station?.songs[0]._id))
-    setIsPlaying(!isPlaying)
+    event.stopPropagation();
+    dispatch(setCurrSong(station?._id, station?.songs[0]._id));
+    dispatch(setCurrSongIndex(station?._id, station?.songs[0]._id));
+    setIsPlaying(!isPlaying);
+  }
+
+  function goToPreviousRoute() {
+    navigate(-1);
+  }
+
+  function goToNextRoute() {
+    navigate(+1);
   }
 
   return (
@@ -99,6 +108,7 @@ export function AppHeader() {
         <section className="arrows">
           <div className="black-circle">
             <span
+              onClick={goToPreviousRoute}
               className="title"
               title="Go back"
               dangerouslySetInnerHTML={{
@@ -108,6 +118,7 @@ export function AppHeader() {
           </div>
           <div className="black-circle">
             <span
+            onClick={goToNextRoute}
               className="title"
               title="Go forward"
               dangerouslySetInnerHTML={{
@@ -193,5 +204,5 @@ export function AppHeader() {
       </div>
       {showModal && <UserModal onClose={onCloseModal} />}
     </header>
-  )
+  );
 }

@@ -1,5 +1,6 @@
 import { httpService } from './http.service'
 import { stationService } from './station.service'
+import { utilService } from './util.service'
 
 const STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser'
 
@@ -71,6 +72,7 @@ async function login(userCred) {
 }
 
 async function signup(userCred) {
+  console.log('from service',userCred)
   if (!userCred.imgUrl) {
     userCred.imgUrl =
       'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg'
@@ -5147,8 +5149,12 @@ function getLoggedinUser() {
 function prepareData(userCred) {
   return {
     email: userCred.email,
-    userName: userCred.name,
-    img: userCred.picture,
+    username: userCred.name,
+    imgUrl: userCred.picture,
+    password: utilService.makeId(),
+    stations: [],
+    likedSongs: [],
+    latestStations: [],
   }
 }
 
