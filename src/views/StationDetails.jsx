@@ -34,7 +34,7 @@ export function StationDetails(props) {
     (storeState) => storeState.stationModule.currStation
   )
   const user = useSelector((storeState) => storeState.userModule.loggedInUser)
-  console.log('user', user)
+
   const filterBy = useSelector(
     (storeState) => storeState.stationModule.categoryBy
   )
