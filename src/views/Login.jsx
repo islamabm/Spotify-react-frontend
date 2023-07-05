@@ -41,7 +41,7 @@ export function Login() {
       </div>
       <div className="login-main-container flex column align-center">
         <h2>Log in to Spotify</h2>
-        <div className="continueW flex column">
+        <div className="continue flex column">
           <button className="pointer">
             <span>
               <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/2008px-Google_%22G%22_Logo.svg.png" />

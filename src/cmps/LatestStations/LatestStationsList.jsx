@@ -1,5 +1,6 @@
 import React from 'react'
 import LatestStationsPreview from './LatestStationsPreview'
+
 export function LatestStationsList({latestStations}) {
   return (
     ( latestStations &&

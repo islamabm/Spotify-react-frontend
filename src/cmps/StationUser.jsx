@@ -4,14 +4,15 @@ import { stationService } from '../services/station.service.js'
 import { EditUserStationModal } from './Modals/EditUserStationModal.jsx'
 import emptyImg from '../assets/imgs/empty-img.png'
 
-export default function StationUser({ station }) {
+export default function StationUser({ station , onEditModalOpen }) {
   const stationNameClass = stationService.stationNameClass(station)
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
-  const handleEditModalOpen = () => {
+  function handleEditModalOpen() {
     setIsEditModalOpen(true)
+    onEditModalOpen()
   }
 
-  const handleEditModalClose = () => {
+  function handleEditModalClose() {
     setIsEditModalOpen(false)
   }
   return (

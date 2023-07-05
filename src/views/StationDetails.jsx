@@ -150,7 +150,7 @@ export function StationDetails(props) {
           background: `linear-gradient(to bottom, ${color.rgb} 0%, ${color.rgb} 10%, ${color.rgb} 20%, ${color.rgb} 50%, black 140%, black 70%, black 100%)`,
         })
         setBgBottomStyle({
-          background: `linear-gradient(${color.rgb} -30%, #121212 9%)`,
+          background: `linear-gradient(${color.rgb} -30%, #121212 12%)`,
         })
       } catch (e) {
         console.error(e)
@@ -162,7 +162,7 @@ export function StationDetails(props) {
   return (
     <section className="station-details" ref={stationDetailsRef}>
       <StationHeaderDetails bgStyle={bgStyle} station={station} />
-      <div className="bottom gradient" style={bgBottomStyle}>
+      <div className="bottom-gradient" style={bgBottomStyle}>
         <div className="user-station-actions">
           {station?.songs?.length > 0 && (
             <>
@@ -189,10 +189,10 @@ export function StationDetails(props) {
           ></span>
         </div>
         <div className="station-songs-header" style={{ background: headerBg }}>
-          <span className="flex align-center justify-center">#</span>
+          <span className=" align-center justify-center">#</span>
           <span className="title flex align-center">Title</span>
-          <span className="flex align-center">Album</span>
-          <span className="flex align-center">Date added</span>
+          <span className=" align-center">Album</span>
+          <span className=" align-center">Date added</span>
           <span
             className="time flex align-center justify-center"
             dangerouslySetInnerHTML={{

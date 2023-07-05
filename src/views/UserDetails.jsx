@@ -59,7 +59,7 @@ export function UserDetails() {
           <span className="profile-word"> Profile </span>
           <h3 className="user-username">{user?.username}</h3>
           <span className="user-stations-count">24 Public Playlists</span>
-          <span className="dot">•</span>
+          <span className="dot"> • </span>
           <span className="following">7 following</span>
         </div>
       </div>
