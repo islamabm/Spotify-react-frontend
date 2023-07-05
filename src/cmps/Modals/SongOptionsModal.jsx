@@ -8,8 +8,16 @@ import {
   removeSongFromStation,
   addStation,
 } from '../../store/actions/station.actions'
-import { updateUser } from '../../store/actions/user.actions'
+import {
+  updateUser,
+  removeSongFromUser,
+} from '../../store/actions/user.actions'
 export function SongOptionsModal({ position, closeModal, station }) {
+  const [createdBy, setCreatedBy] = useState('')
+
+  useEffect(() => {
+    setCreatedBy(station.createdBy?.fullname)
+  }, [station])
   const user = useSelector((storeState) => storeState.userModule.loggedInUser)
   const song = useSelector((storeState) => storeState.songModule.currSongAction)
 
@@ -52,6 +60,10 @@ export function SongOptionsModal({ position, closeModal, station }) {
     closeModal()
   }
 
+  function removeSongFromLikedSongs() {
+    dispatch(removeSongFromUser(song._id, user))
+  }
+
   function handleRemoveSongFromStation() {
     dispatch(removeSongFromStation(station._id, song._id))
     closeModal()
@@ -70,9 +82,15 @@ export function SongOptionsModal({ position, closeModal, station }) {
         }}
       >
         <ul>
-          <li onClick={addSongToLikedSongs}>
-            <button>Save to your Liked Songs</button>
-          </li>
+          {createdBy === 'Liked songs system' ? (
+            <li onClick={removeSongFromLikedSongs}>
+              <button>Remove from your Liked Songs</button>
+            </li>
+          ) : (
+            <li onClick={addSongToLikedSongs}>
+              <button>Save to your Liked Songs</button>
+            </li>
+          )}
           {station.createdBy.fullname !== 'system' && (
             <li onClick={handleRemoveSongFromStation}>
               <button>Remove from this playlist</button>

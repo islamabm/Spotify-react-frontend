@@ -8,12 +8,13 @@ export function UserStationsIndex({ filterUserStations }) {
     (storeState) => storeState.stationModule.userStations
   )
 
-  // const user = useSelector((storeState) => storeState.userModule.loggedInUser)
+  const user = useSelector((storeState) => storeState.userModule.loggedInUser)
   const dispatch = useDispatch()
 
   useEffect(() => {
+    console.log('loadstations')
     dispatch(loadUserStations())
-  }, [userStations])
+  }, [userStations, user])
 
   return (
     <section className="user-stations-index">
