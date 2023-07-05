@@ -30,9 +30,9 @@ export default function StationSongList({ station }) {
   const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 })
   const [songs, setSongs] = useState(station.songs)
   const [isFirstClick, setIsFirstClick] = useState(true)
+
   function onSongClicked(songId) {
     setCurrSvg('play')
-
     if (currSong?.id !== songId) {
       setIsFirstClick(true)
     }
@@ -47,7 +47,6 @@ export default function StationSongList({ station }) {
 
   function pauseSong() {
     setCurrSvg('pause')
-
     dispatch(setCurrSongSvg('pause'))
   }
 
@@ -96,19 +95,12 @@ export default function StationSongList({ station }) {
   }
 
   function handleDragEnd(result) {
-    if (!result.destination) {
-      return
-    }
-
+    if (!result.destination) return
     const { source, destination } = result
-
     const updatedSongs = Array.from(songs)
-
     const [movedSong] = updatedSongs?.splice(source.index, 1)
     updatedSongs.splice(destination.index, 0, movedSong)
-
     setSongs(updatedSongs)
-
     dispatch(updateStation(params.id, updatedSongs))
   }
 

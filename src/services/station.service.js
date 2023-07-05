@@ -275,7 +275,6 @@ async function updateStation(stationId, songs) {
       `station/songs/${stationId}`,
       songs
     )
-    console.log('updatedStation', updatedStation)
     return updatedStation
   } catch (err) {
     console.error('Failed to update station', err)

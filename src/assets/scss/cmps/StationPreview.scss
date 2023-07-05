@@ -2,7 +2,6 @@
   text-decoration: none;
   font-family: circular-book;
   position: relative;
-
   cursor: pointer;
   height: 273px;
   width: 186px;
@@ -50,36 +49,24 @@
     height: 48px;
     background-color: $clrGreen;
     border-radius: 50%;
-    display: flex;
-    justify-content: center;
     align-items: center;
     opacity: 0;
     transition: opacity 0.4s 0.2s, transform 0.4s 0.2s;
     cursor: pointer;
     z-index: 2;
-
-    &:before {
-      content: "";
-      width: 0;
-      height: 0;
-      border-style: solid;
-      border-width: 9px 0 9px 16px;
-      border-color: transparent $clr2;
-      display: inline-block;
-      position: relative;
-      left: 3px;
+    svg {
+      fill: $clr2;
+      margin-left: 2px;
     }
   }
-
+  
   &:hover {
     background-color: $clr8;
     transition: background-color 0.3s ease-in-out;
     border-radius: 10px;
-
     .play-button {
       opacity: 1;
       transition: opacity 0.1s 0.1s, transform 0.1s 0.1s;
-
       &:hover {
         transform: scale(1.05);
         background-color: $clrGreenLight;
