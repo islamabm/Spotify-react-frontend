@@ -113,7 +113,7 @@ const gSearchCategories = [
   ],
 ]
 
-const API_KEY = 'AIzaSyCUFGRnCSVi_ThSlPsSGiian0R5z5i5wWA'
+const API_KEY = 'AIzaSyCnFaCmsRk7kKv39qKr8CG7-w3G7aEiTw0'
 
 const gUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=${API_KEY}&q=`
 const STORAGE_KEY = 'stations'

@@ -69,8 +69,6 @@ export function SongOptionsModal({ position, closeModal, station }) {
     closeModal()
   }
 
-  useEffect(() => {}, [station?.songs])
-
   return (
     <>
       <section

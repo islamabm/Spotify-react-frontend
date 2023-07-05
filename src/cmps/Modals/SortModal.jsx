@@ -15,7 +15,7 @@ export function SortModal({ onSelectOption }) {
     (storeState) => storeState.stationModule.filterBy
   )
 
-  const onSelect = (ev, option) => {
+  function onSelect(ev, option) {
     setSelected(option)
     onSelectOption(ev, option)
     dispatch(setFilterBy(userStations, option))
@@ -23,9 +23,8 @@ export function SortModal({ onSelectOption }) {
 
   return (
     <div className="sort-modal">
-      
-        <p className="sort-by">Sort by</p>
-     
+      <p className="sort-by">Sort by</p>
+
       {options?.map((option, idx) => (
         <div
           onClick={(ev) => onSelect(ev, option)}
