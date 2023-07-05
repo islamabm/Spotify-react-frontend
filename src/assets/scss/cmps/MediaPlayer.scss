@@ -93,15 +93,15 @@
   display: block;
 }
 
-// .progress-bar-audio {
-//   flex: 1 1;
-//   height: 5px;
-//   background-color: gray;
-//   position: relative;
-//   cursor: pointer;
-//   width: 110px;
-//   border-radius: 10000px;
-// }
+.progress-bar-audio {
+  flex: 1 1;
+  height: 5px;
+  background-color: gray;
+  position: relative;
+  cursor: pointer;
+  width: 110px;
+  border-radius: 10000px;
+}
 .progress-bar-audio-fill {
   -webkit-appearance: #1db954;
   appearance: #1db954;
