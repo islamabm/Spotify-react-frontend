@@ -19,7 +19,7 @@ export function StationPreview({ station }) {
     navigate(`/station/${station._id}`)
     console.log('cmp', station._id)
     console.log('cmp', user)
-    dispatch(updateLatestStations(station._id, user))
+    // dispatch(updateLatestStations(station._id, user))
   }
 
   function playFirstSongInStation(event) {
@@ -32,7 +32,13 @@ export function StationPreview({ station }) {
   return createdBy === 'system' ? (
     <article className="info" onClick={goToDetails}>
       <div className="station-img">
-        <img src={station.imgUrl ? station.imgUrl : 'https://pbs.twimg.com/profile_images/558556141605511168/2JDJX8SQ_400x400.png'} />
+        <img
+          src={
+            station.imgUrl
+              ? station.imgUrl
+              : 'https://pbs.twimg.com/profile_images/558556141605511168/2JDJX8SQ_400x400.png'
+          }
+        />
         <div
           className="play-button flex justify-center"
           onClick={playFirstSongInStation}
