@@ -215,7 +215,7 @@ export default function StationSongList({ station }) {
                         //   __html: getSpotifySvg('emptyHeartIcon'),
                         // }}
                         >
-                          <BubblingHeart songIndex={idx} song={song} />
+                          <BubblingHeart songIndex={idx} song={song} type="song" />
                         </span>
 
                         <div className="duration">

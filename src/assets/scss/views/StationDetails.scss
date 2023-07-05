@@ -28,7 +28,7 @@
 
     .station-info {
       .station-description {
-        margin-bottom:35px;
+        margin-bottom: 35px;
         color: rgba(255, 255, 255, 0.698);
       }
       .songs-count {
@@ -95,10 +95,16 @@
     padding: 24px;
     gap: 25px;
     .heart {
-      fill: $clrGreen;
+      fill: #afb8b7;
+      &:hover {
+        fill: $clr6;
+      }
     }
     .dots {
       fill: #afb8b7;
+      &:hover {
+        fill: $clr6;
+      }
     }
   }
 
