@@ -10,7 +10,7 @@ export function StationPreview({ station }) {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const user = useSelector((storeState) => storeState.userModule.loggedInUser)
-
+  console.log('user', user)
   function goToDetails() {
     dispatch(setCurrStation(station._id))
     navigate(`/station/${station._id}`)

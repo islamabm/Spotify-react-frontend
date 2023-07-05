@@ -10,15 +10,15 @@ export function UserStationsIndex() {
   const user = useSelector((storeState) => storeState.userModule.loggedInUser)
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    ifUser()
-  }, [])
+  // useEffect(() => {
+  //   ifUser()
+  // }, [])
 
-  function ifUser() {
-    if (user) {
-      dispatch(loadUserStations())
-    }
-  }
+  // function ifUser() {
+  //   if (user) {
+  //     dispatch(loadUserStations())
+  //   }
+  // }
 
   return (
     <section className="user-stations-index">
