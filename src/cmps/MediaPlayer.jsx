@@ -200,7 +200,7 @@ export function MediaPlayer({ volume }) {
               <span
                 title="Disable shuffle"
                 onClick={onShuffleClicked}
-                className="pointer title"
+                className="pointer title shuffle"
                 dangerouslySetInnerHTML={{
                   __html: getSpotifySvg('shouffleIcon'),
                 }}
@@ -208,7 +208,7 @@ export function MediaPlayer({ volume }) {
             </button>
           ) : (
             <span
-              className="pointer title"
+              className="pointer title shuffle"
               title="Enable shuffle"
               onClick={onShuffleClicked}
               dangerouslySetInnerHTML={{
@@ -219,14 +219,14 @@ export function MediaPlayer({ volume }) {
           <span
             title="Previous"
             onClick={getPrevSong}
-            className="pointer title"
+            className="pointer title prev"
             dangerouslySetInnerHTML={{ __html: getSpotifySvg('prevIcon') }}
           ></span>
           <div className="play-song-div">
             {' '}
             <span
               title={isPlaying ? 'Pause' : 'Play'}
-              className="special-i pointer title"
+              className="special-i pointer play-pause"
               onClick={handlePlayPauseClick}
               dangerouslySetInnerHTML={{
                 __html: isPlaying
@@ -238,7 +238,7 @@ export function MediaPlayer({ volume }) {
           <span
             title="Next"
             onClick={getNextSong}
-            className="pointer title"
+            className="pointer title next"
             dangerouslySetInnerHTML={{
               __html: getSpotifySvg('nextIcon'),
             }}
@@ -246,9 +246,9 @@ export function MediaPlayer({ volume }) {
           {isRepeated ? (
             <button className="is-repeated">
               <span
-                title="Disable repeat title"
+                title="Disable repeat"
                 onClick={onRepeatClicked}
-                className="pointer"
+                className="pointer repeat"
                 dangerouslySetInnerHTML={{
                   __html: getSpotifySvg('repeateIcon'),
                 }}
@@ -258,7 +258,7 @@ export function MediaPlayer({ volume }) {
             <span
               title="Enable repeat"
               onClick={onRepeatClicked}
-              className="pointer title"
+              className="pointer title repeat"
               dangerouslySetInnerHTML={{
                 __html: getSpotifySvg('repeateIcon'),
               }}

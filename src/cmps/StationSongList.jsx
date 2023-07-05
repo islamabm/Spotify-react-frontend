@@ -174,9 +174,9 @@ export default function StationSongList({ station }) {
                         ></span>
                       ) : (
                         <span
-                          title={`Play ${currSong?.title}`}
+                          title={`Play ${song?.title}`}
                           onClick={() => onSongClicked(song._id)}
-                          className={` small-play-btn flex align-center justify-center title ${
+                          className={` small-play-btn flex align-center justify-center title play${
                             hoveredSongIdx === idx ? 'hovered' : ''
                           }`}
                           dangerouslySetInnerHTML={{
@@ -217,7 +217,7 @@ export default function StationSongList({ station }) {
                       <div className="duration-container flex">
                         <span
                           title="Save to Your Library"
-                          className="hidden dots title"
+                          className="hidden dots title save"
                           dangerouslySetInnerHTML={{
                             __html: getSpotifySvg('emptyHeartIcon'),
                           }}
@@ -226,9 +226,9 @@ export default function StationSongList({ station }) {
                           {song?.duration ? song?.duration : '1:00'}
                         </div>
                         <span
-                          title={`More options for ${currSong?.title}`}
+                          title={`More options for ${song?.title}`}
                           onClick={(e) => showSongOptionsModal(e, song)}
-                          className="hidden dots title"
+                          className="hidden dots title song-option"
                           dangerouslySetInnerHTML={{
                             __html: getSpotifySvg('dots'),
                           }}

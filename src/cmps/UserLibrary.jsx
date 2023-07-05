@@ -57,7 +57,7 @@ export function UserLibrary() {
             <span
               title="Create Playlist"
               onClick={createNewStation}
-              className="plus-icon flex align-center justify-center pointer title"
+              className="plus-icon flex align-center justify-center pointer title create"
               dangerouslySetInnerHTML={{
                 __html: getSpotifySvg('plus'),
               }}

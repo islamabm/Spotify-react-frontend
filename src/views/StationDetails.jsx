@@ -180,9 +180,9 @@ export function StationDetails(props) {
             </>
           )}
           <span
-            title={`More options from ${station.name}`}
+            title={`More options for my ${station.name}`}
             onClick={(e) => showStationModal(e)}
-            className="dots flex align-center justify-center"
+            className="dots flex align-center justify-center option"
             dangerouslySetInnerHTML={{
               __html: getSpotifySvg('bigDots'),
             }}

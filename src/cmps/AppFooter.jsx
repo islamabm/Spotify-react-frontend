@@ -99,7 +99,7 @@ export function AppFooter() {
           <span
             title="Lyrics"
             onClick={onLyricsClicked}
-            className="pointer title"
+            className="pointer title lyrics"
             dangerouslySetInnerHTML={{
               __html: getSpotifySvg('lyricsIcon'),
             }}
@@ -114,7 +114,7 @@ export function AppFooter() {
         <span
           title={mute ? 'Unmute' : 'Mute'}
           onClick={onToggleMute}
-          className="pointer title"
+          className="pointer title mute"
           dangerouslySetInnerHTML={{
             __html: getSpotifySvg(setSvg()),
           }}

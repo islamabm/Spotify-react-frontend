@@ -1,0 +1,132 @@
+.shuffle[title]:hover::after {
+  content: attr(title);
+  background-color: $clr4;
+  width: max-content;
+  padding: 8px;
+  border-radius: 10px;
+  font-family: circular-book;
+  position: absolute;
+  top: -40%;
+  left: 38%;
+}
+.prev[title]:hover::after {
+  content: attr(title);
+  background-color: $clr4;
+  width: max-content;
+  padding: 8px;
+  border-radius: 10px;
+  font-family: circular-book;
+  position: absolute;
+  top: -40%;
+  left: 41.8%;
+}
+.play-pause[title]:hover::after {
+  content: attr(title);
+  background-color: $clr4;
+  width: max-content;
+  padding: 8px;
+  border-radius: 10px;
+  font-family: circular-book;
+  position: absolute;
+  top: -40%;
+  left: 46.4%;
+}
+.next[title]:hover::after {
+  content: attr(title);
+  background-color: $clr4;
+  width: max-content;
+  padding: 8px;
+  border-radius: 10px;
+  font-family: circular-book;
+  position: absolute;
+  top: -40%;
+  left: 49.8%;
+}
+.repeat[title]:hover::after {
+  content: attr(title);
+  background-color: $clr4;
+  width: max-content;
+  padding: 8px;
+  border-radius: 10px;
+  font-family: circular-book;
+  position: absolute;
+  top: -40%;
+  left: 52%;
+}
+.lyrics[title]:hover::after {
+  content: attr(title);
+  background-color: $clr4;
+  width: max-content;
+  padding: 8px;
+  border-radius: 10px;
+  font-family: circular-book;
+  position: absolute;
+  top: -23%;
+  left: 75%;
+}
+.mute[title]:hover::after {
+  content: attr(title);
+  background-color: $clr4;
+  width: max-content;
+  padding: 8px;
+  border-radius: 10px;
+  font-family: circular-book;
+  position: absolute;
+  top: -23%;
+  left: 77%;
+}
+.create[title]:hover::after {
+  content: attr(title);
+  background-color: $clr4;
+  width: max-content;
+  padding: 8px;
+  border-radius: 10px;
+  font-family: circular-book;
+  position: absolute;
+  top: -23%;
+  left: 77%;
+}
+.option[title]:hover::after {
+  content: attr(title);
+  background-color: $clr4;
+  width: max-content;
+  padding: 8px;
+  border-radius: 10px;
+  font-family: circular-book;
+  position: absolute;
+  top: 40%;
+  left: 30%;
+}
+.song-option[title]:hover::after {
+  content: attr(title);
+  background-color: $clr4;
+  width: max-content;
+  padding: 8px;
+  border-radius: 10px;
+  font-family: circular-book;
+  position: absolute;
+  top: -45%;
+  left: 83%;
+}
+.play[title]:hover::after {
+  content: attr(title);
+  background-color: $clr4;
+  width: max-content;
+  padding: 8px;
+  border-radius: 10px;
+  font-family: circular-book;
+  position: absolute;
+  top: -45%;
+  left: -2%;
+}
+.save[title]:hover::after {
+  content: attr(title);
+  background-color: $clr4;
+  width: max-content;
+  padding: 8px;
+  border-radius: 10px;
+  font-family: circular-book;
+  position: absolute;
+  top: -45%;
+  left: 82%;
+}
