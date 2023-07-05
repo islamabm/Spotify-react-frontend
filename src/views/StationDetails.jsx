@@ -199,7 +199,7 @@ export function StationDetails(props) {
                 )}
               </div>
               <span>
-                <BubblingHeart index={station._id} item={station} type="station" />
+                <BubblingHeart index={station._id} item={station} type="station"/>
               </span>
             </>
           )}
