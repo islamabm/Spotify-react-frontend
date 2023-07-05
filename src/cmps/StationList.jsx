@@ -27,8 +27,8 @@ function _StationList({ stations }) {
         <>
           <h3 className="category-tag">{tag}</h3>
           <section className="station-list">
-            {stationTag.map((station) => (
-              <StationPreview key={station._id} station={station} />
+            {stationTag.map((station, idx) => (
+              <StationPreview key={idx} station={station} />
             ))}
           </section>
         </>

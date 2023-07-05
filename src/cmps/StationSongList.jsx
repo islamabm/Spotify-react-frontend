@@ -130,11 +130,7 @@ export default function StationSongList({ station }) {
                 song?._id === currSong?._id && song?._id === hoveredSong
 
               return (
-                <Draggable
-                  key={idx}
-                  draggableId={song._id || `song-${idx}`}
-                  index={idx}
-                >
+                <Draggable key={idx} draggableId={`song-${idx}`} index={idx}>
                   {(provided) => (
                     <div
                       ref={provided.innerRef}

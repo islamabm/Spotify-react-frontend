@@ -49,7 +49,11 @@ export function AppHeader() {
       updateHeaderOpacity(scrollPos, bgStyle)
     const unlisten = eventBus.on('stationDetailsScroll', onScroll)
 
-    if (location.pathname === '/' || location.pathname === '/search') {
+    if (
+      location.pathname === '/' ||
+      location.pathname === '/search' ||
+      location.pathname === '/lyrics'
+    ) {
       setHeaders({
         backgroundColor: 'rgba(0,0,0,0)',
       })
@@ -76,8 +80,9 @@ export function AppHeader() {
       <section className="arrows-and-input">
         <section className="arrows">
           <div className="black-circle">
-            <span className='title'
-            title='Go back'
+            <span
+              className="title"
+              title="Go back"
               dangerouslySetInnerHTML={{
                 __html: getSpotifySvg('leftArrowIcon'),
               }}
@@ -85,8 +90,8 @@ export function AppHeader() {
           </div>
           <div className="black-circle">
             <span
-            className='title'
-            title='Go forward'
+              className="title"
+              title="Go forward"
               dangerouslySetInnerHTML={{
                 __html: getSpotifySvg('rightArrowIcon'),
               }}
@@ -96,10 +101,10 @@ export function AppHeader() {
         {location.pathname === '/search' && (
           <div className="flex align-center justify-center input-container">
             <span
-      dangerouslySetInnerHTML={{
-        __html: getSpotifySvg('smallerSearchIcon'),
-      }}
-    ></span>
+              dangerouslySetInnerHTML={{
+                __html: getSpotifySvg('smallerSearchIcon'),
+              }}
+            ></span>
             <input placeholder="What do you want to listen to?" />
           </div>
         )}

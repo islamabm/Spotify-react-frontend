@@ -169,10 +169,9 @@ export function setFilterBy(userStations, filterBy) {
 export function updateStation(stationId, songs) {
   return async (dispatch) => {
     try {
-      const updatedStation = await stationService.updateStation(
-        stationId,
-        songs
-      )
+      const updatedStation = await stationService.updateStation(stationId, {
+        songs: songs,
+      })
       const action = {
         type: UPDATE_STATION,
         station: updatedStation,

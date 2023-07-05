@@ -170,7 +170,7 @@ async function getVideos(keyword, song = null) {
       uncachedKeywords.map(async (artist) => {
         let cachedSong = getCachedSong(artist)
         if (cachedSong) {
-          console.log('cashed')
+          // console.log('cashed')
           return cachedSong
         } else {
           const res = await axios.get(gUrl + artist)
@@ -272,9 +272,10 @@ async function removeSongFromStation(stationId, songId) {
 async function updateStation(stationId, songs) {
   try {
     const updatedStation = await httpService.put(
-      `station/user/${stationId}`,
+      `station/songs/${stationId}`,
       songs
     )
+    console.log('updatedStation', updatedStation)
     return updatedStation
   } catch (err) {
     console.error('Failed to update station', err)
