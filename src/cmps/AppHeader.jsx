@@ -25,7 +25,6 @@ export function AppHeader() {
 
   function updateHeaderOpacity(scrollPos, headerBg) {
     setScrollPos(scrollPos)
-    console.log("scrollPos", scrollPos) 
     const maxScroll = 50
     let opacity = Math.min(scrollPos / maxScroll, 1)
 
@@ -52,8 +51,6 @@ export function AppHeader() {
     const onScroll = ({ scrollPos, headerBg }) => {
 
       updateHeaderOpacity(scrollPos, headerBg)
-      console.log('scrollPos', scrollPos)
-      console.log('headerBg', headerBg)
     }
     const unlistenDetails = eventBus.on("stationDetailsScroll", onScroll)
     const unlistenIndex = eventBus.on("stationIndexScroll", onScroll)
