@@ -9,6 +9,7 @@ import { eventBus } from '../services/event-bus.service'
 export function AppHeader() {
   const [showModal, setShowModal] = useState(false)
   const [currScrollPos, setScrollPos] = useState(0)
+  const [isPlaying, setIsPlaying] = useState(false)
 
   const station = useSelector(
     (storeState) => storeState.stationModule.currStation
@@ -75,6 +76,14 @@ export function AppHeader() {
   function onCloseModal() {
     setShowModal(false)
   }
+
+  function playFirstSongInStation(event) {
+    event.stopPropagation()
+    dispatch(setCurrSong(station?._id, station?.songs[0]._id))
+    dispatch(setCurrSongIndex(station?._id, station?.songs[0]._id))
+    setIsPlaying(!isPlaying)
+  }
+
   return (
     <header className="app-header" style={{ ...headers }}>
       <section className="arrows-and-input">
@@ -115,7 +124,28 @@ export function AppHeader() {
             onClick={playFirstSong}
             className="flex align-center justify-center station-options"
           >
-            <div className="play-button flex justify-center align-center"></div>
+            <div
+          className="play-button flex justify-center"
+          onClick={playFirstSongInStation}
+        >
+          {isPlaying ? (
+            <span
+              title="Pause"
+              className="pause-button flex align-center justify-center title"
+              dangerouslySetInnerHTML={{
+                __html: getSpotifySvg('biggerPauseBtn'),
+              }}
+            ></span>
+          ) : (
+            <span
+              title="Play"
+              className=" flex align-center justify-center title"
+              dangerouslySetInnerHTML={{
+                __html: getSpotifySvg('biggerPlayBtn'),
+              }}
+            ></span>
+          )}
+        </div>
             <p className="">{station.name}</p>
           </div>
         ) : (

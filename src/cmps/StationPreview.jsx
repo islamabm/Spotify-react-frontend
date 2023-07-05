@@ -19,7 +19,7 @@ export function StationPreview({ station }) {
     navigate(`/station/${station._id}`)
     console.log('cmp', station._id)
     console.log('cmp', user)
-    // dispatch(updateLatestStations(station._id, user))
+    dispatch(updateLatestStations(station._id, user))
   }
 
   function playFirstSongInStation(event) {
