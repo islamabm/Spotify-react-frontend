@@ -171,7 +171,7 @@ export function StationDetails(props) {
                 className="play-button flex justify-center align-center"
               ></div>
               <span
-                title='Save to Your Library'
+                title="Save to Your Library"
                 className="heart flex align-center justify-center title"
                 dangerouslySetInnerHTML={{
                   __html: getSpotifySvg('bigFilledHeart'),

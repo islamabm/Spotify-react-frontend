@@ -11,6 +11,7 @@ import {
 } from '../reducers/user.reducer'
 
 export function doSignup(userCred) {
+  console.log('userCred', userCred)
   console.log('userCred in the actions ', userCred)
   return async (dispatch, getState) => {
     try {
@@ -114,7 +115,7 @@ export function spendBalance(amount) {
 export function updateLatestStations(stationId, user) {
   return async (dispatch, getState) => {
     try {
-      const {value} = await userService.updateLatestStations(stationId, user)
+      const { value } = await userService.updateLatestStations(stationId, user)
       dispatch({ type: UPDATE_LATEST, value })
       console.log('Latest stations updated successfully:', value)
     } catch (error) {

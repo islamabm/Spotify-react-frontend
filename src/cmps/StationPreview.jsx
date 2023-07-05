@@ -14,7 +14,7 @@ export function StationPreview({ station }) {
   function goToDetails() {
     dispatch(setCurrStation(station._id))
     navigate(`/station/${station._id}`)
-    dispatch(updateLatestStations(station._id, user))
+    // dispatch(updateLatestStations(station._id, user))
   }
 
   return createdBy === 'system' ? (

@@ -132,7 +132,7 @@ export default function StationSongList({ station }) {
               return (
                 <Draggable
                   key={idx}
-                  draggableId={song?._id || `song-${idx}`}
+                  draggableId={song._id || `song-${idx}`}
                   index={idx}
                 >
                   {(provided) => (
