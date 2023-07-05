@@ -8,12 +8,19 @@ export function BubblingHeart({ songIndex, song }) {
   const dispatch = useDispatch()
 
   function toggleLike() {
-    // setLiked(!liked)
-    // if (liked) {
-      dispatch(updateUser(song, user))
-    // } else {
-    //   dispatch(removeSongFromUser(song._id, user))
-    // }
+    setLiked((prevLiked) => {
+      const updatedLike = !prevLiked
+
+      if (updatedLike) {
+        console.log('updatedLike', updatedLike)
+        dispatch(updateUser(song, user))
+      } else {
+        console.log('updatedLike', updatedLike)
+        dispatch(removeSongFromUser(song._id, user))
+      }
+
+      return updatedLike
+    })
   }
 
   return (
