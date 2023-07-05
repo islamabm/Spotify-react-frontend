@@ -11,7 +11,6 @@ import {
 } from '../reducers/user.reducer'
 
 export function doSignup(userCred) {
-  console.log('userCred', userCred)
   console.log('userCred in the actions ', userCred)
   return async (dispatch, getState) => {
     try {
