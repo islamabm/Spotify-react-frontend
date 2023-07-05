@@ -90,6 +90,7 @@ export function removeSongFromUser(songId, user) {
   return async (dispatch) => {
     try {
       const updatedUser = await userService.removeSong(songId, user)
+      console.log('updatedUser', updatedUser)
       dispatch({ type: UPDATE_USER, user: updatedUser })
     } catch (err) {
       console.log(err)
