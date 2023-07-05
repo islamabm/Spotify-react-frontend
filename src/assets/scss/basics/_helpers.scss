@@ -36,13 +36,15 @@
   content: attr(title);
   background-color: $clr4;
   position: absolute;
+  width: max-content;
   top: -30%;
-  height: 25px;
-  line-height: 30px;
+  left: 49%;
+
+  // line-height: 30px;
   padding: 8px;
   border-radius: 10px;
 }
-  
+
 .dot {
   font-size: 0.7rem;
   padding: 2px;
