@@ -331,16 +331,13 @@ function filterUserStations(userStations, filterBy) {
   let filteredStations = userStations
   switch (filterBy) {
     case 'Recently Added':
-      filteredStations = userStations.filter((station) => station.createdAt)
+      filteredStations = userStations
+        .filter((station) => station.createdAt)
+        .sort((a, b) => b.createdAt - a.createdAt)
       break
     case 'Alphabetical':
       filteredStations = userStations.sort((a, b) =>
         a.name.localeCompare(b.name)
-      )
-      break
-    case 'Creator':
-      filteredStations = userStations.sort((a, b) =>
-        a.createdBy.fullname.localeCompare(b.creator)
       )
       break
     default:
@@ -367,6 +364,7 @@ async function createNewStation(name, songs, url) {
       fullname: loggedinUser.username,
       imgUrl: '',
     },
+    createdAt: Date.now(),
     likedByUsers: [],
     songs,
     msgs: [

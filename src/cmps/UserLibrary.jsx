@@ -64,11 +64,11 @@ export function UserLibrary() {
               }}
             ></span>
           </div>
-          <div className="your-library-btns flex align-center">
+          {/* <div className="your-library-btns flex align-center">
             <button className="library-btn pointer">Playlists</button>
             <button className="library-btn pointer">Artists</button>
             <button className="library-btn pointer">Albums</button>
-          </div>
+          </div> */}
         </section>
         <section className="filter-and-list">
           <div className="library-filter">
