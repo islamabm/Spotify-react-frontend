@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getSpotifySvg } from '../services/SVG.service'
+import { BubblingHeart } from './BubblingHeart'
 import {
   setCurrSong,
   setCurrSongIndex,
@@ -215,13 +216,14 @@ export default function StationSongList({ station }) {
                         {formatDate(song?.addedAt)}
                       </div>
                       <div className="duration-container flex">
-                        <span
+                        {/* <span
                           title="Save to Your Library"
                           className="hidden dots title save"
                           dangerouslySetInnerHTML={{
                             __html: getSpotifySvg('emptyHeartIcon'),
-                          }}
-                        ></span>
+                          }} */}
+                        {/* ></span> */}
+                        <BubblingHeart />
                         <div className="duration">
                           {song?.duration ? song?.duration : '1:00'}
                         </div>

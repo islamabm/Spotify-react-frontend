@@ -1,5 +1,5 @@
-const UPLOAD_PRESET = process.env.REACT_APP_UPLOAD_PRESET
-const CLOUD_NAME = process.env.REACT_APP_CLOUD_NAME
+const UPLOAD_PRESET = process.env.REACT_APP_VITE_UPLOAD_PRESET
+const CLOUD_NAME = process.env.REACT_APP_VITE_CLOUD_NAME
 const UPLOAD_URL = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`
 
 export const uploadImg = async (file) => {
