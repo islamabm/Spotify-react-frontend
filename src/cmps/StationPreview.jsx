@@ -1,18 +1,18 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { setCurrStation } from "../store/actions/station.actions";
-import { setCurrSong, setCurrSongIndex } from "../store/actions/song.actions";
-import { userService } from "../services/user.service";
-import { updateLatestStations } from "../store/actions/user.actions";
-import { getSpotifySvg } from "../services/SVG.service";
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { setCurrStation } from '../store/actions/station.actions'
+import { setCurrSong, setCurrSongIndex } from '../store/actions/song.actions'
+import { userService } from '../services/user.service'
+import { updateLatestStations } from '../store/actions/user.actions'
+import { getSpotifySvg } from '../services/SVG.service'
 
 export function StationPreview({ station }) {
-  const createdBy = station?.createdBy.fullname;
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const user = useSelector((storeState) => storeState.userModule.loggedInUser);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const createdBy = station?.createdBy.fullname
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const user = useSelector((storeState) => storeState.userModule.loggedInUser)
+  const [isPlaying, setIsPlaying] = useState(false)
 
   function goToDetails() {
     dispatch(setCurrStation(station._id));
@@ -23,10 +23,10 @@ export function StationPreview({ station }) {
   }
 
   function playFirstSongInStation(event) {
-    event.stopPropagation();
-    dispatch(setCurrSong(station?._id, station?.songs[0]._id));
-    dispatch(setCurrSongIndex(station?._id, station?.songs[0]._id));
-    setIsPlaying(!isPlaying);
+    event.stopPropagation()
+    dispatch(setCurrSong(station?._id, station?.songs[0]._id))
+    dispatch(setCurrSongIndex(station?._id, station?.songs[0]._id))
+    setIsPlaying(!isPlaying)
   }
 
   return createdBy === "system" ? (

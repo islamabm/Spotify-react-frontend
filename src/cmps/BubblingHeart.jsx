@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
-
-export function BubblingHeart({ songIndex }) {
+import { useDispatch, useSelector } from 'react-redux'
+import { updateUser } from '../store/actions/user.actions'
+export function BubblingHeart({ songIndex, song }) {
   const [liked, setLiked] = useState(false)
-
-  const toggleLike = () => {
+  const user = useSelector((storeState) => storeState.userModule.loggedInUser)
+  const dispatch = useDispatch()
+  function toggleLike() {
+    dispatch(updateUser(song, user))
     setLiked(!liked)
   }
   return (
