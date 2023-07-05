@@ -94,32 +94,6 @@
     align-items: center;
     padding: 24px;
     gap: 25px;
-    .play-button {
-      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.4);
-      width: 55px;
-      height: 55px;
-      background-color: $clrGreen;
-      border-radius: 50%;
-      transition: opacity 1s 0.02s, transform 1s 0.02s;
-      cursor: pointer;
-      z-index: 2;
-      &:before {
-        content: '';
-        width: 0;
-        height: 0;
-        border-style: solid;
-        border-width: 9px 0 9px 16px;
-        border-color: transparent $clr2;
-        display: inline-block;
-        position: relative;
-        left: 3px;
-      }
-      &:hover {
-        transform: scale(1.1);
-        background-color: $clrGreenLight;
-        border-radius: 50%;
-      }
-    }
     .heart {
       fill: $clrGreen;
     }
@@ -258,19 +232,11 @@
   transition: opacity 0.3s 0.1s, transform 0.3s 0.1s;
   cursor: pointer;
   z-index: 2;
-  &:before {
-    content: '';
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 9px 0 9px 16px;
-    border-color: transparent $clr2;
-    display: inline-block;
-    position: relative;
-    left: 3px;
+  svg {
+    fill: $clr2;
   }
   &:hover {
-    transform: scale(1.11);
+    transform: scale(1.05);
     background-color: $clrGreenLight;
     border-radius: 50%;
   }

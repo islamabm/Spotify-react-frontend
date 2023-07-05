@@ -16,6 +16,7 @@ import { RecommindationModal } from '../cmps/Modals/RecommindationModal'
 import SearchSongs from '../cmps/SearchSongs/SearchSongsIndex'
 import { setCurrSong, setCurrSongIndex } from '../store/actions/song.actions'
 import { DeleteStationModal } from '../cmps/Modals/DeleteStationModal'
+
 export function StationDetails(props) {
   const [bgStyle, setBgStyle] = useState(null)
   const [bgBottomStyle, setBgBottomStyle] = useState(null)
@@ -28,6 +29,7 @@ export function StationDetails(props) {
   const navigate = useNavigate()
   const params = useParams()
   const stationDetailsRef = useRef(null)
+  const [isPlaying, setIsPlaying] = useState(false)
   const station = useSelector(
     (storeState) => storeState.stationModule.currStation
   )
@@ -122,6 +124,7 @@ export function StationDetails(props) {
   function playFirstSongInStation() {
     dispatch(setCurrSong(station?._id, station?.songs[0]._id))
     dispatch(setCurrSongIndex(station?._id, station?.songs[0]._id))
+    setIsPlaying(!isPlaying)
   }
 
   function handleShowRecommindationModal() {
@@ -169,9 +172,27 @@ export function StationDetails(props) {
           {station?.songs?.length > 0 && (
             <>
               <div
-                onClick={playFirstSongInStation}
                 className="play-button flex justify-center align-center"
-              ></div>
+                onClick={playFirstSongInStation}
+              >
+                {isPlaying ? (
+                  <span
+                    title="Pause"
+                    className="pause-button flex align-center justify-center title"
+                    dangerouslySetInnerHTML={{
+                      __html: getSpotifySvg('biggerPauseBtn'),
+                    }}
+                  ></span>
+                ) : (
+                  <span
+                    title="Play"
+                    className="play-button flex align-center justify-center title"
+                    dangerouslySetInnerHTML={{
+                      __html: getSpotifySvg('biggerPlayBtn'),
+                    }}
+                  ></span>
+                )}
+              </div>
               <span
                 title="Save to Your Library"
                 className="heart flex align-center justify-center title"
