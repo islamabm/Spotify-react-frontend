@@ -24,6 +24,10 @@ export function BubblingHeart({ index, item, type }) {
     });
   }
 
+  useEffect(() => {
+    console.log('user', user)
+  }, [liked])
+
   return (
     <div className={`bubbling-heart ${liked ? "bubbling-heart--liked" : ""}`}>
       <input
