@@ -23,20 +23,20 @@ export function AppHeader() {
     backgroundColor: "transparent",
   });
 
-  function updateHeaderOpacity(scrollPos, bgStyle) {
-    setScrollPos(scrollPos);
-    console.log("scrollPos", scrollPos);
-    const maxScroll = 50;
-    let opacity = Math.min(scrollPos / maxScroll, 1);
+  function updateHeaderOpacity(scrollPos, headerBg) {
+    setScrollPos(scrollPos)
+    console.log("scrollPos", scrollPos) 
+    const maxScroll = 50
+    let opacity = Math.min(scrollPos / maxScroll, 1)
 
-    let match = bgStyle?.background.match(/rgb\((\d+,\d+,\d+)\)/);
-    let dominantColor = match ? match[1] : "0,0,0";
+    let match = headerBg?.background?.match(/rgb\((\d+,\d+,\d+)\)/)
+    let dominantColor = match ? match[1] : "0,0,0"
 
     const newHeaders = {
       backgroundColor: `rgba(${dominantColor}, ${opacity})`,
-    };
-    console.log("newHeaders", newHeaders);
-    setHeaders(newHeaders);
+    }
+    console.log("newHeaders", newHeaders)
+    setHeaders(newHeaders)
   }
 
   function playFirstSong() {
@@ -47,31 +47,37 @@ export function AppHeader() {
   function handleLogout() {
     dispatch(doLogout());
   }
+
   useEffect(() => {
-    const onScroll = ({ scrollPos, bgStyle }) =>
-      updateHeaderOpacity(scrollPos, bgStyle);
-    const unlisten = eventBus.on("stationDetailsScroll", onScroll);
-    console.log("use effect scroll event");
+    const onScroll = ({ scrollPos, headerBg }) => {
+
+      updateHeaderOpacity(scrollPos, headerBg)
+      console.log('scrollPos', scrollPos)
+      console.log('headerBg', headerBg)
+    }
+    const unlistenDetails = eventBus.on("stationDetailsScroll", onScroll)
+    const unlistenIndex = eventBus.on("stationIndexScroll", onScroll)
     if (
       location.pathname === "/" ||
       location.pathname === "/search" ||
       location.pathname === "/lyrics"
     ) {
-      console.log("new header");
+      console.log("new header")
       setHeaders({
         backgroundColor: "rgba(0,0,0,0)",
-      });
+      })
+      console.log("headers", headers)
     } else {
-      console.log("transparent");
+      console.log("transparent")
       setHeaders({
         backgroundColor: "transparent",
-      });
+      })
     }
-
     return () => {
-      unlisten();
-    };
-  }, [location]);
+      unlistenDetails()
+      unlistenIndex()
+    }
+  }, [location.pathname])
 
   function onShowModal() {
     setShowModal(true);

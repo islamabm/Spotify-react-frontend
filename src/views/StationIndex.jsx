@@ -1,22 +1,56 @@
-import { useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { StationList } from '../cmps/StationList'
 import { useDispatch, useSelector } from 'react-redux'
 import { loadStations } from '../store/actions/station.actions'
-import { LatestStationsIndex } from '../cmps/LatestStations/LatestStationsIndex'
 import { getGreeting } from '../services/util.service'
+import { eventBus } from '../services/event-bus.service'
 
 export function StationIndex() {
+  const [headerBg, setHeaderBg] = useState({
+    backgroundColor: `transparent`
+  }
+  )
   const stations = useSelector(
     (storeState) => storeState.stationModule.stations
   )
-
+  const stationIndexRef = useRef(null);
   const filterBy = useSelector(
     (storeState) => storeState.stationModule.categoryBy
   )
-
+    
   const dispatch = useDispatch()
   const currentDate = new Date()
   const greeting = getGreeting(currentDate)
+
+  useEffect(() => {
+    const currentStationIndexRef = stationIndexRef.current;
+    const handleScroll = () => {
+      const scrollPos = currentStationIndexRef.scrollTop;
+      if (scrollPos > 375) {
+        setHeaderBg("#1a1a1a");
+      } else {
+        setHeaderBg("transparent");
+      }
+      console.log('scrollPos', scrollPos)
+      console.log('headerBg', headerBg)
+      eventBus.emit("stationIndexScroll", { scrollPos, headerBg });
+    };
+    if (currentStationIndexRef) {
+      console.log('add event listener');
+      currentStationIndexRef.addEventListener('scroll', handleScroll, {
+        passive: true,
+      });
+    }
+    return () => {
+      if (currentStationIndexRef) {
+        console.log('remove event listener');
+        currentStationIndexRef.removeEventListener("scroll", handleScroll, {
+          passive: true,
+        });
+      }
+    };
+  }, [headerBg]);
+
 
   useEffect(() => {
     dispatch(loadStations(filterBy))
@@ -25,7 +59,7 @@ export function StationIndex() {
   if (!stations) return <div className="loader"></div>
 
   return (
-    <section className="station-index">
+    <section className="station-index" ref={stationIndexRef}>
       <h1 className="greeting">{greeting}</h1>
       {/* <LatestStationsIndex /> */}
       <StationList stations={stations} />

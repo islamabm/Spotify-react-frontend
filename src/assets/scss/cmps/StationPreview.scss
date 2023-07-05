@@ -24,9 +24,12 @@
     }
 
     p {
-      margin: 5px 0px -3px 2px;
       color: $clr3;
       padding: 0;
+      margin: 5px 0;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      max-width: 160px;
     }
   }
 
