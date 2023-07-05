@@ -15,7 +15,9 @@ export function Signup() {
 
   function handleCallbackResponse(response) {
     const userObject = jwtDecode(response.credential)
+    console.log(userObject)
     const user = userService.prepareData(userObject)
+    console.log('from signup',user)
     dispatch(doSignup(user))
     navigate(`/`)
   }

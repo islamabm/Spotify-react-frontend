@@ -11,7 +11,6 @@ export const ADD_SONG_TO_STATION = 'ADD_SONG_TO_STATION'
 export const REMOVE_SONG_FROM_STATION = 'REMOVE_SONG_FROM_STATION'
 export const EDIT_STATION = 'EDIT_STATION'
 export const SET_CURR_CATEGORY_BY = 'SET_CURR_CATEGORY_BY'
-
 const INITIAL_STATE = {
   currStationImg: '',
   stations: [],
@@ -75,6 +74,7 @@ export function stationReducer(state = INITIAL_STATE, action = {}) {
         searchStations: action.stations,
       }
     case ADD_STATION:
+      if (state.userStations.some((station) => station.name === action.station.name)) return
       return {
         ...state,
         stations: [...state.stations, action.station],
@@ -134,7 +134,6 @@ export function stationReducer(state = INITIAL_STATE, action = {}) {
             : station
         ),
       }
-
     default:
       return state
   }

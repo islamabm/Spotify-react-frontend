@@ -1,87 +1,99 @@
-import { getSpotifySvg } from '../services/SVG.service'
-import { useLocation, Link } from 'react-router-dom'
-import { UserModal } from './Modals/UserModal'
-import { useState, useEffect } from 'react'
-import { setCurrSong, setCurrSongIndex } from '../store/actions/song.actions'
-import { doLogout } from '../store/actions/user.actions'
-import { useDispatch, useSelector } from 'react-redux'
-import { eventBus } from '../services/event-bus.service'
+import { getSpotifySvg } from "../services/SVG.service";
+import { useLocation, Link, useNavigate } from "react-router-dom";
+import { UserModal } from "./Modals/UserModal";
+import { useState, useEffect } from "react";
+import { setCurrSong, setCurrSongIndex } from "../store/actions/song.actions";
+import { doLogout } from "../store/actions/user.actions";
+import { useDispatch, useSelector } from "react-redux";
+import { eventBus } from "../services/event-bus.service";
 export function AppHeader() {
-  const [showModal, setShowModal] = useState(false)
-  const [currScrollPos, setScrollPos] = useState(0)
-  const [isPlaying, setIsPlaying] = useState(false)
+  const [showModal, setShowModal] = useState(false);
+  const [currScrollPos, setScrollPos] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const navigate = useNavigate();
 
   const station = useSelector(
     (storeState) => storeState.stationModule.currStation
-  )
-  const user = useSelector((storeState) => storeState.userModule.loggedInUser)
-  const dispatch = useDispatch()
-  const location = useLocation()
+  );
+  const user = useSelector((storeState) => storeState.userModule.loggedInUser);
+  const dispatch = useDispatch();
+  const location = useLocation();
 
   const [headers, setHeaders] = useState({
-    backgroundColor: 'transparent',
-  })
+    backgroundColor: "transparent",
+  });
 
   function updateHeaderOpacity(scrollPos, bgStyle) {
-    setScrollPos(scrollPos)
+    setScrollPos(scrollPos);
+    console.log("scrollPos", scrollPos);
+    const maxScroll = 50;
+    let opacity = Math.min(scrollPos / maxScroll, 1);
 
-    const maxScroll = 50
-    let opacity = Math.min(scrollPos / maxScroll, 1)
-
-    let match = bgStyle?.background.match(/rgb\((\d+,\d+,\d+)\)/)
-    let dominantColor = match ? match[1] : '0,0,0'
+    let match = bgStyle?.background.match(/rgb\((\d+,\d+,\d+)\)/);
+    let dominantColor = match ? match[1] : "0,0,0";
 
     const newHeaders = {
       backgroundColor: `rgba(${dominantColor}, ${opacity})`,
-    }
-    setHeaders(newHeaders)
+    };
+    console.log("newHeaders", newHeaders);
+    setHeaders(newHeaders);
   }
 
   function playFirstSong() {
-    dispatch(setCurrSong(station?._id, station?.songs[0]._id))
-    dispatch(setCurrSongIndex(station?._id, station?.songs[0]._id))
+    dispatch(setCurrSong(station?._id, station?.songs[0]._id));
+    dispatch(setCurrSongIndex(station?._id, station?.songs[0]._id));
   }
 
   function handleLogout() {
-    dispatch(doLogout())
+    dispatch(doLogout());
   }
   useEffect(() => {
     const onScroll = ({ scrollPos, bgStyle }) =>
-      updateHeaderOpacity(scrollPos, bgStyle)
-    const unlisten = eventBus.on('stationDetailsScroll', onScroll)
-
+      updateHeaderOpacity(scrollPos, bgStyle);
+    const unlisten = eventBus.on("stationDetailsScroll", onScroll);
+    console.log("use effect scroll event");
     if (
-      location.pathname === '/' ||
-      location.pathname === '/search' ||
-      location.pathname === '/lyrics'
+      location.pathname === "/" ||
+      location.pathname === "/search" ||
+      location.pathname === "/lyrics"
     ) {
+      console.log("new header");
       setHeaders({
-        backgroundColor: 'rgba(0,0,0,0)',
-      })
+        backgroundColor: "rgba(0,0,0,0)",
+      });
     } else {
+      console.log("transparent");
       setHeaders({
-        backgroundColor: 'transparent',
-      })
+        backgroundColor: "transparent",
+      });
     }
 
     return () => {
-      unlisten()
-    }
-  }, [location])
+      unlisten();
+    };
+  }, [location]);
 
   function onShowModal() {
-    setShowModal(true)
+    setShowModal(true);
   }
 
   function onCloseModal() {
-    setShowModal(false)
+    setShowModal(false);
   }
 
   function playFirstSongInStation(event) {
-    event.stopPropagation()
-    dispatch(setCurrSong(station?._id, station?.songs[0]._id))
-    dispatch(setCurrSongIndex(station?._id, station?.songs[0]._id))
-    setIsPlaying(!isPlaying)
+    event.stopPropagation();
+    dispatch(setCurrSong(station?._id, station?.songs[0]._id));
+    dispatch(setCurrSongIndex(station?._id, station?.songs[0]._id));
+    setIsPlaying(!isPlaying);
+  }
+
+  function goToPreviousRoute() {
+    navigate(-1);
+  }
+
+  function goToNextRoute() {
+    navigate(+1);
   }
 
   return (
@@ -90,28 +102,30 @@ export function AppHeader() {
         <section className="arrows">
           <div className="black-circle">
             <span
+              onClick={goToPreviousRoute}
               className="title"
               title="Go back"
               dangerouslySetInnerHTML={{
-                __html: getSpotifySvg('leftArrowIcon'),
+                __html: getSpotifySvg("leftArrowIcon"),
               }}
             ></span>
           </div>
           <div className="black-circle">
             <span
+            onClick={goToNextRoute}
               className="title"
               title="Go forward"
               dangerouslySetInnerHTML={{
-                __html: getSpotifySvg('rightArrowIcon'),
+                __html: getSpotifySvg("rightArrowIcon"),
               }}
             ></span>
           </div>
         </section>
-        {location.pathname === '/search' && (
+        {location.pathname === "/search" && (
           <div className="flex align-center justify-center input-container">
             <span
               dangerouslySetInnerHTML={{
-                __html: getSpotifySvg('smallerSearchIcon'),
+                __html: getSpotifySvg("smallerSearchIcon"),
               }}
             ></span>
             <input placeholder="What do you want to listen to?" />
@@ -125,31 +139,31 @@ export function AppHeader() {
             className="flex align-center justify-center station-options"
           >
             <div
-          className="play-button flex justify-center"
-          onClick={playFirstSongInStation}
-        >
-          {isPlaying ? (
-            <span
-              title="Pause"
-              className="pause-button flex align-center justify-center title"
-              dangerouslySetInnerHTML={{
-                __html: getSpotifySvg('biggerPauseBtn'),
-              }}
-            ></span>
-          ) : (
-            <span
-              title="Play"
-              className=" flex align-center justify-center title"
-              dangerouslySetInnerHTML={{
-                __html: getSpotifySvg('biggerPlayBtn'),
-              }}
-            ></span>
-          )}
-        </div>
+              className="play-button flex justify-center"
+              onClick={playFirstSongInStation}
+            >
+              {isPlaying ? (
+                <span
+                  title="Pause"
+                  className="pause-button flex align-center justify-center title"
+                  dangerouslySetInnerHTML={{
+                    __html: getSpotifySvg("biggerPauseBtn"),
+                  }}
+                ></span>
+              ) : (
+                <span
+                  title="Play"
+                  className=" flex align-center justify-center title"
+                  dangerouslySetInnerHTML={{
+                    __html: getSpotifySvg("biggerPlayBtn"),
+                  }}
+                ></span>
+              )}
+            </div>
             <p className="">{station.name}</p>
           </div>
         ) : (
-          ''
+          ""
         )}
       </section>
 
@@ -184,5 +198,5 @@ export function AppHeader() {
       </div>
       {showModal && <UserModal onClose={onCloseModal} />}
     </header>
-  )
+  );
 }
