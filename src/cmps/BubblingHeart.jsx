@@ -43,7 +43,7 @@ export function BubblingHeart({ index, item, type }) {
           className="heart-svg"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 189.2 87.507"
-          style={{ overflow: "visible" }}
+          style={{ overflow: "visible", width: type === "song" ? '40px' : '85px' }}
         >
           <g id="hearts" transform="translate(-787.902 -454.998)">
             <g id="right-hearts">

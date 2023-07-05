@@ -94,14 +94,9 @@
     align-items: center;
     padding: 24px;
     gap: 25px;
-    .heart {
-      fill: #afb8b7;
-      &:hover {
-        fill: $clr6;
-      }
-    }
     .dots {
       fill: #afb8b7;
+      margin-left: -50px;
       &:hover {
         fill: $clr6;
       }

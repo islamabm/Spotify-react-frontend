@@ -200,13 +200,6 @@ export function StationDetails(props) {
               <span>
                 <BubblingHeart index={station._id} item={station} type="station" />
               </span>
-              <span
-                title="Save to Your Library"
-                className="heart flex align-center justify-center title pointer"
-                dangerouslySetInnerHTML={{
-                  __html: getSpotifySvg("emptyHeart"),
-                }}
-              ></span>
             </>
           )}
           <span
