@@ -74,6 +74,7 @@ export function stationReducer(state = INITIAL_STATE, action = {}) {
         searchStations: action.stations,
       }
     case ADD_STATION:
+      if (state.userStations.some((station) => station.name === action.station.name)) return
       return {
         ...state,
         stations: [...state.stations, action.station],
