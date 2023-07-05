@@ -72,7 +72,8 @@ export function StationDetails(props) {
       eventBus.emit("stationDetailsScroll", { scrollPos, bgStyle });
     };
     if (currentStationDetailsRef) {
-      currentStationDetailsRef.addEventListener("scroll", handleScroll, {
+      console.log('edding scroll event');
+      currentStationDetailsRef.addEventListener('scroll', handleScroll, {
         passive: true,
       });
     }
@@ -159,8 +160,8 @@ export function StationDetails(props) {
           background: `linear-gradient(to bottom, ${color.rgb} 0%, ${color.rgb} 10%, ${color.rgb} 20%, ${color.rgb} 50%, black 140%, black 70%, black 100%)`,
         });
         setBgBottomStyle({
-          background: `linear-gradient(${color.rgb} -30%, #121212 12%)`,
-        });
+          background: `linear-gradient(${color.rgb} -30%, #121212 9%)`,
+        })
       } catch (e) {
         console.error(e);
       }
