@@ -6,10 +6,8 @@ export function BubblingHeart({ songIndex }) {
   const toggleLike = () => {
     setLiked(!liked)
   }
-
   return (
     <div className={`bubbling-heart ${liked ? 'bubbling-heart--liked' : ''}`}>
-      {/* <div className="bubbling-heart"> */}
       <input
         type="checkbox"
         className="heart-input"
@@ -116,5 +114,3 @@ export function BubblingHeart({ songIndex }) {
     </div>
   )
 }
-
-// export default BubblingHeart
