@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { updateUser, removeSongFromUser } from '../store/actions/user.actions'
@@ -8,13 +8,14 @@ export function BubblingHeart({ songIndex, song }) {
   const dispatch = useDispatch()
 
   function toggleLike() {
-    // if (liked) {
-    //   // dispatch(removeSongFromUser(song._id, user))
-    // } else {
-    dispatch(updateUser(song, user))
-    // }
     setLiked(!liked)
+    if (liked) {
+      dispatch(updateUser(song, user))
+    } else {
+      dispatch(removeSongFromUser(song._id, user))
+    }
   }
+
   return (
     <div className={`bubbling-heart ${liked ? 'bubbling-heart--liked' : ''}`}>
       <input

@@ -36,7 +36,10 @@ function remove(userId) {
   return httpService.delete(`user/${userId}`);
 }
 async function removeSong(songId, user) {
-  return httpService.put(`/user/${user._id}/removeSong`, { songId });
+  const updatedUser = await httpService.put(`/user/${user._id}/removeSong`, {
+    songId,
+  })
+  return updatedUser
 }
 
 async function update(selectedSong, user) {
