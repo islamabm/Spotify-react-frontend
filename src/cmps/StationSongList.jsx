@@ -216,14 +216,16 @@ export default function StationSongList({ station }) {
                         {formatDate(song?.addedAt)}
                       </div>
                       <div className="duration-container flex">
-                        {/* <span
-                          title="Save to Your Library"
-                          className="hidden dots title save"
-                          dangerouslySetInnerHTML={{
-                            __html: getSpotifySvg('emptyHeartIcon'),
-                          }} */}
-                        {/* ></span> */}
-                        <BubblingHeart />
+                        <span
+                        // title="Save to Your Library"
+                        // className="hidden dots title save"
+                        // dangerouslySetInnerHTML={{
+                        //   __html: getSpotifySvg('emptyHeartIcon'),
+                        // }}
+                        >
+                          <BubblingHeart />
+                        </span>
+
                         <div className="duration">
                           {song?.duration ? song?.duration : '1:00'}
                         </div>
