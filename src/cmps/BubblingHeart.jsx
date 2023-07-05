@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUser, removeSongFromUser } from "../store/actions/user.actions";
-import { addStationToUser,removeStation } from "../store/actions/station.actions";
+import {addStation,removeStation } from "../store/actions/station.actions";
 
 export function BubblingHeart({ index, item, type }) {
   const [liked, setLiked] = useState(false);
@@ -14,7 +14,7 @@ export function BubblingHeart({ index, item, type }) {
       if (updatedLike) {
         console.log("updatedLike", updatedLike);
         if (type === "song") dispatch(updateUser(item, user));
-        else if (type === "station") dispatch(addStationToUser(item));
+        else if (type === "station") dispatch(addStation(item.name, item.songs, item.imgUrl));
       } else {
         console.log("updatedLike", updatedLike);
         if (type === "song") dispatch(removeSongFromUser(item._id, user));

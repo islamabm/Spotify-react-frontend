@@ -14,7 +14,6 @@ import {
   REMOVE_SONG_FROM_STATION,
   EDIT_STATION,
   SET_CURR_CATEGORY_BY,
-  UPDATE_LIKED_STATION,
 } from "../reducers/station.reducer";
 
 export function loadStations(filterBy) {
@@ -196,21 +195,6 @@ export function editUserStation(station) {
       showSuccessMsg(`Playlist updated`);
     } catch (error) {
       showErrorMsg(`Cannot update station`);
-    }
-  };
-}
-
-export function addStationToUser(station) {
-  console.log("station from bubbling", station);
-  return async (dispatch) => {
-    try {
-      const action = {
-        type: UPDATE_LIKED_STATION,
-        station,
-      };
-      dispatch(action);
-    } catch (error) {
-      console.log("error:", error);
     }
   };
 }
