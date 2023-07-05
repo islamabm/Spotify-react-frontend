@@ -31,19 +31,15 @@ export function StationIndex() {
       } else {
         setHeaderBg("transparent");
       }
-      console.log('scrollPos', scrollPos)
-      console.log('headerBg', headerBg)
       eventBus.emit("stationIndexScroll", { scrollPos, headerBg });
     };
     if (currentStationIndexRef) {
-      console.log('add event listener');
       currentStationIndexRef.addEventListener('scroll', handleScroll, {
         passive: true,
       });
     }
     return () => {
       if (currentStationIndexRef) {
-        console.log('remove event listener');
         currentStationIndexRef.removeEventListener("scroll", handleScroll, {
           passive: true,
         });
