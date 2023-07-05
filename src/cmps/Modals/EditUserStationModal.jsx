@@ -33,6 +33,7 @@ export function EditUserStationModal({ station, onClose }) {
     setEditedStation({ ...editedStation, desc: e.target.value })
   }
   function handleSave() {
+    console.log('editedStation', editedStation)
     dispatch(editUserStation(editedStation))
     onClose()
   }
