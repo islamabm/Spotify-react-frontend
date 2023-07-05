@@ -28,12 +28,13 @@ export function AppHeader() {
     const maxScroll = 50
     let opacity = Math.min(scrollPos / maxScroll, 1)
 
-    // let match = headerBg?.background?.match(/rgb\((\d+,\d+,\d+)\)/)
-    let dominantColor = "0,0,0"
+    let match = headerBg?.background?.match(/rgb\((\d+,\d+,\d+)\)/)
+    let dominantColor = match ? match[1] : "0,0,0"
 
     const newHeaders = {
       backgroundColor: `rgba(${dominantColor}, ${opacity})`,
     }
+    console.log("newHeaders", newHeaders)
     setHeaders(newHeaders)
   }
 
@@ -48,7 +49,10 @@ export function AppHeader() {
 
   useEffect(() => {
     const onScroll = ({ scrollPos, headerBg }) => {
+
       updateHeaderOpacity(scrollPos, headerBg)
+      console.log('scrollPos', scrollPos)
+      console.log('headerBg', headerBg)
     }
     const unlistenDetails = eventBus.on("stationDetailsScroll", onScroll)
     const unlistenIndex = eventBus.on("stationIndexScroll", onScroll)
