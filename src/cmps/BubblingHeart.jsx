@@ -1,37 +1,49 @@
-import React, { useState, useEffect, useRef } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useState, useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { updateUser, removeSongFromUser } from "../store/actions/user.actions";
+import {addStation,removeStation } from "../store/actions/station.actions";
 
-import { updateUser, removeSongFromUser } from '../store/actions/user.actions'
-export function BubblingHeart({ songIndex, song }) {
-  const [liked, setLiked] = useState(false)
-  const user = useSelector((storeState) => storeState.userModule.loggedInUser)
-  const dispatch = useDispatch()
+export function BubblingHeart({ index, item, type }) {
+  const [liked, setLiked] = useState(false);
+  const user = useSelector((storeState) => storeState.userModule.loggedInUser);
+  const dispatch = useDispatch();
 
   function toggleLike() {
-    setLiked(!liked)
-    if (liked) {
-      dispatch(updateUser(song, user))
-    } else {
-      dispatch(removeSongFromUser(song._id, user))
-    }
+    setLiked((prevLiked) => {
+      const updatedLike = !prevLiked;
+      if (updatedLike) {
+        console.log("updatedLike", updatedLike);
+        if (type === "song") dispatch(updateUser(item, user));
+        else if (type === "station") dispatch(addStation(item.name, item.songs, item.imgUrl));
+      } else {
+        console.log("updatedLike", updatedLike);
+        if (type === "song") dispatch(removeSongFromUser(item._id, user));
+        else if (type === "station") dispatch(removeStation(item._id));
+      }
+      return updatedLike;
+    });
   }
 
+  useEffect(() => {
+    console.log('user', user)
+  }, [liked])
+
   return (
-    <div className={`bubbling-heart ${liked ? 'bubbling-heart--liked' : ''}`}>
+    <div className={`bubbling-heart ${liked ? "bubbling-heart--liked" : ""}`}>
       <input
         type="checkbox"
         className="heart-input"
-        id={`like-${songIndex}`}
+        id={`like-${index}`}
         checked={liked}
         onChange={toggleLike}
       />
 
-      <label className="label" htmlFor={`like-${songIndex}`}>
+      <label className="label" htmlFor={`like-${index}`}>
         <svg
           className="heart-svg"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 189.2 87.507"
-          style={{ overflow: 'visible' }}
+          style={{ overflow: "visible" }}
         >
           <g id="hearts" transform="translate(-787.902 -454.998)">
             <g id="right-hearts">
@@ -122,5 +134,5 @@ export function BubblingHeart({ songIndex, song }) {
         </svg>
       </label>
     </div>
-  )
+  );
 }
