@@ -7,7 +7,7 @@ export default function UserStationsList({ userStations }) {
     <section className="user-station-list">
       <LikedSongsStation />
       {userStations?.map((station) => (
-        <UserStationsPreview key={station?._id} station={station} />
+        <UserStationsPreview key={station._id} station={station} />
       ))}
     </section>
   )

@@ -22,7 +22,7 @@ export default function StationLikedSongs({ station }) {
         />
         <span className="logo">{user?.username}</span>
         <span className="dot"> • </span>
-        <span className="songs-count">{station.songs?.length} songs </span>
+        <span className="songs-count">{station?.songs?.length} songs </span>
       </div>
     </>
   )
