@@ -72,7 +72,6 @@ export function StationDetails(props) {
       eventBus.emit("stationDetailsScroll", { scrollPos, bgStyle });
     };
     if (currentStationDetailsRef) {
-      console.log('edding scroll event');
       currentStationDetailsRef.addEventListener('scroll', handleScroll, {
         passive: true,
       });
