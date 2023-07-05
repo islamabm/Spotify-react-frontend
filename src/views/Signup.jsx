@@ -48,7 +48,7 @@ export function Signup() {
 
     if (!signupCred.email || !signupCred.password || !signupCred.username)
       return;
-
+    console.log('signupCred',signupCred)
     dispatch(doSignup(signupCred));
 
     navigate(`/`);

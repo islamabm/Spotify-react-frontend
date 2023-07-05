@@ -135,6 +135,8 @@ function prepareData(userCred) {
 }
 
 async function updateLatestStations(stationId, user) {
+  console.log('service', stationId)
+    console.log('service', user)
   const station = await stationService.getById(stationId);
   const userCopy = { ...user };
   userCopy.latestStations = [...userCopy.latestStations, station];

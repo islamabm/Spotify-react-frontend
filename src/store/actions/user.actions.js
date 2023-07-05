@@ -113,6 +113,8 @@ export function spendBalance(amount) {
 }
 
 export function updateLatestStations(stationId, user) {
+  console.log('action', stationId)
+    console.log('action', user)
   return async (dispatch, getState) => {
     try {
       const { value } = await userService.updateLatestStations(stationId, user)

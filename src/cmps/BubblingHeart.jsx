@@ -18,7 +18,7 @@ export function BubblingHeart({ songIndex }) {
 
       <label className="label" htmlFor={`like-${songIndex}`}>
         <svg
-          class="heart-svg"
+          className="heart-svg"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 189.2 87.507"
           style={{ overflow: 'visible' }}
