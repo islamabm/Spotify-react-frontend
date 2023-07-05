@@ -3,26 +3,20 @@ import { useDispatch, useSelector } from 'react-redux'
 import UserStationsList from './UserStationsList'
 import { loadUserStations } from '../../store/actions/station.actions'
 
-export function UserStationsIndex() {
+export function UserStationsIndex({filterUserStations}) {
   const userStations = useSelector(
     (storeState) => storeState.stationModule.userStations
   )
-  const user = useSelector((storeState) => storeState.userModule.loggedInUser)
+  // const user = useSelector((storeState) => storeState.userModule.loggedInUser)
   const dispatch = useDispatch()
 
-  // useEffect(() => {
-  //   ifUser()
-  // }, [])
-
-  // function ifUser() {
-  //   if (user) {
-  //     dispatch(loadUserStations())
-  //   }
-  // }
+  useEffect(() => {
+    dispatch(loadUserStations())
+  }, [])
 
   return (
     <section className="user-stations-index">
-      <UserStationsList userStations={userStations} />
+      <UserStationsList userStations={userStations} filterUserStations={filterUserStations}/>
     </section>
   )
 }
