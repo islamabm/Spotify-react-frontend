@@ -130,7 +130,7 @@ export default function StationSongList({ station }) {
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
                       className="song"
-                      onMouseEnter={() => setHoveredSong(song._id)}
+                      onMouseEnter={() => setHoveredSong(song?._id)}
                       onMouseLeave={() => setHoveredSong(null)}
                     >
                       {song?._id === currSong?._id &&

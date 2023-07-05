@@ -15,11 +15,11 @@ export function StationPreview({ station }) {
   const [isPlaying, setIsPlaying] = useState(false)
 
   function goToDetails() {
-    dispatch(setCurrStation(station._id));
-    navigate(`/station/${station._id}`);
+    dispatch(setCurrStation(station._id))
+    navigate(`/station/${station._id}`)
     console.log('cmp', station._id)
     console.log('cmp', user)
-    dispatch(updateLatestStations(station._id, user))
+    // dispatch(updateLatestStations(station._id, user))
   }
 
   function playFirstSongInStation(event) {
@@ -29,7 +29,7 @@ export function StationPreview({ station }) {
     setIsPlaying(!isPlaying)
   }
 
-  return createdBy === "system" ? (
+  return createdBy === 'system' ? (
     <article className="info" onClick={goToDetails}>
       <div className="station-img">
         <img src={station.imgUrl} alt="station-img" />
@@ -42,7 +42,7 @@ export function StationPreview({ station }) {
               title="Pause"
               className="pause-button flex align-center justify-center title"
               dangerouslySetInnerHTML={{
-                __html: getSpotifySvg("biggerPauseBtn"),
+                __html: getSpotifySvg('biggerPauseBtn'),
               }}
             ></span>
           ) : (
@@ -50,7 +50,7 @@ export function StationPreview({ station }) {
               title="Play"
               className=" flex align-center justify-center title"
               dangerouslySetInnerHTML={{
-                __html: getSpotifySvg("biggerPlayBtn"),
+                __html: getSpotifySvg('biggerPlayBtn'),
               }}
             ></span>
           )}
@@ -61,5 +61,5 @@ export function StationPreview({ station }) {
         <p>{station.description}</p>
       </div>
     </article>
-  ) : null;
+  ) : null
 }

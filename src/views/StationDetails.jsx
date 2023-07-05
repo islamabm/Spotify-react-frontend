@@ -122,8 +122,8 @@ export function StationDetails(props) {
   }
 
   function playFirstSongInStation() {
-    dispatch(setCurrSong(station?._id, station?.songs[0]._id))
-    dispatch(setCurrSongIndex(station?._id, station?.songs[0]._id))
+    dispatch(setCurrSong(station?._id, station?.songs[0]?._id))
+    dispatch(setCurrSongIndex(station?._id, station?.songs[0]?._id))
     setIsPlaying(!isPlaying)
   }
 
@@ -248,11 +248,13 @@ export function StationDetails(props) {
               station?.songs?.slice(0, 5) ||
               station?.songs?.slice(0, station?.songs?.length - 1)
             }
-            stationId={station._id}
+            stationId={station?._id}
           />
         )}
       {station.createdBy?.fullname !== 'system' &&
-        station?.songs?.length === 0 && <SearchSongs stationId={station._id} />}
+        station?.songs?.length === 0 && (
+          <SearchSongs stationId={station?._id} />
+        )}
       {showDeleteModal && (
         <DeleteStationModal
           onCloseDeleteModal={handleCloseDeleteModal}

@@ -86,6 +86,17 @@ export function updateUser(song, user) {
   }
 }
 
+export function removeSongFromUser(songId, user) {
+  return async (dispatch) => {
+    try {
+      const updatedUser = await userService.removeSong(songId, user)
+      dispatch({ type: UPDATE_USER, user: updatedUser })
+    } catch (err) {
+      console.log(err)
+    }
+  }
+}
+
 export function editUserImg(url, loggedInUser) {
   return async (dispatch, getState) => {
     try {
@@ -114,7 +125,7 @@ export function spendBalance(amount) {
 
 export function updateLatestStations(stationId, user) {
   console.log('action', stationId)
-    console.log('action', user)
+  console.log('action', user)
   return async (dispatch, getState) => {
     try {
       const { value } = await userService.updateLatestStations(stationId, user)

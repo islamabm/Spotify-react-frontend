@@ -7,14 +7,14 @@ export function RecommendedPreview({ song, stationId }) {
   const dispatch = useDispatch()
 
   function handleAddSong() {
-    song._id = utilService.makeId()
+    // song._id = utilService.makeId()
     dispatch(addSongToStation(stationId, song))
   }
 
   return (
     <article className="recommended-song flex align-center">
       <div className="img-and-title flex align-center">
-        <img src={song.imgUrl} className="song-img" />
+        <img src={song?.imgUrl} className="song-img" />
         <span>{song?.title}</span>
       </div>
       <button onClick={handleAddSong} className="pointer">
