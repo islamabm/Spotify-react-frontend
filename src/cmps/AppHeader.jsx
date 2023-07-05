@@ -23,7 +23,7 @@ export function AppHeader() {
 
   function updateHeaderOpacity(scrollPos, bgStyle) {
     setScrollPos(scrollPos)
-
+    console.log('scrollPos', scrollPos)
     const maxScroll = 50
     let opacity = Math.min(scrollPos / maxScroll, 1)
 
@@ -33,6 +33,7 @@ export function AppHeader() {
     const newHeaders = {
       backgroundColor: `rgba(${dominantColor}, ${opacity})`,
     }
+    console.log('newHeaders', newHeaders)
     setHeaders(newHeaders)
   }
 
@@ -48,16 +49,18 @@ export function AppHeader() {
     const onScroll = ({ scrollPos, bgStyle }) =>
       updateHeaderOpacity(scrollPos, bgStyle)
     const unlisten = eventBus.on('stationDetailsScroll', onScroll)
-
+    console.log('use effect scroll event')
     if (
       location.pathname === '/' ||
       location.pathname === '/search' ||
       location.pathname === '/lyrics'
     ) {
+      console.log('new header');
       setHeaders({
         backgroundColor: 'rgba(0,0,0,0)',
       })
     } else {
+      console.log('transparent');
       setHeaders({
         backgroundColor: 'transparent',
       })
