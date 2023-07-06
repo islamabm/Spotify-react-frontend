@@ -34,7 +34,6 @@ export function AppHeader() {
     const newHeaders = {
       backgroundColor: `rgba(${dominantColor}, ${opacity})`,
     }
-    console.log("newHeaders", newHeaders)
     setHeaders(newHeaders)
   }
 
@@ -49,7 +48,6 @@ export function AppHeader() {
 
   useEffect(() => {
     const onScroll = ({ scrollPos, headerBg }) => {
-
       updateHeaderOpacity(scrollPos, headerBg)
     }
     const unlistenDetails = eventBus.on("stationDetailsScroll", onScroll)
