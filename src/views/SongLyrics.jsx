@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { FastAverageColor } from 'fast-average-color'
 import { getSpotifySvg } from '../services/SVG.service'
 export function SongLyrics() {
-  const song = useSelector((storeState) => storeState.songModule.currSong)
+  const song = useSelector((storeState) => storeState.songModule.currSongAction)
   // const stationNameClass = stationService.stationNameClass(song)
   const lyrics = useSelector(
     (storeState) => storeState.songModule.currSongLyrics

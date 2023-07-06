@@ -105,7 +105,8 @@ export default function StationSongList({ station }) {
     dispatch(updateStation(params.id, updatedSongs))
   }
 
-  function onLyricsClicked(artist, title) {
+  function onLyricsClicked(artist, title, songId) {
+    dispatch(setCurrSongAction(station._id, songId))
     dispatch(setCurrSongLyrics(artist, title))
     navigate('/lyrics')
   }
@@ -188,7 +189,7 @@ export default function StationSongList({ station }) {
                         <div className="name-and-artist flex justify-center">
                           <span
                             onClick={() =>
-                              onLyricsClicked(song.artist, song.title)
+                              onLyricsClicked(song.artist, song.title, song._id)
                             }
                             className="song-name"
                             style={{
