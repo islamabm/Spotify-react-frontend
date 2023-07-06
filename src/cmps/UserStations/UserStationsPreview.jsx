@@ -23,7 +23,7 @@ export default function UserStationsPreview({ station }) {
   console.log('currentPlaylist', currentPlaylist)
 
   const isSongInPlaylist =
-    currentPlaylist?.songs?.some((s) => s._id === song?._id) || false
+    currentPlaylist.songs.some((s) => s._id === song?._id) || false
 
   return (
     <section className="user-station-preview" onClick={goToUserStationDetails}>
