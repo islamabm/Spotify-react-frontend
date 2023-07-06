@@ -15,7 +15,8 @@ export function UserLibrary() {
   const dispatch = useDispatch()
 
   function onShowSortModal() {
-    setShowSortModal(true)
+    setShowSortModal((prevState) => !prevState);
+    setShowInput(false);
   }
 
   function onSelectOption(ev, option) {
@@ -29,7 +30,6 @@ export function UserLibrary() {
     setStationCounter(stationCounter + 1)
     const name = `My Playlist #${stationCounter}`
     dispatch(addStation(name, [], ''))
-    // setNewStationCreated(true)
   }
 
   // useEffect(() => {
@@ -99,7 +99,7 @@ function openInput() {
               <span
                 className="pointer arrow"
                 dangerouslySetInnerHTML={{
-                  __html: getSpotifySvg('bottomArrowIcon'),
+                  __html: getSpotifySvg(showSortModal ? 'upperArrow' : 'bottomArrowIcon'),
                 }}
               ></span>
               {showSortModal && <SortModal onSelectOption={onSelectOption} />}

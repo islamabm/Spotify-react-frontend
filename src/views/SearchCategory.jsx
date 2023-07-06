@@ -12,7 +12,7 @@ export default function SearchCategory() {
   console.log('stations', stations)
   return (
     <section className="station-list-container">
-      <h3 className="category-tag">{category}</h3>
+      <h3 className="category-tag pointer">{category}</h3>
       <section className="station-list">
         {stations
           ?.filter((station) => station.tags.includes(category))

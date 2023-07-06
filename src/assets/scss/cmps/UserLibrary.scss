@@ -1,6 +1,5 @@
 .user-library {
   background-color: $clr7;
-  // position: relative;
   grid-column: 1;
   grid-row: 2;
   min-height: 100vh;
@@ -14,6 +13,10 @@
     padding: 10px 18px;
     justify-content: space-between;
     color: #b3b3b3;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 10px 0px,
+      rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+      rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+
     span {
       margin: 7px;
     }
@@ -70,12 +73,10 @@
   scrollbar-color: transparent transparent;
 
   &::-webkit-scrollbar {
-    // for Chrome, Safari
     width: 13px;
   }
 
   &::-webkit-scrollbar-thumb {
-    // for Chrome, Safari
     background-color: rgba(234, 227, 227, 0.39);
     &:hover {
       background-color: rgba(234, 227, 227, 0.552);
@@ -92,21 +93,20 @@
         background-color: hsla(0, 0%, 100%, 0.11);
         border: 0;
         border-radius: 4px;
-        color: $clr3;
+        color: #b3b3b3;
         height: 30px;
-        opacity: 1;
-        padding: 8px 40px;
+        padding: 8px 30px;
         text-overflow: ellipsis;
         position: absolute;
         transition: all 0.3s ease-in;
         top: 0;
+        width: 170px;
         &:focus {
           outline: none;
         }
       }
     }
     .smaller-search {
-      // position: absolute;
       width: 32px;
       height: 30px;
       border-radius: 50%;
@@ -129,6 +129,7 @@
         width: max-content;
       }
       .arrow {
+        margin-top: -3px;
         margin-inline-end: rem(5px);
       }
 
