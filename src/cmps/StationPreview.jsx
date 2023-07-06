@@ -64,8 +64,8 @@ export function StationPreview({ station }) {
       </div>
       <div className="station-info flex justify-center">
         <h3>{station.name}</h3>
-        <p>{station.description}</p>
       </div>
+        <p>{station.description}</p>
     </article>
   ) : null
 }
