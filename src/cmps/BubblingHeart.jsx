@@ -1,27 +1,28 @@
-import React, { useState, useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { updateUser, removeSongFromUser } from "../store/actions/user.actions";
-import {addStation,removeStation } from "../store/actions/station.actions";
+import React, { useState, useEffect, useRef } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { updateUser, removeSongFromUser } from '../store/actions/user.actions'
+import { addStation, removeStation } from '../store/actions/station.actions'
 
 export function BubblingHeart({ index, item, type }) {
-  const [liked, setLiked] = useState(false);
-  const user = useSelector((storeState) => storeState.userModule.loggedInUser);
-  const dispatch = useDispatch();
+  const [liked, setLiked] = useState(false)
+  const user = useSelector((storeState) => storeState.userModule.loggedInUser)
+  const dispatch = useDispatch()
 
   function toggleLike() {
     setLiked((prevLiked) => {
-      const updatedLike = !prevLiked;
+      const updatedLike = !prevLiked
       if (updatedLike) {
-        console.log("updatedLike", updatedLike);
-        if (type === "song") dispatch(updateUser(item, user));
-        else if (type === "station") dispatch(addStation(item.name, item.songs, item.imgUrl));
+        console.log('updatedLike', updatedLike)
+        if (type === 'song') dispatch(updateUser(item, user))
+        else if (type === 'station')
+          dispatch(addStation(item.name, item.songs, item.imgUrl))
       } else {
-        console.log("updatedLike", updatedLike);
-        if (type === "song") dispatch(removeSongFromUser(item._id, user));
-        else if (type === "station") dispatch(removeStation(item._id));
+        console.log('updatedLike', updatedLike)
+        if (type === 'song') dispatch(removeSongFromUser(item._id, user))
+        else if (type === 'station') dispatch(removeStation(item._id))
       }
-      return updatedLike;
-    });
+      return updatedLike
+    })
   }
 
   // useEffect(() => {
@@ -29,7 +30,7 @@ export function BubblingHeart({ index, item, type }) {
   // }, [liked])
 
   return (
-    <div className={`bubbling-heart ${liked ? "bubbling-heart--liked" : ""}`}>
+    <div className={`bubbling-heart ${liked ? 'bubbling-heart--liked' : ''}`}>
       <input
         type="checkbox"
         className="heart-input"
@@ -43,7 +44,10 @@ export function BubblingHeart({ index, item, type }) {
           className="heart-svg"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 189.2 87.507"
-          style={{ overflow: "visible", width: type === "song" ? '40px' : '85px' }}
+          style={{
+            overflow: 'visible',
+            width: type === 'song' ? '40px' : '85px',
+          }}
         >
           <g id="hearts" transform="translate(-787.902 -454.998)">
             <g id="right-hearts">
@@ -134,5 +138,5 @@ export function BubblingHeart({ index, item, type }) {
         </svg>
       </label>
     </div>
-  );
+  )
 }

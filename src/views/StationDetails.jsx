@@ -34,6 +34,7 @@ export function StationDetails(props) {
   const station = useSelector(
     (storeState) => storeState.stationModule.currStation
   )
+  const [counter, setCounter] = useState(0)
 
   const stationImg = useSelector(
     (storeState) => storeState.stationModule.currStationImg
@@ -41,7 +42,10 @@ export function StationDetails(props) {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    loadStation()
+    if (counter === 0) {
+      setCounter(1)
+      loadStation()
+    }
   }, [params.id])
 
   useEffect(() => {
