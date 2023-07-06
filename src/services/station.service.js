@@ -254,8 +254,8 @@ async function userQuery() {
   return userStations
 }
 
-function query(filterBy) {
-  return httpService.get(`station?filterBy=${filterBy}`)
+function query() {
+  return httpService.get(`station`)
 }
 
 async function getById(id) {

@@ -10,6 +10,7 @@ import { StationDetails } from './views/StationDetails'
 import { Login } from './views/Login'
 import { Signup } from './views/Signup'
 import Search from './views/Search'
+import SearchCategory from './views/SearchCategory'
 import { getUser } from './store/actions/user.actions'
 import { UserDetails } from './views/UserDetails'
 import { useEffect } from 'react'
@@ -47,6 +48,7 @@ function LoggedInApp() {
           <Route path="/only/lyrics" element={<OnlyLyrics />} />
           <Route path="/user" element={<UserDetails />} />
           <Route path="/search" element={<Search />} />
+          <Route path="/search/category" element={<SearchCategory />} />
           {/* Exclude /login and /signup */}
         </Routes>
       </main>

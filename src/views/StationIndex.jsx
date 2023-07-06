@@ -7,50 +7,48 @@ import { eventBus } from '../services/event-bus.service'
 
 export function StationIndex() {
   const [headerBg, setHeaderBg] = useState({
-    backgroundColor: `transparent`
-  }
-  )
+    backgroundColor: `transparent`,
+  })
   const stations = useSelector(
     (storeState) => storeState.stationModule.stations
   )
-  const stationIndexRef = useRef(null);
+  const stationIndexRef = useRef(null)
   const filterBy = useSelector(
     (storeState) => storeState.stationModule.categoryBy
   )
-    
+
   const dispatch = useDispatch()
   const currentDate = new Date()
   const greeting = getGreeting(currentDate)
 
   useEffect(() => {
-    const currentStationIndexRef = stationIndexRef.current;
+    const currentStationIndexRef = stationIndexRef.current
     const handleScroll = () => {
-      const scrollPos = currentStationIndexRef.scrollTop;
+      const scrollPos = currentStationIndexRef.scrollTop
       if (scrollPos > 375) {
-        setHeaderBg("#1a1a1a");
+        setHeaderBg('#1a1a1a')
       } else {
-        setHeaderBg("transparent");
+        setHeaderBg('transparent')
       }
-      eventBus.emit("stationIndexScroll", { scrollPos, headerBg });
-    };
+      eventBus.emit('stationIndexScroll', { scrollPos, headerBg })
+    }
     if (currentStationIndexRef) {
       currentStationIndexRef.addEventListener('scroll', handleScroll, {
         passive: true,
-      });
+      })
     }
     return () => {
       if (currentStationIndexRef) {
-        currentStationIndexRef.removeEventListener("scroll", handleScroll, {
+        currentStationIndexRef.removeEventListener('scroll', handleScroll, {
           passive: true,
-        });
+        })
       }
-    };
-  }, [headerBg]);
-
+    }
+  }, [headerBg])
 
   useEffect(() => {
-    dispatch(loadStations(filterBy))
-  }, [filterBy])
+    dispatch(loadStations())
+  }, [])
 
   if (!stations) return <div className="loader"></div>
 

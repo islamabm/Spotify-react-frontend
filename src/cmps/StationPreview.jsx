@@ -17,8 +17,7 @@ export function StationPreview({ station }) {
   function goToDetails() {
     dispatch(setCurrStation(station._id))
     navigate(`/station/${station._id}`)
-    console.log('cmp', station._id)
-    console.log('cmp', user)
+
     // dispatch(updateLatestStations(station._id, user))
   }
 

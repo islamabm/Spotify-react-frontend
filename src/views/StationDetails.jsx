@@ -37,11 +37,7 @@ export function StationDetails(props) {
   const station = useSelector(
     (storeState) => storeState.stationModule.currStation
   );
-  const user = useSelector((storeState) => storeState.userModule.loggedInUser);
 
-  // const filterBy = useSelector(
-  //   (storeState) => storeState.stationModule.categoryBy
-  // );
   const stationImg = useSelector(
     (storeState) => storeState.stationModule.currStationImg
   );

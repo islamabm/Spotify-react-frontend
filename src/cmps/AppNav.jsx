@@ -22,7 +22,6 @@ export function AppNav() {
   }
 
   function goHome() {
-    dispatch(setCurrCategoryBy('All'))
     navigate('/')
   }
 
