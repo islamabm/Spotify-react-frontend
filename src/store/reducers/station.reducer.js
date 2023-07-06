@@ -1,3 +1,5 @@
+import { userService } from '../../services/user.service'
+
 export const SET_STATIONS = 'SET_STATIONS'
 export const SET_SEARCH_STATIONS = 'SET_SEARCH_STATIONS'
 export const ADD_STATION = 'ADD_STATION'
@@ -16,7 +18,7 @@ const INITIAL_STATE = {
   stations: [],
   searchStations: null,
   filterBy: 'Alphabetical',
-
+  loggedInUser: userService.getLoggedinUser() || null,
   currStation: null,
   currStationId: null,
   currStationGradientColor: 'black',
@@ -73,16 +75,17 @@ export function stationReducer(state = INITIAL_STATE, action = {}) {
         searchStations: action.stations,
       }
     case ADD_STATION:
-      if (
-        state.userStations.some(
-          (station) => station.name === action.station.name
-        )
-      )
-        return
+      // if (
+      //   state.userStations.some(
+      //     (station) => station.name === action.station.name
+      //   )
+      // )
+      //   return
       return {
         ...state,
         stations: [...state.stations, action.station],
         userStations: [...state.userStations, action.station],
+        // loggedInUser: [...state.loggedInUser.stations, action.station],
       }
     case REMOVE_STATION:
       return {

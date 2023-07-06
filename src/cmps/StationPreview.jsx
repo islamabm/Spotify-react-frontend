@@ -15,6 +15,7 @@ export function StationPreview({ station }) {
   const [isPlaying, setIsPlaying] = useState(false)
 
   function goToDetails() {
+    console.log('details')
     dispatch(setCurrStation(station._id))
     navigate(`/station/${station._id}`)
 

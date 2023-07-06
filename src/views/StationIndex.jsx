@@ -17,7 +17,11 @@ export function StationIndex() {
   const filterBy = useSelector(
     (storeState) => storeState.stationModule.categoryBy
   )
-
+  const user = useSelector((storeState) => storeState.userModule.loggedInUser)
+  console.log('user', user)
+  useEffect(() => {
+    console.log('user use effect', user)
+  }, [user])
   const dispatch = useDispatch()
   const currentDate = new Date()
   const greeting = getGreeting(currentDate)

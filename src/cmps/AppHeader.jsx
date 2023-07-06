@@ -62,7 +62,6 @@ export function AppHeader() {
       })
       console.log('headers', headers)
     } else {
-      console.log('transparent')
       setHeaders({
         backgroundColor: 'transparent',
       })
