@@ -12,6 +12,7 @@ export function StationIndex() {
   const stations = useSelector(
     (storeState) => storeState.stationModule.stations
   )
+  console.log('stations', stations)
   const stationIndexRef = useRef(null)
   const filterBy = useSelector(
     (storeState) => storeState.stationModule.categoryBy
@@ -50,11 +51,11 @@ export function StationIndex() {
     dispatch(loadStations())
   }, [])
 
-  if (!stations) return <div className="loader"></div>
+  if (!stations) return <div className="loader">loading</div>
 
   return (
     <section className="station-index" ref={stationIndexRef}>
-      <h1 className="greeting">{greeting}</h1>
+      {/* <h1 className="greeting">{greeting}</h1> */}
       {/* <LatestStationsIndex /> */}
       <StationList stations={stations} />
     </section>
