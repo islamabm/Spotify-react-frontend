@@ -6,12 +6,8 @@
   grid-row: 3;
   grid-column: 1/-1;
   color: white;
-  // display: flex;
-  // justify-content: space-between;
-  // align-items: center;
-  // justify-items: center;
   display: grid;
-  grid-template-columns: 480px minmax(400px, 800px) 300px;
+  grid-template-columns: 1fr 1fr 1fr;
   position: fixed;
   left: 0;
   right: 0;
@@ -73,6 +69,7 @@
     display: flex;
     align-items: center;
     justify-items: center;
+    justify-content: flex-end;
     gap: rem(16px);
     span {
       fill: #b3b3b3;
