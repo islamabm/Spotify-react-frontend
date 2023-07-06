@@ -79,7 +79,7 @@ export function StationDetails(props) {
   }, [bgStyle])
 
   function loadStation() {
-    dispatch(setCurrStation(station._id))
+    dispatch(setCurrStation(params.id))
   }
 
   function showStationModal(e) {

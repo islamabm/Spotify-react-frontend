@@ -21,17 +21,22 @@
       font-size: 16px;
       margin-block-start: 0;
       margin-block-end: 1px;
-    }
-
-    p {
-      color: $clr3;
-      padding: 0;
-      margin: 5px 0;
       text-overflow: ellipsis;
-      overflow: hidden;
-      max-width: 160px;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 160px;
     }
   }
+      p {
+        color: $clr3;
+        padding: 0;
+        max-width: 160px;
+        margin-inline-start: 1rem;
+        text-overflow: ellipsis;
+             overflow: hidden;    
+             white-space: nowrap;
+             font-size: 14px;
+      }
 
   .station-img {
     margin-inline-start: rem(12px);
