@@ -191,7 +191,7 @@ export default function StationSongList({ station }) {
                             onClick={() =>
                               onLyricsClicked(song.artist, song.title, song._id)
                             }
-                            className="song-name"
+                            className="song-name pointer"
                             style={{
                               color:
                                 song?._id === currSong?._id ? '#1ED760' : '',

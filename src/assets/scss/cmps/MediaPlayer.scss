@@ -1,6 +1,6 @@
 .control-buttons {
   display: flex;
-  gap: 1rem;
+  gap: 1.5rem;
   margin-bottom: 0.5rem;
   margin-block-start: 10px;
   justify-content: center;
@@ -15,6 +15,11 @@
     border-radius: 50%;
     justify-content: center;
     min-width: 32px;
+    transition: opacity 0.1s 0.1s, transform 0.1s 0.1s;
+    transform: translateY(-1%);
+    &:hover {
+      transform: scale(1.05);
+    }
   }
   span {
     fill: #b3b3b3;

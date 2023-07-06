@@ -148,6 +148,9 @@
             overflow: hidden;
             white-space: nowrap;
             width: 224px;
+            &:hover {
+              text-decoration: underline;
+            }
           }
           .song-artist {
             color: $clr3;
@@ -234,7 +237,7 @@
     .time {
       svg {
         fill: $clr3;
-        margin-left: 15%;
+        margin-left: 40%;
       }
     }
   }
