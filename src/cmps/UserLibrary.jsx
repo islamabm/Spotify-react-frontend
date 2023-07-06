@@ -11,6 +11,7 @@ export function UserLibrary() {
   const [stationCounter, setStationCounter] = useState(0)
   const [filterUserStations, setFilterUserStations] = useState("")
   // const [newStationCreated, setNewStationCreated] = useState(false)
+  const [showInput, setShowInput] = useState(false)
   const dispatch = useDispatch()
 
   function onShowSortModal() {
@@ -41,7 +42,9 @@ export function UserLibrary() {
   //     setNewStationCreated(false)
   //   }
   // }, [newStationCreated])
-
+function openInput() {
+  setShowInput(true)
+}
   return (
     <>
       <section className="user-library">
@@ -73,20 +76,22 @@ export function UserLibrary() {
         <section className="filter-and-list">
           <div className="library-filter">
             <div className="input-container">
-              <span
+              <span onClick={openInput}
                 title="Search in Your Library"
                 className="smaller-search pointer flex align-center justify-center title"
                 dangerouslySetInnerHTML={{
                   __html: getSpotifySvg("smallerSearchIcon"),
                 }}
               ></span>
+              {showInput && 
               <input
                 className="search-input"
                 type="text"
-                placeholder="Search for songs"
+                placeholder="Search in Your Library"
                 value={filterUserStations}
                 onChange={(e) => setFilterUserStations(e.target.value)}
               />
+            }
             </div>
             <div onClick={onShowSortModal} className="sort-by-section relative">
               <span className="sort-by-span">{selectedOption}</span>
