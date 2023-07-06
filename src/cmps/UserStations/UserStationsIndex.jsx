@@ -12,7 +12,6 @@ export function UserStationsIndex({ filterUserStations }) {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    console.log('loadstations')
     dispatch(loadUserStations())
   }, [user])
 
