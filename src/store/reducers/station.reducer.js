@@ -18,7 +18,7 @@ const INITIAL_STATE = {
   stations: [],
   searchStations: null,
   filterBy: 'Alphabetical',
-  loggedInUser: userService.getLoggedinUser() || null,
+  // loggedInUser: userService.getLoggedinUser() || null,
   currStation: null,
   currStationId: null,
   currStationGradientColor: 'black',

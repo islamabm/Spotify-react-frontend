@@ -35,6 +35,14 @@ export function StationDetails(props) {
     (storeState) => storeState.stationModule.currStation
   )
 
+  const firstRun = useRef(true)
+
+  useEffect(() => {
+    if (firstRun.current) {
+      firstRun.current = false
+      console.log(' shloc kdetails')
+    }
+  }, [])
   const stationImg = useSelector(
     (storeState) => storeState.stationModule.currStationImg
   )
@@ -90,7 +98,7 @@ export function StationDetails(props) {
     })
     setShowModal(true)
   }
-
+  console.log('details')
   function updateImgUrlAndColor(station) {
     if (!station) return
     const imgUrl = station.imgUrl
@@ -159,7 +167,7 @@ export function StationDetails(props) {
       }
     }
   }
-  console.log('station details')
+
   if (!station) return <div>Loading...</div>
   return (
     <section className="station-details" ref={stationDetailsRef}>
@@ -224,16 +232,16 @@ export function StationDetails(props) {
           <StationSongList station={station} />
         </div>
       </div>
-      {showModal && (
+      {/* {showModal && (
         <StationOptionsModal
           position={modalPosition}
           closeOptionsModal={handleCloseOptionModal}
           openRecommindationModal={handleShowRecommindationModal}
           onShowDeleteModal={handleShowDeleteModal}
         />
-      )}
+      )} */}
 
-      {showRecommindationModal && (
+      {/* {showRecommindationModal && (
         <RecommindationModal
           closeRecommindationModal={() => setShowRecommindationModal(false)}
         />
@@ -257,7 +265,7 @@ export function StationDetails(props) {
           onCloseDeleteModal={handleCloseDeleteModal}
           onRemoveStation={handleRemoveStation}
         />
-      )}
+      )} */}
     </section>
   )
 }

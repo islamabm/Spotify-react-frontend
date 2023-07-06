@@ -17,7 +17,7 @@ export function Signup() {
     const userObject = jwtDecode(response.credential)
     console.log(userObject)
     const user = userService.prepareData(userObject)
-    console.log('from signup',user)
+    console.log('from signup', user)
     dispatch(doSignup(user))
     navigate(`/`)
   }
@@ -50,7 +50,7 @@ export function Signup() {
 
     if (!signupCred.email || !signupCred.password || !signupCred.username)
       return
-    console.log('signupCred', signupCred)
+    console.log('signupCred in the signup', signupCred)
     dispatch(doSignup(signupCred))
 
     navigate(`/`)
