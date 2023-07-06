@@ -13,6 +13,9 @@
 .category-tag {
   font-family: circular-book;
   font-size: 24px;
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .song-animation-gif {

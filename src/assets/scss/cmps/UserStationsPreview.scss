@@ -1,7 +1,7 @@
 .user-station-preview {
   display: flex;
   min-width: 400px;
-  padding: 8px;
+  padding: 6px;
   border-radius: 6px;
   .image-svg-container {
     background-color: rgb(58, 56, 56);
@@ -14,6 +14,11 @@
     align-content: center;
     justify-content: center;
     border-radius: 3px;
+    border-radius: 5px;
+    img {
+      border-radius: 5px;
+      min-height: 100%;
+    }
   }
   .user-station-details {
     display: flex;
@@ -32,16 +37,18 @@
       display: flex;
       gap: 5px;
       margin-bottom: 0;
-      margin-top: 10px;
+      margin-top: 7px;
       span {
-        font-size: 0.8125rem;
         margin: 0;
         padding: 0;
-        color: #6a6a6a;
+        color: #9c9c9c;
+        font-size: 14px;
       }
       .pinned-svg {
         svg {
           fill: #1ed760;
+          width: 12px;
+          padding-bottom: 5px;
         }
       }
     }
@@ -50,22 +57,3 @@
     background-color: #232323;
   }
 }
-// <article className="user-station-preview">
-//       <div className="image-svg-container">
-//         <span
-//           dangerouslySetInnerHTML={{
-//             __html: getSpotifySvg('musicIcon'),
-//           }}
-//         ></span>
-//       </div>
-//       <div className="user-station-details">
-//         <div>
-//           <p>{station.name}</p>
-//         </div>
-//         <div className="user-details">
-//           <span>Playlist</span>
-//           <span>•</span>
-//           <span>Guest</span>
-//         </div>
-//       </div>
-//     </article>
