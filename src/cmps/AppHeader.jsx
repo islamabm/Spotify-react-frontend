@@ -212,7 +212,11 @@ export function AppHeader() {
               <span className="user-details-header">
                 <img
                   title={user?.username}
-                  src="https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg"
+                  src={
+                    user.imgUrl
+                      ? user.imgUrl
+                      : 'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg'
+                  }
                   alt="user-img"
                 />
               </span>
@@ -224,29 +228,5 @@ export function AppHeader() {
     </header>
   )
 }
-// import React, { useState } from "react";
-// import { useEffect } from "react";
-
-// export function useOnScreen (options) {
-//     //part 1
-//     const [ref,setRef] = useState(null)
-//     const [visible,setVisible] = useState(false)
-// //part2
-//     useEffect(() => {
-//     const observer = new IntersectionObserver(([entry])=>{
-//         setVisible(entry.isIntersecting)
-//     },options)
-//     if(ref){
-//         observer.observe(ref)
-//     }
-
-//       return () => {
-//        if(ref){
-//         observer.unobserve(ref)
-//        }
-//       }
-//     }, [ref,visible])
-// //part3
-// return [setRef,visible]
 
 // }

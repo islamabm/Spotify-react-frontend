@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import { uploadImg } from '../services/upload.service'
 import { editUserImg } from '../store/actions/user.actions'
 import { FastAverageColor } from 'fast-average-color'
-
 export function UserDetails() {
   const user = useSelector((storeState) => storeState.userModule.loggedInUser)
   const [isUploading, setIsUploading] = useState(false)
@@ -28,17 +27,17 @@ export function UserDetails() {
     updateImgUrlAndColor(user.imgUrl)
   }, [user?.imgUrl])
 
-console.log('user', user)
+  console.log('user', user)
   function updateImgUrlAndColor(userImg) {
     if (!user.imgUrl) return
-      getDominantColor(userImg)
+    getDominantColor(userImg)
   }
 
   async function getDominantColor(imageSrc) {
     const cachedColor = colorCache[imageSrc]
     if (cachedColor) {
-      const gradient = `linear-gradient(to bottom, ${cachedColor} 0%, ${cachedColor} 80vh, black 80vh, black 100%)`;
-      console.log('there is cached');
+      const gradient = `linear-gradient(to bottom, ${cachedColor} 0%, ${cachedColor} 80vh, black 80vh, black 100%)`
+      console.log('there is cached')
       setBgStyle(gradient)
 
       document.body.style.backgroundImage = gradient
@@ -46,7 +45,7 @@ console.log('user', user)
     }
     const fac = new FastAverageColor()
     const img = new Image()
-    console.log('Api call');
+    console.log('Api call')
     img.crossOrigin = 'Anonymous'
     const corsProxyUrl = 'https://api.codetabs.com/v1/proxy?quest='
     img.src = corsProxyUrl + encodeURIComponent(imageSrc)
@@ -57,13 +56,11 @@ console.log('user', user)
         setBgStyle({
           background: `linear-gradient(to bottom, ${color.rgb} 0%, ${color.rgb} 10%, ${color.rgb} 20%, ${color.rgb} 50%, black 140%, black 70%, black 100%)`,
         })
-
       } catch (e) {
         console.error(e)
       }
     }
   }
-
 
   return user ? (
     <section className="user-profile" style={bgStyle}>

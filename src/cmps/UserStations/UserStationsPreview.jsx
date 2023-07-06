@@ -46,7 +46,6 @@ export default function UserStationsPreview({ station }) {
 
       {isSongInPlaylist && (
         <span
-          // style={{ fill: '#1ed760' }}
           className="user-library-volume"
           dangerouslySetInnerHTML={{
             __html: getSpotifySvg('volumeIconStation'),
