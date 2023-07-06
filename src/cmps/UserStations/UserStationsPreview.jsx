@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { getSpotifySvg } from '../../services/SVG.service'
 
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
@@ -21,9 +22,8 @@ export default function UserStationsPreview({ station }) {
   console.log('song', song)
   console.log('currentPlaylist', currentPlaylist)
 
-  const isSongInPlaylist = currentPlaylist?.songs?.some(
-    (s) => s._id === song?._id
-  )
+  const isSongInPlaylist =
+    currentPlaylist?.songs?.some((s) => s._id === song?._id) || false
 
   return (
     <section className="user-station-preview" onClick={goToUserStationDetails}>
@@ -35,16 +35,24 @@ export default function UserStationsPreview({ station }) {
       </div>
       <div className="user-station-details">
         <div className="user-station-name">
-          <p>{station?.name}</p>
+          <p className={isSongInPlaylist ? 'green' : ''}>{station?.name}</p>
         </div>
         <div className="user-details">
           <span>Playlist</span>
           <span>•</span>
-          <span className={isSongInPlaylist ? 'green' : ''}>
-            {user?.username}
-          </span>
+          <span>{user?.username}</span>
         </div>
       </div>
+
+      {isSongInPlaylist && (
+        <span
+          // style={{ fill: '#1ed760' }}
+          className="user-library-volume"
+          dangerouslySetInnerHTML={{
+            __html: getSpotifySvg('volumeIconStation'),
+          }}
+        ></span>
+      )}
     </section>
   )
 }

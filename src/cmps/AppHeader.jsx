@@ -211,7 +211,7 @@ export function AppHeader() {
             <Link to="/user">
               <span className="user-details-header">
                 <img
-                title={user?.username}
+                  title={user?.username}
                   src="https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg"
                   alt="user-img"
                 />
