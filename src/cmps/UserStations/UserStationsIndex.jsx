@@ -14,7 +14,7 @@ export function UserStationsIndex({ filterUserStations }) {
   useEffect(() => {
     console.log('loadstations')
     dispatch(loadUserStations())
-  }, [userStations, user])
+  }, [user])
 
   return (
     <section className="user-stations-index">

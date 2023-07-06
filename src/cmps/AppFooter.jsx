@@ -27,7 +27,6 @@ export function AppFooter() {
   const handleVolumeChange = (event) => {
     setVolume(event.target.value)
   }
-  console.log('song', song)
   function onRepeatClicked() {
     setIsLyrics(!isLyrics)
   }
