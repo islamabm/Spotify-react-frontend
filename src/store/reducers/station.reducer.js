@@ -13,12 +13,13 @@ export const ADD_SONG_TO_STATION = 'ADD_SONG_TO_STATION'
 export const REMOVE_SONG_FROM_STATION = 'REMOVE_SONG_FROM_STATION'
 export const EDIT_STATION = 'EDIT_STATION'
 export const SET_CURR_CATEGORY_BY = 'SET_CURR_CATEGORY_BY'
+export const ADD_TO_USER_STATIONS = 'ADD_TO_USER_STATIONS'
 const INITIAL_STATE = {
   currStationImg: '',
   stations: [],
   searchStations: null,
   filterBy: 'Alphabetical',
-  // loggedInUser: userService.getLoggedinUser() || null,
+  loggedInUser: userService.getLoggedinUser(),
   currStation: null,
   currStationId: null,
   currStationGradientColor: 'black',
@@ -32,6 +33,14 @@ export function stationReducer(state = INITIAL_STATE, action = {}) {
       return {
         ...state,
         stations: action.stations,
+      }
+    case ADD_TO_USER_STATIONS:
+      return {
+        ...state,
+        loggedInUser: {
+          ...state.loggedInUser,
+          stations: [...state.loggedInUser.stations, action.station],
+        },
       }
     case LOAD_USER_STATIONS:
       return {
@@ -85,7 +94,6 @@ export function stationReducer(state = INITIAL_STATE, action = {}) {
         ...state,
         stations: [...state.stations, action.station],
         userStations: [...state.userStations, action.station],
-        // loggedInUser: [...state.loggedInUser.stations, action.station],
       }
     case REMOVE_STATION:
       return {
