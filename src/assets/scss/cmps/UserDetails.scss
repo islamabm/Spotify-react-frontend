@@ -1,7 +1,7 @@
 .user-profile {
   font-family: circular-book;
-  height: 45vh;
-  background: linear-gradient(to bottom, #3e3e3e, #121212);
+  height: 51vh;
+  // background: linear-gradient(to bottom, #3e3e3e, #121212);
   padding-inline: 5rem;
   color: #fff;
   .user-details-container {
@@ -9,7 +9,7 @@
     align-items: center;
     gap: 2rem;
     margin-block-start: 4rem;
-
+    border-bottom: #121212 1px solid ;
     .user-info {
       margin-top: 47px;
     }

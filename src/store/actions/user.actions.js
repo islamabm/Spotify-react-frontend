@@ -44,6 +44,7 @@ export function getUser() {
   return async (dispatch, getState) => {
     try {
       const user = await userService.getLoggedinUser()
+      console.log('user from actions', user)
       const action = {
         type: SET_LOGGEDIN_USER,
         user,
