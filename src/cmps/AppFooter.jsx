@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { getSpotifySvg } from '../services/SVG.service'
 import { setCurrSongLyrics } from '../store/actions/song.actions'
 import { MediaPlayer } from './MediaPlayer'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { BubblingHeart } from './BubblingHeart'
+import { storageService } from '../services/storage.service'
 export function AppFooter() {
   const [mute, setMute] = useState(false)
   const [volume, setVolume] = useState(50)
@@ -15,7 +16,14 @@ export function AppFooter() {
   const song = useSelector((storeState) => storeState.songModule.currSong)
   const station = useSelector(
     (storeState) => storeState.stationModule.currStation
-  )
+    )
+    const [currSong, setCurrSong] = useState(song)
+  
+  useEffect(() => {
+      setCurrSong(song)
+  }, [song]);
+
+
   const handleVolumeChange = (event) => {
     setVolume(event.target.value)
   }
@@ -45,13 +53,14 @@ export function AppFooter() {
       setMute(true)
     }
   }
+  console.log('currSong', currSong)
   return (
     <div className="app-footer">
       <div
         className="song-details"
-        style={{ opacity: location.pathname === '/' ? 0 : 1 }}
+        // style={{ opacity: location.pathname === '/' ? 0 : 1 }}
       >
-        {song && (
+        {currSong && (
           <>
             <div className="image">
               <img
