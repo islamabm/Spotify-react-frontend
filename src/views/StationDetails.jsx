@@ -35,14 +35,6 @@ export function StationDetails(props) {
     (storeState) => storeState.stationModule.currStation
   )
 
-  const firstRun = useRef(true)
-
-  useEffect(() => {
-    if (firstRun.current) {
-      firstRun.current = false
-      console.log(' shloc kdetails')
-    }
-  }, [])
   const stationImg = useSelector(
     (storeState) => storeState.stationModule.currStationImg
   )
@@ -50,7 +42,7 @@ export function StationDetails(props) {
 
   useEffect(() => {
     loadStation()
-  }, [params.id, station?.songs])
+  }, [params.id])
 
   useEffect(() => {
     const unsubscribe = eventBus.on('newStationCreated', setBgStyle)
@@ -232,16 +224,16 @@ export function StationDetails(props) {
           <StationSongList station={station} />
         </div>
       </div>
-      {/* {showModal && (
+      {showModal && (
         <StationOptionsModal
           position={modalPosition}
           closeOptionsModal={handleCloseOptionModal}
           openRecommindationModal={handleShowRecommindationModal}
           onShowDeleteModal={handleShowDeleteModal}
         />
-      )} */}
+      )}
 
-      {/* {showRecommindationModal && (
+      {showRecommindationModal && (
         <RecommindationModal
           closeRecommindationModal={() => setShowRecommindationModal(false)}
         />
@@ -265,7 +257,7 @@ export function StationDetails(props) {
           onCloseDeleteModal={handleCloseDeleteModal}
           onRemoveStation={handleRemoveStation}
         />
-      )} */}
+      )}
     </section>
   )
 }
