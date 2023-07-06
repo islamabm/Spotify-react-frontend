@@ -14,6 +14,7 @@ import {
   REMOVE_SONG_FROM_STATION,
   EDIT_STATION,
   SET_CURR_CATEGORY_BY,
+  ADD_TO_USER_STATIONS,
 } from '../reducers/station.reducer'
 
 export function loadStations() {

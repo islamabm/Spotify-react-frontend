@@ -9,7 +9,7 @@ export default function SearchCategory() {
   const category = useSelector(
     (storeState) => storeState.stationModule.categoryBy
   )
-  console.log('stations', stations)
+
   return (
     <section className="station-list-container">
       <h3 className="category-tag pointer">{category}</h3>

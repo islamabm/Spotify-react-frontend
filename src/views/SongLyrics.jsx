@@ -106,7 +106,7 @@ export function SongLyrics() {
         {lyrics ? (
           lyrics.map((line, index) => <div key={index}>{line?.text}</div>)
         ) : (
-          <div>Loading lyrics...</div>
+          <div className="loader"></div>
         )}
       </article>
     </section>
