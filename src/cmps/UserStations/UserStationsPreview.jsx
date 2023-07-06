@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
@@ -14,6 +14,16 @@ export default function UserStationsPreview({ station }) {
   }
 
   const user = useSelector((storeState) => storeState.userModule.loggedInUser)
+  const song = useSelector((storeState) => storeState.songModule.currSong)
+  const currentPlaylist = useSelector(
+    (storeState) => storeState.stationModule.currStation
+  )
+  console.log('song', song)
+  console.log('currentPlaylist', currentPlaylist)
+
+  const isSongInPlaylist = currentPlaylist?.songs?.some(
+    (s) => s._id === song?._id
+  )
 
   return (
     <section className="user-station-preview" onClick={goToUserStationDetails}>
@@ -30,7 +40,9 @@ export default function UserStationsPreview({ station }) {
         <div className="user-details">
           <span>Playlist</span>
           <span>•</span>
-          <span>{user?.username}</span>
+          <span className={isSongInPlaylist ? 'green' : ''}>
+            {user?.username}
+          </span>
         </div>
       </div>
     </section>
