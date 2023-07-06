@@ -56,9 +56,7 @@ export function AppFooter() {
   return (
     <div className="app-footer">
       <div
-        className="song-details"
-        // style={{ opacity: location.pathname === '/' ? 0 : 1 }}
-      >
+        className="song-details">
         {currSong && (
           <>
             <div className="image">
@@ -75,12 +73,12 @@ export function AppFooter() {
                 {song ? song.artist : station?.songs[0]?.artist}
               </p>
             </div>
-          </>
-        )}
+          {/* </> */}
+        
 
         <div className="heart-picture-icons ">
           <span className="footer-heart">
-            <BubblingHeart />
+            <BubblingHeart index={song._id} item={song} type="song"/>
           </span>
           {/* <span
             className="picture-icon pointer title"
@@ -89,7 +87,10 @@ export function AppFooter() {
             }}
           ></span>{' '} */}
         </div>
+        </>
+        )}
       </div>
+      
 
       <div className="media-player">
         <MediaPlayer volume={volume} />
