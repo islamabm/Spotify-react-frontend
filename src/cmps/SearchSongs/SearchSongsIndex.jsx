@@ -18,7 +18,7 @@ export default function SearchSongsIndex({ stationId }) {
     }
   }, [searchText])
 
-  const handleInputChange = (e) => {
+  function handleInputChange(e) {
     setSearchText(e.target.value)
   }
 

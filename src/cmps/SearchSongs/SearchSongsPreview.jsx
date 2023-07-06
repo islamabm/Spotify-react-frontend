@@ -7,7 +7,7 @@ export default function SearchSongsPreview({ song, stationId }) {
   const dispatch = useDispatch()
 
   function handleAddSong() {
-    song._id = utilService.makeId()
+    // song._id = utilService.makeId()
     dispatch(addSongToStation(stationId, song))
   }
   return (

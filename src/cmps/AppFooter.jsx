@@ -4,6 +4,7 @@ import { setCurrSongLyrics } from '../store/actions/song.actions'
 import { MediaPlayer } from './MediaPlayer'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { BubblingHeart } from './BubblingHeart'
 export function AppFooter() {
   const [mute, setMute] = useState(false)
   const [volume, setVolume] = useState(50)
@@ -70,12 +71,15 @@ export function AppFooter() {
         )}
 
         <div className="heart-picture-icons ">
-          <span
+          <span className="footer-heart">
+            <BubblingHeart />
+          </span>
+          {/* <span
             className="picture-icon pointer title"
             dangerouslySetInnerHTML={{
               __html: getSpotifySvg('pictureIcon'),
             }}
-          ></span>{' '}
+          ></span>{' '} */}
         </div>
       </div>
 

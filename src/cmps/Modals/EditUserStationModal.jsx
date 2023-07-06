@@ -21,7 +21,7 @@ export function EditUserStationModal({ station, onClose }) {
     setIsHovered(false)
   }
 
-  const handleInputFocus = (inputIndex) => {
+  function handleInputFocus(inputIndex) {
     setFocusedInput(inputIndex)
   }
 
