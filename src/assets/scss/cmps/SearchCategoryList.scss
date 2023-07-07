@@ -2,5 +2,8 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(186px, 1fr));
   gap: 20px;
-  // padding:;
+  @include for-mobile-layout {
+    grid-template-columns: 163px 163px;
+    gap: 16px;
+  }
 }

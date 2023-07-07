@@ -4,6 +4,10 @@
   border-radius: 10px;
   height: 215px;
   cursor: pointer;
+  @include for-mobile-layout {
+    width: 164px;
+    height: 92px;
+  }
 
   .image {
     transform: rotate(25deg) translate(18%, -2%);
@@ -12,6 +16,9 @@
     right: 0;
     height: 100px;
     width: 100px;
+    @include for-mobile-layout {
+      display: none;
+    }
   }
   h2 {
     color: #fff;
@@ -19,5 +26,8 @@
     font-weight: 700;
     padding: 0.2em 0.5em;
     font-family: circular-book;
+    @include for-mobile-layout {
+      font-size: 18px;
+    }
   }
 }

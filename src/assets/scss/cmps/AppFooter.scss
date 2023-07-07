@@ -12,6 +12,9 @@
   left: 0;
   right: 0;
   bottom: 0;
+  @include for-mobile-layout {
+    display: none;
+  }
 
   .song-details {
     display: flex;

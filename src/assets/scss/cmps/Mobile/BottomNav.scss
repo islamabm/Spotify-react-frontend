@@ -1,0 +1,51 @@
+.bottom-nav-container {
+    position:fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    height: 80px;
+    color: $clr3;
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: repeat(3,1fr);
+     background-color: black;
+    a {
+        text-decoration: none;
+      }
+      .shared-nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 40px;
+        text-decoration: none;
+        cursor: pointer;
+        color: $clr6;
+        transition: color 0.3s ease;
+        height: 100%;
+        font-size: 11px;
+        font-family: circular-medium;
+        svg {
+          fill: $clr6;
+          margin-left: 15px;
+          width: 40px;
+          transition: fill 0.3s ease;
+        }
+      }
+      .shared-nav-item:not(.active) {
+        color: #b3b3b3;
+        svg {
+          fill: #b3b3b3;
+        }
+        &:hover {
+          color: $clr6;
+          svg {
+            fill: $clr6;
+          }
+        }
+      }
+      .shared-nav-item .icon.active svg {
+        fill: $clr6;
+      }
+    }
+    

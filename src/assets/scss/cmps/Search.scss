@@ -5,7 +5,11 @@
   overflow-y: scroll;
   scrollbar-width: thin;
   scrollbar-color: transparent transparent; // for Firefox
-
+  @include for-mobile-layout {
+    margin-inline-end: auto;
+    height: calc(100vh + 15px);
+    padding: 0;
+  }
   &::-webkit-scrollbar {
     width: 17px;
   }

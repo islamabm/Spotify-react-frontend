@@ -6,6 +6,10 @@
   max-height: rem(112px);
   min-width: rem(318px);
   padding: 17px 25px;
+  @include for-mobile-layout {
+    display: none;
+  }
+
   a {
     text-decoration: none;
   }
