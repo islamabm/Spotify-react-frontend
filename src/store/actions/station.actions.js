@@ -18,6 +18,7 @@ import {
 } from '../reducers/station.reducer'
 
 export function loadStations() {
+  console.log('hi')
   return async (dispatch, getState) => {
     try {
       const stations = await stationService.query()

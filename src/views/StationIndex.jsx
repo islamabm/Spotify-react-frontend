@@ -15,8 +15,6 @@ export function StationIndex() {
 
   const stationIndexRef = useRef(null)
 
-  const user = useSelector((storeState) => storeState.userModule.loggedInUser)
-
   const dispatch = useDispatch()
   const currentDate = new Date()
   const greeting = getGreeting(currentDate)

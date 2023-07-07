@@ -252,8 +252,10 @@ async function userQuery() {
   return userStations
 }
 
-function query() {
-  return httpService.get(`station`)
+async function query() {
+  const stations = await httpService.get(`station`)
+  console.log('stations', stations)
+  return stations
 }
 
 async function getById(id) {
