@@ -1,12 +1,11 @@
 import { userService } from '../../services/user.service'
 import {
   SIGNUP,
-  SPEND_BALANCE,
   LOGIN,
   LOGOUT,
   UPDATE_USER,
   SET_LOGGEDIN_USER,
-  ADD_SONG_TO_USER_LIKED_SONGS,
+  // ADD_SONG_TO_USER_LIKED_SONGS,
   UPDATE_LATEST,
 } from '../reducers/user.reducer'
 
@@ -49,6 +48,7 @@ export function getUser() {
         user,
       }
       dispatch(action)
+      return user
     } catch (error) {
       console.log('error:', error)
     }
@@ -105,16 +105,6 @@ export function editUserImg(url, loggedInUser) {
         user,
       }
       dispatch(action)
-    } catch (error) {
-      console.log('error:', error)
-    }
-  }
-}
-
-export function spendBalance(amount) {
-  return async (dispatch, getState) => {
-    try {
-      dispatch({ type: SPEND_BALANCE, amount })
     } catch (error) {
       console.log('error:', error)
     }
