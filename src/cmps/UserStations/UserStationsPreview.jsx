@@ -16,7 +16,7 @@ export default function UserStationsPreview({ station, color }) {
   const location = useLocation()
 
   const user = useSelector((storeState) => storeState.userModule.loggedInUser)
-
+  const svg = useSelector((storeState) => storeState.songModule.currentSvg)
   return (
     <section className="user-station-preview" onClick={goToUserStationDetails}>
       <div className="image-svg-container">
@@ -36,7 +36,7 @@ export default function UserStationsPreview({ station, color }) {
         </div>
       </div>
 
-      {color === 'green' && location.pathname === `/station/${station._id}` && (
+      {color === 'green' && svg === 'play' && (
         <span
           className="user-library-volume"
           dangerouslySetInnerHTML={{
