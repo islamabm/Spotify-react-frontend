@@ -86,7 +86,7 @@ export function UserLibrary() {
               ></span>
               {showInput && (
                 <input
-                  className="search-input"
+                  className={`search-input ${showInput ? 'open' : ''}`}
                   type="text"
                   placeholder="Search in Your Library"
                   value={filterUserStations}

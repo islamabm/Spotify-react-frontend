@@ -100,7 +100,10 @@
         position: absolute;
         transition: all 0.3s ease-in;
         top: 0;
-        width: 170px;
+        width: 0;
+        &.open {
+          animation: inputExpand 0.2s forwards;
+        }
         &:focus {
           outline: none;
         }
@@ -144,5 +147,16 @@
         }
       }
     }
+  }
+}
+@keyframes inputExpand {
+  0% {
+    width: 0;
+  }
+  50% {
+    width: 100px;
+  }
+  100% {
+    width: 170px;
   }
 }

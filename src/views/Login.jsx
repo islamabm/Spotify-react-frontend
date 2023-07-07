@@ -17,7 +17,7 @@ export function Login() {
     }
     console.log('loginCred', loginCred)
     dispatch(doLogin(loginCred))
-    // navigate(`/`)
+    navigate(`/`)
   }
 
   const handleInputChange = (e) => {
