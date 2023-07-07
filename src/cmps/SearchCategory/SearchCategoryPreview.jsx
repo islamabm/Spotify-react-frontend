@@ -1,10 +1,7 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router'
-import {
-  setCurrCategoryBy,
-  loadStations,
-} from '../../store/actions/station.actions'
+import { setCurrCategoryBy } from '../../store/actions/station.actions'
 
 export function SearchCategoryPreview({ category }) {
   const navigate = useNavigate()
@@ -12,7 +9,6 @@ export function SearchCategoryPreview({ category }) {
   const dispatch = useDispatch()
 
   function filterStationCategories(categoryName) {
-    console.log('categoryName', categoryName)
     dispatch(setCurrCategoryBy(categoryName))
     navigate('/search/category')
   }

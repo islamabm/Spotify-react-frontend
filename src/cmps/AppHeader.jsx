@@ -3,7 +3,7 @@ import { useLocation, Link, useNavigate } from 'react-router-dom'
 import { UserModal } from './Modals/UserModal'
 import { useState, useEffect } from 'react'
 import { setCurrSong, setCurrSongIndex } from '../store/actions/song.actions'
-import { doLogout } from '../store/actions/user.actions'
+
 import { useDispatch, useSelector } from 'react-redux'
 import { eventBus } from '../services/event-bus.service'
 export function AppHeader() {
@@ -42,10 +42,6 @@ export function AppHeader() {
     dispatch(setCurrSongIndex(station?._id, station?.songs[0]._id))
   }
 
-  function handleLogout() {
-    dispatch(doLogout())
-  }
-
   useEffect(() => {
     const onScroll = ({ scrollPos, headerBg }) => {
       updateHeaderOpacity(scrollPos, headerBg)
@@ -56,11 +52,9 @@ export function AppHeader() {
       location.pathname === '/search' ||
       location.pathname === '/lyrics'
     ) {
-      console.log('new header')
       setHeaders({
         backgroundColor: 'rgba(0,0,0,0)',
       })
-      console.log('headers', headers)
     } else {
       setHeaders({
         backgroundColor: 'transparent',
@@ -81,13 +75,10 @@ export function AppHeader() {
       location.pathname === '/search' ||
       location.pathname === '/lyrics'
     ) {
-      console.log('new header')
       setHeaders({
         backgroundColor: 'rgba(0,0,0,0)',
       })
-      console.log('headers', headers)
     } else {
-      console.log('transparent')
       setHeaders({
         backgroundColor: 'transparent',
       })
@@ -96,10 +87,6 @@ export function AppHeader() {
       unlistenDetails()
     }
   }, [location.pathname])
-
-  function onShowModal() {
-    setShowModal(true)
-  }
 
   function onCloseModal() {
     setShowModal(false)
@@ -110,6 +97,10 @@ export function AppHeader() {
     dispatch(setCurrSong(station?._id, station?.songs[0]._id))
     dispatch(setCurrSongIndex(station?._id, station?.songs[0]._id))
     setIsPlaying(!isPlaying)
+  }
+
+  function onClickUserDetails() {
+    setShowModal(!showModal)
   }
 
   function goToPreviousRoute() {
@@ -205,18 +196,17 @@ export function AppHeader() {
           </>
         ) : (
           <>
-            <button onClick={handleLogout} className="sign-up  pointer">
-              Log out
-            </button>
-            <Link to="/user">
-              <span className="user-details-header">
-                <img
-                  title={user?.username}
-                  src="https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg"
-                  alt="user-img"
-                />
-              </span>
-            </Link>
+            <span className="user-details-header" onClick={onClickUserDetails}>
+              <img
+                title={user?.username}
+                src={
+                  user.imgUrl
+                    ? user.imgUrl
+                    : 'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg'
+                }
+                alt="user-img"
+              />
+            </span>
           </>
         )}
       </div>
@@ -224,29 +214,3 @@ export function AppHeader() {
     </header>
   )
 }
-// import React, { useState } from "react";
-// import { useEffect } from "react";
-
-// export function useOnScreen (options) {
-//     //part 1
-//     const [ref,setRef] = useState(null)
-//     const [visible,setVisible] = useState(false)
-// //part2
-//     useEffect(() => {
-//     const observer = new IntersectionObserver(([entry])=>{
-//         setVisible(entry.isIntersecting)
-//     },options)
-//     if(ref){
-//         observer.observe(ref)
-//     }
-
-//       return () => {
-//        if(ref){
-//         observer.unobserve(ref)
-//        }
-//       }
-//     }, [ref,visible])
-// //part3
-// return [setRef,visible]
-
-// }

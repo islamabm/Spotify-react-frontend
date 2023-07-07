@@ -170,7 +170,6 @@ async function getVideos(keyword, song = null) {
       uncachedKeywords.map(async (artist) => {
         let cachedSong = getCachedSong(artist)
         if (cachedSong) {
-          // console.log('cashed')
           return cachedSong
         } else {
           const res = await axios.get(gUrl + artist)
@@ -178,7 +177,7 @@ async function getVideos(keyword, song = null) {
             _prepareData(item)
           )
           cacheSong(artist, recommendedSong[0])
-          console.log('save cashed')
+
           return recommendedSong[0]
         }
       })
@@ -253,8 +252,10 @@ async function userQuery() {
   return userStations
 }
 
-function query() {
-  return httpService.get(`station`)
+async function query() {
+  const stations = await httpService.get(`station`)
+  console.log('stations', stations)
+  return stations
 }
 
 async function getById(id) {

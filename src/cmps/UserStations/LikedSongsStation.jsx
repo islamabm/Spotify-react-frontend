@@ -2,7 +2,7 @@ import React from 'react'
 
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import emptyImg from '../../assets/imgs/empty-img.png'
+
 import { useSelector } from 'react-redux'
 import { setCurrStation } from '../../store/actions/station.actions'
 import { getSpotifySvg } from '../../services/SVG.service'

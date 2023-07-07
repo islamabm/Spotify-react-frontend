@@ -1,34 +1,34 @@
-import { memo, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router";
-import { StationPreview } from "./StationPreview";
-import { setCurrCategoryBy } from "../store/actions/station.actions";
+import { memo, useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router'
+import { StationPreview } from './StationPreview'
+import { setCurrCategoryBy } from '../store/actions/station.actions'
 
 function _StationList({ stations }) {
-  const [stationsCategory, setStationsCategory] = useState([]);
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const [stationsCategory, setStationsCategory] = useState([])
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   function categorizedStations() {
     const category = stations?.reduce((acc, station) => {
       station.tags.forEach((tag) => {
         if (!acc[tag]) {
-          acc[tag] = [];
+          acc[tag] = []
         }
-        acc[tag].push(station);
-      });
-      return acc;
-    }, {});
-    return Object.entries(category);
+        acc[tag].push(station)
+      })
+      return acc
+    }, {})
+    return Object.entries(category)
   }
 
   useEffect(() => {
-    setStationsCategory(categorizedStations());
-  }, []);
+    setStationsCategory(categorizedStations())
+  }, [])
 
   function goToTagList(tag) {
-    dispatch(setCurrCategoryBy(tag));
-    navigate("/search/category");
+    dispatch(setCurrCategoryBy(tag))
+    navigate('/search/category')
   }
   return (
     <section className="station-list-container">
@@ -45,7 +45,7 @@ function _StationList({ stations }) {
         </>
       ))}
     </section>
-  );
+  )
 }
 
-export const StationList = memo(_StationList);
+export const StationList = memo(_StationList)

@@ -1,29 +1,21 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { getSpotifySvg } from '../../services/SVG.service'
 
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import emptyImg from '../../assets/imgs/empty-img.png'
 import { useSelector } from 'react-redux'
 import { setCurrStation } from '../../store/actions/station.actions'
-export default function UserStationsPreview({ station }) {
+export default function UserStationsPreview({ station, color }) {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   function goToUserStationDetails() {
     dispatch(setCurrStation(station._id))
     navigate(`/station/${station._id}`)
   }
+  const location = useLocation()
 
   const user = useSelector((storeState) => storeState.userModule.loggedInUser)
-  const song = useSelector((storeState) => storeState.songModule.currSong)
-  const currentPlaylist = useSelector(
-    (storeState) => storeState.stationModule.currStation
-  )
-  console.log('song', song)
-  console.log('currentPlaylist', currentPlaylist)
-
-  const isSongInPlaylist =
-    currentPlaylist.songs.some((s) => s._id === song?._id) || false
 
   return (
     <section className="user-station-preview" onClick={goToUserStationDetails}>
@@ -35,7 +27,7 @@ export default function UserStationsPreview({ station }) {
       </div>
       <div className="user-station-details">
         <div className="user-station-name">
-          <p className={isSongInPlaylist ? 'green' : ''}>{station?.name}</p>
+          <p className={color}>{station?.name}</p>
         </div>
         <div className="user-details">
           <span>Playlist</span>
@@ -44,9 +36,8 @@ export default function UserStationsPreview({ station }) {
         </div>
       </div>
 
-      {isSongInPlaylist && (
+      {color === 'green' && location.pathname === `/station/${station._id}` && (
         <span
-          // style={{ fill: '#1ed760' }}
           className="user-library-volume"
           dangerouslySetInnerHTML={{
             __html: getSpotifySvg('volumeIconStation'),

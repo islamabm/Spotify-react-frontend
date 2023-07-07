@@ -94,7 +94,7 @@ export function StationDetails(props) {
     })
     setShowModal(true)
   }
-  console.log('details')
+
   function updateImgUrlAndColor(station) {
     if (!station) return
     const imgUrl = station.imgUrl
@@ -164,7 +164,7 @@ export function StationDetails(props) {
     }
   }
 
-  // if (!station) return <div>Loading...</div>
+  if (!station) return <div>Loading...</div>
   return (
     <section className="station-details" ref={stationDetailsRef}>
       <StationHeaderDetails bgStyle={bgStyle} station={station} />

@@ -5,24 +5,23 @@ import { MediaPlayer } from './MediaPlayer'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { BubblingHeart } from './BubblingHeart'
-import { storageService } from '../services/storage.service'
+
 export function AppFooter() {
   const [mute, setMute] = useState(false)
   const [volume, setVolume] = useState(50)
   const [isLyrics, setIsLyrics] = useState(false)
-  const location = useLocation()
+
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const song = useSelector((storeState) => storeState.songModule.currSong)
   const station = useSelector(
     (storeState) => storeState.stationModule.currStation
-    )
-    const [currSong, setCurrSong] = useState(song)
-  
-  useEffect(() => {
-      setCurrSong(song)
-  }, [song]);
+  )
+  const [currSong, setCurrSong] = useState(song)
 
+  useEffect(() => {
+    setCurrSong(song)
+  }, [song])
 
   const handleVolumeChange = (event) => {
     setVolume(event.target.value)
@@ -52,11 +51,10 @@ export function AppFooter() {
       setMute(true)
     }
   }
-  console.log('currSong', currSong)
+
   return (
     <div className="app-footer">
-      <div
-        className="song-details">
+      <div className="song-details">
         {currSong && (
           <>
             <div className="image">
@@ -73,24 +71,15 @@ export function AppFooter() {
                 {song ? song.artist : station?.songs[0]?.artist}
               </p>
             </div>
-          {/* </> */}
-        
 
-        <div className="heart-picture-icons ">
-          <span className="footer-heart">
-            <BubblingHeart index={song._id} item={song} type="song"/>
-          </span>
-          {/* <span
-            className="picture-icon pointer title"
-            dangerouslySetInnerHTML={{
-              __html: getSpotifySvg('pictureIcon'),
-            }}
-          ></span>{' '} */}
-        </div>
-        </>
+            <div className="heart-picture-icons ">
+              <span className="footer-heart">
+                <BubblingHeart index={song._id} item={song} type="song" />
+              </span>
+            </div>
+          </>
         )}
       </div>
-      
 
       <div className="media-player">
         <MediaPlayer volume={volume} />
@@ -118,12 +107,6 @@ export function AppFooter() {
             }}
           ></span>
         )}
-        {/* <span title='open '
-          className="pointer"
-          dangerouslySetInnerHTML={{
-            __html: getSpotifySvg('queueIcon'),
-          }}
-        ></span>{' '} */}
         <span
           title={mute ? 'Unmute' : 'Mute'}
           onClick={onToggleMute}
