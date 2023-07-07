@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { getSpotifySvg } from '../services/SVG.service'
 import { SortModal } from './Modals/SortModal'
 import { useDispatch } from 'react-redux'
@@ -12,7 +12,6 @@ export function UserLibrary() {
 
   const [filterUserStations, setFilterUserStations] = useState('')
 
-  // const [newStationCreated, setNewStationCreated] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [showInput, setShowInput] = useState(false)
   const dispatch = useDispatch()
