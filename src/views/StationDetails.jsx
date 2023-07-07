@@ -94,7 +94,7 @@ export function StationDetails(props) {
     })
     setShowModal(true)
   }
-  console.log('details')
+
   function updateImgUrlAndColor(station) {
     if (!station) return
     const imgUrl = station.imgUrl

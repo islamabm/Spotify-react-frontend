@@ -15,15 +15,6 @@ export default function UserStationsPreview({ station, color }) {
   }
 
   const user = useSelector((storeState) => storeState.userModule.loggedInUser)
-  // const song = useSelector((storeState) => storeState.songModule.currSong)
-  // const currentPlaylist = useSelector(
-  //   (storeState) => storeState.stationModule.currStation
-  // )
-  // console.log('song', song)
-  // console.log('currentPlaylist', currentPlaylist)
-
-  // const isSongInPlaylist =
-  //   currentPlaylist.songs.some((s) => s._id === song?._id)
 
   return (
     <section className="user-station-preview" onClick={goToUserStationDetails}>

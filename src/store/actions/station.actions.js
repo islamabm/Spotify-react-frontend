@@ -134,7 +134,6 @@ export function addSongToStation(stationId, song) {
 export function removeSongFromStation(stationId, songId) {
   return async (dispatch) => {
     try {
-      console.log('songId', songId)
       const id = await stationService.removeSongFromStation(stationId, songId)
 
       const action = {
@@ -186,7 +185,7 @@ export function editUserStation(station) {
   return async (dispatch) => {
     try {
       const updatedStation = await stationService.editStation(station)
-      console.log('updatedStation', updatedStation)
+
       const action = { type: EDIT_STATION, station: updatedStation }
       dispatch(action)
       const action2 = { type: SET_CURR_STATION, station: updatedStation }

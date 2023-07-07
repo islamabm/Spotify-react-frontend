@@ -42,7 +42,6 @@ export function AppHeader() {
     dispatch(setCurrSongIndex(station?._id, station?.songs[0]._id))
   }
 
-
   useEffect(() => {
     const onScroll = ({ scrollPos, headerBg }) => {
       updateHeaderOpacity(scrollPos, headerBg)
@@ -53,11 +52,9 @@ export function AppHeader() {
       location.pathname === '/search' ||
       location.pathname === '/lyrics'
     ) {
-      console.log('new header')
       setHeaders({
         backgroundColor: 'rgba(0,0,0,0)',
       })
-      console.log('headers', headers)
     } else {
       setHeaders({
         backgroundColor: 'transparent',
@@ -78,13 +75,10 @@ export function AppHeader() {
       location.pathname === '/search' ||
       location.pathname === '/lyrics'
     ) {
-      console.log('new header')
       setHeaders({
         backgroundColor: 'rgba(0,0,0,0)',
       })
-      console.log('headers', headers)
     } else {
-      console.log('transparent')
       setHeaders({
         backgroundColor: 'transparent',
       })
@@ -202,7 +196,6 @@ export function AppHeader() {
           </>
         ) : (
           <>
-
             <span className="user-details-header" onClick={onClickUserDetails}>
               <img
                 title={user?.username}

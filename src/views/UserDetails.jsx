@@ -27,7 +27,6 @@ export function UserDetails() {
     updateImgUrlAndColor(user.imgUrl)
   }, [user?.imgUrl])
 
-  console.log('user', user)
   function updateImgUrlAndColor(userImg) {
     if (!user.imgUrl) return
     getDominantColor(userImg)
@@ -37,7 +36,7 @@ export function UserDetails() {
     const cachedColor = colorCache[imageSrc]
     if (cachedColor) {
       const gradient = `linear-gradient(to bottom, ${cachedColor} 0%, ${cachedColor} 80vh, black 80vh, black 100%)`
-      console.log('there is cached')
+
       setBgStyle(gradient)
 
       document.body.style.backgroundImage = gradient
@@ -45,7 +44,7 @@ export function UserDetails() {
     }
     const fac = new FastAverageColor()
     const img = new Image()
-    console.log('Api call')
+
     img.crossOrigin = 'Anonymous'
     const corsProxyUrl = 'https://api.codetabs.com/v1/proxy?quest='
     img.src = corsProxyUrl + encodeURIComponent(imageSrc)

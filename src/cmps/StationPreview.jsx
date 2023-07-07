@@ -15,7 +15,6 @@ export function StationPreview({ station }) {
   const [isPlaying, setIsPlaying] = useState(false)
 
   function goToDetails() {
-    console.log('details')
     dispatch(setCurrStation(station._id))
     navigate(`/station/${station._id}`)
 
@@ -65,7 +64,7 @@ export function StationPreview({ station }) {
       <div className="station-info flex justify-center">
         <h3>{station.name}</h3>
       </div>
-        <p>{station.description}</p>
+      <p>{station.description}</p>
     </article>
   ) : null
 }

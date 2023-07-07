@@ -16,13 +16,12 @@ export function AppFooter() {
   const song = useSelector((storeState) => storeState.songModule.currSong)
   const station = useSelector(
     (storeState) => storeState.stationModule.currStation
-    )
-    const [currSong, setCurrSong] = useState(song)
-  
-  useEffect(() => {
-      setCurrSong(song)
-  }, [song]);
+  )
+  const [currSong, setCurrSong] = useState(song)
 
+  useEffect(() => {
+    setCurrSong(song)
+  }, [song])
 
   const handleVolumeChange = (event) => {
     setVolume(event.target.value)
@@ -52,11 +51,10 @@ export function AppFooter() {
       setMute(true)
     }
   }
-  console.log('currSong', currSong)
+
   return (
     <div className="app-footer">
-      <div
-        className="song-details">
+      <div className="song-details">
         {currSong && (
           <>
             <div className="image">
@@ -73,24 +71,22 @@ export function AppFooter() {
                 {song ? song.artist : station?.songs[0]?.artist}
               </p>
             </div>
-          {/* </> */}
-        
+            {/* </> */}
 
-        <div className="heart-picture-icons ">
-          <span className="footer-heart">
-            <BubblingHeart index={song._id} item={song} type="song"/>
-          </span>
-          {/* <span
+            <div className="heart-picture-icons ">
+              <span className="footer-heart">
+                <BubblingHeart index={song._id} item={song} type="song" />
+              </span>
+              {/* <span
             className="picture-icon pointer title"
             dangerouslySetInnerHTML={{
               __html: getSpotifySvg('pictureIcon'),
             }}
           ></span>{' '} */}
-        </div>
-        </>
+            </div>
+          </>
         )}
       </div>
-      
 
       <div className="media-player">
         <MediaPlayer volume={volume} />

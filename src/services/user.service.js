@@ -72,7 +72,7 @@ async function login(userCred) {
 }
 
 async function signup(userCred) {
-  console.log('from service',userCred)
+
   if (!userCred.imgUrl) {
     userCred.imgUrl =
       'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg'
@@ -5159,8 +5159,7 @@ function prepareData(userCred) {
 }
 
 async function updateLatestStations(stationId, user) {
-  console.log('service', stationId)
-  console.log('service', user)
+
   const station = await stationService.getById(stationId)
   const userCopy = { ...user }
   userCopy.latestStations = [...userCopy.latestStations, station]

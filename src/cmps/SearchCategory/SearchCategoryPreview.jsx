@@ -12,7 +12,6 @@ export function SearchCategoryPreview({ category }) {
   const dispatch = useDispatch()
 
   function filterStationCategories(categoryName) {
-    console.log('categoryName', categoryName)
     dispatch(setCurrCategoryBy(categoryName))
     navigate('/search/category')
   }

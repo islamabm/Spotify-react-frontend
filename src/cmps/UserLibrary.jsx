@@ -15,8 +15,8 @@ export function UserLibrary() {
   const dispatch = useDispatch()
 
   function onShowSortModal() {
-    setShowSortModal((prevState) => !prevState);
-    setShowInput(false);
+    setShowSortModal((prevState) => !prevState)
+    setShowInput(false)
   }
 
   function onSelectOption(ev, option) {
@@ -26,7 +26,6 @@ export function UserLibrary() {
   }
 
   function createNewStation() {
-    console.log('hi')
     setStationCounter(stationCounter + 1)
     const name = `My Playlist #${stationCounter}`
     dispatch(addStation(name, [], ''))
@@ -43,9 +42,9 @@ export function UserLibrary() {
   //     setNewStationCreated(false)
   //   }
   // }, [newStationCreated])
-function openInput() {
-  setShowInput(true)
-}
+  function openInput() {
+    setShowInput(true)
+  }
   return (
     <>
       <section className="user-library">
@@ -77,29 +76,32 @@ function openInput() {
         <section className="filter-and-list">
           <div className="library-filter">
             <div className="input-container">
-              <span onClick={openInput}
+              <span
+                onClick={openInput}
                 title="Search in Your Library"
                 className="smaller-search pointer flex align-center justify-center title"
                 dangerouslySetInnerHTML={{
                   __html: getSpotifySvg('smallerSearchIcon'),
                 }}
               ></span>
-              {showInput && 
-              <input
-                className="search-input"
-                type="text"
-                placeholder="Search in Your Library"
-                value={filterUserStations}
-                onChange={(e) => setFilterUserStations(e.target.value)}
-              />
-            }
+              {showInput && (
+                <input
+                  className="search-input"
+                  type="text"
+                  placeholder="Search in Your Library"
+                  value={filterUserStations}
+                  onChange={(e) => setFilterUserStations(e.target.value)}
+                />
+              )}
             </div>
             <div onClick={onShowSortModal} className="sort-by-section relative">
               <span className="sort-by-span">{selectedOption}</span>
               <span
                 className="pointer arrow"
                 dangerouslySetInnerHTML={{
-                  __html: getSpotifySvg(showSortModal ? 'upperArrow' : 'bottomArrowIcon'),
+                  __html: getSpotifySvg(
+                    showSortModal ? 'upperArrow' : 'bottomArrowIcon'
+                  ),
                 }}
               ></span>
               {showSortModal && <SortModal onSelectOption={onSelectOption} />}

@@ -15,9 +15,9 @@ export function Signup() {
 
   function handleCallbackResponse(response) {
     const userObject = jwtDecode(response.credential)
-    console.log(userObject)
+
     const user = userService.prepareData(userObject)
-    console.log('from signup', user)
+
     dispatch(doSignup(user))
     navigate(`/`)
   }
@@ -50,7 +50,7 @@ export function Signup() {
 
     if (!signupCred.email || !signupCred.password || !signupCred.username)
       return
-    console.log('signupCred in the signup', signupCred)
+
     dispatch(doSignup(signupCred))
 
     navigate(`/`)
@@ -73,9 +73,7 @@ export function Signup() {
         <div className="signupW flex column align-center">
           <LoginSocialFacebook
             appId="278384431355097"
-            onResolve={(response) => {
-              console.log(response)
-            }}
+            onResolve={(response) => {}}
             onReject={(error) => {
               console.log(error)
             }}

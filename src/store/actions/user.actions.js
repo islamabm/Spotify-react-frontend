@@ -11,7 +11,6 @@ import {
 } from '../reducers/user.reducer'
 
 export function doSignup(userCred) {
-  console.log('userCred in the actions ', userCred)
   return async (dispatch, getState) => {
     try {
       const user = await userService.signup(userCred)
@@ -44,7 +43,7 @@ export function getUser() {
   return async (dispatch, getState) => {
     try {
       const user = await userService.getLoggedinUser()
-      console.log('user from actions', user)
+
       const action = {
         type: SET_LOGGEDIN_USER,
         user,
@@ -70,8 +69,6 @@ export function doLogout() {
 }
 
 export function updateUser(song, user) {
-  console.log('song', song)
-  console.log('user', user)
   return async (dispatch, getState) => {
     try {
       const updatedUser = await userService.update(song, user)
@@ -90,7 +87,7 @@ export function removeSongFromUser(songId, user) {
   return async (dispatch) => {
     try {
       const updatedUser = await userService.removeSong(songId, user)
-      console.log('updatedUser', updatedUser)
+
       dispatch({ type: UPDATE_USER, user: updatedUser })
     } catch (err) {
       console.log(err)
@@ -102,7 +99,7 @@ export function editUserImg(url, loggedInUser) {
   return async (dispatch, getState) => {
     try {
       const user = await userService.updateUser(url, loggedInUser)
-      console.log('user', user)
+
       const action = {
         type: UPDATE_USER,
         user,
@@ -125,8 +122,6 @@ export function spendBalance(amount) {
 }
 
 export function updateLatestStations(stationId, user) {
-  console.log('action', stationId)
-  console.log('action', user)
   return async (dispatch, getState) => {
     try {
       const { value } = await userService.updateLatestStations(stationId, user)
@@ -138,7 +133,6 @@ export function updateLatestStations(stationId, user) {
         user: value,
       }
       dispatch(action)
-      console.log('Latest stations updated successfully:', value)
     } catch (error) {
       console.log('Error updating latest stations:', error)
     }
