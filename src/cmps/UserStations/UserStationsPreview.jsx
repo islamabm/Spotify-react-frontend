@@ -1,7 +1,7 @@
 import React from 'react'
 import { getSpotifySvg } from '../../services/SVG.service'
 
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import emptyImg from '../../assets/imgs/empty-img.png'
 import { useSelector } from 'react-redux'
@@ -13,6 +13,7 @@ export default function UserStationsPreview({ station, color }) {
     dispatch(setCurrStation(station._id))
     navigate(`/station/${station._id}`)
   }
+  const location = useLocation()
 
   const user = useSelector((storeState) => storeState.userModule.loggedInUser)
 
@@ -35,7 +36,7 @@ export default function UserStationsPreview({ station, color }) {
         </div>
       </div>
 
-      {color === 'green' && (
+      {color === 'green' && location.pathname === `/station/${station._id}` && (
         <span
           className="user-library-volume"
           dangerouslySetInnerHTML={{
