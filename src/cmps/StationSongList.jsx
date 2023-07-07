@@ -67,7 +67,7 @@ export default function StationSongList({ station }) {
       top: rect.top + window.scrollY,
       left: rect.left + window.scrollX,
     })
-    setShowOptionsModal(true)
+    setShowOptionsModal(prevState => !prevState)
   }
 
   function formatDate(dateString) {

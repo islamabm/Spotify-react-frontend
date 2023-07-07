@@ -76,7 +76,7 @@ export function SongOptionsModal({ position, closeModal, station }) {
         className="song-options-modal"
         style={{
           top: position.top + 20,
-          left: position.left - 220,
+          left: position.left - 170,
         }}
       >
         <ul>

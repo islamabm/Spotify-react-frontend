@@ -46,7 +46,7 @@ export function StationOptionsModal({
         ref={modalRef}
         className="station-options-modal"
         style={{
-          top: position.top - 30,
+          top: position.top + 40,
           left: position.left,
         }}
       >
