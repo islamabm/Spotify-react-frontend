@@ -34,6 +34,8 @@ export function StationDetails(props) {
   const station = useSelector(
     (storeState) => storeState.stationModule.currStation
   )
+  const user = useSelector((storeState) => storeState.userModule.loggedInUser)
+  console.log('user in details', user)
   const [counter, setCounter] = useState(0)
 
   const stationImg = useSelector(

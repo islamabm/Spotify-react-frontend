@@ -19,6 +19,7 @@ export const userService = {
   prepareData,
   updateLatestStations,
   updateUser,
+  updateStations,
   removeSong,
 }
 
@@ -53,6 +54,19 @@ async function update(selectedSong, user) {
   if (getLoggedinUser()._id === savedUser._id) saveLocalUser(savedUser)
   return savedUser
 }
+async function updateStations(station, user) {
+  const userCopy = { ...user }
+
+  userCopy.stations = [...userCopy.stations, station]
+
+  const savedUser = await httpService.put(
+    `user/station/${userCopy._id}`,
+    userCopy
+  )
+
+  if (getLoggedinUser()._id === savedUser._id) saveLocalUser(savedUser)
+  return savedUser
+}
 
 async function updateUser(url, user) {
   const userCopy = { ...user }
@@ -72,7 +86,7 @@ async function login(userCred) {
 }
 
 async function signup(userCred) {
-  console.log('from service',userCred)
+  console.log('from service', userCred)
   // if (!userCred.imgUrl) {
   //   userCred.imgUrl =
   //     'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg'
@@ -5159,10 +5173,8 @@ function prepareData(userCred) {
 }
 
 async function updateLatestStations(stationId, user) {
-
   const station = await stationService.getById(stationId)
   const userCopy = { ...user }
   userCopy.latestStations = [...userCopy.latestStations, station]
   return httpService.put(`user/latest/${userCopy._id}`, userCopy)
 }
-

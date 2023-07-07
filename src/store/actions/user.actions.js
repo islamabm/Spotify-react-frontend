@@ -84,6 +84,21 @@ export function updateUser(song, user) {
   }
 }
 
+export function updateUserStations(station, user) {
+  return async (dispatch, getState) => {
+    try {
+      const updatedUser = await userService.updateStations(station, user)
+      const action = {
+        type: UPDATE_USER,
+        user: updatedUser,
+      }
+      dispatch(action)
+    } catch (error) {
+      console.log('error:', error)
+    }
+  }
+}
+
 export function removeSongFromUser(songId, user) {
   return async (dispatch) => {
     try {

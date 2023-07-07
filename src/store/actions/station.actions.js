@@ -60,6 +60,7 @@ export function addStation(name, songs, url) {
       const action2 = { type: SET_CURR_STATION, station }
       dispatch(action2)
       showSuccessMsg('Playlist added')
+      return station
     } catch (error) {
       showErrorMsg('Cannot add playlist')
     }

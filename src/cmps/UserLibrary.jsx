@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { getSpotifySvg } from '../services/SVG.service'
 import { SortModal } from './Modals/SortModal'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { UserStationsIndex } from './UserStations/UserStationsIndex'
 import { addStation } from '../store/actions/station.actions'
-
+import { updateUserStations } from '../store/actions/user.actions'
 export function UserLibrary() {
   const [showSortModal, setShowSortModal] = useState(false)
   const [selectedOption, setSelectedOption] = useState('Recents')
@@ -15,6 +15,8 @@ export function UserLibrary() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [showInput, setShowInput] = useState(false)
   const dispatch = useDispatch()
+
+  const user = useSelector((storeState) => storeState.userModule.loggedInUser)
 
   function onShowSortModal() {
     setShowSortModal((prevState) => !prevState)
@@ -31,6 +33,8 @@ export function UserLibrary() {
     setStationCounter(stationCounter + 1)
     const name = `My Playlist #${stationCounter}`
     dispatch(addStation(name, [], ''))
+
+    // dispatch(updateUserStations(station, user))
   }
 
   useEffect(() => {
