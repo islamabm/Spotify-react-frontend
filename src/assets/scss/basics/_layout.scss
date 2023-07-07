@@ -4,4 +4,7 @@
   grid-template-rows: 112px 3fr 1fr;
   column-gap: rem(8px);
   padding: rem(8px);
+  @include for-mobile-layout {
+    grid-template-columns: auto;
+  }
 }
