@@ -39,7 +39,7 @@ export function Signup() {
     username: '',
     password: '',
     email: '',
-    imgUrl: '',
+    imgUrl: 'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg',
     stations: [],
     likedSongs: [],
     latestStations: [],

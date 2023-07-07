@@ -48,17 +48,17 @@
     .actor-name-song {
       display: flex;
       flex-direction: column;
-      gap: 5px;
+      gap: rem(5px);
       margin-inline-start: 0.5em;
       font-family: Circular-medium;
-      letter-spacing: 0.4px;
+      letter-spacing: rem(0.4px);
       .song-name {
         margin: 0;
         padding: 0;
         color: #fff;
         font-size: 0.8125rem;
         font-weight: 400;
-        margin-right: 20px;
+        margin-right: rem(20px);
       }
       .actor-name {
         margin: 0;
