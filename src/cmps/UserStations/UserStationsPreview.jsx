@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { getSpotifySvg } from '../../services/SVG.service'
 
 import { useNavigate } from 'react-router-dom'

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { getSpotifySvg } from '../services/SVG.service'
 import { SortModal } from './Modals/SortModal'
 import { useDispatch } from 'react-redux'

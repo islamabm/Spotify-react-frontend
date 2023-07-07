@@ -1,11 +1,10 @@
 import React from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { getSpotifySvg } from '../services/SVG.service'
-import { setCurrCategoryBy } from '../store/actions/station.actions'
-import { useDispatch } from 'react-redux'
+
 export function AppNav() {
   const location = useLocation()
-  const dispatch = useDispatch()
+
   const navigate = useNavigate()
   const getSvgIcon = (iconName) => {
     if (iconName === 'homeIcon' && location.pathname === '/') {

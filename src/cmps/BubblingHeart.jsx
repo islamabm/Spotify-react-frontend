@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateUser, removeSongFromUser } from '../store/actions/user.actions'
 import { addStation, removeStation } from '../store/actions/station.actions'

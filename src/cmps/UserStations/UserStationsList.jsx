@@ -5,9 +5,6 @@ import { useSelector } from 'react-redux'
 
 export default function UserStationsList({ userStations, filterUserStations }) {
   const song = useSelector((storeState) => storeState.songModule.currSong)
-  // const currentPlaylist = useSelector(
-  //   (storeState) => storeState.stationModule.currStation
-  // )
 
   return (
     <section className="user-station-list">
