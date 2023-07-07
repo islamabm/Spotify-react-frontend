@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux'
 import emptyImg from '../../assets/imgs/empty-img.png'
 import { useSelector } from 'react-redux'
 import { setCurrStation } from '../../store/actions/station.actions'
-export default function UserStationsPreview({ station }) {
+export default function UserStationsPreview({ station, color }) {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   function goToUserStationDetails() {
@@ -15,15 +15,15 @@ export default function UserStationsPreview({ station }) {
   }
 
   const user = useSelector((storeState) => storeState.userModule.loggedInUser)
-  const song = useSelector((storeState) => storeState.songModule.currSong)
-  const currentPlaylist = useSelector(
-    (storeState) => storeState.stationModule.currStation
-  )
-  console.log('song', song)
-  console.log('currentPlaylist', currentPlaylist)
+  // const song = useSelector((storeState) => storeState.songModule.currSong)
+  // const currentPlaylist = useSelector(
+  //   (storeState) => storeState.stationModule.currStation
+  // )
+  // console.log('song', song)
+  // console.log('currentPlaylist', currentPlaylist)
 
-  const isSongInPlaylist =
-    currentPlaylist.songs.some((s) => s._id === song?._id) || false
+  // const isSongInPlaylist =
+  //   currentPlaylist.songs.some((s) => s._id === song?._id)
 
   return (
     <section className="user-station-preview" onClick={goToUserStationDetails}>
@@ -35,7 +35,7 @@ export default function UserStationsPreview({ station }) {
       </div>
       <div className="user-station-details">
         <div className="user-station-name">
-          <p className={isSongInPlaylist ? 'green' : ''}>{station?.name}</p>
+          <p className={color}>{station?.name}</p>
         </div>
         <div className="user-details">
           <span>Playlist</span>
@@ -44,7 +44,7 @@ export default function UserStationsPreview({ station }) {
         </div>
       </div>
 
-      {isSongInPlaylist && (
+      {color === 'green' && (
         <span
           className="user-library-volume"
           dangerouslySetInnerHTML={{
