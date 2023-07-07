@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { getKeepSvg } from '../services/SVG.service'
-import { addAudioNote } from '../store/actions/note.actions'
+import { getSpotifySvg } from '../services/SVG.service'
+// import { addAudioNote } from '../store/actions/note.actions'
 
 function Transcript() {
   const [recording, setRecording] = useState(false)
@@ -22,7 +22,8 @@ function Transcript() {
       const audioBlob = new Blob(audioChunksRef.current)
       const audioUrl = URL.createObjectURL(audioBlob)
       setAudioUrl(audioUrl)
-      dispatch(addAudioNote(audioUrl))
+      console.log('audioUrl', audioUrl)
+      // dispatch(addAudioNote(audioUrl))
       audioChunksRef.current = []
     })
 
@@ -59,7 +60,7 @@ function Transcript() {
         <span
           // className={`mic ${recording ? 'active' : ''}`}
           dangerouslySetInnerHTML={{
-            __html: getKeepSvg('mic'),
+            __html: getSpotifySvg('mic'),
           }}
         ></span>
       </i>

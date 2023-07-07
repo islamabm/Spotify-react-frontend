@@ -6,6 +6,7 @@ import { setCurrSong, setCurrSongIndex } from '../store/actions/song.actions'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { eventBus } from '../services/event-bus.service'
+import Transcript from './Transcript'
 export function AppHeader() {
   const [showModal, setShowModal] = useState(false)
   const [currScrollPos, setScrollPos] = useState(0)
@@ -134,6 +135,7 @@ export function AppHeader() {
                 __html: getSpotifySvg('rightArrowIcon'),
               }}
             ></span>
+            <Transcript />
           </div>
         </section>
         {location.pathname === '/search' && (
