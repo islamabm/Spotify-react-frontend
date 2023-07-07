@@ -12,7 +12,7 @@ export default function LikedSongsStation() {
   const dispatch = useDispatch()
 
   function goToUserStationDetails() {
-    const stationId = '64a31f7a56a7902b69ccef0a'
+    const stationId = '6466c0bf5aa2c46190c54046'
     dispatch(setCurrStation(stationId))
     navigate(`/station/${stationId}`)
   }
