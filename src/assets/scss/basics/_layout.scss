@@ -6,5 +6,7 @@
   padding: rem(8px);
   @include for-mobile-layout {
     grid-template-columns: auto;
+    display: block;
+    background-color: #121212;
   }
 }

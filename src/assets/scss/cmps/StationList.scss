@@ -1,10 +1,17 @@
 .station-list-container {
   padding: 55px 24px;
+  @include for-mobile-layout {
+    padding: 5px;
+  }
 }
 .station-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(100px, 189px));
   gap: rem(20px);
+  @include for-mobile-layout {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+  }
   a {
     cursor: default;
   }
@@ -13,6 +20,10 @@
 .category-tag {
   font-family: circular-book;
   font-size: 24px;
+  @include for-mobile-layout {
+    font-size: 18px;
+    margin-left: 3px;
+  }
   &:hover {
     text-decoration: underline;
   }

@@ -9,6 +9,11 @@
   background-color: $clr1;
   font-size: 12px;
   overflow: hidden;
+  @include for-mobile-layout {
+    background-color: inherit;
+    height: 220px;
+  width: 168px;
+  }
 
   .station-info {
     flex-direction: column;
@@ -16,31 +21,42 @@
     margin-inline-start: 1rem;
     margin-block-start: 0;
     color: white;
+    @include for-mobile-layout {
+      margin-inline-start: 0;
+      font-family: circular-light;
+    }
 
     h3 {
       font-size: 16px;
       margin-block-start: 0;
       margin-block-end: 1px;
       text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-    max-width: 160px;
+      overflow: hidden;
+      white-space: nowrap;
+      max-width: 160px;
     }
   }
-      p {
-        color: $clr3;
-        padding: 0;
-        max-width: 160px;
-        margin-inline-start: 1rem;
-        text-overflow: ellipsis;
-             overflow: hidden;    
-             white-space: nowrap;
-             font-size: 14px;
-      }
+  p {
+    color: $clr3;
+    padding: 0;
+    max-width: 160px;
+    margin-inline-start: 1rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 14px;
+    @include for-mobile-layout {
+      display: none;
+    }
+  }
 
   .station-img {
     margin-inline-start: rem(12px);
     padding: 13px 2px;
+    @include for-mobile-layout {
+      margin-inline-start: 0;
+      // padding: 5px;
+    }
     img {
       border-radius: 7px;
       width: 157px;
@@ -68,7 +84,7 @@
       margin-left: 3px;
     }
   }
-  
+
   &:hover {
     background-color: $clr8;
     transition: background-color 0.3s ease-in-out;
