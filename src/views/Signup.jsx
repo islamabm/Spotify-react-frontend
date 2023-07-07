@@ -39,7 +39,8 @@ export function Signup() {
     username: '',
     password: '',
     email: '',
-    imgUrl: 'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg',
+    imgUrl:
+      'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg',
     stations: [],
     likedSongs: [],
     latestStations: [],
@@ -50,7 +51,7 @@ export function Signup() {
 
     if (!signupCred.email || !signupCred.password || !signupCred.username)
       return
-
+    console.log('signupCred in component', signupCred)
     dispatch(doSignup(signupCred))
 
     navigate(`/`)
