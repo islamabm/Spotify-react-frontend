@@ -110,6 +110,10 @@
         &.open {
           animation: inputExpand 0.2s forwards;
         }
+        &.close {
+          animation: inputCollapse 0.2s forwards;
+        }
+
         &:focus {
           outline: none;
         }
@@ -163,5 +167,16 @@
   }
   100% {
     width: 170px;
+  }
+}
+@keyframes inputCollapse {
+  0% {
+    width: 170px;
+  }
+  50% {
+    width: 100px;
+  }
+  100% {
+    width: 0;
   }
 }
