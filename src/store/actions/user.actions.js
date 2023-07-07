@@ -8,7 +8,7 @@ import {
   // ADD_SONG_TO_USER_LIKED_SONGS,
   UPDATE_LATEST,
 } from '../reducers/user.reducer'
-
+import { showErrorMsg, showSuccessMsg } from '../../services/event-bus.service'
 export function doSignup(userCred) {
   return async (dispatch, getState) => {
     try {
@@ -33,8 +33,9 @@ export function doLogin(userCred) {
         user,
       }
       dispatch(action)
+      showSuccessMsg('like')
     } catch (error) {
-      console.log('error:', error)
+      showErrorMsg('username or email not found please signup')
     }
   }
 }
