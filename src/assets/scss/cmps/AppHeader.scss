@@ -7,17 +7,16 @@
   grid-row: 1;
   padding: 20px;
   background-color: transparent;
-  // after scrolling -
   height: 64px;
   border-radius: 5px;
   z-index: 999;
   transition: background-color 0.3s ease-in-out;
   .arrows-and-input {
     display: flex;
-    gap: 8px;
+    gap: rem(8px);
     .arrows {
       display: flex;
-      gap: 8px;
+      gap: rem(8px);
       align-items: center;
 
       .black-circle {
@@ -41,7 +40,7 @@
       span {
         position: relative;
         left: 8%;
-        margin-top: 2px;
+        margin-top: rem(2px);
         svg {
           fill: rgba(255, 255, 255, 0.744);
         }
@@ -61,6 +60,10 @@
         &:focus {
           border: 2px solid white;
           outline: none;
+        }
+        &::placeholder {
+          font-size: 14px;
+          color: $clr15;
         }
       }
     }
@@ -85,7 +88,7 @@
       border: 0;
       border-radius: 500px;
       font-size: inherit;
-      min-block-size: 48px;
+      min-block-size: 47px;
       padding-inline: 30px;
       font-size: 15px;
 
@@ -99,10 +102,9 @@
       font-family: Circular-medium;
       background-color: transparent;
       border: 0px;
-      border-radius: 500px;
       transition-duration: 33ms;
       color: $clr15;
-      padding-inline: 12px;
+      padding-inline: 18px;
       &:hover {
         color: white;
         transform: scale(1.04);
@@ -116,7 +118,7 @@
 }
 
 .station-options {
-  gap: 10px;
+  gap: rem(10px);
   p {
     font-size: 1.5rem;
     font-weight: 700;
@@ -131,7 +133,6 @@
   justify-content: center;
   align-items: center;
   border-radius: 500px;
-  margin-inline-end: 22px;
   font-family: Circular-medium;
   height: 33px;
   width: 33px;
