@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { getSpotifySvg } from '../services/SVG.service'
 import { SortModal } from './Modals/SortModal'
 import { useDispatch } from 'react-redux'
@@ -9,8 +9,11 @@ export function UserLibrary() {
   const [showSortModal, setShowSortModal] = useState(false)
   const [selectedOption, setSelectedOption] = useState('Recents')
   const [stationCounter, setStationCounter] = useState(0)
+
   const [filterUserStations, setFilterUserStations] = useState('')
+
   // const [newStationCreated, setNewStationCreated] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
   const [showInput, setShowInput] = useState(false)
   const dispatch = useDispatch()
 
@@ -31,17 +34,23 @@ export function UserLibrary() {
     dispatch(addStation(name, [], ''))
   }
 
-  // useEffect(() => {
-  //   if (newStationCreated) {
-  //     const gradient = {
-  //       background:
-  //         'linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 50%, rgba(0,0,0,1) 70%, rgba(0,0,0,1) 100%)',
-  //     }
-  //     eventBus.emit('newStationCreated', gradient)
+  useEffect(() => {
+    const filterAndListSection = document.querySelector('.filter-and-list')
+    const checkScroll = () => {
+      if (filterAndListSection.scrollTop > 0 && !isScrolled) {
+        setIsScrolled(true)
+      } else if (filterAndListSection.scrollTop === 0 && isScrolled) {
+        setIsScrolled(false)
+      }
+    }
 
-  //     setNewStationCreated(false)
-  //   }
-  // }, [newStationCreated])
+    filterAndListSection.addEventListener('scroll', checkScroll)
+
+    return () => {
+      filterAndListSection.removeEventListener('scroll', checkScroll)
+    }
+  }, [isScrolled])
+
   function openInput() {
     setShowInput(true)
   }
@@ -49,7 +58,11 @@ export function UserLibrary() {
     <>
       <section className="user-library">
         <section className="library-header-wrapper">
-          <div className="flex align-center library-header">
+          <div
+            className={`flex align-center library-header ${
+              isScrolled ? 'scrolled' : ''
+            }`}
+          >
             <div className="flex align-center your-library pointer">
               <span
                 dangerouslySetInnerHTML={{
