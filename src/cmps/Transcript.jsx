@@ -1,13 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { getSpotifySvg } from '../services/SVG.service'
-// import { addAudioNote } from '../store/actions/note.actions'
+import { shazamService } from '../services/shazam.service'
 
 function Transcript() {
   const [recording, setRecording] = useState(false)
   const [audioUrl, setAudioUrl] = useState(null)
   const mediaRecorderRef = useRef(null)
   const audioChunksRef = useRef([])
+  const [audioBlob, setAudioBlob] = useState(null)
   const dispatch = useDispatch()
 
   const startRecording = async () => {
@@ -20,10 +21,11 @@ function Transcript() {
 
     mediaRecorderRef.current.addEventListener('stop', () => {
       const audioBlob = new Blob(audioChunksRef.current)
+      setAudioBlob(audioBlob) // Save the blob to state
       const audioUrl = URL.createObjectURL(audioBlob)
       setAudioUrl(audioUrl)
       console.log('audioUrl', audioUrl)
-      // dispatch(addAudioNote(audioUrl))
+
       audioChunksRef.current = []
     })
 
@@ -31,11 +33,15 @@ function Transcript() {
     setRecording(true)
   }
 
-  const stopRecording = () => {
+  async function stopRecording() {
     if (mediaRecorderRef.current) {
       mediaRecorderRef.current.stop()
       setRecording(false)
     }
+    const name = await shazamService.identifySong({
+      /* Your data to identify the song */
+    })
+    console.log('name', name)
   }
 
   useEffect(() => {
@@ -58,7 +64,7 @@ function Transcript() {
     <div>
       <i title="record" onClick={toggleRecording}>
         <span
-          // className={`mic ${recording ? 'active' : ''}`}
+          className={`mic ${recording ? 'active' : ''}`}
           dangerouslySetInnerHTML={{
             __html: getSpotifySvg('mic'),
           }}
