@@ -72,15 +72,21 @@
   scrollbar-width: thin;
   scrollbar-color: transparent transparent;
 
+  &:hover {
+    scrollbar-color: rgba(234, 227, 227, 0.39) transparent;
+  }
+
   &::-webkit-scrollbar {
     width: 13px;
   }
 
   &::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    transition: background-color 2s;
+  }
+
+  &:hover::-webkit-scrollbar-thumb {
     background-color: rgba(234, 227, 227, 0.39);
-    &:hover {
-      background-color: rgba(234, 227, 227, 0.552);
-    }
   }
   .library-filter {
     display: flex;
