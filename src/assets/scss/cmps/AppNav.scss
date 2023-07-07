@@ -3,8 +3,8 @@
   margin-block-end: rem(8px);
   border-radius: 7px;
   font-family: Circular-medium;
-  max-height: 112px;
-  min-width: 318px;
+  max-height: rem(112px);
+  min-width: rem(318px);
   padding: 17px 25px;
   a {
     text-decoration: none;
@@ -12,7 +12,7 @@
   .shared-nav-item {
     display: flex;
     align-items: center;
-    height: 40px;
+    height: rem(40px);
     text-decoration: none;
     cursor: pointer;
     color: $clr6;
