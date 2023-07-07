@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { uploadImg } from '../services/upload.service'
-import { editUserImg } from '../store/actions/user.actions'
+import { editUserImg, getUser } from '../store/actions/user.actions'
 import { FastAverageColor } from 'fast-average-color'
 
 export function UserDetails() {
-  const user = useSelector((storeState) => storeState.userModule.loggedInUser)
+  // const user = useSelector((storeState) => storeState.userModule.loggedInUser)
   const [isUploading, setIsUploading] = useState(false)
   const [bgStyle, setBgStyle] = useState(null)
+  const [user, setUser] = useState(useSelector((storeState) => storeState.userModule.loggedInUser))
   const dispatch = useDispatch()
   const colorCache = {}
   async function handleFile(ev) {
@@ -23,10 +24,15 @@ export function UserDetails() {
       setIsUploading(false)
     }
   }
-
-  useEffect(() => {
-    updateImgUrlAndColor(user.imgUrl)
-  }, [user?.imgUrl])
+  // useEffect(() => {
+    // }, [])
+    useEffect(() => {
+      const user1 = dispatch(getUser())
+      setUser(user1)
+        console.log('user1', user1)
+        console.log('user use effect', user)
+      updateImgUrlAndColor(user.imgUrl)
+  }, [user.imgUrl])
 
 console.log('user', user)
   function updateImgUrlAndColor(userImg) {

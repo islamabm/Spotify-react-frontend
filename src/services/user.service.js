@@ -73,10 +73,10 @@ async function login(userCred) {
 
 async function signup(userCred) {
   console.log('from service',userCred)
-  if (!userCred.imgUrl) {
-    userCred.imgUrl =
-      'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg'
-  }
+  // if (!userCred.imgUrl) {
+  //   userCred.imgUrl =
+  //     'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg'
+  // }
   const user = await httpService.post('auth/signup', userCred)
   return saveLocalUser(user)
 }
