@@ -4,6 +4,6 @@
   gap: 20px;
   @include for-mobile-layout {
     grid-template-columns: 163px 163px;
-    gap: 16px;
+    gap: 15px;
   }
 }
