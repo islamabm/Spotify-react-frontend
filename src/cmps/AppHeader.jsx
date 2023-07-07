@@ -3,7 +3,7 @@ import { useLocation, Link, useNavigate } from 'react-router-dom'
 import { UserModal } from './Modals/UserModal'
 import { useState, useEffect } from 'react'
 import { setCurrSong, setCurrSongIndex } from '../store/actions/song.actions'
-import { doLogout } from '../store/actions/user.actions'
+
 import { useDispatch, useSelector } from 'react-redux'
 import { eventBus } from '../services/event-bus.service'
 export function AppHeader() {
@@ -42,9 +42,6 @@ export function AppHeader() {
     dispatch(setCurrSongIndex(station?._id, station?.songs[0]._id))
   }
 
-  function handleLogout() {
-    dispatch(doLogout())
-  }
 
   useEffect(() => {
     const onScroll = ({ scrollPos, headerBg }) => {
@@ -97,10 +94,6 @@ export function AppHeader() {
     }
   }, [location.pathname])
 
-  function onShowModal() {
-    setShowModal(true)
-  }
-
   function onCloseModal() {
     setShowModal(false)
   }
@@ -110,6 +103,10 @@ export function AppHeader() {
     dispatch(setCurrSong(station?._id, station?.songs[0]._id))
     dispatch(setCurrSongIndex(station?._id, station?.songs[0]._id))
     setIsPlaying(!isPlaying)
+  }
+
+  function onClickUserDetails() {
+    setShowModal(!showModal)
   }
 
   function goToPreviousRoute() {
@@ -205,22 +202,18 @@ export function AppHeader() {
           </>
         ) : (
           <>
-            <button onClick={handleLogout} className="sign-up  pointer">
-              Log out
-            </button>
-            <Link to="/user">
-              <span className="user-details-header">
-                <img
-                  title={user?.username}
-                  src={
-                    user.imgUrl
-                      ? user.imgUrl
-                      : 'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg'
-                  }
-                  alt="user-img"
-                />
-              </span>
-            </Link>
+
+            <span className="user-details-header" onClick={onClickUserDetails}>
+              <img
+                title={user?.username}
+                src={
+                  user.imgUrl
+                    ? user.imgUrl
+                    : 'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg'
+                }
+                alt="user-img"
+              />
+            </span>
           </>
         )}
       </div>
