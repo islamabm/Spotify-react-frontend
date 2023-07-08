@@ -28,8 +28,8 @@ function Transcript() {
         }) // assuming the audio type is webm
         setAudioBlob(audioFile) // Save the file to state
 
-        const name = await shazamService.identifySong(audioFile)
-        console.log('name', name)
+        // const name = await shazamService.identifySong(audioFile)
+        // console.log('name', name)
       }
       reader.readAsArrayBuffer(audioBlob)
       audioChunksRef.current = []
