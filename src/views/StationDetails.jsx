@@ -13,7 +13,7 @@ import {
   RecommendedIndex,
 } from '../cmps/Recommended/RecommendedIndex'
 import { RecommindationModal } from '../cmps/Modals/RecommindationModal'
-import SearchSongs from '../cmps/SearchSongs/SearchSongsIndex'
+import { SearchSongsIndex } from '../cmps/SearchSongs/SearchSongsIndex'
 import { setCurrSong, setCurrSongIndex } from '../store/actions/song.actions'
 import { DeleteStationModal } from '../cmps/Modals/DeleteStationModal'
 import { BubblingHeart } from '../cmps/BubblingHeart'
@@ -21,6 +21,7 @@ import { BubblingHeart } from '../cmps/BubblingHeart'
 export function StationDetails(props) {
   const [bgStyle, setBgStyle] = useState(null)
   const [bgBottomStyle, setBgBottomStyle] = useState(null)
+
   const colorCache = {}
   const [showRecommindationModal, setShowRecommindationModal] = useState(false)
   const [showModal, setShowModal] = useState(false)
@@ -265,7 +266,7 @@ export function StationDetails(props) {
         )}
       {station.createdBy?.fullname !== 'system' &&
         station?.songs?.length === 0 && (
-          <SearchSongs stationId={station?._id} />
+          <SearchSongsIndex stationId={station?._id} />
         )}
       {showDeleteModal && (
         <DeleteStationModal
