@@ -1,7 +1,7 @@
 .station-list-container {
-  padding: 55px 24px;
+  padding: rem(55px) rem(24px);
   @include for-mobile-layout {
-    padding: 5px;
+    padding: rem(5px);
   }
 }
 .station-list {
@@ -10,7 +10,7 @@
   gap: rem(20px);
   @include for-mobile-layout {
     grid-template-columns: repeat(2, 1fr);
-    gap: 5px;
+    gap: rem(5px);
   }
   a {
     cursor: default;
@@ -22,7 +22,7 @@
   font-size: 24px;
   @include for-mobile-layout {
     font-size: 18px;
-    margin-left: 3px;
+    margin-inline-start: rem(3px);
   }
   &:hover {
     text-decoration: underline;
@@ -30,9 +30,9 @@
 }
 
 .song-animation-gif {
-  height: 13px;
-  width: 13px;
-  margin-top: 13px;
+  height: rem(13px);
+  width: rem(13px);
+  margin-block-start: rem(19px);
   padding: 0;
   transform: translate(2px);
 }

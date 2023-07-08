@@ -3,21 +3,22 @@
   position: relative;
 
   .search {
-    margin-top: 20px;
-    margin-left: -45px;
+    margin: rem(20px) 0 0 rem(-35px);
+  }
+  h2 {
+    margin-block-end: 0;
   }
   .search-songs-x {
-    position: absolute;
+    position: relative;
     background-color: transparent;
     border: 0;
     color: hsla(0, 0%, 100%, 0.7);
-    right: 36px;
     top: 75%;
-
+    left: 94%;
     svg {
       fill: $clr3;
-      width: 30px;
-      height: 22px;
+      width: rem(30px);
+      height: rem(22px);
     }
   }
   .input-container {
@@ -27,9 +28,9 @@
       border: 0;
       border-radius: 4px;
       color: $clr3;
-      height: 40px;
+      height: rem(40px);
       opacity: 1;
-      padding: 8px 40px;
+      padding: rem(8px) rem(40px);
       text-overflow: ellipsis;
       width: 35%;
       &:focus {
@@ -39,7 +40,7 @@
     .search-icon {
       position: absolute;
       top: 18%;
-      left: 8px;
+      left: rem(8px);
       svg {
         stroke: $clr3;
         cursor: pointer;

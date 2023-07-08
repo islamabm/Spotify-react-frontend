@@ -7,10 +7,10 @@
     0 6px 8px rgba(0, 0, 0, 0.2);
   box-shadow: 0 16px 24px rgba(0, 0, 0, 0.3), 0 6px 8px rgba(0, 0, 0, 0.2);
   max-height: calc(100vh - 24px);
-  max-width: 350px;
-  min-width: 160px;
+  max-width: rem(350px);
+  min-width: rem(160px);
   overflow-y: auto;
-  padding: 4px;
+  padding: rem(4px);
   z-index: 9999;
 
   ul {
@@ -21,9 +21,9 @@
       button {
         font-size: 14px;
         font-weight: 400;
-        height: 40px;
+        height: rem(40px);
         font-family: circular-book;
-        padding: 12px;
+        padding: rem(12px);
         background: transparent;
         border: 0;
         border-radius: 2px;
