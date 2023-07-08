@@ -80,6 +80,8 @@ export function SongOptionsModal({ position, closeModal, station }) {
   }
 
   function handleRemoveSongFromStation() {
+    console.log('station._id', station._id)
+    console.log('song._id', song._id)
     dispatch(removeSongFromStation(station._id, song._id))
     closeModal()
   }
