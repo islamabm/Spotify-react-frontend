@@ -10,6 +10,7 @@ export function SongLyrics() {
   )
   const [bgStyle, setBgStyle] = useState(null)
   const [bgBottomStyle, setBgBottomStyle] = useState(null)
+  const [isPlaying, setIsPlaying] = useState(false)
   const colorCache = {}
 
   useEffect(() => {
@@ -56,6 +57,16 @@ export function SongLyrics() {
     }
   }
 
+  function playSong() {
+    console.log('play')
+    setIsPlaying(true)
+  }
+
+  function pauseSong() {
+    console.log('pause')
+    setIsPlaying(false)
+  }
+
   return (
     <section className="song-lyrics-section">
       {/* <section className="song-lyrics-section"> */}
@@ -85,27 +96,28 @@ export function SongLyrics() {
         </div>
       )}
       <div className="song-details" style={bgBottomStyle}>
-        <div
-          className="play-button flex justify-center align-center"
-          // onClick={playFirstSongInStation}
-        >
-          {/* {isPlaying ? (
-                  <span
-                    title="Pause"
-                    className="pause-button flex align-center justify-center title"
-                    dangerouslySetInnerHTML={{
-                      __html: getSpotifySvg('biggerPauseBtn'),
-                    }}
-                  ></span> */}
-          {/* // ) : ( */}
-          <span
-            title="Play"
-            className="play-button flex align-center justify-center title lyrics-play"
-            dangerouslySetInnerHTML={{
-              __html: getSpotifySvg('biggerPlayBtn'),
-            }}
-          ></span>
-          {/* // )} */}
+        <div className="play-button flex justify-center align-center">
+          {isPlaying ? (
+            <button onClick={pauseSong}>
+              <span
+                title="Pause"
+                className="pause-button flex align-center justify-center title lyrics-play"
+                dangerouslySetInnerHTML={{
+                  __html: getSpotifySvg('biggerPauseBtn'),
+                }}
+              ></span>
+            </button>
+          ) : (
+            <button onClick={playSong}>
+              <span
+                title="Play"
+                className="play-button flex align-center justify-center title lyrics-play"
+                dangerouslySetInnerHTML={{
+                  __html: getSpotifySvg('biggerPlayBtn'),
+                }}
+              ></span>
+            </button>
+          )}
         </div>
         <span
           className="heart flex align-center justify-center"
