@@ -83,7 +83,7 @@ export function EditUserStationModal({ station, onClose }) {
           className="cover-img"
         >
           {isUploading ? (
-            <span className="loader"></span>
+            <span className="loader-img"></span>
           ) : (
             <img
               className="img-edit"

@@ -7,7 +7,9 @@ export function UserDetails() {
   // const user = useSelector((storeState) => storeState.userModule.loggedInUser)
   const [isUploading, setIsUploading] = useState(false)
   const [bgStyle, setBgStyle] = useState(null)
-  const [user, setUser] = useState(useSelector((storeState) => storeState.userModule.loggedInUser))
+  const [user, setUser] = useState(
+    useSelector((storeState) => storeState.userModule.loggedInUser)
+  )
   const dispatch = useDispatch()
   const colorCache = {}
   async function handleFile(ev) {
@@ -24,13 +26,13 @@ export function UserDetails() {
     }
   }
   // useEffect(() => {
-    // }, [])
-    useEffect(() => {
-      const user1 = dispatch(getUser())
-      setUser(user1)
-        console.log('user1', user1)
-        console.log('user use effect', user)
-      updateImgUrlAndColor(user.imgUrl)
+  // }, [])
+  useEffect(() => {
+    const user1 = dispatch(getUser())
+    setUser(user1)
+    console.log('user1', user1)
+    console.log('user use effect', user)
+    updateImgUrlAndColor(user.imgUrl)
   }, [user.imgUrl])
 
   function updateImgUrlAndColor(userImg) {
@@ -81,7 +83,7 @@ export function UserDetails() {
           }}
         >
           {isUploading ? (
-            <span className="loader"></span>
+            <span className="loader-img"></span>
           ) : (
             <img
               className="user-profile-img pointer"

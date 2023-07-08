@@ -16,7 +16,7 @@ export const SET_CURR_CATEGORY_BY = 'SET_CURR_CATEGORY_BY'
 export const ADD_TO_USER_STATIONS = 'ADD_TO_USER_STATIONS'
 const INITIAL_STATE = {
   currStationImg: '',
-  stations: [],
+  stations: null,
   searchStations: null,
   filterBy: 'Alphabetical',
   currStation: null,
