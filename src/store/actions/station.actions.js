@@ -18,7 +18,6 @@ import {
 } from '../reducers/station.reducer'
 
 export function loadStations() {
-  console.log('hi')
   return async (dispatch, getState) => {
     try {
       const stations = await stationService.query()
@@ -54,7 +53,6 @@ export function addStation(name, songs, url) {
   return async (dispatch) => {
     try {
       const station = await stationService.createNewStation(name, songs, url)
-      console.log('station', station)
       const action = { type: ADD_STATION, station }
       dispatch(action)
       const action2 = { type: SET_CURR_STATION, station }

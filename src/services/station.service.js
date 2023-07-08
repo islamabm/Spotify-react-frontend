@@ -254,7 +254,6 @@ async function userQuery() {
 
 async function query() {
   const stations = await httpService.get(`station`)
-  console.log('stations', stations)
   return stations
 }
 

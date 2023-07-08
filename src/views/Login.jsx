@@ -15,7 +15,6 @@ export function Login() {
       alert('Please enter username/password')
       return
     }
-    console.log('loginCred', loginCred)
     dispatch(doLogin(loginCred))
     navigate(`/`)
   }
