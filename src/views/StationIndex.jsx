@@ -48,7 +48,7 @@ export function StationIndex() {
     dispatch(loadStations())
   }, [])
 
-  if (!stations) return <div className="loader"></div>
+  if (!stations) return <div className="loader">loading</div>
 
   return (
     <section className="station-index" ref={stationIndexRef}>
