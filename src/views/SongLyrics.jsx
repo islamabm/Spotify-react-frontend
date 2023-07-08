@@ -85,7 +85,28 @@ export function SongLyrics() {
         </div>
       )}
       <div className="song-details" style={bgBottomStyle}>
-        <div className="play-button flex justify-center align-center"></div>
+        <div
+          className="play-button flex justify-center align-center"
+          // onClick={playFirstSongInStation}
+        >
+          {/* {isPlaying ? (
+                  <span
+                    title="Pause"
+                    className="pause-button flex align-center justify-center title"
+                    dangerouslySetInnerHTML={{
+                      __html: getSpotifySvg('biggerPauseBtn'),
+                    }}
+                  ></span> */}
+          {/* // ) : ( */}
+          <span
+            title="Play"
+            className="play-button flex align-center justify-center title lyrics-play"
+            dangerouslySetInnerHTML={{
+              __html: getSpotifySvg('biggerPlayBtn'),
+            }}
+          ></span>
+          {/* // )} */}
+        </div>
         <span
           className="heart flex align-center justify-center"
           dangerouslySetInnerHTML={{

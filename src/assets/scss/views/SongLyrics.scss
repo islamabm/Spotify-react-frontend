@@ -85,6 +85,14 @@
     align-items: center;
     justify-items: center;
 
+    .play-button {
+      .lyrics-play {
+        svg {
+          fill: black;
+        }
+      }
+    }
+
     span {
       svg {
         fill: #b3b3b3;
