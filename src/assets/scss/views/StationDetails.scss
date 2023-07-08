@@ -33,6 +33,20 @@
         margin-block-start: rem(5px);
         color: rgba(255, 255, 255, 0.698);
       }
+      .user-details-section {
+        display: flex;
+        align-items: center;
+        justify-items: center;
+        gap: 4px;
+        .user-img-details {
+          display: inline-block;
+          height: rem(32px);
+          width: rem(32px);
+          img {
+            border-radius: 50%;
+          }
+        }
+      }
       .songs-count {
         font-size: 14px;
         font-weight: 200;

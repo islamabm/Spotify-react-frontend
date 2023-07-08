@@ -30,8 +30,6 @@ export function UserDetails() {
   useEffect(() => {
     const user1 = dispatch(getUser())
     setUser(user1)
-    console.log('user1', user1)
-    console.log('user use effect', user)
     updateImgUrlAndColor(user.imgUrl)
   }, [user.imgUrl])
 

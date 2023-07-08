@@ -3,10 +3,13 @@ import { stationService } from '../services/station.service.js'
 
 import { EditUserStationModal } from './Modals/EditUserStationModal.jsx'
 import emptyImg from '../assets/imgs/empty-img.png'
+import { useSelector } from 'react-redux'
 
 export default function StationUser({ station }) {
   const stationNameClass = stationService.stationNameClass(station)
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
+  const user = useSelector((storeState) => storeState.userModule.loggedInUser)
+
   function handleEditModalOpen() {
     setIsEditModalOpen(true)
     // onEditModalOpen()
@@ -29,16 +32,27 @@ export default function StationUser({ station }) {
         <h1 className={stationNameClass} onClick={handleEditModalOpen}>
           {station?.name}
         </h1>
-        {isEditModalOpen && (
-          <EditUserStationModal
-            onClose={handleEditModalClose}
-            station={station}
-          />
-        )}
-        {station?.songs?.length > 0 && (
-          <span className="songs-count"> {station?.songs?.length} songs </span>
-        )}
+        <div className="user-details-section">
+          <span className="user-img-details">
+            <img src={user?.imgUrl} />
+          </span>
+          <span>{user?.username} •</span>
+          {station?.songs?.length > 0 && (
+            <span className="songs-count">
+              {' '}
+              {station?.songs?.length === 1
+                ? `${station.songs.length} song`
+                : `${station.songs.length} songs`}{' '}
+            </span>
+          )}
+        </div>
       </div>
+      {isEditModalOpen && (
+        <EditUserStationModal
+          onClose={handleEditModalClose}
+          station={station}
+        />
+      )}
     </>
   )
 }
