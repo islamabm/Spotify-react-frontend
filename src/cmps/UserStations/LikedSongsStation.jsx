@@ -22,7 +22,7 @@ export default function LikedSongsStation() {
   if (user && user.LikedSongs && user.LikedSongs.length !== 0) {
     return (
       <section
-        className="user-station-preview"
+        className="user-station-preview flex"
         onClick={goToUserStationDetails}
       >
         <div className="image-svg-container">

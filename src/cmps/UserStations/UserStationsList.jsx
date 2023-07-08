@@ -7,7 +7,7 @@ export default function UserStationsList({ userStations, filterUserStations }) {
   const song = useSelector((storeState) => storeState.songModule.currSong)
 
   return (
-    <section className="user-station-list">
+    <section className="user-station-list flex">
       <LikedSongsStation />
       {userStations
         ?.filter((station) => station?.name?.includes(filterUserStations))

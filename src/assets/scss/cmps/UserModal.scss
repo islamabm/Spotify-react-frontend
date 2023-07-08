@@ -1,15 +1,3 @@
-// import React from 'react'
-
-// export function UserModal() {
-//   return (
-//     <div className="user-modal">
-//       <p>Profile</p>
-//       <div className="line"></div>
-//       <p>Log out</p>
-//     </div>
-//   )
-// }
-
 .user-modal {
   display: flex;
   flex-direction: column;
@@ -17,20 +5,20 @@
   border-radius: 4px;
   box-shadow: 0 16px 24px rgba(0, 0, 0, 0.3), 0 6px 8px rgba(0, 0, 0, 0.2);
   max-height: calc(100vh - 24px);
-  max-width: 350px;
-  min-width: 160px;
+  max-width: rem(350px);
+  min-width: rem(160px);
   overflow-y: auto;
-  padding: 5px;
+  padding: rem(5px);
   color: hsla(0, 0%, 100%, 0.9);
   position: absolute;
-  top: 60px;
-  right: 40px;
+  top: rem(60px);
+  right: rem(40px);
   z-index: 999;
   .user-actions-modal {
     p {
       font-size: 0.875rem;
       font-family: Roboto-Regular;
-        padding: 0 10px;
+        padding: 0 rem(10px);
         border-radius: 4px;
     }
 

@@ -16,7 +16,7 @@ export function UserStationsIndex({ filterUserStations }) {
   }, [user])
 
   return (
-    <section className="user-stations-index">
+    <section className="user-stations-index flex">
       <UserStationsList
         userStations={userStations}
         filterUserStations={filterUserStations}
