@@ -1,5 +1,5 @@
 .recommended {
-  padding: 20px;
+  padding: rem(20px);
   .recommended-title {
     display: flex;
     flex-direction: column;
@@ -7,7 +7,7 @@
       font-size: 24px;
     }
     h4 {
-        margin-top: -10px;
+        margin-top: rem(-10px);
       font-size: 14px;
       color: $clr3;
     }

@@ -1,10 +1,10 @@
 .recommended-song {
   justify-content: space-between;
-  gap: 8px;
-  padding: 0 16px;
+  gap: rem(8px);
+  padding: 0 rem(16px);
   position: relative;
   border: 1px solid transparent;
-  height: 56px;
+  height: rem(56px);
   border-radius: 4px;
   .small-play-btn {
     display: none;
@@ -14,20 +14,20 @@
   }
   &:hover .small-play-btn {
     display: block;
-    margin-top: 17px;
+    margin-top: rem(17px);
     fill: $clr3;
   }
   .img-and-title {
     margin-inline-start: rem(12px);
-    gap: 8px;
+    gap: rem(8px);
   }
   .song-img {
-    height: 40px;
-    width: 40px;
+    height: rem(40px);
+    width: rem(40px);
   }
   button {
-    width: 60px;
-    height: 32px;
+    width: rem(60px);
+    height: rem(32px);
     background-color: inherit;
     color: $clr6;
     border-radius: 500px;
