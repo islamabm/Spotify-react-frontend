@@ -134,14 +134,12 @@ export function addSongToStation(stationId, song) {
 export function removeSongFromStation(stationId, songId) {
   return async (dispatch) => {
     try {
-      const station = await stationService.removeSongFromStation(
-        stationId,
-        songId
-      )
+      const id = await stationService.removeSongFromStation(stationId, songId)
 
       const action = {
-        type: UPDATE_STATION,
-        station,
+        type: REMOVE_SONG_FROM_STATION,
+        stationId,
+        id,
       }
       dispatch(action)
       showSuccessMsg(`Song removed `)
