@@ -208,24 +208,33 @@ export function StationDetails(props) {
           <span
             title={`More options for my ${station.name}`}
             onClick={(e) => showStationModal(e)}
-            className="dots flex align-center justify-center option pointer"
+            className={`flex align-center justify-center option pointer ${
+              station?.songs?.length > 0 ? 'dots' : 'margin'
+            }`}
             dangerouslySetInnerHTML={{
               __html: getSpotifySvg('bigDots'),
             }}
           ></span>
         </div>
-        <div className="station-songs-header" style={{ background: headerBg }}>
-          <span className=" align-center justify-center">#</span>
-          <span className="title flex align-center">Title</span>
-          <span className=" align-center">Album</span>
-          <span className=" align-center">Date added</span>
-          <span
-            className="time flex align-center justify-center"
-            dangerouslySetInnerHTML={{
-              __html: getSpotifySvg('time'),
-            }}
-          ></span>
-        </div>
+        {station.songs.length > 0 ? (
+          <div
+            className="station-songs-header"
+            style={{ background: headerBg }}
+          >
+            <span className=" align-center justify-center">#</span>
+            <span className="title flex align-center">Title</span>
+            <span className=" align-center">Album</span>
+            <span className=" align-center">Date added</span>
+            <span
+              className="time flex align-center justify-center"
+              dangerouslySetInnerHTML={{
+                __html: getSpotifySvg('time'),
+              }}
+            ></span>
+          </div>
+        ) : (
+          <div className="border-line"></div>
+        )}
         <div className="station-songs">
           <StationSongList station={station} />
         </div>

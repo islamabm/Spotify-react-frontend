@@ -195,12 +195,12 @@
           font-size: 14px;
         }
         .heart-svg {
-            width: 40px;
-            position: relative;
-            right: -27px;
-            display: flex;
-            top: -4px;
-            opacity: 0;
+          width: 40px;
+          position: relative;
+          right: -27px;
+          display: flex;
+          top: -4px;
+          opacity: 0;
         }
         .dots {
           fill: $clr6;
@@ -209,8 +209,8 @@
       }
       &:hover {
         .heart-svg {
-         opacity: 1;
-      }
+          opacity: 1;
+        }
         .hidden {
           opacity: 1;
         }
