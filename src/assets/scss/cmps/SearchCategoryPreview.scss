@@ -2,11 +2,11 @@
   position: relative;
   overflow: hidden;
   border-radius: 10px;
-  height: 215px;
+  height: rem(215px);
   cursor: pointer;
   @include for-mobile-layout {
-    width: 164px;
-    height: 92px;
+    width: rem(164px);
+    height: rem(92px);
   }
 
   .image {
@@ -14,8 +14,8 @@
     position: absolute;
     bottom: 0;
     right: 0;
-    height: 100px;
-    width: 100px;
+    height: rem(100px);
+    width: rem(100px);
     @include for-mobile-layout {
       display: none;
     }

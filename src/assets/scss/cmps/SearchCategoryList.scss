@@ -1,9 +1,10 @@
 .search-station-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(186px, 1fr));
-  gap: 20px;
+  gap: rem(20px);
+  margin-block-end: rem(80px);
   @include for-mobile-layout {
     grid-template-columns: 163px 163px;
-    gap: 15px;
+    gap: rem(15px);
   }
 }
