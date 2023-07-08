@@ -7,6 +7,7 @@ import {
   setCurrSongSvg,
   setCurrSongIndex,
 } from '../store/actions/song.actions'
+import { SongOptionsModal } from '../cmps/Modals/SongOptionsModal'
 export function SongLyrics() {
   const song = useSelector((storeState) => storeState.songModule.currSongAction)
   const station = useSelector(
@@ -16,6 +17,8 @@ export function SongLyrics() {
   const lyrics = useSelector(
     (storeState) => storeState.songModule.currSongLyrics
   )
+  const [showModal, setShowOptionsModal] = useState(false)
+  const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 })
   const [isFirstClick, setIsFirstClick] = useState(true)
   const [bgStyle, setBgStyle] = useState(null)
   const [bgBottomStyle, setBgBottomStyle] = useState(null)
@@ -32,6 +35,16 @@ export function SongLyrics() {
     if (imgUrl !== '') {
       getDominantColor(imgUrl)
     }
+  }
+
+  function showSongOptionsModal(e) {
+    e.stopPropagation()
+    const rect = e.target.getBoundingClientRect()
+    setModalPosition({
+      top: rect.top + window.scrollY,
+      left: rect.left + window.scrollX + 200,
+    })
+    setShowOptionsModal((prevState) => !prevState)
   }
 
   async function getDominantColor(imageSrc) {
@@ -144,6 +157,7 @@ export function SongLyrics() {
         ></span>
 
         <span
+          onClick={(e) => showSongOptionsModal(e)}
           className="dots flex align-center justify-center"
           dangerouslySetInnerHTML={{
             __html: getSpotifySvg('bigDots'),
@@ -159,6 +173,13 @@ export function SongLyrics() {
           <div className="loader"></div>
         )}
       </article>
+      {showModal && (
+        <SongOptionsModal
+          station={station}
+          position={modalPosition}
+          closeModal={() => setShowOptionsModal(false)}
+        />
+      )}
     </section>
   )
 }
