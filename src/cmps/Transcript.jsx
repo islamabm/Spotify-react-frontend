@@ -38,9 +38,7 @@ function Transcript() {
       mediaRecorderRef.current.stop()
       setRecording(false)
     }
-    const name = await shazamService.identifySong({
-      /* Your data to identify the song */
-    })
+    const name = await shazamService.identifySong(audioBlob)
     console.log('name', name)
   }
 
