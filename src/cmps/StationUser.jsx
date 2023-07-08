@@ -23,7 +23,7 @@ export default function StationUser({ station }) {
       <div className="station-main-img user-main-img justify-center align-center">
         <img
           className="default-image station-cover-img"
-          src={station?.imgUrl ? station?.imgUrl : emptyImg}
+          src={station?.imgUrl}
           alt="user station img"
         ></img>
       </div>

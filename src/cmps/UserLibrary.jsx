@@ -4,6 +4,7 @@ import { SortModal } from './Modals/SortModal'
 import { useDispatch, useSelector } from 'react-redux'
 import { UserStationsIndex } from './UserStations/UserStationsIndex'
 import { addStation } from '../store/actions/station.actions'
+import emptyImg from '../assets/imgs/empty-img.png'
 import { updateUserStations } from '../store/actions/user.actions'
 export function UserLibrary() {
   const [showSortModal, setShowSortModal] = useState(false)
@@ -32,7 +33,7 @@ export function UserLibrary() {
   function createNewStation() {
     setStationCounter(stationCounter + 1)
     const name = `My Playlist #${stationCounter}`
-    dispatch(addStation(name, [], ''))
+    dispatch(addStation(name, [], emptyImg))
     // dispatch(updateUserStations(station, user))
   }
 
