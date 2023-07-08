@@ -2,17 +2,26 @@ import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { FastAverageColor } from 'fast-average-color'
 import { getSpotifySvg } from '../services/SVG.service'
+import {
+  setCurrSong,
+  setCurrSongSvg,
+  setCurrSongIndex,
+} from '../store/actions/song.actions'
 export function SongLyrics() {
   const song = useSelector((storeState) => storeState.songModule.currSongAction)
+  const station = useSelector(
+    (storeState) => storeState.stationModule.currStation
+  )
   // const stationNameClass = stationService.stationNameClass(song)
   const lyrics = useSelector(
     (storeState) => storeState.songModule.currSongLyrics
   )
+  const [isFirstClick, setIsFirstClick] = useState(true)
   const [bgStyle, setBgStyle] = useState(null)
   const [bgBottomStyle, setBgBottomStyle] = useState(null)
   const [isPlaying, setIsPlaying] = useState(false)
   const colorCache = {}
-
+  const dispatch = useDispatch()
   useEffect(() => {
     updateImgUrlAndColor(song)
   }, [song])
@@ -58,13 +67,21 @@ export function SongLyrics() {
   }
 
   function playSong() {
-    console.log('play')
     setIsPlaying(true)
+    setIsFirstClick(true)
+    if (isFirstClick) {
+      dispatch(setCurrSong(station._id, song._id))
+      dispatch(setCurrSongIndex(station._id, song._id))
+      setIsFirstClick(false)
+    } else {
+      dispatch(setCurrSongSvg('play'))
+    }
   }
 
   function pauseSong() {
-    console.log('pause')
     setIsPlaying(false)
+    console.log('pause')
+    dispatch(setCurrSongSvg('pause'))
   }
 
   return (
