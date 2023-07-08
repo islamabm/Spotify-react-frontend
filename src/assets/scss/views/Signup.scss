@@ -1,24 +1,21 @@
 .spotify-signup-page {
   background-color: $clr6;
   color: $clr2;
-  min-height: 1000px;
-
+  min-height: rem(1000px);
 
   margin: 0px auto;
-  padding-bottom: 130px;
-
-
+  padding-bottom: rem(130px);
 
   h1 {
     font-size: 32px;
     font-family: Circular-medium;
     letter-spacing: -0.04em;
   }
-  .signupW { 
-    gap: 20px;
+  .signupW {
+    gap: rem(20px);
     .fb-btn {
-      width: 394px;
-      height: 48px;
+      width: rem(394px);
+      height: rem(48px);
       border-radius: 200px;
       font-family: Circular-medium;
       font-size: 16px;
@@ -31,14 +28,14 @@
         font-weight: bolder;
       }
       img {
-        width: 24px;
-        height: 24px;
+        width: rem(24px);
+        height: rem(24px);
         border-radius: 50%;
-    }
+      }
     }
     .google-btn {
-      width: 394px;
-      height: 48px;
+      width: rem(394px);
+      height: rem(48px);
       border-radius: 200px;
       font-family: Circular-medium;
       font-size: 16px;
@@ -56,22 +53,22 @@
       align-items: center;
       width: 100%;
       margin: 1em 0;
-  
+
       .line {
         flex-grow: 1;
         height: 1px;
         background-color: #ccc;
       }
-  
+
       span {
         padding: 0 1em;
-        color:#777;
+        color: #777;
         letter-spacing: 2px;
         font-size: 16px;
         font-family: Circular-light;
         font-weight: 700;
- }
- }
+      }
+    }
   }
   h3 {
     font-family: Circular-light;
@@ -81,35 +78,35 @@
   form {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: rem(20px);
     .label {
-        font-family: Circular-medium;
+      font-family: Circular-medium;
     }
     input {
-        width: 450px;
-        height: 48px;
-        border: 1px solid #878787;
-        border-radius: 4px;
-        margin: 8px 0;
-        padding: 15px;
-        &:hover {
-            border: 1px solid black;
-        }
+      width: rem(450px);
+      height: rem(48px);
+      border: 1px solid #878787;
+      border-radius: 4px;
+      margin: rem(8px) 0;
+      padding: 15px;
+      &:hover {
+        border: 1px solid black;
+      }
     }
     small {
-        font-family: Circular-light;
-        font-size: 14px;
+      font-family: Circular-light;
+      font-size: 14px;
     }
     button {
-        font-size: 18px;
-        font-family: Circular-medium;
-        background-color: #1ed760;
-        border-radius: 500px;
-        width: 159px;
-        height: 56px;
-        border: none;
-        margin-left: 32%;
-      margin-bottom: 30px;
+      font-size: 18px;
+      font-family: Circular-medium;
+      background-color: #1ed760;
+      border-radius: 500px;
+      width: rem(159px);
+      height: rem(56px);
+      border: none;
+      margin-left: 32%;
+      margin-bottom: rem(30px);
       transition: opacity 0.01s 0.01s, transform 0.01s 0.01s;
       &:hover {
         transform: scale(1.03);
@@ -119,13 +116,13 @@
   .go-to-login {
     font-size: 16px;
     font-family: Circular-light;
-    gap: 5px;
+    gap: rem(5px);
     a {
-        color: #39b95b;
-        text-decoration: underline;
-        &:hover {
-            color:#1ed760;
-        }
+      color: #39b95b;
+      text-decoration: underline;
+      &:hover {
+        color: #1ed760;
+      }
     }
   }
 }

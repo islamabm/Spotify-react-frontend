@@ -2,33 +2,36 @@
   background-color: #121212;
   font-family: Circular-medium;
   color: $clr6;
-  overflow-y: scroll;
+  // overflow-y: scroll;
   min-height: 100vh;
   .login-header {
     background-color: black;
-    height: 100px;
-    padding: 32px 51px;
-    margin-bottom: 35px;
+    height: rem(100px);
+    padding: rem(32px) rem(51px);
+    margin-block-end: rem(35px);
   }
   .login-main-container {
-    margin-left: 30%;
-    width: 734px;
-    height: 986px;
-    padding: 10px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%);
+    position: relative;
+    width: rem(734px);
+    height: rem(900px);
+    padding: rem(10px);
     background-color: black;
     border-radius: 8px;
-    margin-bottom: 500px;
     h2 {
       font-family: Circular-medium;
-      font-size: 48px;
+      font-size: 40px;
     }
     .continue {
-      gap: 10px;
+      gap: rem(10px);
       button {
         font-size: 16px;
         font-family: Circular-medium;
-        width: 324px;
-        height: 48px;
+        width: rem(324px);
+        height: rem(48px);
         background-color: inherit;
         border: 1px solid #727272;
         color: $clr6;
@@ -37,15 +40,15 @@
             border: 1px solid $clr6;
         }
         img {
-            width: 24px;
-            height: 24px;
+            width: rem(24px);
+            height: rem(24px);
         }
       }
     }
     .empty-line {
-      width: 534px;
-      height: 1px;
-      margin: 32px 100px;
+      width: rem(534px);
+      height: rem(1px);
+      margin: rem(32px) rem(100px);
       border-right: none;
       border-bottom: none;
       border-left: none;
@@ -54,39 +57,38 @@
     }
     form {
       .spotify-username {
-        gap: 8px;
+        gap: rem(8px);
         span {
           font-size: 14px;
         }
       }
       .spotify-password {
-        gap: 8px;
+        gap: rem(8px);
         span {
           font-size: 14px;
         }
       }
     }
     input {
-      width: 324px;
-      height: 48px;
+      width: rem(324px);
+      height: rem(48px);
       background-color: #121212;
       outline: 1px solid #727272;
       border: 0px;
       border-radius: 4px;
-      padding: 10px;
-      margin-bottom: 20px;
+      padding: rem(10px);
+      margin-block-end: rem(20px);
       color: $clr6;
       &:hover {
         outline: 1px solid $clr6;
     }
     &:focus {
         outline: 3px solid $clr6;
-    
     }
     }
     .login-btn {
-      width: 324px;
-      height: 48px;
+      width: rem(324px);
+      height: rem(48px);
       color: black;
       border-radius: 200px;
       background-color: #1ed760;
@@ -100,7 +102,7 @@
 
     align-items: baseline;
 
-    gap: 5px;
+    gap: rem(5px);
     span {
       color: #a7a7a7;
     }
