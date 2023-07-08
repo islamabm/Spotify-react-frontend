@@ -9,7 +9,7 @@
 
   &::-webkit-scrollbar {
     // for Chrome, Safari
-    width: 13px;
+    width: rem(13px);
   }
 
   &::-webkit-scrollbar-thumb {
@@ -23,14 +23,14 @@
     width: 100%;
     display: flex;
     align-items: center;
-    padding: 80px 24px;
+    padding: rem(80px) rem(24px);
     padding-block-end: 1.5rem;
 
     .station-info {
-      margin-top: 40px;
+      margin-block-start: rem(40px);
       .station-description {
         font-size: 14px;
-        margin-top: 5px;
+        margin-block-start: rem(5px);
         color: rgba(255, 255, 255, 0.698);
       }
       .songs-count {
@@ -38,8 +38,8 @@
         font-weight: 200;
       }
       .spotify-logo {
-        width: 26px;
-        margin: -8px 2px;
+        width: rem(26px);
+        margin: rem(-8px) rem(2px);
         background-color: transparent;
       }
       .logo {
@@ -53,12 +53,12 @@
 
     .short-station-name {
       font-size: 6rem;
-      margin-block: 2px;
+      margin-block: rem(2px);
     }
 
     .long-station-name {
       font-size: 5rem;
-      margin-block: 20px;
+      margin-block: rem(20px);
     }
 
     .huge-station-name {
@@ -68,11 +68,11 @@
     .station-main-img {
       object-fit: cover;
       border-radius: 1px;
-      margin-inline-end: 24px;
+      margin-inline-end: rem(24px);
       box-shadow: 0 2px 8px rgba($clr2, 0.2), 0 1px 2px rgba($clr2, 0.1);
-      height: 232px;
-      min-width: 232px;
-      width: 232px;
+      height: rem(232px);
+      min-width: rem(232px);
+      width: rem(232px); // do we realy need it? 
 
       &.user-main-img {
         position: relative;
@@ -97,11 +97,11 @@
   .user-station-actions {
     display: flex;
     align-items: center;
-    padding: 24px;
-    gap: 25px;
+    padding: rem(24px);
+    gap: rem(25px);
     .dots {
       fill: #afb8b7;
-      margin-left: -50px;
+      margin-inline-start: rem(-50px);
       &:hover {
         fill: $clr6;
       }
@@ -109,14 +109,14 @@
   }
 
   .station-songs {
-    padding: 0 20px;
+    padding: 0 rem(20px);
     .song {
       grid-template-columns: 16px 6fr 4fr 3fr minmax(120px, 1fr);
-      gap: 10px;
-      padding: 0 16px;
+      gap: rem(10px);
+      padding: 0 rem(16px);
       position: relative;
       border: 1px solid transparent;
-      height: 56px;
+      height: rem(56px);
       display: grid;
       border-radius: 4px;
       // border: 1px solid #292a2a;
@@ -131,7 +131,7 @@
       }
       &:hover .small-play-btn {
         display: block;
-        margin-top: 17px;
+        margin-block-start: rem(17px);
         fill: $clr3;
       }
       .song-details-container {
@@ -141,13 +141,13 @@
         .name-and-artist {
           margin-inline-start: rem(12px);
           flex-direction: column;
-          gap: 8px;
+          gap: rem(8px);
           grid-column: 2;
           .song-name {
             text-overflow: ellipsis;
             overflow: hidden;
             white-space: nowrap;
-            width: 224px;
+            width: rem(224px);
             &:hover {
               text-decoration: underline;
             }
@@ -158,12 +158,12 @@
             text-overflow: ellipsis;
             overflow: hidden;
             white-space: nowrap;
-            width: 100px;
+            width: rem(100px);
           }
         }
         .song-img {
-          height: 40px;
-          width: 40px;
+          height: rem(40px);
+          width: rem(40px);
         }
       }
       .song-idx {
@@ -185,26 +185,26 @@
       .duration-container {
         justify-content: space-evenly;
         align-items: center;
-        gap: 20px;
+        gap: rem(20px);
         .hidden {
           opacity: 0;
         }
         .duration {
-          margin-inline-end: -17px;
+          margin-inline-end: rem(-17px);
           color: $clr14;
           font-size: 14px;
         }
         .heart-svg {
-          width: 40px;
+          width: rem(40px);
           position: relative;
-          right: -27px;
+          right: rem(-27px);
           display: flex;
-          top: -4px;
+          top: rem(-4px);
           opacity: 0;
         }
         .dots {
           fill: $clr6;
-          margin-left: 10px;
+          margin-inline-start: rem(10px);
         }
       }
       &:hover {
@@ -218,21 +218,21 @@
     }
   }
   .station-songs-header {
-    margin: 24px 0;
-    padding: 10px 38px;
+    margin: rem(24px) 0;
+    padding: rem(10px) rem(38px);
     position: relative;
     display: grid;
     grid-template-columns: 16px 6fr 4fr 3fr minmax(120px, 1fr);
-    gap: 10px;
+    gap: rem(10px);
     border-bottom: 1px solid #ffffff1a;
     color: $clr3;
     font-size: 14px;
     position: sticky;
-    top: 63px;
+    top: rem(63px);
     z-index: 5;
 
     .title {
-      margin-inline-start: 6px;
+      margin-inline-start: rem(6px);
     }
     .time {
       svg {
@@ -245,8 +245,8 @@
 
 .play-button {
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.4);
-  width: 50px;
-  height: 50px;
+  width: rem(50px);
+  height: rem(50px);
   background-color: $clrGreen;
   border-radius: 50%;
   transition: opacity 0.3s 0.1s, transform 0.3s 0.1s;

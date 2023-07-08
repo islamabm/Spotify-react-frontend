@@ -20,7 +20,7 @@
   }
 
   &::-webkit-scrollbar {
-    width: 13px;
+    width: rem(13px);
   }
 
   &::-webkit-scrollbar-thumb {
@@ -32,6 +32,6 @@
   .greeting {
     font-size: 32px;
     font-family: circular-medium;
-    padding: 35px 24px;
+    padding: rem(35px) rem(24px);
   }
 }

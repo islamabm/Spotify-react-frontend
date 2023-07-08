@@ -7,7 +7,7 @@
   scrollbar-width: thin;
   scrollbar-color: transparent transparent;
   &::-webkit-scrollbar {
-    width: 13px;
+    width: rem(13px);
   }
 
   &::-webkit-scrollbar-thumb {
@@ -23,14 +23,14 @@
     width: 100%;
     display: flex;
     align-items: center;
-    padding: 80px 24px;
+    padding: rem(80px) rem(24px);
     padding-block-end: 1.5rem;
     .image {
-      margin-right: 24px;
+      margin-right: rem(24px);
       -webkit-box-shadow: 0 4px 60px rgba(0, 0, 0, 0.5);
       box-shadow: 0 4px 60px rgba(0, 0, 0, 0.5);
-      width: 192px;
-      height: 192px;
+      width: rem(192px);
+      height: rem(192px);
     }
   }
 
@@ -39,8 +39,8 @@
       display: flex;
       align-items: center;
       justify-items: center;
-      gap: 4px;
-      margin-top: 8px;
+      gap: rem(4px);
+      margin-block-start: rem(8px);
 
       small {
         font-size: 14px;
@@ -57,8 +57,8 @@
       font-size: 3rem;
     }
     .small-image {
-      width: 24px;
-      height: 24px;
+      width: rem(24px);
+      height: rem(24px);
       img {
         border-radius: 50%;
       }
@@ -67,21 +67,21 @@
 
   .song-details-lyrics {
     line-height: 1.7;
-    padding-inline-start: 30px;
-    margin-block-end: 100px;
+    padding-inline-start: rem(30px);
+    margin-block-end: rem(100px);
 
     h2 {
       font-size: 1.5rem;
       font-weight: 700;
-      margin: 0 0 16px;
+      margin: 0 0 rem(16px);
       color: #fff;
     }
   }
 
   .song-details {
-    padding: 24px 16px;
+    padding: rem(24px) rem(16px);
     display: flex;
-    gap: 20px;
+    gap: rem(20px);
     align-items: center;
     justify-items: center;
 
