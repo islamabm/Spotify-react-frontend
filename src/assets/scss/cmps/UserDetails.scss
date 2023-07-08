@@ -1,7 +1,6 @@
 .user-profile {
   font-family: circular-book;
   height: 51vh;
-  // background: linear-gradient(to bottom, #3e3e3e, #121212);
   padding-inline: 5rem;
   color: #fff;
   .user-details-container {
@@ -9,9 +8,8 @@
     align-items: center;
     gap: 2rem;
     margin-block-start: 4rem;
-    border-bottom: #121212 1px solid ;
     .user-info {
-      margin-top: 47px;
+      margin-top: rem(47px);
     }
 
     .dot {
@@ -22,13 +20,13 @@
     .user-profile-img {
       border-radius: 50%;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      margin-top: 50px;
+      margin-top: rem(50px);
     }
 
     .user-username {
       font-size: 5rem;
       font-weight: 700;
-      margin: 20px 20px 20px 0;
+      margin: rem(20px) rem(20px) rem(20px) 0;
       color: $clr6;
       text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
       font-family: Gotham;
