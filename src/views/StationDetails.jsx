@@ -35,9 +35,6 @@ export function StationDetails(props) {
   const station = useSelector(
     (storeState) => storeState.stationModule.currStation
   )
-  const user = useSelector((storeState) => storeState.userModule.loggedInUser)
-  console.log('user in details', user)
-  const [counter, setCounter] = useState(0)
 
   const stationImg = useSelector(
     (storeState) => storeState.stationModule.currStationImg
@@ -45,11 +42,8 @@ export function StationDetails(props) {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    if (counter === 0) {
-      setCounter(1)
-      loadStation()
-    }
-  }, [params.id])
+    loadStation()
+  }, [params.id, station])
 
   useEffect(() => {
     const unsubscribe = eventBus.on('newStationCreated', setBgStyle)
