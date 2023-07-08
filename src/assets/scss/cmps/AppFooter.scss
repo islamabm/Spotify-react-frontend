@@ -1,6 +1,6 @@
 .app-footer {
-  height: 72px;
-  min-height: 80px;
+  height: rem(72px);
+  min-height: rem(80px);
   padding: 0 16px;
   background-color: $clr2;
   grid-row: 3;
@@ -22,8 +22,8 @@
     gap: rem(10px);
     justify-items: center;
     .image {
-      width: 56px;
-      height: 56px;
+      width: rem(56px);
+      height: rem(56px);
       img {
         border-radius: 4px;
       }

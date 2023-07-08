@@ -1,8 +1,7 @@
 .control-buttons {
   display: flex;
   gap: 1.5rem;
-  margin-bottom: 0.5rem;
-  margin-block-start: 10px;
+  margin: rem(10px) 0 rem(8px) rem(14px);
   justify-content: center;
   align-items: center;
   .play-song-div {
@@ -10,11 +9,11 @@
     align-items: center;
     justify-items: center;
     background-color: white;
-    width: 32px;
-    height: 32px;
+    width: rem(32px);
+    height: rem(32px);
     border-radius: 50%;
     justify-content: center;
-    min-width: 32px;
+    min-width: rem(32px);
     transition: opacity 0.1s 0.1s, transform 0.1s 0.1s;
     transform: translateY(-1%);
     &:hover {
@@ -41,13 +40,13 @@
   }
 }
 .music-bar {
+  margin-inline-start: rem(10px);
   display: flex;
   align-items: center;
   justify-items: center;
-  gap: 10px;
-  // width: 100%;
-  width: 575px;
-  height: 20px;
+  gap: rem(8px);
+  width: rem(690px);
+  height: rem(20px);
 }
 
 .current-time {
@@ -59,11 +58,11 @@
 
 .progress-bar {
   flex: 1 1;
-  height: 4px;
+  height: rem(4px);
   background-color: gray;
   position: relative;
   cursor: pointer;
-  width: 400.12px;
+  width: rem(400.12px);
   border-radius: 2px;
 }
 
@@ -82,10 +81,10 @@
 .progress-bar-fill:after {
   content: '';
   position: absolute;
-  right: -5px;
-  top: -2px;
-  height: 10px;
-  width: 10px;
+  right: rem(-5px);
+  top: rem(-2px);
+  height: rem(10px);
+  width: rem(10px);
   border-radius: 50%;
   background-color: rgb(255, 255, 255);
   display: none;
@@ -97,17 +96,17 @@
 
 .progress-bar-audio {
   flex: 1 1;
-  height: 5px;
+  height: rem(5px);
   background-color: gray;
   position: relative;
   cursor: pointer;
-  width: 110px;
+  width: rem(110px);
   border-radius: 10000px;
 }
 .progress-bar-audio-fill {
   -webkit-appearance: #1db954;
   appearance: #1db954;
-  height: 5px;
+  height: rem(5px);
   outline: none;
   border-radius: 10px;
 }
@@ -115,16 +114,16 @@
 .progress-bar-audio-fill::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 10px;
-  height: 10px;
+  width: rem(10px);
+  height: rem(10px);
   border-radius: 50%;
   background: #1db954;
   cursor: pointer;
 }
 
 .progress-bar-audio-fill::-moz-range-thumb {
-  width: 10px;
-  height: 10px;
+  width: rem(10px);
+  height: rem(10px);
   border-radius: 50%;
   background: #1db954;
   cursor: pointer;
@@ -148,11 +147,11 @@
       bottom: 0;
       content: '';
       display: block;
-      height: 4px;
+      height: rem(4px);
       left: 50%;
       position: absolute;
       transform: translateX(-50%);
-      width: 4px;
+      width: rem(4px);
     }
   }
 }

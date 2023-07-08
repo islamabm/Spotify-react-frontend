@@ -5,9 +5,9 @@
   -webkit-box-shadow: 0 16px 24px rgba(0, 0, 0, 0.3),
     0 6px 8px rgba(0, 0, 0, 0.2);
   box-shadow: 0 16px 24px rgba(0, 0, 0, 0.3), 0 6px 8px rgba(0, 0, 0, 0.2);
-  max-height: 250px;
-  max-width: 350px;
-  min-width: 160px;
+  max-height: rem(250px);
+  max-width: rem(350px);
+  min-width: rem(160px);
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: transparent transparent;
@@ -59,9 +59,9 @@
     border-radius: 4px;
     display: flex;
     align-items: flex-end;
-    width: 250px;
-    height: 36px;
-    padding: 2px;
+    width: rem(250px);
+    height: rem(36px);
+    padding: rem(2px);
 
     span {
       fill: white;
@@ -69,8 +69,8 @@
     }
 
     input {
-      width: 246px;
-      height: 32px;
+      // width: 246px; dont need
+      height: rem(32px);
       padding: 0 0 0 4px;
       border: none;
       background-color: transparent;
