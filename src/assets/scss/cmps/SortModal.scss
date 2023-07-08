@@ -9,13 +9,13 @@
     0 6px 8px rgba(0, 0, 0, 0.2);
   box-shadow: 0 16px 24px rgba(0, 0, 0, 0.3), 0 6px 8px rgba(0, 0, 0, 0.2);
   max-height: calc(100vh - 24px);
-  max-width: 350px;
-  min-width: 160px;
+  max-width: rem(350px);
+  min-width: rem(160px);
   color: hsla(0, 0%, 100%, 0.9);
   position: absolute;
-  top: 20px;
+  top: rem(20px);
   right: 0px;
-  padding: 4px;
+  padding: rem(4px);
   z-index: 999;
 .sort-by {
   font-size: 11px;
@@ -23,7 +23,7 @@
   font-family: circular-light;
   color: $clr3;
   align-self: start;
-  margin-left: 12px;
+  margin-inline-start: rem(12px);
 }
   div {
     display: flex;
@@ -31,7 +31,7 @@
     align-items: center;
     justify-items: center;
     width: 100%;
-    padding: 10px 12px;
+    padding: rem(10px) rem(12px);
 
     span {
       opacity: 0;
