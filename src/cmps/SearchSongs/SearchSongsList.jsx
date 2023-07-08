@@ -1,7 +1,7 @@
 import React from 'react'
-import SearchSongsPreview from './SearchSongsPreview'
+import { SearchSongsPreview } from './SearchSongsPreview'
 
-export default function SearchSongsList({ list, stationId }) {
+export function SearchSongsList({ list, stationId }) {
   return (
     <section className="recommended-list-container">
       {list?.map((song, idx) => (

@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import { addSongToStation } from '../../store/actions/station.actions'
 import { utilService } from '../../services/util.service'
 
-export default function SearchSongsPreview({ song, stationId }) {
+export function SearchSongsPreview({ song, stationId }) {
   const dispatch = useDispatch()
 
   function handleAddSong() {

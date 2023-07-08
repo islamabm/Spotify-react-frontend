@@ -102,14 +102,14 @@ export function EditUserStationModal({ station, onClose }) {
             onBlur={handleInputBlur}
           />
           {focusedInput === 1 && <span className="name-span">Name</span>}
-          <input
+          <textarea
             className="bigger-input"
             type="text"
             placeholder="Add an optional description"
             onFocus={() => handleInputFocus(2)}
             onChange={(e) => onChangeStationDesc(e)}
             onBlur={handleInputBlur}
-          />
+          ></textarea>
           {focusedInput === 2 && (
             <span className="descp-span">Description</span>
           )}

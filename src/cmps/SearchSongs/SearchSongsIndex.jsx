@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { getSpotifySvg } from '../../services/SVG.service'
 import { stationService } from '../../services/station.service'
-import SearchSongsList from './SearchSongsList'
+import { SearchSongsList } from './SearchSongsList'
 
 export function SearchSongsIndex({ stationId }) {
   const [searchText, setSearchText] = useState('')
