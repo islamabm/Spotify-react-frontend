@@ -38,8 +38,8 @@ function Transcript() {
       mediaRecorderRef.current.stop()
       setRecording(false)
     }
-    const name = await shazamService.identifySong(audioBlob)
-    console.log('name', name)
+    // const name = await shazamService.identifySong(audioBlob)
+    // console.log('name', name)
   }
 
   useEffect(() => {
