@@ -7,6 +7,7 @@ import emptyImg from '../assets/imgs/empty-img.png'
 export default function StationUser({ station }) {
   const stationNameClass = stationService.stationNameClass(station)
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
+
   function handleEditModalOpen() {
     setIsEditModalOpen(true)
     // onEditModalOpen()
@@ -36,7 +37,12 @@ export default function StationUser({ station }) {
           />
         )}
         {station?.songs?.length > 0 && (
-          <span className="songs-count"> {station?.songs?.length} songs </span>
+          <span className="songs-count">
+            {' '}
+            {station?.songs?.length === 1
+              ? `${station.songs.length} song`
+              : `${station.songs.length} songs`}{' '}
+          </span>
         )}
       </div>
     </>
