@@ -4,9 +4,11 @@ export const shazamService = {
   identifySong,
 }
 
-async function identifySong(data) {
+async function identifySong(audioBlob) {
   try {
-    const res = await httpService.post('shazam/identify', data)
+    const formData = new FormData()
+    formData.append('file', audioBlob)
+    const res = await httpService.post('shazam/identify', formData)
     return res
   } catch (error) {
     throw new Error('Failed to identify song')
