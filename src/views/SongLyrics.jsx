@@ -6,6 +6,7 @@ import {
   setCurrSong,
   setCurrSongSvg,
   setCurrSongIndex,
+  setCurrDirection,
 } from '../store/actions/song.actions'
 import { SongOptionsModal } from '../cmps/Modals/SongOptionsModal'
 export function SongLyrics() {
@@ -39,9 +40,10 @@ export function SongLyrics() {
 
   function showSongOptionsModal(e) {
     e.stopPropagation()
+    dispatch(setCurrDirection('right'))
     const rect = e.target.getBoundingClientRect()
     setModalPosition({
-      top: rect.top + window.scrollY,
+      top: rect.top + window.scrollY - 100,
       left: rect.left + window.scrollX + 200,
     })
     setShowOptionsModal((prevState) => !prevState)

@@ -6,6 +6,7 @@ import {
   setCurrSong,
   setCurrSongIndex,
   setCurrSongSvg,
+  setCurrDirection
 } from '../store/actions/song.actions'
 import { useNavigate, useParams } from 'react-router-dom'
 import { SongOptionsModal } from './Modals/SongOptionsModal'
@@ -60,6 +61,7 @@ export default function StationSongList({ station }) {
 
   function showSongOptionsModal(e, song) {
     dispatch(setCurrSongAction(station._id, song._id))
+    dispatch(setCurrDirection('left'))
     e.stopPropagation()
 
     const rect = e.target.getBoundingClientRect()
