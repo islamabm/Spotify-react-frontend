@@ -3,16 +3,16 @@
   font-family: circular-book;
   position: relative;
   cursor: pointer;
-  height: 273px;
-  width: 186px;
+  height: rem(273px);
+  width: rem(186px);
   border-radius: 10px;
   background-color: $clr1;
   font-size: 12px;
   overflow: hidden;
   @include for-mobile-layout {
     background-color: inherit;
-    height: 220px;
-  width: 168px;
+    height: rem(220px);
+    width: rem(168px);
   }
 
   .station-info {
@@ -29,17 +29,17 @@
     h3 {
       font-size: 16px;
       margin-block-start: 0;
-      margin-block-end: 1px;
+      margin-block-end: rem(1px);
       text-overflow: ellipsis;
       overflow: hidden;
       white-space: nowrap;
-      max-width: 160px;
+      max-width: rem(160px);
     }
   }
   p {
     color: $clr3;
     padding: 0;
-    max-width: 160px;
+    max-width: rem(160px);
     margin-inline-start: 1rem;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -52,25 +52,25 @@
 
   .station-img {
     margin-inline-start: rem(12px);
-    padding: 13px 2px;
+    padding: rem(13px) rem(2px);
     @include for-mobile-layout {
       margin-inline-start: 0;
       // padding: 5px;
     }
     img {
       border-radius: 7px;
-      width: 157px;
-      height: 157px;
+      width: rem(157px);
+      height: rem(157px);
     }
   }
 
   .play-button {
     position: absolute;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.4);
-    bottom: 110px;
-    left: 115px;
-    width: 48px;
-    height: 48px;
+    bottom: rem(110px);
+    left: rem(115px);
+    width: rem(48px);
+    height: rem(48px);
     background-color: $clrGreen;
     border-radius: 50%;
     align-items: center;
@@ -81,7 +81,7 @@
     z-index: 2;
     svg {
       fill: $clr2;
-      margin-left: 3px;
+      margin-inline-start: rem(3px);
     }
   }
 
