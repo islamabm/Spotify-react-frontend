@@ -14,14 +14,14 @@
 
 .recommendation-modal {
   position: relative;
-  padding: 10px;
+  padding: rem(10px);
   overflow: hidden;
   box-sizing: border-box;
   background-color: #333;
   border-radius: 10px;
-  height: 320px;
+  height: rem(320px);
   text-align: left;
-  width: 480px;
+  width: rem(480px);
 }
 
 .recommendation-modal h1 {
@@ -34,8 +34,8 @@
 
 .recommendation-modal button {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: rem(20px);
+  right: rem(20px);
   background: none;
   border: none;
   font-size: 20px;
@@ -48,7 +48,7 @@
 
 .recommendation-modal .line {
   width: 100%;
-  height: 0.5px;
+  height: rem(0.5px);
   background-color: #faf2f2;
 }
 
@@ -60,7 +60,7 @@
 .recommendation-modla-text p {
   font-size: 16px;
   font-weight: 400;
-  line-height: 24px;
+  line-height: rem(24px);
   letter-spacing: 0px;
   color: #ffffff;
 }
