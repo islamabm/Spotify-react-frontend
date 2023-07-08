@@ -2,34 +2,34 @@
   position: absolute;
   top: 30%;
   left: 40%;
-  width: 524px;
-  height: 390px;
+  width: rem(524px);
+  height: rem(390px);
   z-index: 10;
-  padding: 20px;
+  padding: rem(20px);
   border-radius: 8px;
   background-color: #282828;
   .modal-header {
     justify-content: space-between;
     .edit-details {
-      margin-block-end: 50px;
+      margin-block-end: rem(50px);
     }
     .x {
       fill: #bebebe;
       align-items: center;
       background-color: transparent;
       border: 0;
-      border-radius: 32px;
-      width: 32px;
-      height: 32px;
-      margin-block-end: 40px;
+      border-radius: rem(32px);
+      width: rem(32px);
+      height: rem(32px);
+      margin-block-end: rem(40px);
       &:hover {
         background-color: #3e3e3e;
       }
     }
   }
   .default-image-div {
-    width: 180px;
-    height: 180px;
+    width: rem(180px);
+    height: rem(180px);
     box-shadow: 0 2px 8px rgba($clr2, 0.2), 0 1px 2px rgba($clr2, 0.1);
     .music-note {
       position: relative;
@@ -45,17 +45,17 @@
   }
   .edit-actions {
     display: flex;
-    gap: 15px;
+    gap: rem(15px);
 
     .cover-img {
       position: relative;
       width: 37%;
-      height: 200px;
-      margin-right: 20px;
+      height: rem(200px);
+      margin-right: rem(20px);
 
       .img-edit {
-        margin-inline-start: 25px;
-        padding: 5px;
+        margin-inline-start: rem(25px);
+        padding: rem(5px);
         width: 105%;
         height: 90%;
         object-fit: cover;
@@ -63,14 +63,14 @@
       }
     }
     .inputs-container {
-      gap: 15px;
+      gap: rem(15px);
       input {
-        width: 280px;
-        height: 40px;
+        width: rem(280px);
+        height: rem(40px);
         background-color: #3d3e3e;
         border: none;
         border-radius: 4px;
-        padding: 10px;
+        padding: rem(10px);
         &:focus {
           background-color: #333;
           border: 1px solid #535353;
@@ -78,8 +78,8 @@
         }
       }
       .bigger-input {
-        width: 280px;
-        height: 124px;
+        width: rem(280px);
+        height: rem(124px);
         background-color: #3d3e3e;
         border: none;
         border-radius: 4px;
@@ -88,20 +88,19 @@
     }
     .name-span {
       position: absolute;
-      margin-top: -5px;
-      margin-left: 10px;
+      margin: rem(-5px) 0 0 rem(10px);
       font-size: 11px;
     }
     .descp-span {
       position: absolute;
-      margin-top: 50px;
-      margin-left: 10px;
+      margin-top: rem(50px);
+      margin-left: rem(10px);
       font-size: 11px;
     }
   }
   button {
-    width: 100px;
-    height: 48px;
+    width: rem(100px);
+    height: rem(48px);
     border-radius: 500px;
     background-color: $clr6;
     border: none;

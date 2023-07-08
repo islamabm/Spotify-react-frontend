@@ -5,9 +5,9 @@
   justify-content: space-between;
   grid-column: 2;
   grid-row: 1;
-  padding: 20px;
+  padding: rem(20px);
   background-color: transparent;
-  height: 64px;
+  height: rem(64px);
   border-radius: 5px;
   z-index: 999;
   transition: background-color 0.3s ease-in-out;
@@ -26,20 +26,20 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 32px;
-        width: 32px;
+        height: rem(32px);
+        width: rem(32px);
         background-color: #000000b3;
         border-radius: 50%;
         color: #fff;
         cursor: pointer;
         svg {
           fill: white;
-          margin-block-start: 3px;
+          margin-block-start: rem(3px);
         }
       }
     }
     .input-container {
-      margin-left: -15px;
+      margin-left: rem(-15px);
       span {
         position: relative;
         left: 8%;
@@ -53,10 +53,10 @@
         border: 1px solid #242424;
         border-radius: 500px;
         color: #fff !important;
-        height: 48px;
-        padding: 6px 37px;
+        height: rem(48px);
+        padding: rem(6px) rem(37px);
         text-overflow: ellipsis;
-        width: 364px;
+        width: rem(364px);
         &:hover {
           border: 1px solid #404040;
         }
@@ -72,13 +72,13 @@
     }
   }
   .user-actions {
-    gap: 10px;
+    gap: rem(10px);
     .user-icon {
       background-color: rgba(0, 0, 0, 0.54);
       flex-wrap: wrap;
       border-radius: 50%;
-      height: 32px;
-      width: 32px;
+      height: rem(32px);
+      width: rem(32px);
       fill: white;
       align-content: center;
       &:hover {
@@ -91,8 +91,8 @@
       border: 0;
       border-radius: 500px;
       font-size: inherit;
-      min-block-size: 47px;
-      padding-inline: 30px;
+      min-block-size: rem(47px);
+      padding-inline: rem(30px);
       font-size: 15px;
 
       &:hover {
@@ -107,14 +107,14 @@
       border: 0px;
       transition-duration: 33ms;
       color: $clr15;
-      padding-inline: 18px;
+      padding-inline: rem(18px);
       &:hover {
         color: white;
         transform: scale(1.04);
       }
     }
     img {
-      min-block-size: 32px;
+      min-block-size: rem(32px);
       width: auto;
     }
   }
@@ -137,8 +137,8 @@
   align-items: center;
   border-radius: 500px;
   font-family: Circular-medium;
-  height: 33px;
-  width: 33px;
+  height: rem(33px);
+  width: rem(33px);
   color: #fff;
   cursor: pointer;
   transform: translateY(-1%);
@@ -146,8 +146,8 @@
     transform: scale(1.05);
   }
   img {
-    height: 25px;
-    width: 25px;
+    height: rem(25px);
+    width: rem(25px);
     border-radius: 50%;
   }
   &:hover {
