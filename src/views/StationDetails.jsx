@@ -208,7 +208,9 @@ export function StationDetails(props) {
           <span
             title={`More options for my ${station.name}`}
             onClick={(e) => showStationModal(e)}
-            className="dots flex align-center justify-center option pointer"
+            className={`flex align-center justify-center option pointer ${
+              station?.songs?.length > 0 ? 'dots' : 'margin'
+            }`}
             dangerouslySetInnerHTML={{
               __html: getSpotifySvg('bigDots'),
             }}
