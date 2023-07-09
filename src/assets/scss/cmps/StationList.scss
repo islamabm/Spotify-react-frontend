@@ -1,7 +1,7 @@
 .station-list-container {
   padding: rem(55px) rem(24px);
   @include for-mobile-layout {
-    padding: rem(5px);
+    padding: rem(15px);
   }
 }
 .station-list {

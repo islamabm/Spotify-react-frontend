@@ -25,9 +25,18 @@
     align-items: center;
     padding: rem(80px) rem(24px);
     padding-block-end: 1.5rem;
+    @include for-mobile-layout {
+      flex-direction: column;
+      padding: rem(15px) rem(24px);
+
+      }
 
     .station-info {
       margin-block-start: rem(40px);
+      @include for-mobile-layout {
+        margin-block-start: rem(15px);
+        margin-left: 5%;
+        }
       .station-description {
         font-size: 14px;
         margin-block-start: rem(5px);
@@ -62,12 +71,18 @@
       }
       .playlist-word {
         font-size: 14px;
+        @include for-mobile-layout {
+          display: none;
+          }
       }
     }
 
     .short-station-name {
       font-size: 6rem;
       margin-block: rem(2px);
+      @include for-mobile-layout {
+        font-size: 20px;
+        }
     }
 
     .long-station-name {
@@ -87,6 +102,9 @@
       height: rem(232px);
       min-width: rem(232px);
       width: rem(232px); // do we realy need it? 
+      @include for-mobile-layout {
+        margin-inline-end: 0;
+         }
 
       &.user-main-img {
         position: relative;
@@ -124,6 +142,9 @@
 
   .station-songs {
     padding: 0 rem(20px);
+    @include for-mobile-layout {
+      padding: 0 ;
+      }
     .song {
       grid-template-columns: 16px 6fr 4fr 3fr minmax(120px, 1fr);
       gap: rem(10px);
@@ -133,7 +154,10 @@
       height: rem(56px);
       display: grid;
       border-radius: 4px;
-      // border: 1px solid #292a2a;
+      @include for-mobile-layout {
+        display: flex;
+        padding: 0 10px;
+        }
       .small-play-btn {
         display: none;
       }
@@ -157,11 +181,17 @@
           flex-direction: column;
           gap: rem(8px);
           grid-column: 2;
+          @include for-mobile-layout {
+            margin-inline-start: rem(5px);
+            }
           .song-name {
             text-overflow: ellipsis;
             overflow: hidden;
             white-space: nowrap;
             width: rem(224px);
+            @include for-mobile-layout {
+              font-size: 14px;
+              }
             &:hover {
               text-decoration: underline;
             }
@@ -173,6 +203,9 @@
             overflow: hidden;
             white-space: nowrap;
             width: rem(100px);
+            @include for-mobile-layout {
+              font-size: 12px;
+              }
           }
         }
         .song-img {
@@ -183,6 +216,9 @@
       .song-idx {
         grid-column: 1;
         color: $clr14;
+        @include for-mobile-layout{
+          display: none;
+        }
       }
       .album-name {
         grid-column: 3;
@@ -191,15 +227,24 @@
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
+        @include for-mobile-layout {
+          display: none;
+           }
       }
       .added-at {
         font-size: 14px;
         color: $clr3;
+        @include for-mobile-layout {
+         display: none;
+          }
       }
       .duration-container {
         justify-content: space-evenly;
         align-items: center;
         gap: rem(20px);
+        @include for-mobile-layout {
+          display: none;
+           }
         .hidden {
           opacity: 0;
         }
@@ -244,6 +289,9 @@
     position: sticky;
     top: rem(63px);
     z-index: 5;
+    @include for-mobile-layout {
+      display: none;
+      }
 
     .title {
       margin-inline-start: rem(6px);
@@ -266,8 +314,16 @@
   transition: opacity 0.3s 0.1s, transform 0.3s 0.1s;
   cursor: pointer;
   z-index: 2;
+  @include for-mobile-layout {
+    width: rem(45px);
+    height: rem(45px);
+    }
   svg {
     fill: $clr2;
+    @include for-mobile-layout {
+      width: rem(24px);
+      height: rem(24px);
+      }
   }
   &:hover {
     transform: scale(1.05);
