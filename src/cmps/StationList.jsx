@@ -21,6 +21,7 @@ function _StationList({ stations }) {
     }, {})
     return Object.entries(category)
   }
+  console.log('hi')
 
   useEffect(() => {
     setStationsCategory(categorizedStations())
