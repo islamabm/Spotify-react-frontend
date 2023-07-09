@@ -10,6 +10,7 @@ export default function UserStationsPreview({ station, color }) {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   function goToUserStationDetails() {
+    // dispatch()
     dispatch(setCurrStation(station._id))
     navigate(`/station/${station._id}`)
   }
@@ -18,7 +19,10 @@ export default function UserStationsPreview({ station, color }) {
   const user = useSelector((storeState) => storeState.userModule.loggedInUser)
   const svg = useSelector((storeState) => storeState.songModule.currentSvg)
   return (
-    <section className="user-station-preview flex" onClick={goToUserStationDetails}>
+    <section
+      className="user-station-preview flex"
+      onClick={goToUserStationDetails}
+    >
       <div className="image-svg-container">
         <img
           src={station.imgUrl ? station.imgUrl : emptyImg}

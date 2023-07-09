@@ -6,7 +6,7 @@ import {
   SET_CURR_SONG_ACTION,
   SET_CURR_SONG_SVG,
   SET_CURR_SONG_LYRICS,
-  SET_CURR_DIRECTION
+  SET_CURR_DIRECTION,
 } from '../reducers/song.reducer'
 
 export function setCurrSong(stationId, songId) {
@@ -117,6 +117,6 @@ export function setCurrSongSvg(svg) {
 
 export function setCurrDirection(direction) {
   return (dispatch) => {
-    dispatch({ type: SET_CURR_DIRECTION, direction })
+    dispatch({ type: SET_CURR_DIRECTION, dir: direction })
   }
 }

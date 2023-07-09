@@ -30,7 +30,7 @@ export function songReducer(state = INITIAL_STATE, action = {}) {
     case SET_CURR_DIRECTION:
       return {
         ...state,
-        currDirection: action.direction,
+        currDirection: action.dir,
       }
     case SET_CURR_SONG_ACTION:
       return {
