@@ -4,15 +4,23 @@
   color: $clr6;
   overflow-y: scroll;
   min-height: 100vh;
+  @include for-mobile-layout {
+    background-color: black;
+    overflow-y: clip;
+  }
   .login-header {
-    a{
+    background-color: black;
+    height: rem(100px);
+    padding: rem(32px) rem(51px);
+  margin-block-end: rem(20px);
+  @include for-mobile-layout {
+    padding: rem(32px) rem(30px);
+    height: rem(30px);
+  }
+    a {
       display: block;
         width: max-content;
     }
-      background-color: black;
-      height: rem(100px);
-      padding: rem(32px) rem(51px);
-    margin-block-end: rem(20px);
   }
   .login-main-container {
     position: absolute;
@@ -25,9 +33,18 @@
     padding: rem(10px);
     background-color: black;
     border-radius: 8px;
+    @include for-mobile-layout {
+      width: fit-content;
+     }
     h2 {
       font-family: Circular-medium;
       font-size: 40px;
+      @include for-mobile-layout {
+       font-size: 32px;
+       margin-bottom: 25px;
+       margin-top: 0;
+       margin-left: -70px;
+      }
     }
     .continue {
       gap: rem(10px);
@@ -58,6 +75,10 @@
       border-left: none;
       border-image: initial;
       border-top: 1px solid rgb(41, 41, 41);
+      @include for-mobile-layout {
+        width: rem(330px);
+        margin: rem(35px) rem(100px);
+       }
     }
     form {
       .spotify-username {
@@ -99,14 +120,20 @@
       border: none;
       font-size: 16px;
       font-family: Circular-medium;
+      @include for-mobile-layout {
+        width: rem(330px);
+        margin: rem(10px) rem(0px);
+       }
     }
   }
   .go-to-signup {
     font-family: Circular-light;
-
     align-items: baseline;
-
     gap: rem(5px);
+    @include for-mobile-layout {
+      flex-direction: column;
+      align-items: center;
+     }
     span {
       color: #a7a7a7;
     }

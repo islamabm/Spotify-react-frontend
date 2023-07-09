@@ -13,7 +13,7 @@
   right: 0;
   bottom: 0;
   @include for-mobile-layout {
-    display: none;
+    // display: none;
   }
 
   .song-details {

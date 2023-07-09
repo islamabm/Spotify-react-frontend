@@ -12,7 +12,7 @@
   z-index: 999;
   transition: background-color 0.3s ease-in-out;
   @include for-mobile-layout {
-  display: none;
+  // display: none;
   }
   .arrows-and-input {
     display: flex;
@@ -21,6 +21,9 @@
       display: flex;
       gap: rem(8px);
       align-items: center;
+       @include for-mobile-layout {
+      display: none;
+      }
 
       .black-circle {
         display: flex;
@@ -94,6 +97,9 @@
       min-block-size: rem(47px);
       padding-inline: rem(30px);
       font-size: 15px;
+      @include for-mobile-layout {
+        display: none;
+        }
 
       &:hover {
         transform: scale(1.04);
@@ -108,6 +114,9 @@
       transition-duration: 33ms;
       color: $clr15;
       padding-inline: rem(18px);
+      @include for-mobile-layout {
+        display: none;
+        }
       &:hover {
         color: white;
         transform: scale(1.04);
@@ -126,6 +135,10 @@
     font-size: 1.5rem;
     font-weight: 700;
     font-family: circular-book;
+     @include for-mobile-layout {
+      font-size: 14px;
+      font-family: circular-light;
+      }
   }
 }
 

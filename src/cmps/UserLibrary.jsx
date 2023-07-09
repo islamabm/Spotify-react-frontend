@@ -11,6 +11,7 @@ export function UserLibrary() {
   const [showSortModal, setShowSortModal] = useState(false)
   const [selectedOption, setSelectedOption] = useState('Recents')
   const [stationCounter, setStationCounter] = useState(0)
+  // const [librarySize, setLibrarySize] = useState('original'); 
 
   const [filterUserStations, setFilterUserStations] = useState('')
 
@@ -61,11 +62,13 @@ export function UserLibrary() {
 
   function goToUserLibrary() {
     navigate('/library')
+    // setLibrarySize((prevSize) => (prevSize === 'original' ? 'smaller' : 'original'));
   }
 
   return (
     <>
-      <section className="user-library">
+      <section className={`user-library`}>
+      {/* ${librarySize} */}
         <section className="library-header-wrapper">
           <div
             className={`flex align-center library-header ${
@@ -81,8 +84,14 @@ export function UserLibrary() {
                   __html: getSpotifySvg('libraryIconActive'),
                 }}
               ></span>
-              <span>Your Library</span>
+               {/* {librarySize === 'original' && ( */}
+                 <span>Your Library</span>
+                 {/* )} */}
+                
+                
+                
             </div>
+            {/* {librarySize === 'original' && ( */}
             <span
               title="Create Playlist"
               onClick={createNewStation}
@@ -91,6 +100,7 @@ export function UserLibrary() {
                 __html: getSpotifySvg('plus'),
               }}
             ></span>
+            {/* )} */}
           </div>
           {/* <div className="your-library-btns flex align-center">
             <button className="library-btn pointer">Playlists</button>
@@ -100,6 +110,7 @@ export function UserLibrary() {
         </section>
         <section className="filter-and-list">
           <div className="library-filter">
+          {/* {librarySize === 'original' && ( */}
             <div className="input-container">
               <span
                 onClick={openInput}
@@ -108,17 +119,20 @@ export function UserLibrary() {
                 dangerouslySetInnerHTML={{
                   __html: getSpotifySvg('smallerSearchIcon'),
                 }}
-              ></span>
+                ></span>
               {showInput && (
+                // {showInput && librarySize === 'original' && (
                 <input
-                  className={`search-input ${showInput ? 'open' : 'close'}`}
-                  type="text"
-                  placeholder="Search in Your Library"
-                  value={filterUserStations}
-                  onChange={(e) => setFilterUserStations(e.target.value)}
+                className={`search-input ${showInput ? 'open' : 'close'}`}
+                type="text"
+                placeholder="Search in Your Library"
+                value={filterUserStations}
+                onChange={(e) => setFilterUserStations(e.target.value)}
                 />
               )}
             </div>
+              {/* )} */}
+               {/* {librarySize === 'original' && ( */}
             <div onClick={onShowSortModal} className="sort-by-section relative">
               <span className="sort-by-span">{selectedOption}</span>
               <span
@@ -126,11 +140,12 @@ export function UserLibrary() {
                 dangerouslySetInnerHTML={{
                   __html: getSpotifySvg(
                     showSortModal ? 'upperArrow' : 'bottomArrowIcon'
-                  ),
-                }}
-              ></span>
+                    ),
+                  }}
+                  ></span>
               {showSortModal && <SortModal onSelectOption={onSelectOption} />}
             </div>
+            {/* )} */}
           </div>
           <UserStationsIndex filterUserStations={filterUserStations} />
         </section>

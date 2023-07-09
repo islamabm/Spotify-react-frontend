@@ -6,6 +6,15 @@
   border-radius: 7px;
   width: 100%;
   font-family: Circular-medium;
+
+  // &.original {
+  //   width: 100%;
+  // }
+  
+  // &.smaller {
+  //   max-width: 82px; 
+  // }
+
   @include for-mobile-layout {
     display: none;
   }
@@ -179,3 +188,4 @@
     width: 0;
   }
 }
+

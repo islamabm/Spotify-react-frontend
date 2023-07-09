@@ -2,7 +2,6 @@
   background-color: $clr6;
   color: $clr2;
   min-height: rem(1000px);
-
   margin: 0px auto;
   padding-bottom: rem(240px);
 
@@ -10,6 +9,13 @@
     font-size: 32px;
     font-family: Circular-medium;
     letter-spacing: -0.04em;
+    @include for-mobile-layout {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      // margin: 20px;
+    }
   }
   .signupW {
     gap: rem(8px);
@@ -80,6 +86,9 @@
     gap: rem(10px);
     .label {
       font-family: Circular-medium;
+      @include for-mobile-layout {
+        font-size: 14px;
+      }
     }
     input {
       width: rem(450px);
@@ -88,6 +97,9 @@
       border-radius: 4px;
       margin: rem(8px) 0;
       padding: 15px;
+      @include for-mobile-layout {
+        width: auto;
+      }
       &:hover {
         border: 1px solid black;
       }
@@ -107,6 +119,9 @@
       margin-left: 32%;
       margin-bottom: rem(20px);
       transition: opacity 0.01s 0.01s, transform 0.01s 0.01s;
+      @include for-mobile-layout {
+        margin-left: 27%;
+      }
       &:hover {
         transform: scale(1.03);
       }
