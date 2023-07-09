@@ -27,21 +27,6 @@ export function SongOptionsModal({ position, closeModal, station }) {
   const [modalPosition, setAddModalPosition] = useState({ top: 0, left: 0 })
   const dispatch = useDispatch()
 
-  // useEffect(() => {
-  //   function handleClickOutside(event) {
-  //     if (
-  //       SongmodalRef.current &&
-  //       !SongmodalRef.current.contains(event.target)
-  //     ) {
-  //       closeModal()
-  //     }
-  //   }
-  //   document.addEventListener('mousedown', handleClickOutside)
-  //   return () => {
-  //     document.removeEventListener('mousedown', handleClickOutside)
-  //   }
-  // }, [SongmodalRef, closeModal])
-
   function showAddModal(e) {
     const rect = e.target.getBoundingClientRect()
     setAddModalPosition({

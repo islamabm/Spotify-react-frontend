@@ -3,12 +3,12 @@ import { useSelector } from 'react-redux'
 import { FastAverageColor } from 'fast-average-color'
 
 export function OnlyLyrics() {
+  const [bgStyle, setBgStyle] = useState(null)
+
   const song = useSelector((storeState) => storeState.songModule.currSong)
   const lyrics = useSelector(
     (storeState) => storeState.songModule.currSongLyrics
   )
-  const [bgStyle, setBgStyle] = useState(null)
-
   const colorCache = {}
 
   useEffect(() => {

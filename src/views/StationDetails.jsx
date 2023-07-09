@@ -9,7 +9,6 @@ import StationHeaderDetails from '../cmps/StationHeaderDetails'
 import StationSongList from '../cmps/StationSongList'
 import { StationOptionsModal } from '../cmps/Modals/StationOptionsModal'
 import {
-  Recommended,
   RecommendedIndex,
 } from '../cmps/Recommended/RecommendedIndex'
 import { RecommindationModal } from '../cmps/Modals/RecommindationModal'
@@ -21,17 +20,13 @@ import { BubblingHeart } from '../cmps/BubblingHeart'
 export function StationDetails(props) {
   const [bgStyle, setBgStyle] = useState(null)
   const [bgBottomStyle, setBgBottomStyle] = useState(null)
-
-  const colorCache = {}
   const [showRecommindationModal, setShowRecommindationModal] = useState(false)
   const [showModal, setShowModal] = useState(false)
   const [headerBg, setHeaderBg] = useState('transparent')
   const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 })
   const [showDeleteModal, setShowDeleteModal] = useState(false)
-  const navigate = useNavigate()
-  const params = useParams()
-  const stationDetailsRef = useRef(null)
   const [isPlaying, setIsPlaying] = useState(false)
+
   const station = useSelector(
     (storeState) => storeState.stationModule.currStation
   )
@@ -39,7 +34,12 @@ export function StationDetails(props) {
   const stationImg = useSelector(
     (storeState) => storeState.stationModule.currStationImg
   )
+
+  const navigate = useNavigate()
+  const params = useParams()
+  const stationDetailsRef = useRef(null)
   const dispatch = useDispatch()
+  const colorCache = {}
 
   useEffect(() => {
     loadStation()

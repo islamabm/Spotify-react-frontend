@@ -2,13 +2,12 @@ import React, { useState } from 'react'
 import { stationService } from '../services/station.service.js'
 
 import { EditUserStationModal } from './Modals/EditUserStationModal.jsx'
-import emptyImg from '../assets/imgs/empty-img.png'
 import { useSelector } from 'react-redux'
 
 export default function StationUser({ station }) {
-  const stationNameClass = stationService.stationNameClass(station)
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
   const user = useSelector((storeState) => storeState.userModule.loggedInUser)
+  const stationNameClass = stationService.stationNameClass(station)
 
   function handleEditModalOpen() {
     setIsEditModalOpen(true)

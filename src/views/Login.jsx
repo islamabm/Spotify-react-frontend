@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { doLogin } from '../store/actions/user.actions'
 import { useNavigate, Link } from 'react-router-dom'
 import { getSpotifySvg } from '../services/SVG.service'
 
 export function Login() {
+  const [loginCred, setLoginCred] = useState({ username: '', password: '' })
+  
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const [loginCred, setLoginCred] = useState({ username: '', password: '' })
 
   function handleLogin(e) {
     e.preventDefault()
@@ -19,7 +20,7 @@ export function Login() {
     navigate(`/`)
   }
 
-  const handleInputChange = (e) => {
+  function handleInputChange(e) {
     setLoginCred({
       ...loginCred,
       [e.target.name]: e.target.value,
