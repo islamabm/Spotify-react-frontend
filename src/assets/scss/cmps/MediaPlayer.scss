@@ -103,31 +103,6 @@
   width: rem(110px);
   border-radius: 10000px;
 }
-.progress-bar-audio-fill {
-  -webkit-appearance: #1db954;
-  appearance: #1db954;
-  height: rem(5px);
-  outline: none;
-  border-radius: 10px;
-}
-
-.progress-bar-audio-fill::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: rem(10px);
-  height: rem(10px);
-  border-radius: 50%;
-  background: #1db954;
-  cursor: pointer;
-}
-
-.progress-bar-audio-fill::-moz-range-thumb {
-  width: rem(10px);
-  height: rem(10px);
-  border-radius: 50%;
-  background: #1db954;
-  cursor: pointer;
-}
 
 .hidden-player {
   display: none;
@@ -155,4 +130,3 @@
     }
   }
 }
-

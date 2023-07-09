@@ -83,3 +83,71 @@
     }
   }
 }
+
+.progress-bar-audio-fill {
+  -webkit-appearance: #1db954;
+  appearance: #1db954;
+  height: rem(5px);
+  outline: none;
+  border-radius: 10px;
+}
+
+.progress-bar-audio-fill::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: rem(10px);
+  height: rem(10px);
+  border-radius: 50%;
+  background: #1db954;
+  cursor: pointer;
+}
+
+// .progress-bar-audio-fill::-moz-range-thumb {
+//   width: rem(10px);
+//   height: rem(10px);
+//   border-radius: 50%;
+//   background: #1db954;
+//   cursor: pointer;
+// }
+
+// /* Thumb */
+// .progress-bar-audio-fill::-webkit-slider-thumb {
+//   -webkit-appearance: none; /* Override default look */
+//   appearance: none;
+//   width: 25px; /* Set a specific width */
+//   height: 25px; /* Slider handle height */
+//   background: #4caf50; /* Green background */
+//   cursor: pointer; /* Cursor on hover */
+// }
+
+// .progress-bar-audio-fill::-moz-range-thumb {
+//   width: 25px; /* Set a specific width */
+//   height: 25px; /* Slider handle height */
+//   background: #4caf50; /* Green background */
+//   cursor: pointer; /* Cursor on hover */
+// }
+
+// /* Track */
+// .progress-bar-audio-fill::-webkit-slider-runnable-track {
+//   width: 100%;
+//   height: 8.4px;
+//   cursor: pointer;
+//   background: #999999;
+//   border-radius: 1.3px;
+// }
+
+// .progress-bar-audio-fill::-moz-range-track {
+//   width: 100%;
+//   height: 8.4px;
+//   cursor: pointer;
+//   background: #999999;
+//   border-radius: 1.3px;
+// }
+// .progress-bar-audio-fill::-webkit-slider-progress {
+//   background: #4caf50; /* Replace #yourColor with your desired color */
+// }
+
+// /* For Firefox */
+// .progress-bar-audio-fill::-moz-range-progress {
+//   background: #4caf50; /* Replace #yourColor with your desired color */
+// }
