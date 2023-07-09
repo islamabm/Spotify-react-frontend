@@ -8,7 +8,9 @@ import {
   setCurrSongIndex,
   setCurrDirection,
 } from '../store/actions/song.actions'
+import { updateUser } from '../store/actions/user.actions'
 import { SongOptionsModal } from '../cmps/Modals/SongOptionsModal'
+import { BubblingHeart } from '../cmps/BubblingHeart'
 export function SongLyrics() {
   const song = useSelector((storeState) => storeState.songModule.currSongAction)
   const station = useSelector(
@@ -18,6 +20,7 @@ export function SongLyrics() {
   const lyrics = useSelector(
     (storeState) => storeState.songModule.currSongLyrics
   )
+  const user = useSelector((storeState) => storeState.userModule.loggedInUser)
   const [showModal, setShowOptionsModal] = useState(false)
   const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 })
   const [isFirstClick, setIsFirstClick] = useState(true)
@@ -99,6 +102,10 @@ export function SongLyrics() {
     dispatch(setCurrSongSvg('pause'))
   }
 
+  function addSongToLoveSongs() {
+    dispatch(updateUser(song, user))
+  }
+
   return (
     <section className="song-lyrics-section">
       {/* <section className="song-lyrics-section"> */}
@@ -151,12 +158,9 @@ export function SongLyrics() {
             </button>
           )}
         </div>
-        <span
-          className="heart flex align-center justify-center"
-          dangerouslySetInnerHTML={{
-            __html: getSpotifySvg('lyricsHeart'),
-          }}
-        ></span>
+        <span>
+          <BubblingHeart index={song?._id} item={song} type="lyrics" />
+        </span>
 
         <span
           onClick={(e) => showSongOptionsModal(e)}

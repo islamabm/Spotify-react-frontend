@@ -2,22 +2,25 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateUser, removeSongFromUser } from '../store/actions/user.actions'
 import { addStation, removeStation } from '../store/actions/station.actions'
+import { useLocation } from 'react-router-dom'
 
 export function BubblingHeart({ index, item, type }) {
   const [liked, setLiked] = useState(false)
   const user = useSelector((storeState) => storeState.userModule.loggedInUser)
   const dispatch = useDispatch()
-
+  const location = useLocation()
   function toggleLike() {
     setLiked((prevLiked) => {
       const updatedLike = !prevLiked
       if (updatedLike) {
-        if (type === 'song') dispatch(updateUser(item, user))
-        else if (type === 'station')
+        if (type === 'song' || type === 'lyrics')
+          dispatch(updateUser(item, user))
+        else if (type === 'station' && location.pathname !== '/lyrics')
           dispatch(addStation(item.name, item.songs, item.imgUrl))
       } else {
-        if (type === 'song') dispatch(removeSongFromUser(item._id, user))
-        else if (type === 'station') dispatch(removeStation(item._id))
+        if (type === 'song' || type === 'lyrics')
+          dispatch(removeSongFromUser(item._id, user))
+        // else if (type === 'station') dispatch(removeStationFromUserStations(item._id))
       }
       return updatedLike
     })

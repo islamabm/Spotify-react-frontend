@@ -1,4 +1,4 @@
-import { httpService } from './http.service' // Make sure to provide the correct path to your http.service.js file
+import { httpService } from './http.service'
 
 export const shazamService = {
   identifySong,
