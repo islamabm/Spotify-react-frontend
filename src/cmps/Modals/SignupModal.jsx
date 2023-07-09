@@ -17,7 +17,6 @@ export function SignupModal({ closeSignupModal }) {
           <button className="login-modal-cancle-btn" onClick={closeSignupModal}>
             Not now
           </button>
-
           <button className="login-modal-login-btn" onClick={goToSignup}>
             Sign up
           </button>
