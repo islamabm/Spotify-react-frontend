@@ -30,6 +30,11 @@
     border: none;
     font-size: 1.2rem;
     cursor: pointer;
+    span {
+      svg {
+        fill: white;
+      }
+    }
   }
 
   h1 {
@@ -49,6 +54,10 @@
       margin-bottom: 20px;
       border: 1px solid #ccc;
       border-radius: 5px;
+
+      &:focus {
+        outline: none;
+      }
     }
 
     .btn-generate {

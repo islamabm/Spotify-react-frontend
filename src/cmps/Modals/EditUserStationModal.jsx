@@ -69,7 +69,7 @@ export function EditUserStationModal({ station, onClose }) {
         <div className="modal-header flex align-center">
           <h2 className="edit-details">Edit details</h2>
           <h1 className="openai" onClick={openAiModal}>
-            openai
+            Generate with AI
           </h1>
           <span
             onClick={onCloseEditModal}

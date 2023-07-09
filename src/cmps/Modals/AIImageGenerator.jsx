@@ -23,7 +23,6 @@ export default function AIImageGenerator({ closeAiModal, onImageGenerated }) {
   return (
     <div className="ai-modal-back-drop">
       <div className="ai-modal">
-        {/* <button onClick={toggleModal} className="close-ai-modal"> */}
         <button className="close-ai-modal">
           {' '}
           <span

@@ -138,3 +138,34 @@
     bottom: 3%;
   }
 }
+@-webkit-keyframes neon6 {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #3f45fe, 0 0 30px #3f45fe,
+      0 0 40px #3f45fe;
+  }
+  to {
+    text-shadow: 0 0 5px #fff, 0 0 10px #3f45fe, 0 0 15px #3f45fe,
+      0 0 20px #3f45fe;
+  }
+}
+
+@-moz-keyframes neon6 {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #3f45fe, 0 0 30px #3f45fe,
+      0 0 40px #3f45fe;
+  }
+  to {
+    text-shadow: 0 0 5px #fff, 0 0 10px #3f45fe, 0 0 15px #3f45fe,
+      0 0 20px #3f45fe;
+  }
+}
+@keyframes neon6 {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #3f45fe, 0 0 30px #3f45fe,
+      0 0 40px #3f45fe;
+  }
+  to {
+    text-shadow: 0 0 5px #fff, 0 0 10px #3f45fe, 0 0 15px #3f45fe,
+      0 0 20px #3f45fe;
+  }
+}
