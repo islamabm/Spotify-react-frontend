@@ -7,7 +7,7 @@ export const shazamService = {
 async function identifySong(audioBlob) {
   try {
     const formData = new FormData()
-    formData.append('file', audioBlob)
+    formData.append('file', audioBlob, 'recordedAudio.webm')
     const res = await httpService.post('shazam/identify', formData)
     return res
   } catch (error) {

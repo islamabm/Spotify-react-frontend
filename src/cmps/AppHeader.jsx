@@ -135,7 +135,7 @@ export function AppHeader() {
                 __html: getSpotifySvg('rightArrowIcon'),
               }}
             ></span>
-            {/* <Transcript /> */}
+            <Transcript />
           </div>
         </section>
         {location.pathname === '/search' && (
