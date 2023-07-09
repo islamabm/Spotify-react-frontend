@@ -43,7 +43,7 @@ export function StationDetails(props) {
 
   useEffect(() => {
     loadStation()
-  }, [params.id, station])
+  }, [params.id])
 
   useEffect(() => {
     const unsubscribe = eventBus.on('newStationCreated', setBgStyle)
