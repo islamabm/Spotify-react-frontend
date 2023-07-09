@@ -1,14 +1,13 @@
-import React, { useEffect } from 'react'
-import { StationList } from '../cmps/StationList'
-import { useDispatch, useSelector } from 'react-redux'
-import { loadUserStations } from '../store/actions/station.actions'
-import { UserLibraryList } from '../cmps/UserLibraryStations/UserLibraryList'
+import React, { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { loadUserStations } from "../store/actions/station.actions"
+import { UserLibraryList } from "../cmps/UserLibraryStations/UserLibraryList"
 export function UserLibraryIndex() {
-  const dispatch = useDispatch()
   const stations = useSelector(
     (storeState) => storeState.stationModule.userStations
   )
   const user = useSelector((storeState) => storeState.userModule.loggedInUser)
+  const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(loadUserStations())

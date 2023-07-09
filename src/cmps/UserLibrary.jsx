@@ -5,43 +5,23 @@ import { useDispatch, useSelector } from 'react-redux'
 import { UserStationsIndex } from './UserStations/UserStationsIndex'
 import { addStation } from '../store/actions/station.actions'
 import emptyImg from '../assets/imgs/empty-img.png'
-import { updateUserStations } from '../store/actions/user.actions'
 import { useNavigate } from 'react-router-dom'
 import { SignupModal } from './Modals/SignupModal'
+
 export function UserLibrary() {
   const [showSortModal, setShowSortModal] = useState(false)
   const [selectedOption, setSelectedOption] = useState('Recents')
   const [stationCounter, setStationCounter] = useState(0)
   const [showModal, setShowModal] = useState(false)
-  // const [librarySize, setLibrarySize] = useState('original');
-
-  const [filterUserStations, setFilterUserStations] = useState('')
-
   const [isScrolled, setIsScrolled] = useState(false)
   const [showInput, setShowInput] = useState(false)
+  const [filterUserStations, setFilterUserStations] = useState('')
+  
+  const user = useSelector((storeState) => storeState.userModule.loggedInUser)
+  
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const user = useSelector((storeState) => storeState.userModule.loggedInUser)
-
-  function onShowSortModal() {
-    setShowSortModal((prevState) => !prevState)
-    setShowInput(false)
-  }
-
-  function onSelectOption(ev, option) {
-    ev.stopPropagation()
-    setSelectedOption(option)
-    setShowSortModal(false)
-  }
-
-  function createNewStation() {
-    if (!user) setShowModal(true)
-    setStationCounter(stationCounter + 1)
-    const name = `My Playlist #${stationCounter}`
-    dispatch(addStation(name, [], emptyImg))
-    // dispatch(updateUserStations(station, user))
-  }
-
+  
   useEffect(() => {
     const filterAndListSection = document.querySelector('.filter-and-list')
     const checkScroll = () => {
@@ -59,6 +39,26 @@ export function UserLibrary() {
     }
   }, [isScrolled])
 
+  
+  function onShowSortModal() {
+    setShowSortModal((prevState) => !prevState)
+    setShowInput(false)
+  }
+
+  function onSelectOption(ev, option) {
+    ev.stopPropagation()
+    setSelectedOption(option)
+    setShowSortModal(false)
+  }
+  
+  function createNewStation() {
+    if (!user) setShowModal(true)
+    setStationCounter(stationCounter + 1)
+    const name = `My Playlist #${stationCounter}`
+    dispatch(addStation(name, [], emptyImg))
+    // dispatch(updateUserStations(station, user))
+  }
+  
   function openInput() {
     setShowInput(true)
   }
@@ -69,13 +69,11 @@ export function UserLibrary() {
 
   function goToUserLibrary() {
     navigate('/library')
-    // setLibrarySize((prevSize) => (prevSize === 'original' ? 'smaller' : 'original'));
   }
 
   return (
     <>
       <section className={`user-library`}>
-        {/* ${librarySize} */}
         <section className="library-header-wrapper">
           <div
             className={`flex align-center library-header ${

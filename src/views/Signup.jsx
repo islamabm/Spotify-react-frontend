@@ -9,18 +9,20 @@ import { LoginSocialFacebook } from 'reactjs-social-login'
 import { FacebookLoginButton } from 'react-social-login-buttons'
 
 export function Signup() {
+  const [signupCred, setSignupCred] = useState({
+    username: '',
+    password: '',
+    email: '',
+    imgUrl:
+      'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg',
+    stations: [],
+    likedSongs: [],
+    latestStations: [],
+  })
+  
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const google = window.google
-
-  function handleCallbackResponse(response) {
-    const userObject = jwtDecode(response.credential)
-
-    const user = userService.prepareData(userObject)
-
-    dispatch(doSignup(user))
-    navigate(`/`)
-  }
 
   useEffect(() => {
     google.accounts.id.initialize({
@@ -35,16 +37,15 @@ export function Signup() {
     })
   }, [])
 
-  const [signupCred, setSignupCred] = useState({
-    username: '',
-    password: '',
-    email: '',
-    imgUrl:
-      'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg',
-    stations: [],
-    likedSongs: [],
-    latestStations: [],
-  })
+  function handleCallbackResponse(response) {
+    const userObject = jwtDecode(response.credential)
+
+    const user = userService.prepareData(userObject)
+
+    dispatch(doSignup(user))
+    navigate(`/`)
+  }
+
 
   function handleSignup(e) {
     e.preventDefault()

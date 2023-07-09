@@ -1,28 +1,27 @@
-import { getSpotifySvg } from '../services/SVG.service'
-import { useLocation, Link, useNavigate } from 'react-router-dom'
-import { UserModal } from './Modals/UserModal'
-import { useState, useEffect } from 'react'
-import { setCurrSong, setCurrSongIndex } from '../store/actions/song.actions'
+import { getSpotifySvg } from "../services/SVG.service"
+import { useLocation, Link, useNavigate } from "react-router-dom"
+import { UserModal } from "./Modals/UserModal"
+import { useState, useEffect } from "react"
+import { setCurrSong, setCurrSongIndex } from "../store/actions/song.actions"
+import { useDispatch, useSelector } from "react-redux"
+import { eventBus } from "../services/event-bus.service"
 
-import { useDispatch, useSelector } from 'react-redux'
-import { eventBus } from '../services/event-bus.service'
-import Transcript from './Transcript'
 export function AppHeader() {
   const [showModal, setShowModal] = useState(false)
   const [currScrollPos, setScrollPos] = useState(0)
   const [isPlaying, setIsPlaying] = useState(false)
-  const navigate = useNavigate()
+  const [headers, setHeaders] = useState({
+    backgroundColor: "transparent",
+  })
 
   const station = useSelector(
     (storeState) => storeState.stationModule.currStation
   )
   const user = useSelector((storeState) => storeState.userModule.loggedInUser)
+
   const dispatch = useDispatch()
   const location = useLocation()
-
-  const [headers, setHeaders] = useState({
-    backgroundColor: 'transparent',
-  })
+  const navigate = useNavigate()
 
   function updateHeaderOpacity(scrollPos, headerBg) {
     setScrollPos(scrollPos)
@@ -30,7 +29,7 @@ export function AppHeader() {
     let opacity = Math.min(scrollPos / maxScroll, 1)
 
     let match = headerBg?.background?.match(/rgb\((\d+,\d+,\d+)\)/)
-    let dominantColor = match ? match[1] : '#121212'
+    let dominantColor = match ? match[1] : "#121212"
 
     const newHeaders = {
       backgroundColor: `rgba(${dominantColor}, ${opacity})`,
@@ -43,46 +42,46 @@ export function AppHeader() {
     dispatch(setCurrSongIndex(station?._id, station?.songs[0]._id))
   }
 
-  // useEffect(() => {
-  //   const onScroll = ({ scrollPos, headerBg }) => {
-  //     updateHeaderOpacity(scrollPos, headerBg)
-  //   }
-  //   const unlistenIndex = eventBus.on('stationIndexScroll', onScroll)
-  //   if (
-  //     location.pathname === '/' ||
-  //     location.pathname === '/search' ||
-  //     location.pathname === '/lyrics'
-  //   ) {
-  //     setHeaders({
-  //       backgroundColor: '#121212',
-  //     })
-  //   } else {
-  //     setHeaders({
-  //       backgroundColor: 'transparent',
-  //     })
-  //   }
-  //   return () => {
-  //     unlistenIndex()
-  //   }
-  // }, [location.pathname])
-
   useEffect(() => {
-    const onScroll = ({ scrollPos, bgStyle }) => {
-      updateHeaderOpacity(scrollPos, bgStyle)
+    const onScroll = ({ scrollPos, headerBg }) => {
+      updateHeaderOpacity(scrollPos, headerBg)
     }
-    const unlistenDetails = eventBus.on('stationDetailsScroll', onScroll)
-
+    const unlistenIndex = eventBus.on('stationIndexScroll', onScroll)
     if (
       location.pathname === '/' ||
       location.pathname === '/search' ||
       location.pathname === '/lyrics'
     ) {
       setHeaders({
-        backgroundColor: '#121212',
+        backgroundColor: 'transparent',
       })
     } else {
       setHeaders({
-        backgroundColor: 'transparent',
+        backgroundColor: '#121212',
+      })
+    }
+    return () => {
+      unlistenIndex()
+    }
+  }, [location.pathname])
+
+  useEffect(() => {
+    const onScroll = ({ scrollPos, bgStyle }) => {
+      updateHeaderOpacity(scrollPos, bgStyle)
+    }
+    const unlistenDetails = eventBus.on("stationDetailsScroll", onScroll)
+
+    if (
+      location.pathname === "/" ||
+      location.pathname === "/search" ||
+      location.pathname === "/lyrics"
+    ) {
+      setHeaders({
+        backgroundColor: "transparent",
+      })
+    } else {
+      setHeaders({
+        backgroundColor: "#121212",
       })
     }
     return () => {
@@ -123,7 +122,7 @@ export function AppHeader() {
               className="title"
               title="Go back"
               dangerouslySetInnerHTML={{
-                __html: getSpotifySvg('leftArrowIcon'),
+                __html: getSpotifySvg("leftArrowIcon"),
               }}
             ></span>
           </div>
@@ -133,17 +132,17 @@ export function AppHeader() {
               className="title"
               title="Go forward"
               dangerouslySetInnerHTML={{
-                __html: getSpotifySvg('rightArrowIcon'),
+                __html: getSpotifySvg("rightArrowIcon"),
               }}
             ></span>
             {/* <Transcript /> */}
           </div>
         </section>
-        {location.pathname === '/search' && (
+        {location.pathname === "/search" && (
           <div className="flex align-center justify-center input-container">
             <span
               dangerouslySetInnerHTML={{
-                __html: getSpotifySvg('smallerSearchIcon'),
+                __html: getSpotifySvg("smallerSearchIcon"),
               }}
             ></span>
             <input placeholder="What do you want to listen to?" />
@@ -165,7 +164,7 @@ export function AppHeader() {
                   title="Pause"
                   className="pause-button flex align-center justify-center title"
                   dangerouslySetInnerHTML={{
-                    __html: getSpotifySvg('biggerPauseBtn'),
+                    __html: getSpotifySvg("biggerPauseBtn"),
                   }}
                 ></span>
               ) : (
@@ -173,7 +172,7 @@ export function AppHeader() {
                   title="Play"
                   className=" flex align-center justify-center title"
                   dangerouslySetInnerHTML={{
-                    __html: getSpotifySvg('biggerPlayBtn'),
+                    __html: getSpotifySvg("biggerPlayBtn"),
                   }}
                 ></span>
               )}
@@ -181,7 +180,7 @@ export function AppHeader() {
             <p className="">{station.name}</p>
           </div>
         ) : (
-          ''
+          ""
         )}
       </section>
 
@@ -205,7 +204,7 @@ export function AppHeader() {
                 src={
                   user.imgUrl
                     ? user.imgUrl
-                    : 'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg'
+                    : "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg"
                 }
                 alt="user-img"
               />

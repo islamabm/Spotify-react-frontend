@@ -6,20 +6,12 @@ import { editUserStation } from '../../store/actions/station.actions'
 import { uploadImg } from '../../services/upload.service'
 import emptyImg from '../../assets/imgs/empty-img.png'
 export function EditUserStationModal({ station, onClose }) {
-  const [isHovered, setIsHovered] = useState(false)
   const [focusedInput, setFocusedInput] = useState(null)
   const [isUploading, setIsUploading] = useState(false)
   const dispatch = useDispatch()
 
   const [editedStation, setEditedStation] = useState({ ...station })
 
-  function handleMouseEnter() {
-    setIsHovered(true)
-  }
-
-  function handleMouseLeave() {
-    setIsHovered(false)
-  }
 
   function handleInputFocus(inputIndex) {
     setFocusedInput(inputIndex)

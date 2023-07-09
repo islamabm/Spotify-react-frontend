@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { setCurrStation } from '../../store/actions/station.actions'
 import { setCurrSong, setCurrSongIndex } from '../../store/actions/song.actions'
 

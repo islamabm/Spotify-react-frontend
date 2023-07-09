@@ -1,23 +1,21 @@
-import React from 'react'
-import { getSpotifySvg } from '../../services/SVG.service'
-
-import { useLocation, useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
-import emptyImg from '../../assets/imgs/empty-img.png'
-import { useSelector } from 'react-redux'
-import { setCurrStation } from '../../store/actions/station.actions'
+import React from "react"
+import { getSpotifySvg } from "../../services/SVG.service"
+import { useNavigate } from "react-router-dom"
+import { useDispatch } from "react-redux"
+import emptyImg from "../../assets/imgs/empty-img.png"
+import { useSelector } from "react-redux"
+import { setCurrStation } from "../../store/actions/station.actions"
 export default function UserStationsPreview({ station, color }) {
+  const user = useSelector((storeState) => storeState.userModule.loggedInUser)
+  const svg = useSelector((storeState) => storeState.songModule.currentSvg)
   const navigate = useNavigate()
   const dispatch = useDispatch()
+
   function goToUserStationDetails() {
-    // dispatch()
     dispatch(setCurrStation(station._id))
     navigate(`/station/${station._id}`)
   }
-  const location = useLocation()
 
-  const user = useSelector((storeState) => storeState.userModule.loggedInUser)
-  const svg = useSelector((storeState) => storeState.songModule.currentSvg)
   return (
     <section
       className="user-station-preview flex"
@@ -40,11 +38,11 @@ export default function UserStationsPreview({ station, color }) {
         </div>
       </div>
 
-      {color === 'green' && svg === 'play' && (
+      {color === "green" && svg === "play" && (
         <span
           className="user-library-volume"
           dangerouslySetInnerHTML={{
-            __html: getSpotifySvg('volumeIconStation'),
+            __html: getSpotifySvg("volumeIconStation"),
           }}
         ></span>
       )}

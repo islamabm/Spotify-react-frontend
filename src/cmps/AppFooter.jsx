@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { getSpotifySvg } from '../services/SVG.service'
 import { setCurrSongLyrics } from '../store/actions/song.actions'
 import { MediaPlayer } from './MediaPlayer'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { BubblingHeart } from './BubblingHeart'
 
@@ -10,22 +10,23 @@ export function AppFooter() {
   const [mute, setMute] = useState(false)
   const [volume, setVolume] = useState(50)
   const [isLyrics, setIsLyrics] = useState(false)
-
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
+  
   const song = useSelector((storeState) => storeState.songModule.currSong)
+  const [currSong, setCurrSong] = useState(song)
   const station = useSelector(
     (storeState) => storeState.stationModule.currStation
   )
-  const [currSong, setCurrSong] = useState(song)
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   useEffect(() => {
     setCurrSong(song)
   }, [song])
 
-  const handleVolumeChange = (event) => {
+  function handleVolumeChange(event) {
     setVolume(event.target.value)
   }
+  
   function onRepeatClicked() {
     setIsLyrics(!isLyrics)
   }

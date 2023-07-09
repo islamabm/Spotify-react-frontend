@@ -4,7 +4,6 @@ import { uploadImg } from '../services/upload.service'
 import { editUserImg, getUser } from '../store/actions/user.actions'
 import { FastAverageColor } from 'fast-average-color'
 export function UserDetails() {
-  // const user = useSelector((storeState) => storeState.userModule.loggedInUser)
   const [isUploading, setIsUploading] = useState(false)
   const [bgStyle, setBgStyle] = useState(null)
   const [user, setUser] = useState(
@@ -12,6 +11,13 @@ export function UserDetails() {
   )
   const dispatch = useDispatch()
   const colorCache = {}
+  
+    useEffect(() => {
+      const user1 = dispatch(getUser())
+      setUser(user1)
+      updateImgUrlAndColor(user.imgUrl)
+    }, [user.imgUrl])
+  
   async function handleFile(ev) {
     const file =
       ev.type === 'change' ? ev.target.files[0] : ev.dataTransfer.files[0]
@@ -23,16 +29,8 @@ export function UserDetails() {
       console.log('err', err)
     } finally {
       setIsUploading(false)
-    }
-  }
-  // useEffect(() => {
-  // }, [])
-  useEffect(() => {
-    const user1 = dispatch(getUser())
-    setUser(user1)
-    updateImgUrlAndColor(user.imgUrl)
-  }, [user.imgUrl])
-
+    }  
+  }    
   function updateImgUrlAndColor(userImg) {
     if (!user.imgUrl) return
     getDominantColor(userImg)
