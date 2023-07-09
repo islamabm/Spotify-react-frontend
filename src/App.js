@@ -17,12 +17,13 @@ import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { SongLyrics } from './views/SongLyrics'
 import { OnlyLyrics } from './views/OnlyLyrics'
-import {BottomNav} from '../src/cmps/Mobile/BottomNav'
+import { BottomNav } from '../src/cmps/Mobile/BottomNav'
 
 function App() {
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(getUser())
+    const user = dispatch(getUser())
+    console.log('user', user)
   }, [])
   return (
     <Router>

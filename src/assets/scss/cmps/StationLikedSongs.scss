@@ -1,0 +1,21 @@
+.liked-songs-user {
+  gap: rem(8px);
+  display: flex;
+  align-items: center;
+  justify-items: center;
+
+  .liked-songs-img {
+    height: rem(24px);
+    width: rem(24px);
+    img {
+      border-radius: 50%;
+    }
+  }
+  .user-name {
+    letter-spacing: rem(1px);
+    font-size: 0.875rem;
+    color: #fff;
+    font-weight: 700;
+    font-family: circular-book;
+  }
+}

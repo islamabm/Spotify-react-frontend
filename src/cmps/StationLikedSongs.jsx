@@ -15,14 +15,21 @@ export default function StationLikedSongs({ station }) {
       <div className="station-info">
         <span className="playlist-word">Playlist</span>
         <h1 className={stationNameClass}>{station?.name}</h1>
-        <img
-          src="https://www.freepnglogos.com/uploads/spotify-logo-png/spotify-icon-green-logo-8.png"
-          className="spotify-logo"
-          alt="spotify logo"
-        />
-        <span className="logo">{user?.username}</span>
-        <span className="dot"> • </span>
-        <span className="songs-count">{user?.LikedSongs?.length} songs </span>
+        <div className="liked-songs-user">
+          <div className="liked-songs-img">
+            <img
+              src={user?.imgUrl}
+              className="liked-songs-logo"
+              alt="spotify logo"
+            />
+          </div>
+          <span className="logo user-name">{user?.username}</span>
+          <span className="dot"> • </span>
+          <span className="songs-count">
+            {user?.LikedSongs?.length}{' '}
+            {user?.LikedSongs?.length === 1 ? 'song' : 'songs'}{' '}
+          </span>
+        </div>
       </div>
     </>
   )
