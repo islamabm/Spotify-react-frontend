@@ -30,7 +30,7 @@ export function AppHeader() {
     let opacity = Math.min(scrollPos / maxScroll, 1)
 
     let match = headerBg?.background?.match(/rgb\((\d+,\d+,\d+)\)/)
-    let dominantColor = match ? match[1] : '0,0,0'
+    let dominantColor = match ? match[1] : '#121212'
 
     const newHeaders = {
       backgroundColor: `rgba(${dominantColor}, ${opacity})`,
@@ -43,28 +43,29 @@ export function AppHeader() {
     dispatch(setCurrSongIndex(station?._id, station?.songs[0]._id))
   }
 
-  useEffect(() => {
-    const onScroll = ({ scrollPos, headerBg }) => {
-      updateHeaderOpacity(scrollPos, headerBg)
-    }
-    const unlistenIndex = eventBus.on('stationIndexScroll', onScroll)
-    if (
-      location.pathname === '/' ||
-      location.pathname === '/search' ||
-      location.pathname === '/lyrics'
-    ) {
-      setHeaders({
-        backgroundColor: 'rgba(0,0,0,0)',
-      })
-    } else {
-      setHeaders({
-        backgroundColor: 'transparent',
-      })
-    }
-    return () => {
-      unlistenIndex()
-    }
-  }, [location.pathname])
+  // useEffect(() => {
+  //   const onScroll = ({ scrollPos, headerBg }) => {
+  //     updateHeaderOpacity(scrollPos, headerBg)
+  //   }
+  //   const unlistenIndex = eventBus.on('stationIndexScroll', onScroll)
+  //   if (
+  //     location.pathname === '/' ||
+  //     location.pathname === '/search' ||
+  //     location.pathname === '/lyrics'
+  //   ) {
+  //     setHeaders({
+  //       backgroundColor: '#121212',
+  //     })
+  //   } else {
+  //     setHeaders({
+  //       backgroundColor: 'transparent',
+  //     })
+  //   }
+  //   return () => {
+  //     unlistenIndex()
+  //   }
+  // }, [location.pathname])
+
   useEffect(() => {
     const onScroll = ({ scrollPos, bgStyle }) => {
       updateHeaderOpacity(scrollPos, bgStyle)
@@ -77,7 +78,7 @@ export function AppHeader() {
       location.pathname === '/lyrics'
     ) {
       setHeaders({
-        backgroundColor: 'rgba(0,0,0,0)',
+        backgroundColor: '#121212',
       })
     } else {
       setHeaders({
