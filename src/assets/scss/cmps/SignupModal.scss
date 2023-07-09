@@ -28,9 +28,9 @@
     position: absolute;
     top: 50%;
     left: -10px;
-    border-top: 10px solid transparent;
-    border-bottom: 10px solid transparent;
-    border-right: 10px solid #0d72ea;
+    border-top: 16px solid transparent;
+    border-bottom: 16px solid transparent;
+    border-right: 16px solid #0d72ea;
     transform: translateY(-50%);
   }
 
@@ -43,7 +43,7 @@
   .login-modal-login-btn {
     box-sizing: border-box;
     position: relative;
-
+    height: rem(32px);
     cursor: pointer;
     border: none;
     background-color: white;
@@ -94,6 +94,7 @@
   }
   p {
     font-size: 0.875rem;
+    line-height: 1.4;
     color: white;
     font-family: circular-book;
     margin-inline-start: 1em;

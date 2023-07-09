@@ -12,7 +12,7 @@ export function SignupModal({ closeSignupModal }) {
     <section className="login-modal-backdrop">
       <div className="login-modal">
         <h1>Create a playlist</h1>
-        <p>Signup to create and share playlists</p>
+        <p>Signup to create and share playlists.</p>
         <div className="login-modla-btns">
           <button className="login-modal-cancle-btn" onClick={closeSignupModal}>
             Not now
