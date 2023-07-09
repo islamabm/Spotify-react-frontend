@@ -14,7 +14,6 @@ export function EditUserStationModal({ station, onClose }) {
 
   const [editedStation, setEditedStation] = useState({ ...station })
 
-
   function handleInputFocus(inputIndex) {
     setFocusedInput(inputIndex)
   }
@@ -69,7 +68,9 @@ export function EditUserStationModal({ station, onClose }) {
       <section className="modal-container">
         <div className="modal-header flex align-center">
           <h2 className="edit-details">Edit details</h2>
-          <h1 onClick={openAiModal}>openai</h1>
+          <h1 className="openai" onClick={openAiModal}>
+            openai
+          </h1>
           <span
             onClick={onCloseEditModal}
             className="x flex align-center justify-center pointer"
