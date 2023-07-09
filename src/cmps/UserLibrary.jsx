@@ -7,11 +7,13 @@ import { addStation } from '../store/actions/station.actions'
 import emptyImg from '../assets/imgs/empty-img.png'
 import { updateUserStations } from '../store/actions/user.actions'
 import { useNavigate } from 'react-router-dom'
+import { SignupModal } from './Modals/SignupModal'
 export function UserLibrary() {
   const [showSortModal, setShowSortModal] = useState(false)
   const [selectedOption, setSelectedOption] = useState('Recents')
   const [stationCounter, setStationCounter] = useState(0)
-  // const [librarySize, setLibrarySize] = useState('original'); 
+  const [showModal, setShowModal] = useState(false)
+  // const [librarySize, setLibrarySize] = useState('original');
 
   const [filterUserStations, setFilterUserStations] = useState('')
 
@@ -33,6 +35,7 @@ export function UserLibrary() {
   }
 
   function createNewStation() {
+    if (!user) setShowModal(true)
     setStationCounter(stationCounter + 1)
     const name = `My Playlist #${stationCounter}`
     dispatch(addStation(name, [], emptyImg))
@@ -60,6 +63,10 @@ export function UserLibrary() {
     setShowInput(true)
   }
 
+  function handleCloseSignupModal() {
+    setShowModal(false)
+  }
+
   function goToUserLibrary() {
     navigate('/library')
     // setLibrarySize((prevSize) => (prevSize === 'original' ? 'smaller' : 'original'));
@@ -68,7 +75,7 @@ export function UserLibrary() {
   return (
     <>
       <section className={`user-library`}>
-      {/* ${librarySize} */}
+        {/* ${librarySize} */}
         <section className="library-header-wrapper">
           <div
             className={`flex align-center library-header ${
@@ -84,12 +91,9 @@ export function UserLibrary() {
                   __html: getSpotifySvg('libraryIconActive'),
                 }}
               ></span>
-               {/* {librarySize === 'original' && ( */}
-                 <span>Your Library</span>
-                 {/* )} */}
-                
-                
-                
+              {/* {librarySize === 'original' && ( */}
+              <span>Your Library</span>
+              {/* )} */}
             </div>
             {/* {librarySize === 'original' && ( */}
             <span
@@ -110,7 +114,7 @@ export function UserLibrary() {
         </section>
         <section className="filter-and-list">
           <div className="library-filter">
-          {/* {librarySize === 'original' && ( */}
+            {/* {librarySize === 'original' && ( */}
             <div className="input-container">
               <span
                 onClick={openInput}
@@ -119,20 +123,20 @@ export function UserLibrary() {
                 dangerouslySetInnerHTML={{
                   __html: getSpotifySvg('smallerSearchIcon'),
                 }}
-                ></span>
+              ></span>
               {showInput && (
                 // {showInput && librarySize === 'original' && (
                 <input
-                className={`search-input ${showInput ? 'open' : 'close'}`}
-                type="text"
-                placeholder="Search in Your Library"
-                value={filterUserStations}
-                onChange={(e) => setFilterUserStations(e.target.value)}
+                  className={`search-input ${showInput ? 'open' : 'close'}`}
+                  type="text"
+                  placeholder="Search in Your Library"
+                  value={filterUserStations}
+                  onChange={(e) => setFilterUserStations(e.target.value)}
                 />
               )}
             </div>
-              {/* )} */}
-               {/* {librarySize === 'original' && ( */}
+            {/* )} */}
+            {/* {librarySize === 'original' && ( */}
             <div onClick={onShowSortModal} className="sort-by-section relative">
               <span className="sort-by-span">{selectedOption}</span>
               <span
@@ -140,14 +144,17 @@ export function UserLibrary() {
                 dangerouslySetInnerHTML={{
                   __html: getSpotifySvg(
                     showSortModal ? 'upperArrow' : 'bottomArrowIcon'
-                    ),
-                  }}
-                  ></span>
+                  ),
+                }}
+              ></span>
               {showSortModal && <SortModal onSelectOption={onSelectOption} />}
             </div>
             {/* )} */}
           </div>
           <UserStationsIndex filterUserStations={filterUserStations} />
+          {showModal && (
+            <SignupModal closeSignupModal={handleCloseSignupModal} />
+          )}
         </section>
       </section>
     </>
