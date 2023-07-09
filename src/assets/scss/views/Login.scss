@@ -2,13 +2,17 @@
   background-color: #121212;
   font-family: Circular-medium;
   color: $clr6;
-  // overflow-y: scroll;
+  overflow-y: scroll;
   min-height: 100vh;
   .login-header {
-    background-color: black;
-    height: rem(100px);
-    padding: rem(32px) rem(51px);
-    margin-block-end: rem(35px);
+    a{
+      display: block;
+        width: max-content;
+    }
+      background-color: black;
+      height: rem(100px);
+      padding: rem(32px) rem(51px);
+    margin-block-end: rem(20px);
   }
   .login-main-container {
     position: absolute;
@@ -48,7 +52,7 @@
     .empty-line {
       width: rem(534px);
       height: rem(1px);
-      margin: rem(32px) rem(100px);
+      margin: rem(15px) rem(100px);
       border-right: none;
       border-bottom: none;
       border-left: none;
