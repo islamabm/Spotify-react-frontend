@@ -7,6 +7,7 @@ export const stationService = {
   query,
   save,
   remove,
+
   getById,
   searchQuery,
   getSongById,
@@ -322,6 +323,7 @@ async function getCurrIndex(stationId, songId) {
 async function remove(stationId) {
   return httpService.delete(`station/${stationId}`)
 }
+
 async function save(station) {
   return httpService.put(`station/${station._id}`, station)
 }

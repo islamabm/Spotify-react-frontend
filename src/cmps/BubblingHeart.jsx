@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateUser, removeSongFromUser } from '../store/actions/user.actions'
-import { addStation, removeStation } from '../store/actions/station.actions'
+import { addStation } from '../store/actions/station.actions'
 import { useLocation } from 'react-router-dom'
 
 export function BubblingHeart({ index, item, type }) {
@@ -20,7 +20,6 @@ export function BubblingHeart({ index, item, type }) {
       } else {
         if (type === 'song' || type === 'lyrics')
           dispatch(removeSongFromUser(item._id, user))
-        // else if (type === 'station') dispatch(removeStationFromUserStations(item._id))
       }
       return updatedLike
     })
