@@ -98,26 +98,37 @@ input[type='range']::-webkit-slider-thumb {
   height: 10px;
   background-color: whitesmoke;
   box-shadow: -80px 0 0 80px white;
-  
-  &:hover {
-    box-shadow: -80px 0 0 80px $clrGreen;
-    cursor: pointer;
-    border-radius: 50%;
-  }
+  border-radius: 50%;
+}
+
+input[type='range']::-webkit-slider-thumb:hover {
+  box-shadow: -80px 0 0 80px $clrGreen;
+  cursor: pointer;
+}
+
+input[type='range']::-moz-range-thumb {
+  width: 10px;
+  height: 10px;
+  background-color: whitesmoke;
+  border-radius: 50%;
+}
+
+input[type='range']::-moz-range-thumb:hover {
+  background-color: $clrGreen;
+  cursor: pointer;
 }
 
 input[type='range']::-moz-range-progress {
-background-color: white;
+  background-color: white;
 }
 
 input[type='range']::-moz-range-track {
-background-color: #b7b7b7;
+  background-color: #b7b7b7;
 }
 
 input[type='range']::-ms-fill-lower {
-background-color: white;
+  background-color: white;
 }
-
 
 // .progress-bar-audio-fill {
 //   -webkit-appearance: #1db954;

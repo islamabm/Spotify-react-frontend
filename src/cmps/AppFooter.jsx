@@ -115,14 +115,17 @@ export function AppFooter() {
             __html: getSpotifySvg(setSvg()),
           }}
         ></span>
-        <input
-          type="range"
-          min="0"
-          max="100"
-          value={volume}
-          onChange={handleVolumeChange}
-          className="progress-bar-audio-fill"
-        />
+        <div className="slider-container">
+          <input
+            className="range-slider"
+            type="range"
+            min="0"
+            max="100"
+            value={volume}
+            onChange={handleVolumeChange}
+          />
+          <span className="range-thumb"></span>
+        </div>
       </div>
     </div>
   )
