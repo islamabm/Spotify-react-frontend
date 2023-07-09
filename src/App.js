@@ -3,6 +3,7 @@ import './assets/scss/global.scss'
 import { AppHeader } from './cmps/AppHeader'
 import { AppNav } from './cmps/AppNav'
 import { UserLibrary } from './cmps/UserLibrary'
+import { UserLibraryIndex } from './views/UserLibraryIndex'
 import { UserMsg } from './cmps/UserMsg'
 import { AppFooter } from './cmps/AppFooter'
 import { StationIndex } from './views/StationIndex'
@@ -49,6 +50,7 @@ function LoggedInApp() {
           <Route path="/lyrics" element={<SongLyrics />} />
           <Route path="/only/lyrics" element={<OnlyLyrics />} />
           <Route path="/user" element={<UserDetails />} />
+          <Route path="/library" element={<UserLibraryIndex />} />
           <Route path="/search" element={<Search />} />
           <Route path="/search/category" element={<SearchCategory />} />
           {/* Exclude /login and /signup */}

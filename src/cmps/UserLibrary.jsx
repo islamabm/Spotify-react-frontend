@@ -6,6 +6,7 @@ import { UserStationsIndex } from './UserStations/UserStationsIndex'
 import { addStation } from '../store/actions/station.actions'
 import emptyImg from '../assets/imgs/empty-img.png'
 import { updateUserStations } from '../store/actions/user.actions'
+import { useNavigate } from 'react-router-dom'
 export function UserLibrary() {
   const [showSortModal, setShowSortModal] = useState(false)
   const [selectedOption, setSelectedOption] = useState('Recents')
@@ -16,7 +17,7 @@ export function UserLibrary() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [showInput, setShowInput] = useState(false)
   const dispatch = useDispatch()
-
+  const navigate = useNavigate()
   const user = useSelector((storeState) => storeState.userModule.loggedInUser)
 
   function onShowSortModal() {
@@ -57,6 +58,11 @@ export function UserLibrary() {
   function openInput() {
     setShowInput(true)
   }
+
+  function goToUserLibrary() {
+    navigate('/library')
+  }
+
   return (
     <>
       <section className="user-library">
@@ -66,7 +72,10 @@ export function UserLibrary() {
               isScrolled ? 'scrolled' : ''
             }`}
           >
-            <div className="flex align-center your-library pointer">
+            <div
+              onClick={goToUserLibrary}
+              className="flex align-center your-library pointer"
+            >
               <span
                 dangerouslySetInnerHTML={{
                   __html: getSpotifySvg('libraryIconActive'),
