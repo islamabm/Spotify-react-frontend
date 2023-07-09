@@ -8,7 +8,7 @@ import {
   setCurrSongIndex,
   setCurrDirection,
 } from '../store/actions/song.actions'
-import { updateUser } from '../store/actions/user.actions'
+
 import { SongOptionsModal } from '../cmps/Modals/SongOptionsModal'
 import { BubblingHeart } from '../cmps/BubblingHeart'
 export function SongLyrics() {
@@ -16,11 +16,11 @@ export function SongLyrics() {
   const station = useSelector(
     (storeState) => storeState.stationModule.currStation
   )
-  // const stationNameClass = stationService.stationNameClass(song)
+
   const lyrics = useSelector(
     (storeState) => storeState.songModule.currSongLyrics
   )
-  const user = useSelector((storeState) => storeState.userModule.loggedInUser)
+
   const [showModal, setShowOptionsModal] = useState(false)
   const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 })
   const [isFirstClick, setIsFirstClick] = useState(true)
@@ -98,17 +98,15 @@ export function SongLyrics() {
 
   function pauseSong() {
     setIsPlaying(false)
-    console.log('pause')
     dispatch(setCurrSongSvg('pause'))
   }
 
-  function addSongToLoveSongs() {
-    dispatch(updateUser(song, user))
-  }
+  // function addSongToLoveSongs() {
+  //   dispatch(updateUser(song, user))
+  // }
 
   return (
     <section className="song-lyrics-section">
-      {/* <section className="song-lyrics-section"> */}
       {song && (
         <div
           className="song-details-wrapper station-header-content"

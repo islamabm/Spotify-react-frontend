@@ -8,8 +8,6 @@ export function UserLibraryIndex() {
   const stations = useSelector(
     (storeState) => storeState.stationModule.userStations
   )
-  console.log('statitions', stations)
-
   const user = useSelector((storeState) => storeState.userModule.loggedInUser)
 
   useEffect(() => {
