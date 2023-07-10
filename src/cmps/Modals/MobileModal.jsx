@@ -28,7 +28,7 @@ export function MobileModal({ closeModal, show }) {
   }
 
   return (
-    <section className={`mobile-modal ${show ? 'show' : ''}`}>
+    <section className={`mobile-modal ${show ? 'show' : 'hide'}`}>
       <span
         onClick={closeModal}
         className="x"
