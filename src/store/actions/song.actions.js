@@ -12,7 +12,11 @@ import {
 export function setCurrSong(stationId, songId) {
   return async (dispatch, getState) => {
     try {
-      const song = await stationService.getSongById(stationId, songId)
+      let song
+      if (stationId) song = await stationService.getSongById(stationId, songId)
+      else song = songId
+      // const song = await stationService.getSongById(stationId, songId)
+      console.log('song curr song action', song)
       const action = {
         type: SET_CURR_SONG,
         song,
@@ -26,10 +30,10 @@ export function setCurrSong(stationId, songId) {
 export function setCurrSongAction(stationId, id) {
   return async (dispatch, getState) => {
     try {
-      let song
-      if (stationId) song = await stationService.getSongById(stationId, id)
-      else song = id
-      console.log('song curr song action', song)
+      // let song
+      // if (stationId) song = await stationService.getSongById(stationId, id)
+      // else song = id
+      const song = await stationService.getSongById(stationId, id)
       const action = {
         type: SET_CURR_SONG_ACTION,
         song,

@@ -2,14 +2,14 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { addSongToStation } from '../../store/actions/station.actions'
 import { utilService } from '../../services/util.service'
-import { setCurrSongAction } from '../../store/actions/song.actions'
+import { setCurrSong } from '../../store/actions/song.actions'
 
 export function SearchSongsPreview({ song, stationId }) {
   const dispatch = useDispatch()
 
   function playSong () {
     console.log('song', song)
-    dispatch(setCurrSongAction('' , song.videoId ))
+    dispatch(setCurrSong('' , song.videoId ))
   }
   function handleAddSong() {
     song._id = utilService.makeId()
