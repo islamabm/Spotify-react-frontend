@@ -15,6 +15,7 @@ import { setCurrSong, setCurrSongIndex } from '../store/actions/song.actions'
 import { DeleteStationModal } from '../cmps/Modals/DeleteStationModal'
 import { BubblingHeart } from '../cmps/BubblingHeart'
 import { getDominantColor } from '../services/color.service'
+
 export function StationDetails(props) {
   const [bgStyle, setBgStyle] = useState(null)
   const [bgBottomStyle, setBgBottomStyle] = useState(null)
@@ -140,6 +141,7 @@ export function StationDetails(props) {
     setShowModal(false)
     setShowRecommindationModal(true)
   }
+  
   async function getDominantColor(imageSrc) {
     const cachedColor = colorCache[imageSrc]
     if (cachedColor) {

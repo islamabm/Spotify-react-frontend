@@ -133,6 +133,8 @@ export function AppHeader() {
   }
 
   return (
+    <>
+    {location.pathname !== "/mobileMediaPlayer" && 
     <header className="app-header" style={{ ...headers }}>
       <section className="arrows-and-input">
         <section className="arrows">
@@ -246,5 +248,7 @@ export function AppHeader() {
       </div>
       {showModal && <UserModal onClose={onCloseModal} />}
     </header>
+                }
+                </>
   )
 }

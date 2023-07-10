@@ -1,0 +1,58 @@
+.media-player-header{
+    font-family: circular-medium;
+    .arrow {
+      position: absolute;
+      left: 20px;
+      fill: $clr6;
+    }
+}
+.song-details-container-mobile {
+  min-height: 0;
+  padding: 12px;
+  &.open {
+    animation: cmpExpand 0.2s forwards;
+  }
+  img {
+    padding: 27px;
+  }
+  .artist-name-heart {
+    justify-content: space-between;
+    margin: 0 12px;
+    .artist-name {
+        display: flex;
+        flex-direction: column;
+      .song-name {
+        font-size: 24px;
+        font-family: circular-medium;
+        margin: 0;
+      }
+      .artist-name {
+        font-size: 16px;
+        font-family: circular-light;
+        margin: 0;
+        color: $clr3;
+      }
+    }
+    .bubbling-heart{
+        // padding-right: -30px;
+    }
+  }
+  .media-player {
+   display: flex;
+   flex-direction: column-reverse;
+   margin: 15px 0;
+   gap: 25px;
+  }
+}
+
+@keyframes cmpExpand {
+  0% {
+    min-height: 0;
+  }
+  50% {
+    min-height: 50vh;
+  }
+  100% {
+    min-height: 100vh;
+  }
+}

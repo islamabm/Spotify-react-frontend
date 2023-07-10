@@ -24,13 +24,8 @@
   }
 
   .mobile-heart {
-    // display: block;
-    // @include for-tablet-layout {
-    //   display: none;
-    // }
     display: none;
     margin-left: rem(170px);
-
     .play-pause {
       margin-top: rem(7px);
 
@@ -65,7 +60,6 @@
       @include for-mobile-layout {
         width: rem(40px);
         height: rem(40px);
-        // margin-top: 2px;
       }
       img {
         border-radius: 4px;
@@ -135,6 +129,9 @@
       }
     }
   }
+  // .media-player {
+  //   display: none;
+  // }
 }
 
 input[type='range'] {
@@ -250,3 +247,4 @@ input[type='range']::-ms-fill-lower {
 // .progress-bar-audio-fill::-moz-range-progress {
 //   background: #4caf50; /* Replace #yourColor with your desired color */
 // }
+

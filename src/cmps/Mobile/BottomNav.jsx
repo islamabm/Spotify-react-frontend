@@ -24,6 +24,8 @@ export function BottomNav() {
       }
 
   return (
+    <>
+    {window.innerWidth < 460 && location.pathname !== "/mobileMediaPlayer" &&
     <section className='bottom-nav-container'>
         <Link to="/" className={`shared-nav-item ${isActive('/')}`}>
         <span
@@ -47,5 +49,7 @@ export function BottomNav() {
         <span>Your Library</span>
       </Link>
         </section>
-  )
+      }
+      </>
+      )
 }

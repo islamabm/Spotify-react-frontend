@@ -5,7 +5,8 @@
   justify-content: center;
   align-items: center;
   @include for-mobile-layout {
-    display: none;
+    gap: 2.7rem;
+    margin: auto;
   }
   .play-song-div {
     display: flex;
@@ -19,12 +20,22 @@
     min-width: rem(32px);
     transition: opacity 0.1s 0.1s, transform 0.1s 0.1s;
     transform: translateY(-1%);
+    @include for-mobile-layout {
+      width: rem(56px);
+      height: rem(56px);
+    }
     &:hover {
       transform: scale(1.05);
     }
   }
   span {
     fill: #b3b3b3;
+    @include for-mobile-layout {
+      svg {
+        width: 24px;
+        height: 24px;
+      }
+    }
 
     &:hover {
       fill: white;
@@ -34,9 +45,7 @@
     display: flex;
     align-items: center;
     justify-items: center;
-
     fill: black;
-
     &:hover {
       fill: black;
     }
@@ -51,10 +60,10 @@
   width: rem(690px);
   height: rem(20px);
   @include for-mobile-layout {
-    width: rem(345px);
+    width: auto;
     gap: rem(0px);
-     margin-inline-start: rem(0px);
-     height: 1rem;
+    margin-inline-start: rem(0px);
+    height: 1rem;
   }
 }
 
@@ -64,7 +73,8 @@
   color: #6a6a6a;
   text-align: right;
   @include for-mobile-layout {
-    display: none;
+    margin-top: 30px;
+    // margin-left: 10px;
   }
 }
 
@@ -79,7 +89,7 @@
   @include for-mobile-layout {
     grid-row: 2;
     grid-column: 1/-1;
-    width: rem(350px);
+    width: auto;
     height: rem(4px);
   }
 }
@@ -97,7 +107,7 @@
 }
 
 .progress-bar-fill:after {
-  content: '';
+  content: "";
   position: absolute;
   right: rem(-5px);
   top: rem(-2px);
@@ -138,7 +148,7 @@
       background-color: #1db954;
       border-radius: 50%;
       bottom: 0;
-      content: '';
+      content: "";
       display: block;
       height: rem(4px);
       left: 50%;

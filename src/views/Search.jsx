@@ -1,8 +1,9 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef,useState } from 'react'
 import { SearchCategoryList } from '../cmps/SearchCategory/SearchCategoryList'
 import { useDispatch, useSelector } from 'react-redux'
 import { loadSearchStations } from '../store/actions/station.actions'
 import { eventBus } from '../services/event-bus.service'
+
 export default function Search() {
   const categories = useSelector(
     (storeState) => storeState.stationModule.searchStations
