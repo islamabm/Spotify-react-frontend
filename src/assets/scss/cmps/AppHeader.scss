@@ -42,6 +42,9 @@
     }
     .input-container {
       margin-left: rem(-15px);
+      @include for-mobile-layout {
+        display: none;
+      }
       span {
         position: relative;
         left: 8%;
