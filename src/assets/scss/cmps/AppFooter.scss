@@ -16,9 +16,11 @@
     grid-template-rows: 1fr 1fr;
     height: rem(58px);
     min-height: rem(58px);
-    width: rem(398px);
     padding: 8px;
     border-radius: 6px;
+    bottom: 83px;
+    left: 7px;
+    right: 7px;
   }
 
   .mobile-heart {
@@ -55,6 +57,7 @@
     @include for-mobile-layout {
       grid-row: 1;
       grid-column: 1/-1;
+      gap: rem(0px);
     }
     .image {
       width: rem(56px);
