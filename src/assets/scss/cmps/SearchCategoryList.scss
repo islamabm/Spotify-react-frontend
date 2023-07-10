@@ -4,7 +4,8 @@
   gap: rem(20px);
   margin-block-end: rem(80px);
   @include for-mobile-layout {
-    grid-template-columns: 163px 163px;
+    grid-template-columns: 1fr 1fr;
     gap: rem(15px);
+    margin-block-end: rem(140px);
   }
 }
