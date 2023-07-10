@@ -13,8 +13,12 @@
   right: 0;
   bottom: 0;
   @include for-mobile-layout {
-    grid-template-rows: 3fr 1fr;
-    height: rem(56px);
+    grid-template-rows: 1fr 1fr;
+    height: rem(58px);
+    min-height: rem(58px);
+    width: rem(398px);
+    padding: 8px;
+    border-radius: 6px;
   }
 
   .mobile-heart {
@@ -23,7 +27,11 @@
     //   display: none;
     // }
     display: none;
+    margin-left: rem(170px);
+
     .play-pause {
+      margin-top: rem(7px);
+
       svg {
         fill: white;
       }
@@ -51,6 +59,11 @@
     .image {
       width: rem(56px);
       height: rem(56px);
+      @include for-mobile-layout {
+        width: rem(40px);
+        height: rem(40px);
+        // margin-top: 2px;
+      }
       img {
         border-radius: 4px;
       }
@@ -89,6 +102,10 @@
         font-size: 0.8125rem;
         font-weight: 400;
         margin-right: rem(20px);
+        @include for-mobile-layout {
+          margin-right: 0;
+          width: max-content;
+        }
       }
       .actor-name {
         margin: 0;

@@ -5,12 +5,12 @@ import { MediaPlayer } from './MediaPlayer'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { BubblingHeart } from './BubblingHeart'
-
+import { FastAverageColor } from 'fast-average-color'
 export function AppFooter() {
   const [mute, setMute] = useState(false)
   const [volume, setVolume] = useState(50)
   const [isLyrics, setIsLyrics] = useState(false)
-
+  const [bgStyle, setBgStyle] = useState(null)
   const song = useSelector((storeState) => storeState.songModule.currSong)
   const [currSong, setCurrSong] = useState(song)
   const station = useSelector(
@@ -18,9 +18,10 @@ export function AppFooter() {
   )
   const navigate = useNavigate()
   const dispatch = useDispatch()
-
+  const colorCache = {}
   useEffect(() => {
     setCurrSong(song)
+    updateImgUrlAndColor(song)
   }, [song])
 
   function handleVolumeChange(event) {
@@ -43,6 +44,38 @@ export function AppFooter() {
     else return 'muteIcon'
   }
 
+  function updateImgUrlAndColor(song) {
+    if (!song) return
+    const imgUrl = song.imgUrl
+    if (imgUrl !== '') {
+      getDominantColor(imgUrl)
+    }
+  }
+
+  async function getDominantColor(imageSrc) {
+    const cachedColor = colorCache[imageSrc]
+    if (cachedColor) {
+      setBgStyle({ backgroundColor: cachedColor })
+
+      document.body.style.backgroundColor = cachedColor
+      return
+    }
+    const fac = new FastAverageColor()
+    const img = new Image()
+    img.crossOrigin = 'Anonymous'
+    const corsProxyUrl = 'https://api.codetabs.com/v1/proxy?quest='
+    img.src = corsProxyUrl + encodeURIComponent(imageSrc)
+    img.onload = async () => {
+      try {
+        const color = await fac.getColorAsync(img)
+        colorCache[imageSrc] = color.rgb // I assumed color.rgb returns color in rgb format
+        setBgStyle({ backgroundColor: color.rgb })
+      } catch (e) {
+        console.error(e)
+      }
+    }
+  }
+
   function onToggleMute() {
     if (setSvg() === 'muteIcon') {
       setVolume(100)
@@ -54,7 +87,7 @@ export function AppFooter() {
   }
 
   return (
-    <div className="app-footer">
+    <div className="app-footer" style={window.innerWidth < 460 ? bgStyle : {}}>
       {/* <div className="mobile"> */}
       <div className="song-details">
         {/* <div> */}

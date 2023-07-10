@@ -51,7 +51,7 @@
   width: rem(690px);
   height: rem(20px);
   @include for-mobile-layout {
-    width: rem(330px);
+    width: rem(350px);
   }
 }
 
@@ -77,7 +77,7 @@
     grid-row: 2;
     grid-column: 1/-1;
     width: rem(350px);
-    height: rem(1.5px);
+    height: rem(1px);
   }
 }
 
