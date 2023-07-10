@@ -68,7 +68,8 @@ export function AppHeader() {
     if (
       location.pathname === '/' ||
       location.pathname === '/search' ||
-      location.pathname === '/lyrics'
+      location.pathname === '/lyrics' ||
+      (location.pathname.includes('/station/') && currScrollPos < 10)
     ) {
       setHeaders({
         backgroundColor: 'transparent',
@@ -92,7 +93,8 @@ export function AppHeader() {
     if (
       location.pathname === '/' ||
       location.pathname === '/search' ||
-      location.pathname === '/lyrics'
+      location.pathname === '/lyrics' ||
+      (location.pathname.includes('/station/') && currScrollPos < 10)
     ) {
       setHeaders({
         backgroundColor: 'transparent',

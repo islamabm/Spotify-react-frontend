@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, useLocation } from 'react-router-dom'
 import { getSpotifySvg } from '../services/SVG.service'
 import { useDispatch, useSelector } from 'react-redux'
 import { setCurrStation, removeStation } from '../store/actions/station.actions'
@@ -35,22 +35,28 @@ export function StationDetails(props) {
 
   const navigate = useNavigate()
   const params = useParams()
+  const location = useLocation()
   const stationDetailsRef = useRef(null)
   const dispatch = useDispatch()
   const colorCache = {}
 
   useEffect(() => {
     loadStation()
+    updateImgUrlAndColor(station)
+    // eventBus.emit('stationDetailsScroll', {
+    //   scrollPos: 0,
+    //   backgroundColor: 'transparent',
+    // })
   }, [params.id, station])
 
-  useEffect(() => {
-    const unsubscribe = eventBus.on('newStationCreated', setBgStyle)
-    return () => unsubscribe()
-  }, [])
+  // useEffect(() => {
+  //   const unsubscribe = eventBus.on('newStationCreated', setBgStyle)
+  //   return () => unsubscribe()
+  // }, [])
 
-  useEffect(() => {
-    updateImgUrlAndColor(station)
-  }, [stationImg])
+  // useEffect(() => {
+  //   updateImgUrlAndColor(station)
+  // }, [stationImg])
 
   useEffect(() => {
     const currentStationDetailsRef = stationDetailsRef.current
@@ -76,6 +82,13 @@ export function StationDetails(props) {
       }
     }
   }, [bgStyle])
+
+  useEffect(() => {
+    eventBus.emit('stationDetailsScroll', {
+      scrollPos: 0,
+      backgroundColor: 'transparent',
+    })
+  }, [])
 
   function loadStation() {
     dispatch(setCurrStation(params.id))
