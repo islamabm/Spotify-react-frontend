@@ -13,7 +13,30 @@
   right: 0;
   bottom: 0;
   @include for-mobile-layout {
-    // display: none;
+    grid-template-rows: 3fr 1fr;
+    height: rem(56px);
+  }
+
+  .mobile-heart {
+    // display: block;
+    // @include for-tablet-layout {
+    //   display: none;
+    // }
+    display: none;
+    .play-pause {
+      svg {
+        fill: white;
+      }
+    }
+    span {
+      margin: 0;
+      padding: 0;
+    }
+    @include for-mobile-layout {
+      display: flex;
+      justify-items: center;
+      align-items: center;
+    }
   }
 
   .song-details {
@@ -21,6 +44,10 @@
     align-items: center;
     gap: rem(10px);
     justify-items: center;
+    @include for-mobile-layout {
+      grid-row: 1;
+      grid-column: 1/-1;
+    }
     .image {
       width: rem(56px);
       height: rem(56px);
@@ -33,6 +60,9 @@
       align-items: center;
       justify-items: center;
       gap: rem(24px);
+      @include for-mobile-layout {
+        display: none;
+      }
       .picture-icon {
         svg {
           g {
@@ -74,6 +104,9 @@
     align-items: center;
     justify-items: center;
     justify-content: flex-end;
+    @include for-mobile-layout {
+      display: none;
+    }
     gap: rem(16px);
     span {
       fill: #b3b3b3;

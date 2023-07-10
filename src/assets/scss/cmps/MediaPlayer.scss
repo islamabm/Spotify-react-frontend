@@ -4,6 +4,9 @@
   margin: rem(10px) 0 rem(8px) rem(14px);
   justify-content: center;
   align-items: center;
+  @include for-mobile-layout {
+    display: none;
+  }
   .play-song-div {
     display: flex;
     align-items: center;
@@ -47,6 +50,9 @@
   gap: rem(8px);
   width: rem(690px);
   height: rem(20px);
+  @include for-mobile-layout {
+    width: rem(330px);
+  }
 }
 
 .current-time {
@@ -54,6 +60,9 @@
   font-family: Circular-medium;
   color: #6a6a6a;
   text-align: right;
+  @include for-mobile-layout {
+    display: none;
+  }
 }
 
 .progress-bar {
@@ -64,6 +73,12 @@
   cursor: pointer;
   width: rem(400.12px);
   border-radius: 2px;
+  @include for-mobile-layout {
+    grid-row: 2;
+    grid-column: 1/-1;
+    width: rem(350px);
+    height: rem(1.5px);
+  }
 }
 
 .progress-bar-fill {

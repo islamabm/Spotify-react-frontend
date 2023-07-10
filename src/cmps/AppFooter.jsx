@@ -10,7 +10,7 @@ export function AppFooter() {
   const [mute, setMute] = useState(false)
   const [volume, setVolume] = useState(50)
   const [isLyrics, setIsLyrics] = useState(false)
-  
+
   const song = useSelector((storeState) => storeState.songModule.currSong)
   const [currSong, setCurrSong] = useState(song)
   const station = useSelector(
@@ -26,7 +26,7 @@ export function AppFooter() {
   function handleVolumeChange(event) {
     setVolume(event.target.value)
   }
-  
+
   function onRepeatClicked() {
     setIsLyrics(!isLyrics)
   }
@@ -55,7 +55,9 @@ export function AppFooter() {
 
   return (
     <div className="app-footer">
+      {/* <div className="mobile"> */}
       <div className="song-details">
+        {/* <div> */}
         {currSong && (
           <>
             <div className="image">
@@ -73,13 +75,30 @@ export function AppFooter() {
               </p>
             </div>
 
-            <div className="heart-picture-icons ">
+            <div className="heart-picture-icons">
               <span className="footer-heart">
                 <BubblingHeart index={song._id} item={song} type="song" />
               </span>
             </div>
+            <div className="mobile-heart">
+              <span className="footer-heart">
+                <BubblingHeart index={song?._id} item={song} type="song" />
+              </span>
+              <span
+                // title={isPlaying ? "Pause" : "Play"}
+                className="special-i pointer play-pause"
+                // onClick={handlePlayPauseClick}
+                dangerouslySetInnerHTML={{
+                  __html: getSpotifySvg('playIcon'),
+                  // __html: isPlaying
+                  //   ? getSpotifySvg("pauseIcon")
+                  //   : getSpotifySvg("playIcon"),
+                }}
+              ></span>
+            </div>
           </>
         )}
+        {/* </div> */}
       </div>
 
       <div className="media-player">
@@ -129,5 +148,6 @@ export function AppFooter() {
         </div>
       </div>
     </div>
+    // </div>
   )
 }
