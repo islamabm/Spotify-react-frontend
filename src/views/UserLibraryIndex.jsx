@@ -1,7 +1,7 @@
-import React, { useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { loadUserStations } from "../store/actions/station.actions"
-import { UserLibraryList } from "../cmps/UserLibraryStations/UserLibraryList"
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { loadUserStations } from '../store/actions/station.actions'
+import { UserLibraryList } from '../cmps/UserLibraryStations/UserLibraryList'
 export function UserLibraryIndex() {
   const stations = useSelector(
     (storeState) => storeState.stationModule.userStations
@@ -17,7 +17,7 @@ export function UserLibraryIndex() {
 
   return (
     <section className="station-index">
-      <UserLibraryList stations={stations} />
+      <UserLibraryList stations={stations} title="Your Playlists" />
     </section>
   )
 }

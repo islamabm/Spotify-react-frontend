@@ -1,87 +1,106 @@
-.user-profile {
-  font-family: circular-book;
-  position: relative;
-  height: 51vh;
-  padding-inline: 5rem;
-  color: #fff;
-  @include for-mobile-layout {
-    width: rem(414px);
-    height: rem(258px);
-    padding: rem(72px) rem(16px) rem(16px);
+.user-page {
+  overflow-y: scroll;
+  height: 100vh;
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+  &::-webkit-scrollbar {
+    width: rem(13px);
   }
-  .user-details-arrow {
-    background-color: transparent;
-    border: none;
-    outline: none;
-    display: none;
-    svg {
-      fill: white;
-    }
-    @include for-mobile-layout {
-      display: block;
-      position: absolute;
-      top: 0;
-      left: 0;
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(234, 227, 227, 0.39);
+    &:hover {
+      background-color: rgba(234, 227, 227, 0.552);
     }
   }
-  .user-details-container {
-    display: flex;
-    align-items: flex-start;
-    gap: 2rem;
+
+  .user-profile {
+    font-family: circular-book;
+    position: relative;
+    height: 51vh;
+    padding-inline: 5rem;
+    color: #fff;
 
     @include for-mobile-layout {
-      margin-block-start: 0;
-      height: rem(132px);
-      padding: rem(16px);
+      width: rem(414px);
+      height: rem(258px);
+      padding: rem(24px) rem(16px) rem(16px);
     }
-    .user-info {
-      margin-top: rem(47px);
+    .user-details-arrow {
+      background-color: transparent;
+      border: none;
+      outline: none;
+      display: none;
+      svg {
+        fill: white;
+      }
+      @include for-mobile-layout {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
     }
+    .user-details-container {
+      display: flex;
+      align-items: flex-start;
+      gap: 2rem;
 
-    .dot {
-      font-size: 0.7rem;
-      margin-inline: 0;
-      transform: translate(-2px, 1px);
+      @include for-mobile-layout {
+        margin-block-start: 0;
+        height: rem(132px);
+        padding: rem(16px);
+      }
+      .user-info {
+        margin-top: rem(47px);
+      }
+
+      .dot {
+        font-size: 0.7rem;
+        margin-inline: 0;
+        transform: translate(-2px, 1px);
+        @include for-mobile-layout {
+          display: none;
+        }
+      }
+      .user-profile-img {
+        border-radius: 50%;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-top: rem(50px);
+        @include for-mobile-layout {
+          margin-top: 0;
+        }
+      }
+
+      .user-username {
+        font-size: 5rem;
+        font-weight: 700;
+        margin: rem(20px) rem(20px) rem(20px) 0;
+        color: $clr6;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+        font-family: Gotham;
+        @include for-mobile-layout {
+          font-size: 2rem;
+          margin: 0;
+          margin-top: rem(24px);
+        }
+      }
+    }
+    .profile-word {
+      font-size: 0.8rem;
+      font-family: circular-book;
       @include for-mobile-layout {
         display: none;
       }
     }
-    .user-profile-img {
-      border-radius: 50%;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      margin-top: rem(50px);
+    .user-stations-count,
+    .following {
+      font-family: circular-book;
+      font-size: 1rem;
+      margin-inline-end: 0.5rem;
       @include for-mobile-layout {
-        margin-top: 0;
+        display: none;
       }
-    }
-
-    .user-username {
-      font-size: 5rem;
-      font-weight: 700;
-      margin: rem(20px) rem(20px) rem(20px) 0;
-      color: $clr6;
-      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-      font-family: Gotham;
-      @include for-mobile-layout {
-        font-size: 2rem;
-        margin: 0;
-      }
-    }
-  }
-  .profile-word {
-    font-size: 0.8rem;
-    font-family: circular-book;
-    @include for-mobile-layout {
-      display: none;
-    }
-  }
-  .user-stations-count,
-  .following {
-    font-family: circular-book;
-    font-size: 1rem;
-    margin-inline-end: 0.5rem;
-    @include for-mobile-layout {
-      display: none;
     }
   }
 }
