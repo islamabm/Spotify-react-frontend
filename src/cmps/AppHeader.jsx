@@ -218,17 +218,29 @@ export function AppHeader() {
           </>
         ) : (
           <>
-            <span className="user-details-header" onClick={onClickUserDetails}>
-              <img
-                title={user?.username}
-                src={
-                  user.imgUrl
-                    ? user.imgUrl
-                    : 'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg'
-                }
-                alt="user-img"
-              />
-            </span>
+            {window.innerWidth < 460 ? (
+              <span
+                className="white"
+                dangerouslySetInnerHTML={{
+                  __html: getSpotifySvg('settings'),
+                }}
+              ></span>
+            ) : (
+              <span
+                className="user-details-header"
+                onClick={onClickUserDetails}
+              >
+                <img
+                  title={user?.username}
+                  src={
+                    user.imgUrl
+                      ? user.imgUrl
+                      : 'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg'
+                  }
+                  alt="user-img"
+                />
+              </span>
+            )}
           </>
         )}
       </div>
