@@ -8,15 +8,13 @@ import { eventBus } from '../services/event-bus.service'
 import StationHeaderDetails from '../cmps/StationHeaderDetails'
 import StationSongList from '../cmps/StationSongList'
 import { StationOptionsModal } from '../cmps/Modals/StationOptionsModal'
-import {
-  RecommendedIndex,
-} from '../cmps/Recommended/RecommendedIndex'
+import { RecommendedIndex } from '../cmps/Recommended/RecommendedIndex'
 import { RecommindationModal } from '../cmps/Modals/RecommindationModal'
 import { SearchSongsIndex } from '../cmps/SearchSongs/SearchSongsIndex'
 import { setCurrSong, setCurrSongIndex } from '../store/actions/song.actions'
 import { DeleteStationModal } from '../cmps/Modals/DeleteStationModal'
 import { BubblingHeart } from '../cmps/BubblingHeart'
-
+import { getDominantColor } from '../services/color.service'
 export function StationDetails(props) {
   const [bgStyle, setBgStyle] = useState(null)
   const [bgBottomStyle, setBgBottomStyle] = useState(null)
@@ -92,11 +90,14 @@ export function StationDetails(props) {
     setShowModal(true)
   }
 
-  function updateImgUrlAndColor(station) {
+  async function updateImgUrlAndColor(station) {
     if (!station) return
     const imgUrl = station.imgUrl
     if (imgUrl !== '') {
-      getDominantColor(imgUrl)
+      const { gradient, bottomGradient } = await getDominantColor(imgUrl)
+      setBgStyle(gradient)
+      setBgBottomStyle(bottomGradient)
+      document.body.style.backgroundImage = gradient
     }
   }
 
@@ -129,37 +130,37 @@ export function StationDetails(props) {
     setShowModal(false)
     setShowRecommindationModal(true)
   }
-  async function getDominantColor(imageSrc) {
-    const cachedColor = colorCache[imageSrc]
-    if (cachedColor) {
-      const gradient = `linear-gradient(to bottom, ${cachedColor} 0%, ${cachedColor} 10%, ${cachedColor} 20%, ${cachedColor} 50%, black 140%, black 70%, black 100%)`
+  // async function getDominantColor(imageSrc) {
+  //   const cachedColor = colorCache[imageSrc]
+  //   if (cachedColor) {
+  //     const gradient = `linear-gradient(to bottom, ${cachedColor} 0%, ${cachedColor} 10%, ${cachedColor} 20%, ${cachedColor} 50%, black 140%, black 70%, black 100%)`
 
-      setBgStyle(gradient)
-      const bottomGradient = `linear-gradient(${cachedColor} -20%, #121212 9%)`
-      setBgBottomStyle(bottomGradient)
-      document.body.style.backgroundImage = gradient
-      return
-    }
-    const fac = new FastAverageColor()
-    const img = new Image()
-    img.crossOrigin = 'Anonymous'
-    const corsProxyUrl = 'https://api.codetabs.com/v1/proxy?quest='
-    img.src = corsProxyUrl + encodeURIComponent(imageSrc)
-    img.onload = async () => {
-      try {
-        const color = await fac.getColorAsync(img)
-        colorCache[imageSrc] = color
-        setBgStyle({
-          background: `linear-gradient(to bottom, ${color.rgb} 0%, ${color.rgb} 10%, ${color.rgb} 20%, ${color.rgb} 50%, black 140%, black 70%, black 100%)`,
-        })
-        setBgBottomStyle({
-          background: `linear-gradient(${color.rgb} -30%, #121212 9%)`,
-        })
-      } catch (e) {
-        console.error(e)
-      }
-    }
-  }
+  //     setBgStyle(gradient)
+  //     const bottomGradient = `linear-gradient(${cachedColor} -20%, #121212 9%)`
+  //     setBgBottomStyle(bottomGradient)
+  //     document.body.style.backgroundImage = gradient
+  //     return
+  //   }
+  //   const fac = new FastAverageColor()
+  //   const img = new Image()
+  //   img.crossOrigin = 'Anonymous'
+  //   const corsProxyUrl = 'https://api.codetabs.com/v1/proxy?quest='
+  //   img.src = corsProxyUrl + encodeURIComponent(imageSrc)
+  //   img.onload = async () => {
+  //     try {
+  //       const color = await fac.getColorAsync(img)
+  //       colorCache[imageSrc] = color
+  //       setBgStyle({
+  //         background: `linear-gradient(to bottom, ${color.rgb} 0%, ${color.rgb} 10%, ${color.rgb} 20%, ${color.rgb} 50%, black 140%, black 70%, black 100%)`,
+  //       })
+  //       setBgBottomStyle({
+  //         background: `linear-gradient(${color.rgb} -30%, #121212 9%)`,
+  //       })
+  //     } catch (e) {
+  //       console.error(e)
+  //     }
+  //   }
+  // }
 
   if (!station) return <div className="loader"></div>
   return (

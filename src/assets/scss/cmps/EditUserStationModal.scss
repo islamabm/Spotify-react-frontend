@@ -13,24 +13,7 @@
     .edit-details {
       margin-block-end: rem(50px);
     }
-    .openai {
-      margin-bottom: rem(58px);
 
-      // margin-inline-start: 30%;
-      // position: absolute;
-      // left: 10%;
-      // top: 10%;
-      font-family: Circular-book;
-      cursor: pointer;
-      color: #ffffff;
-      -webkit-animation: neon6 1.5s ease-in-out infinite alternate;
-      -moz-animation: neon6 1.5s ease-in-out infinite alternate;
-      animation: neon6 1.5s ease-in-out infinite alternate;
-      transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out; /* Add transition for smooth effect */
-      &:hover {
-        transform: scale(1.05); /* Make the text a bit larger */
-      }
-    }
     .x {
       fill: #bebebe;
       align-items: center;
@@ -136,6 +119,20 @@
     font-size: 11px;
     position: absolute;
     bottom: 3%;
+  }
+}
+
+.openai {
+  margin-bottom: rem(58px);
+  font-family: Circular-book;
+  cursor: pointer;
+  color: #ffffff;
+  -webkit-animation: neon6 1.5s ease-in-out infinite alternate;
+  -moz-animation: neon6 1.5s ease-in-out infinite alternate;
+  animation: neon6 1.5s ease-in-out infinite alternate;
+  transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out; /* Add transition for smooth effect */
+  &:hover {
+    transform: scale(1.05); /* Make the text a bit larger */
   }
 }
 @-webkit-keyframes neon6 {

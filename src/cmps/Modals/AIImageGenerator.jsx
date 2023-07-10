@@ -33,7 +33,7 @@ export default function AIImageGenerator({ closeAiModal, onImageGenerated }) {
           ></span>
         </button>
         <form onSubmit={handleSubmit}>
-          <h1>Create AI Image</h1>
+          <h1 className="openai">Generate AI Image</h1>
           <input
             type="text"
             value={prompt}
@@ -41,7 +41,7 @@ export default function AIImageGenerator({ closeAiModal, onImageGenerated }) {
             placeholder="Enter description..."
           />
           <button className="btn-generate" type="submit">
-            <span>Create image</span>
+            <span>Generate image</span>
           </button>
         </form>
         {loading && <span className="loader"></span>}
