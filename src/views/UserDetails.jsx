@@ -3,20 +3,29 @@ import { useSelector, useDispatch } from 'react-redux'
 import { uploadImg } from '../services/upload.service'
 import { editUserImg, getUser } from '../store/actions/user.actions'
 import { FastAverageColor } from 'fast-average-color'
+import { getSpotifySvg } from '../services/SVG.service'
+import { useNavigate } from 'react-router-dom'
+import { loadUserStations } from '../store/actions/station.actions'
+import { UserDetailsList } from '../cmps/UserDetailsStations/UserDetailsList'
 export function UserDetails() {
   const [isUploading, setIsUploading] = useState(false)
   const [bgStyle, setBgStyle] = useState(null)
-  const [user, setUser] = useState(
-    useSelector((storeState) => storeState.userModule.loggedInUser)
-  )
+  const user = useSelector((storeState) => storeState.userModule.loggedInUser)
   const dispatch = useDispatch()
   const colorCache = {}
-
+  const navigate = useNavigate()
   useEffect(() => {
-    const user1 = dispatch(getUser())
-    setUser(user1)
+    dispatch(getUser())
     updateImgUrlAndColor(user.imgUrl)
   }, [user.imgUrl])
+
+  const stations = useSelector(
+    (storeState) => storeState.stationModule.userStations
+  )
+
+  useEffect(() => {
+    dispatch(loadUserStations())
+  }, [user])
 
   async function handleFile(ev) {
     const file =
@@ -65,48 +74,64 @@ export function UserDetails() {
     }
   }
 
-  return user ? (
-    <section className="user-profile" style={bgStyle}>
-      <div className="user-details-container">
-        <label
-          className="cover-img"
-          onDrop={(ev) => {
-            ev.preventDefault()
-            handleFile(ev)
-          }}
-          onDragOver={(ev) => {
-            ev.preventDefault()
-          }}
-        >
-          {isUploading ? (
-            <span className="loader-img"></span>
-          ) : (
-            <img
-              className="user-profile-img pointer"
-              style={{ maxWidth: '200px' }}
-              src={
-                user?.imgUrl
-                  ? user.imgUrl
-                  : 'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg'
-              }
-              alt="user-img"
-            />
-          )}
+  function goHome() {
+    navigate('/')
+  }
 
-          <input
-            type="file"
-            onChange={handleFile}
-            style={{ display: 'none' }}
-          />
-        </label>
-        <div className="user-info">
-          <span className="profile-word"> Profile </span>
-          <h3 className="user-username">{user?.username}</h3>
-          <span className="user-stations-count">24 Public Playlists</span>
-          <span className="dot"> • </span>
-          <span className="following">7 following</span>
+  return user ? (
+    <section className="user-page">
+      <section className="user-profile" style={bgStyle}>
+        <button className="user-details-arrow" onClick={goHome}>
+          <span
+            dangerouslySetInnerHTML={{
+              __html: getSpotifySvg('leftArrow'),
+            }}
+          ></span>
+        </button>
+        <div className="user-details-container">
+          <label
+            className="cover-img"
+            onDrop={(ev) => {
+              ev.preventDefault()
+              handleFile(ev)
+            }}
+            onDragOver={(ev) => {
+              ev.preventDefault()
+            }}
+          >
+            {isUploading ? (
+              <div className="loader-img"></div>
+            ) : (
+              <img
+                className="user-profile-img pointer"
+                style={{ width: window.innerWidth > 460 ? '200px' : '124px' }}
+                src={
+                  user?.imgUrl
+                    ? user.imgUrl
+                    : 'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg'
+                }
+                alt="user-img"
+              />
+            )}
+
+            <input
+              type="file"
+              onChange={handleFile}
+              style={{ display: 'none' }}
+            />
+          </label>
+          <div className="user-info">
+            <span className="profile-word"> Profile </span>
+            <h3 className="user-username">{user?.username}</h3>
+            <span className="user-stations-count">24 Public Playlists</span>
+            <span className="dot"> • </span>
+            <span className="following">7 following</span>
+          </div>
         </div>
-      </div>
+      </section>
+      <section className="user-details-index">
+        <UserDetailsList stations={stations} />
+      </section>
     </section>
   ) : null
 }

@@ -1,11 +1,11 @@
 .category-container {
   position: relative;
   overflow: hidden;
-  border-radius: 10px;
+  border-radius: 4px;
   height: rem(215px);
   cursor: pointer;
   @include for-mobile-layout {
-    width: rem(164px);
+    width: rem(183px);
     height: rem(92px);
   }
 
