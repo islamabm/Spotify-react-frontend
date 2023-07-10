@@ -1,13 +1,39 @@
 .user-profile {
   font-family: circular-book;
+  position: relative;
   height: 51vh;
   padding-inline: 5rem;
   color: #fff;
+  @include for-mobile-layout {
+    width: rem(414px);
+    height: rem(258px);
+    padding: rem(72px) rem(16px) rem(16px);
+  }
+  .user-details-arrow {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    display: none;
+    svg {
+      fill: white;
+    }
+    @include for-mobile-layout {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  }
   .user-details-container {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 2rem;
-    margin-block-start: 4rem;
+
+    @include for-mobile-layout {
+      margin-block-start: 0;
+      height: rem(132px);
+      padding: rem(16px);
+    }
     .user-info {
       margin-top: rem(47px);
     }
@@ -16,11 +42,17 @@
       font-size: 0.7rem;
       margin-inline: 0;
       transform: translate(-2px, 1px);
+      @include for-mobile-layout {
+        display: none;
+      }
     }
     .user-profile-img {
       border-radius: 50%;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       margin-top: rem(50px);
+      @include for-mobile-layout {
+        margin-top: 0;
+      }
     }
 
     .user-username {
@@ -30,16 +62,31 @@
       color: $clr6;
       text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
       font-family: Gotham;
+      @include for-mobile-layout {
+        font-size: 2rem;
+        margin: 0;
+      }
     }
   }
   .profile-word {
     font-size: 0.8rem;
     font-family: circular-book;
+    @include for-mobile-layout {
+      display: none;
+    }
   }
   .user-stations-count,
   .following {
     font-family: circular-book;
     font-size: 1rem;
     margin-inline-end: 0.5rem;
+    @include for-mobile-layout {
+      display: none;
+    }
   }
 }
+// <span className="profile-word"> Profile </span>
+// <h3 className="user-username">{user?.username}</h3>
+// <span className="user-stations-count">24 Public Playlists</span>
+// <span className="dot"> • </span>
+// <span className="following">7 following</span>

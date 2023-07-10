@@ -3,18 +3,20 @@ import { useSelector, useDispatch } from 'react-redux'
 import { uploadImg } from '../services/upload.service'
 import { editUserImg, getUser } from '../store/actions/user.actions'
 import { FastAverageColor } from 'fast-average-color'
+import { getSpotifySvg } from '../services/SVG.service'
+import { useNavigate } from 'react-router-dom'
 export function UserDetails() {
   const [isUploading, setIsUploading] = useState(false)
   const [bgStyle, setBgStyle] = useState(null)
-  const [user, setUser] = useState(
-    useSelector((storeState) => storeState.userModule.loggedInUser)
-  )
+  // const [user, setUser] = useState(
+  //   useSelector((storeState) => storeState.userModule.loggedInUser)
+  // )
+  const user = useSelector((storeState) => storeState.userModule.loggedInUser)
   const dispatch = useDispatch()
   const colorCache = {}
-
+  const navigate = useNavigate()
   useEffect(() => {
-    const user1 = dispatch(getUser())
-    setUser(user1)
+    dispatch(getUser())
     updateImgUrlAndColor(user.imgUrl)
   }, [user.imgUrl])
 
@@ -65,8 +67,19 @@ export function UserDetails() {
     }
   }
 
+  function goHome() {
+    navigate('/')
+  }
+
   return user ? (
     <section className="user-profile" style={bgStyle}>
+      <button className="user-details-arrow" onClick={goHome}>
+        <span
+          dangerouslySetInnerHTML={{
+            __html: getSpotifySvg('leftArrow'),
+          }}
+        ></span>
+      </button>
       <div className="user-details-container">
         <label
           className="cover-img"
@@ -79,11 +92,11 @@ export function UserDetails() {
           }}
         >
           {isUploading ? (
-            <span className="loader-img"></span>
+            <div className="loader-img"></div>
           ) : (
             <img
               className="user-profile-img pointer"
-              style={{ maxWidth: '200px' }}
+              style={{ width: window.innerWidth > 460 ? '200px' : '124px' }}
               src={
                 user?.imgUrl
                   ? user.imgUrl

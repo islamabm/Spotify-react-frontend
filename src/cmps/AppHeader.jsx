@@ -5,9 +5,11 @@ import { useState, useEffect } from 'react'
 import { setCurrSong, setCurrSongIndex } from '../store/actions/song.actions'
 import { useDispatch, useSelector } from 'react-redux'
 import { eventBus } from '../services/event-bus.service'
+import { MobileModal } from './Modals/MobileModal'
 
 export function AppHeader() {
   const [showModal, setShowModal] = useState(false)
+  const [showMobileModal, setShowMobileModal] = useState(false)
   const [currScrollPos, setScrollPos] = useState(0)
   const [isPlaying, setIsPlaying] = useState(false)
   const [headers, setHeaders] = useState({
@@ -69,6 +71,7 @@ export function AppHeader() {
       location.pathname === '/' ||
       location.pathname === '/search' ||
       location.pathname === '/lyrics' ||
+      location.pathname === '/user' ||
       (location.pathname.includes('/station/') && currScrollPos < 10)
     ) {
       setHeaders({
@@ -94,6 +97,7 @@ export function AppHeader() {
       location.pathname === '/' ||
       location.pathname === '/search' ||
       location.pathname === '/lyrics' ||
+      location.pathname === '/user' ||
       (location.pathname.includes('/station/') && currScrollPos < 10)
     ) {
       setHeaders({
@@ -132,8 +136,18 @@ export function AppHeader() {
     navigate(+1)
   }
 
+  function openMobileModal() {
+    setShowMobileModal(true)
+  }
+
+  function handleCloseModal() {
+    setShowMobileModal(false)
+  }
   return (
-    <header className="app-header" style={{ ...headers }}>
+    <header
+      className="app-header"
+      style={{ padding: showMobileModal ? '0' : '20px', ...headers }}
+    >
       <section className="arrows-and-input">
         <section className="arrows">
           <div className="black-circle">
@@ -218,21 +232,38 @@ export function AppHeader() {
           </>
         ) : (
           <>
-            <span className="user-details-header" onClick={onClickUserDetails}>
-              <img
-                title={user?.username}
-                src={
-                  user.imgUrl
-                    ? user.imgUrl
-                    : 'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg'
-                }
-                alt="user-img"
-              />
-            </span>
+            {window.innerWidth < 460 ? (
+              <span
+                style={{ display: showMobileModal ? 'none' : '' }}
+                onClick={openMobileModal}
+                className="white"
+                dangerouslySetInnerHTML={{
+                  __html: getSpotifySvg('settings'),
+                }}
+              ></span>
+            ) : (
+              <span
+                className="user-details-header"
+                onClick={onClickUserDetails}
+              >
+                <img
+                  title={user?.username}
+                  src={
+                    user.imgUrl
+                      ? user.imgUrl
+                      : 'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg'
+                  }
+                  alt="user-img"
+                />
+              </span>
+            )}
           </>
         )}
       </div>
       {showModal && <UserModal onClose={onCloseModal} />}
+      {showMobileModal && (
+        <MobileModal closeModal={handleCloseModal} show={showMobileModal} />
+      )}
     </header>
   )
 }

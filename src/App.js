@@ -19,6 +19,7 @@ import { useDispatch } from 'react-redux'
 import { SongLyrics } from './views/SongLyrics'
 import { OnlyLyrics } from './views/OnlyLyrics'
 import { BottomNav } from '../src/cmps/Mobile/BottomNav'
+import { MobileMediaPlayer } from '../src/views/mobile/MobileMediaPlayer'
 
 function App() {
   const dispatch = useDispatch()
@@ -57,7 +58,8 @@ function LoggedInApp() {
         </Routes>
       </main>
       <AppFooter />
-      {/* <BottomNav/> */}
+      <BottomNav/>
+      <MobileMediaPlayer/>
     </section>
   )
 }
