@@ -23,10 +23,11 @@ export function StationIndex() {
     const currentStationIndexRef = stationIndexRef.current
     const handleScroll = () => {
       const scrollPos = currentStationIndexRef.scrollTop
+      console.log('scrollPos', scrollPos)
       if (scrollPos > 375) {
-        setHeaderBg('#1a1a1a')
+        setHeaderBg({ backgroundColor: '#1a1a1a' })
       } else {
-        setHeaderBg('transparent')
+        setHeaderBg({ backgroundColor: 'transparent' })
       }
       eventBus.emit('stationIndexScroll', { scrollPos, headerBg })
     }
