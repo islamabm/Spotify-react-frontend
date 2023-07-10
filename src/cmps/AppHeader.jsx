@@ -71,6 +71,7 @@ export function AppHeader() {
       location.pathname === '/' ||
       location.pathname === '/search' ||
       location.pathname === '/lyrics' ||
+      location.pathname === '/user' ||
       (location.pathname.includes('/station/') && currScrollPos < 10)
     ) {
       setHeaders({
@@ -96,6 +97,7 @@ export function AppHeader() {
       location.pathname === '/' ||
       location.pathname === '/search' ||
       location.pathname === '/lyrics' ||
+      location.pathname === '/user' ||
       (location.pathname.includes('/station/') && currScrollPos < 10)
     ) {
       setHeaders({
