@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState,useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { SearchCategoryList } from "../cmps/SearchCategory/SearchCategoryList"
 import { useDispatch, useSelector } from "react-redux"
 import { loadSearchStations } from "../store/actions/station.actions"
