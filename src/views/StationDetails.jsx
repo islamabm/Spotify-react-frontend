@@ -43,13 +43,15 @@ export function StationDetails(props) {
 
   useEffect(() => {
     loadStation()
-    updateImgUrlAndColor(station)
+
     // eventBus.emit('stationDetailsScroll', {
     //   scrollPos: 0,
     //   backgroundColor: 'transparent',
     // })
   }, [params.id])
-
+  useEffect(() => {
+    updateImgUrlAndColor(station)
+  }, [stationImg])
   // useEffect(() => {
   //   const unsubscribe = eventBus.on('newStationCreated', setBgStyle)
   //   return () => unsubscribe()
