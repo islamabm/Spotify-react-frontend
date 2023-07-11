@@ -10,6 +10,7 @@
   gap: rem(20px);
   @include for-mobile-layout {
     grid-template-columns: repeat(5, 1fr);
+    gap: rem(4px);
     overflow-x: scroll;
     scrollbar-width: none;
     -ms-overflow-style: none;
