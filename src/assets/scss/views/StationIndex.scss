@@ -17,6 +17,7 @@
   scrollbar-color: transparent transparent;
   @include for-mobile-layout {
     box-shadow: none;
+    overflow-x: hidden;
   }
 
   &::-webkit-scrollbar {
@@ -27,6 +28,13 @@
     background-color: rgba(234, 227, 227, 0.39);
     &:hover {
       background-color: rgba(234, 227, 227, 0.552);
+    }
+  }
+  @include for-mobile-layout {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar {
+      display: none;
     }
   }
   .greeting {

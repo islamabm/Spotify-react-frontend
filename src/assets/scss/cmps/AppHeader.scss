@@ -131,6 +131,11 @@
   }
 }
 
+.none-sticky {
+  // display: block;
+  position: relative;
+}
+
 .station-options {
   gap: rem(10px);
   p {
@@ -167,5 +172,20 @@
   }
   &:hover {
     background-color: rgba(0, 0, 0, 0.4);
+  }
+}
+
+.user-in-header {
+  display: flex;
+  align-items: center;
+  gap: rem(16px);
+
+  span {
+    svg {
+      fill: white;
+    }
+  }
+  .user-name-in-header {
+    margin: 0;
   }
 }

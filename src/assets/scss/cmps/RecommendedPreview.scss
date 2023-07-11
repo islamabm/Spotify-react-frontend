@@ -6,6 +6,9 @@
   border: 1px solid transparent;
   height: rem(56px);
   border-radius: 4px;
+  @include for-mobile-layout {
+    padding: 0 0 0 rem(24px);
+  }
   .small-play-btn {
     display: none;
   }

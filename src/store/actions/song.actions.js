@@ -1,5 +1,5 @@
-import { stationService } from "../../services/station.service"
-import { lyricsService } from "../../services/lyrics.service"
+import { stationService } from '../../services/station.service'
+import { lyricsService } from '../../services/lyrics.service'
 import {
   SET_CURR_SONG,
   SET_CURR_SONG_INDEX,
@@ -7,23 +7,21 @@ import {
   SET_CURR_SONG_SVG,
   SET_CURR_SONG_LYRICS,
   SET_CURR_DIRECTION,
-} from "../reducers/song.reducer"
+  SET_CURR_VIDEOID,
+} from '../reducers/song.reducer'
 
 export function setCurrSong(stationId, songId) {
   return async (dispatch, getState) => {
     try {
-      let song
-      if (stationId) song = await stationService.getSongById(stationId, songId)
-      else song = songId
-      // const song = await stationService.getSongById(stationId, songId)
-      console.log('song curr song action', song)
+      const song = await stationService.getSongById(stationId, songId)
+
       const action = {
         type: SET_CURR_SONG,
         song,
       }
       dispatch(action)
     } catch (error) {
-      console.log("error:", error)
+      console.log('error:', error)
     }
   }
 }
@@ -40,7 +38,7 @@ export function setCurrSongAction(stationId, id) {
       }
       dispatch(action)
     } catch (error) {
-      console.log("error:", error)
+      console.log('error:', error)
     }
   }
 }
@@ -55,7 +53,7 @@ export function setCurrSongLyrics(artist, title) {
       }
       dispatch(action)
     } catch (error) {
-      console.log("error:", error)
+      console.log('error:', error)
     }
   }
 }
@@ -69,7 +67,7 @@ export function setCurrSongIndex(stationId, songId) {
       }
       dispatch(action)
     } catch (error) {
-      console.log("error:", error)
+      console.log('error:', error)
     }
   }
 }
@@ -83,7 +81,7 @@ export function getRandomSong(stationId) {
       }
       dispatch(action)
     } catch (error) {
-      console.log("error:", error)
+      console.log('error:', error)
     }
   }
 }
@@ -97,7 +95,7 @@ export function setPrevSong(stationId, songId) {
       }
       dispatch(action)
     } catch (error) {
-      console.log("error:", error)
+      console.log('error:', error)
     }
   }
 }
@@ -111,7 +109,7 @@ export function setNextSong(stationId, songId) {
       }
       dispatch(action)
     } catch (error) {
-      console.log("error:", error)
+      console.log('error:', error)
     }
   }
 }
@@ -119,6 +117,11 @@ export function setNextSong(stationId, songId) {
 export function setCurrSongSvg(svg) {
   return (dispatch) => {
     dispatch({ type: SET_CURR_SONG_SVG, svg })
+  }
+}
+export function setVideoId(videoId, song) {
+  return (dispatch) => {
+    dispatch({ type: SET_CURR_VIDEOID, videoId, song })
   }
 }
 

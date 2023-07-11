@@ -9,8 +9,13 @@
   grid-template-columns: repeat(auto-fit, minmax(100px, 189px));
   gap: rem(20px);
   @include for-mobile-layout {
-    grid-template-columns: repeat(2, 1fr);
-    gap: rem(5px);
+    grid-template-columns: repeat(5, 1fr);
+    overflow-x: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
   a {
     cursor: default;

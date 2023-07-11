@@ -63,7 +63,7 @@
     width: auto;
     gap: rem(0px);
     margin-inline-start: rem(0px);
-    height: 1rem;
+    height: 2px;
   }
 }
 
@@ -74,6 +74,7 @@
   text-align: right;
   @include for-mobile-layout {
     margin-top: 30px;
+    // display: none;
     // margin-left: 10px;
   }
 }
@@ -107,7 +108,7 @@
 }
 
 .progress-bar-fill:after {
-  content: "";
+  content: '';
   position: absolute;
   right: rem(-5px);
   top: rem(-2px);
@@ -148,7 +149,7 @@
       background-color: #1db954;
       border-radius: 50%;
       bottom: 0;
-      content: "";
+      content: '';
       display: block;
       height: rem(4px);
       left: 50%;
