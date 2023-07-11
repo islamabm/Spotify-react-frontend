@@ -7,8 +7,9 @@
     }
 }
 .song-details-container-mobile {
-  min-height: 0;
-  padding: 12px;
+  min-height: 0;         
+  padding: 12px;     
+  min-height: 100vh;                                                  
   &.open {
     animation: cmpExpand 0.2s forwards;
   }
