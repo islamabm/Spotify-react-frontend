@@ -173,13 +173,16 @@ export function AppHeader() {
   }
 
   function headerVisabillity() {
-    if (width < 430 && location.pathname.includes('/station/')) return 'display-none'
+    if (width < 430){
+     if(location.pathname.includes('/')) return 'none-sticky'
+     if(location.pathname.includes('search')) return 'display-none'      
+    }
     return ''
   }
 
   return (
     <>
-      {location.pathname !== '/mobileMediaPlayer' && (
+      {/* {location.pathname !== '/mobileMediaPlayer' && ( */}
         <header
           className={`app-header ${ headerVisabillity }`}
           style={{ padding: showMobileModal ? '0' : '20px', ...headers }}
@@ -315,7 +318,7 @@ export function AppHeader() {
             <MobileModal closeModal={handleCloseModal} show={showMobileModal} />
           )}
         </header>
-      )}
+      {/* // )} */}
     </>
   )
 }
