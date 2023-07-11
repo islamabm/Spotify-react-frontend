@@ -1,64 +1,64 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { getSpotifySvg } from "../../services/SVG.service";
-import { BubblingHeart } from "../../cmps/BubblingHeart";
-import { MediaPlayer } from "../../cmps/MediaPlayer";
-import { FastAverageColor } from "fast-average-color";
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { getSpotifySvg } from '../../services/SVG.service'
+import { BubblingHeart } from '../../cmps/BubblingHeart'
+import { MediaPlayer } from '../../cmps/MediaPlayer'
+import { FastAverageColor } from 'fast-average-color'
 
-export function MobileMediaPlayer() {
-  const song = useSelector((storeState) => storeState.songModule.currSong);
-  const [bgStyle, setBgStyle] = useState(null);
-  const colorCache = {};
-  const navigate = useNavigate();
+export function MobileMediaPlayer({ closeMediaPlayer }) {
+  const song = useSelector((storeState) => storeState.songModule.currSong)
+  const [bgStyle, setBgStyle] = useState(null)
+  const colorCache = {}
+  const navigate = useNavigate()
 
   const station = useSelector(
     (storeState) => storeState.stationModule.currStation
-  );
+  )
 
   useEffect(() => {
-    updateImgUrlAndColor(song);
-  }, [song?.imgUrl]);
+    updateImgUrlAndColor(song)
+  }, [song?.imgUrl])
 
   function updateImgUrlAndColor(song) {
-    if (!song) return;
-    const imgUrl = song.imgUrl;
-    if (imgUrl !== "") {
-      getDominantColor(imgUrl);
+    if (!song) return
+    const imgUrl = song.imgUrl
+    if (imgUrl !== '') {
+      getDominantColor(imgUrl)
     }
   }
 
   async function getDominantColor(imageSrc) {
-    const cachedColor = colorCache[imageSrc];
+    const cachedColor = colorCache[imageSrc]
     if (cachedColor) {
-      const gradient = `linear-gradient(to bottom, ${cachedColor} 0%, ${cachedColor} 10%, ${cachedColor} 20%, ${cachedColor} 50%, black 140%, black 70%, black 100%)`;
+      const gradient = `linear-gradient(to bottom, ${cachedColor} 0%, ${cachedColor} 10%, ${cachedColor} 20%, ${cachedColor} 50%, black 140%, black 70%, black 100%)`
 
-      setBgStyle(gradient);
-      const bottomGradient = `linear-gradient(${cachedColor} -20%, #121212 9%)`;
+      setBgStyle(gradient)
+      const bottomGradient = `linear-gradient(${cachedColor} -20%, #121212 9%)`
 
-      document.body.style.backgroundImage = gradient;
-      return;
+      document.body.style.backgroundImage = gradient
+      return
     }
-    const fac = new FastAverageColor();
-    const img = new Image();
-    img.crossOrigin = "Anonymous";
-    const corsProxyUrl = "https://api.codetabs.com/v1/proxy?quest=";
-    img.src = corsProxyUrl + encodeURIComponent(imageSrc);
+    const fac = new FastAverageColor()
+    const img = new Image()
+    img.crossOrigin = 'Anonymous'
+    const corsProxyUrl = 'https://api.codetabs.com/v1/proxy?quest='
+    img.src = corsProxyUrl + encodeURIComponent(imageSrc)
     img.onload = async () => {
       try {
-        const color = await fac.getColorAsync(img);
-        colorCache[imageSrc] = color;
+        const color = await fac.getColorAsync(img)
+        colorCache[imageSrc] = color
         setBgStyle({
           background: `linear-gradient(to bottom, ${color.rgb} 0%, ${color.rgb} 10%, ${color.rgb} 20%, ${color.rgb} 50%, black 140%, black 70%, black 100%)`,
-        });
+        })
       } catch (e) {
-        console.error(e);
+        console.error(e)
       }
-    };
+    }
   }
 
   function goToPreviousRoute() {
-    navigate(-1);
+    closeMediaPlayer()
   }
 
   return (
@@ -69,12 +69,13 @@ export function MobileMediaPlayer() {
       >
         <div className="media-player-header flex align-center">
           <span
-            className="arrow"
             onClick={goToPreviousRoute}
+            className="arrow"
             dangerouslySetInnerHTML={{
-              __html: getSpotifySvg("mobileArrow"),
+              __html: getSpotifySvg('mobileArrow'),
             }}
           ></span>
+
           <span className="station-name">{station?.name}</span>
         </div>
         <div className="song-details">
@@ -99,5 +100,5 @@ export function MobileMediaPlayer() {
         </div>
       </section>
     </>
-  );
+  )
 }
