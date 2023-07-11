@@ -142,6 +142,11 @@
 // }
 
 .station-options {
+  @include for-mobile-layout {
+    .play-button {
+      display: none;
+    }
+  }
   gap: rem(10px);
   p {
     font-size: 1.5rem;

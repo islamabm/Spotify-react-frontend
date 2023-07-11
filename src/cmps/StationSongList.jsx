@@ -223,9 +223,12 @@ export default function StationSongList({ station }) {
                         <span
                           title={`More options for ${song?.title}`}
                           onClick={(e) => showSongOptionsModal(e, song)}
-                          className="hidden dots title song-option"
+                          className="dots title song-option"
                           dangerouslySetInnerHTML={{
-                            __html: getSpotifySvg('dots'),
+                            __html:
+                              window.innerWidth > 460
+                                ? getSpotifySvg('dots')
+                                : getSpotifySvg('mobileDots'),
                           }}
                         ></span>
                       </div>

@@ -198,11 +198,12 @@ export function StationDetails(props) {
                   ></span>
                 )}
               </div>
+
               <span>
                 <BubblingHeart
                   index={station._id}
                   item={station}
-                  type="station"
+                  type={window.innerWidth > 460 ? 'station' : 'stationMobile'}
                 />
               </span>
             </>
@@ -214,7 +215,10 @@ export function StationDetails(props) {
               station?.songs?.length > 0 ? 'dots' : 'margin'
             }`}
             dangerouslySetInnerHTML={{
-              __html: getSpotifySvg('bigDots'),
+              __html:
+                window.innerWidth > 460
+                  ? getSpotifySvg('bigDots')
+                  : getSpotifySvg('mobileDots'),
             }}
           ></span>
         </div>
