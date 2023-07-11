@@ -37,16 +37,15 @@ export function UserLibraryList({ stations, title }) {
             </div>
             <div className="section-two">
               <div className="input-container">
-                {!showInput && (
-                  <span
-                    onClick={openInput}
-                    title="Search in Your Library"
-                    className="smaller-search pointer flex align-center justify-center title"
-                    dangerouslySetInnerHTML={{
-                      __html: getSpotifySvg('smallerSearchIcon'),
-                    }}
-                  ></span>
-                )}
+                <span
+                  onClick={openInput}
+                  title="Search in Your Library"
+                  className="smaller-search pointer flex align-center justify-center title"
+                  dangerouslySetInnerHTML={{
+                    __html: getSpotifySvg('smallerSearchIcon'),
+                  }}
+                ></span>
+
                 {showInput && (
                   <input
                     className={`search-input ${showInput ? 'open' : 'close'}`}

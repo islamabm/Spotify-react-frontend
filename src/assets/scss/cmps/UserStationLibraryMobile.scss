@@ -26,9 +26,9 @@
 
     .section-two {
       display: flex;
-      align-items: end;
+      align-items: flex-start;
       justify-items: center;
-      gap: rem(16px);
+      gap: rem(40px);
 
       span {
         svg {
@@ -39,10 +39,17 @@
 
       .plus-library {
         margin-inline-end: 16px;
+        margin-block-start: rem(2px);
       }
 
       .input-container {
         position: relative;
+
+        .smaller-search {
+          position: absolute;
+          top: 3px;
+          left: 3px;
+        }
         .search-input {
           position: relative;
           right: 0;
