@@ -173,7 +173,7 @@ export function AppFooter() {
                 <span
                   title="Lyrics"
                   onClick={onRepeatClicked}
-                  className="pointer title"
+                  className="pointer title lyrics"
                   dangerouslySetInnerHTML={{
                     __html: getSpotifySvg('lyricsIcon'),
                   }}
