@@ -3,18 +3,18 @@
   @include for-mobile-layout {
     padding: rem(15px);
   }
-}
-.station-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 189px));
-  gap: rem(20px);
-  @include for-mobile-layout {
-    display: flex;
-    flex-direction: column;
-    gap: rem(16px);
-  }
-  a {
-    cursor: default;
+  .station-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 189px));
+    gap: rem(20px);
+    @include for-mobile-layout {
+      display: flex;
+      flex-direction: column;
+      gap: rem(16px);
+    }
+    a {
+      cursor: default;
+    }
   }
 }
 
