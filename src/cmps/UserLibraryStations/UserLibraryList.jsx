@@ -3,14 +3,36 @@ import { UserLibraryPreview } from './UserLibraryPreview'
 import { addStation } from '../../store/actions/station.actions'
 import { getSpotifySvg } from '../../services/SVG.service'
 import emptyImg from '../../assets/imgs/empty-img.png'
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 export function UserLibraryList({ stations, title }) {
   const user = useSelector((storeState) => storeState.userModule.loggedInUser)
   const [showInput, setShowInput] = useState(false)
   const [stationCounter, setStationCounter] = useState(0)
   const [filter, setFilter] = useState('')
   const dispatch = useDispatch()
-  function openInput() {
+  const inputRef = useRef()
+  const buttonRef = useRef()
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (
+        showInput &&
+        event.target !== inputRef.current &&
+        event.target !== buttonRef.current
+      ) {
+        setShowInput(false)
+      }
+    }
+
+    document.addEventListener('click', handleClickOutside)
+
+    return () => {
+      // Clean up the event listener on component unmount
+      document.removeEventListener('click', handleClickOutside)
+    }
+  }, [showInput])
+  function openInput(event) {
+    event.stopPropagation()
     setShowInput(!showInput)
   }
   function handleFilterChange(e) {
@@ -38,7 +60,8 @@ export function UserLibraryList({ stations, title }) {
             <div className="section-two">
               <div className="input-container">
                 <span
-                  onClick={openInput}
+                  ref={buttonRef}
+                  onClick={(event) => openInput(event)}
                   title="Search in Your Library"
                   className="smaller-search pointer flex align-center justify-center title"
                   dangerouslySetInnerHTML={{
@@ -48,6 +71,7 @@ export function UserLibraryList({ stations, title }) {
 
                 {showInput && (
                   <input
+                    ref={inputRef}
                     className={`search-input ${showInput ? 'open' : 'close'}`}
                     type="text"
                     placeholder="Search in Your Library"
