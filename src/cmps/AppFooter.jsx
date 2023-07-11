@@ -8,14 +8,14 @@ import { BubblingHeart } from './BubblingHeart'
 import { FastAverageColor } from 'fast-average-color'
 import { MobileMediaPlayer } from '../views/mobile/MobileMediaPlayer'
 import { BottomNav } from '../cmps/Mobile/BottomNav'
-import { stationService } from '../services/station.service.js'
+
 export function AppFooter() {
   const [mute, setMute] = useState(false)
   const [volume, setVolume] = useState(50)
   const [isLyrics, setIsLyrics] = useState(false)
   const [bgStyle, setBgStyle] = useState(null)
   const song = useSelector((storeState) => storeState.songModule.currSong)
-  const stationSongClass = stationService.stationNameClass(song)
+
   const [currSong, setCurrSong] = useState(song)
   const [isMobileMediaPlayer, setIsMobileMediaPlayer] = useState(false)
   const [isDisplayFooter, setIsDisplayFooter] = useState(true)
@@ -121,7 +121,7 @@ export function AppFooter() {
                   />
                 </div>
                 <div className="actor-name-song">
-                  <p className={`song-name ${stationSongClass}`}>
+                  <p className={`song-name`}>
                     {song ? song.title : station?.songs[0]?.title}
                   </p>
                   <p className="actor-name">
