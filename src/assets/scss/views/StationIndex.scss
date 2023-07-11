@@ -17,6 +17,7 @@
   scrollbar-color: transparent transparent;
   @include for-mobile-layout {
     box-shadow: none;
+    overflow-x: hidden;
   }
 
   &::-webkit-scrollbar {
