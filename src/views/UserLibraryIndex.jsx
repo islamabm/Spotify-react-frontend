@@ -16,7 +16,7 @@ export function UserLibraryIndex() {
   if (!stations) return <div className="loader"></div>
 
   return (
-    <section className="station-index">
+    <section className="user-details-index">
       <UserLibraryList stations={stations} title="Your Playlists" />
     </section>
   )

@@ -25,7 +25,7 @@ export function UserLibraryPreview({ station }) {
   // }
 
   return (
-    <article className="info" onClick={goToDetails}>
+    <article className="info-user" onClick={goToDetails}>
       <div className="station-img">
         <img
           src={

@@ -101,6 +101,11 @@ export function AppFooter() {
     navigate('/mobileMediaPlayer')
   }
 
+  function handleCloseMediaPlayer() {
+    console.log('hi')
+    // setIsMobileMediaPlayer(false)
+  }
+
   return (
     <>
       {((window.innerWidth < 460 && currSong && isDisplayFooter) ||
@@ -110,7 +115,9 @@ export function AppFooter() {
           onClick={displayMobileMediaPlayer}
           style={window.innerWidth < 460 ? bgStyle : {}}
         >
-          {isMobileMediaPlayer && <MobileMediaPlayer />}
+          {isMobileMediaPlayer && (
+            <MobileMediaPlayer closeMediaPlayer={handleCloseMediaPlayer} />
+          )}
           <div className="song-details">
             {currSong && (
               <>
