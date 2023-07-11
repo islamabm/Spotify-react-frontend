@@ -131,6 +131,11 @@
   }
 }
 
+.none-sticky {
+  // display: block;
+  position: relative;
+}
+
 .station-options {
   gap: rem(10px);
   p {
