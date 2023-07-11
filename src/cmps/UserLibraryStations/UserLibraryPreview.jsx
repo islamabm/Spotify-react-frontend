@@ -17,12 +17,12 @@ export function UserLibraryPreview({ station }) {
     navigate(`/station/${station._id}`)
   }
 
-  function playFirstSongInStation(event) {
-    event.stopPropagation()
-    dispatch(setCurrSong(station?._id, station?.songs[0]._id))
-    dispatch(setCurrSongIndex(station?._id, station?.songs[0]._id))
-    setIsPlaying(!isPlaying)
-  }
+  // function playFirstSongInStation(event) {
+  //   event.stopPropagation()
+  //   dispatch(setCurrSong(station?._id, station?.songs[0]._id))
+  //   dispatch(setCurrSongIndex(station?._id, station?.songs[0]._id))
+  //   setIsPlaying(!isPlaying)
+  // }
 
   return (
     <article className="info" onClick={goToDetails}>
@@ -36,7 +36,7 @@ export function UserLibraryPreview({ station }) {
         />
         <div
           className="play-button flex justify-center"
-          onClick={playFirstSongInStation}
+          // onClick={playFirstSongInStation}
         >
           {isPlaying ? (
             <span

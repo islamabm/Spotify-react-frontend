@@ -13,10 +13,22 @@ export function AddSongModal({ position, addSongToStation, createStation }) {
     <section
       className="add-song-modal"
       style={{
-        top: direction === 'left' ? position.top - 160 : position.top - 200,
-        left: direction === 'left' ? position.left - 260 : position.left + 180,
+        top:
+          direction === 'left'
+            ? window.innerWidth < 460
+              ? position.top - 220
+              : position.top - 200
+            : position.top - 200,
+        left:
+          direction === 'left'
+            ? window.innerWidth < 460
+              ? position.left - 200
+              : position.left - 280
+            : position.left + 180,
       }}
     >
+      {/* top: direction === 'left' ? position.top - 160 : position.top - 200,
+    left: direction === 'left' ? position.left - 260 : position.left + 180, */}
       <ul>
         <li className="filter-by-user-stations">
           <span
