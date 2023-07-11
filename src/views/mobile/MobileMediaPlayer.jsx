@@ -6,7 +6,7 @@ import { BubblingHeart } from '../../cmps/BubblingHeart'
 import { MediaPlayer } from '../../cmps/MediaPlayer'
 import { FastAverageColor } from 'fast-average-color'
 
-export function MobileMediaPlayer({ closeMediaPlayer }) {
+export function MobileMediaPlayer({ closeMediaPlayer, open }) {
   const song = useSelector((storeState) => storeState.songModule.currSong)
   const [bgStyle, setBgStyle] = useState(null)
   const colorCache = {}
@@ -64,7 +64,10 @@ export function MobileMediaPlayer({ closeMediaPlayer }) {
   return (
     <>
       <section
-        className="song-details-container-mobile flex column align-center justify-center"
+        className={`song-details-container-mobile flex column align-center justify-center ${
+          open ? 'open' : 'close'
+        }`}
+        // className="song-details-container-mobile flex column align-center justify-center"
         style={bgStyle}
       >
         <div className="media-player-header flex align-center">
@@ -92,7 +95,7 @@ export function MobileMediaPlayer({ closeMediaPlayer }) {
                 {song ? song.artist : station?.songs[0]?.artist}
               </p>
             </div>
-            <BubblingHeart index={song?._id} item={song} type="stationMobile"/>
+            <BubblingHeart index={song?._id} item={song} type="stationMobile" />
           </div>
         </div>
         <div className="media-player">

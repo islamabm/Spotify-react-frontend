@@ -1,29 +1,30 @@
-.media-player-header{
-    font-family: circular-medium;
-    
-    .arrow {
-      position: absolute;
-      left: 20px;
-      fill: $clr6;
-    }
-}
-.song-details-container-mobile {        
-  padding: 12px;     
-  min-height: 100vh;                                                  
-  &.open {
-    animation: cmpExpand 0.2s forwards;
+.media-player-header {
+  font-family: circular-medium;
+
+  .arrow {
+    position: absolute;
+    left: 20px;
+    fill: $clr6;
   }
+}
+.song-details-container-mobile {
+  padding: 12px;
+  min-height: 100vh;
+  // &.open {
+  //   animation: cmpExpand 0.2s forwards;
+  // }
   img {
     margin-top: 19px;
     padding: 27px;
-   filter: drop-shadow(0 0 1px rgba(0,0,0,.3)) drop-shadow(0 0 10px rgba(0,0,0,.3));
+    filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.3))
+      drop-shadow(0 0 10px rgba(0, 0, 0, 0.3));
   }
   .artist-name-heart {
     justify-content: space-between;
     margin: -10px 12px 0px 12px;
     .artist-name {
-        display: flex;
-        flex-direction: column;
+      display: flex;
+      flex-direction: column;
       .song-name {
         font-size: 24px;
         font-family: circular-medium;
@@ -36,16 +37,15 @@
         color: $clr3;
       }
     }
-    .bubbling-heart{
-        margin-right: -40px;
+    .bubbling-heart {
+      margin-right: -40px;
     }
   }
   .media-player {
-   display: flex;
-   flex-direction: column-reverse;
-   margin: 18px 0;
-   gap: 55px;
-
+    display: flex;
+    flex-direction: column-reverse;
+    margin: 18px 0;
+    gap: 55px;
   }
 }
 
