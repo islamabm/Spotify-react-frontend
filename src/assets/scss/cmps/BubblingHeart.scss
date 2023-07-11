@@ -5,6 +5,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
   fill: white;
 }
 label {
@@ -27,6 +28,9 @@ input[type='checkbox'] + label {
     #outer {
       fill: $clr11;
       transition: 0.2s ease;
+      &:hover {
+        fill: white;
+      }
     }
   }
   #left-hearts > *,

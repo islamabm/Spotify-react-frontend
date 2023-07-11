@@ -135,6 +135,16 @@
     align-items: center;
     padding: rem(24px);
     gap: rem(25px);
+    @include for-mobile-layout {
+      justify-content: space-between;
+      padding: rem(16px);
+    }
+    .mobile-heart-dots {
+      display: flex;
+      align-items: center;
+      justify-items: center;
+      gap: rem(25px);
+    }
     .dots {
       fill: #afb8b7;
       margin-inline-start: rem(-50px);
@@ -160,6 +170,7 @@
       border-radius: 4px;
       @include for-mobile-layout {
         display: flex;
+        justify-content: space-between;
         padding: 0 10px;
       }
       .small-play-btn {
@@ -242,16 +253,14 @@
         justify-content: space-evenly;
         align-items: center;
         gap: rem(20px);
-        @include for-mobile-layout {
-          display: none;
-        }
-        .hidden {
-          opacity: 0;
-        }
+
         .duration {
           margin-inline-end: rem(-17px);
           color: $clr14;
           font-size: 14px;
+          @include for-mobile-layout {
+            display: none;
+          }
         }
         .heart-svg {
           width: rem(40px);
@@ -260,17 +269,25 @@
           display: flex;
           top: rem(-4px);
           opacity: 0;
+          @include for-mobile-layout {
+            display: none;
+          }
         }
         .dots {
           fill: $clr6;
           margin-inline-start: rem(10px);
+          opacity: 0;
+          @include for-mobile-layout {
+            opacity: 1;
+            margin-inline-start: rem(0px);
+          }
         }
       }
       &:hover {
         .heart-svg {
           opacity: 1;
         }
-        .hidden {
+        .dots {
           opacity: 1;
         }
       }

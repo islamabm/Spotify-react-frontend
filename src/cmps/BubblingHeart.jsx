@@ -25,6 +25,14 @@ export function BubblingHeart({ index, item, type }) {
     })
   }
 
+  function heartWidth() {
+    if (type === 'song') return '40px'
+    if (type === 'station') return '85px'
+    if (type === 'stationMobile') return '55px'
+
+    return ''
+  }
+
   return (
     <div className={`bubbling-heart ${liked ? 'bubbling-heart--liked' : ''}`}>
       <input
@@ -42,7 +50,7 @@ export function BubblingHeart({ index, item, type }) {
           viewBox="0 0 189.2 87.507"
           style={{
             overflow: 'visible',
-            width: type === 'song' ? '40px' : '85px',
+            width: heartWidth(),
           }}
         >
           <g id="hearts" transform="translate(-787.902 -454.998)">

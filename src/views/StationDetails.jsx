@@ -173,51 +173,105 @@ export function StationDetails(props) {
     <section className="station-details" ref={stationDetailsRef}>
       <StationHeaderDetails bgStyle={bgStyle} station={station} />
       <div className="bottom-gradient" style={bgBottomStyle}>
-        <div className="user-station-actions">
-          {station?.songs?.length > 0 && (
-            <>
-              <div
-                className="play-button flex justify-center align-center"
-                onClick={playFirstSongInStation}
-              >
-                {isPlaying ? (
-                  <span
-                    title="Pause"
-                    className="pause-button flex align-center justify-center title"
-                    dangerouslySetInnerHTML={{
-                      __html: getSpotifySvg('biggerPauseBtn'),
-                    }}
-                  ></span>
-                ) : (
-                  <span
-                    title="Play"
-                    className="play-button flex align-center justify-center title"
-                    dangerouslySetInnerHTML={{
-                      __html: getSpotifySvg('biggerPlayBtn'),
-                    }}
-                  ></span>
-                )}
-              </div>
+        {window.innerWidth > 460 ? (
+          <div className="user-station-actions">
+            {station?.songs?.length > 0 && (
+              <>
+                <div
+                  className="play-button flex justify-center align-center"
+                  onClick={playFirstSongInStation}
+                >
+                  {isPlaying ? (
+                    <span
+                      title="Pause"
+                      className="pause-button flex align-center justify-center title"
+                      dangerouslySetInnerHTML={{
+                        __html: getSpotifySvg('biggerPauseBtn'),
+                      }}
+                    ></span>
+                  ) : (
+                    <span
+                      title="Play"
+                      className="play-button flex align-center justify-center title"
+                      dangerouslySetInnerHTML={{
+                        __html: getSpotifySvg('biggerPlayBtn'),
+                      }}
+                    ></span>
+                  )}
+                </div>
+
+                <span>
+                  <BubblingHeart
+                    index={station._id}
+                    item={station}
+                    type={window.innerWidth > 460 ? 'station' : 'stationMobile'}
+                  />
+                </span>
+              </>
+            )}
+            <span
+              title={`More options for my ${station.name}`}
+              onClick={(e) => showStationModal(e)}
+              className={`flex align-center justify-center option pointer ${
+                station?.songs?.length > 0 ? 'dots' : 'margin'
+              }`}
+              dangerouslySetInnerHTML={{
+                __html:
+                  window.innerWidth > 460
+                    ? getSpotifySvg('bigDots')
+                    : getSpotifySvg('mobileDots'),
+              }}
+            ></span>
+          </div>
+        ) : (
+          <div className="user-station-actions">
+            <div className="mobile-heart-dots">
               <span>
                 <BubblingHeart
                   index={station._id}
                   item={station}
-                  type="station"
+                  type={window.innerWidth > 460 ? 'station' : 'stationMobile'}
                 />
               </span>
-            </>
-          )}
-          <span
-            title={`More options for my ${station.name}`}
-            onClick={(e) => showStationModal(e)}
-            className={`flex align-center justify-center option pointer ${
-              station?.songs?.length > 0 ? 'dots' : 'margin'
-            }`}
-            dangerouslySetInnerHTML={{
-              __html: getSpotifySvg('bigDots'),
-            }}
-          ></span>
-        </div>
+
+              <span
+                title={`More options for my ${station.name}`}
+                onClick={(e) => showStationModal(e)}
+                className={`flex align-center justify-center option pointer ${
+                  station?.songs?.length > 0 ? 'dots' : 'margin'
+                }`}
+                dangerouslySetInnerHTML={{
+                  __html:
+                    window.innerWidth > 460
+                      ? getSpotifySvg('bigDots')
+                      : getSpotifySvg('mobileDots'),
+                }}
+              ></span>
+            </div>
+            <div
+              className="play-button flex justify-center align-center"
+              onClick={playFirstSongInStation}
+            >
+              {isPlaying ? (
+                <span
+                  title="Pause"
+                  className="pause-button flex align-center justify-center title"
+                  dangerouslySetInnerHTML={{
+                    __html: getSpotifySvg('biggerPauseBtn'),
+                  }}
+                ></span>
+              ) : (
+                <span
+                  title="Play"
+                  className="play-button flex align-center justify-center title"
+                  dangerouslySetInnerHTML={{
+                    __html: getSpotifySvg('biggerPlayBtn'),
+                  }}
+                ></span>
+              )}
+            </div>
+          </div>
+        )}
         {station.songs.length > 0 ? (
           <div
             className="station-songs-header"
