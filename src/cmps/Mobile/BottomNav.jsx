@@ -46,8 +46,9 @@ export function BottomNav() {
               <span>Search</span>
             </Link>
             <Link
+            
               to="/library"
-              className={`shared-nav-item ${isActive('/userLibrary')}`}
+              className={`library-icon shared-nav-item ${isActive('/userLibrary')}`}
             >
               <span
                 className={`icon ${isActive('/userLibrary')}`}
@@ -55,7 +56,7 @@ export function BottomNav() {
                   __html: getSvgIcon('libraryIconActive'),
                 }}
               ></span>
-              <span>Your Library</span>
+              <span className='library-icon-text'>Your Library</span>
             </Link>
           </section>
         )}

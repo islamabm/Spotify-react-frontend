@@ -16,7 +16,7 @@ export function SongOptionsModal({ position, closeModal, station }) {
   const [createdBy, setCreatedBy] = useState('')
 
   useEffect(() => {
-    setCreatedBy(station.createdBy?.fullname)
+    setCreatedBy(station?.createdBy?.fullname)
   }, [station])
   const user = useSelector((storeState) => storeState.userModule.loggedInUser)
   const song = useSelector((storeState) => storeState.songModule.currSongAction)
@@ -65,7 +65,7 @@ export function SongOptionsModal({ position, closeModal, station }) {
   }
 
   function handleRemoveSongFromStation() {
-    dispatch(removeSongFromStation(station._id, song._id))
+    dispatch(removeSongFromStation(station?._id, song._id))
     closeModal()
   }
 
@@ -89,7 +89,7 @@ export function SongOptionsModal({ position, closeModal, station }) {
               <button>Save to your Liked Songs</button>
             </li>
           )}
-          {station.createdBy.fullname !== 'system' && (
+          {station?.createdBy.fullname !== 'system' && (
             <li onClick={handleRemoveSongFromStation}>
               <button>Remove from this playlist</button>
             </li>

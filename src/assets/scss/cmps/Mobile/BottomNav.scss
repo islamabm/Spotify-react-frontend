@@ -1,4 +1,5 @@
 .bottom-nav-container {
+  background: linear-gradient(0deg, black 70%,rgba(0, 0, 0, 0.1));
     position:fixed;
     bottom: 0;
     right: 0;
@@ -8,7 +9,6 @@
     display: grid;
     grid-auto-flow: column;
     grid-template-columns: repeat(3,1fr);
-     background-color: black;
     a {
         text-decoration: none;
       }
@@ -47,5 +47,10 @@
       .shared-nav-item .icon.active svg {
         fill: $clr6;
       }
+        .library-icon {
+          margin-inline-end: rem(20px);
+        }
+      .library-icon-text {
+        margin-inline-start: rem(16px);
+      }
     }
-    

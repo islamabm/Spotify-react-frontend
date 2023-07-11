@@ -348,3 +348,8 @@
     border-radius: 50%;
   }
 }
+@include for-mobile-layout {
+  .song-list {
+    margin-block-end: rem(150px);
+  }
+}

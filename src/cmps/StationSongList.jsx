@@ -119,7 +119,7 @@ export default function StationSongList({ station }) {
     <DragDropContext onDragEnd={handleDragEnd}>
       <Droppable droppableId="songList">
         {(provided) => (
-          <div ref={provided.innerRef} {...provided.droppableProps}>
+          <div ref={provided.innerRef} {...provided.droppableProps} className="song-list">
             {(createdBy === 'Liked songs system'
               ? user?.LikedSongs
               : songs

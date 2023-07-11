@@ -1,29 +1,29 @@
-import React, { useState, useEffect } from 'react'
-import { getSpotifySvg } from '../services/SVG.service'
-import { SortModal } from './Modals/SortModal'
-import { useDispatch, useSelector } from 'react-redux'
-import { UserStationsIndex } from './UserStations/UserStationsIndex'
-import { addStation } from '../store/actions/station.actions'
-import emptyImg from '../assets/imgs/empty-img.png'
-import { useNavigate } from 'react-router-dom'
-import { SignupModal } from './Modals/SignupModal'
+import React, { useState, useEffect } from "react"
+import { getSpotifySvg } from "../services/SVG.service"
+import { SortModal } from "./Modals/SortModal"
+import { useDispatch, useSelector } from "react-redux"
+import { UserStationsIndex } from "./UserStations/UserStationsIndex"
+import { addStation } from "../store/actions/station.actions"
+import emptyImg from "../assets/imgs/empty-img.png"
+import { useLocation, useNavigate } from "react-router-dom"
+import { SignupModal } from "./Modals/SignupModal"
 
 export function UserLibrary() {
   const [showSortModal, setShowSortModal] = useState(false)
-  const [selectedOption, setSelectedOption] = useState('Recents')
+  const [selectedOption, setSelectedOption] = useState("Recents")
   const [stationCounter, setStationCounter] = useState(0)
   const [showModal, setShowModal] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [showInput, setShowInput] = useState(false)
-  const [filterUserStations, setFilterUserStations] = useState('')
-  
+  const [filterUserStations, setFilterUserStations] = useState("")
+
   const user = useSelector((storeState) => storeState.userModule.loggedInUser)
-  
+  const location = useLocation()
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  
+
   useEffect(() => {
-    const filterAndListSection = document.querySelector('.filter-and-list')
+    const filterAndListSection = document.querySelector(".filter-and-list")
     const checkScroll = () => {
       if (filterAndListSection.scrollTop > 0 && !isScrolled) {
         setIsScrolled(true)
@@ -32,14 +32,13 @@ export function UserLibrary() {
       }
     }
 
-    filterAndListSection.addEventListener('scroll', checkScroll)
+    filterAndListSection.addEventListener("scroll", checkScroll)
 
     return () => {
-      filterAndListSection.removeEventListener('scroll', checkScroll)
+      filterAndListSection.removeEventListener("scroll", checkScroll)
     }
   }, [isScrolled])
 
-  
   function onShowSortModal() {
     setShowSortModal((prevState) => !prevState)
     setShowInput(false)
@@ -50,7 +49,7 @@ export function UserLibrary() {
     setSelectedOption(option)
     setShowSortModal(false)
   }
-  
+
   function createNewStation() {
     if (!user) setShowModal(true)
     setStationCounter(stationCounter + 1)
@@ -58,7 +57,7 @@ export function UserLibrary() {
     dispatch(addStation(name, [], emptyImg))
     // dispatch(updateUserStations(station, user))
   }
-  
+
   function openInput() {
     setShowInput(true)
   }
@@ -68,16 +67,16 @@ export function UserLibrary() {
   }
 
   function goToUserLibrary() {
-    navigate('/library')
+    navigate("/library")
   }
 
   return (
     <>
-      <section className={`user-library`}>
+      <section className="user-library">
         <section className="library-header-wrapper">
           <div
             className={`flex align-center library-header ${
-              isScrolled ? 'scrolled' : ''
+              isScrolled ? "scrolled" : ""
             }`}
           >
             <div
@@ -85,8 +84,10 @@ export function UserLibrary() {
               className="flex align-center your-library pointer"
             >
               <span
+                className={location.pathname === "/library" ? "icon-active" : ''}
                 dangerouslySetInnerHTML={{
-                  __html: getSpotifySvg('libraryIconActive'),
+                  __html:
+                    getSpotifySvg("libraryIcon"),
                 }}
               ></span>
               {/* {librarySize === 'original' && ( */}
@@ -99,7 +100,7 @@ export function UserLibrary() {
               onClick={createNewStation}
               className="plus-icon flex align-center justify-center pointer title create"
               dangerouslySetInnerHTML={{
-                __html: getSpotifySvg('plus'),
+                __html: getSpotifySvg("plus"),
               }}
             ></span>
             {/* )} */}
@@ -119,13 +120,13 @@ export function UserLibrary() {
                 title="Search in Your Library"
                 className="smaller-search pointer flex align-center justify-center title"
                 dangerouslySetInnerHTML={{
-                  __html: getSpotifySvg('smallerSearchIcon'),
+                  __html: getSpotifySvg("smallerSearchIcon"),
                 }}
               ></span>
               {showInput && (
                 // {showInput && librarySize === 'original' && (
                 <input
-                  className={`search-input ${showInput ? 'open' : 'close'}`}
+                  className={`search-input ${showInput ? "open" : "close"}`}
                   type="text"
                   placeholder="Search in Your Library"
                   value={filterUserStations}
@@ -141,7 +142,7 @@ export function UserLibrary() {
                 className="pointer arrow"
                 dangerouslySetInnerHTML={{
                   __html: getSpotifySvg(
-                    showSortModal ? 'upperArrow' : 'bottomArrowIcon'
+                    showSortModal ? "upperArrow" : "bottomArrowIcon"
                   ),
                 }}
               ></span>

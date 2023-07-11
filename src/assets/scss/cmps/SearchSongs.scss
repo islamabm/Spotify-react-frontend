@@ -52,33 +52,42 @@
 .search-song-list {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   margin-inline-start: rem(-10px);
   margin-block-start: rem(10px);
 }
 
-.name-and-artist-container {
-  flex-direction: column;
-  margin-inline-start: rem(10px);
+.img-and-title {
+  width: 100%;
+  .name-and-artist-container {
+    flex-direction: column;
+    margin-inline-start: rem(10px);
 
-  .song-name {
-    font-size: 13px;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-    width: rem(224px);
-    @include for-mobile-layout {
+    .song-name {
+      font-size: 13px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      width: rem(224px);
+      @include for-mobile-layout {
+        font-size: 14px;
+      }
+    }
+    .song-artist {
+      color: $clr3;
       font-size: 14px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      width: rem(100px);
+      @include for-mobile-layout {
+        font-size: 12px;
+      }
     }
   }
-  .song-artist {
-    color: $clr3;
-    font-size: 14px;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-    width: rem(100px);
-    @include for-mobile-layout {
-      font-size: 12px;
-    }
-  }
+
+}
+.mobile-dots {
+  fill: white;
+  margin-inline-start: rem(40px);
 }
