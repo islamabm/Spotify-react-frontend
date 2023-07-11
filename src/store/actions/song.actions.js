@@ -13,11 +13,8 @@ import {
 export function setCurrSong(stationId, songId) {
   return async (dispatch, getState) => {
     try {
-      let song
-      if (stationId) song = await stationService.getSongById(stationId, songId)
-      else song = songId
-      // const song = await stationService.getSongById(stationId, songId)
-      console.log('song curr song action', song)
+      const song = await stationService.getSongById(stationId, songId)
+
       const action = {
         type: SET_CURR_SONG,
         song,
