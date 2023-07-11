@@ -13,7 +13,8 @@
   right: 0;
   bottom: 0;
   @include for-mobile-layout {
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 1fr 10px;
+    grid-template-columns: 40px 190px 5px 1fr;
     height: rem(58px);
     min-height: rem(58px);
     padding: 8px;
@@ -25,12 +26,16 @@
 
   .mobile-heart {
     display: none;
-    margin-left: rem(200px);
+    margin-left: rem(140px);
+    .heart-svg {
+      margin-right: -10px;
+    }
     .play-pause {
-      margin-top: rem(7px);
-
+      margin-top: rem(9px);
       svg {
         fill: white;
+        width: 20px;
+        height: 20px;
       }
     }
     span {
@@ -50,6 +55,10 @@
     gap: rem(10px);
     justify-items: center;
     @include for-mobile-layout {
+      display: grid;
+      grid-auto-flow: column;
+      align-items: end;
+      grid-template-columns: 40px 190px 5px 1fr;
       grid-row: 1;
       grid-column: 1/-1;
       gap: rem(0px);
@@ -89,9 +98,14 @@
       display: flex;
       flex-direction: column;
       gap: rem(5px);
-      margin-inline-start: 0.5em;
+      margin-inline-start: -2em;
       font-family: Circular-medium;
       letter-spacing: rem(0.4px);
+      @include for-mobile-layout {
+        gap: rem(2px);
+        width: 175px;
+        margin-inline-start: 0;
+      }
       .song-name {
         margin: 0;
         padding: 0;
@@ -100,8 +114,7 @@
         font-weight: 400;
         margin-right: rem(20px);
         @include for-mobile-layout {
-          margin-right: 0;
-          width: max-content;
+          margin-right: rem(0px);
         }
       }
       .actor-name {
@@ -110,6 +123,10 @@
         color: #b3b3b3;
         font-size: 0.6875rem;
         font-weight: 400;
+        @include for-mobile-layout {
+          color:white;
+          font-family: circular-light;
+        }
       }
     }
   }
