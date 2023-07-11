@@ -30,6 +30,13 @@
       background-color: rgba(234, 227, 227, 0.552);
     }
   }
+  @include for-mobile-layout {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
   .greeting {
     font-size: 32px;
     font-family: circular-medium;
