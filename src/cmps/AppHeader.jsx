@@ -166,6 +166,10 @@ export function AppHeader() {
   function handleCloseModal() {
     setShowMobileModal(false)
   }
+
+  function goHome() {
+    navigate('/')
+  }
   return (
     <>
       {location.pathname !== '/mobileMediaPlayer' && (
@@ -209,7 +213,15 @@ export function AppHeader() {
             )}
 
             {currScrollPos > 300 && location.pathname === `/user` ? (
-              <h1>baba</h1>
+              <div className="user-in-header">
+                <span
+                  onClick={goHome}
+                  dangerouslySetInnerHTML={{
+                    __html: getSpotifySvg('leftArrow'),
+                  }}
+                ></span>
+                <h1 className="user-name-in-header">{user?.username}</h1>
+              </div>
             ) : (
               ''
             )}
