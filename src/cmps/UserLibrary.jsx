@@ -84,7 +84,7 @@ export function UserLibrary() {
               className="flex align-center your-library pointer"
             >
               <span
-                className={`icon ${location.pathname === "/library" ? "icon-active" : ''}`}
+                className={location.pathname === "/library" ? "icon-active" : ''}
                 dangerouslySetInnerHTML={{
                   __html:
                     getSpotifySvg("libraryIcon"),
