@@ -3,7 +3,7 @@ import { SearchSongsPreview } from './SearchSongsPreview'
 
 export function SearchSongsList({ list, stationId }) {
   return (
-    <section className="recommended-list-container">
+    <section className="search-song-list">
       {list?.map((song, idx) => (
         <SearchSongsPreview key={idx} song={song} stationId={stationId} />
       ))}
