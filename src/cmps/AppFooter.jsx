@@ -8,14 +8,14 @@ import { BubblingHeart } from './BubblingHeart'
 import { FastAverageColor } from 'fast-average-color'
 import { MobileMediaPlayer } from '../views/mobile/MobileMediaPlayer'
 import { BottomNav } from '../cmps/Mobile/BottomNav'
-import { stationService } from '../services/station.service.js'
+
 export function AppFooter() {
   const [mute, setMute] = useState(false)
   const [volume, setVolume] = useState(50)
   const [isLyrics, setIsLyrics] = useState(false)
   const [bgStyle, setBgStyle] = useState(null)
   const song = useSelector((storeState) => storeState.songModule.currSong)
-  const songNameClass = stationService.songNameClass(song || {})
+
   const [currSong, setCurrSong] = useState(song)
   const [isMobileMediaPlayer, setIsMobileMediaPlayer] = useState(false)
   const [isDisplayFooter, setIsDisplayFooter] = useState(true)
@@ -122,7 +122,14 @@ export function AppFooter() {
                 </div>
                 <div className="actor-name-song">
                   <p className={`song-name`}>
-                    {song ? song.title : station?.songs[0]?.title}
+                    {song
+                      ? window.innerWidth < 460 && song.title.length > 10
+                        ? `${song.title.slice(0, 10)}...`
+                        : song.title
+                      : window.innerWidth < 460 &&
+                        station?.songs[0]?.title.length > 10
+                      ? `${station.songs[0].title.slice(0, 10)}...`
+                      : station?.songs[0]?.title}
                   </p>
                   <p className="actor-name">
                     {song ? song.artist : station?.songs[0]?.artist}
@@ -134,7 +141,7 @@ export function AppFooter() {
                     <BubblingHeart index={song._id} item={song} type="song" />
                   </span>
                 </div>
-                <div className={`mobile-heart ${songNameClass}`}>
+                <div className={`mobile-heart`}>
                   <span className="footer-heart">
                     <BubblingHeart index={song?._id} item={song} type="song" />
                   </span>

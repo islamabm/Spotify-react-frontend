@@ -22,24 +22,10 @@
     left: 7px;
     right: 7px;
   }
-  // if (words <= 10) {
-  //   return 'short-song-title'
-  // } else if (words <= 15) {
-  //   return 'long-song-title'
-  // } else {
-  //   return 'huge-song-title'
+
   .mobile-heart {
     display: none;
-    &.short-song-title {
-      margin-left: rem(170px);
-    }
-    &.long-song-title {
-      margin-left: rem(70px);
-    }
-    &.huge-song-title {
-      margin-left: rem(-10px);
-    }
-
+    margin-left: rem(200px);
     .play-pause {
       margin-top: rem(7px);
 
