@@ -116,7 +116,10 @@ export function AppFooter() {
           style={window.innerWidth < 460 ? bgStyle : {}}
         >
           {isMobileMediaPlayer && (
-            <MobileMediaPlayer closeMediaPlayer={handleCloseMediaPlayer} />
+            <MobileMediaPlayer
+              closeMediaPlayer={handleCloseMediaPlayer}
+              open={isMobileMediaPlayer}
+            />
           )}
           <div className="song-details">
             {currSong && (
@@ -139,7 +142,7 @@ export function AppFooter() {
                       : station?.songs[0]?.title}
                   </p>
                   <p className="actor-name">
-                  {song
+                    {song
                       ? window.innerWidth < 460 && song.artist.length > 25
                         ? `${song.artist.slice(0, 25)}...`
                         : song.artist
@@ -157,7 +160,11 @@ export function AppFooter() {
                 </div>
                 <div className={`mobile-heart`}>
                   <span className="footer-heart">
-                    <BubblingHeart index={song?._id} item={song} type="stationMobile" />
+                    <BubblingHeart
+                      index={song?._id}
+                      item={song}
+                      type="stationMobile"
+                    />
                   </span>
                   <span
                     // title={isPlaying ? "Pause" : "Play"}
