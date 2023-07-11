@@ -52,7 +52,7 @@
     }
   }
   @include for-mobile-layout {
-    margin-inline-end: auto;
+    margin-inline-end: 0;
     height: calc(100vh + 15px);
     padding: rem(15px);
   }
