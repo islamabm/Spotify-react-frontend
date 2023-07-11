@@ -19,6 +19,7 @@ export const stationService = {
   userQuery,
   addSongToStation,
   stationNameClass,
+  songNameClass,
   updateStation,
   editStation,
   getRecommendedSongs,
@@ -389,6 +390,17 @@ function stationNameClass(station) {
     return 'long-station-name'
   } else {
     return 'huge-station-name'
+  }
+}
+function songNameClass(song) {
+  if (!song.title) return
+  const words = song.title.split(' ').length
+  if (words <= 10) {
+    return 'short-song-title'
+  } else if (words <= 15) {
+    return 'long-song-title'
+  } else {
+    return 'huge-song-title'
   }
 }
 

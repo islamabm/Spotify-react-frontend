@@ -1,28 +1,28 @@
-import React, { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { getSpotifySvg } from "../services/SVG.service"
-import { BubblingHeart } from "./BubblingHeart"
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { getSpotifySvg } from '../services/SVG.service'
+import { BubblingHeart } from './BubblingHeart'
 import {
   setCurrSong,
   setCurrSongIndex,
   setCurrSongSvg,
   setCurrDirection,
-} from "../store/actions/song.actions"
-import { useNavigate, useParams } from "react-router-dom"
-import { SongOptionsModal } from "./Modals/SongOptionsModal"
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
-import { updateStation } from "../store/actions/station.actions"
+} from '../store/actions/song.actions'
+import { useNavigate, useParams } from 'react-router-dom'
+import { SongOptionsModal } from './Modals/SongOptionsModal'
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
+import { updateStation } from '../store/actions/station.actions'
 import {
   setCurrSongAction,
   setCurrSongLyrics,
-} from "../store/actions/song.actions"
-import animationGit from "../assets/gif/animation.gif"
+} from '../store/actions/song.actions'
+import animationGit from '../assets/gif/animation.gif'
 
 export default function StationSongList({ station }) {
   const [hoveredSongIdx] = useState(null)
   const [hoveredSong, setHoveredSong] = useState(null)
-  const [createdBy, setCreatedBy] = useState("")
-  const [currSvg, setCurrSvg] = useState("play")
+  const [createdBy, setCreatedBy] = useState('')
+  const [currSvg, setCurrSvg] = useState('play')
   const [showModal, setShowOptionsModal] = useState(false)
   const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 })
   const [songs, setSongs] = useState(station.songs)
@@ -43,7 +43,7 @@ export default function StationSongList({ station }) {
   }, [station])
 
   function onSongClicked(songId) {
-    setCurrSvg("play")
+    setCurrSvg('play')
     if (currSong?.id !== songId) {
       setIsFirstClick(true)
     }
@@ -52,18 +52,18 @@ export default function StationSongList({ station }) {
       dispatch(setCurrSongIndex(params.id, songId))
       setIsFirstClick(false)
     } else {
-      dispatch(setCurrSongSvg("play"))
+      dispatch(setCurrSongSvg('play'))
     }
   }
 
   function pauseSong() {
-    setCurrSvg("pause")
-    dispatch(setCurrSongSvg("pause"))
+    setCurrSvg('pause')
+    dispatch(setCurrSongSvg('pause'))
   }
 
   function showSongOptionsModal(e, song) {
     dispatch(setCurrSongAction(station._id, song._id))
-    dispatch(setCurrDirection("left"))
+    dispatch(setCurrDirection('left'))
     e.stopPropagation()
 
     const rect = e.target.getBoundingClientRect()
@@ -76,18 +76,18 @@ export default function StationSongList({ station }) {
 
   function formatDate(dateString) {
     const months = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
     ]
 
     const date = new Date(dateString)
@@ -112,7 +112,7 @@ export default function StationSongList({ station }) {
   function onLyricsClicked(artist, title, songId) {
     dispatch(setCurrSongAction(station._id, songId))
     dispatch(setCurrSongLyrics(artist, title))
-    navigate("/lyrics")
+    navigate('/lyrics')
   }
 
   return (
@@ -120,7 +120,7 @@ export default function StationSongList({ station }) {
       <Droppable droppableId="songList">
         {(provided) => (
           <div ref={provided.innerRef} {...provided.droppableProps}>
-            {(createdBy === "Liked songs system"
+            {(createdBy === 'Liked songs system'
               ? user?.LikedSongs
               : songs
             )?.map((song, idx) => {
@@ -140,7 +140,7 @@ export default function StationSongList({ station }) {
                     >
                       {song?._id === currSong?._id &&
                       song?._id !== hoveredSong &&
-                      currSvg === "play" ? (
+                      currSvg === 'play' ? (
                         <img
                           className="song-animation-gif"
                           src={animationGit}
@@ -149,36 +149,36 @@ export default function StationSongList({ station }) {
                       ) : (
                         <span
                           className={`song-idx flex align-center justify-center ${
-                            hoveredSongIdx === idx ? "hovered" : ""
+                            hoveredSongIdx === idx ? 'hovered' : ''
                           }`}
                           style={{
-                            color: song?._id === currSong?._id ? "#1ED760" : "",
+                            color: song?._id === currSong?._id ? '#1ED760' : '',
                           }}
                         >
                           {idx + 1}
                         </span>
                       )}
 
-                      {isPlayingAndHovered && currSvg === "play" ? (
+                      {isPlayingAndHovered && currSvg === 'play' ? (
                         <span
                           title="Pause"
                           onClick={pauseSong}
                           className={` small-play-btn flex align-center justify-center title ${
-                            hoveredSongIdx === idx ? "hovered" : ""
+                            hoveredSongIdx === idx ? 'hovered' : ''
                           }`}
                           dangerouslySetInnerHTML={{
-                            __html: getSpotifySvg("smallPauseButton"),
+                            __html: getSpotifySvg('smallPauseButton'),
                           }}
                         ></span>
                       ) : (
                         <span
-                          title={`Play ${song?.title}`}
+                          // title={`Play ${song?.title}`}
                           onClick={() => onSongClicked(song._id)}
                           className={` small-play-btn flex align-center justify-center title play${
-                            hoveredSongIdx === idx ? "hovered" : ""
+                            hoveredSongIdx === idx ? 'hovered' : ''
                           }`}
                           dangerouslySetInnerHTML={{
-                            __html: getSpotifySvg("smallPlayButton"),
+                            __html: getSpotifySvg('smallPlayButton'),
                           }}
                         ></span>
                       )}
@@ -198,7 +198,7 @@ export default function StationSongList({ station }) {
                             className="song-name pointer"
                             style={{
                               color:
-                                song?._id === currSong?._id ? "#1ED760" : "",
+                                song?._id === currSong?._id ? '#1ED760' : '',
                             }}
                           >
                             {song?.title}
@@ -218,14 +218,14 @@ export default function StationSongList({ station }) {
                         </span>
 
                         <div className="duration">
-                          {song?.duration ? song?.duration : "1:00"}
+                          {song?.duration ? song?.duration : '1:00'}
                         </div>
                         <span
                           title={`More options for ${song?.title}`}
                           onClick={(e) => showSongOptionsModal(e, song)}
                           className="hidden dots title song-option"
                           dangerouslySetInnerHTML={{
-                            __html: getSpotifySvg("dots"),
+                            __html: getSpotifySvg('dots'),
                           }}
                         ></span>
                       </div>
