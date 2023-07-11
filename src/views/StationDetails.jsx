@@ -48,7 +48,7 @@ export function StationDetails(props) {
     //   scrollPos: 0,
     //   backgroundColor: 'transparent',
     // })
-  }, [params.id, station])
+  }, [params.id])
 
   // useEffect(() => {
   //   const unsubscribe = eventBus.on('newStationCreated', setBgStyle)
@@ -141,7 +141,7 @@ export function StationDetails(props) {
     setShowModal(false)
     setShowRecommindationModal(true)
   }
-  
+
   async function getDominantColor(imageSrc) {
     const cachedColor = colorCache[imageSrc]
     if (cachedColor) {
