@@ -91,7 +91,7 @@ export function MobileMediaPlayer() {
                 {song ? song.artist : station?.songs[0]?.artist}
               </p>
             </div>
-            <BubblingHeart index={song?._id} item={song} type="song" />
+            <BubblingHeart index={song?._id} item={song} type="stationMobile"/>
           </div>
         </div>
         <div className="media-player">

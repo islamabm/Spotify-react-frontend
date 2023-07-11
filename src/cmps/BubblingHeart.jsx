@@ -29,7 +29,6 @@ export function BubblingHeart({ index, item, type }) {
     if (type === 'song') return '40px'
     if (type === 'station') return '85px'
     if (type === 'stationMobile') return '55px'
-
     return ''
   }
 

@@ -5,8 +5,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
   fill: white;
+  @include for-mobile-layout {
+   stroke: white;   
+  }
 }
 label {
   transform: translateX(-25px);

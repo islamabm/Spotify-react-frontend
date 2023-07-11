@@ -123,16 +123,23 @@ export function AppFooter() {
                 <div className="actor-name-song">
                   <p className={`song-name`}>
                     {song
-                      ? window.innerWidth < 460 && song.title.length > 10
-                        ? `${song.title.slice(0, 10)}...`
+                      ? window.innerWidth < 460 && song.title.length > 20
+                        ? `${song.title.slice(0, 20)}...`
                         : song.title
                       : window.innerWidth < 460 &&
-                        station?.songs[0]?.title.length > 10
-                      ? `${station.songs[0].title.slice(0, 10)}...`
+                        station?.songs[0]?.title.length > 20
+                      ? `${station.songs[0].title.slice(0, 20)}...`
                       : station?.songs[0]?.title}
                   </p>
                   <p className="actor-name">
-                    {song ? song.artist : station?.songs[0]?.artist}
+                  {song
+                      ? window.innerWidth < 460 && song.artist.length > 25
+                        ? `${song.artist.slice(0, 25)}...`
+                        : song.artist
+                      : window.innerWidth < 460 &&
+                        station?.songs[0]?.artist.length > 25
+                      ? `${station.songs[0].artist.slice(0, 25)}...`
+                      : station?.songs[0]?.artist}
                   </p>
                 </div>
 
@@ -143,7 +150,7 @@ export function AppFooter() {
                 </div>
                 <div className={`mobile-heart`}>
                   <span className="footer-heart">
-                    <BubblingHeart index={song?._id} item={song} type="song" />
+                    <BubblingHeart index={song?._id} item={song} type="stationMobile" />
                   </span>
                   <span
                     // title={isPlaying ? "Pause" : "Play"}
