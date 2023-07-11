@@ -58,7 +58,7 @@ export function MobileMediaPlayer({ closeMediaPlayer, open }) {
   }
 
   function goToPreviousRoute() {
-    closeMediaPlayer()
+    navigate(-1)
   }
 
   return (
