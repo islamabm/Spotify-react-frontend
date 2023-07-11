@@ -122,9 +122,9 @@ export function setCurrSongSvg(svg) {
     dispatch({ type: SET_CURR_SONG_SVG, svg })
   }
 }
-export function setVideoId(videoId) {
+export function setVideoId(videoId, song) {
   return (dispatch) => {
-    dispatch({ type: SET_CURR_VIDEOID, videoId })
+    dispatch({ type: SET_CURR_VIDEOID, videoId, song })
   }
 }
 

@@ -53,6 +53,7 @@ export function songReducer(state = INITIAL_STATE, action = {}) {
       return {
         ...state,
         videoId: action.videoId,
+        currSong: action.song,
       }
     default:
       return state

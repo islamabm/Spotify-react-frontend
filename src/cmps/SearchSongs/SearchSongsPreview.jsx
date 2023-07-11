@@ -8,7 +8,7 @@ export function SearchSongsPreview({ song, stationId }) {
   const dispatch = useDispatch()
 
   function playSong() {
-    dispatch(setVideoId(song.videoId))
+    dispatch(setVideoId(song.videoId, song))
   }
   function handleAddSong() {
     song._id = utilService.makeId()
