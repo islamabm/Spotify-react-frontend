@@ -135,6 +135,16 @@
     align-items: center;
     padding: rem(24px);
     gap: rem(25px);
+    @include for-mobile-layout {
+      justify-content: space-between;
+      padding: rem(16px);
+    }
+    .mobile-heart-dots {
+      display: flex;
+      align-items: center;
+      justify-items: center;
+      gap: rem(25px);
+    }
     .dots {
       fill: #afb8b7;
       margin-inline-start: rem(-50px);
