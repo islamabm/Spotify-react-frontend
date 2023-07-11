@@ -209,6 +209,9 @@
             }
             &:hover {
               text-decoration: underline;
+              @include for-mobile-layout {
+                text-decoration: none;
+              }
             }
           }
           .song-artist {
