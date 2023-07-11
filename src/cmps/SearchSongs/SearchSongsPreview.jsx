@@ -2,14 +2,13 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { addSongToStation } from '../../store/actions/station.actions'
 import { utilService } from '../../services/util.service'
-import { setCurrSong } from '../../store/actions/song.actions'
+import { setVideoId } from '../../store/actions/song.actions'
 
 export function SearchSongsPreview({ song, stationId }) {
   const dispatch = useDispatch()
 
-  function playSong () {
-    console.log('song', song)
-    dispatch(setCurrSong('' , song.videoId ))
+  function playSong() {
+    dispatch(setVideoId(song.videoId))
   }
   function handleAddSong() {
     song._id = utilService.makeId()
@@ -21,11 +20,11 @@ export function SearchSongsPreview({ song, stationId }) {
         <img src={song.imgUrl} className="song-img" />
         <span>{song?.title}</span>
       </div>
-      {stationId &&
-      <button onClick={handleAddSong} className="pointer">
-        Add
-      </button>
-      }
+      {stationId && (
+        <button onClick={handleAddSong} className="pointer">
+          Add
+        </button>
+      )}
     </article>
   )
 }

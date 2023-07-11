@@ -4,6 +4,7 @@ export const SET_CURR_SONG_INDEX = 'SET_CURR_SONG_INDEX'
 export const SET_CURR_SONG_SVG = 'SET_CURR_SONG_SVG'
 export const SET_CURR_SONG_LYRICS = 'SET_CURR_SONG_LYRICS'
 export const SET_CURR_DIRECTION = 'SET_CURR_DIRECTION'
+export const SET_CURR_VIDEOID = 'SET_CURR_VIDEOID'
 const INITIAL_STATE = {
   currSong: null,
   currSongId: null,
@@ -12,6 +13,7 @@ const INITIAL_STATE = {
   currentSvg: '',
   currDirection: 'left',
   currSongLyrics: [],
+  videoId: '',
 }
 
 export function songReducer(state = INITIAL_STATE, action = {}) {
@@ -46,6 +48,11 @@ export function songReducer(state = INITIAL_STATE, action = {}) {
       return {
         ...state,
         currIndex: action.index,
+      }
+    case SET_CURR_VIDEOID:
+      return {
+        ...state,
+        videoId: action.videoId,
       }
     default:
       return state
