@@ -52,14 +52,6 @@ export function StationDetails(props) {
   useEffect(() => {
     updateImgUrlAndColor(station)
   }, [stationImg])
-  // useEffect(() => {
-  //   const unsubscribe = eventBus.on('newStationCreated', setBgStyle)
-  //   return () => unsubscribe()
-  // }, [])
-
-  // useEffect(() => {
-  //   updateImgUrlAndColor(station)
-  // }, [stationImg])
 
   useEffect(() => {
     const currentStationDetailsRef = stationDetailsRef.current

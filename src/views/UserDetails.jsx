@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { uploadImg } from '../services/upload.service'
 import { editUserImg, getUser } from '../store/actions/user.actions'
 import { FastAverageColor } from 'fast-average-color'
 import { getSpotifySvg } from '../services/SVG.service'
+import { eventBus } from '../services/event-bus.service'
 import { useNavigate } from 'react-router-dom'
 import { loadUserStations } from '../store/actions/station.actions'
 import { UserDetailsList } from '../cmps/UserDetailsStations/UserDetailsList'
@@ -13,6 +14,7 @@ export function UserDetails() {
   const user = useSelector((storeState) => storeState.userModule.loggedInUser)
   const dispatch = useDispatch()
   const colorCache = {}
+  const userDetailsRef = useRef(null)
   const navigate = useNavigate()
   useEffect(() => {
     dispatch(getUser())
@@ -44,6 +46,26 @@ export function UserDetails() {
     if (!user.imgUrl) return
     getDominantColor(userImg)
   }
+
+  useEffect(() => {
+    const currentUserDetailsRef = userDetailsRef.current
+    const handleScroll = () => {
+      const scrollPos = currentUserDetailsRef.scrollTop
+      eventBus.emit('userDetailsScroll', { scrollPos, bgStyle })
+    }
+    if (currentUserDetailsRef) {
+      currentUserDetailsRef.addEventListener('scroll', handleScroll, {
+        passive: true,
+      })
+    }
+    return () => {
+      if (currentUserDetailsRef) {
+        currentUserDetailsRef.removeEventListener('scroll', handleScroll, {
+          passive: true,
+        })
+      }
+    }
+  }, [bgStyle])
 
   async function getDominantColor(imageSrc) {
     const cachedColor = colorCache[imageSrc]
@@ -79,7 +101,7 @@ export function UserDetails() {
   }
 
   return user ? (
-    <section className="user-page">
+    <section className="user-page" ref={userDetailsRef}>
       <section className="user-profile" style={bgStyle}>
         <button className="user-details-arrow" onClick={goHome}>
           <span

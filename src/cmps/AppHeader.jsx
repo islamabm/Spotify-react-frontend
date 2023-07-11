@@ -110,6 +110,31 @@ export function AppHeader() {
       unlistenDetails()
     }
   }, [location.pathname])
+  useEffect(() => {
+    const onScroll = ({ scrollPos, bgStyle }) => {
+      updateHeaderOpacity(scrollPos, bgStyle)
+    }
+    const unlistenDetails = eventBus.on('userDetailsScroll', onScroll)
+
+    if (
+      location.pathname === '/' ||
+      location.pathname === '/search' ||
+      location.pathname === '/lyrics' ||
+      location.pathname === '/user' ||
+      (location.pathname.includes('/station/') && currScrollPos < 10)
+    ) {
+      setHeaders({
+        backgroundColor: 'transparent',
+      })
+    } else {
+      setHeaders({
+        backgroundColor: '#121212',
+      })
+    }
+    return () => {
+      unlistenDetails()
+    }
+  }, [location.pathname])
 
   function onCloseModal() {
     setShowModal(false)
@@ -143,129 +168,135 @@ export function AppHeader() {
   }
   return (
     <>
-    {location.pathname !== "/mobileMediaPlayer" && 
-    <header
-      className="app-header"
-      style={{ padding: showMobileModal ? '0' : '20px', ...headers }}
-    >
-      <section className="arrows-and-input">
-        <section className="arrows">
-          <div className="black-circle">
-            <span
-              onClick={goToPreviousRoute}
-              className="title"
-              title="Go back"
-              dangerouslySetInnerHTML={{
-                __html: getSpotifySvg('leftArrowIcon'),
-              }}
-            ></span>
-          </div>
-          <div className="black-circle">
-            <span
-              onClick={goToNextRoute}
-              className="title"
-              title="Go forward"
-              dangerouslySetInnerHTML={{
-                __html: getSpotifySvg('rightArrowIcon'),
-              }}
-            ></span>
-            {/* <Transcript /> */}
-          </div>
-        </section>
-        {location.pathname === '/search' && (
-          <div className="flex align-center justify-center input-container">
-            <span
-              dangerouslySetInnerHTML={{
-                __html: getSpotifySvg('smallerSearchIcon'),
-              }}
-            ></span>
-            <input placeholder="What do you want to listen to?" />
-          </div>
-        )}
-
-        {currScrollPos > 300 &&
-        location.pathname === `/station/${station?._id}` ? (
-          <div
-            onClick={playFirstSong}
-            className="flex align-center justify-center station-options"
-          >
-            <div
-              className="play-button flex justify-center"
-              onClick={playFirstSongInStation}
-            >
-              {isPlaying ? (
+      {location.pathname !== '/mobileMediaPlayer' && (
+        <header
+          className="app-header"
+          style={{ padding: showMobileModal ? '0' : '20px', ...headers }}
+        >
+          <section className="arrows-and-input">
+            <section className="arrows">
+              <div className="black-circle">
                 <span
-                  title="Pause"
-                  className="pause-button flex align-center justify-center title"
+                  onClick={goToPreviousRoute}
+                  className="title"
+                  title="Go back"
                   dangerouslySetInnerHTML={{
-                    __html: getSpotifySvg('biggerPauseBtn'),
+                    __html: getSpotifySvg('leftArrowIcon'),
                   }}
                 ></span>
-              ) : (
+              </div>
+              <div className="black-circle">
                 <span
-                  title="Play"
-                  className=" flex align-center justify-center title"
+                  onClick={goToNextRoute}
+                  className="title"
+                  title="Go forward"
                   dangerouslySetInnerHTML={{
-                    __html: getSpotifySvg('biggerPlayBtn'),
+                    __html: getSpotifySvg('rightArrowIcon'),
                   }}
                 ></span>
-              )}
-            </div>
-            <p className="">{station.name}</p>
-          </div>
-        ) : (
-          ''
-        )}
-      </section>
-
-      <div className="user-actions flex justify-center align-center">
-        {!user ? (
-          <>
-            <Link to="/signup">
-              <button className="sign-up pointer">Sign up</button>
-            </Link>
-            <Link to="/login">
-              <button className="login pointer flex justify-center align-center">
-                Log in
-              </button>
-            </Link>
-          </>
-        ) : (
-          <>
-            {window.innerWidth < 460 ? (
-              <span
-                style={{ display: showMobileModal ? 'none' : '' }}
-                onClick={openMobileModal}
-                className="white"
-                dangerouslySetInnerHTML={{
-                  __html: getSpotifySvg('settings'),
-                }}
-              ></span>
-            ) : (
-              <span
-                className="user-details-header"
-                onClick={onClickUserDetails}
-              >
-                <img
-                  title={user?.username}
-                  src={
-                    user.imgUrl
-                      ? user.imgUrl
-                      : 'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg'
-                  }
-                  alt="user-img"
-                />
-              </span>
+                {/* <Transcript /> */}
+              </div>
+            </section>
+            {location.pathname === '/search' && (
+              <div className="flex align-center justify-center input-container">
+                <span
+                  dangerouslySetInnerHTML={{
+                    __html: getSpotifySvg('smallerSearchIcon'),
+                  }}
+                ></span>
+                <input placeholder="What do you want to listen to?" />
+              </div>
             )}
-          </>
-        )}
-      </div>
-      {showModal && <UserModal onClose={onCloseModal} />}
-      {showMobileModal && (
-        <MobileModal closeModal={handleCloseModal} show={showMobileModal} />
+
+            {currScrollPos > 300 && location.pathname === `/user` ? (
+              <h1>baba</h1>
+            ) : (
+              ''
+            )}
+
+            {currScrollPos > 300 &&
+            location.pathname === `/station/${station?._id}` ? (
+              <div
+                onClick={playFirstSong}
+                className="flex align-center justify-center station-options"
+              >
+                <div
+                  className="play-button flex justify-center"
+                  onClick={playFirstSongInStation}
+                >
+                  {isPlaying ? (
+                    <span
+                      title="Pause"
+                      className="pause-button flex align-center justify-center title"
+                      dangerouslySetInnerHTML={{
+                        __html: getSpotifySvg('biggerPauseBtn'),
+                      }}
+                    ></span>
+                  ) : (
+                    <span
+                      title="Play"
+                      className=" flex align-center justify-center title"
+                      dangerouslySetInnerHTML={{
+                        __html: getSpotifySvg('biggerPlayBtn'),
+                      }}
+                    ></span>
+                  )}
+                </div>
+                <p className="">{station.name}</p>
+              </div>
+            ) : (
+              ''
+            )}
+          </section>
+
+          <div className="user-actions flex justify-center align-center">
+            {!user ? (
+              <>
+                <Link to="/signup">
+                  <button className="sign-up pointer">Sign up</button>
+                </Link>
+                <Link to="/login">
+                  <button className="login pointer flex justify-center align-center">
+                    Log in
+                  </button>
+                </Link>
+              </>
+            ) : (
+              <>
+                {window.innerWidth < 460 ? (
+                  <span
+                    style={{ display: showMobileModal ? 'none' : '' }}
+                    onClick={openMobileModal}
+                    className="white"
+                    dangerouslySetInnerHTML={{
+                      __html: getSpotifySvg('settings'),
+                    }}
+                  ></span>
+                ) : (
+                  <span
+                    className="user-details-header"
+                    onClick={onClickUserDetails}
+                  >
+                    <img
+                      title={user?.username}
+                      src={
+                        user.imgUrl
+                          ? user.imgUrl
+                          : 'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg'
+                      }
+                      alt="user-img"
+                    />
+                  </span>
+                )}
+              </>
+            )}
+          </div>
+          {showModal && <UserModal onClose={onCloseModal} />}
+          {showMobileModal && (
+            <MobileModal closeModal={handleCloseModal} show={showMobileModal} />
+          )}
+        </header>
       )}
-    </header>
-                }
-                </>
+    </>
   )
 }
