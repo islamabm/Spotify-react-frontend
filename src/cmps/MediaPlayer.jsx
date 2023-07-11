@@ -272,7 +272,7 @@ export function MediaPlayer({ volume }) {
         </div>
 
         <div className="music-bar">
-          <span className="current-time hiding">{displayTime}</span>
+          <span className="current-time start hiding">{displayTime}</span>
           <div
             className="progress-bar"
             ref={progressBarRef}
@@ -286,7 +286,7 @@ export function MediaPlayer({ volume }) {
               style={{ width: progressBarWidth }}
             ></div>
           </div>
-          <span className="current-time hiding">{displayDuration}</span>
+          <span className="current-time end hiding">{displayDuration}</span>
         </div>
       </div>
     </>
