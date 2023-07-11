@@ -12,14 +12,14 @@
     background-color: black;
     height: rem(100px);
     padding: rem(32px) rem(51px);
-  margin-block-end: rem(20px);
-  @include for-mobile-layout {
-    padding: rem(32px) rem(30px);
-    height: rem(30px);
-  }
+    margin-block-end: rem(20px);
+    @include for-mobile-layout {
+      padding: rem(32px) rem(30px);
+      height: rem(30px);
+    }
     a {
       display: block;
-        width: max-content;
+      width: max-content;
     }
   }
   .login-main-container {
@@ -35,15 +35,16 @@
     border-radius: 8px;
     @include for-mobile-layout {
       width: fit-content;
-     }
+      padding: rem(32px);
+    }
     h2 {
       font-family: Circular-medium;
       font-size: 40px;
       @include for-mobile-layout {
-       font-size: 32px;
-       margin-bottom: 25px;
-       margin-top: 0;
-       margin-left: -70px;
+        font-size: 32px;
+        margin-bottom: 25px;
+        margin-top: 0;
+        margin-left: -70px;
       }
     }
     .continue {
@@ -53,16 +54,19 @@
         font-family: Circular-medium;
         width: rem(324px);
         height: rem(48px);
+        @include for-mobile-layout {
+          width: rem(350px);
+        }
         background-color: inherit;
         border: 1px solid #727272;
         color: $clr6;
         border-radius: 200px;
         &:hover {
-            border: 1px solid $clr6;
+          border: 1px solid $clr6;
         }
         img {
-            width: rem(24px);
-            height: rem(24px);
+          width: rem(24px);
+          height: rem(24px);
         }
       }
     }
@@ -78,7 +82,7 @@
       @include for-mobile-layout {
         width: rem(330px);
         margin: rem(35px) rem(100px);
-       }
+      }
     }
     form {
       .spotify-username {
@@ -106,10 +110,10 @@
       color: $clr6;
       &:hover {
         outline: 1px solid $clr6;
-    }
-    &:focus {
+      }
+      &:focus {
         outline: 3px solid $clr6;
-    }
+      }
     }
     .login-btn {
       width: rem(324px);
@@ -121,9 +125,9 @@
       font-size: 16px;
       font-family: Circular-medium;
       @include for-mobile-layout {
-        width: rem(330px);
+        width: rem(350px);
         margin: rem(10px) rem(0px);
-       }
+      }
     }
   }
   .go-to-signup {
@@ -133,13 +137,13 @@
     @include for-mobile-layout {
       flex-direction: column;
       align-items: center;
-     }
+    }
     span {
       color: #a7a7a7;
     }
     a {
       color: $clr6;
-      text-decoration:underline;
+      text-decoration: underline;
       &:hover {
         color: #1ed760;
       }
