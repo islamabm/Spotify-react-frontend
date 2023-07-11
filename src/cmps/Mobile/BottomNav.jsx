@@ -12,6 +12,9 @@ export function BottomNav() {
     if (iconName === 'searchIcon' && location.pathname === '/search') {
       return getSpotifySvg('searchIconActive')
     }
+    if (iconName === 'libraryIcon' && location.pathname === '/library') {
+      return getSpotifySvg('libraryIconActive')
+    }
     return getSpotifySvg(iconName)
   }
 
@@ -46,14 +49,13 @@ export function BottomNav() {
               <span>Search</span>
             </Link>
             <Link
-            
               to="/library"
-              className={`library-icon shared-nav-item ${isActive('/userLibrary')}`}
+              className={`library-icon shared-nav-item ${isActive('/library')}`}
             >
               <span
-                className={`icon ${isActive('/userLibrary')}`}
+                className={`icon ${isActive('/library')}`}
                 dangerouslySetInnerHTML={{
-                  __html: getSvgIcon('libraryIconActive'),
+                  __html: getSvgIcon('libraryIcon'),
                 }}
               ></span>
               <span className='library-icon-text'>Your Library</span>

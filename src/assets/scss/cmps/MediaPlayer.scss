@@ -70,19 +70,27 @@
 .current-time {
   font-size: 0.6875rem;
   font-family: Circular-medium;
-  color: #6a6a6a;
+  color: #b3b3b3;
   text-align: right;
-  @include for-mobile-layout {
-    margin-top: 30px;
-    // display: none;
-    // margin-left: 10px;
-  }
+  &.start {
+    @include for-mobile-layout {
+      position: absolute;
+      bottom: 150px;
+     }
+   }
+  &.end {
+    @include for-mobile-layout {
+      position: absolute;
+      bottom: 150px;
+      right: 22px;
+     }
+   }
 }
 
 .progress-bar {
   flex: 1 1;
   height: rem(4px);
-  background-color: gray;
+  background-color: #606060;
   position: relative;
   cursor: pointer;
   width: rem(400.12px);
@@ -90,8 +98,8 @@
   @include for-mobile-layout {
     grid-row: 2;
     grid-column: 1/-1;
-    width: auto;
-    height: rem(80px);
+    width: 20.7rem;
+    height: rem(4px);
   }
 }
 

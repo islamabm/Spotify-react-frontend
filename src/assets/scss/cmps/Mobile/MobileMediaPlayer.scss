@@ -1,24 +1,26 @@
 .media-player-header{
     font-family: circular-medium;
+    
     .arrow {
       position: absolute;
       left: 20px;
       fill: $clr6;
     }
 }
-.song-details-container-mobile {
-  min-height: 0;         
+.song-details-container-mobile {        
   padding: 12px;     
   min-height: 100vh;                                                  
   &.open {
     animation: cmpExpand 0.2s forwards;
   }
   img {
+    margin-top: 19px;
     padding: 27px;
+   filter: drop-shadow(0 0 1px rgba(0,0,0,.3)) drop-shadow(0 0 10px rgba(0,0,0,.3));
   }
   .artist-name-heart {
     justify-content: space-between;
-    margin: 0 12px;
+    margin: -10px 12px 0px 12px;
     .artist-name {
         display: flex;
         flex-direction: column;
@@ -35,14 +37,15 @@
       }
     }
     .bubbling-heart{
-        // padding-right: -30px;
+        margin-right: -40px;
     }
   }
   .media-player {
    display: flex;
    flex-direction: column-reverse;
-   margin: 15px 0;
-   gap: 25px;
+   margin: 18px 0;
+   gap: 55px;
+
   }
 }
 
