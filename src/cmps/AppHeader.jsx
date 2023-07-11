@@ -174,8 +174,8 @@ export function AppHeader() {
 
   function headerVisabillity() {
     if (width < 430) {
-      if (location.pathname.includes('/')) return 'none-sticky'
-      if (location.pathname.includes('search')) return 'display-none'
+      if (location.pathname === '/') return 'none-sticky'
+      if (location.pathname === '/search') return 'display-none'
     }
     return ''
   }
@@ -183,7 +183,7 @@ export function AppHeader() {
   return (
     <>
       <header
-        className={`app-header ${headerVisabillity}`}
+        className={`app-header ${headerVisabillity()}`}
         style={{ padding: showMobileModal ? '0' : '20px', ...headers }}
       >
         <section className="arrows-and-input">
@@ -288,7 +288,7 @@ export function AppHeader() {
                 <span
                   style={{ display: showMobileModal ? 'none' : '' }}
                   onClick={openMobileModal}
-                  className="white"
+                  className="none-sticky white"
                   dangerouslySetInnerHTML={{
                     __html: getSpotifySvg('settings'),
                   }}
