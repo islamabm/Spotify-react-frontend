@@ -63,8 +63,6 @@ export function AppHeader() {
   useEffect(() => {
     const onScroll = ({ scrollPos, headerBg }) => {
       updateHeaderOpacity(scrollPos, headerBg)
-      console.log('headerBg', headerBg)
-      // console.log('scrollPos', scrollPos)
     }
     const unlistenIndex = eventBus.on('stationIndexScroll', onScroll)
     if (
