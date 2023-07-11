@@ -182,45 +182,44 @@ export function AppHeader() {
 
   return (
     <>
-      {location.pathname !== '/mobileMediaPlayer' && (
-        <header
-          className={`app-header ${ headerVisabillity }`}
-          style={{ padding: showMobileModal ? '0' : '20px', ...headers }}
-        >
-          <section className="arrows-and-input">
-            <section className="arrows">
-              <div className="black-circle">
-                <span
-                  onClick={goToPreviousRoute}
-                  className="title"
-                  title="Go back"
-                  dangerouslySetInnerHTML={{
-                    __html: getSpotifySvg('leftArrowIcon'),
-                  }}
-                ></span>
-              </div>
-              <div className="black-circle">
-                <span
-                  onClick={goToNextRoute}
-                  className="title"
-                  title="Go forward"
-                  dangerouslySetInnerHTML={{
-                    __html: getSpotifySvg('rightArrowIcon'),
-                  }}
-                ></span>
-                {/* <Transcript /> */}
-              </div>
-            </section>
-            {location.pathname === '/search' && (
-              <div className="flex align-center justify-center input-container">
-                <span
-                  dangerouslySetInnerHTML={{
-                    __html: getSpotifySvg('smallerSearchIcon'),
-                  }}
-                ></span>
-                <input placeholder="What do you want to listen to?" />
-              </div>
-            )}
+      <header
+        className={`app-header ${headerVisabillity}`}
+        style={{ padding: showMobileModal ? '0' : '20px', ...headers }}
+      >
+        <section className="arrows-and-input">
+          <section className="arrows">
+            <div className="black-circle">
+              <span
+                onClick={goToPreviousRoute}
+                className="title"
+                title="Go back"
+                dangerouslySetInnerHTML={{
+                  __html: getSpotifySvg('leftArrowIcon'),
+                }}
+              ></span>
+            </div>
+            <div className="black-circle">
+              <span
+                onClick={goToNextRoute}
+                className="title"
+                title="Go forward"
+                dangerouslySetInnerHTML={{
+                  __html: getSpotifySvg('rightArrowIcon'),
+                }}
+              ></span>
+              {/* <Transcript /> */}
+            </div>
+          </section>
+          {location.pathname === '/search' && (
+            <div className="flex align-center justify-center input-container">
+              <span
+                dangerouslySetInnerHTML={{
+                  __html: getSpotifySvg('smallerSearchIcon'),
+                }}
+              ></span>
+              <input placeholder="What do you want to listen to?" />
+            </div>
+          )}
 
           {currScrollPos > 300 && location.pathname === `/user` ? (
             <div className="user-in-header">
@@ -318,7 +317,6 @@ export function AppHeader() {
           <MobileModal closeModal={handleCloseModal} show={showMobileModal} />
         )}
       </header>
-      {/* // )} */}
     </>
   )
 }
