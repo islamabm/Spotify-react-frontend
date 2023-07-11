@@ -203,18 +203,14 @@
           .song-artist {
             color: $clr3;
             font-size: 14px;
-            text-overflow: ellipsis;
-            overflow: hidden;
-            white-space: nowrap;
-            width: rem(100px);
             @include for-mobile-layout {
               font-size: 12px;
             }
           }
         }
         .song-img {
-          height: rem(40px);
-          width: rem(40px);
+          height: rem(50px);
+          width: rem(50px);
         }
       }
       .song-idx {
