@@ -24,6 +24,7 @@ export function AppHeader() {
   const dispatch = useDispatch()
   const location = useLocation()
   const navigate = useNavigate()
+  const width = window.innerWidth  
 
   function hexToRgb(hex) {
     const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i
@@ -170,11 +171,17 @@ export function AppHeader() {
   function goHome() {
     navigate('/')
   }
+
+  function headerVisabillity() {
+    if (width < 430 && location.pathname.includes('/station/')) return 'display-none'
+    return ''
+  }
+
   return (
     <>
       {location.pathname !== '/mobileMediaPlayer' && (
         <header
-          className="app-header"
+          className={`app-header ${ headerVisabillity }`}
           style={{ padding: showMobileModal ? '0' : '20px', ...headers }}
         >
           <section className="arrows-and-input">

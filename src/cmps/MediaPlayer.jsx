@@ -34,6 +34,7 @@ export function MediaPlayer({ volume }) {
   let playerRef = useRef(null)
   let interval = null
 
+
   const progressBarWidth = duration
     ? `${(currentTime / duration) * 100}%`
     : '0%'
