@@ -8,16 +8,22 @@ export function UserLibraryList({ stations, title }) {
   const user = useSelector((storeState) => storeState.userModule.loggedInUser)
   const [showInput, setShowInput] = useState(false)
   const [stationCounter, setStationCounter] = useState(0)
+  const [filter, setFilter] = useState('')
   const dispatch = useDispatch()
   function openInput() {
-    setShowInput(true)
+    setShowInput(!showInput)
+  }
+  function handleFilterChange(e) {
+    setFilter(e.target.value)
   }
   function createNewStation() {
     setStationCounter(stationCounter + 1)
     const name = `My Playlist #${stationCounter}`
     dispatch(addStation(name, [], emptyImg))
   }
-
+  const filteredStations = stations.filter((station) =>
+    station.name.toLowerCase().includes(filter.toLowerCase())
+  )
   return (
     <>
       {window.innerWidth < 460 ? (
@@ -30,39 +36,41 @@ export function UserLibraryList({ stations, title }) {
               <h1>Library</h1>
             </div>
             <div className="section-two">
-              <span
-                onClick={createNewStation}
-                className="title"
-                title="Go back"
-                dangerouslySetInnerHTML={{
-                  __html: getSpotifySvg('plus'),
-                }}
-              ></span>
               <div className="input-container">
-                <span
-                  onClick={openInput}
-                  title="Search in Your Library"
-                  className="smaller-search pointer flex align-center justify-center title"
-                  dangerouslySetInnerHTML={{
-                    __html: getSpotifySvg('smallerSearchIcon'),
-                  }}
-                ></span>
+                {!showInput && (
+                  <span
+                    onClick={openInput}
+                    title="Search in Your Library"
+                    className="smaller-search pointer flex align-center justify-center title"
+                    dangerouslySetInnerHTML={{
+                      __html: getSpotifySvg('smallerSearchIcon'),
+                    }}
+                  ></span>
+                )}
                 {showInput && (
                   <input
                     className={`search-input ${showInput ? 'open' : 'close'}`}
                     type="text"
                     placeholder="Search in Your Library"
-                    // value={filterUserStations}
-                    // onChange={(e) => setFilterUserStations(e.target.value)}
+                    value={filter}
+                    onChange={handleFilterChange}
                   />
                 )}
               </div>
+              <span
+                onClick={createNewStation}
+                className="title plus-library"
+                title="Go back"
+                dangerouslySetInnerHTML={{
+                  __html: getSpotifySvg('plus'),
+                }}
+              ></span>
             </div>
           </div>
           <section className="station-list-user">
             <h3 className="category-tag pointer">{title}</h3>
             <section className="station-list">
-              {stations.map((station, idx) => (
+              {filteredStations.map((station, idx) => (
                 <UserLibraryPreview key={idx} station={station} />
               ))}
             </section>
