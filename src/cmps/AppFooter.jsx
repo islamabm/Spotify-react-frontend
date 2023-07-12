@@ -112,6 +112,7 @@ export function AppFooter() {
 
   function displayMobileMediaPlayer() {
     setIsDisplayFooter(false)
+    dispatch(setCurrSongSvg('pause'))
     if (window.innerWidth > 460) return
     // setIsMobileMediaPlayer(true)
     navigate('/mobileMediaPlayer')
