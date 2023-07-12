@@ -20,6 +20,7 @@ import { SongLyrics } from "./views/SongLyrics";
 import { OnlyLyrics } from "./views/OnlyLyrics";
 import { BottomNav } from "../src/cmps/Mobile/BottomNav";
 import { MobileMediaPlayer } from "../src/views/mobile/MobileMediaPlayer";
+import { EditStationMobile } from "./views/mobile/EditStationMobile";
 
 function App() {
   const dispatch = useDispatch();
@@ -28,7 +29,6 @@ function App() {
     const user = dispatch(getUser());
     console.log("user", user);
   }, []);
-
   return (
     <Router>
       <Routes>
@@ -49,6 +49,7 @@ function LoggedInApp() {
       <main className="container">
         <Routes>
           <Route path="/" element={<StationIndex />} />
+          <Route path="/edit/mobile" element={<EditStationMobile />} />
           <Route path="/station/:id" element={<StationDetails />} />
           <Route path="/lyrics" element={<SongLyrics />} />
           <Route path="/only/lyrics" element={<OnlyLyrics />} />
