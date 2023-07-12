@@ -13,7 +13,7 @@
   right: 0;
   bottom: 0;
   @include for-mobile-layout {
-    grid-template-rows: 1fr 10px;
+    grid-template-rows: 1fr 1fr;
     grid-template-columns: 40px 190px 5px 1fr;
     height: rem(58px);
     min-height: rem(58px);
@@ -124,7 +124,7 @@
         font-size: 0.6875rem;
         font-weight: 400;
         @include for-mobile-layout {
-          color:white;
+          color: white;
           font-family: circular-light;
         }
       }
