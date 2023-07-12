@@ -1,11 +1,19 @@
 import React from 'react'
 import { getSpotifySvg } from '../../services/SVG.service'
-export function EditStationMobilePreview({ song }) {
+import { useDispatch } from 'react-redux'
+import { removeSongFromStation } from '../../store/actions/station.actions'
+export function EditStationMobilePreview({ provided, song, station }) {
+  const dispatch = useDispatch()
+
+  function remove() {
+    dispatch(removeSongFromStation(station._id, song._id))
+  }
+
   return (
     <div className="edit-station-mobile-preview">
       <div className="preview-img-container">
         <span
-          // onClick={goToPreviousRoute}
+          onClick={remove}
           title="Go back"
           dangerouslySetInnerHTML={{
             __html: getSpotifySvg('deleteMobile'),
@@ -19,7 +27,7 @@ export function EditStationMobilePreview({ song }) {
         </div>
       </div>
       <span
-        // onClick={goToPreviousRoute}
+        {...provided.dragHandleProps}
         title="Go back"
         dangerouslySetInnerHTML={{
           __html: getSpotifySvg('menu'),

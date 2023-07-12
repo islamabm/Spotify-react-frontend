@@ -1,9 +1,10 @@
 .edit-station-mobile-preview {
   display: flex;
-  align-items: flex-start; // Align vertically at start
-  justify-items: flex-start;
+  align-items: center;
+  justify-items: center;
   justify-content: space-between;
   padding: rem(10px);
+  gap: rem(10px);
 
   .preview-img-container {
     display: flex;

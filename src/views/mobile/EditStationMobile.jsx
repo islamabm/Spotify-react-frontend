@@ -13,6 +13,7 @@ export function EditStationMobile() {
   const [editedStation, setEditedStation] = useState({ ...station })
   const [showDescInput, setShowDescInput] = useState(false)
   const [isUploading, setIsUploading] = useState(false)
+  const [isTyping, setIsTyping] = useState(false)
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
@@ -51,17 +52,9 @@ export function EditStationMobile() {
     }
   }
 
-  // function onChangeStationDesc(e) {
-  //   setEditedStation({ ...editedStation, desc: e.target.value })
-  // }
-
   return (
     <section className="edit-station-mobile">
       <div className="edit-station-mobile-header flex align-center">
-        <span className="edit-station-save" onClick={handleSave}>
-          Save
-        </span>
-        <span className="edit-station-text">Edit playlist</span>
         <span
           onClick={onCloseEditModal}
           className="edit-station-x flex pointer"
@@ -69,6 +62,10 @@ export function EditStationMobile() {
             __html: getSpotifySvg('x'),
           }}
         ></span>
+        <span className="edit-station-text">Edit playlist</span>
+        <span className="edit-station-save" onClick={handleSave}>
+          Save
+        </span>
       </div>
       <div className="edit-station-mobile-img-container flex justify-center">
         <label
@@ -92,14 +89,18 @@ export function EditStationMobile() {
           )}
           <input type="file" onChange={handelFile} className="hidden" />
         </label>
-        <span className="edit-station-mobile-change-img">Change image</span>
+        {/* <span className="edit-station-mobile-change-img">Change image</span> */}
       </div>
       <div className="edit-station-mobile-input-container flex justify-center align-center">
         <input
-          className="edit-station-mobile-input"
+          className={`edit-station-mobile-input ${
+            isTyping ? 'green-border' : ''
+          }`} // add class here
           type="text"
           placeholder={station.name}
-          onChange={(e) => onChangeStationName(e)}
+          onChange={onChangeStationName}
+          onFocus={() => setIsTyping(true)}
+          onBlur={() => setIsTyping(false)}
         />
         {showDescInput ? (
           <input
@@ -119,7 +120,7 @@ export function EditStationMobile() {
       </div>
       {station?.songs && (
         <div className="edit-station-song-list">
-          <EditStationMobileList list={station.songs} />
+          <EditStationMobileList list={station.songs} station={station} />
         </div>
       )}
     </section>

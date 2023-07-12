@@ -4,17 +4,10 @@
   .edit-station-mobile-header {
     color: $clr3;
     font-size: 25px;
-    // justify-content: space-between;
-    // padding: rem(10px);
-    .edit-station-save {
-      padding: rem(20px);
-      margin-inline-start: rem(15px);
-    }
-    .edit-station-text {
-      margin-inline-start: rem(28px);
-    }
+    justify-content: space-between;
+    padding: rem(24px);
+
     .edit-station-x {
-      margin-inline-start: rem(90px);  
       svg {
         fill: $clr3;
         width: rem(30px);
@@ -25,14 +18,14 @@
   .edit-station-mobile-img-container {
     flex-direction: column;
     gap: rem(15px);
-    margin-block-end: rem(50px) ;
+    margin-block-end: rem(50px);
     transform: translate(26%, 10px);
     .edit-station-mobile-img {
-        height: rem(200px);
-        width: rem(200px);
+      height: rem(200px);
+      width: rem(200px);
     }
     .edit-station-mobile-change-img {
-        transform: translate(12%);
+      transform: translate(12%);
     }
   }
   .edit-station-mobile-input-container {
