@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { getSpotifySvg } from '../../services/SVG.service'
+import { eventBus } from '../../services/event-bus.service'
 import { BubblingHeart } from '../../cmps/BubblingHeart'
 import { MediaPlayer } from '../../cmps/MediaPlayer'
 import { FastAverageColor } from 'fast-average-color'
 
-export function MobileMediaPlayer({ closeMediaPlayer, open }) {
+export function MobileMediaPlayer() {
   const song = useSelector((storeState) => storeState.songModule.currSong)
   const [bgStyle, setBgStyle] = useState(null)
   const colorCache = {}
@@ -59,14 +60,13 @@ export function MobileMediaPlayer({ closeMediaPlayer, open }) {
 
   function goToPreviousRoute() {
     navigate(-1)
+    eventBus.emit('navigation:back')
   }
 
   return (
     <>
       <section
-        className={`song-details-container-mobile flex column align-center justify-center ${
-          open ? 'open' : 'close'
-        }`}
+        className={`song-details-container-mobile flex column align-center justify-center`}
         // className="song-details-container-mobile flex column align-center justify-center"
         style={bgStyle}
       >

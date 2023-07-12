@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { getSpotifySvg } from '../services/SVG.service'
-
+import { eventBus } from '../services/event-bus.service'
 import { MediaPlayer } from './MediaPlayer'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -22,7 +22,7 @@ export function AppFooter() {
   const [isLyrics, setIsLyrics] = useState(false)
   const [bgStyle, setBgStyle] = useState(null)
   const song = useSelector((storeState) => storeState.songModule.currSong)
-const location = useLocation()
+  const location = useLocation()
   const [currSong, setCurrSongFooter] = useState(song)
   const [isMobileMediaPlayer, setIsMobileMediaPlayer] = useState(false)
   const [isDisplayFooter, setIsDisplayFooter] = useState(true)
@@ -38,6 +38,15 @@ const location = useLocation()
     setCurrSongFooter(song)
     updateImgUrlAndColor(song)
   }, [song])
+  useEffect(() => {
+    const removeListener = eventBus.on('navigation:back', () => {
+      setIsDisplayFooter(true)
+    })
+
+    return () => {
+      removeListener()
+    }
+  }, [])
 
   function handleVolumeChange(event) {
     setVolume(event.target.value)
@@ -104,13 +113,8 @@ const location = useLocation()
   function displayMobileMediaPlayer() {
     setIsDisplayFooter(false)
     if (window.innerWidth > 460) return
-    setIsMobileMediaPlayer(true)
+    // setIsMobileMediaPlayer(true)
     navigate('/mobileMediaPlayer')
-  }
-
-  function handleCloseMediaPlayer() {
-    console.log('hi')
-    // setIsMobileMediaPlayer(false)
   }
 
   function playSong(e) {
@@ -141,12 +145,12 @@ const location = useLocation()
           onClick={displayMobileMediaPlayer}
           style={window.innerWidth < 460 ? bgStyle : {}}
         >
-          {isMobileMediaPlayer && (
+          {/* {isMobileMediaPlayer && (
             <MobileMediaPlayer
               closeMediaPlayer={handleCloseMediaPlayer}
               open={isMobileMediaPlayer}
             />
-          )}
+          )} */}
           <div className="song-details">
             {currSong && (
               <>
