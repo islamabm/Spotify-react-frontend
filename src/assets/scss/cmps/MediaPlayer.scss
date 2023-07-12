@@ -95,12 +95,12 @@
   cursor: pointer;
   width: rem(400.12px);
   border-radius: 2px;
-  @include for-mobile-layout {
-    grid-row: 2;
-    grid-column: 1/-1;
-    width: 20.7rem;
-    height: rem(4px);
-  }
+  // @include for-mobile-layout {
+  //   // grid-row: 2;
+  //   // grid-column: 1/-1;
+  //   // width: 20.7rem;
+  //   // height: rem(4px);
+  // }
 }
 
 .progress-bar-fill {

@@ -110,6 +110,7 @@ export default function StationSongList({ station }) {
   }
 
   function onLyricsClicked(artist, title, songId) {
+    if (window.innerWidth < 460) return
     dispatch(setCurrSongAction(station._id, songId))
     dispatch(setCurrSongLyrics(artist, title))
     navigate('/lyrics')
