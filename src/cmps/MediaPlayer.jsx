@@ -122,7 +122,6 @@ export function MediaPlayer({ volume }) {
   }
 
   function onReady(event) {
-    if (!playerRef.current) return
     playerRef.current = event.target
     const duration = event.target.getDuration()
     setDuration(duration)
@@ -155,7 +154,6 @@ export function MediaPlayer({ volume }) {
     }, 1000)
   }
   function onPauseSong() {
-    if (!playerRef.current) return
     setIsPlaying(false)
     clearInterval(interval)
   }
