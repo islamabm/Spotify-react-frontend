@@ -1,23 +1,30 @@
 import React from 'react'
-
+import { getSpotifySvg } from '../../services/SVG.service'
 export function EditStationMobilePreview({ song }) {
   return (
     <div className="edit-station-mobile-preview">
       <div className="preview-img-container">
-        <img
-          className="preview-img"
-          src={song.imgUrl}
-          alt="station mobile preview"
-        />
-      </div>
-      <div className="name-and-artist">
-        <div className="edit-station-mobile-preview-song-name">
-          {song?.title}
+        <span
+          // onClick={goToPreviousRoute}
+          title="Go back"
+          dangerouslySetInnerHTML={{
+            __html: getSpotifySvg('deleteMobile'),
+          }}
+        ></span>
+        <div className="name-and-artist">
+          <p className="edit-station-mobile-preview-song-name">{song?.title}</p>
+          <p className="edit-station-mobile-preview-song-name">
+            {song?.artist}
+          </p>
         </div>
-        <div className="edit-station-mobile-preview-song-name">
-          {song?.artist}
-        </div>
       </div>
+      <span
+        // onClick={goToPreviousRoute}
+        title="Go back"
+        dangerouslySetInnerHTML={{
+          __html: getSpotifySvg('menu'),
+        }}
+      ></span>
     </div>
   )
 }

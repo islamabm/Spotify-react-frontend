@@ -1,10 +1,58 @@
 .edit-station-mobile-preview {
-    .preview-img-container {
-        background-color: $clr5;
-        width: rem(50px);
-        height: rem(50px);
-        .preview-img {
-            padding: rem(5px);
-        }
+  display: flex;
+  align-items: flex-start; // Align vertically at start
+  justify-items: flex-start;
+  justify-content: space-between;
+  padding: rem(10px);
+
+  .preview-img-container {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    gap: rem(24px);
+
+    .name-and-artist {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-items: center;
+      gap: rem(10px);
+
+      p {
+        margin: 0;
+        padding: 0;
+      }
     }
+  }
+
+  span {
+    svg {
+      fill: white;
+    }
+  }
 }
+
+// <div className="edit-station-mobile-preview">
+//       <div className="preview-img-container">
+//         <span
+//           // onClick={goToPreviousRoute}
+//           title="Go back"
+//           dangerouslySetInnerHTML={{
+//             __html: getSpotifySvg('deleteMobile'),
+//           }}
+//         ></span>
+//         <div className="name-and-artist">
+//           <p className="edit-station-mobile-preview-song-name">{song?.title}</p>
+//           <p className="edit-station-mobile-preview-song-name">
+//             {song?.artist}
+//           </p>
+//         </div>
+//       </div>
+//       <span
+//         // onClick={goToPreviousRoute}
+//         title="Go back"
+//         dangerouslySetInnerHTML={{
+//           __html: getSpotifySvg('menu'),
+//         }}
+//       ></span>
+//     </div>
