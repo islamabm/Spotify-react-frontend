@@ -8,6 +8,7 @@ import {
 } from '../store/actions/song.actions'
 import YouTube from 'react-youtube'
 import { useDispatch, useSelector } from 'react-redux'
+import { useLocation } from 'react-router-dom'
 
 export function MediaPlayer({ volume }) {
   const [videoId, setVideoId] = useState('M7lc1UVf-VE')
@@ -16,6 +17,7 @@ export function MediaPlayer({ volume }) {
   const [isPlaying, setIsPlaying] = useState(false)
   const [duration, setDuration] = useState(0)
   const [currentTime, setCurrentTime] = useState(0)
+  const [showInMobile, setShowInMobile] = useState('')
   const [isMouseDown, setIsMouseDown] = useState(false)
   const [displayDuration, setDisplayDuration] = useState('0:00')
   const [displayTime, setDisplayTime] = useState('0:00')
@@ -28,12 +30,11 @@ export function MediaPlayer({ volume }) {
     (storeState) => storeState.stationModule.currStationId
   )
   const currSvg = useSelector((storeState) => storeState.songModule.currentSvg)
-
+  const location = useLocation()
   const dispatch = useDispatch()
   const progressBarRef = useRef(null)
   let playerRef = useRef(null)
   let interval = null
-
 
   const progressBarWidth = duration
     ? `${(currentTime / duration) * 100}%`
@@ -50,6 +51,14 @@ export function MediaPlayer({ volume }) {
       playerRef.current.setVolume(volume)
     }
   }, [volume])
+
+  useEffect(() => {
+    if (location.pathname === '/mobileMediaPlayer') {
+      setShowInMobile('show-in-mobile')
+    } else {
+      setShowInMobile('')
+    }
+  }, [location.pathname])
 
   useEffect(() => {
     if (id) setVideoId(id)
@@ -133,6 +142,7 @@ export function MediaPlayer({ volume }) {
     setIsMouseDown(false)
   }
   function onPlaySong() {
+    if (!playerRef.current) return
     setIsPlaying(true)
     interval = setInterval(() => {
       const currentTime = playerRef.current.getCurrentTime()
@@ -199,7 +209,7 @@ export function MediaPlayer({ volume }) {
         className="hidden-player"
       />
       <div className="media-player">
-        <div className="control-buttons">
+        <div className={`control-buttons ${showInMobile}`}>
           {isShuffled ? (
             <button className="is-repeated">
               <span
@@ -272,7 +282,9 @@ export function MediaPlayer({ volume }) {
         </div>
 
         <div className="music-bar">
-          <span className="current-time start hiding">{displayTime}</span>
+          <span className={`current-time ${showInMobile} start hiding`}>
+            {displayTime}
+          </span>
           <div
             className="progress-bar"
             ref={progressBarRef}
@@ -286,7 +298,12 @@ export function MediaPlayer({ volume }) {
               style={{ width: progressBarWidth }}
             ></div>
           </div>
-          <span className="current-time end hiding">{displayDuration}</span>
+          <span
+            className={`current-time ${showInMobile} end hiding`}
+            // className="current-time end hiding"
+          >
+            {displayDuration}
+          </span>
         </div>
       </div>
     </>

@@ -5,8 +5,13 @@
   justify-content: center;
   align-items: center;
   @include for-mobile-layout {
-    gap: 2.7rem;
-    margin: auto;
+    display: none;
+    &.show-in-mobile {
+      display: block;
+      gap: 2.7rem;
+      display: flex;
+      margin: auto;
+    }
   }
   .play-song-div {
     display: flex;
@@ -60,10 +65,12 @@
   width: rem(690px);
   height: rem(20px);
   @include for-mobile-layout {
-    width: auto;
+    width: 23.125rem;
+    // width: auto;
     gap: rem(0px);
     margin-inline-start: rem(0px);
     height: 2px;
+    margin-block-start: 8px;
   }
 }
 
@@ -72,17 +79,25 @@
   font-family: Circular-medium;
   color: #b3b3b3;
   text-align: right;
-  &.start {
-    @include for-mobile-layout {
-      position: absolute;
-      bottom: 150px;
+
+  @include for-mobile-layout {
+    display: none;
+    &.show-in-mobile {
+      // Newly added CSS
+      display: block;
     }
-  }
-  &.end {
-    @include for-mobile-layout {
+    &.start {
+      // @include for-mobile-layout {
       position: absolute;
-      bottom: 150px;
+      bottom: 82px;
+      // }
+    }
+    &.end {
+      // @include for-mobile-layout {
+      position: absolute;
+      bottom: 82px;
       right: 22px;
+      // }
     }
   }
 }
@@ -95,12 +110,12 @@
   cursor: pointer;
   width: rem(400.12px);
   border-radius: 2px;
-  // @include for-mobile-layout {
-  //   // grid-row: 2;
-  //   // grid-column: 1/-1;
-  //   // width: 20.7rem;
-  //   // height: rem(4px);
-  // }
+  @include for-mobile-layout {
+    grid-row: 2;
+    grid-column: 1/-1;
+    width: 100%;
+    height: rem(2px);
+  }
 }
 
 .progress-bar-fill {

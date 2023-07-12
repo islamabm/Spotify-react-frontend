@@ -1,22 +1,29 @@
 import React, { useEffect, useState } from 'react'
 import { getSpotifySvg } from '../services/SVG.service'
-import { setCurrSongLyrics } from '../store/actions/song.actions'
+
 import { MediaPlayer } from './MediaPlayer'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { BubblingHeart } from './BubblingHeart'
 import { FastAverageColor } from 'fast-average-color'
 import { MobileMediaPlayer } from '../views/mobile/MobileMediaPlayer'
 import { BottomNav } from '../cmps/Mobile/BottomNav'
-
+import {
+  setCurrSong,
+  setCurrSongSvg,
+  setCurrSongLyrics,
+  setCurrSongIndex,
+} from '../store/actions/song.actions'
 export function AppFooter() {
   const [mute, setMute] = useState(false)
   const [volume, setVolume] = useState(50)
+  const [isFirstClick, setIsFirstClick] = useState(true)
+  const [isPlaying, setIsPlaying] = useState(false)
   const [isLyrics, setIsLyrics] = useState(false)
   const [bgStyle, setBgStyle] = useState(null)
   const song = useSelector((storeState) => storeState.songModule.currSong)
-
-  const [currSong, setCurrSong] = useState(song)
+const location = useLocation()
+  const [currSong, setCurrSongFooter] = useState(song)
   const [isMobileMediaPlayer, setIsMobileMediaPlayer] = useState(false)
   const [isDisplayFooter, setIsDisplayFooter] = useState(true)
 
@@ -28,7 +35,7 @@ export function AppFooter() {
 
   const colorCache = {}
   useEffect(() => {
-    setCurrSong(song)
+    setCurrSongFooter(song)
     updateImgUrlAndColor(song)
   }, [song])
 
@@ -106,6 +113,25 @@ export function AppFooter() {
     // setIsMobileMediaPlayer(false)
   }
 
+  function playSong(e) {
+    e.stopPropagation()
+    setIsPlaying(true)
+    setIsFirstClick(true)
+    if (isFirstClick) {
+      dispatch(setCurrSong(station._id, song._id))
+      dispatch(setCurrSongIndex(station._id, song._id))
+      setIsFirstClick(false)
+    } else {
+      dispatch(setCurrSongSvg('play'))
+    }
+  }
+
+  function pauseSong(e) {
+    e.stopPropagation()
+    setIsPlaying(false)
+    dispatch(setCurrSongSvg('pause'))
+  }
+
   return (
     <>
       {((window.innerWidth < 460 && currSong && isDisplayFooter) ||
@@ -166,27 +192,37 @@ export function AppFooter() {
                       type="stationMobile"
                     />
                   </span>
-                  <span
-                    // title={isPlaying ? "Pause" : "Play"}
-                    className="special-i pointer play-pause"
-                    // onClick={handlePlayPauseClick}
-                    dangerouslySetInnerHTML={{
-                      __html: getSpotifySvg('playIcon'),
-                      // __html: isPlaying
-                      //   ? getSpotifySvg("pauseIcon")
-                      //   : getSpotifySvg("playIcon"),
-                    }}
-                  ></span>
+                  {isPlaying ? (
+                    <button onClick={(e) => pauseSong(e)}>
+                      <span
+                        title="Pause"
+                        className="play-pause"
+                        dangerouslySetInnerHTML={{
+                          __html: getSpotifySvg('pauseIcon'),
+                        }}
+                      ></span>
+                    </button>
+                  ) : (
+                    <button onClick={(e) => playSong(e)}>
+                      <span
+                        title="Play"
+                        className="play-pause"
+                        dangerouslySetInnerHTML={{
+                          __html: getSpotifySvg('playIcon'),
+                        }}
+                      ></span>
+                    </button>
+                  )}
                 </div>
               </>
             )}
           </div>
 
-          {window.innerWidth > 460 && (
-            <div className="media-player">
-              <MediaPlayer volume={volume} />
-            </div>
-          )}
+          {/* {window.innerWidth > 460 && ( */}
+          <div className="media-player">
+            <MediaPlayer volume={volume} />
+          </div>
+          {/* )} */}
           <div className="song-details-two">
             {' '}
             {isLyrics ? (
