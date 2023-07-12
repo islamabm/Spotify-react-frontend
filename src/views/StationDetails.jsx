@@ -48,7 +48,7 @@ export function StationDetails(props) {
     //   scrollPos: 0,
     //   backgroundColor: 'transparent',
     // })
-  }, [params.id])
+  }, [params.id, station])
   useEffect(() => {
     updateImgUrlAndColor(station)
   }, [stationImg])
