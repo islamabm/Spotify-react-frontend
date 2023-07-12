@@ -1,11 +1,11 @@
-import { getSpotifySvg } from '../services/SVG.service'
-import { useLocation, Link, useNavigate } from 'react-router-dom'
-import { UserModal } from './Modals/UserModal'
-import { useState, useEffect } from 'react'
-import { setCurrSong, setCurrSongIndex } from '../store/actions/song.actions'
-import { useDispatch, useSelector } from 'react-redux'
-import { eventBus } from '../services/event-bus.service'
-import { MobileModal } from './Modals/MobileModal'
+import { getSpotifySvg } from "../services/SVG.service"
+import { useLocation, Link, useNavigate } from "react-router-dom"
+import { UserModal } from "./Modals/UserModal"
+import { useState, useEffect } from "react"
+import { setCurrSong, setCurrSongIndex } from "../store/actions/song.actions"
+import { useDispatch, useSelector } from "react-redux"
+import { eventBus } from "../services/event-bus.service"
+import { MobileModal } from "./Modals/MobileModal"
 
 export function AppHeader() {
   const [showModal, setShowModal] = useState(false)
@@ -13,7 +13,7 @@ export function AppHeader() {
   const [currScrollPos, setScrollPos] = useState(0)
   const [isPlaying, setIsPlaying] = useState(false)
   const [headers, setHeaders] = useState({
-    backgroundColor: 'transparent',
+    backgroundColor: "transparent",
   })
 
   const station = useSelector(
@@ -38,7 +38,7 @@ export function AppHeader() {
           parseInt(result[1], 16),
           parseInt(result[2], 16),
           parseInt(result[3], 16),
-        ].join(',')
+        ].join(",")
       : null
   }
 
@@ -48,7 +48,7 @@ export function AppHeader() {
     let opacity = Math.min(scrollPos / maxScroll, 1)
 
     let match = headerBg?.background?.match(/rgb\((\d+,\d+,\d+)\)/)
-    let dominantColor = match ? match[1] : hexToRgb('#121212')
+    let dominantColor = match ? match[1] : hexToRgb("#121212")
 
     const newHeaders = {
       backgroundColor: `rgba(${dominantColor}, ${opacity})`,
@@ -65,20 +65,20 @@ export function AppHeader() {
     const onScroll = ({ scrollPos, headerBg }) => {
       updateHeaderOpacity(scrollPos, headerBg)
     }
-    const unlistenIndex = eventBus.on('stationIndexScroll', onScroll)
+    const unlistenIndex = eventBus.on("stationIndexScroll", onScroll)
     if (
-      location.pathname === '/' ||
-      location.pathname === '/search' ||
-      location.pathname === '/lyrics' ||
-      location.pathname === '/user' ||
-      (location.pathname.includes('/station/') && currScrollPos < 10)
+      location.pathname === "/" ||
+      location.pathname === "/search" ||
+      location.pathname === "/lyrics" ||
+      location.pathname === "/user" ||
+      (location.pathname.includes("/station/") && currScrollPos < 10)
     ) {
       setHeaders({
-        backgroundColor: 'transparent',
+        backgroundColor: "transparent",
       })
     } else {
       setHeaders({
-        backgroundColor: '#121212',
+        backgroundColor: "#121212",
       })
     }
     return () => {
@@ -90,21 +90,21 @@ export function AppHeader() {
     const onScroll = ({ scrollPos, bgStyle }) => {
       updateHeaderOpacity(scrollPos, bgStyle)
     }
-    const unlistenDetails = eventBus.on('stationDetailsScroll', onScroll)
+    const unlistenDetails = eventBus.on("stationDetailsScroll", onScroll)
 
     if (
-      location.pathname === '/' ||
-      location.pathname === '/search' ||
-      location.pathname === '/lyrics' ||
-      location.pathname === '/user' ||
-      (location.pathname.includes('/station/') && currScrollPos < 10)
+      location.pathname === "/" ||
+      location.pathname === "/search" ||
+      location.pathname === "/lyrics" ||
+      location.pathname === "/user" ||
+      (location.pathname.includes("/station/") && currScrollPos < 10)
     ) {
       setHeaders({
-        backgroundColor: 'transparent',
+        backgroundColor: "transparent",
       })
     } else {
       setHeaders({
-        backgroundColor: '#121212',
+        backgroundColor: "#121212",
       })
     }
     return () => {
@@ -115,21 +115,21 @@ export function AppHeader() {
     const onScroll = ({ scrollPos, bgStyle }) => {
       updateHeaderOpacity(scrollPos, bgStyle)
     }
-    const unlistenDetails = eventBus.on('userDetailsScroll', onScroll)
+    const unlistenDetails = eventBus.on("userDetailsScroll", onScroll)
 
     if (
-      location.pathname === '/' ||
-      location.pathname === '/search' ||
-      location.pathname === '/lyrics' ||
-      location.pathname === '/user' ||
-      (location.pathname.includes('/station/') && currScrollPos < 10)
+      location.pathname === "/" ||
+      location.pathname === "/search" ||
+      location.pathname === "/lyrics" ||
+      location.pathname === "/user" ||
+      (location.pathname.includes("/station/") && currScrollPos < 10)
     ) {
       setHeaders({
-        backgroundColor: 'transparent',
+        backgroundColor: "transparent",
       })
     } else {
       setHeaders({
-        backgroundColor: '#121212',
+        backgroundColor: "#121212",
       })
     }
     return () => {
@@ -169,26 +169,27 @@ export function AppHeader() {
   }
 
   function goHome() {
-    navigate('/')
+    navigate("/")
   }
 
   function headerVisabillity() {
     if (width < 430) {
-      if (location.pathname === '/') return 'none-sticky'
+      if (location.pathname === "/") return "none-sticky"
       if (
-        location.pathname === '/search' ||
-        location.pathname === '/mobileMediaPlayer'
+        location.pathname === "/search" ||
+        location.pathname === "/mobileMediaPlayer" ||
+        location.pathname === "/edit/mobile"
       )
-        return 'display-none'
+        return "display-none"
     }
-    return ''
+    return ""
   }
 
   return (
     <>
       <header
         className={`app-header ${headerVisabillity()}`}
-        style={{ padding: showMobileModal ? '0' : '20px', ...headers }}
+        style={{ padding: showMobileModal ? "0" : "20px", ...headers }}
       >
         <section className="arrows-and-input">
           <section className="arrows">
@@ -198,7 +199,7 @@ export function AppHeader() {
                 className="title"
                 title="Go back"
                 dangerouslySetInnerHTML={{
-                  __html: getSpotifySvg('leftArrowIcon'),
+                  __html: getSpotifySvg("leftArrowIcon"),
                 }}
               ></span>
             </div>
@@ -208,17 +209,17 @@ export function AppHeader() {
                 className="title"
                 title="Go forward"
                 dangerouslySetInnerHTML={{
-                  __html: getSpotifySvg('rightArrowIcon'),
+                  __html: getSpotifySvg("rightArrowIcon"),
                 }}
               ></span>
               {/* <Transcript /> */}
             </div>
           </section>
-          {location.pathname === '/search' && (
+          {location.pathname === "/search" && (
             <div className="flex align-center justify-center input-container">
               <span
                 dangerouslySetInnerHTML={{
-                  __html: getSpotifySvg('smallerSearchIcon'),
+                  __html: getSpotifySvg("smallerSearchIcon"),
                 }}
               ></span>
               <input placeholder="What do you want to listen to?" />
@@ -230,13 +231,13 @@ export function AppHeader() {
               <span
                 onClick={goHome}
                 dangerouslySetInnerHTML={{
-                  __html: getSpotifySvg('leftArrow'),
+                  __html: getSpotifySvg("leftArrow"),
                 }}
               ></span>
               <h1 className="user-name-in-header">{user?.username}</h1>
             </div>
           ) : (
-            ''
+            ""
           )}
 
           {currScrollPos > 300 &&
@@ -254,7 +255,7 @@ export function AppHeader() {
                     title="Pause"
                     className="pause-button flex align-center justify-center title"
                     dangerouslySetInnerHTML={{
-                      __html: getSpotifySvg('biggerPauseBtn'),
+                      __html: getSpotifySvg("biggerPauseBtn"),
                     }}
                   ></span>
                 ) : (
@@ -262,7 +263,7 @@ export function AppHeader() {
                     title="Play"
                     className=" flex align-center justify-center title"
                     dangerouslySetInnerHTML={{
-                      __html: getSpotifySvg('biggerPlayBtn'),
+                      __html: getSpotifySvg("biggerPlayBtn"),
                     }}
                   ></span>
                 )}
@@ -270,7 +271,7 @@ export function AppHeader() {
               <p className="">{station.name}</p>
             </div>
           ) : (
-            ''
+            ""
           )}
         </section>
 
@@ -290,11 +291,11 @@ export function AppHeader() {
             <>
               {window.innerWidth < 460 ? (
                 <span
-                  style={{ display: showMobileModal ? 'none' : '' }}
+                  style={{ display: showMobileModal ? "none" : "" }}
                   onClick={openMobileModal}
                   className="none-sticky white"
                   dangerouslySetInnerHTML={{
-                    __html: getSpotifySvg('settings'),
+                    __html: getSpotifySvg("settings"),
                   }}
                 ></span>
               ) : (
@@ -307,7 +308,7 @@ export function AppHeader() {
                     src={
                       user.imgUrl
                         ? user.imgUrl
-                        : 'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg'
+                        : "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg"
                     }
                     alt="user-img"
                   />

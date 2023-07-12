@@ -1,0 +1,69 @@
+.edit-station-mobile {
+  font-family: Circular-book;
+  // margin-block-start: rem(5px);
+  .edit-station-mobile-header {
+    color: $clr3;
+    font-size: 25px;
+    // justify-content: space-between;
+    // padding: rem(10px);
+    .edit-station-save {
+      padding: rem(20px);
+      margin-inline-start: rem(15px);
+    }
+    .edit-station-text {
+      margin-inline-start: rem(28px);
+    }
+    .edit-station-x {
+      margin-inline-start: rem(90px);  
+      svg {
+        fill: $clr3;
+        width: rem(30px);
+        height: rem(25px);
+      }
+    }
+  }
+  .edit-station-mobile-img-container {
+    flex-direction: column;
+    gap: rem(15px);
+    margin-block-end: rem(50px) ;
+    transform: translate(26%, 10px);
+    .edit-station-mobile-img {
+        height: rem(200px);
+        width: rem(200px);
+    }
+    .edit-station-mobile-change-img {
+        transform: translate(12%);
+    }
+  }
+  .edit-station-mobile-input-container {
+    gap: rem(30px);
+    flex-direction: column;
+    margin-block-end: rem(60px);
+    .edit-station-mobile-input {
+      height: rem(50px);
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      border-bottom: 2px solid white;
+      background-color: inherit;
+      width: 80%;
+
+      &::placeholder {
+        color: white;
+        font-size: 30px;
+        transform: translate(22%);
+      }
+    }
+    .edit-station-mobile-description {
+      color: white;
+      font-weight: 700;
+      border: 2px solid $clr15;
+      border-radius: 500px;
+      font-size: inherit;
+      min-block-size: rem(47px);
+      padding-inline: rem(30px);
+      font-size: 15px;
+      background-color: $clr7;
+    }
+  }
+}
