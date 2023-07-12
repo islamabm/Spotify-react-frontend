@@ -226,7 +226,7 @@ export function StationDetails(props) {
         ) : (
           <div className="user-station-actions">
             <div className="mobile-heart-dots">
-              <span>
+              <span className="nice-heart">
                 <BubblingHeart
                   index={station._id}
                   item={station}

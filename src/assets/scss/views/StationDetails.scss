@@ -144,6 +144,10 @@
       align-items: center;
       justify-items: center;
       gap: rem(25px);
+
+      .nice-heart {
+        margin-block-end: rem(3px);
+      }
     }
     .dots {
       fill: #afb8b7;
