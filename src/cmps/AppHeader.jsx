@@ -173,13 +173,13 @@ export function AppHeader() {
   }
 
   function headerVisabillity() {
-    if (width < 430) {
+    if (width < 572) {
       if (location.pathname === "/") return "none-sticky"
       if (
-        location.pathname === "/search" ||
         location.pathname === "/mobileMediaPlayer" ||
-        location.pathname === "/edit/mobile"
-      )
+        location.pathname === "/search" || 
+        location.pathname === "/edit/mobile" 
+        )
         return "display-none"
     }
     return ""
