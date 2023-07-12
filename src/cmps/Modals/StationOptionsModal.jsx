@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react'
+import { useNavigate } from 'react-router'
 
 export function StationOptionsModal({
   position,
@@ -7,7 +8,7 @@ export function StationOptionsModal({
   onShowDeleteModal,
 }) {
   const modalRef = useRef()
-
+  const navigate = useNavigate()
   function handleShowDeleteModal() {
     onShowDeleteModal()
     closeOptionsModal()
@@ -52,7 +53,7 @@ export function StationOptionsModal({
       >
         <ul>
           <li>
-            <button>Edit details</button>
+            <button onClick={navigate('/edit/mobile')}>Edit details</button>
           </li>
           <li onClick={(e) => handleShowDeleteModal(e)}>
             <button>Delete</button>
