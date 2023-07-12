@@ -35,7 +35,7 @@ export function EditStationMobile() {
   function handleSave() {
     setShowDescInput(false)
     dispatch(editUserStation(editedStation))
-    navigate('/')
+    navigate(`/station/${station._id}`)
   }
 
   async function handelFile(ev) {
@@ -97,7 +97,7 @@ export function EditStationMobile() {
             isTyping ? 'green-border' : ''
           }`} // add class here
           type="text"
-          placeholder={station.name}
+          placeholder={station?.name}
           onChange={onChangeStationName}
           onFocus={() => setIsTyping(true)}
           onBlur={() => setIsTyping(false)}
@@ -106,7 +106,7 @@ export function EditStationMobile() {
           <input
             className="edit-station-mobile-input"
             type="text"
-            placeholder={station.desc}
+            placeholder={station?.desc}
             onChange={(e) => onChangeStationDesc(e)}
           />
         ) : (

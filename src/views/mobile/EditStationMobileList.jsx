@@ -24,7 +24,7 @@ export function EditStationMobileList({ list, station }) {
       <Droppable droppableId="editStationSongList">
         {(provided) => (
           <div ref={provided.innerRef} {...provided.droppableProps}>
-            {songs.map((song, idx) => (
+            {songs?.map((song, idx) => (
               <Draggable key={song._id} draggableId={song._id} index={idx}>
                 {(provided) => (
                   <div ref={provided.innerRef} {...provided.draggableProps}>

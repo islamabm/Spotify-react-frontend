@@ -35,16 +35,24 @@
     .edit-station-mobile-input {
       height: rem(50px);
       border-top: none;
-      border-left: none;
-      border-right: none;
+      border-left: 2px solid white;
+      border-right: 2px solid white;
       border-bottom: 2px solid white;
+      position: relative;
       background-color: inherit;
       width: 80%;
+      &:focus {
+        outline: none;
+      }
 
       &::placeholder {
         color: white;
-        font-size: 30px;
+        font-size: 20px;
         transform: translate(22%);
+      }
+
+      &.green-border {
+        border-bottom: 2px solid green;
       }
     }
     .edit-station-mobile-description {
