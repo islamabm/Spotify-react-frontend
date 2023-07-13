@@ -10,6 +10,7 @@ export function EditStationMobile() {
   const station = useSelector(
     (storeState) => storeState.stationModule.currStation
   )
+  console.log('Updated station in EditStationMobile:', station)
   const [editedStation, setEditedStation] = useState({ ...station })
   const [showDescInput, setShowDescInput] = useState(false)
   const [isUploading, setIsUploading] = useState(false)
