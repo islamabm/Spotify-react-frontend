@@ -35,6 +35,8 @@
     margin-block-end: rem(60px);
     .edit-station-mobile-input {
       height: rem(50px);
+      font-size: rem(22px);
+      color: rgb(255, 255, 255);
       border-top: none;
       border-left: none;
       border-right: none;
@@ -48,7 +50,7 @@
 
       &::placeholder {
         color: white;
-        font-size: 20px;
+        font-size: rem(20px);
         transform: translate(30%);
       }
 
