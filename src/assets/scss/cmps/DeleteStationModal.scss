@@ -20,7 +20,11 @@
   text-align: start;
   width: rem(420px);
   height: rem(204px);
-
+  @include for-mobile-layout {
+    width: 90%;
+    height: 30%;
+  }
+  
   button {
     color: #000000;
     &:hover {
