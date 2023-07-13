@@ -8,6 +8,7 @@ export function AddSongModal({ position, addSongToStation, createStation }) {
   const direction = useSelector(
     (storeState) => storeState.songModule.currDirection
   )
+  const width = window.innerWidth
 
   return (
     <section
@@ -15,15 +16,15 @@ export function AddSongModal({ position, addSongToStation, createStation }) {
       style={{
         top:
           direction === 'left'
-            ? window.innerWidth < 460
-              ? position.top - 220
-              : position.top - 200
-            : position.top - 200,
+            ? width < 410
+              ? position.top - 200
+              : position.top - 130
+            : position.top - 100,
         left:
           direction === 'left'
-            ? window.innerWidth < 460
+            ? width < 460
               ? position.left - 200
-              : position.left - 280
+              : position.left - 270
             : position.left + 180,
       }}
     >
