@@ -41,6 +41,10 @@ export function StationOptionsModal({
     }
   }, [modalRef, closeOptionsModal])
 
+  function goToEdit() {
+    navigate('/edit/mobile')
+  }
+
   return (
     <>
       <section
@@ -52,9 +56,11 @@ export function StationOptionsModal({
         }}
       >
         <ul>
-          <li>
-            <button onClick={navigate('/edit/mobile')}>Edit details</button>
-          </li>
+          {window.innerWidth < 460 && (
+            <li>
+              <button onClick={goToEdit}>Edit details</button>
+            </li>
+          )}
           <li onClick={(e) => handleShowDeleteModal(e)}>
             <button>Delete</button>
           </li>
