@@ -10,6 +10,7 @@ export default function StationUser({ station }) {
   const stationNameClass = stationService.stationNameClass(station)
 
   function handleEditModalOpen() {
+    if (window.innerWidth < 460) return
     setIsEditModalOpen(true)
     // onEditModalOpen()
   }
@@ -28,7 +29,10 @@ export default function StationUser({ station }) {
       </div>
       <div className="station-info">
         <span className="playlist-word">Playlist</span>
-        <h1 className={stationNameClass} onClick={handleEditModalOpen}>
+        <h1
+          className={`pointer ${stationNameClass}`}
+          onClick={handleEditModalOpen}
+        >
           {station?.name}
         </h1>
         <div className="user-details-section">

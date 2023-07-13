@@ -65,7 +65,7 @@ function Transcript() {
 
   return (
     <div>
-      <i title="record" onClick={toggleRecording}>
+      <i onClick={toggleRecording}>
         <span
           className={`mic ${recording ? 'active' : ''}`}
           dangerouslySetInnerHTML={{

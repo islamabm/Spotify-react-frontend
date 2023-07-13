@@ -43,7 +43,6 @@ export function StationPreview({ station }) {
         >
           {isPlaying ? (
             <span
-              title="Pause"
               className="pause-button flex align-center justify-center title"
               dangerouslySetInnerHTML={{
                 __html: getSpotifySvg('biggerPauseBtn'),
@@ -51,7 +50,6 @@ export function StationPreview({ station }) {
             ></span>
           ) : (
             <span
-              title="Play"
               className=" flex align-center justify-center title"
               dangerouslySetInnerHTML={{
                 __html: getSpotifySvg('biggerPlayBtn'),

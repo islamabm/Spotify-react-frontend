@@ -200,7 +200,6 @@ export function AppFooter() {
                   {isPlaying ? (
                     <button onClick={(e) => pauseSong(e)}>
                       <span
-                        title="Pause"
                         className="play-pause"
                         dangerouslySetInnerHTML={{
                           __html: getSpotifySvg('pauseIcon'),
@@ -210,7 +209,6 @@ export function AppFooter() {
                   ) : (
                     <button onClick={(e) => playSong(e)}>
                       <span
-                        title="Play"
                         className="play-pause"
                         dangerouslySetInnerHTML={{
                           __html: getSpotifySvg('playIcon'),
@@ -233,7 +231,6 @@ export function AppFooter() {
             {isLyrics ? (
               <button className="is-repeated">
                 <span
-                  title="Lyrics"
                   onClick={onRepeatClicked}
                   className="pointer title lyrics"
                   dangerouslySetInnerHTML={{
@@ -243,7 +240,6 @@ export function AppFooter() {
               </button>
             ) : (
               <span
-                title="Lyrics"
                 onClick={onLyricsClicked}
                 className="pointer title lyrics"
                 dangerouslySetInnerHTML={{
@@ -252,7 +248,6 @@ export function AppFooter() {
               ></span>
             )}
             <span
-              title={mute ? 'Unmute' : 'Mute'}
               onClick={onToggleMute}
               className="pointer title mute"
               dangerouslySetInnerHTML={{
