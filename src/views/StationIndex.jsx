@@ -21,32 +21,31 @@ export function StationIndex() {
   const greeting = getGreeting(currentDate)
 
   useEffect(() => {
-    if(width > 460) {
-
+    if (width > 460) {
       const currentStationIndexRef = stationIndexRef.current
       const handleScroll = () => {
         const scrollPos = currentStationIndexRef.scrollTop
-      if (scrollPos > 375) {
-        setHeaderBg({ backgroundColor: '#1a1a1a' })
-      } else {
-        setHeaderBg({ backgroundColor: 'transparent' })
+        if (scrollPos > 375) {
+          setHeaderBg({ backgroundColor: '#1a1a1a' })
+        } else {
+          setHeaderBg({ backgroundColor: 'transparent' })
+        }
+        eventBus.emit('stationIndexScroll', { scrollPos, headerBg })
       }
-      eventBus.emit('stationIndexScroll', { scrollPos, headerBg })
-    }
-    if (currentStationIndexRef) {
-      currentStationIndexRef.addEventListener('scroll', handleScroll, {
-        passive: true,
-      })
-    }
-    return () => {
       if (currentStationIndexRef) {
-        currentStationIndexRef.removeEventListener('scroll', handleScroll, {
+        currentStationIndexRef.addEventListener('scroll', handleScroll, {
           passive: true,
         })
       }
+      return () => {
+        if (currentStationIndexRef) {
+          currentStationIndexRef.removeEventListener('scroll', handleScroll, {
+            passive: true,
+          })
+        }
+      }
     }
-  }
-  return
+    return
   }, [headerBg])
 
   useEffect(() => {
