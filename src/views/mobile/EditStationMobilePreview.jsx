@@ -14,7 +14,6 @@ export function EditStationMobilePreview({ provided, song, station }) {
       <div className="preview-img-container">
         <span
           onClick={remove}
-          title="Go back"
           dangerouslySetInnerHTML={{
             __html: getSpotifySvg('deleteMobile'),
           }}
@@ -28,7 +27,6 @@ export function EditStationMobilePreview({ provided, song, station }) {
       </div>
       <span
         {...provided.dragHandleProps}
-        title="Go back"
         dangerouslySetInnerHTML={{
           __html: getSpotifySvg('menu'),
         }}
