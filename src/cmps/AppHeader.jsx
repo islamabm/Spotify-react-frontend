@@ -184,7 +184,6 @@ export function AppHeader() {
     }
     return ""
   }
-
   return (
     <>
       <header

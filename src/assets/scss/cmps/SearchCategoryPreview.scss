@@ -5,7 +5,6 @@
   height: rem(215px);
   cursor: pointer;
   @include for-mobile-layout {
-    // width: rem(183px);
     height: rem(92px);
   }
 

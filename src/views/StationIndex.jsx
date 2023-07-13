@@ -14,15 +14,18 @@ export function StationIndex() {
   )
 
   const stationIndexRef = useRef(null)
+  const width = window.innerWidth
 
   const dispatch = useDispatch()
   const currentDate = new Date()
   const greeting = getGreeting(currentDate)
 
   useEffect(() => {
-    const currentStationIndexRef = stationIndexRef.current
-    const handleScroll = () => {
-      const scrollPos = currentStationIndexRef.scrollTop
+    if(width > 460) {
+
+      const currentStationIndexRef = stationIndexRef.current
+      const handleScroll = () => {
+        const scrollPos = currentStationIndexRef.scrollTop
       if (scrollPos > 375) {
         setHeaderBg({ backgroundColor: '#1a1a1a' })
       } else {
@@ -42,6 +45,8 @@ export function StationIndex() {
         })
       }
     }
+  }
+  return
   }, [headerBg])
 
   useEffect(() => {
