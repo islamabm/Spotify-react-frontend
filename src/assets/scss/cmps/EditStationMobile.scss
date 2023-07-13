@@ -20,7 +20,7 @@
     flex-direction: column;
     gap: rem(15px);
     margin-block-end: rem(50px);
-    transform: translate(26%, 10px);
+    transform: translate(31%, 10px);
     .edit-station-mobile-img {
       height: rem(200px);
       width: rem(200px);
@@ -49,7 +49,7 @@
       &::placeholder {
         color: white;
         font-size: 20px;
-        transform: translate(22%);
+        transform: translate(30%);
       }
 
       &.green-border {

@@ -277,27 +277,30 @@ export function AppHeader() {
         <div className="user-actions flex justify-center align-center">
           {!user ? (
             <>
-              <Link to="/signup">
-                <button className="sign-up pointer">Sign up</button>
-              </Link>
-              <Link to="/login">
-                <button className="login pointer flex justify-center align-center">
-                  Log in
-                </button>
-              </Link>
+            {window.innerWidth < 460 ? (
+              <span
+              style={{ display: showMobileModal ? "none" : "" }}
+              onClick={openMobileModal}
+              className="none-sticky white"
+              dangerouslySetInnerHTML={{
+                __html: getSpotifySvg("settings"),
+              }}
+            ></span>
+            ) : (
+              <>
+            <Link to="/signup">
+            <button className="sign-up pointer">Sign up</button>
+          </Link>
+          <Link to="/login">
+            <button className="login pointer flex justify-center align-center">
+              Log in
+            </button>
+          </Link>
+          </>
+          )}    
             </>
           ) : (
-            <>
-              {window.innerWidth < 460 ? (
-                <span
-                  style={{ display: showMobileModal ? "none" : "" }}
-                  onClick={openMobileModal}
-                  className="none-sticky white"
-                  dangerouslySetInnerHTML={{
-                    __html: getSpotifySvg("settings"),
-                  }}
-                ></span>
-              ) : (
+            <>                
                 <span
                   className="user-details-header"
                   onClick={onClickUserDetails}
@@ -312,7 +315,6 @@ export function AppHeader() {
                     alt="user-img"
                   />
                 </span>
-              )}
             </>
           )}
         </div>
