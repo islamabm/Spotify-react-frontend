@@ -120,7 +120,11 @@ export default function StationSongList({ station }) {
     <DragDropContext onDragEnd={handleDragEnd}>
       <Droppable droppableId="songList">
         {(provided) => (
-          <div ref={provided.innerRef} {...provided.droppableProps} className="song-list">
+          <div
+            ref={provided.innerRef}
+            {...provided.droppableProps}
+            className="song-list"
+          >
             {(createdBy === 'Liked songs system'
               ? user?.LikedSongs
               : songs
@@ -162,7 +166,6 @@ export default function StationSongList({ station }) {
 
                       {isPlayingAndHovered && currSvg === 'play' ? (
                         <span
-                          title="Pause"
                           onClick={pauseSong}
                           className={` small-play-btn flex align-center justify-center title ${
                             hoveredSongIdx === idx ? 'hovered' : ''
@@ -173,7 +176,6 @@ export default function StationSongList({ station }) {
                         ></span>
                       ) : (
                         <span
-                          // title={`Play ${song?.title}`}
                           onClick={() => onSongClicked(song._id)}
                           className={` small-play-btn flex align-center justify-center title play${
                             hoveredSongIdx === idx ? 'hovered' : ''
@@ -222,7 +224,6 @@ export default function StationSongList({ station }) {
                           {song?.duration ? song?.duration : '1:00'}
                         </div>
                         <span
-                          title={`More options for ${song?.title}`}
                           onClick={(e) => showSongOptionsModal(e, song)}
                           className="dots title song-option"
                           dangerouslySetInnerHTML={{

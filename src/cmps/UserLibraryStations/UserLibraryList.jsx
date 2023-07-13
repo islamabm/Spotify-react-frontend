@@ -62,7 +62,7 @@ export function UserLibraryList({ stations, title }) {
                 <span
                   ref={buttonRef}
                   onClick={(event) => openInput(event)}
-                  title="Search in Your Library"
+
                   className="smaller-search pointer flex align-center justify-center title"
                   dangerouslySetInnerHTML={{
                     __html: getSpotifySvg('smallerSearchIcon'),
@@ -83,7 +83,7 @@ export function UserLibraryList({ stations, title }) {
               <span
                 onClick={createNewStation}
                 className="title plus-library"
-                title="Go back"
+
                 dangerouslySetInnerHTML={{
                   __html: getSpotifySvg('plus'),
                 }}

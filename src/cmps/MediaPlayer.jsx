@@ -213,7 +213,6 @@ export function MediaPlayer({ volume }) {
           {isShuffled ? (
             <button className="is-repeated">
               <span
-                title="Disable shuffle"
                 onClick={onShuffleClicked}
                 className="pointer title shuffle"
                 dangerouslySetInnerHTML={{
@@ -224,7 +223,6 @@ export function MediaPlayer({ volume }) {
           ) : (
             <span
               className="pointer title shuffle"
-              title="Enable shuffle"
               onClick={onShuffleClicked}
               dangerouslySetInnerHTML={{
                 __html: getSpotifySvg('shouffleIcon'),
@@ -232,7 +230,6 @@ export function MediaPlayer({ volume }) {
             ></span>
           )}
           <span
-            title="Previous"
             onClick={getPrevSong}
             className="pointer title prev"
             dangerouslySetInnerHTML={{ __html: getSpotifySvg('prevIcon') }}
@@ -240,7 +237,6 @@ export function MediaPlayer({ volume }) {
           <div className="play-song-div">
             {' '}
             <span
-              title={isPlaying ? 'Pause' : 'Play'}
               className="special-i pointer play-pause"
               onClick={handlePlayPauseClick}
               dangerouslySetInnerHTML={{
@@ -251,7 +247,6 @@ export function MediaPlayer({ volume }) {
             ></span>
           </div>
           <span
-            title="Next"
             onClick={getNextSong}
             className="pointer title next"
             dangerouslySetInnerHTML={{
@@ -261,7 +256,6 @@ export function MediaPlayer({ volume }) {
           {isRepeated ? (
             <button className="is-repeated">
               <span
-                title="Disable repeat"
                 onClick={onRepeatClicked}
                 className="pointer repeat"
                 dangerouslySetInnerHTML={{
@@ -271,7 +265,6 @@ export function MediaPlayer({ volume }) {
             </button>
           ) : (
             <span
-              title="Enable repeat"
               onClick={onRepeatClicked}
               className="pointer title repeat"
               dangerouslySetInnerHTML={{
