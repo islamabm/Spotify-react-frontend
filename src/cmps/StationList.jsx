@@ -38,7 +38,6 @@ function _StationList({ stations }) {
     navigate('/search/category')
   }
 
-  console.log('rendered')
   return (
     <section className={`station-list-container`}>
       {stationsCategory.map(([tag, stationTag]) => (
