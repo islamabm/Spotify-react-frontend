@@ -3,8 +3,10 @@ import { getSpotifySvg } from '../../services/SVG.service'
 import { useNavigate } from 'react-router-dom'
 import { doLogout } from '../../store/actions/user.actions'
 import { useDispatch, useSelector } from 'react-redux'
+
 export function MobileModal({ closeModal, show }) {
   const user = useSelector((storeState) => storeState.userModule.loggedInUser)
+
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -22,6 +24,7 @@ export function MobileModal({ closeModal, show }) {
     navigate('/login')
     closeModal()
   }
+
   function signup() {
     navigate('/signup')
     closeModal()

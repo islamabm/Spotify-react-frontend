@@ -30,6 +30,7 @@ export function MediaPlayer({ volume }) {
     (storeState) => storeState.stationModule.currStationId
   )
   const currSvg = useSelector((storeState) => storeState.songModule.currentSvg)
+
   const location = useLocation()
   const dispatch = useDispatch()
   const progressBarRef = useRef(null)
@@ -130,17 +131,21 @@ export function MediaPlayer({ volume }) {
     setDisplayDuration(`${minutes}:${seconds < 10 ? '0' : ''}${seconds}`)
     event.target.pauseVideo()
   }
+
   function handleMouseDown() {
     setIsMouseDown(true)
   }
+
   function handleMouseMove(e) {
     if (isMouseDown) {
       handleProgressBarClick(e)
     }
   }
+
   function handleMouseUp() {
     setIsMouseDown(false)
   }
+
   function onPlaySong() {
     if (!playerRef.current) return
     setIsPlaying(true)
@@ -153,10 +158,12 @@ export function MediaPlayer({ volume }) {
       setDisplayTime(`${minutes}:${seconds < 10 ? '0' : ''}${seconds}`)
     }, 1000)
   }
+
   function onPauseSong() {
     setIsPlaying(false)
     clearInterval(interval)
   }
+
   function getPrevSong() {
     dispatch(setPrevSong(stationId, songId))
   }
@@ -197,6 +204,7 @@ export function MediaPlayer({ volume }) {
       playerRef.current.playVideo()
     }
   }
+
   return (
     <>
       <YouTube
@@ -291,10 +299,7 @@ export function MediaPlayer({ volume }) {
               style={{ width: progressBarWidth }}
             ></div>
           </div>
-          <span
-            className={`current-time ${showInMobile} end hiding`}
-            // className="current-time end hiding"
-          >
+          <span className={`current-time ${showInMobile} end hiding`}>
             {displayDuration}
           </span>
         </div>

@@ -6,15 +6,18 @@ import { useNavigate } from 'react-router-dom'
 import { editUserStation } from '../../store/actions/station.actions'
 import { uploadImg } from '../../services/upload.service'
 import emptyImg from '../../assets/imgs/empty-img.png'
+
 export function EditStationMobile() {
+  const [showDescInput, setShowDescInput] = useState(false)
+  const [isUploading, setIsUploading] = useState(false)
+  const [isTyping, setIsTyping] = useState(false)
+
   const station = useSelector(
     (storeState) => storeState.stationModule.currStation
   )
 
   const [editedStation, setEditedStation] = useState({ ...station })
-  const [showDescInput, setShowDescInput] = useState(false)
-  const [isUploading, setIsUploading] = useState(false)
-  const [isTyping, setIsTyping] = useState(false)
+
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
@@ -25,6 +28,7 @@ export function EditStationMobile() {
   function onChangeStationName(e) {
     setEditedStation({ ...editedStation, name: e.target.value })
   }
+
   function onChangeStationDesc(e) {
     setEditedStation({ ...editedStation, desc: e.target.value })
   }
@@ -90,13 +94,12 @@ export function EditStationMobile() {
           )}
           <input type="file" onChange={handelFile} className="hidden" />
         </label>
-        {/* <span className="edit-station-mobile-change-img">Change image</span> */}
       </div>
       <div className="edit-station-mobile-input-container flex justify-center align-center">
         <input
           className={`edit-station-mobile-input ${
             isTyping ? 'green-border' : ''
-          }`} // add class here
+          }`}
           type="text"
           placeholder={station?.name}
           onChange={onChangeStationName}

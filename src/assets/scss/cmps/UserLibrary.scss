@@ -6,19 +6,6 @@
   border-radius: 7px;
   width: 100%;
   font-family: Circular-medium;
-  // .icon-active {
-  //   svg {
-  //     stroke: pink;
-  //     fill: blue;
-  //   }
-  // }
-  // &.original {
-  //   width: 100%;
-  // }
-  
-  // &.smaller {
-  //   max-width: 82px; 
-  // }
 
   @include for-mobile-layout {
     display: none;
@@ -193,4 +180,3 @@
     width: 0;
   }
 }
-

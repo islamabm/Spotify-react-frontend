@@ -6,7 +6,7 @@ import { getSpotifySvg } from '../services/SVG.service'
 
 export function Login() {
   const [loginCred, setLoginCred] = useState({ username: '', password: '' })
-  
+
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -74,20 +74,6 @@ export function Login() {
               id="username"
               name="username"
             />
-            {/* <select
-            className="login-form-inputs"
-            id="username"
-            name="username"
-            value={loginCred.username}
-            onChange={handleInputChange}
-          >
-            <option value="">Select User</option>
-            {users.map((user, idx) => (
-              <option key={idx} value={user.username}>
-                {user.fullname}
-              </option>
-            ))}
-          </select> */}
           </div>
           <div className="spotify-password flex column">
             <span className="login-form-labels">Password</span>

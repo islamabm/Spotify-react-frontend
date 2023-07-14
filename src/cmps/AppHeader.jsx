@@ -24,42 +24,8 @@ export function AppHeader() {
   const dispatch = useDispatch()
   const location = useLocation()
   const navigate = useNavigate()
+
   const width = window.innerWidth
-
-  function hexToRgb(hex) {
-    const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i
-    hex = hex.replace(shorthandRegex, function (m, r, g, b) {
-      return r + r + g + g + b + b
-    })
-
-    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
-    return result
-      ? [
-          parseInt(result[1], 16),
-          parseInt(result[2], 16),
-          parseInt(result[3], 16),
-        ].join(',')
-      : null
-  }
-
-  function updateHeaderOpacity(scrollPos, headerBg) {
-    setScrollPos(scrollPos)
-    const maxScroll = 50
-    let opacity = Math.min(scrollPos / maxScroll, 1)
-
-    let match = headerBg?.background?.match(/rgb\((\d+,\d+,\d+)\)/)
-    let dominantColor = match ? match[1] : hexToRgb('#121212')
-
-    const newHeaders = {
-      backgroundColor: `rgba(${dominantColor}, ${opacity})`,
-    }
-    setHeaders(newHeaders)
-  }
-
-  function playFirstSong() {
-    dispatch(setCurrSong(station?._id, station?.songs[0]._id))
-    dispatch(setCurrSongIndex(station?._id, station?.songs[0]._id))
-  }
 
   useEffect(() => {
     const onScroll = ({ scrollPos, headerBg }) => {
@@ -111,6 +77,7 @@ export function AppHeader() {
       unlistenDetails()
     }
   }, [location.pathname])
+
   useEffect(() => {
     const onScroll = ({ scrollPos, bgStyle }) => {
       updateHeaderOpacity(scrollPos, bgStyle)
@@ -136,6 +103,41 @@ export function AppHeader() {
       unlistenDetails()
     }
   }, [location.pathname])
+
+  function hexToRgb(hex) {
+    const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i
+    hex = hex.replace(shorthandRegex, function (m, r, g, b) {
+      return r + r + g + g + b + b
+    })
+
+    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
+    return result
+      ? [
+          parseInt(result[1], 16),
+          parseInt(result[2], 16),
+          parseInt(result[3], 16),
+        ].join(',')
+      : null
+  }
+
+  function updateHeaderOpacity(scrollPos, headerBg) {
+    setScrollPos(scrollPos)
+    const maxScroll = 50
+    let opacity = Math.min(scrollPos / maxScroll, 1)
+
+    let match = headerBg?.background?.match(/rgb\((\d+,\d+,\d+)\)/)
+    let dominantColor = match ? match[1] : hexToRgb('#121212')
+
+    const newHeaders = {
+      backgroundColor: `rgba(${dominantColor}, ${opacity})`,
+    }
+    setHeaders(newHeaders)
+  }
+
+  function playFirstSong() {
+    dispatch(setCurrSong(station?._id, station?.songs[0]._id))
+    dispatch(setCurrSongIndex(station?._id, station?.songs[0]._id))
+  }
 
   function onCloseModal() {
     setShowModal(false)
@@ -184,6 +186,7 @@ export function AppHeader() {
     }
     return ''
   }
+
   return (
     <>
       <header
@@ -209,7 +212,6 @@ export function AppHeader() {
                   __html: getSpotifySvg('rightArrowIcon'),
                 }}
               ></span>
-              {/* <Transcript /> */}
             </div>
           </section>
           {location.pathname === '/search' && (

@@ -3,9 +3,11 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { getSpotifySvg } from '../../services/SVG.service'
 
 export function BottomNav() {
+
   const location = useLocation()
   const navigate = useNavigate()
-  const getSvgIcon = (iconName) => {
+
+ function getSvgIcon(iconName){
     if (iconName === 'homeIcon' && location.pathname === '/') {
       return getSpotifySvg('homeIconActive')
     }
@@ -18,7 +20,7 @@ export function BottomNav() {
     return getSpotifySvg(iconName)
   }
 
-  const isActive = (path) => {
+  function isActive(path){
     return location.pathname === path ? 'active' : ''
   }
 

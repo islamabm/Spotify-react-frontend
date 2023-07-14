@@ -6,13 +6,14 @@ import { editUserStation } from '../../store/actions/station.actions'
 import { uploadImg } from '../../services/upload.service'
 import emptyImg from '../../assets/imgs/empty-img.png'
 import AIImageGenerator from './AIImageGenerator'
+
 export function EditUserStationModal({ station, onClose }) {
   const [focusedInput, setFocusedInput] = useState(null)
   const [showModal, setShowModal] = useState(false)
   const [isUploading, setIsUploading] = useState(false)
-  const dispatch = useDispatch()
-
   const [editedStation, setEditedStation] = useState({ ...station })
+
+  const dispatch = useDispatch()
 
   function handleInputFocus(inputIndex) {
     setFocusedInput(inputIndex)
@@ -41,6 +42,7 @@ export function EditUserStationModal({ station, onClose }) {
   function openAiModal() {
     setShowModal(true)
   }
+
   function handleImageGenerated(url) {
     setEditedStation({ ...editedStation, imgUrl: url })
   }

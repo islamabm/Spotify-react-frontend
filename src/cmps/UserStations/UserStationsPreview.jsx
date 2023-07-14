@@ -5,9 +5,11 @@ import { useDispatch } from 'react-redux'
 import emptyImg from '../../assets/imgs/empty-img.png'
 import { useSelector } from 'react-redux'
 import { setCurrStation } from '../../store/actions/station.actions'
+
 export default function UserStationsPreview({ station, color }) {
   const user = useSelector((storeState) => storeState.userModule.loggedInUser)
   const svg = useSelector((storeState) => storeState.songModule.currentSvg)
+
   const navigate = useNavigate()
   const dispatch = useDispatch()
 

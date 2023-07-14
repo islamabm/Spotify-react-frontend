@@ -5,10 +5,10 @@ import {
   LOGOUT,
   UPDATE_USER,
   SET_LOGGEDIN_USER,
-  // ADD_SONG_TO_USER_LIKED_SONGS,
   UPDATE_LATEST,
 } from '../reducers/user.reducer'
 import { showErrorMsg, showSuccessMsg } from '../../services/event-bus.service'
+
 export function doSignup(userCred) {
   return async (dispatch, getState) => {
     try {
@@ -39,6 +39,7 @@ export function doLogin(userCred) {
     }
   }
 }
+
 export function getUser() {
   return async (dispatch, getState) => {
     try {
@@ -55,6 +56,7 @@ export function getUser() {
     }
   }
 }
+
 export function doLogout() {
   return async (dispatch, getState) => {
     try {
@@ -131,9 +133,6 @@ export function updateLatestStations(stationId, user) {
   return async (dispatch, getState) => {
     try {
       const { value } = await userService.updateLatestStations(stationId, user)
-
-      // dispatch({ type: UPDATE_LATEST, value })
-
       const action = {
         type: UPDATE_LATEST,
         user: value,

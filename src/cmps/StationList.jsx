@@ -8,13 +8,13 @@ import { useSelector } from 'react-redux'
 function _StationList({ stations }) {
   const [stationsCategory, setStationsCategory] = useState([])
 
-  const category = useSelector(
-    (storeState) => storeState.stationModule.categoryBy
-  )
-
   const location = useLocation()
   const navigate = useNavigate()
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    setStationsCategory(categorizedStations())
+  }, [])
 
   function categorizedStations() {
     const category = stations?.reduce((acc, station) => {
@@ -28,10 +28,6 @@ function _StationList({ stations }) {
     }, {})
     return Object.entries(category)
   }
-
-  useEffect(() => {
-    setStationsCategory(categorizedStations())
-  }, [])
 
   function goToTagList(tag) {
     dispatch(setCurrCategoryBy(tag))

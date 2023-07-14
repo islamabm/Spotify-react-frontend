@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from "react"
-import { useSelector, useDispatch } from "react-redux"
-import { FastAverageColor } from "fast-average-color"
-import { getSpotifySvg } from "../services/SVG.service"
+import React, { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { FastAverageColor } from 'fast-average-color'
+import { getSpotifySvg } from '../services/SVG.service'
 import {
   setCurrSong,
   setCurrSongSvg,
   setCurrSongIndex,
   setCurrDirection,
-} from "../store/actions/song.actions"
+} from '../store/actions/song.actions'
+import { SongOptionsModal } from '../cmps/Modals/SongOptionsModal'
+import { BubblingHeart } from '../cmps/BubblingHeart'
 
-import { SongOptionsModal } from "../cmps/Modals/SongOptionsModal"
-import { BubblingHeart } from "../cmps/BubblingHeart"
 export function SongLyrics() {
   const [showModal, setShowOptionsModal] = useState(false)
   const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 })
@@ -26,6 +26,7 @@ export function SongLyrics() {
   const lyrics = useSelector(
     (storeState) => storeState.songModule.currSongLyrics
   )
+
   const dispatch = useDispatch()
   const colorCache = {}
 
@@ -36,14 +37,14 @@ export function SongLyrics() {
   function updateImgUrlAndColor(song) {
     if (!song) return
     const imgUrl = song.imgUrl
-    if (imgUrl !== "") {
+    if (imgUrl !== '') {
       getDominantColor(imgUrl)
     }
   }
 
   function showSongOptionsModal(e) {
     e.stopPropagation()
-    dispatch(setCurrDirection("right"))
+    dispatch(setCurrDirection('right'))
     const rect = e.target.getBoundingClientRect()
     setModalPosition({
       top: rect.top + window.scrollY - 100,
@@ -65,8 +66,8 @@ export function SongLyrics() {
     }
     const fac = new FastAverageColor()
     const img = new Image()
-    img.crossOrigin = "Anonymous"
-    const corsProxyUrl = "https://api.codetabs.com/v1/proxy?quest="
+    img.crossOrigin = 'Anonymous'
+    const corsProxyUrl = 'https://api.codetabs.com/v1/proxy?quest='
     img.src = corsProxyUrl + encodeURIComponent(imageSrc)
     img.onload = async () => {
       try {
@@ -92,18 +93,14 @@ export function SongLyrics() {
       dispatch(setCurrSongIndex(station._id, song._id))
       setIsFirstClick(false)
     } else {
-      dispatch(setCurrSongSvg("play"))
+      dispatch(setCurrSongSvg('play'))
     }
   }
 
   function pauseSong() {
     setIsPlaying(false)
-    dispatch(setCurrSongSvg("pause"))
+    dispatch(setCurrSongSvg('pause'))
   }
-
-  // function addSongToLoveSongs() {
-  //   dispatch(updateUser(song, user))
-  // }
 
   return (
     <section className="song-lyrics-section">
@@ -140,7 +137,7 @@ export function SongLyrics() {
                 title="Pause"
                 className="pause-button flex align-center justify-center title lyrics-play"
                 dangerouslySetInnerHTML={{
-                  __html: getSpotifySvg("biggerPauseBtn"),
+                  __html: getSpotifySvg('biggerPauseBtn'),
                 }}
               ></span>
             </button>
@@ -150,7 +147,7 @@ export function SongLyrics() {
                 title="Play"
                 className="play-button flex align-center justify-center title lyrics-play"
                 dangerouslySetInnerHTML={{
-                  __html: getSpotifySvg("biggerPlayBtn"),
+                  __html: getSpotifySvg('biggerPlayBtn'),
                 }}
               ></span>
             </button>
@@ -164,7 +161,7 @@ export function SongLyrics() {
           onClick={(e) => showSongOptionsModal(e)}
           className="dots flex align-center justify-center"
           dangerouslySetInnerHTML={{
-            __html: getSpotifySvg("bigDots"),
+            __html: getSpotifySvg('bigDots'),
           }}
         ></span>
       </div>

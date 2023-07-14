@@ -5,7 +5,6 @@ import { setCurrCategoryBy } from '../../store/actions/station.actions'
 
 export function SearchCategoryPreview({ category }) {
   const navigate = useNavigate()
-
   const dispatch = useDispatch()
 
   function filterStationCategories(categoryName) {

@@ -1,6 +1,7 @@
 export const utilService = {
   makeId,
   getRandomIntInclusive,
+  getGreeting,
 }
 
 function makeId(length = 5) {
@@ -12,20 +13,21 @@ function makeId(length = 5) {
   }
   return text
 }
+
 function getRandomIntInclusive(min, max) {
   min = Math.ceil(min)
   max = Math.floor(max)
-  return Math.floor(Math.random() * (max - min + 1)) + min //The maximum is inclusive and the minimum is inclusive
+  return Math.floor(Math.random() * (max - min + 1)) + min
 }
 
-export function getGreeting(date) {
-  const currentHour = date.getHours();
+function getGreeting(date) {
+  const currentHour = date.getHours()
 
   if (currentHour < 12) {
-    return "Good morning";
+    return 'Good morning'
   } else if (currentHour < 18) {
-    return "Good afternoon";
+    return 'Good afternoon'
   } else {
-    return "Good evening";
+    return 'Good evening'
   }
 }

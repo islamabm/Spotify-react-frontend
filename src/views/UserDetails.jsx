@@ -8,44 +8,30 @@ import { eventBus } from '../services/event-bus.service'
 import { useNavigate } from 'react-router-dom'
 import { loadUserStations } from '../store/actions/station.actions'
 import { UserDetailsList } from '../cmps/UserDetailsStations/UserDetailsList'
+
 export function UserDetails() {
   const [isUploading, setIsUploading] = useState(false)
   const [bgStyle, setBgStyle] = useState(null)
+
   const user = useSelector((storeState) => storeState.userModule.loggedInUser)
+  const stations = useSelector(
+    (storeState) => storeState.stationModule.userStations
+  )
+
   const dispatch = useDispatch()
+  const navigate = useNavigate()
+
   const colorCache = {}
   const userDetailsRef = useRef(null)
-  const navigate = useNavigate()
+
   useEffect(() => {
     dispatch(getUser())
     updateImgUrlAndColor(user.imgUrl)
   }, [user.imgUrl])
 
-  const stations = useSelector(
-    (storeState) => storeState.stationModule.userStations
-  )
-
   useEffect(() => {
     dispatch(loadUserStations())
   }, [user])
-
-  async function handleFile(ev) {
-    const file =
-      ev.type === 'change' ? ev.target.files[0] : ev.dataTransfer.files[0]
-    try {
-      setIsUploading(true)
-      const { url } = await uploadImg(file)
-      dispatch(editUserImg(url, user))
-    } catch (err) {
-      console.log('err', err)
-    } finally {
-      setIsUploading(false)
-    }
-  }
-  function updateImgUrlAndColor(userImg) {
-    if (!user.imgUrl) return
-    getDominantColor(userImg)
-  }
 
   useEffect(() => {
     const currentUserDetailsRef = userDetailsRef.current
@@ -66,6 +52,25 @@ export function UserDetails() {
       }
     }
   }, [bgStyle])
+
+  async function handleFile(ev) {
+    const file =
+      ev.type === 'change' ? ev.target.files[0] : ev.dataTransfer.files[0]
+    try {
+      setIsUploading(true)
+      const { url } = await uploadImg(file)
+      dispatch(editUserImg(url, user))
+    } catch (err) {
+      console.log('err', err)
+    } finally {
+      setIsUploading(false)
+    }
+  }
+
+  function updateImgUrlAndColor(userImg) {
+    if (!user.imgUrl) return
+    getDominantColor(userImg)
+  }
 
   async function getDominantColor(imageSrc) {
     const cachedColor = colorCache[imageSrc]

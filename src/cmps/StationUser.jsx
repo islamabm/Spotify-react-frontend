@@ -1,23 +1,24 @@
 import React, { useState } from 'react'
 import { stationService } from '../services/station.service.js'
-
 import { EditUserStationModal } from './Modals/EditUserStationModal.jsx'
 import { useSelector } from 'react-redux'
 
 export default function StationUser({ station }) {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
+
   const user = useSelector((storeState) => storeState.userModule.loggedInUser)
+
   const stationNameClass = stationService.stationNameClass(station)
 
   function handleEditModalOpen() {
     if (window.innerWidth < 460) return
     setIsEditModalOpen(true)
-    // onEditModalOpen()
   }
 
   function handleEditModalClose() {
     setIsEditModalOpen(false)
   }
+
   return (
     <>
       <div className="station-main-img user-main-img justify-center align-center">

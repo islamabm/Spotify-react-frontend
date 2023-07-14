@@ -3,6 +3,7 @@ import { stationService } from '../services/station.service.js'
 
 export default function StationSystem({ station }) {
   const stationNameClass = stationService.stationNameClass(station)
+
   return (
     <>
       <img

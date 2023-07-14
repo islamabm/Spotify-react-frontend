@@ -1,10 +1,7 @@
-import { userService } from '../../services/user.service'
-
 export const SET_STATIONS = 'SET_STATIONS'
 export const SET_SEARCH_STATIONS = 'SET_SEARCH_STATIONS'
 export const ADD_STATION = 'ADD_STATION'
 export const REMOVE_STATION = 'REMOVE_STATION'
-
 export const UPDATE_STATION = 'UPDATE_STATION'
 export const SET_FILTER_BY = 'SET_FILTER_BY'
 export const SET_CURR_STATION = 'SET_CURR_STATION'
@@ -15,6 +12,7 @@ export const REMOVE_SONG_FROM_STATION = 'REMOVE_SONG_FROM_STATION'
 export const EDIT_STATION = 'EDIT_STATION'
 export const SET_CURR_CATEGORY_BY = 'SET_CURR_CATEGORY_BY'
 export const ADD_TO_USER_STATIONS = 'ADD_TO_USER_STATIONS'
+
 const INITIAL_STATE = {
   currStationImg: '',
   stations: null,
@@ -84,12 +82,6 @@ export function stationReducer(state = INITIAL_STATE, action = {}) {
         searchStations: action.stations,
       }
     case ADD_STATION:
-      // if (
-      //   state.userStations.some(
-      //     (station) => station.name === action.station.name
-      //   )
-      // )
-      //   return
       return {
         ...state,
         stations: [...state.stations, action.station],

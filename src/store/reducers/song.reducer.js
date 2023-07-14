@@ -5,6 +5,7 @@ export const SET_CURR_SONG_SVG = 'SET_CURR_SONG_SVG'
 export const SET_CURR_SONG_LYRICS = 'SET_CURR_SONG_LYRICS'
 export const SET_CURR_DIRECTION = 'SET_CURR_DIRECTION'
 export const SET_CURR_VIDEOID = 'SET_CURR_VIDEOID'
+
 const INITIAL_STATE = {
   currSong: null,
   currSongId: null,

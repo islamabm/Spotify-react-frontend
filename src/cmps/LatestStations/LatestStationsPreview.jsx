@@ -6,9 +6,11 @@ import { setCurrSong, setCurrSongIndex } from '../../store/actions/song.actions'
 import { getSpotifySvg } from '../../services/SVG.service'
 
 export default function LatestStationsPreview({ station }) {
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
   const [isPlaying, setIsPlaying] = useState(false)
+
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
   function goToDetails() {
     dispatch(setCurrStation(station._id))
     navigate(`/station/${station._id}`)

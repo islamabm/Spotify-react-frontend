@@ -7,6 +7,7 @@ export function SearchSongsIndex({ stationId }) {
   const [searchText, setSearchText] = useState('')
   const [songList, setSongList] = useState([])
   const [isOpen, setIsOpen] = useState(true)
+
   useEffect(() => {
     const timerId = setTimeout(async () => {
       const list = await stationService.getVideos(searchText)

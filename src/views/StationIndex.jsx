@@ -2,23 +2,22 @@ import { useEffect, useRef, useState } from 'react'
 import { StationList } from '../cmps/StationList'
 import { useDispatch, useSelector } from 'react-redux'
 import { loadStations } from '../store/actions/station.actions'
-import { getGreeting } from '../services/util.service'
+
 import { eventBus } from '../services/event-bus.service'
 
 export function StationIndex() {
   const [headerBg, setHeaderBg] = useState({
     backgroundColor: `transparent`,
   })
+
   const stations = useSelector(
     (storeState) => storeState.stationModule.stations
   )
 
+  const dispatch = useDispatch()
+
   const stationIndexRef = useRef(null)
   const width = window.innerWidth
-
-  const dispatch = useDispatch()
-  const currentDate = new Date()
-  const greeting = getGreeting(currentDate)
 
   useEffect(() => {
     if (width > 460) {
@@ -56,8 +55,6 @@ export function StationIndex() {
 
   return (
     <section className="station-index" ref={stationIndexRef}>
-      {/* <h1 className="greeting">{greeting}</h1> */}
-      {/* <LatestStationsIndex /> */}
       <StationList stations={stations} />
     </section>
   )

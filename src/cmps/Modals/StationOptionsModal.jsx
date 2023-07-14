@@ -9,6 +9,19 @@ export function StationOptionsModal({
 }) {
   const modalRef = useRef()
   const navigate = useNavigate()
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        closeOptionsModal()
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [modalRef, closeOptionsModal])
+
   function handleShowDeleteModal() {
     onShowDeleteModal()
     closeOptionsModal()
@@ -28,18 +41,6 @@ export function StationOptionsModal({
       closeOptionsModal()
     }
   }
-
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (modalRef.current && !modalRef.current.contains(event.target)) {
-        closeOptionsModal()
-      }
-    }
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [modalRef, closeOptionsModal])
 
   function goToEdit() {
     navigate('/edit/mobile')

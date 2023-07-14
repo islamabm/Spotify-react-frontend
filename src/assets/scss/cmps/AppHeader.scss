@@ -47,7 +47,7 @@
         }
       }
     }
-    
+
     .input-container {
       margin-left: rem(-15px);
       @include for-mobile-layout {
@@ -138,11 +138,6 @@
     }
   }
 }
-
-// .none-sticky {
-//   // display: block;
-//   position: relative;
-// }
 
 .station-options {
   @include for-mobile-layout {

@@ -18,6 +18,7 @@ export function UserLibrary() {
   const [filterUserStations, setFilterUserStations] = useState('')
 
   const user = useSelector((storeState) => storeState.userModule.loggedInUser)
+
   const location = useLocation()
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -91,11 +92,8 @@ export function UserLibrary() {
                   __html: getSpotifySvg('libraryIcon'),
                 }}
               ></span>
-              {/* {librarySize === 'original' && ( */}
               <span>Your Library</span>
-              {/* )} */}
             </div>
-            {/* {librarySize === 'original' && ( */}
             <span
               onClick={createNewStation}
               className="plus-icon flex align-center justify-center pointer title create"
@@ -103,17 +101,10 @@ export function UserLibrary() {
                 __html: getSpotifySvg('plus'),
               }}
             ></span>
-            {/* )} */}
           </div>
-          {/* <div className="your-library-btns flex align-center">
-            <button className="library-btn pointer">Playlists</button>
-            <button className="library-btn pointer">Artists</button>
-            <button className="library-btn pointer">Albums</button>
-          </div> */}
         </section>
         <section className="filter-and-list">
           <div className="library-filter">
-            {/* {librarySize === 'original' && ( */}
             <div className="input-container">
               <span
                 onClick={openInput}
@@ -123,7 +114,6 @@ export function UserLibrary() {
                 }}
               ></span>
               {showInput && (
-                // {showInput && librarySize === 'original' && (
                 <input
                   className={`search-input ${showInput ? 'open' : 'close'}`}
                   type="text"
@@ -133,8 +123,7 @@ export function UserLibrary() {
                 />
               )}
             </div>
-            {/* )} */}
-            {/* {librarySize === 'original' && ( */}
+
             <div onClick={onShowSortModal} className="sort-by-section relative">
               <span className="sort-by-span">{selectedOption}</span>
               <span
@@ -147,7 +136,6 @@ export function UserLibrary() {
               ></span>
               {showSortModal && <SortModal onSelectOption={onSelectOption} />}
             </div>
-            {/* )} */}
           </div>
           <UserStationsIndex filterUserStations={filterUserStations} />
           {showModal && (

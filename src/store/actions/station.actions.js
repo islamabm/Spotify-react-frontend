@@ -14,7 +14,6 @@ import {
   REMOVE_SONG_FROM_STATION,
   EDIT_STATION,
   SET_CURR_CATEGORY_BY,
-  ADD_TO_USER_STATIONS,
 } from '../reducers/station.reducer'
 
 export function loadStations() {
@@ -79,6 +78,7 @@ export function loadSearchStations() {
     }
   }
 }
+
 export function setCurrStation(id) {
   return async (dispatch, getState) => {
     try {
@@ -94,6 +94,7 @@ export function setCurrStation(id) {
     }
   }
 }
+
 export function setCurrCategoryBy(category) {
   return (dispatch) => {
     const action = { type: SET_CURR_CATEGORY_BY, category }
@@ -148,6 +149,7 @@ export function removeSongFromStation(stationId, songId) {
     }
   }
 }
+
 export function setCurrGradient(bgStyle) {
   return (dispatch) => {
     dispatch({ type: SET_CURR_GRADIENT, bgStyle })

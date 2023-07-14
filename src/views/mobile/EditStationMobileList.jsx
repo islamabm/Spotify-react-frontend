@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import { EditStationMobilePreview } from './EditStationMobilePreview'
@@ -6,6 +6,7 @@ import { updateStation } from '../../store/actions/station.actions'
 
 export function EditStationMobileList({ list, station }) {
   const [songs, setSongs] = useState(list)
+
   const dispatch = useDispatch()
 
   function handleDragEnd(result) {

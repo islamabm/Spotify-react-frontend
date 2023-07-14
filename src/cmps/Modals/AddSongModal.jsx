@@ -5,9 +5,11 @@ import { useSelector } from 'react-redux'
 
 export function AddSongModal({ position, addSongToStation, createStation }) {
   const [filterInput, setFilterInput] = useState('')
+
   const direction = useSelector(
     (storeState) => storeState.songModule.currDirection
   )
+
   const width = window.innerWidth
 
   return (

@@ -7,8 +7,8 @@ export function UserStationsIndex({ filterUserStations }) {
   const userStations = useSelector(
     (storeState) => storeState.stationModule.userStations
   )
-
   const user = useSelector((storeState) => storeState.userModule.loggedInUser)
+
   const dispatch = useDispatch()
 
   useEffect(() => {

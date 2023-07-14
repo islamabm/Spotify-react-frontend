@@ -117,10 +117,8 @@ const gSearchCategories = [
 const API_KEY = 'AIzaSyCpw1F8RDlbSPhUZptfwf4JRSiIkqpUJCc'
 
 const gUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=${API_KEY}&q=`
-const STORAGE_KEY = 'stations'
-const USER_STATIONS = 'user-stations'
+
 const STORAGE_SEARCH_KEY = 'search-stations'
-const SEARCH_KEY = 'videosDB'
 const VIDEOS_KEY = 'videosIdDB'
 
 var gSearchStations = _loadSearchStations()
@@ -150,7 +148,7 @@ async function getCachedVideos(keyword) {
 }
 
 const CACHE_KEY = 'recommendedSongsCache'
-const CACHE_EXPIRATION_TIME = 24 * 60 * 60 * 1000 // 24 hours
+const CACHE_EXPIRATION_TIME = 24 * 60 * 60 * 1000
 
 async function getVideos(keyword, song = null) {
   if (Array.isArray(keyword)) {
@@ -296,6 +294,7 @@ async function getRandomSong(stationId) {
   const song = station.songs[idx]
   return Promise.resolve({ ...song })
 }
+
 async function getPrevSong(stationId, songId) {
   let song
   const station = await getById(stationId)
@@ -305,6 +304,7 @@ async function getPrevSong(stationId, songId) {
 
   return Promise.resolve({ ...song })
 }
+
 async function getNextSong(stationId, songId) {
   let song
   const station = await getById(stationId)
@@ -392,6 +392,7 @@ function stationNameClass(station) {
     return 'huge-station-name'
   }
 }
+
 function songNameClass(song) {
   if (!song.title) return
   const words = song.title.split(' ').length

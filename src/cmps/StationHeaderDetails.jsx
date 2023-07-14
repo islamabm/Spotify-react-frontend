@@ -11,7 +11,7 @@ export default function StationHeaderDetails({ bgStyle, station }) {
   useEffect(() => {
     setCreatedBy(station.createdBy?.fullname)
   }, [station])
-  
+
   return (
     <div className="station-header-content" style={bgStyle}>
       {station && (

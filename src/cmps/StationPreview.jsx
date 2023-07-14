@@ -3,21 +3,19 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { setCurrStation } from '../store/actions/station.actions'
 import { setCurrSong, setCurrSongIndex } from '../store/actions/song.actions'
-
 import { getSpotifySvg } from '../services/SVG.service'
 
 export function StationPreview({ station }) {
+  const [isPlaying, setIsPlaying] = useState(false)
+
   const createdBy = station?.createdBy.fullname
+
   const navigate = useNavigate()
   const dispatch = useDispatch()
-
-  const [isPlaying, setIsPlaying] = useState(false)
 
   function goToDetails() {
     dispatch(setCurrStation(station._id))
     navigate(`/station/${station._id}`)
-
-    // dispatch(updateLatestStations(station._id, user))
   }
 
   function playFirstSongInStation(event) {

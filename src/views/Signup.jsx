@@ -8,6 +8,7 @@ import { userService } from '../services/user.service'
 import { LoginSocialFacebook } from 'reactjs-social-login'
 import { FacebookLoginButton } from 'react-social-login-buttons'
 import { emailService } from '../services/email.service'
+
 export function Signup() {
   const [signupCred, setSignupCred] = useState({
     username: '',
@@ -22,6 +23,7 @@ export function Signup() {
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
+
   const google = window.google
 
   useEffect(() => {
@@ -91,15 +93,6 @@ export function Signup() {
           >
             <FacebookLoginButton />
           </LoginSocialFacebook>
-
-          {/* <button className="fb-btn pointer">
-            Sign up with Facebook
-            {/* <span>
-                <img src="https://www.freeiconspng.com/uploads/facebook-f-logo-white-background-21.jpg" />
-              </span> */}
-          {/* </button>  */}
-
-          {/* Google Sign in */}
           <div id="signIn-div"></div>
 
           <div className="divider">

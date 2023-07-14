@@ -105,7 +105,7 @@
       box-shadow: 0 2px 8px rgba($clr2, 0.2), 0 1px 2px rgba($clr2, 0.1);
       height: rem(232px);
       min-width: rem(232px);
-      width: rem(232px); // do we realy need it?
+      width: rem(232px); 
       @include for-mobile-layout {
         margin-inline-end: 0;
       }

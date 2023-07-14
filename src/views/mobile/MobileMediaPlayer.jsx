@@ -8,14 +8,16 @@ import { MediaPlayer } from '../../cmps/MediaPlayer'
 import { FastAverageColor } from 'fast-average-color'
 
 export function MobileMediaPlayer() {
-  const song = useSelector((storeState) => storeState.songModule.currSong)
   const [bgStyle, setBgStyle] = useState(null)
-  const colorCache = {}
-  const navigate = useNavigate()
 
+  const song = useSelector((storeState) => storeState.songModule.currSong)
   const station = useSelector(
     (storeState) => storeState.stationModule.currStation
   )
+
+  const navigate = useNavigate()
+
+  const colorCache = {}
 
   useEffect(() => {
     updateImgUrlAndColor(song)
@@ -67,7 +69,6 @@ export function MobileMediaPlayer() {
     <>
       <section
         className={`song-details-container-mobile flex column align-center justify-center`}
-        // className="song-details-container-mobile flex column align-center justify-center"
         style={bgStyle}
       >
         <div className="media-player-header flex align-center">

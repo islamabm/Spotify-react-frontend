@@ -9,6 +9,7 @@ export function OnlyLyrics() {
   const lyrics = useSelector(
     (storeState) => storeState.songModule.currSongLyrics
   )
+
   const colorCache = {}
 
   useEffect(() => {

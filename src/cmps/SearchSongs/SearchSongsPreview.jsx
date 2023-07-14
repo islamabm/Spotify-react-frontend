@@ -1,30 +1,33 @@
-import React, { useState } from "react"
-import { useDispatch } from "react-redux"
-import { addSongToStation } from "../../store/actions/station.actions"
-import { utilService } from "../../services/util.service"
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { addSongToStation } from '../../store/actions/station.actions'
+import { utilService } from '../../services/util.service'
 import {
   setCurrDirection,
   setCurrSongAction,
   setVideoId,
-} from "../../store/actions/song.actions"
-import { getSpotifySvg } from "../../services/SVG.service"
-import { SongOptionsModal } from "../Modals/SongOptionsModal"
+} from '../../store/actions/song.actions'
+import { getSpotifySvg } from '../../services/SVG.service'
+import { SongOptionsModal } from '../Modals/SongOptionsModal'
 
 export function SearchSongsPreview({ song, stationId }) {
   const [showModal, setShowOptionsModal] = useState(false)
   const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 })
 
   const dispatch = useDispatch()
+
   function playSong() {
     dispatch(setVideoId(song.videoId, song))
   }
+
   function handleAddSong() {
     song._id = utilService.makeId()
     dispatch(addSongToStation(stationId, song))
   }
+
   function showSongOptionsModal(e, song) {
     dispatch(setCurrSongAction(stationId, song._id))
-    dispatch(setCurrDirection("left"))
+    dispatch(setCurrDirection('left'))
     e.stopPropagation()
 
     const rect = e.target.getBoundingClientRect()
@@ -53,7 +56,7 @@ export function SearchSongsPreview({ song, stationId }) {
           className="mobile-dots"
           onClick={(e) => showSongOptionsModal(e, song)}
           dangerouslySetInnerHTML={{
-            __html: getSpotifySvg("mobileDots"),
+            __html: getSpotifySvg('mobileDots'),
           }}
         ></span>
       )}

@@ -5,15 +5,17 @@ import { setFilterBy } from '../../store/actions/station.actions'
 
 export function SortModal({ onSelectOption }) {
   const [selected, setSelected] = useState(null)
-  const dispatch = useDispatch()
 
-  const options = ['Recently Added', 'Alphabetical', 'Creator']
   const userStations = useSelector(
     (storeState) => storeState.stationModule.userStations
   )
   const currFilterBy = useSelector(
     (storeState) => storeState.stationModule.filterBy
   )
+
+  const dispatch = useDispatch()
+
+  const options = ['Recently Added', 'Alphabetical', 'Creator']
 
   function onSelect(ev, option) {
     setSelected(option)

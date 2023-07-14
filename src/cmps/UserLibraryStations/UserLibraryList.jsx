@@ -4,11 +4,13 @@ import { addStation } from '../../store/actions/station.actions'
 import { getSpotifySvg } from '../../services/SVG.service'
 import emptyImg from '../../assets/imgs/empty-img.png'
 import { useState, useEffect, useRef } from 'react'
+
 export function UserLibraryList({ stations, title }) {
   const user = useSelector((storeState) => storeState.userModule.loggedInUser)
   const [showInput, setShowInput] = useState(false)
   const [stationCounter, setStationCounter] = useState(0)
   const [filter, setFilter] = useState('')
+
   const dispatch = useDispatch()
   const inputRef = useRef()
   const buttonRef = useRef()
@@ -31,18 +33,22 @@ export function UserLibraryList({ stations, title }) {
       document.removeEventListener('click', handleClickOutside)
     }
   }, [showInput])
+
   function openInput(event) {
     event.stopPropagation()
     setShowInput(!showInput)
   }
+
   function handleFilterChange(e) {
     setFilter(e.target.value)
   }
+
   function createNewStation() {
     setStationCounter(stationCounter + 1)
     const name = `My Playlist #${stationCounter}`
     dispatch(addStation(name, [], emptyImg))
   }
+
   const filteredStations = stations.filter((station) =>
     station.name.toLowerCase().includes(filter.toLowerCase())
   )
@@ -62,7 +68,6 @@ export function UserLibraryList({ stations, title }) {
                 <span
                   ref={buttonRef}
                   onClick={(event) => openInput(event)}
-
                   className="smaller-search pointer flex align-center justify-center title"
                   dangerouslySetInnerHTML={{
                     __html: getSpotifySvg('smallerSearchIcon'),
@@ -83,7 +88,6 @@ export function UserLibraryList({ stations, title }) {
               <span
                 onClick={createNewStation}
                 className="title plus-library"
-
                 dangerouslySetInnerHTML={{
                   __html: getSpotifySvg('plus'),
                 }}

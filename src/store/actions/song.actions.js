@@ -25,12 +25,10 @@ export function setCurrSong(stationId, songId) {
     }
   }
 }
+
 export function setCurrSongAction(stationId, id) {
   return async (dispatch, getState) => {
     try {
-      // let song
-      // if (stationId) song = await stationService.getSongById(stationId, id)
-      // else song = id
       const song = await stationService.getSongById(stationId, id)
       const action = {
         type: SET_CURR_SONG_ACTION,
@@ -42,6 +40,7 @@ export function setCurrSongAction(stationId, id) {
     }
   }
 }
+
 export function setCurrSongLyrics(artist, title) {
   return async (dispatch, getState) => {
     try {
@@ -57,6 +56,7 @@ export function setCurrSongLyrics(artist, title) {
     }
   }
 }
+
 export function setCurrSongIndex(stationId, songId) {
   return async (dispatch, getState) => {
     try {
@@ -71,6 +71,7 @@ export function setCurrSongIndex(stationId, songId) {
     }
   }
 }
+
 export function getRandomSong(stationId) {
   return async (dispatch, getState) => {
     try {
@@ -85,6 +86,7 @@ export function getRandomSong(stationId) {
     }
   }
 }
+
 export function setPrevSong(stationId, songId) {
   return async (dispatch, getState) => {
     try {
@@ -99,6 +101,7 @@ export function setPrevSong(stationId, songId) {
     }
   }
 }
+
 export function setNextSong(stationId, songId) {
   return async (dispatch, getState) => {
     try {
@@ -119,6 +122,7 @@ export function setCurrSongSvg(svg) {
     dispatch({ type: SET_CURR_SONG_SVG, svg })
   }
 }
+
 export function setVideoId(videoId, song) {
   return (dispatch) => {
     dispatch({ type: SET_CURR_VIDEOID, videoId, song })

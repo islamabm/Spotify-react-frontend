@@ -1,10 +1,8 @@
-.latest-stations-container{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    column-gap: rem(24px);
-    row-gap: rem(16px);
-    // margin-top: -40px;
-    // margin-bottom: -50px;
-    margin: rem(-40px) 0 rem(-50px) 0 ;
-    padding: 0 rem(24px);
+.latest-stations-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: rem(24px);
+  row-gap: rem(16px);
+  margin: rem(-40px) 0 rem(-50px) 0;
+  padding: 0 rem(24px);
 }

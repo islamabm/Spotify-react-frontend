@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from 'react'
 import { getSpotifySvg } from '../../services/SVG.service'
 import { AddSongModal } from './AddSongModal'
 import { useDispatch, useSelector } from 'react-redux'
-
 import {
   addSongToStation,
   removeSongFromStation,
@@ -12,20 +11,21 @@ import {
   updateUser,
   removeSongFromUser,
 } from '../../store/actions/user.actions'
+
 export function SongOptionsModal({ position, closeModal, station }) {
   const [createdBy, setCreatedBy] = useState('')
+  const [showModal, setShowModal] = useState(false)
+  const [modalPosition, setAddModalPosition] = useState({ top: 0, left: 0 })
 
-  useEffect(() => {
-    setCreatedBy(station?.createdBy?.fullname)
-  }, [station])
   const user = useSelector((storeState) => storeState.userModule.loggedInUser)
   const song = useSelector((storeState) => storeState.songModule.currSongAction)
 
   const SongmodalRef = useRef()
-
-  const [showModal, setShowModal] = useState(false)
-  const [modalPosition, setAddModalPosition] = useState({ top: 0, left: 0 })
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    setCreatedBy(station?.createdBy?.fullname)
+  }, [station])
 
   function showAddModal(e) {
     const rect = e.target.getBoundingClientRect()
@@ -36,6 +36,7 @@ export function SongOptionsModal({ position, closeModal, station }) {
 
     setShowModal(true)
   }
+
   function handleAddSongToStation(stationId) {
     dispatch(addSongToStation(stationId, song))
     setShowModal(false)

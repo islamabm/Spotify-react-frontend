@@ -20,6 +20,7 @@ export default function AIImageGenerator({ closeAiModal, onImageGenerated }) {
       closeAiModal()
     }
   }
+
   return (
     <div className="ai-modal-back-drop">
       <div className="ai-modal">

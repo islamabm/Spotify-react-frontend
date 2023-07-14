@@ -2,18 +2,17 @@ import React, { useEffect, useState } from 'react'
 import { getSpotifySvg } from '../services/SVG.service'
 import { eventBus } from '../services/event-bus.service'
 import { MediaPlayer } from './MediaPlayer'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { BubblingHeart } from './BubblingHeart'
 import { FastAverageColor } from 'fast-average-color'
-import { MobileMediaPlayer } from '../views/mobile/MobileMediaPlayer'
-import { BottomNav } from '../cmps/Mobile/BottomNav'
 import {
   setCurrSong,
   setCurrSongSvg,
   setCurrSongLyrics,
   setCurrSongIndex,
 } from '../store/actions/song.actions'
+
 export function AppFooter() {
   const [mute, setMute] = useState(false)
   const [volume, setVolume] = useState(50)
@@ -22,22 +21,23 @@ export function AppFooter() {
   const [isLyrics, setIsLyrics] = useState(false)
   const [bgStyle, setBgStyle] = useState(null)
   const song = useSelector((storeState) => storeState.songModule.currSong)
-  const location = useLocation()
   const [currSong, setCurrSongFooter] = useState(song)
-  const [isMobileMediaPlayer, setIsMobileMediaPlayer] = useState(false)
   const [isDisplayFooter, setIsDisplayFooter] = useState(true)
 
   const station = useSelector(
     (storeState) => storeState.stationModule.currStation
   )
+
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
   const colorCache = {}
+
   useEffect(() => {
     setCurrSongFooter(song)
     updateImgUrlAndColor(song)
   }, [song])
+
   useEffect(() => {
     const removeListener = eventBus.on('navigation:back', () => {
       setIsDisplayFooter(true)
@@ -114,7 +114,6 @@ export function AppFooter() {
     setIsDisplayFooter(false)
     dispatch(setCurrSongSvg('pause'))
     if (window.innerWidth > 460) return
-    // setIsMobileMediaPlayer(true)
     navigate('/mobileMediaPlayer')
   }
 
@@ -146,12 +145,6 @@ export function AppFooter() {
           onClick={displayMobileMediaPlayer}
           style={window.innerWidth < 460 ? bgStyle : {}}
         >
-          {/* {isMobileMediaPlayer && (
-            <MobileMediaPlayer
-              closeMediaPlayer={handleCloseMediaPlayer}
-              open={isMobileMediaPlayer}
-            />
-          )} */}
           <div className="song-details">
             {currSong && (
               <>
@@ -221,11 +214,10 @@ export function AppFooter() {
             )}
           </div>
 
-          {/* {window.innerWidth > 460 && ( */}
           <div className="media-player">
             <MediaPlayer volume={volume} />
           </div>
-          {/* )} */}
+
           <div className="song-details-two">
             {' '}
             {isLyrics ? (

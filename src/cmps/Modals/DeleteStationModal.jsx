@@ -14,7 +14,10 @@ export function DeleteStationModal({ onCloseDeleteModal, onRemoveStation }) {
           This will delete <span>{station?.name} </span> from Your Library.
         </p>
         <div className="delete-modla-btns">
-          <button className="delete-modal-cancle-btn" onClick={onCloseDeleteModal}>
+          <button
+            className="delete-modal-cancle-btn"
+            onClick={onCloseDeleteModal}
+          >
             Cancel
           </button>
           <button className="delete-modal-delete-btn" onClick={onRemoveStation}>
