@@ -18,7 +18,7 @@ export function AppFooter() {
   const [mute, setMute] = useState(false)
   const [volume, setVolume] = useState(50)
   const [isFirstClick, setIsFirstClick] = useState(true)
-  const [isPlaying, setIsPlaying] = useState(false)
+  const [isPlaying, setIsPlaying] = useState(true)
   const [isLyrics, setIsLyrics] = useState(false)
   const [bgStyle, setBgStyle] = useState(null)
   const song = useSelector((storeState) => storeState.songModule.currSong)
