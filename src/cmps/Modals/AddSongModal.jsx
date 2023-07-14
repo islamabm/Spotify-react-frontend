@@ -28,8 +28,6 @@ export function AddSongModal({ position, addSongToStation, createStation }) {
             : position.left + 180,
       }}
     >
-      {/* top: direction === 'left' ? position.top - 160 : position.top - 200,
-    left: direction === 'left' ? position.left - 260 : position.left + 180, */}
       <ul>
         <li className="filter-by-user-stations">
           <span

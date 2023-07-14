@@ -7,7 +7,8 @@ import jwtDecode from 'jwt-decode'
 import { userService } from '../services/user.service'
 import { LoginSocialFacebook } from 'reactjs-social-login'
 import { FacebookLoginButton } from 'react-social-login-buttons'
-
+import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
+import emailjs from 'emailjs-com'
 export function Signup() {
   const [signupCred, setSignupCred] = useState({
     username: '',
@@ -19,7 +20,7 @@ export function Signup() {
     likedSongs: [],
     latestStations: [],
   })
-  
+
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const google = window.google
@@ -46,13 +47,33 @@ export function Signup() {
     navigate(`/`)
   }
 
-
   function handleSignup(e) {
     e.preventDefault()
 
     if (!signupCred.email || !signupCred.password || !signupCred.username)
       return
     dispatch(doSignup(signupCred))
+
+    if (signupCred.email) {
+      emailjs
+        .send(
+          process.env.REACT_APP_SERVICE_ID,
+          process.env.REACT_APP_TEMPLATE_ID,
+          {
+            user_name: signupCred.username,
+            user_email: signupCred.email,
+          },
+          process.env.REACT_APP_USER_ID
+        )
+        .then((response) => {
+          showSuccessMsg('Email successfully sent! Check your email')
+        })
+        .catch((error) => {
+          showErrorMsg('Email failed sent!', error)
+        })
+    } else {
+      console.error('Error: email is empty or undefined')
+    }
 
     navigate(`/`)
   }
