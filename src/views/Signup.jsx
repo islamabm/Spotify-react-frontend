@@ -7,8 +7,7 @@ import jwtDecode from 'jwt-decode'
 import { userService } from '../services/user.service'
 import { LoginSocialFacebook } from 'reactjs-social-login'
 import { FacebookLoginButton } from 'react-social-login-buttons'
-import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
-import emailjs from 'emailjs-com'
+import { emailService } from '../services/email.service'
 export function Signup() {
   const [signupCred, setSignupCred] = useState({
     username: '',
@@ -55,24 +54,14 @@ export function Signup() {
     dispatch(doSignup(signupCred))
 
     if (signupCred.email) {
-      emailjs
-        .send(
-          process.env.REACT_APP_SERVICE_ID,
-          process.env.REACT_APP_TEMPLATE_ID,
-          {
-            user_name: signupCred.username,
-            user_email: signupCred.email,
-          },
-          process.env.REACT_APP_USER_ID
-        )
-        .then((response) => {
-          showSuccessMsg('Email successfully sent! Check your email')
+      emailService
+        .sendEmail({
+          username: signupCred.username,
+          email: signupCred.email,
         })
         .catch((error) => {
-          showErrorMsg('Email failed sent!', error)
+          console.error('Error: email is empty or undefined', error)
         })
-    } else {
-      console.error('Error: email is empty or undefined')
     }
 
     navigate(`/`)
