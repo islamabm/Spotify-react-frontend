@@ -12,7 +12,9 @@ export default function UserStationsList({ userStations, filterUserStations }) {
       {userStations
         ?.filter((station) => station?.name?.includes(filterUserStations))
         .map((station) => {
-          let color = station?.songs?.some((s) => s._id === song?._id)
+          let color = station?.songs?.some(
+            (s) => s && s._id === (song?._id ?? '')
+          )
             ? 'green'
             : ''
           return (
