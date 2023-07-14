@@ -6,7 +6,8 @@
   padding-bottom: rem(240px);
 
   h1 {
-    font-size: 32px;
+    font-size: 100px;
+    color: red;
     font-family: Circular-medium;
     letter-spacing: -0.04em;
     @include for-mobile-layout {
