@@ -114,7 +114,7 @@ const gSearchCategories = [
   ],
 ]
 
-const API_KEY = 'AIzaSyCpw1F8RDlbSPhUZptfwf4JRSiIkqpUJCc'
+const API_KEY = 'AIzaSyC490pBZv2nkY2Q7-GGhdVxBCJM7UQ_ugE'
 
 const gUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=${API_KEY}&q=`
 

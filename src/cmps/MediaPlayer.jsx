@@ -22,6 +22,7 @@ export function MediaPlayer({ volume }) {
   const [displayDuration, setDisplayDuration] = useState('0:00')
   const [displayTime, setDisplayTime] = useState('0:00')
   const [localVolume, setLocalVolume] = useState(volume || 50)
+  const [shuffleAfterSongEnds, setShuffleAfterSongEnds] = useState(false)
 
   const song = useSelector((storeState) => storeState.songModule.currSong)
   const id = useSelector((storeState) => storeState.songModule.videoId)
@@ -117,6 +118,9 @@ export function MediaPlayer({ volume }) {
   function onEndSong() {
     if (isRepeated) {
       playerRef.current.playVideo()
+    } else if (shuffleAfterSongEnds) {
+      setShuffleAfterSongEnds(false)
+      dispatch(getRandomSong(stationId))
     } else {
       getNextSong()
     }
@@ -173,8 +177,12 @@ export function MediaPlayer({ volume }) {
   }
 
   function onShuffleClicked() {
+    if (isPlaying) {
+      setShuffleAfterSongEnds(true)
+    } else {
+      dispatch(getRandomSong(stationId))
+    }
     setIsShuffled(!isShuffled)
-    dispatch(getRandomSong(stationId))
   }
 
   function handleProgressBarClick(e) {
