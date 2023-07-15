@@ -1,18 +1,25 @@
 import React, { useEffect, useState } from 'react'
 import { stationService } from '../services/station.service'
 import { getSpotifySvg } from '../services/SVG.service'
+import { useDispatch } from 'react-redux'
+import { setSearchStations } from '../store/actions/station.actions'
 export function MobileSearchHeader() {
   const [searchText, setSearchText] = useState('')
-  const [songList, setSongList] = useState([])
+
+  const dispatch = useDispatch()
 
   useEffect(() => {
+    if (!searchText) {
+      dispatch(setSearchStations(null))
+      return
+    }
     const timerId = setTimeout(async () => {
       const list = await stationService.getVideos(searchText)
-      setSongList(list)
+      dispatch(setSearchStations(list))
     }, 1000)
     return () => {
       clearTimeout(timerId)
-      setSongList([])
+      dispatch(setSearchStations(null))
     }
   }, [searchText])
 
@@ -40,7 +47,6 @@ export function MobileSearchHeader() {
           type="text"
           placeholder="What do you want to listen to?"
           value={searchText}
-          //   onClick={goToMobileSearchPage}
           onChange={handleInputChange}
         />
       </div>

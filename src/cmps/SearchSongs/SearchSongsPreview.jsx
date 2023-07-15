@@ -11,6 +11,7 @@ import { getSpotifySvg } from '../../services/SVG.service'
 import { SongOptionsModal } from '../Modals/SongOptionsModal'
 
 export function SearchSongsPreview({ song, stationId }) {
+  console.log('song in search', song)
   const [showModal, setShowOptionsModal] = useState(false)
   const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 })
 

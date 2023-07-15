@@ -14,6 +14,7 @@ import {
   REMOVE_SONG_FROM_STATION,
   EDIT_STATION,
   SET_CURR_CATEGORY_BY,
+  SET_SEARCH_LIST,
 } from '../reducers/station.reducer'
 
 export function loadStations() {
@@ -196,5 +197,10 @@ export function editUserStation(station) {
     } catch (error) {
       showErrorMsg(`Cannot update station`)
     }
+  }
+}
+export function setSearchStations(list) {
+  return (dispatch) => {
+    dispatch({ type: SET_SEARCH_LIST, list })
   }
 }

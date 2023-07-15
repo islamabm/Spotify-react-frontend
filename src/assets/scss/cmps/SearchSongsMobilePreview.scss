@@ -1,0 +1,46 @@
+// <div className="search-song-mobile-preview">
+// <div className="search-song-mobile-preview-image">
+//   <img src={song?.imgUrl} alt="song-image" />
+// </div>
+// <div className="search-song-mobile-preview-details">
+//   <p>{song?.title}</p>
+//   <div>
+//     <p>Song</p>
+//     <p className="dot"> • </p>
+//     <p>{song?.artist}</p>
+//   </div>
+// </div>
+// </div>
+// )
+
+.search-song-mobile-preview {
+  display: flex;
+  gap: rem(8px) rem(12px);
+  padding-block: 8px;
+  padding-inline: 12px;
+  font-size: 16px;
+  line-height: normal;
+
+  .search-song-mobile-preview-image {
+    width: rem(48px);
+    height: rem(48px);
+    img {
+      border-radius: 4px;
+    }
+  }
+  .search-song-mobile-preview-details {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+
+    div {
+      display: flex;
+      align-items: center;
+      justify-items: center;
+    }
+    p {
+      margin: 0;
+      padding: 0;
+    }
+  }
+}
