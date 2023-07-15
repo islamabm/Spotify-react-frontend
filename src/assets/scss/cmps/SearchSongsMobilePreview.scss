@@ -16,8 +16,10 @@
 .search-song-mobile-preview {
   display: flex;
   gap: rem(8px) rem(12px);
-  padding-block: 8px;
-  padding-inline: 12px;
+  padding-block: rem(8px);
+  padding-inline: rem(24px);
+  width: 100%;
+  height: rem(64px);
   font-size: 16px;
   line-height: normal;
 
@@ -25,22 +27,33 @@
     width: rem(48px);
     height: rem(48px);
     img {
-      border-radius: 4px;
+      border-radius: rem(4px);
     }
   }
   .search-song-mobile-preview-details {
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: rem(4px);
+    font-family: circular-book;
 
     div {
       display: flex;
       align-items: center;
       justify-items: center;
+      gap: rem(4px);
+      font-size: 0.8125rem;
+      font-weight: 400;
+      color: #6a6a6a;
     }
     p {
       margin: 0;
       padding: 0;
+    }
+    .nice-p {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      width: 14rem;
     }
   }
 }

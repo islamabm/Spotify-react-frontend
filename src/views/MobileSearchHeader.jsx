@@ -40,7 +40,7 @@ export function MobileSearchHeader() {
           title="Pause"
           className="pause-button flex align-center justify-center title lyrics-play"
           dangerouslySetInnerHTML={{
-            __html: getSpotifySvg('searchIcon'),
+            __html: getSpotifySvg('searchInMobile'),
           }}
         ></span>
         <input

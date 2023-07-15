@@ -8,11 +8,12 @@ export function SearchSongsMobilePreview({ song }) {
         <img src={song?.imgUrl} alt="song-image" />
       </div>
       <div className="search-song-mobile-preview-details">
-        <p>{song?.title}</p>
+        <p className="nice-p">{song?.title}</p>
         <div>
           <p>Song</p>
           <p className="dot">•</p>
-          <p>{song?.artist}</p>
+          <p>{song?.artist} |</p>
+          <p>{song?.album}</p>
         </div>
       </div>
     </div>
