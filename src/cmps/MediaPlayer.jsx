@@ -23,6 +23,7 @@ export function MediaPlayer({ volume }) {
   const [displayTime, setDisplayTime] = useState('0:00')
   const [localVolume, setLocalVolume] = useState(volume || 50)
   const [shuffleAfterSongEnds, setShuffleAfterSongEnds] = useState(false)
+  const [repeatMode, setRepeatMode] = useState('off')
 
   const song = useSelector((storeState) => storeState.songModule.currSong)
   const id = useSelector((storeState) => storeState.songModule.videoId)
@@ -116,7 +117,10 @@ export function MediaPlayer({ volume }) {
   }, [currSvg])
 
   function onEndSong() {
-    if (isRepeated) {
+    if (repeatMode === 'repeat_one') {
+      playerRef.current.playVideo()
+      setRepeatMode('off')
+    } else if (repeatMode === 'repeat_more') {
       playerRef.current.playVideo()
     } else if (shuffleAfterSongEnds) {
       setShuffleAfterSongEnds(false)
@@ -202,7 +206,23 @@ export function MediaPlayer({ volume }) {
   }
 
   function onRepeatClicked() {
-    setIsRepeated(!isRepeated)
+    switch (repeatMode) {
+      case 'off':
+        setRepeatMode('repeat_one')
+        setIsRepeated(true)
+        break
+      case 'repeat_one':
+        setRepeatMode('repeat_more')
+        break
+      case 'repeat_more':
+        setRepeatMode('off')
+        setIsRepeated(false)
+        break
+      default:
+        setRepeatMode('off')
+        setIsRepeated(false)
+        break
+    }
   }
 
   function handlePlayPauseClick() {
@@ -269,17 +289,7 @@ export function MediaPlayer({ volume }) {
               __html: getSpotifySvg('nextIcon'),
             }}
           ></span>{' '}
-          {isRepeated ? (
-            <button className="is-repeated">
-              <span
-                onClick={onRepeatClicked}
-                className="pointer repeat"
-                dangerouslySetInnerHTML={{
-                  __html: getSpotifySvg('repeateIcon'),
-                }}
-              ></span>{' '}
-            </button>
-          ) : (
+          {repeatMode === 'off' ? (
             <span
               onClick={onRepeatClicked}
               className="pointer title repeat"
@@ -287,6 +297,26 @@ export function MediaPlayer({ volume }) {
                 __html: getSpotifySvg('repeateIcon'),
               }}
             ></span>
+          ) : repeatMode === 'repeat_one' ? (
+            <button className="is-repeated">
+              <span
+                onClick={onRepeatClicked}
+                className="pointer title repeat"
+                dangerouslySetInnerHTML={{
+                  __html: getSpotifySvg('repeateIcon'),
+                }}
+              ></span>
+            </button>
+          ) : (
+            <button className="is-repeated">
+              <span
+                onClick={onRepeatClicked}
+                className="pointer title repeat"
+                dangerouslySetInnerHTML={{
+                  __html: getSpotifySvg('repeatMore'),
+                }}
+              ></span>
+            </button>
           )}
         </div>
 

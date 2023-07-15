@@ -35,26 +35,28 @@ export function StationPreview({ station }) {
               : 'https://pbs.twimg.com/profile_images/558556141605511168/2JDJX8SQ_400x400.png'
           }
         />
-        <div
-          className="play-button flex justify-center"
-          onClick={playFirstSongInStation}
-        >
-          {isPlaying ? (
-            <span
-              className="pause-button flex align-center justify-center title"
-              dangerouslySetInnerHTML={{
-                __html: getSpotifySvg('biggerPauseBtn'),
-              }}
-            ></span>
-          ) : (
-            <span
-              className=" flex align-center justify-center title"
-              dangerouslySetInnerHTML={{
-                __html: getSpotifySvg('biggerPlayBtn'),
-              }}
-            ></span>
-          )}
-        </div>
+        {window.innerWidth > 460 && (
+          <div
+            className="play-button flex justify-center"
+            onClick={playFirstSongInStation}
+          >
+            {isPlaying ? (
+              <span
+                className="pause-button flex align-center justify-center title"
+                dangerouslySetInnerHTML={{
+                  __html: getSpotifySvg('biggerPauseBtn'),
+                }}
+              ></span>
+            ) : (
+              <span
+                className=" flex align-center justify-center title"
+                dangerouslySetInnerHTML={{
+                  __html: getSpotifySvg('biggerPlayBtn'),
+                }}
+              ></span>
+            )}
+          </div>
+        )}
       </div>
       <div className="station-info flex justify-center">
         <h3>{station.name}</h3>
