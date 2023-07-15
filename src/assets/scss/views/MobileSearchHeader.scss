@@ -1,0 +1,53 @@
+.mobile-search-songs-header {
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  gap: rem(6px);
+  button {
+    background-color: transparent;
+    border: none;
+
+    span {
+      svg {
+        fill: white;
+      }
+    }
+  }
+
+  .input-search-container {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-line-pack: start;
+    -webkit-align-content: flex-start;
+    align-content: flex-start;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    position: relative;
+    width: 100%;
+    svg {
+      color: #000;
+      position: absolute;
+      top: 40%;
+      left: 5%;
+      transform: translateY(-50%);
+    }
+    input {
+      background-color: #fff;
+      border: none;
+      border-radius: 4px;
+      color: #000;
+      padding: rem(8px) rem(40px);
+      width: rem(344px);
+      height: rem(38px);
+      text-indent: rem(15px);
+      &:focus {
+        outline: none;
+      }
+      &::placeholder {
+        color: black;
+        font-size: 15px;
+      }
+    }
+  }
+}

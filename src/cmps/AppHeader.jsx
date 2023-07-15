@@ -6,6 +6,7 @@ import { setCurrSong, setCurrSongIndex } from '../store/actions/song.actions'
 import { useDispatch, useSelector } from 'react-redux'
 import { eventBus } from '../services/event-bus.service'
 import { MobileModal } from './Modals/MobileModal'
+import { MobileSearchHeader } from '../views/MobileSearchHeader'
 
 export function AppHeader() {
   const [showModal, setShowModal] = useState(false)
@@ -272,53 +273,56 @@ export function AppHeader() {
           )}
         </section>
 
-        <div className="user-actions flex justify-center align-center">
-          {!user ? (
-            <>
-              {window.innerWidth < 460 ? (
+        {location.pathname !== '/mobile/search' && (
+          <div className="user-actions flex justify-center align-center">
+            {!user ? (
+              <>
+                {window.innerWidth < 460 ? (
+                  <span
+                    style={{ display: showMobileModal ? 'none' : '' }}
+                    onClick={openMobileModal}
+                    className="none-sticky white"
+                    dangerouslySetInnerHTML={{
+                      __html: getSpotifySvg('settings'),
+                    }}
+                  ></span>
+                ) : (
+                  <>
+                    <Link to="/signup">
+                      <button className="sign-up pointer">Sign up</button>
+                    </Link>
+                    <Link to="/login">
+                      <button className="login pointer flex justify-center align-center">
+                        Log in
+                      </button>
+                    </Link>
+                  </>
+                )}
+              </>
+            ) : (
+              <>
                 <span
-                  style={{ display: showMobileModal ? 'none' : '' }}
-                  onClick={openMobileModal}
-                  className="none-sticky white"
-                  dangerouslySetInnerHTML={{
-                    __html: getSpotifySvg('settings'),
-                  }}
-                ></span>
-              ) : (
-                <>
-                  <Link to="/signup">
-                    <button className="sign-up pointer">Sign up</button>
-                  </Link>
-                  <Link to="/login">
-                    <button className="login pointer flex justify-center align-center">
-                      Log in
-                    </button>
-                  </Link>
-                </>
-              )}
-            </>
-          ) : (
-            <>
-              <span
-                className="user-details-header"
-                onClick={onClickUserDetails}
-              >
-                <img
-                  src={
-                    user.imgUrl
-                      ? user.imgUrl
-                      : 'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg'
-                  }
-                  alt="user-img"
-                />
-              </span>
-            </>
-          )}
-        </div>
+                  className="user-details-header"
+                  onClick={onClickUserDetails}
+                >
+                  <img
+                    src={
+                      user.imgUrl
+                        ? user.imgUrl
+                        : 'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg'
+                    }
+                    alt="user-img"
+                  />
+                </span>
+              </>
+            )}
+          </div>
+        )}
         {showModal && <UserModal onClose={onCloseModal} />}
         {showMobileModal && (
           <MobileModal closeModal={handleCloseModal} show={showMobileModal} />
         )}
+        {location.pathname === '/mobile/search' && <MobileSearchHeader />}
       </header>
     </>
   )

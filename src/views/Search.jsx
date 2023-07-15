@@ -6,15 +6,17 @@ import { eventBus } from '../services/event-bus.service'
 import { getSpotifySvg } from '../services/SVG.service'
 import { stationService } from '../services/station.service'
 import { SearchSongsList } from '../cmps/SearchSongs/SearchSongsList'
+import { useNavigate } from 'react-router-dom'
 
 export default function Search() {
-  const [searchText, setSearchText] = useState('')
-  const [songList, setSongList] = useState([])
+  // const [searchText, setSearchText] = useState('')
+  // const [songList, setSongList] = useState([])
 
   const categories = useSelector(
     (storeState) => storeState.stationModule.searchStations
   )
 
+  const navigate = useNavigate()
   const dispatch = useDispatch()
 
   const searchRef = useRef(null)
@@ -48,19 +50,23 @@ export default function Search() {
     }
   }, [])
 
-  useEffect(() => {
-    const timerId = setTimeout(async () => {
-      const list = await stationService.getVideos(searchText)
-      setSongList(list)
-    }, 1000)
-    return () => {
-      clearTimeout(timerId)
-      setSongList([])
-    }
-  }, [searchText])
+  // useEffect(() => {
+  //   const timerId = setTimeout(async () => {
+  //     const list = await stationService.getVideos(searchText)
+  //     setSongList(list)
+  //   }, 1000)
+  //   return () => {
+  //     clearTimeout(timerId)
+  //     setSongList([])
+  //   }
+  // }, [searchText])
 
-  function handleInputChange(e) {
-    setSearchText(e.target.value)
+  // function handleInputChange(e) {
+  //   setSearchText(e.target.value)
+  // }
+
+  function goToMobileSearchPage() {
+    navigate('/mobile/search')
   }
 
   if (!categories) return <div className="loader"></div>
@@ -80,21 +86,22 @@ export default function Search() {
             <input
               type="text"
               placeholder="What do you want to listen to?"
-              value={searchText}
-              onChange={handleInputChange}
+              // value={searchText}
+              onClick={goToMobileSearchPage}
+              // onChange={handleInputChange}
             />
           </div>
         </>
       )}
       <>
-        {searchText.length > 0 ? (
+        {/* {searchText.length > 0 ? (
           <SearchSongsList list={songList} />
-        ) : (
-          <>
-            <h2 className="search-header">Browse all</h2>
-            <SearchCategoryList categories={categories} />
-          </>
-        )}
+        ) : ( */}
+        <>
+          <h2 className="search-header">Browse all</h2>
+          <SearchCategoryList categories={categories} />
+        </>
+        {/* )} */}
       </>
     </div>
   )
