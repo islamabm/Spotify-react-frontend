@@ -220,7 +220,7 @@ export function AppFooter() {
 
           <div className="song-details-two">
             {' '}
-            {isLyrics ? (
+            {song && isLyrics ? (
               <button className="is-repeated">
                 <span
                   onClick={onRepeatClicked}
@@ -230,7 +230,7 @@ export function AppFooter() {
                   }}
                 ></span>{' '}
               </button>
-            ) : (
+            ) : song ? (
               <span
                 onClick={onLyricsClicked}
                 className="pointer title lyrics"
@@ -238,7 +238,7 @@ export function AppFooter() {
                   __html: getSpotifySvg('lyricsIcon'),
                 }}
               ></span>
-            )}
+            ) : null}
             <span
               onClick={onToggleMute}
               className="pointer title mute"

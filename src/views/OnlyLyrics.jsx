@@ -53,7 +53,11 @@ export function OnlyLyrics() {
   return (
     <section className="only-song-lyrics" style={bgStyle}>
       {lyrics ? (
-        lyrics.map((line, index) => <div key={index}>{line?.text}</div>)
+        lyrics.length > 0 ? (
+          lyrics.map((line, index) => <div key={index}>{line?.text}</div>)
+        ) : (
+          <h1 className="no-lyrics">This song does not have lyrics.</h1>
+        )
       ) : (
         <div className="loader"></div>
       )}
