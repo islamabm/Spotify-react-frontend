@@ -98,5 +98,10 @@
         border-radius: 50%;
       }
     }
+    @include for-mobile-layout {
+      background-color: inherit;
+      transition: none;
+      border-radius: 0;
+    }
   }
 }
