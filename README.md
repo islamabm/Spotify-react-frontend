@@ -19,21 +19,22 @@ Search for songs and playlists according to mood
 Fully responsive design
 
 <h1>More Screenshots</h1>
-Home Page
+
+Home Page:
 <img src="https://i.ibb.co/5Kj23yf/image.png" alt="Home Page on PC" width="700">
 The homepage shows all the categories and playlists and allows the user to create new playlists.
 
-Playlists
+Playlists:
 <div>
   <img src="https://i.ibb.co/qyf3vC8/image.png" alt="Playlist on PC" width="600" style="margin-right: 20px;">
   <img src="https://i.ibb.co/rt8zp7s/image.png" alt="Playlist on mobile" height="300">
 </div>
 The playlist view shows all the songs in a playlist, allows the user to add new songs if the playlist was created by them, and reorder the songs.
 
-Search
+Search:
 <img src="https://i.ibb.co/xCmcKNC/image.png" alt="Search Page" width="700">
 
-Search in mobile
+Search in mobile:
 <img src="https://i.ibb.co/jvr1khN/image.png" alt="Search Page" width="700">
 
 Search songs in mobile:
