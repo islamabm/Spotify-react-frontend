@@ -1,6 +1,7 @@
 .mobile-search-songs-header {
   display: flex;
   align-items: center;
+
   justify-items: center;
   gap: rem(6px);
   button {
@@ -37,7 +38,7 @@
       border: none;
       border-radius: 4px;
       color: #000;
-      padding: rem(8px) rem(40px);
+      padding: rem(8px) 1.5rem;
       width: rem(344px);
       height: rem(38px);
       text-indent: rem(15px);
