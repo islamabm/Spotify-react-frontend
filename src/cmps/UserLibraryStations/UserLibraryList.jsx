@@ -46,7 +46,10 @@ export function UserLibraryList({ stations, title }) {
   }
 
   function createNewStation() {
-    if (!user) setShowModal(true)
+    if (!user) {
+      setShowModal(true)
+      return
+    }
     setStationCounter(stationCounter + 1)
     const name = `My Playlist #${stationCounter}`
     dispatch(addStation(name, [], emptyImg))
