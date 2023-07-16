@@ -122,8 +122,10 @@ export function AppFooter() {
     setIsPlaying(true)
     setIsFirstClick(true)
     if (isFirstClick) {
-      dispatch(setCurrSong(station._id, song._id))
-      dispatch(setCurrSongIndex(station._id, song._id))
+      if (station && song) {
+        dispatch(setCurrSong(station._id, song._id))
+        dispatch(setCurrSongIndex(station._id, song._id))
+      }
       setIsFirstClick(false)
     } else {
       dispatch(setCurrSongSvg('play'))

@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { BubblingHeart } from '../cmps/BubblingHeart'
 import { getSpotifySvg } from '../services/SVG.service'
 import { FastAverageColor } from 'fast-average-color'
+import { eventBus } from '../services/event-bus.service'
 export function SongDetails() {
   const [bgStyle, setBgStyle] = useState(null)
   const [bgBottomStyle, setBgBottomStyle] = useState(null)
   const song = useSelector((storeState) => storeState.songModule.currSong)
   const colorCache = {}
+  const songDetailsRef = useRef(null)
+
   const lyrics = useSelector(
     (storeState) => storeState.songModule.currSongLyrics
   )
@@ -27,6 +30,30 @@ export function SongDetails() {
       getDominantColor(imgUrl)
     }
   }
+  useEffect(() => {
+    const currentSongDetailsRef = songDetailsRef.current
+    const handleScroll = () => {
+      const scrollPos = currentSongDetailsRef.scrollTop
+      //   if (scrollPos > 375) {
+      //     setHeaderBg('#1a1a1a')
+      //   } else {
+      //     setHeaderBg('transparent')
+      //   }
+      eventBus.emit('songDetailsScroll', { scrollPos, bgStyle })
+    }
+    if (currentSongDetailsRef) {
+      currentSongDetailsRef.addEventListener('scroll', handleScroll, {
+        passive: true,
+      })
+    }
+    return () => {
+      if (currentSongDetailsRef) {
+        currentSongDetailsRef.removeEventListener('scroll', handleScroll, {
+          passive: true,
+        })
+      }
+    }
+  }, [bgStyle])
   async function getDominantColor(imageSrc) {
     const cachedColor = colorCache[imageSrc]
     if (cachedColor) {
@@ -59,7 +86,7 @@ export function SongDetails() {
     }
   }
   return (
-    <section className="song-details-mobile-preview">
+    <section className="song-details-mobile-preview" ref={songDetailsRef}>
       <div className="song-details-mobile" style={bgStyle}>
         <div className="song-details-mobile-image">
           <img src={song?.imgUrl} />

@@ -197,3 +197,18 @@
     margin: 0;
   }
 }
+.song-in-header {
+  display: flex;
+  align-items: center;
+  gap: rem(16px);
+
+  span {
+    svg {
+      fill: white;
+    }
+  }
+  .song-name-in-header {
+    margin: 0;
+    font-family: circular-book;
+  }
+}

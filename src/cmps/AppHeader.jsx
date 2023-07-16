@@ -21,12 +21,17 @@ export function AppHeader() {
     (storeState) => storeState.stationModule.currStation
   )
   const user = useSelector((storeState) => storeState.userModule.loggedInUser)
+  const song = useSelector((storeState) => storeState.songModule.currSong)
 
   const dispatch = useDispatch()
   const location = useLocation()
   const navigate = useNavigate()
 
   const width = window.innerWidth
+  let modifiedTitle = song?.title
+  if (song?.title && song.title.includes('-') && song.title.includes('(')) {
+    modifiedTitle = song.title.split('-')[1].split('(')[0].trim()
+  }
 
   useEffect(() => {
     const onScroll = ({ scrollPos, headerBg }) => {
@@ -84,6 +89,32 @@ export function AppHeader() {
       updateHeaderOpacity(scrollPos, bgStyle)
     }
     const unlistenDetails = eventBus.on('userDetailsScroll', onScroll)
+
+    if (
+      location.pathname === '/' ||
+      location.pathname === '/search' ||
+      location.pathname === '/lyrics' ||
+      location.pathname === '/user' ||
+      (location.pathname.includes('/station/') && currScrollPos < 10)
+    ) {
+      setHeaders({
+        backgroundColor: 'transparent',
+      })
+    } else {
+      setHeaders({
+        backgroundColor: '#121212',
+      })
+    }
+    return () => {
+      unlistenDetails()
+    }
+  }, [location.pathname])
+
+  useEffect(() => {
+    const onScroll = ({ scrollPos, bgStyle }) => {
+      updateHeaderOpacity(scrollPos, bgStyle)
+    }
+    const unlistenDetails = eventBus.on('songDetailsScroll', onScroll)
 
     if (
       location.pathname === '/' ||
@@ -175,6 +206,10 @@ export function AppHeader() {
     navigate('/')
   }
 
+  function goBackToSerach() {
+    navigate(-1)
+  }
+
   function headerVisabillity() {
     if (width < 572) {
       if (location.pathname === '/') return 'none-sticky'
@@ -235,6 +270,20 @@ export function AppHeader() {
                 }}
               ></span>
               <h1 className="user-name-in-header">{user?.username}</h1>
+            </div>
+          ) : (
+            ''
+          )}
+
+          {currScrollPos > 300 && location.pathname === `/song/details` ? (
+            <div className="song-in-header">
+              <span
+                onClick={goBackToSerach}
+                dangerouslySetInnerHTML={{
+                  __html: getSpotifySvg('leftArrow'),
+                }}
+              ></span>
+              <h1 className="song-name-in-header">{modifiedTitle}</h1>
             </div>
           ) : (
             ''
