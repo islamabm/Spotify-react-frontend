@@ -1,39 +1,40 @@
 // Externals
 @font-face {
   font-family: gotham;
-  src: url('../../../src/assets/fonts/GothamMedium_1.ttf');
+  src: url('https://res.cloudinary.com/duujym6bu/raw/upload/v1689534492/GothamMedium_1_lgy7h7.ttf');
   // src: url('../fonts/GothamMedium_1.ttf');
 }
 
 @font-face {
   font-family: gotham-light;
-  src: url('../../../src/assets/fonts/GothamLight.ttf');
+  src: url('https://res.cloudinary.com/duujym6bu/raw/upload/v1689534492/GothamLight_ibsbsd.ttf');
   // src: url('../fonts/GothamLight.ttf');
 }
 
 @font-face {
   font-family: circular-book;
-  src: url('../../../src/assets/fonts/CircularSpotifyText-Book.otf');
+  src: url('https://res.cloudinary.com/duujym6bu/raw/upload/v1689534492/CircularSpotifyText-Book_yja5hr.otf');
 }
 
 // @font-face {
 //   font-family: gotham-light;
 //   src: url('/src/assets/fonts/GothamMedium_1.ttf');
 // }
+
 @font-face {
   font-family: Roboto-Regular;
-  src: url('../../../src/assets/fonts/Roboto-Regular.ttf');
+  src: url('https://res.cloudinary.com/duujym6bu/raw/upload/v1689534492/Roboto-Regular_uianwb.ttf');
 }
 
 @font-face {
   font-family: Circular-light;
   // src: url('../fonts/CircularStd-Light.otf');
-  src: url('../../../src/assets/fonts/CircularStd-Light.otf');
+  src: url('https://res.cloudinary.com/duujym6bu/raw/upload/v1689534492/CircularStd-Light_wyknpc.otf');
 }
 
 @font-face {
   font-family: Circular-medium;
-  src: url('../../../src/assets/fonts/CircularSpotifyText-Medium.otf');
+  src: url('https://res.cloudinary.com/duujym6bu/raw/upload/v1689534492/CircularSpotifyText-Medium_jqknof.otf');
 }
 // Setup
 @import 'setup/variables';
