@@ -22,14 +22,14 @@ Fully responsive design
 
 <h3>Home Page:</h3>
 <img src="https://i.ibb.co/5Kj23yf/image.png" alt="Home Page on PC" width="700">
-The homepage shows all the categories and playlists and allows the user to create new playlists.
+<p color:"pink">The homepage shows all the categories and playlists and allows the user to create new playlists.</p>
 
 <h3>Playlists:</h3>
-<p>Playlist in desktop</p>
+<p>Playlist in desktop:</p>
 <div>
   <img src="https://i.ibb.co/qyf3vC8/image.png" alt="Playlist on PC" width="600" style="margin-right: 20px;">
 </div>
-<p>Playlist in mobile</p>
+<p>Playlist in mobile:</p>
 <div>
   <img src="https://i.ibb.co/rt8zp7s/image.png" alt="Playlist on mobile" height="300">
 </div>
