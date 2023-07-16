@@ -44,6 +44,7 @@ export default function StationSongList({ station }) {
   }, [station])
 
   function onSongClicked(songId) {
+    setCurrSvg('play')
     if (currSong?.id !== songId) {
       setIsFirstClick(true)
     }

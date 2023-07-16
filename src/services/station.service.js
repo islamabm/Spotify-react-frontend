@@ -114,9 +114,14 @@ const gSearchCategories = [
   ],
 ]
 
-const API_KEY = 'AIzaSyC490pBZv2nkY2Q7-GGhdVxBCJM7UQ_ugE'
+const API_KEYS = [
+  'AIzaSyC490pBZv2nkY2Q7-GGhdVxBCJM7UQ_ugE',
+  'AIzaSyBbbMTD4v2nXglhlgF7OQ4HJoq6FefNEZ4',
+  'AIzaSyBtANk4rTUDYVNW_dNRfFo2oSdTmakG5VM',
+]
+let keyIndex = 0
 
-const gUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=${API_KEY}&q=`
+// const gUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=${API_KEY}&q=`
 
 const STORAGE_SEARCH_KEY = 'search-stations'
 const VIDEOS_KEY = 'videosIdDB'
@@ -124,6 +129,28 @@ const VIDEOS_KEY = 'videosIdDB'
 var gSearchStations = _loadSearchStations()
 
 const videoCache = {}
+
+function getNextKey() {
+  keyIndex = (keyIndex + 1) % API_KEYS.length
+  return API_KEYS[keyIndex]
+}
+async function axiosGetWithKeyRotation(url, config) {
+  try {
+    const response = await axios.get(url, config)
+    return response
+  } catch (err) {
+    if (err.response && err.response.status === 403) {
+      // assuming 403 is for quota exceeded, adjust accordingly
+      const nextKey = getNextKey()
+      const nextUrl = url.replace(/key=[^&]+/, `key=${nextKey}`)
+      console.log(`Switching to next API key: ${nextKey}`)
+      return axiosGetWithKeyRotation(nextUrl, config)
+    }
+    throw err
+  }
+}
+const gUrl = () =>
+  `https://www.googleapis.com/youtube/v3/search?part=snippet&key=${API_KEYS[keyIndex]}&q=`
 
 async function getCachedVideos(keyword) {
   if (
@@ -134,7 +161,7 @@ async function getCachedVideos(keyword) {
   }
 
   let videosIds = storageService.load(VIDEOS_KEY) || []
-  const res = await axios.get(gUrl + keyword)
+  const res = await axiosGetWithKeyRotation(gUrl() + keyword)
   const videos = res.data.items.map((item) => _prepareData(item))
 
   videoCache[keyword] = {
@@ -171,7 +198,7 @@ async function getVideos(keyword, song = null) {
         if (cachedSong) {
           return cachedSong
         } else {
-          const res = await axios.get(gUrl + artist)
+          const res = await axiosGetWithKeyRotation(gUrl() + artist)
           const recommendedSong = res.data.items.map((item) =>
             _prepareData(item)
           )

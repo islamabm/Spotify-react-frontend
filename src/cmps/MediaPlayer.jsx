@@ -98,21 +98,23 @@ export function MediaPlayer({ volume }) {
   }, [])
 
   useEffect(() => {
-    switch (currSvg) {
-      case 'play':
-        if (!isPlaying) {
-          playerRef.current.playVideo()
-          setIsPlaying(true)
-        }
-        break
-      case 'pause':
-        if (isPlaying) {
-          playerRef.current.pauseVideo()
-          setIsPlaying(false)
-        }
-        break
-      default:
-        console.error(`Unknown SVG action: ${currSvg}`)
+    if (playerRef.current) {
+      switch (currSvg) {
+        case 'play':
+          if (!isPlaying) {
+            playerRef.current.playVideo()
+            setIsPlaying(true)
+          }
+          break
+        case 'pause':
+          if (isPlaying) {
+            playerRef.current.pauseVideo()
+            setIsPlaying(false)
+          }
+          break
+        default:
+          console.error(`Unknown SVG action: ${currSvg}`)
+      }
     }
   }, [currSvg])
 
@@ -226,10 +228,12 @@ export function MediaPlayer({ volume }) {
   }
 
   function handlePlayPauseClick() {
-    if (isPlaying) {
-      playerRef.current.pauseVideo()
-    } else {
-      playerRef.current.playVideo()
+    if (playerRef.current) {
+      if (isPlaying) {
+        playerRef.current.pauseVideo()
+      } else {
+        playerRef.current.playVideo()
+      }
     }
   }
 

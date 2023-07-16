@@ -158,7 +158,7 @@ export function AppFooter() {
                 </div>
                 <div className="actor-name-song">
                   <p className={`song-name`}>
-                    {song
+                    {song && song.title
                       ? window.innerWidth < 460 && song.title.length > 20
                         ? `${song.title.slice(0, 20)}...`
                         : song.title
@@ -168,7 +168,7 @@ export function AppFooter() {
                       : station?.songs[0]?.title}
                   </p>
                   <p className="actor-name">
-                    {song
+                    {song && song.artist
                       ? window.innerWidth < 460 && song.artist.length > 25
                         ? `${song.artist.slice(0, 25)}...`
                         : song.artist
