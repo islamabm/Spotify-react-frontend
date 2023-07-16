@@ -1,17 +1,13 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { SearchCategoryList } from '../cmps/SearchCategory/SearchCategoryList'
 import { useDispatch, useSelector } from 'react-redux'
 import { loadSearchStations } from '../store/actions/station.actions'
 import { eventBus } from '../services/event-bus.service'
 import { getSpotifySvg } from '../services/SVG.service'
-import { stationService } from '../services/station.service'
-import { SearchSongsList } from '../cmps/SearchSongs/SearchSongsList'
+
 import { useNavigate } from 'react-router-dom'
 
 export default function Search() {
-  // const [searchText, setSearchText] = useState('')
-  // const [songList, setSongList] = useState([])
-
   const categories = useSelector(
     (storeState) => storeState.stationModule.searchStations
   )
@@ -50,21 +46,6 @@ export default function Search() {
     }
   }, [])
 
-  // useEffect(() => {
-  //   const timerId = setTimeout(async () => {
-  //     const list = await stationService.getVideos(searchText)
-  //     setSongList(list)
-  //   }, 1000)
-  //   return () => {
-  //     clearTimeout(timerId)
-  //     setSongList([])
-  //   }
-  // }, [searchText])
-
-  // function handleInputChange(e) {
-  //   setSearchText(e.target.value)
-  // }
-
   function goToMobileSearchPage() {
     navigate('/mobile/search')
   }
@@ -86,22 +67,16 @@ export default function Search() {
             <input
               type="text"
               placeholder="What do you want to listen to?"
-              // value={searchText}
               onClick={goToMobileSearchPage}
-              // onChange={handleInputChange}
             />
           </div>
         </>
       )}
       <>
-        {/* {searchText.length > 0 ? (
-          <SearchSongsList list={songList} />
-        ) : ( */}
         <>
           <h2 className="search-header">Browse all</h2>
           <SearchCategoryList categories={categories} />
         </>
-        {/* )} */}
       </>
     </div>
   )
