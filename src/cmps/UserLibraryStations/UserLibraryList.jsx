@@ -4,12 +4,14 @@ import { addStation } from '../../store/actions/station.actions'
 import { getSpotifySvg } from '../../services/SVG.service'
 import emptyImg from '../../assets/imgs/empty-img.png'
 import { useState, useEffect, useRef } from 'react'
+import { SignupModal } from '../Modals/SignupModal'
 
 export function UserLibraryList({ stations, title }) {
   const user = useSelector((storeState) => storeState.userModule.loggedInUser)
   const [showInput, setShowInput] = useState(false)
   const [stationCounter, setStationCounter] = useState(0)
   const [filter, setFilter] = useState('')
+  const [showModal, setShowModal] = useState(false)
 
   const dispatch = useDispatch()
   const inputRef = useRef()
@@ -44,9 +46,14 @@ export function UserLibraryList({ stations, title }) {
   }
 
   function createNewStation() {
+    if (!user) setShowModal(true)
     setStationCounter(stationCounter + 1)
     const name = `My Playlist #${stationCounter}`
     dispatch(addStation(name, [], emptyImg))
+  }
+
+  function handleCloseSignupModal() {
+    setShowModal(false)
   }
 
   const filteredStations = stations.filter((station) =>
@@ -113,6 +120,7 @@ export function UserLibraryList({ stations, title }) {
           </section>
         </section>
       )}
+      {showModal && <SignupModal closeSignupModal={handleCloseSignupModal} />}
     </>
   )
 }

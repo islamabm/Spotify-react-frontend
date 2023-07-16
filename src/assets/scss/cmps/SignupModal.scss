@@ -9,6 +9,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  @include for-mobile-layout {
+    top: -100px;
+    left: -20px;
+  }
 }
 
 .login-modal {
