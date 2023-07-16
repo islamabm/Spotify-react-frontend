@@ -1,7 +1,7 @@
 <h1 align="center">
   <img src="https://cdn.freebiesupply.com/logos/large/2x/spotify-2-logo-png-transparent.png" alt="Spotify Logo" width="50" height="50" style="vertical-align: middle;"> Muzicay
 </h1>
-<div margin="auto">
+<div align="center">
 <img src="https://media.tenor.com/_yFLs1OWgBAAAAAC/vinyl-disc-dance-music.gif" alt="nice gif" height="150">
 </div>
 
