@@ -123,8 +123,6 @@ const API_KEYS = [
 ]
 let keyIndex = 0
 
-// const gUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=${API_KEY}&q=`
-
 const STORAGE_SEARCH_KEY = 'search-stations'
 const VIDEOS_KEY = 'videosIdDB'
 
