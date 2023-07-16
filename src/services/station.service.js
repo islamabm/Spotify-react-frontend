@@ -118,6 +118,8 @@ const API_KEYS = [
   'AIzaSyC490pBZv2nkY2Q7-GGhdVxBCJM7UQ_ugE',
   'AIzaSyBbbMTD4v2nXglhlgF7OQ4HJoq6FefNEZ4',
   'AIzaSyBtANk4rTUDYVNW_dNRfFo2oSdTmakG5VM',
+  'AIzaSyDVkfIVegJhAmuINQ8GpBs5lUyLTTbM3r0',
+  'AIzaSyD3NO_363qJfF-A1Yv6q-s1LaYYq5vnWtI',
 ]
 let keyIndex = 0
 
