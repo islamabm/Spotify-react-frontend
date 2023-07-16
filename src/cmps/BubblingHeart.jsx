@@ -13,7 +13,7 @@ export function BubblingHeart({ index, item, type }) {
     setLiked((prevLiked) => {
       const updatedLike = !prevLiked
       if (updatedLike) {
-        if (type === 'song' || type === 'lyrics')
+        if (type === 'song' || type === 'lyrics' || type === 'song-details')
           dispatch(updateUser(item, user))
         else if (type === 'station' && location.pathname !== '/lyrics')
           dispatch(addStation(item.name, item.songs, item.imgUrl))
@@ -29,6 +29,7 @@ export function BubblingHeart({ index, item, type }) {
     if (type === 'song') return '40px'
     if (type === 'station') return '85px'
     if (type === 'stationMobile') return '55px'
+    if (type === 'song-details') return '65'
     return ''
   }
 

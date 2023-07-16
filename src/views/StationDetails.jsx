@@ -177,7 +177,6 @@ export function StationDetails(props) {
                 >
                   {isPlaying ? (
                     <span
-                      title="Pause"
                       className="pause-button flex align-center justify-center title"
                       dangerouslySetInnerHTML={{
                         __html: getSpotifySvg('biggerPauseBtn'),
@@ -229,7 +228,6 @@ export function StationDetails(props) {
               </span>
 
               <span
-                title={`More options for my ${station.name}`}
                 onClick={(e) => showStationModal(e)}
                 className={`flex align-center justify-center option pointer ${
                   station?.songs?.length > 0 ? 'dots' : 'margin'

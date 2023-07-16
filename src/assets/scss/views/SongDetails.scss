@@ -1,0 +1,158 @@
+// <section className="song-details-mobile-preview">
+// <div className="song-details-mobile">
+//   <div className="song-details-mobile-image">
+//     <img src={song?.imgUrl} />
+//   </div>
+//   <h1>{song?.title}</h1>
+//   <div className="song-details-mobile-album">
+//     <div className="song-details-mobile-album">
+//       <img src={song?.imgUrl} />
+//     </div>
+//     <p>{song?.album}</p>
+//   </div>
+//   <div className="song-details-mobile-song">
+//     <span>{song?.title}</span>
+//     <span className="dot">•</span>
+//     <span>2022</span>
+//     <span className="dot">•</span>
+//     <span>3:39</span>
+//   </div>
+//   <div className="song-details-mobile-actions">
+//     <div className="first-section">
+//       <span className="nice-heart">
+//         <BubblingHeart index={song?._id} item={song} type="lyrics" />
+//       </span>
+//       <span
+//         dangerouslySetInnerHTML={{
+//           __html: getSpotifySvg('mobileDots'),
+//         }}
+//       ></span>
+//     </div>
+//   </div>
+// </div>
+// <article className="song-details-lyrics">
+//   <h2>Lyrics</h2>
+//   {lyrics ? (
+//     lyrics.map((line, index) => <div key={index}>{line?.text}</div>)
+//   ) : (
+//     <div className="loader"></div>
+//   )}
+// </article>
+// </section>
+
+.song-details-mobile-preview {
+  overflow-y: scroll;
+  height: 100vh;
+  .song-details-mobile {
+    width: rem(414px);
+    height: rem(427.59px);
+    padding: rem(72px) rem(16px) rem(16px);
+    display: flex;
+    flex-direction: column;
+    gap: rem(8px);
+
+    h1 {
+      margin: 0;
+      padding: 0;
+      font-size: 2rem;
+      font-weight: 700;
+      font-family: circular-book;
+      //   text-overflow: ellipsis;
+      //   overflow: hidden;
+      //   white-space: nowrap;
+      //   width: 8rem;
+    }
+    .song-details-mobile-image {
+      -webkit-filter: drop-shadow(0 0 18.3529px rgba(0, 0, 0, 0.3));
+      filter: drop-shadow(0 0 18.3529px rgba(0, 0, 0, 0.3));
+      margin-bottom: 8px;
+      width: rem(165.59px);
+      height: rem(165.59px);
+      align-self: center;
+      justify-self: center;
+    }
+    .song-details-mobile-album {
+      display: flex;
+      align-items: center;
+      justify-items: center;
+      gap: rem(8px);
+      .song-details-mobile-album-image {
+        width: rem(24px);
+        height: rem(24px);
+        img {
+          border-radius: 50%;
+        }
+      }
+      p {
+        font-size: 0.8125rem;
+        margin: 0;
+        font-weight: 400;
+        color: #fff;
+        font-family: circular-book;
+      }
+    }
+  }
+  .song-details-mobile-song {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    gap: rem(4px);
+    line-height: normal;
+    font-size: 0.8125rem;
+    font-weight: 400;
+    font-family: circular-book;
+    color: hsla(0, 0%, 100%, 0.7);
+  }
+
+  .song-details-lyrics {
+    padding: rem(16px);
+    line-height: 1.7;
+    font-family: Circular-book;
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 0 0 rem(16px);
+      color: #fff;
+    }
+  }
+  .song-details-mobile-actions {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    justify-content: space-between;
+    .first-section {
+      display: flex;
+      align-items: center;
+      justify-items: center;
+
+      button {
+        background-color: transparent;
+        border: none;
+        width: rem(48px);
+        height: rem(48px);
+        display: flex;
+        align-items: center;
+        justify-items: center;
+      }
+      .bub-button {
+        padding: rem(12px) rem(12px) rem(12px) 0;
+        margin-block-end: rem(8px);
+      }
+      .dots-button {
+        padding: rem(12px);
+      }
+
+      .dots-span {
+        fill: #6a6a6a;
+      }
+    }
+    .play-button {
+      width: rem(56px);
+      height: rem(56px);
+      button {
+        background-color: transparent;
+        border: none;
+      }
+    }
+  }
+}

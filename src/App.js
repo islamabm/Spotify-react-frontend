@@ -22,6 +22,7 @@ import { BottomNav } from '../src/cmps/Mobile/BottomNav'
 import { MobileMediaPlayer } from '../src/views/mobile/MobileMediaPlayer'
 import { EditStationMobile } from './views/mobile/EditStationMobile'
 import { SearchSongsMobile } from './views/SearchSongsMobile'
+import { SongDetails } from './views/SongDetails'
 
 function App() {
   const dispatch = useDispatch()
@@ -52,6 +53,7 @@ function LoggedInApp() {
           <Route path="/" element={<StationIndex />} />
           <Route path="/edit/mobile" element={<EditStationMobile />} />
           <Route path="/station/:id" element={<StationDetails />} />
+          <Route path="/song/details" element={<SongDetails />} />
           <Route path="/lyrics" element={<SongLyrics />} />
           <Route path="/only/lyrics" element={<OnlyLyrics />} />
           <Route path="/user" element={<UserDetails />} />
