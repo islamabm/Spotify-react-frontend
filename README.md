@@ -20,7 +20,7 @@ Fully responsive design
 
 <h1>More Screenshots</h1>
 
-Home Page:
+<p>Home Page:</p>
 <img src="https://i.ibb.co/5Kj23yf/image.png" alt="Home Page on PC" width="700">
 The homepage shows all the categories and playlists and allows the user to create new playlists.
 
