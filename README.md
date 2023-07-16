@@ -11,12 +11,14 @@ You can view the app deployed on Render: https://music-k9lb.onrender.com
 
 This is a Spotify-inspired music streaming web application built with React.js, Redux, React Hooks, Styled-components, MongoDB, Node, HTML, and different APIs such as Youtube API , React DnD, Fast Average Color, etc. It was built by a team of 3 as part of a hackathon.
 
-Features
-Browse and play music by genre or playlist
-Create and manage playlists
-Like and add songs to the favorites list
-Search for songs and playlists according to mood
-Fully responsive design
+<h1>Features</h1>
+<ul>
+<li>Browse and play music by genre or playlist</li>
+<li>Create and manage playlists</li>
+<li>Like and add songs to the favorites list</li>
+<li>Search for songs and playlists according to mood</li>
+<li>Fully responsive design</li>
+</ul>
 
 <h1>More Screenshots</h1>
 
