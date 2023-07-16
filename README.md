@@ -20,28 +20,42 @@ Fully responsive design
 
 <h1>More Screenshots</h1>
 
-<p>Home Page:</p>
+<h3>Home Page:</h3>
 <img src="https://i.ibb.co/5Kj23yf/image.png" alt="Home Page on PC" width="700">
 The homepage shows all the categories and playlists and allows the user to create new playlists.
 
-Playlists:
+<h3>Playlists:</h3>
+<p>Playlist in desktop</p>
 <div>
   <img src="https://i.ibb.co/qyf3vC8/image.png" alt="Playlist on PC" width="600" style="margin-right: 20px;">
+</div>
+<p>Playlist in mobile</p>
+<div>
   <img src="https://i.ibb.co/rt8zp7s/image.png" alt="Playlist on mobile" height="300">
 </div>
-The playlist view shows all the songs in a playlist, allows the user to add new songs if the playlist was created by them, and reorder the songs.
 
-Search:
+<p>The playlist view shows all the songs in a playlist, allows the user to add new songs if the playlist was created by them, and reorder the songs.</p>
+
+<h3>Search:</h3>
+<div>
 <img src="https://i.ibb.co/xCmcKNC/image.png" alt="Search Page" width="700">
+</div>
 
-Search in mobile:
+<h3>Search in mobile:</h3>
+<div>
 <img src="https://i.ibb.co/jvr1khN/image.png" alt="Search Page" width="700">
+</div>
 
-Search songs in mobile:
+<h3>Search songs in mobile:</h3>
+<div>
 <img src="https://i.ibb.co/stGRcws/image.png" alt="Search Page" width="700">
+</div>
 
+<p>
 The search page allows the user to search for songs or artists, and also allows them to choose a pre-made playlist by mood/need.
-## Installation
+</p>
+
+<h5>## Installation</h5>
 
 To run the app locally, clone the repository and run the following commands:
 
