@@ -1,70 +1,48 @@
-# Getting Started with Create React App
+<h1 align="center">
+  <img src="https://cdn.freebiesupply.com/logos/large/2x/spotify-2-logo-png-transparent.png" alt="Spotify Logo" width="50" height="50" style="vertical-align: middle;"> Muzicay
+</h1>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<img src="https://i.ibb.co/rt8zp7s/image.png" alt="nice gif" height="150">
 
-## Available Scripts
 
-In the project directory, you can run:
+Demo
+You can view the app deployed on Render: https://music-k9lb.onrender.com
 
-### `npm start`
+This is a Spotify-inspired music streaming web application built with React.js, Redux, React Hooks, Styled-components, MongoDB, Node, HTML, and different APIs such as Youtube API , React DnD, Fast Average Color, etc. It was built by a team of 3 as part of a hackathon.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Features
+Browse and play music by genre or playlist
+Create and manage playlists
+Like and add songs to the favorites list
+Search for songs and playlists according to mood
+Fully responsive design
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+More Screenshots
+Home Page
+<img src="https://i.ibb.co/5Kj23yf/image.png" alt="Home Page on PC" width="700">
+The homepage shows all the categories and playlists and allows the user to create new playlists.
 
-### `npm test`
+Playlists
+<div>
+  <img src="https://i.ibb.co/qyf3vC8/image.png" alt="Playlist on PC" width="600" style="margin-right: 20px;">
+  <img src="https://i.ibb.co/rt8zp7s/image.png" alt="Playlist on mobile" height="300">
+</div>
+The playlist view shows all the songs in a playlist, allows the user to add new songs if the playlist was created by them, and reorder the songs.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Search
+<img src="https://i.ibb.co/xCmcKNC/image.png" alt="Search Page" width="700">
 
-### `npm run build`
+Search in mobile
+<img src="https://i.ibb.co/jvr1khN/image.png" alt="Search Page" width="700">
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Search songs in mobile:
+<img src="https://i.ibb.co/stGRcws/image.png" alt="Search Page" width="700">
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+The search page allows the user to search for songs or artists, and also allows them to choose a pre-made playlist by mood/need.
+## Installation
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+To run the app locally, clone the repository and run the following commands:
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```bash
+npm i
+npm start
