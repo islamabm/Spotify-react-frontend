@@ -26,29 +26,29 @@ Fully responsive design
 
 <h3>Playlists:</h3>
 <p>Playlist in desktop:</p>
-<div>
-  <img src="https://i.ibb.co/qyf3vC8/image.png" alt="Playlist on PC" align="center" width="600" style="margin-right: 20px;">
+<div align="center">
+  <img src="https://i.ibb.co/qyf3vC8/image.png" alt="Playlist on PC" width="600" style="margin-right: 20px;">
 </div>
 <p>Playlist in mobile:</p>
-<div>
-  <img src="https://i.ibb.co/rt8zp7s/image.png" alt="Playlist on mobile" align="center" height="300">
+<div align="center">
+  <img src="https://i.ibb.co/rt8zp7s/image.png" alt="Playlist on mobile" height="300">
 </div>
 
 <p>The playlist view shows all the songs in a playlist, allows the user to add new songs if the playlist was created by them, and reorder the songs.</p>
 
 <h3>Search:</h3>
-<div>
-<img src="https://i.ibb.co/xCmcKNC/image.png" alt="Search Page" align="center" width="700">
+<div align="center">
+<img src="https://i.ibb.co/xCmcKNC/image.png" alt="Search Page"  width="500">
 </div>
 
 <h3>Search in mobile:</h3>
-<div>
-<img src="https://i.ibb.co/jvr1khN/image.png" alt="Search Page" align="center" width="700">
+<div align="center">
+<img src="https://i.ibb.co/jvr1khN/image.png" alt="Search Page" width="500">
 </div>
 
 <h3>Search songs in mobile:</h3>
-<div>
-<img src="https://i.ibb.co/stGRcws/image.png" alt="Search Page" align="center" width="700">
+<div align="center">
+<img src="https://i.ibb.co/stGRcws/image.png" alt="Search Page" width="500">
 </div>
 
 <p>
