@@ -29,8 +29,8 @@ function Transcript() {
         // setAudioBlob(audioFile) // Save the file to state
         setAudioBlob(audioBlob)
 
-        // const name = await shazamService.identifySong(audioBlob)
-        // console.log('name', name)
+        const name = await shazamService.identifySong(audioBlob)
+        console.log('name', name)
       }
       reader.readAsArrayBuffer(audioBlob)
       audioChunksRef.current = []

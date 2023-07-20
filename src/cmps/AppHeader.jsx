@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { eventBus } from '../services/event-bus.service'
 import { MobileModal } from './Modals/MobileModal'
 import { MobileSearchHeader } from '../views/MobileSearchHeader'
+import Transcript from './Transcript'
 
 export function AppHeader() {
   const [showModal, setShowModal] = useState(false)
@@ -230,6 +231,7 @@ export function AppHeader() {
         style={{ padding: showMobileModal ? '0' : '20px', ...headers }}
       >
         <section className="arrows-and-input">
+          <Transcript />
           <section className="arrows">
             <div className="black-circle">
               <span

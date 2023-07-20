@@ -98,6 +98,7 @@ export function MediaPlayer({ volume }) {
   }, [])
 
   useEffect(() => {
+    console.log('pause', playerRef.current)
     if (playerRef.current) {
       switch (currSvg) {
         case 'play':
